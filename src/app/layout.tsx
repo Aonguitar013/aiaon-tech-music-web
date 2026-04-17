@@ -3,7 +3,11 @@ import { Inter, Prompt, Geist } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { cn } from "@/lib/utils";
-
+import { Navbar } from "@/components/layout/Navbar";
+import { createClient } from "@/utils/supabase/server";
+import { FaYoutube, FaTiktok, FaFacebook, FaLine } from "react-icons/fa6";
+import { BrandThemeProvider } from "@/components/providers/BrandThemeProvider";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({
@@ -22,31 +26,22 @@ export const metadata: Metadata = {
   description: "Advanced Educational Platform and Digital Marketplace",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getUser();
+
   return (
-    <html lang="en" className={cn("dark", "font-sans", geist.variable)}>
-      <body className={`${inter.variable} ${prompt.variable} antialiased font-sans flex flex-col min-h-screen relative`}>
-        {/* Navigation Bar */}
-        <nav className="fixed top-0 left-0 right-0 z-50 p-4">
-          <div className="max-w-7xl mx-auto glass-panel rounded-full px-6 py-4 flex justify-between items-center w-full">
-            <div className="text-xl font-prompt font-bold text-white tracking-widest uppercase">
-              Influence<span className="text-blue-500">.Lab</span>
-            </div>
-            <div className="hidden md:flex gap-8 text-sm font-medium text-white/70">
-              <span className="hover:text-white cursor-pointer transition-colors">Academy</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Products</span>
-              <span className="hover:text-white cursor-pointer transition-colors">SaaS Tools</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Consulting</span>
-            </div>
-            <button className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-6 py-2 rounded-full font-medium transition-all hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-              Sign In
-            </button>
-          </div>
-        </nav>
+    <html lang="en" className={cn("dark", "font-sans", geist.variable)} suppressHydrationWarning>
+      <body className={`${inter.variable} ${prompt.variable} antialiased font-sans flex flex-col min-h-screen relative`} suppressHydrationWarning>
+        <BrandThemeProvider>
+          {/* Navigation Bar */}
+          <Navbar user={data?.user} />
+          
+          <ThemeToggle />
 
         {/* Global Ambient Lights */}
         <div className="ambient-light-primary w-[500px] h-[500px] top-[-200px] left-[-100px]" />
@@ -58,9 +53,43 @@ export default function RootLayout({
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-white/10 mt-24 py-12 text-center text-white/40 font-prompt text-sm">
-          <p>© {new Date().getFullYear()} Influence.Lab Ecosystem. All Rights Reserved.</p>
+        <footer id="footer" className="border-t border-white/10 mt-24 py-16 bg-black/50 relative overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/10 blur-[120px] pointer-events-none rounded-full"></div>
+          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-12 text-center md:text-left relative z-10 w-full">
+            <div className="space-y-4 md:max-w-sm">
+              <h2 className="font-prompt text-2xl font-bold tracking-widest text-white uppercase">
+                AiAon <span className="text-blue-500">Tech</span>
+              </h2>
+              <p className="text-white/50 text-sm font-prompt leading-relaxed">
+                Tech Educator & Content Creator. มุ่งมั่นสร้างระบบลดภาระครู และยกระดับการศึกษาด้วย Automation
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              <h3 className="text-white font-bold font-prompt text-lg">Quick Links</h3>
+              <ul className="space-y-2 text-white/50 text-sm font-prompt">
+                <li><a href="#about" className="hover:text-blue-400 transition-colors">About Me</a></li>
+                <li><a href="#academy" className="hover:text-blue-400 transition-colors">Academy</a></li>
+                <li><a href="#products" className="hover:text-blue-400 transition-colors">Marketplace</a></li>
+                <li><a href="#saas" className="hover:text-blue-400 transition-colors">SaaS Tools</a></li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="text-white font-bold font-prompt text-lg">Connect With Me</h3>
+              <div className="flex justify-center md:justify-start gap-4">
+                <a href="#" className="p-2 glass-card hover:bg-red-500/20 text-white hover:text-red-500 transition-colors" title="YouTube"><FaYoutube className="w-5 h-5"/></a>
+                <a href="#" className="p-2 glass-card hover:bg-black/40 text-white hover:text-white transition-colors" title="TikTok"><FaTiktok className="w-5 h-5"/></a>
+                <a href="#" className="p-2 glass-card hover:bg-blue-600/20 text-white hover:text-blue-500 transition-colors" title="Facebook"><FaFacebook className="w-5 h-5"/></a>
+                <a href="#" className="p-2 glass-card hover:bg-green-500/20 text-white hover:text-green-500 transition-colors" title="LINE"><FaLine className="w-5 h-5"/></a>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-white/10 mt-12 pt-8 text-center text-white/30 font-prompt text-xs relative z-10">
+            <p suppressHydrationWarning>© {new Date().getFullYear()} AiAon Tech Ecosystem. All Rights Reserved.</p>
+          </div>
         </footer>
+        </BrandThemeProvider>
       </body>
     </html>
   );
