@@ -5,7 +5,7 @@ import { Users, Bell, Sparkles, BarChart3, FileText } from "lucide-react";
 
 export function SaaSSection() {
   return (
-    <section className="py-32 px-4 relative z-10 max-w-7xl mx-auto">
+    <section className="py-32 px-4 relative z-10 max-w-7xl mx-auto" id="saas">
        <div className="flex flex-col md:flex-row items-center gap-16">
         
         <motion.div 

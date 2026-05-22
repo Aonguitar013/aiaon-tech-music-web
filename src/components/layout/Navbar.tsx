@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils";
 const routes = [
   { name: "คอร์สเรียน", href: "/#academy", icon: GraduationCap, hoverColor: "cyan" },
   { name: "สินค้าและบริการ", href: "/#products", icon: ShoppingBag, hoverColor: "amber" },
-  { name: "ระบบออนไลน์", href: "/#saas", icon: Terminal, hoverColor: "cyan" },
+  { name: "ระบบออนไลน์", href: "/saas", icon: Terminal, hoverColor: "cyan" },
   { name: "ของแจกฟรี", href: "/freebies", icon: Gift, hoverColor: "purple" },
   { name: "บริการของเรา", href: "/services", icon: Briefcase, hoverColor: "teal" },
 ];

@@ -120,10 +120,10 @@ export default async function RootLayout({
                   <div className="space-y-4">
                     <h3 className="text-white font-bold font-prompt text-lg">Quick Links</h3>
                     <ul className="space-y-2 text-white/50 text-sm font-prompt">
-                      <li><a href="#about"    className="hover:text-blue-400 transition-colors duration-200">About Me</a></li>
-                      <li><a href="#academy"  className="hover:text-blue-400 transition-colors duration-200">Academy</a></li>
-                      <li><a href="#products" className="hover:text-blue-400 transition-colors duration-200">Marketplace</a></li>
-                      <li><a href="#saas"     className="hover:text-blue-400 transition-colors duration-200">SaaS Tools</a></li>
+                      <li><a href="/#about"    className="hover:text-blue-400 transition-colors duration-200">About Me</a></li>
+                      <li><a href="/#academy"  className="hover:text-blue-400 transition-colors duration-200">Academy</a></li>
+                      <li><a href="/#products" className="hover:text-blue-400 transition-colors duration-200">Marketplace</a></li>
+                      <li><a href="/saas"     className="hover:text-blue-400 transition-colors duration-200">SaaS Tools</a></li>
                     </ul>
                   </div>
 
