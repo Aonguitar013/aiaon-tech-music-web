@@ -8,7 +8,7 @@ import {
   CheckCircle2, Star, Sparkles, Filter,
   ArrowRight,
 } from "lucide-react";
-import Link from "next/link";
+import * as Icons from "lucide-react";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -16,98 +16,23 @@ import Link from "next/link";
 
 type Category = "all" | "tech" | "music";
 
-interface Freebie {
+export interface Freebie {
   id: string;
   title: string;
   description: string;
   category: "tech" | "music";
-  icon: React.ElementType;
-  colorFrom: string;
-  colorTo: string;
-  glowColor: string;
-  borderColor: string;
-  textColor: string;
-  bgColor: string;
+  icon_name: string;
+  color_from: string;
+  color_to: string;
+  glow_color: string;
+  border_color: string;
+  text_color: string;
+  bg_color: string;
   tag: string;
-  fileSize: string;
-  fileType: string;
-  downloadUrl: string; // set "" for gated/coming-soon
+  file_size: string;
+  file_type: string;
+  download_url: string;
 }
-
-const FREEBIES: Freebie[] = [
-  {
-    id: "n8n-line-template",
-    title: "n8n LINE Form Alert Template",
-    description:
-      "Workflow JSON สำเร็จรูปสำหรับส่งการแจ้งเตือนอัตโนมัติผ่าน LINE เมื่อมีการตอบ Google Form — เชื่อมต่อได้ใน 5 นาที",
-    category: "tech",
-    icon: FileJson,
-    colorFrom: "from-cyan-500",
-    colorTo: "to-blue-600",
-    glowColor: "rgba(34,211,238,0.25)",
-    borderColor: "border-cyan-500/20",
-    textColor: "text-cyan-400",
-    bgColor: "bg-cyan-500/8",
-    tag: "n8n · LINE API",
-    fileSize: "12 KB",
-    fileType: "JSON",
-    downloadUrl: "https://raw.githubusercontent.com/Aonguitar013/aiaon-tech-music-web/main/README.md",
-  },
-  {
-    id: "logic-pro-lofi-midi",
-    title: "Logic Pro Lofi Chords MIDI Pack",
-    description:
-      "ชุด MIDI คอร์ดสไตล์ Lofi Jazz จำนวน 20 Progression พร้อมใช้งานทันทีใน Logic Pro, Ableton Live และ FL Studio",
-    category: "music",
-    icon: Music2,
-    colorFrom: "from-amber-500",
-    colorTo: "to-orange-500",
-    glowColor: "rgba(245,158,11,0.25)",
-    borderColor: "border-amber-500/20",
-    textColor: "text-amber-400",
-    bgColor: "bg-amber-500/8",
-    tag: "MIDI · Logic Pro",
-    fileSize: "340 KB",
-    fileType: "ZIP",
-    downloadUrl: "https://raw.githubusercontent.com/Aonguitar013/aiaon-tech-music-web/main/README.md",
-  },
-  {
-    id: "google-sheets-tracker",
-    title: "Google Sheets Student Tracker",
-    description:
-      "สเปรดชีตระบบเช็คชื่อและติดตามนักเรียน พร้อม Dashboard สรุปผลอัตโนมัติ ลดเวลางานเอกสารคุณครูได้กว่า 80%",
-    category: "tech",
-    icon: FileSpreadsheet,
-    colorFrom: "from-emerald-500",
-    colorTo: "to-teal-500",
-    glowColor: "rgba(16,185,129,0.25)",
-    borderColor: "border-emerald-500/20",
-    textColor: "text-emerald-400",
-    bgColor: "bg-emerald-500/8",
-    tag: "Google Sheets · Apps Script",
-    fileSize: "28 KB",
-    fileType: "XLSX",
-    downloadUrl: "https://raw.githubusercontent.com/Aonguitar013/aiaon-tech-music-web/main/README.md",
-  },
-  {
-    id: "acoustic-guitar-loops",
-    title: "Acoustic Guitar Loop Pack",
-    description:
-      "ชุด Loop เสียงกีตาร์โปร่งคุณภาพสูง 12 ไฟล์ ครอบคลุม BPM 70–140 พร้อม Label บอก Key และ Tempo ทุกไฟล์",
-    category: "music",
-    icon: Mic2,
-    colorFrom: "from-rose-500",
-    colorTo: "to-pink-500",
-    glowColor: "rgba(244,63,94,0.25)",
-    borderColor: "border-rose-500/20",
-    textColor: "text-rose-400",
-    bgColor: "bg-rose-500/8",
-    tag: "WAV · BPM Labeled",
-    fileSize: "18 MB",
-    fileType: "ZIP",
-    downloadUrl: "https://raw.githubusercontent.com/Aonguitar013/aiaon-tech-music-web/main/README.md",
-  },
-];
 
 /* ─────────────────────────────────────────────────────────────
    DOWNLOAD STATE MACHINE
@@ -208,7 +133,7 @@ function FreebieCard({
   const [dlState, setDlState] = useState<DlState>("idle");
   const [progress, setProgress] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const Icon = freebie.icon;
+  const Icon = (Icons as any)[freebie.icon_name || "Gift"] || Icons.Gift;
 
   const handleDownload = useCallback(() => {
     if (!isLoggedIn) { onAuthPrompt(); return; }
@@ -227,7 +152,7 @@ function FreebieCard({
         // Trigger real download
         setTimeout(() => {
           const a = document.createElement("a");
-          a.href = freebie.downloadUrl;
+          a.href = freebie.download_url;
           a.download = freebie.title;
           a.target = "_blank";
           a.click();
@@ -252,7 +177,7 @@ function FreebieCard({
       {/* Outer glow on hover */}
       <div
         className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md pointer-events-none"
-        style={{ background: `radial-gradient(ellipse at center, ${freebie.glowColor}, transparent 70%)` }}
+        style={{ background: `radial-gradient(ellipse at center, ${freebie.glow_color}, transparent 70%)` }}
       />
 
       <div className="relative glass-card border-white/8 group-hover:border-white/15 p-6 flex flex-col gap-5 h-full transition-all duration-300">
@@ -260,18 +185,18 @@ function FreebieCard({
         {/* Header row */}
         <div className="flex items-start justify-between gap-3">
           {/* Icon */}
-          <div className={`w-13 h-13 rounded-xl flex items-center justify-center bg-gradient-to-br ${freebie.colorFrom} ${freebie.colorTo} shadow-lg group-hover:scale-105 transition-transform duration-300 shrink-0`}
+          <div className={`w-13 h-13 rounded-xl flex items-center justify-center bg-gradient-to-br ${freebie.color_from} ${freebie.color_to} shadow-lg group-hover:scale-105 transition-transform duration-300 shrink-0`}
             style={{ width: 52, height: 52 }}>
             <Icon className="w-6 h-6 text-white" />
           </div>
 
           {/* Badges */}
           <div className="flex flex-wrap gap-1.5 justify-end">
-            <span className={`text-[10px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border ${freebie.borderColor} ${freebie.textColor} bg-white/3`}>
-              {freebie.fileType}
+            <span className={`text-[10px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border ${freebie.border_color} ${freebie.text_color} bg-white/3`}>
+              {freebie.file_type}
             </span>
             <span className="text-[10px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border border-white/10 text-white/40">
-              {freebie.fileSize}
+              {freebie.file_size}
             </span>
             <span className="text-[10px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
               ฟรี
@@ -281,7 +206,7 @@ function FreebieCard({
 
         {/* Content */}
         <div className="flex-1">
-          <h3 className={`font-prompt text-lg font-bold text-white mb-2 group-hover:${freebie.textColor} transition-colors duration-300 leading-snug`}>
+          <h3 className={`font-prompt text-lg font-bold text-white mb-2 group-hover:${freebie.text_color} transition-colors duration-300 leading-snug`}>
             {freebie.title}
           </h3>
           <p className="font-prompt text-sm text-white/50 leading-relaxed">
@@ -291,7 +216,7 @@ function FreebieCard({
 
         {/* Tag */}
         <div className="flex items-center gap-1.5">
-          <span className={`text-xs font-prompt ${freebie.textColor} opacity-70`}>{freebie.tag}</span>
+          <span className={`text-xs font-prompt ${freebie.text_color} opacity-70`}>{freebie.tag}</span>
         </div>
 
         {/* Download button */}
@@ -300,10 +225,10 @@ function FreebieCard({
             <button
               onClick={handleDownload}
               className={`group/btn w-full py-3 px-4 rounded-xl border flex items-center justify-between text-sm font-semibold font-prompt tracking-wide transition-all duration-300
-                ${freebie.borderColor} ${freebie.textColor} ${freebie.bgColor}
+                ${freebie.border_color} ${freebie.text_color} ${freebie.bg_color}
                 hover:brightness-125 hover:shadow-lg active:scale-95`}
-              style={{ boxShadow: `0 0 0px ${freebie.glowColor}` }}
-              onMouseEnter={e => (e.currentTarget.style.boxShadow = `0 0 20px ${freebie.glowColor}`)}
+              style={{ boxShadow: `0 0 0px ${freebie.glow_color}` }}
+              onMouseEnter={e => (e.currentTarget.style.boxShadow = `0 0 20px ${freebie.glow_color}`)}
               onMouseLeave={e => (e.currentTarget.style.boxShadow = "none")}
             >
               <div className="flex items-center gap-2">
@@ -318,14 +243,14 @@ function FreebieCard({
           )}
 
           {dlState === "preparing" && (
-            <div className={`w-full py-3 px-4 rounded-xl border ${freebie.borderColor} ${freebie.bgColor} space-y-2`}>
+            <div className={`w-full py-3 px-4 rounded-xl border ${freebie.border_color} ${freebie.bg_color} space-y-2`}>
               <div className="flex justify-between items-center">
-                <span className={`text-xs font-prompt ${freebie.textColor}`}>กำลังเตรียมไฟล์...</span>
-                <span className={`text-xs font-bold font-prompt ${freebie.textColor}`}>{progress}%</span>
+                <span className={`text-xs font-prompt ${freebie.text_color}`}>กำลังเตรียมไฟล์...</span>
+                <span className={`text-xs font-bold font-prompt ${freebie.text_color}`}>{progress}%</span>
               </div>
               <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                 <motion.div
-                  className={`h-full rounded-full bg-gradient-to-r ${freebie.colorFrom} ${freebie.colorTo}`}
+                  className={`h-full rounded-full bg-gradient-to-r ${freebie.color_from} ${freebie.color_to}`}
                   animate={{ width: `${progress}%` }}
                   transition={{ duration: 0.15, ease: "linear" }}
                   style={{ width: `${progress}%` }}
@@ -357,6 +282,7 @@ function FreebieCard({
 interface FreebiesViewProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user: any;
+  initialFreebies: Freebie[];
 }
 
 const TABS: { label: string; value: Category; icon: React.ElementType }[] = [
@@ -365,12 +291,12 @@ const TABS: { label: string; value: Category; icon: React.ElementType }[] = [
   { label: "ดนตรี",        value: "music", icon: Music },
 ];
 
-export function FreebiesView({ user }: FreebiesViewProps) {
+export function FreebiesView({ user, initialFreebies }: FreebiesViewProps) {
   const [activeTab, setActiveTab] = useState<Category>("all");
   const [showAuthModal, setShowAuthModal] = useState(false);
   const isLoggedIn = !!user;
 
-  const filtered = FREEBIES.filter(
+  const filtered = initialFreebies.filter(
     (f) => activeTab === "all" || f.category === activeTab
   );
 
@@ -433,7 +359,7 @@ export function FreebiesView({ user }: FreebiesViewProps) {
               className="flex items-center justify-center gap-8 pt-2"
             >
               {[
-                { value: `${FREEBIES.length}`, label: "ไฟล์ให้ดาวน์โหลด" },
+                { value: `${initialFreebies.length}`, label: "ไฟล์ให้ดาวน์โหลด" },
                 { value: "100%", label: "ฟรี ไม่มีค่าใช้จ่าย" },
                 { value: "4.9★", label: "คะแนนจากผู้ใช้" },
               ].map((s) => (

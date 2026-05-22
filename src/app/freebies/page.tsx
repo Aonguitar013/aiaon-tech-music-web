@@ -20,5 +20,10 @@ export default async function FreebiesPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  return <FreebiesView user={user} />;
+  const { data: freebies } = await supabase
+    .from('freebies')
+    .select('*')
+    .order('created_at', { ascending: true });
+
+  return <FreebiesView user={user} initialFreebies={freebies || []} />;
 }
