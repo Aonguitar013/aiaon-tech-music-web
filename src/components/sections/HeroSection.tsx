@@ -1,64 +1,252 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { motion, useAnimation, Variants } from "framer-motion";
+import { ArrowRight, PlayCircle, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
+/* ============================================================
+   ANIMATION VARIANTS — defined outside component to avoid
+   re-creation on every render.
+============================================================ */
+
+/** Shared staggered container — children animate in sequence */
+const containerVariants: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.13,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+/** Fade-up for badge, subtext, and buttons */
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+/** Scale-in with slight upward drift for the main heading */
+const headingVariant: Variants = {
+  hidden: { opacity: 0, y: 36, scale: 0.97 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+/** Scroll chevron infinite bounce */
+const chevronVariants: Variants = {
+  initial: { y: 0, opacity: 0.5 },
+  animate: {
+    y: [0, 10, 0],
+    opacity: [0.5, 1, 0.5],
+    transition: {
+      duration: 2,
+      ease: "easeInOut",
+      repeat: Infinity,
+    },
+  },
+};
+
+/* ============================================================
+   COMPONENT
+============================================================ */
+
 export function HeroSection() {
+  const playControls = useAnimation();
+
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden px-4">
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(59,130,246,0.1)_0%,rgba(0,0,0,0)_50%,rgba(245,158,11,0.1)_100%)] pointer-events-none"></div>
-      <div className="absolute top-0 left-0 w-1/2 h-[80%] bg-blue-600/10 blur-[120px] rounded-full mix-blend-screen pointer-events-none -translate-x-1/4 -translate-y-1/4"></div>
-      <div className="absolute bottom-0 right-0 w-1/2 h-[80%] bg-amber-600/10 blur-[120px] rounded-full mix-blend-screen pointer-events-none translate-x-1/4 translate-y-1/4"></div>
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
-      
-      <div className="max-w-5xl mx-auto text-center z-10 space-y-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium text-white/80 mb-4"
-        >
-          <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-          <span className="text-blue-400">Technology</span>
-          <span className="mx-1 text-white/30">x</span>
-          <span className="text-amber-400">Music</span>
-          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+    <section
+      className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden px-4"
+      aria-label="Hero Section"
+    >
+      {/* ── Background decorations ──────────────────────────── */}
+
+      {/* Diagonal tinted overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(59,130,246,0.08) 0%, transparent 50%, rgba(245,158,11,0.08) 100%)",
+        }}
+      />
+
+      {/* Blue ambient orb — top-left */}
+      <div className="absolute top-0 left-0 w-1/2 h-[75%] bg-blue-600/10 blur-[130px] rounded-full mix-blend-screen pointer-events-none -translate-x-1/4 -translate-y-1/4" />
+
+      {/* Amber ambient orb — bottom-right */}
+      <div className="absolute bottom-0 right-0 w-1/2 h-[75%] bg-amber-600/10 blur-[130px] rounded-full mix-blend-screen pointer-events-none translate-x-1/4 translate-y-1/4" />
+
+      {/* Fine inner grid (denser than global grid for hero depth) */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-50"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right,rgba(255,255,255,0.04) 1px,transparent 1px), linear-gradient(to bottom,rgba(255,255,255,0.04) 1px,transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      {/* ── Main content container ───────────────────────────── */}
+      <motion.div
+        className="max-w-5xl mx-auto text-center z-10 space-y-8 flex-1 flex flex-col items-center justify-center"
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        {/* Badge */}
+        <motion.div variants={fadeUp}>
+          <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-card text-sm font-medium text-white/80 select-none">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75 animate-ping" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-400" />
+            </span>
+            <span className="text-blue-400 font-semibold tracking-wide">Technology</span>
+            <span className="text-white/25 font-light">×</span>
+            <span className="text-amber-400 font-semibold tracking-wide">Music</span>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75 animate-ping" style={{ animationDelay: "0.5s" }} />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
+            </span>
+          </span>
         </motion.div>
 
+        {/* Main Heading */}
         <motion.h1
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-prompt text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]"
+          variants={headingVariant}
+          className="font-prompt text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.08]"
         >
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 drop-shadow-[0_0_20px_rgba(59,130,246,0.3)]">AiAon Tech</span>
-          <span className="text-white/40 mx-2 md:mx-4 font-light">&</span><br className="sm:hidden" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 drop-shadow-[0_0_20px_rgba(245,158,11,0.3)]">Music Studio</span>
+          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-cyan-400 drop-shadow-[0_0_28px_rgba(59,130,246,0.35)]">
+            AiAon Tech
+          </span>
+          <span className="text-white/25 mx-3 md:mx-5 font-extralight">&amp;</span>
+          <br className="sm:hidden" />
+          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-orange-500 drop-shadow-[0_0_28px_rgba(245,158,11,0.35)]">
+            Music Studio
+          </span>
         </motion.h1>
 
+        {/* Subtext */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto font-prompt font-medium leading-relaxed"
+          variants={fadeUp}
+          className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto font-prompt font-light leading-relaxed"
         >
-          Empowering Education with Smart Automation & Soulful Melodies.
+          Empowering Education with{" "}
+          <span className="text-blue-400 font-medium">Smart Automation</span>{" "}
+          &amp;{" "}
+          <span className="text-amber-400 font-medium">Soulful Melodies</span>.
         </motion.p>
 
+        {/* CTA Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"
+          variants={fadeUp}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6"
         >
-          <Link href="/dashboard/academy?category=Technology" className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(59,130,246,0.3)] font-prompt">
-            คอร์สเรียนเทคฯ <ArrowRight className="w-5 h-5" />
+          {/* ── Cyan Tech Button ── */}
+          <Link
+            href="/dashboard/academy?category=Technology"
+            id="hero-cta-tech"
+            className="group relative w-full sm:w-auto"
+          >
+            {/* Expanding glow layer behind the button */}
+            <span
+              className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 blur-md opacity-40 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500 pointer-events-none"
+              aria-hidden="true"
+            />
+            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 group-hover:from-blue-500 group-hover:to-cyan-400 text-white font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_24px_rgba(59,130,246,0.35)]">
+              คอร์สเรียนเทคฯ
+              {/* Arrow slides right on hover */}
+              <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" />
+            </span>
           </Link>
-          
-          <Link href="/dashboard/academy?category=Music" className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-amber-600 to-orange-400 hover:from-amber-500 hover:to-orange-300 text-white font-semibold flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(245,158,11,0.3)] font-prompt text-gray-900 border border-amber-400/50">
-            <PlayCircle className="w-5 h-5 text-white" /> <span className="text-white">คอร์สเรียนดนตรี</span>
+
+          {/* ── Amber Music Button ── */}
+          <Link
+            href="/dashboard/academy?category=Music"
+            id="hero-cta-music"
+            className="group relative w-full sm:w-auto"
+            onMouseEnter={() => playControls.start("pulse")}
+            onMouseLeave={() => playControls.start("idle")}
+          >
+            {/* Pulsing warm glow */}
+            <span
+              className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 blur-md opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500 pointer-events-none"
+              aria-hidden="true"
+            />
+            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 group-hover:from-amber-400 group-hover:to-orange-400 text-white font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_24px_rgba(245,158,11,0.35)] border border-amber-400/30">
+              {/* Animated play icon */}
+              <motion.span
+                animate={playControls}
+                variants={{
+                  idle: { rotate: 0, scale: 1 },
+                  pulse: {
+                    rotate: [0, -12, 0, -8, 0],
+                    scale: [1, 1.18, 1, 1.12, 1],
+                    transition: { duration: 0.55, ease: "easeInOut" },
+                  },
+                }}
+                initial="idle"
+                className="flex items-center"
+              >
+                <PlayCircle className="w-5 h-5" />
+              </motion.span>
+              คอร์สเรียนดนตรี
+            </span>
           </Link>
+        </motion.div>
+
+        {/* Stats row — subtle social proof */}
+        <motion.div
+          variants={fadeUp}
+          className="flex items-center justify-center gap-8 pt-4 text-center"
+        >
+          {[
+            { value: "10+", label: "คอร์สเรียน" },
+            { value: "500+", label: "นักเรียน" },
+            { value: "4.9★", label: "Rating" },
+          ].map((stat) => (
+            <div key={stat.label} className="flex flex-col items-center gap-0.5">
+              <span className="font-prompt text-xl font-bold text-white">{stat.value}</span>
+              <span className="font-prompt text-xs text-white/40 uppercase tracking-wider">{stat.label}</span>
+            </div>
+          ))}
+        </motion.div>
+      </motion.div>
+
+      {/* ── Scroll Indicator ────────────────────────────────── */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5">
+        <span className="font-prompt text-[10px] uppercase tracking-[0.2em] text-white/30 select-none">
+          Scroll
+        </span>
+        {/* Animated mouse icon */}
+        <div className="w-6 h-9 rounded-full border border-white/20 flex items-start justify-center pt-1.5 relative overflow-hidden">
+          <motion.div
+            className="w-1 h-2 rounded-full bg-white/50"
+            animate={{
+              y: [0, 10, 0],
+              opacity: [0.8, 0.2, 0.8],
+            }}
+            transition={{
+              duration: 1.8,
+              ease: "easeInOut",
+              repeat: Infinity,
+            }}
+          />
+        </div>
+        {/* Bouncing chevron */}
+        <motion.div
+          variants={chevronVariants}
+          initial="initial"
+          animate="animate"
+        >
+          <ChevronDown className="w-4 h-4 text-white/30" />
         </motion.div>
       </div>
     </section>

@@ -129,18 +129,40 @@ export function ProductClientGrid({ initialProducts }: { initialProducts: Produc
                 
                 {/* 16:9 Vault Cover */}
                 <div className={`relative w-full aspect-video shrink-0 bg-black/40 border-b border-white/10 overflow-hidden ${hoverBorder} transition-colors`}>
-                  {product.image_url ? (
-                    <Image 
-                      src={product.image_url} 
-                      alt={product.title} 
-                      fill 
-                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out opacity-90 group-hover:opacity-100" 
-                    />
-                  ) : (
-                    <div className={`w-full h-full bg-gradient-to-br ${focusGradient} flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity duration-500`}>
-                      <IconComponent className="w-12 h-12 text-white/50 group-hover:scale-110 group-hover:text-white/80 transition-all duration-500" />
-                    </div>
-                  )}
+                  {(() => {
+                    // Title matching for mock images
+                    const lowerTitle = product.title.toLowerCase();
+                    let mockImage = product.image_url;
+                    
+                    if (!mockImage) {
+                      if (lowerTitle.includes("ระบบเช็กชื่อ") || lowerTitle.includes("line")) {
+                        mockImage = "/images/mockups/system_attendance_line_1779443112798.png";
+                      } else if (lowerTitle.includes("เทมเพลตสื่อการสอน")) {
+                        mockImage = "/images/mockups/teaching_media_template_1779443134799.png";
+                      } else if (lowerTitle.includes("apps script")) {
+                        mockImage = "/images/mockups/apps_script_course_1779443157476.png";
+                      } else if (lowerTitle.includes("blog") || lowerTitle.includes("magazine")) {
+                        mockImage = "/images/mockups/blog_magazine_template_1779443181794.png";
+                      } else if (lowerTitle.includes("real estate")) {
+                        mockImage = "/images/mockups/real_estate_ui_1779443205255.png";
+                      } else if (lowerTitle.includes("startup") || lowerTitle.includes("landing page")) {
+                        mockImage = "/images/mockups/startup_landing_page_1779443225117.png";
+                      }
+                    }
+
+                    return mockImage ? (
+                      <Image 
+                        src={mockImage} 
+                        alt={product.title} 
+                        fill 
+                        className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out opacity-90 group-hover:opacity-100" 
+                      />
+                    ) : (
+                      <div className={`w-full h-full bg-gradient-to-br ${focusGradient} flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity duration-500`}>
+                        <IconComponent className="w-12 h-12 text-white/50 group-hover:scale-110 group-hover:text-white/80 transition-all duration-500" />
+                      </div>
+                    );
+                  })()}
                   
                   {/* Category Badge Overlay */}
                   <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white/80 border border-white/20 px-3 py-1 rounded-full text-[10px] font-prompt font-medium uppercase tracking-wider shadow-lg z-10">

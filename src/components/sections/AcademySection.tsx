@@ -6,6 +6,7 @@ import * as Icons from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
+import { cn } from "@/lib/utils";
 
 interface Course {
   id: string;
@@ -59,18 +60,37 @@ export function AcademySection({ courses }: AcademySectionProps) {
               >
                 {/* 16:9 Course Cover */}
                 <div className={`relative w-full aspect-video shrink-0 bg-black/40 border-b border-white/10 overflow-hidden ${themeColorHover} transition-colors`}>
-                  {course.image_url ? (
-                    <Image 
-                      src={course.image_url} 
-                      alt={course.title} 
-                      fill 
-                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out opacity-90 group-hover:opacity-100" 
-                    />
-                  ) : (
-                    <div className={`w-full h-full bg-gradient-to-br ${fallbackGradient} flex items-center justify-center opacity-40 group-hover:opacity-70 transition-opacity duration-500`}>
-                      <FallbackIcon className="w-12 h-12 text-white/50 group-hover:scale-110 group-hover:text-white/80 transition-all duration-500" />
-                    </div>
-                  )}
+                  {(() => {
+                    const lowerTitle = course.title.toLowerCase();
+                    let mockImage = course.image_url;
+
+                    if (!mockImage) {
+                      if (lowerTitle.includes("next.js") || lowerTitle.includes("masterclass")) {
+                        mockImage = "/images/mockups/nextjs_masterclass_1779443916108.png";
+                      } else if (lowerTitle.includes("workflow") || lowerTitle.includes("automation")) {
+                        mockImage = "/images/mockups/workflow_automation_pro_1779443939357.png";
+                      } else if (lowerTitle.includes("supabase") || lowerTitle.includes("backend")) {
+                        mockImage = "/images/mockups/supabase_backend_crash_course_1779443962868.png";
+                      } else if (lowerTitle.includes("framer motion") || lowerTitle.includes("animations")) {
+                        mockImage = "/images/mockups/framer_motion_animations_1779443987741.png";
+                      } else if (lowerTitle.includes("typescript")) {
+                        mockImage = "/images/mockups/typescript_for_production_1779444015579.png";
+                      }
+                    }
+
+                    return mockImage ? (
+                      <Image 
+                        src={mockImage} 
+                        alt={course.title} 
+                        fill 
+                        className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out opacity-90 group-hover:opacity-100" 
+                      />
+                    ) : (
+                      <div className={`w-full h-full bg-gradient-to-br ${fallbackGradient} flex items-center justify-center opacity-40 group-hover:opacity-70 transition-opacity duration-500`}>
+                        <FallbackIcon className="w-12 h-12 text-white/50 group-hover:scale-110 group-hover:text-white/80 transition-all duration-500" />
+                      </div>
+                    );
+                  })()}
                 </div>
 
                 {/* Decorative glow at bottom */}
@@ -80,8 +100,20 @@ export function AcademySection({ courses }: AcademySectionProps) {
                   <h3 className={`text-2xl font-bold font-prompt text-white mb-3 transition-colors line-clamp-2 leading-snug ${themeTextHover}`}>{course.title}</h3>
                   <p className="text-white/60 text-sm md:text-base font-prompt leading-relaxed line-clamp-3 mb-6 flex-1">{course.description}</p>
                   
-                  <div className={`mt-auto pt-4 border-t border-white/10 flex items-center text-sm font-medium ${isMusic ? 'text-amber-400' : 'text-blue-400'} opacity-60 group-hover:opacity-100 transition-opacity`}>
-                    <BookOpen className="w-4 h-4 mr-2" /> ดูรายละเอียดคอร์ส →
+                  {/* Styled action button */}
+                  <div className="mt-auto pt-5 border-t border-white/10 w-full">
+                    <div className={cn(
+                      "w-full py-3 px-4 rounded-xl border flex items-center justify-between text-sm font-semibold tracking-wide transition-all duration-300 font-prompt shadow-sm",
+                      isMusic 
+                        ? "bg-amber-500/5 border-amber-500/20 text-amber-400 group-hover:bg-amber-500/20 group-hover:border-amber-500/40 group-hover:text-white group-hover:shadow-[0_0_20px_rgba(245,158,11,0.25)]"
+                        : "bg-blue-500/5 border-blue-500/20 text-blue-400 group-hover:bg-blue-500/20 group-hover:border-blue-500/40 group-hover:text-white group-hover:shadow-[0_0_20px_rgba(59,130,246,0.25)]"
+                    )}>
+                      <div className="flex items-center gap-2">
+                        <BookOpen className="w-4.5 h-4.5 shrink-0 transition-transform duration-300 group-hover:rotate-12" />
+                        <span>ดูรายละเอียดคอร์ส</span>
+                      </div>
+                      <ArrowRight className="w-4.5 h-4.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1.5" />
+                    </div>
                   </div>
                 </div>
               </motion.div>

@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal } from "lucide-react";
+import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -16,11 +17,14 @@ import {
   SheetTitle
 } from "@/components/ui/sheet";
 import { logout } from "@/app/login/actions";
+import { cn } from "@/lib/utils";
 
 const routes = [
-  { name: "คอร์สเรียน", href: "/#academy", icon: GraduationCap },
-  { name: "สินค้าและบริการ", href: "/#products", icon: ShoppingBag },
-  { name: "ระบบออนไลน์", href: "/#saas", icon: Terminal },
+  { name: "คอร์สเรียน", href: "/#academy", icon: GraduationCap, hoverColor: "cyan" },
+  { name: "สินค้าและบริการ", href: "/#products", icon: ShoppingBag, hoverColor: "amber" },
+  { name: "ระบบออนไลน์", href: "/#saas", icon: Terminal, hoverColor: "cyan" },
+  { name: "ของแจกฟรี", href: "/freebies", icon: Gift, hoverColor: "purple" },
+  { name: "บริการของเรา", href: "/services", icon: Briefcase, hoverColor: "teal" },
 ];
 
 interface NavbarProps {
@@ -29,14 +33,33 @@ interface NavbarProps {
 }
 
 export function Navbar({ user }: NavbarProps) {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Trigger check immediately in case page is already scrolled on mount
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-black/40 border-b border-white/10">
+    <nav className={cn(
+      "sticky top-0 z-50 w-full transition-all duration-500",
+      isScrolled 
+        ? "glass-nav py-2" 
+        : "bg-transparent border-b border-transparent py-4"
+    )}>
       <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         
         {/* Logo */}
         <div className="flex-shrink-0 flex items-center">
-          <Link href="/" className="font-prompt text-xl font-normal text-white flex items-center gap-1 transition-all duration-300 hover:text-amber-400 hover:-translate-y-0.5 group">
-            iAonTech<span className="text-blue-500 group-hover:text-amber-400 transition-colors duration-300">xMusic</span>
+          <Link href="/" className="font-prompt text-xl font-normal text-white flex items-center gap-1 transition-all duration-300 hover:text-cyan-400 hover:-translate-y-0.5 group">
+            iAonTech<span className="text-blue-500 group-hover:text-cyan-400 transition-colors duration-300">xMusic</span>
           </Link>
         </div>
 
@@ -46,14 +69,36 @@ export function Navbar({ user }: NavbarProps) {
             <NavigationMenuList className="gap-2">
               {routes.map((route) => {
                 const Icon = route.icon;
+                const isCyan   = route.hoverColor === "cyan";
+                const isPurple = route.hoverColor === "purple";
+                const isTeal   = route.hoverColor === "teal";
                 return (
                   <NavigationMenuItem key={route.name}>
                     <NavigationMenuLink 
-                      className="bg-transparent text-white/70 hover:text-amber-400 hover:bg-amber-400/5 border border-transparent hover:border-amber-400/20 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)] px-3 py-2 rounded-lg font-prompt text-xl font-normal transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2"
+                      className={cn(
+                        "relative bg-transparent text-white/70 px-3 py-1.5 rounded-lg font-prompt text-sm font-normal transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-1.5 group overflow-hidden",
+                        isTeal
+                          ? "hover:text-teal-400 hover:bg-teal-500/5 border border-transparent hover:border-teal-500/20 hover:shadow-[0_0_15px_rgba(20,184,166,0.3)]"
+                          : isPurple
+                          ? "hover:text-purple-400 hover:bg-purple-500/5 border border-transparent hover:border-purple-500/20 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+                          : isCyan 
+                          ? "hover:text-cyan-400 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.25)]"
+                          : "hover:text-amber-400 hover:bg-amber-400/5 border border-transparent hover:border-amber-400/20 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)]"
+                      )}
                       render={<Link href={route.href} />}
                     >
-                      <Icon className="w-5 h-5 shrink-0" />
                       {route.name}
+                      {/* Underline glow effect */}
+                      <span className={cn(
+                        "absolute bottom-0 left-3 right-3 h-[2px] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center",
+                        isTeal
+                          ? "bg-gradient-to-r from-teal-400 to-emerald-400 shadow-[0_0_8px_rgba(20,184,166,0.8)]"
+                          : isPurple
+                          ? "bg-gradient-to-r from-purple-400 to-pink-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]"
+                          : isCyan 
+                          ? "bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]"
+                          : "bg-gradient-to-r from-amber-400 to-orange-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"
+                      )} />
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 );
@@ -65,9 +110,10 @@ export function Navbar({ user }: NavbarProps) {
               <div className="flex items-center gap-2">
                   <Link 
                     href="/dashboard" 
-                    className="bg-transparent text-white/70 hover:text-amber-400 hover:bg-amber-400/5 border border-transparent hover:border-amber-400/20 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)] px-3 py-2 rounded-lg font-prompt text-xl font-normal transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2"
+                    className="relative bg-transparent text-white/70 px-4 py-2 rounded-lg font-prompt text-xl font-normal transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 group overflow-hidden hover:text-cyan-400 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.25)]"
                   >
                       <LayoutDashboard className="w-5 h-5" /> แผงควบคุม
+                      <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
                   </Link>
                   <Button 
                     variant="outline" 
@@ -103,11 +149,23 @@ export function Navbar({ user }: NavbarProps) {
               <div className="flex flex-col gap-2 mt-8">
                 {routes.map((route) => {
                   const Icon = route.icon;
+                  const isCyan   = route.hoverColor === "cyan";
+                  const isPurple = route.hoverColor === "purple";
+                  const isTeal   = route.hoverColor === "teal";
                   return (
                     <Link 
                       key={route.name}
                       href={route.href}
-                      className="font-prompt text-base font-normal text-white/70 hover:text-amber-400 hover:bg-amber-400/5 border border-transparent hover:border-amber-400/20 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)] px-4 py-2.5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2"
+                      className={cn(
+                        "font-prompt text-base font-normal text-white/70 px-4 py-2.5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2",
+                        isTeal
+                          ? "hover:text-teal-400 hover:bg-teal-500/5 border border-transparent hover:border-teal-500/20 hover:shadow-[0_0_15px_rgba(20,184,166,0.3)]"
+                          : isPurple
+                          ? "hover:text-purple-400 hover:bg-purple-500/5 border border-transparent hover:border-purple-500/20 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+                          : isCyan 
+                          ? "hover:text-cyan-400 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.25)]"
+                          : "hover:text-amber-400 hover:bg-amber-400/5 border border-transparent hover:border-amber-400/20 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)]"
+                      )}
                     >
                       <Icon className="w-5 h-5 shrink-0" />
                       {route.name}
@@ -119,7 +177,7 @@ export function Navbar({ user }: NavbarProps) {
                    <>
                      <Link 
                        href="/dashboard" 
-                       className="font-prompt text-base font-normal text-white/70 hover:text-amber-400 hover:bg-amber-400/5 border border-transparent hover:border-amber-400/20 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)] px-4 py-2.5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2"
+                       className="font-prompt text-base font-normal text-white/70 hover:text-cyan-400 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.25)] px-4 py-2.5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2"
                      >
                         <LayoutDashboard className="w-5 h-5 text-white/70" /> แผงควบคุม
                      </Link>
