@@ -12,8 +12,8 @@ export default async function CoursePlayerPage({ params }: { params: Promise<{ i
     redirect('/login');
   }
 
-  // Fetch course and check purchase status concurrently
-  const [{ data: course, error }, { data: existingOrder }] = await Promise.all([
+  // Fetch course, purchase status, and lessons concurrently
+  const [{ data: course, error }, { data: existingOrder }, { data: lessons }] = await Promise.all([
     supabase.from('courses').select('*').eq('id', id).single(),
     supabase
       .from('orders')
@@ -22,6 +22,11 @@ export default async function CoursePlayerPage({ params }: { params: Promise<{ i
       .eq('course_id', id)
       .eq('status', 'completed')
       .maybeSingle(),
+    supabase
+      .from('lessons')
+      .select('*')
+      .eq('course_id', id)
+      .order('sort_order', { ascending: true }),
   ]);
 
   const isPurchased = !!existingOrder;
@@ -36,5 +41,6 @@ export default async function CoursePlayerPage({ params }: { params: Promise<{ i
         </div>
     );
   }
-  return <CoursePlayerClientView course={course} isPurchased={isPurchased} />;
+  return <CoursePlayerClientView course={course} isPurchased={isPurchased} lessons={lessons || []} />;
+
 }

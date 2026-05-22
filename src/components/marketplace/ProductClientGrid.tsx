@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search, ShoppingCart, Tag, Filter, Package } from "lucide-react";
+import { Search, ShoppingCart, Tag, Package } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import * as Icons from "lucide-react";
@@ -24,20 +24,51 @@ export function ProductClientGrid({ initialProducts }: { initialProducts: Produc
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState<string>("All");
 
-  const categories = ["All", "Template", "Service"];
+  const categories = [
+    { id: "All", label: "ทั้งหมด" },
+    { id: "Template", label: "ระบบ/สคริปต์" },
+    { id: "Service", label: "ดนตรี/ดีไซน์" }
+  ];
 
   const filteredProducts = initialProducts.filter((product) => {
     const matchesSearch =
       product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter =
-      filterCategory === "All" || product.category === filterCategory;
+    
+    let matchesFilter = false;
+    if (filterCategory === "All") {
+      matchesFilter = true;
+    } else if (filterCategory === "Template") {
+      matchesFilter = product.category?.toLowerCase() === "template" || product.category?.toLowerCase() === "automation";
+    } else if (filterCategory === "Service") {
+      matchesFilter = product.category?.toLowerCase() === "service" || product.category?.toLowerCase() === "creative";
+    } else {
+      matchesFilter = product.category === filterCategory;
+    }
+    
     return matchesSearch && matchesFilter;
   });
 
   return (
     <div className="w-full flex flex-col min-h-0">
-      {/* Search & Filter Bar */}
+      {/* Category Filter (Pill Buttons Style) */}
+      <div className="flex bg-white/5 p-1 rounded-xl w-full max-w-sm mb-6 border border-white/10 mx-auto md:mx-0">
+          {categories.map((cat) => (
+              <button
+                  key={cat.id}
+                  onClick={() => setFilterCategory(cat.id)}
+                  className={`flex-1 py-2 rounded-lg font-prompt text-sm font-medium transition-all duration-200 active:scale-95 ${
+                      filterCategory === cat.id
+                          ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white border border-amber-400/30 shadow-[0_0_15px_rgba(245,158,11,0.45)]"
+                          : "text-white/50 hover:text-white hover:bg-white/5"
+                  }`}
+              >
+                  {cat.label}
+              </button>
+          ))}
+      </div>
+
+      {/* Search Bar */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -45,35 +76,11 @@ export function ProductClientGrid({ initialProducts }: { initialProducts: Produc
           </div>
           <input
             type="text"
-            className="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all font-prompt"
+            className="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-white/40 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all font-prompt"
             placeholder="ค้นหาสินค้า (เช่น ระบบเช็คชื่อ, ให้คำปรึกษา)..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-        </div>
-
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-          <div className="flex items-center gap-2 text-white/50 px-2 shrink-0">
-            <Filter className="w-4 h-4" />
-            <span className="font-prompt text-sm mr-2">หมวดหมู่:</span>
-          </div>
-          {categories.map((cat) => {
-            const label =
-              cat === "All" ? "ทั้งหมด" : cat === "Template" ? "ระบบ/สคริปต์" : "บริการพิเศษ";
-            return (
-              <button
-                key={cat}
-                onClick={() => setFilterCategory(cat)}
-                className={`px-4 py-2 rounded-lg border font-prompt text-sm transition-all shrink-0 ${
-                  filterCategory === cat
-                    ? "bg-blue-500 text-white border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]"
-                    : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white"
-                }`}
-              >
-                {label}
-              </button>
-            );
-          })}
         </div>
       </div>
 
@@ -95,12 +102,10 @@ export function ProductClientGrid({ initialProducts }: { initialProducts: Produc
             }
 
             const IconComponent =
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               (Icons as any)[product.icon_name || "Package"] || Package;
-            const colorClass =
-              product.color_classes ||
-              "text-blue-400 bg-blue-500/10 border-blue-500/20";
             const buttonClass =
-              product.button_classes || "bg-blue-500 hover:bg-blue-600";
+              product.button_classes || "bg-amber-600 hover:bg-amber-500 shadow-amber-600/10 hover:shadow-[0_0_15px_rgba(245,158,11,0.35)]";
 
             // Guard: a valid Supabase UUID is a string longer than 8 chars
             const isValidId =
@@ -139,7 +144,7 @@ export function ProductClientGrid({ initialProducts }: { initialProducts: Produc
                   
                   {/* Category Badge Overlay */}
                   <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white/80 border border-white/20 px-3 py-1 rounded-full text-[10px] font-prompt font-medium uppercase tracking-wider shadow-lg z-10">
-                    {product.category}
+                    {product.category === "Template" ? "Automation" : product.category === "Service" ? "Creative" : product.category}
                   </div>
                 </div>
 
@@ -169,8 +174,8 @@ export function ProductClientGrid({ initialProducts }: { initialProducts: Produc
                     </div>
                     <div
                       className={`px-4 py-2 rounded-lg text-white font-prompt text-sm shadow-lg shadow-black/20 ${
-                        isValidId ? (isMusicBrand ? "bg-amber-600 hover:bg-amber-500" : "bg-blue-600 hover:bg-blue-500") : "bg-white/10"
-                      } transition-colors`}
+                        isValidId ? buttonClass : "bg-white/10"
+                      } transition-all duration-300`}
                     >
                       {isValidId ? "ดูรายละเอียด →" : "ไม่มีข้อมูล"}
                     </div>
@@ -200,7 +205,7 @@ export function ProductClientGrid({ initialProducts }: { initialProducts: Produc
           <p className="font-prompt text-lg">ไม่พบสินค้าที่ตรงกับการค้นหา</p>
           <button
             onClick={() => { setSearchTerm(""); setFilterCategory("All"); }}
-            className="mt-4 px-4 py-2 border border-blue-500/30 text-blue-400 rounded-lg hover:bg-blue-500/10 font-prompt text-sm transition-colors"
+            className="mt-4 px-4 py-2 border border-amber-500/30 text-amber-400 rounded-lg hover:bg-amber-500/10 font-prompt text-sm transition-colors"
           >
             ล้างการค้นหา
           </button>

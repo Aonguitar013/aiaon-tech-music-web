@@ -53,8 +53,8 @@ export default function LoginPage() {
       >
         <div className="text-center mb-10">
           <Link href="/" className="inline-block mb-6">
-            <h2 className="font-prompt text-xl font-bold tracking-widest text-white uppercase flex justify-center items-center gap-1">
-              AiAon <span className="text-blue-500">Tech</span>
+            <h2 className="font-prompt text-xl font-normal tracking-widest text-white uppercase flex justify-center items-center gap-1">
+              iAonTech<span className="text-blue-500">xMusic</span>
             </h2>
           </Link>
           <h1 className="font-prompt text-2xl md:text-3xl font-bold text-white mb-2">

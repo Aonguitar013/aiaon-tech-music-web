@@ -67,8 +67,8 @@ export default async function RootLayout({
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/10 blur-[120px] pointer-events-none rounded-full"></div>
                 <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-12 text-center md:text-left relative z-10 w-full">
                   <div className="space-y-4 md:max-w-sm">
-                    <h2 className="font-prompt text-2xl font-bold tracking-widest text-white uppercase">
-                      AiAon <span className="text-blue-500">Tech</span>
+                    <h2 className="font-prompt text-2xl font-normal tracking-widest text-white uppercase flex items-center gap-1">
+                      iAonTech<span className="text-blue-500">xMusic</span>
                     </h2>
                     <p className="text-white/50 text-sm font-prompt leading-relaxed">
                       Tech Educator & Content Creator. มุ่งมั่นสร้างระบบลดภาระครู และยกระดับการศึกษาด้วย Automation

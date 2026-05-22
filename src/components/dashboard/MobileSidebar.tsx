@@ -14,6 +14,7 @@ import {
   Menu,
   X,
   ChevronRight,
+  Presentation,
 } from "lucide-react";
 import { logout } from "@/app/login/actions";
 
@@ -25,6 +26,7 @@ interface MobileSidebarProps {
 
 const navLinks = [
   { label: "ภาพรวม (Overview)", href: "/dashboard", icon: LayoutDashboard },
+  { label: "สไลด์นำเสนอ (Slides)", href: "/presentation", icon: Presentation },
   { label: "คอร์สเรียน (Academy)", href: "/dashboard/academy", icon: BookOpen },
   { label: "สินค้า (Marketplace)", href: "/dashboard/marketplace", icon: ShoppingCart },
   { label: "โปรไฟล์ (Profile)", href: "/dashboard/profile", icon: User },
@@ -71,9 +73,9 @@ export function MobileSidebar({ userEmail, userInitial, isAdmin }: MobileSidebar
           <Link
             href="/"
             onClick={() => setIsOpen(false)}
-            className="font-prompt text-xl font-bold tracking-widest text-white uppercase flex items-center gap-1 hover:opacity-80 transition-opacity"
+            className="font-prompt text-xl font-normal text-white flex items-center gap-1 hover:opacity-80 transition-opacity"
           >
-            AiAon <span className="text-blue-500">Tech</span>
+            iAonTech<span className="text-blue-500">xMusic</span>
           </Link>
           <button
             onClick={() => setIsOpen(false)}
@@ -100,7 +102,7 @@ export function MobileSidebar({ userEmail, userInitial, isAdmin }: MobileSidebar
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center justify-between gap-3 px-3 py-3 rounded-xl font-prompt font-medium transition-all group ${
+                className={`flex items-center justify-between gap-3 px-3 py-3 rounded-xl font-prompt font-normal transition-all group ${
                   isActive
                     ? "bg-blue-500/15 text-white border border-blue-500/25 shadow-[0_0_12px_rgba(59,130,246,0.15)]"
                     : "text-white/70 hover:text-white hover:bg-white/10"

@@ -9,6 +9,7 @@ import { DesktopNavLink } from "@/components/dashboard/DesktopNavLink";
 // Plain serializable data — no React components/functions in this array
 const navLinks = [
   { label: "ภาพรวม (Overview)",     href: "/dashboard",             iconName: "LayoutDashboard" },
+  { label: "สไลด์นำเสนอ (Slides)",  href: "/presentation",          iconName: "Presentation"    },
   { label: "คอร์สเรียน (Academy)",  href: "/dashboard/academy",     iconName: "BookOpen"        },
   { label: "สินค้า (Marketplace)",  href: "/dashboard/marketplace", iconName: "ShoppingCart"    },
   { label: "โปรไฟล์ (Profile)",     href: "/dashboard/profile",     iconName: "User"            },
@@ -51,9 +52,9 @@ export default async function DashboardLayout({
         <div className="h-16 flex items-center px-6 border-b border-white/10 shrink-0">
           <Link
             href="/"
-            className="font-prompt text-xl font-bold tracking-widest text-white uppercase flex items-center gap-1 hover:opacity-80 transition-opacity"
+            className="font-prompt text-xl font-normal text-white flex items-center gap-1 hover:opacity-80 transition-opacity"
           >
-            AiAon <span className="text-blue-500">Tech</span>
+            iAonTech<span className="text-blue-500">xMusic</span>
           </Link>
         </div>
 
@@ -132,9 +133,9 @@ export default async function DashboardLayout({
             />
             <Link
               href="/"
-              className="font-prompt text-lg font-bold text-white flex items-center gap-1"
+              className="font-prompt text-lg font-normal text-white flex items-center gap-1"
             >
-              AiAon <span className="text-blue-500">Tech</span>
+              iAonTech<span className="text-blue-500">xMusic</span>
             </Link>
           </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, Bell, Sparkles, CheckCircle2 } from "lucide-react";
+import { Users, Bell, Sparkles, BarChart3, FileText } from "lucide-react";
 
 export function SaaSSection() {
   return (
@@ -43,32 +43,40 @@ export function SaaSSection() {
           </div>
         </motion.div>
 
-        <div className="flex-1 space-y-8">
-          <h2 className="font-prompt text-3xl md:text-5xl font-bold leading-tight">
-            Seamless <span className="text-blue-400">Management</span>
+        <div className="flex-1 space-y-8 font-prompt">
+          <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+            จัดการงานครู <span className="text-blue-400">ครบจบในที่เดียว</span>
           </h2>
-          <p className="text-lg text-white/50">
-            Our built-in EdTech SaaS tools handle the heavy lifting. From automated attendance tracking to LINE API notifications, everything is orchestrated for efficiency.
+          <p className="text-lg text-white/50 leading-relaxed">
+            รวมระบบอัตโนมัติ เครื่องมือช่วยงาน และบริการพิเศษ ที่ออกแบบมาเพื่อช่วยลดภาระงานเอกสารและเพิ่มประสิทธิภาพในการทำงานของคุณครูยุคใหม่
           </p>
 
           <ul className="space-y-4">
-            {["Automated Student Tracking", "Real-time Notification API", "Intelligent Analytics", "Billing Integration with Stripe"].map((item, idx) => (
-              <motion.li 
-                key={idx}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className="flex items-center gap-3 text-white/80"
-              >
-                <CheckCircle2 className="w-6 h-6 text-blue-500" />
-                <span className="font-medium font-prompt text-lg">{item}</span>
-              </motion.li>
-            ))}
+            {[
+              { label: "ระบบเช็คชื่อและติดตามนักเรียนอัตโนมัติ", icon: Users },
+              { label: "แจ้งเตือนผ่าน LINE API ทันที", icon: Bell },
+              { label: "ระบบสรุปผลและรายงานข้อมูลอัจฉริยะ", icon: BarChart3 },
+              { label: "เครื่องมือและสคริปต์ช่วยงานเอกสาร", icon: FileText }
+            ].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <motion.li 
+                  key={idx}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex items-center gap-3 text-white/80"
+                >
+                  <Icon className="w-6 h-6 text-blue-500 shrink-0" />
+                  <span className="font-medium text-lg">{item.label}</span>
+                </motion.li>
+              );
+            })}
           </ul>
 
-          <button className="mt-8 px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-500 font-medium transition-colors shadow-[0_0_20px_rgba(37,99,235,0.4)] flex items-center gap-2">
-            <Sparkles className="w-5 h-5" /> Explore Tools
+          <button className="mt-8 px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-500 font-medium transition-colors shadow-[0_0_20px_rgba(37,99,235,0.4)] flex items-center gap-2 active:scale-95 transition-all">
+            <Sparkles className="w-5 h-5" /> เริ่มต้นใช้งานระบบ
           </button>
         </div>
 

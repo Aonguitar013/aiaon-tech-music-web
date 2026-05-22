@@ -10,6 +10,7 @@ import {
   User,
   Receipt,
   ChevronRight,
+  Presentation,
   type LucideIcon,
 } from "lucide-react";
 
@@ -21,6 +22,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Settings,
   User,
   Receipt,
+  Presentation,
 };
 
 interface DesktopNavLinkProps {
@@ -41,7 +43,7 @@ export function DesktopNavLink({ href, label, iconName }: DesktopNavLinkProps) {
   return (
     <Link
       href={href}
-      className={`flex items-center justify-between gap-3 px-3 py-3 rounded-lg font-prompt font-medium transition-all group ${
+      className={`flex items-center justify-between gap-3 px-3 py-3 rounded-lg font-prompt font-normal transition-all group ${
         isActive
           ? "bg-blue-500/15 text-white border border-blue-500/20 shadow-[0_0_12px_rgba(59,130,246,0.1)]"
           : "text-white/70 hover:text-white hover:bg-white/10 border border-transparent"

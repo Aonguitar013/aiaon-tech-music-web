@@ -53,9 +53,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   }
 
   const IconComponent = (Icons as any)[product.icon_name || "Package"] || Icons.Package;
-  const isService = product.category === "Service";
-  const colorClass = product.color_classes || "text-blue-400 bg-blue-500/10 border-blue-500/20";
-  const buttonClass = product.button_classes || "bg-blue-500 hover:bg-blue-600";
+  const isService = product.category === "Service" || product.category === "Creative";
+  const colorClass = product.color_classes || "text-amber-400 bg-amber-500/10 border-amber-500/20";
+  const buttonClass = product.button_classes || "bg-amber-600 hover:bg-amber-500 shadow-amber-600/10 hover:shadow-[0_0_15px_rgba(245,158,11,0.35)]";
 
   return (
     <div className="w-full max-w-[1200px] mx-auto min-h-screen flex flex-col pb-20">
@@ -85,7 +85,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                  </div>
 
                  <div className="bg-white/10 text-white/80 border border-white/20 inline-block px-3 py-1 rounded-full text-xs font-prompt font-medium uppercase tracking-wider mb-4 shadow">
-                     {product.category === "Template" ? "ระบบ / สคริปต์" : "บริการ / ที่ปรึกษา"}
+                     {product.category === "Template" ? "ระบบ / สคริปต์" : product.category === "Service" ? "ดนตรี / ดีไซน์" : "บริการ / ที่ปรึกษา"}
                  </div>
 
                  <h1 className="text-3xl md:text-5xl font-bold font-prompt text-white mb-6 leading-tight">
