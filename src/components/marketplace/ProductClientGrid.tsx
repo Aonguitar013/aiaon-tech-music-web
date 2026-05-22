@@ -135,9 +135,25 @@ export function ProductClientGrid({ initialProducts }: { initialProducts: Produc
                     let mockImage = product.image_url;
                     
                     if (!mockImage) {
-                      if (lowerTitle.includes("ระบบเช็กชื่อ") || lowerTitle.includes("line")) {
+                      if (lowerTitle.includes("e-commerce") || lowerTitle.includes("payment")) {
+                        mockImage = "/images/mockups/ecommerce_store_mockup.png";
+                      } else if (lowerTitle.includes("admin") || lowerTitle.includes("crypto") || lowerTitle.includes("dashboard")) {
+                        mockImage = "/images/mockups/admin_dashboard_pro.png";
+                      } else if (lowerTitle.includes("portfolio") || lowerTitle.includes("gallery") || lowerTitle.includes("design") || lowerTitle.includes("figma")) {
+                        mockImage = "/images/mockups/portfolio_creative_ui.png";
+                      } else if (lowerTitle.includes("fitness") || lowerTitle.includes("social") || lowerTitle.includes("music") || lowerTitle.includes("app")) {
+                        mockImage = "/images/mockups/mobile_app_mockup.png";
+                      } else if (lowerTitle.includes("booking") || lowerTitle.includes("event") || lowerTitle.includes("restaurant") || lowerTitle.includes("travel") || lowerTitle.includes("job")) {
+                        mockImage = "/images/mockups/booking_schedule_ui.png";
+                      } else if (lowerTitle.includes("educational") || lowerTitle.includes("lms") || lowerTitle.includes("mentorship") || lowerTitle.includes("forum")) {
+                        mockImage = "/images/mockups/teaching_media_template_1779443134799.png";
+                      } else if (lowerTitle.includes("supabase") || lowerTitle.includes("database") || lowerTitle.includes("server") || lowerTitle.includes("api") || lowerTitle.includes("deployment") || lowerTitle.includes("pipeline")) {
+                        mockImage = "/images/mockups/workflow_automation_pro_1779443939357.png";
+                      } else if (lowerTitle.includes("code review") || lowerTitle.includes("bug") || lowerTitle.includes("refactoring") || lowerTitle.includes("seo") || lowerTitle.includes("audit") || lowerTitle.includes("conversion") || lowerTitle.includes("testing")) {
+                        mockImage = "/images/mockups/nextjs_masterclass_1779443916108.png";
+                      } else if (lowerTitle.includes("ระบบเช็กชื่อ") || lowerTitle.includes("line") || lowerTitle.includes("notification") || lowerTitle.includes("chat")) {
                         mockImage = "/images/mockups/system_attendance_line_1779443112798.png";
-                      } else if (lowerTitle.includes("เทมเพลตสื่อการสอน")) {
+                      } else if (lowerTitle.includes("สื่อการสอน")) {
                         mockImage = "/images/mockups/teaching_media_template_1779443134799.png";
                       } else if (lowerTitle.includes("apps script")) {
                         mockImage = "/images/mockups/apps_script_course_1779443157476.png";
@@ -145,8 +161,11 @@ export function ProductClientGrid({ initialProducts }: { initialProducts: Produc
                         mockImage = "/images/mockups/blog_magazine_template_1779443181794.png";
                       } else if (lowerTitle.includes("real estate")) {
                         mockImage = "/images/mockups/real_estate_ui_1779443205255.png";
-                      } else if (lowerTitle.includes("startup") || lowerTitle.includes("landing page")) {
+                      } else if (lowerTitle.includes("startup") || lowerTitle.includes("landing page") || lowerTitle.includes("link in bio")) {
                         mockImage = "/images/mockups/startup_landing_page_1779443225117.png";
+                      } else {
+                        // Fallback generic tech mockup
+                        mockImage = "/images/mockups/portfolio_creative_ui.png";
                       }
                     }
 
