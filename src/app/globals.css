@@ -382,3 +382,115 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(59, 130, 246, 0.55);
 }
+
+/* ============================================================
+   PREMIUM PRICING CARD STYLES & INTERACTIVE EFFECTS
+   ============================================================ */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.border-glow-premium {
+  position: relative;
+}
+.border-glow-premium::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px; /* border thickness */
+  background: conic-gradient(
+    from var(--angle),
+    #06b6d4,
+    #3b82f6,
+    #8b5cf6,
+    #ec4899,
+    #06b6d4
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 10;
+  animation: border-rotate-glow 4s linear infinite;
+}
+
+@keyframes border-rotate-glow {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Sweeping reflection shimmer button */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 30%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0.15) 70%,
+    transparent
+  );
+  transform: rotate(25deg);
+  transition: none;
+  animation: shimmer-btn-sweep 5s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer-btn-sweep {
+  0% {
+    left: -60%;
+  }
+  15%, 100% {
+    left: 140%;
+  }
+}
+
+/* Pulse animation for Recommended badge */
+@keyframes badge-pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.3), 0 0 20px rgba(59, 130, 246, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.6), 0 0 35px rgba(59, 130, 246, 0.4);
+    transform: translateY(-50%) scale(1.03);
+  }
+}
+
+.badge-glow-pulse {
+  animation: badge-pulse-glow 3s ease-in-out infinite;
+}
+
+/* Floating sparkle particles */
+@keyframes sparkle-float {
+  0% {
+    transform: translateY(0) scale(0.6) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-60px) scale(1.1) rotate(120deg);
+    opacity: 0;
+  }
+}
+
+.animate-sparkle-float {
+  animation: sparkle-float 5s ease-in-out infinite;
+}

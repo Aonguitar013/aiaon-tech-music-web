@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import {
   Gift, Download, Music, Code2, X, LogIn,
   FileJson, FileSpreadsheet, Music2, Mic2,

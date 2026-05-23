@@ -43,9 +43,50 @@ interface LineMessage {
   time: string;
 }
 
+function FloatingSparkles() {
+  const sparkles = [
+    { top: "15%", left: "12%", delay: "0s", size: 8 },
+    { top: "55%", left: "85%", delay: "1.5s", size: 12 },
+    { top: "35%", left: "78%", delay: "0.8s", size: 10 },
+    { top: "72%", left: "20%", delay: "2.3s", size: 14 },
+    { top: "10%", left: "80%", delay: "3.1s", size: 8 },
+    { top: "45%", left: "8%", delay: "1.9s", size: 11 },
+  ];
+
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 rounded-2xl">
+      {sparkles.map((sp, idx) => (
+        <svg
+          key={idx}
+          className="absolute animate-sparkle-float text-cyan-400/25 fill-cyan-400/25 animate-sparkle-float"
+          style={{
+            top: sp.top,
+            left: sp.left,
+            width: `${sp.size}px`,
+            height: `${sp.size}px`,
+            animationDelay: sp.delay,
+          }}
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
 export function SaaSView({ user }: SaaSViewProps) {
   // Audio state
   const [soundEnabled, setSoundEnabled] = useState(true);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+  };
   
   // Interactive Simulator State
   const [students, setStudents] = useState<Student[]>([
@@ -658,9 +699,15 @@ export function SaaSView({ user }: SaaSViewProps) {
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-card flex flex-col p-8 rounded-2xl border border-white/5 bg-white/5 relative justify-between hover:border-white/10 transition-colors"
+            whileHover={{ y: -8, scale: 1.01, borderColor: "rgba(6, 182, 212, 0.35)" }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            onMouseMove={handleMouseMove}
+            className="glass-card flex flex-col p-8 rounded-2xl border border-white/10 relative justify-between transition-all duration-300"
+            style={{
+              background: "radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(6, 182, 212, 0.08), transparent 80%), rgba(9, 9, 11, 0.6)"
+            }}
           >
-            <div className="space-y-6 font-prompt text-left">
+            <div className="space-y-6 font-prompt text-left relative z-10">
               <div>
                 <h3 className="text-lg font-semibold text-white/80">คุณครูทั่วไป (Free)</h3>
                 <p className="text-xs text-white/40 mt-1">เหมาะสำหรับทดลองระบบหรือใช้ห้องเรียนเดี่ยว</p>
@@ -672,28 +719,36 @@ export function SaaSView({ user }: SaaSViewProps) {
               </div>
 
               <ul className="space-y-3.5 text-sm text-white/70 pt-4 border-t border-white/5">
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>บันทึกชื่อนักเรียนสูงสุด 30 คน</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/10 border border-slate-500/20 group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-cyan-400" />
+                  </span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">บันทึกชื่อนักเรียนสูงสุด 30 คน</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>เช็คชื่อมา สาย ลา ขาด ได้ปกติ</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/10 border border-slate-500/20 group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-cyan-400" />
+                  </span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">เช็คชื่อมา สาย ลา ขาด ได้ปกติ</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>แจ้งเตือน LINE Notify ลิงก์มาตรฐาน</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/10 border border-slate-500/20 group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-cyan-400" />
+                  </span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">แจ้งเตือน LINE Notify ลิงก์มาตรฐาน</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>จัดเก็บข้อมูลใน Google Sheets</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/10 border border-slate-500/20 group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-cyan-400" />
+                  </span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">จัดเก็บข้อมูลใน Google Sheets</span>
                 </li>
               </ul>
             </div>
 
-            <div className="pt-8">
+            <div className="pt-8 relative z-10">
               <Link href={user ? "/dashboard" : "/login"} className="w-full block">
-                <button className="w-full py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 text-white font-prompt font-semibold text-sm active:scale-95 transition-all">
+                <button className="w-full py-3.5 rounded-full border border-white/10 hover:border-cyan-400/40 bg-white/5 hover:bg-cyan-500/5 text-white hover:text-cyan-300 font-prompt font-semibold text-sm active:scale-95 transition-all cursor-pointer shadow-md hover:shadow-[0_0_15px_rgba(6,182,212,0.1)]">
                   เริ่มต้นใช้งานฟรี
                 </button>
               </Link>
@@ -705,16 +760,26 @@ export function SaaSView({ user }: SaaSViewProps) {
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-card flex flex-col p-8 rounded-2xl border border-cyan-500/40 bg-gradient-to-b from-blue-950/20 to-black/80 relative justify-between shadow-[0_0_30px_rgba(6,182,212,0.15)]"
+            whileHover={{ y: -12, scale: 1.08 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            onMouseMove={handleMouseMove}
+            className="glass-card border-glow-premium flex flex-col p-8 rounded-2xl bg-gradient-to-b from-blue-950/25 to-black/90 relative justify-between shadow-[0_0_35px_rgba(6,182,212,0.18)] transition-all duration-300 md:scale-105 z-20"
+            style={{
+              background: "radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.1) 50%, transparent 80%), rgba(9, 9, 11, 0.5)"
+            }}
           >
+            {/* Twinkling particle stars inside card background */}
+            <FloatingSparkles />
+
             {/* Float recommended label badge */}
-            <div className="absolute top-0 right-8 -translate-y-1/2 px-3.5 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-[10px] text-white font-bold tracking-wider font-prompt uppercase shadow-md shadow-cyan-500/30">
-              RECOMMENDED
+            <div className="absolute top-0 right-8 -translate-y-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 text-[10px] text-white font-bold tracking-wider font-prompt uppercase shadow-md badge-glow-pulse flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-white animate-pulse" />
+              <span>RECOMMENDED</span>
             </div>
 
-            <div className="space-y-6 font-prompt text-left">
+            <div className="space-y-6 font-prompt text-left relative z-10">
               <div>
-                <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-cyan-400 flex items-center gap-2 drop-shadow-[0_0_10px_rgba(6,182,212,0.3)]">
                   <span>ครูมืออาชีพ (Pro)</span>
                   <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
                 </h3>
@@ -722,37 +787,47 @@ export function SaaSView({ user }: SaaSViewProps) {
               </div>
 
               <div className="flex items-baseline gap-1 text-white">
-                <span className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-300">190</span>
+                <span className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-cyan-300 drop-shadow-[0_0_15px_rgba(6,182,212,0.2)]">190</span>
                 <span className="text-sm font-medium text-white/50">บาท / เดือน</span>
               </div>
 
               <ul className="space-y-3.5 text-sm text-white/90 pt-4 border-t border-cyan-500/20">
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span className="font-medium text-white">บันทึกชื่อนักเรียนได้ไม่จำกัด</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-cyan-400" />
+                  </span>
+                  <span className="font-medium text-white group-hover/item:text-cyan-300 transition-colors">บันทึกชื่อนักเรียนได้ไม่จำกัด</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>จัดการห้องเรียนแยกกันสูงสุด 5 ห้อง</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-cyan-400" />
+                  </span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">จัดการห้องเรียนแยกกันสูงสุด 5 ห้อง</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span className="text-cyan-300">ปรับแต่งเนื้อหาข้อความ LINE เองได้</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-cyan-400" />
+                  </span>
+                  <span className="text-cyan-300 font-medium group-hover/item:text-cyan-200 transition-colors">ปรับแต่งเนื้อหาข้อความ LINE เองได้</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>ระบบวิเคราะห์ประเมินกราฟสถิติรายสัปดาห์</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-cyan-400" />
+                  </span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">ระบบวิเคราะห์ประเมินกราฟสถิติรายสัปดาห์</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>สำรองข้อมูลแบบรายวันลงคลาวด์ระบบ</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-cyan-400" />
+                  </span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">สำรองข้อมูลแบบรายวันลงคลาวด์ระบบ</span>
                 </li>
               </ul>
             </div>
 
-            <div className="pt-8">
+            <div className="pt-8 relative z-10">
               <Link href={user ? "/dashboard" : "/login"} className="w-full block">
-                <button className="w-full py-3.5 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-prompt font-bold text-sm shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] active:scale-95 transition-all">
+                <button className="btn-shimmer w-full py-4 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-500 text-white font-prompt font-bold text-sm shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] active:scale-95 transition-all cursor-pointer">
                   สมัครใช้งาน Pro
                 </button>
               </Link>
@@ -764,46 +839,62 @@ export function SaaSView({ user }: SaaSViewProps) {
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-card flex flex-col p-8 rounded-2xl border border-white/5 bg-white/5 relative justify-between hover:border-white/10 transition-colors"
+            whileHover={{ y: -8, scale: 1.01, borderColor: "rgba(245, 158, 11, 0.35)" }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            onMouseMove={handleMouseMove}
+            className="glass-card flex flex-col p-8 rounded-2xl border border-white/10 relative justify-between transition-all duration-300"
+            style={{
+              background: "radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(245, 158, 11, 0.08), rgba(99, 102, 241, 0.06) 50%, transparent 80%), rgba(9, 9, 11, 0.6)"
+            }}
           >
-            <div className="space-y-6 font-prompt text-left">
+            <div className="space-y-6 font-prompt text-left relative z-10">
               <div>
                 <h3 className="text-lg font-semibold text-white/80">ระดับโรงเรียน (School)</h3>
                 <p className="text-xs text-white/40 mt-1">ยกระดับทั้งระดับสายชั้น หรือระบบใหญ่ทั้งโรงเรียน</p>
               </div>
 
               <div className="flex items-baseline gap-1 text-white">
-                <span className="text-3xl font-bold tracking-tight">ติดต่อเรา</span>
+                <span className="text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-amber-200 drop-shadow-[0_0_10px_rgba(245,158,11,0.2)]">ติดต่อเรา</span>
                 <span className="text-xs font-medium text-white/50">สำหรับใบเสนอราคา</span>
               </div>
 
               <ul className="space-y-3.5 text-sm text-white/70 pt-4 border-t border-white/5">
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>ไม่จำกัดนักเรียน และไม่จำกัดจำนวนคุณครู</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-amber-400" />
+                  </span>
+                  <span className="group-hover/item:text-amber-300 transition-colors">ไม่จำกัดนักเรียน และไม่จำกัดจำนวนคุณครู</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>ระบบ Portal แอดมินกลางสำหรับโรงเรียน</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-amber-400" />
+                  </span>
+                  <span className="group-hover/item:text-amber-300 transition-colors">ระบบ Portal แอดมินกลางสำหรับโรงเรียน</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>รองรับการเชื่อมต่อ LINE Official Account</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-amber-400" />
+                  </span>
+                  <span className="group-hover/item:text-amber-300 transition-colors">รองรับการเชื่อมต่อ LINE Official Account</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>บริการเชื่อมต่อ API ดาต้าเบสเดิมของโรงเรียน</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-amber-400" />
+                  </span>
+                  <span className="group-hover/item:text-amber-300 transition-colors">บริการเชื่อมต่อ API ดาต้าเบสเดิมของโรงเรียน</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-cyan-400 shrink-0" />
-                  <span>ให้คำปรึกษาและซัพพอร์ตโดยวิศวกรตรง</span>
+                <li className="flex items-center gap-2.5 group/item">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
+                    <Check className="w-3.5 h-3.5 text-amber-400" />
+                  </span>
+                  <span className="group-hover/item:text-amber-300 transition-colors">ให้คำปรึกษาและซัพพอร์ตโดยวิศวกรตรง</span>
                 </li>
               </ul>
             </div>
 
-            <div className="pt-8">
+            <div className="pt-8 relative z-10">
               <a href="mailto:contact@iaontechxmusic.com" className="w-full block">
-                <button className="w-full py-3.5 rounded-full border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 text-white font-prompt font-semibold text-sm active:scale-95 transition-all">
+                <button className="w-full py-3.5 rounded-full border border-amber-500/30 hover:border-amber-500/60 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 font-prompt font-semibold text-sm active:scale-95 transition-all cursor-pointer shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]">
                   ติดต่อฝ่ายขาย
                 </button>
               </a>
