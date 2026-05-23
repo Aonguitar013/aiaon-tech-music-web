@@ -51,7 +51,7 @@ function AuthModal({ onClose }: { onClose: () => void }) {
   const handleLineLogin = async () => {
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
-      provider: 'line' as any,
+      provider: 'custom:line' as any,
       options: {
         redirectTo: `${window.location.origin}/auth/callback?next=/freebies`
       }
@@ -113,27 +113,17 @@ function AuthModal({ onClose }: { onClose: () => void }) {
           ))}
         </ul>
 
-        {/* LINE Login Button (Primary focus) */}
-        <button
-          onClick={handleLineLogin}
-          className="flex items-center justify-center gap-2.5 w-full py-3.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-[0_0_24px_rgba(6,199,85,0.25)] mb-3 cursor-pointer"
-        >
-          <RiLineLine className="w-5 h-5 shrink-0" />
-          เข้าสู่ระบบผ่าน LINE
-        </button>
-
-        {/* Google / Email Login Button (Secondary style) */}
         <Link
           href="/login?next=/freebies"
-          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl glass-card border border-white/10 hover:border-white/20 text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-[1.02]"
+          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-[0_0_24px_rgba(168,85,247,0.3)] hover:shadow-[0_0_36px_rgba(168,85,247,0.45)]"
           onClick={onClose}
         >
           <LogIn className="w-4 h-4" />
-          วิธีอื่น (Google / อีเมล)
+          ล็อกอิน / สมัครสมาชิกฟรี
         </Link>
 
         <p className="mt-4 text-white/25 font-prompt text-xs">
-          แนะนำเข้าสู่ระบบผ่าน LINE เพื่อความสะดวกสูงสุดสำหรับคุณครู
+          ล็อกอินด้วย Google หรืออีเมลได้เลย — ง่ายและปลอดภัย
         </p>
       </motion.div>
     </motion.div>
