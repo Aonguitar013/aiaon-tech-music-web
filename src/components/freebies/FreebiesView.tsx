@@ -7,9 +7,11 @@ import {
   Gift, Download, Music, Code2, X, LogIn,
   FileJson, FileSpreadsheet, Music2, Mic2,
   CheckCircle2, Star, Sparkles, Filter,
-  ArrowRight,
+  ArrowRight, Share2,
 } from "lucide-react";
 import * as Icons from "lucide-react";
+import { RiLineLine } from "react-icons/ri";
+import { createClient } from "@/utils/supabase/client";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -46,6 +48,16 @@ type DlState = "idle" | "preparing" | "done";
 ───────────────────────────────────────────────────────────── */
 
 function AuthModal({ onClose }: { onClose: () => void }) {
+  const handleLineLogin = async () => {
+    const supabase = createClient();
+    await supabase.auth.signInWithOAuth({
+      provider: 'line' as any,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback?next=/freebies`
+      }
+    });
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -82,36 +94,46 @@ function AuthModal({ onClose }: { onClose: () => void }) {
         <h2 className="font-prompt text-2xl font-bold text-white mb-3">
           ล็อกอินเพื่อดาวน์โหลดฟรี
         </h2>
-        <p className="text-white/55 font-prompt text-sm leading-relaxed mb-8">
+        <p className="text-white/55 font-prompt text-sm leading-relaxed mb-6">
           สร้างบัญชีหรือล็อกอินเพื่อดาวน์โหลดทรัพยากรฟรีทั้งหมด
           ไม่มีค่าใช้จ่าย ไม่มีบัตรเครดิต
         </p>
 
         {/* Perks */}
-        <ul className="space-y-2.5 mb-8 text-left">
+        <ul className="space-y-2.5 mb-6 text-left">
           {[
             "ดาวน์โหลดของแจกฟรีทุกอย่างได้ไม่จำกัด",
             "เข้าถึงบทเรียนเพิ่มเติมและอัปเดตใหม่",
             "รับสิทธิ์ส่วนลดคอร์สพิเศษสำหรับสมาชิก",
           ].map((perk) => (
-            <li key={perk} className="flex items-start gap-2.5 text-white/70 text-sm font-prompt">
+            <li key={perk} className="flex items-start gap-2.5 text-white/80 text-base font-prompt leading-relaxed">
               <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
               {perk}
             </li>
           ))}
         </ul>
 
+        {/* LINE Login Button (Primary focus) */}
+        <button
+          onClick={handleLineLogin}
+          className="flex items-center justify-center gap-2.5 w-full py-3.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-[0_0_24px_rgba(6,199,85,0.25)] mb-3 cursor-pointer"
+        >
+          <RiLineLine className="w-5 h-5 shrink-0" />
+          เข้าสู่ระบบผ่าน LINE
+        </button>
+
+        {/* Google / Email Login Button (Secondary style) */}
         <Link
           href="/login?next=/freebies"
-          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-[0_0_24px_rgba(168,85,247,0.3)] hover:shadow-[0_0_36px_rgba(168,85,247,0.45)]"
+          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl glass-card border border-white/10 hover:border-white/20 text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-[1.02]"
           onClick={onClose}
         >
           <LogIn className="w-4 h-4" />
-          ล็อกอิน / สมัครสมาชิกฟรี
+          วิธีอื่น (Google / อีเมล)
         </Link>
 
         <p className="mt-4 text-white/25 font-prompt text-xs">
-          ล็อกอินด้วย Google หรืออีเมลได้เลย — ง่ายและปลอดภัย
+          แนะนำเข้าสู่ระบบผ่าน LINE เพื่อความสะดวกสูงสุดสำหรับคุณครู
         </p>
       </motion.div>
     </motion.div>
@@ -210,7 +232,7 @@ function FreebieCard({
           <h3 className={`font-prompt text-lg font-bold text-white mb-2 group-hover:${freebie.text_color} transition-colors duration-300 leading-snug`}>
             {freebie.title}
           </h3>
-          <p className="font-prompt text-sm text-white/50 leading-relaxed">
+          <p className="font-prompt text-base text-white/70 leading-relaxed">
             {freebie.description}
           </p>
         </div>
@@ -264,10 +286,21 @@ function FreebieCard({
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="w-full py-3 px-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 flex items-center justify-center gap-2 text-emerald-400 text-sm font-semibold font-prompt"
+              className="space-y-2"
             >
-              <CheckCircle2 className="w-4 h-4" />
-              ดาวน์โหลดสำเร็จ!
+              <div className="w-full py-3 px-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 flex items-center justify-center gap-2 text-emerald-400 text-sm font-semibold font-prompt">
+                <CheckCircle2 className="w-4 h-4" />
+                ดาวน์โหลดสำเร็จ!
+              </div>
+              <a
+                href={`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.origin + '/freebies' : 'https://aiaon.tech/freebies')}&text=${encodeURIComponent(`แจกฟรี! ${freebie.title} - ตัวช่วยลดภาระงานครูและคนทำงาน ไปดาวน์โหลดกันเลยครับ`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2 px-4 rounded-xl border border-[#06C755]/30 hover:border-[#06C755]/50 bg-[#06C755]/5 text-white/90 hover:text-white font-prompt font-semibold text-xs flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer"
+              >
+                <Share2 className="w-3.5 h-3.5 text-[#06C755] shrink-0" />
+                แชร์ให้เพื่อนครูทาง LINE
+              </a>
             </motion.div>
           )}
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Briefcase, Code2, Music, CheckCircle2, ArrowRight,
@@ -207,7 +207,15 @@ const TABS: { label: string; value: Category; icon: React.ElementType }[] = [
    SERVICE CARD
 ───────────────────────────────────────────────────────────── */
 
-function ServiceCard({ service, index }: { service: ServicePackage; index: number }) {
+function ServiceCard({
+  service,
+  index,
+  onSelectService,
+}: {
+  service: ServicePackage;
+  index: number;
+  onSelectService: (id: string) => void;
+}) {
   const [hovered, setHovered] = useState(false);
   const Icon = service.icon;
 
@@ -271,14 +279,14 @@ function ServiceCard({ service, index }: { service: ServicePackage; index: numbe
         </div>
 
         {/* Description */}
-        <p className="font-prompt text-sm text-white/55 leading-relaxed mb-5">
+        <p className="font-prompt text-base text-white/70 leading-relaxed mb-5">
           {service.description}
         </p>
 
         {/* Features */}
         <ul className="space-y-2.5 mb-6 flex-1">
           {service.features.map((feat) => (
-            <li key={feat} className="flex items-start gap-2.5 text-white/70 text-sm font-prompt">
+            <li key={feat} className="flex items-start gap-2.5 text-white/80 text-base font-prompt leading-relaxed">
               <CheckCircle2 className={cn("w-4 h-4 shrink-0 mt-0.5", service.textColor)} />
               {feat}
             </li>
@@ -296,21 +304,31 @@ function ServiceCard({ service, index }: { service: ServicePackage; index: numbe
 
         {/* Pricing + CTA */}
         <div className="mt-auto pt-5 border-t border-white/8">
-          <div className="flex items-end justify-between gap-3 flex-wrap">
-            <div>
-              <p className="text-white font-prompt font-bold text-2xl leading-tight">{service.price}</p>
-              <p className="text-white/35 font-prompt text-xs mt-0.5">{service.priceNote}</p>
+          <div className="flex flex-col gap-4">
+            <div className="flex justify-between items-end">
+              <div>
+                <p className="text-white font-prompt font-bold text-2xl leading-tight">{service.price}</p>
+                <p className="text-white/35 font-prompt text-xs mt-0.5">{service.priceNote}</p>
+              </div>
             </div>
-            <a
-              href="#contact-form"
-              className={cn(
-                "inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-[1.04] active:scale-95",
-                service.btnClass
-              )}
-            >
-              สอบถาม
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </a>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <a
+                href="#contact-form"
+                onClick={() => onSelectService(service.id)}
+                className="w-full text-center py-2.5 px-3 rounded-xl border border-white/10 hover:border-white/20 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-xs font-prompt flex items-center justify-center gap-1"
+              >
+                กรอกรายละเอียด
+              </a>
+              <a
+                href="https://lin.ee/XXLvrKW"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-center py-2.5 px-3 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-xs flex items-center justify-center gap-1 transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_0_12px_rgba(6,199,85,0.2)]"
+              >
+                <MessageCircle className="w-3.5 h-3.5 fill-white text-[#06C755] shrink-0" />
+                ทัก LINE ปรึกษาฟรี
+              </a>
+            </div>
           </div>
         </div>
 
@@ -323,9 +341,15 @@ function ServiceCard({ service, index }: { service: ServicePackage; index: numbe
    CONTACT FORM
 ───────────────────────────────────────────────────────────── */
 
-function ContactForm() {
+function ContactForm({ selectedService }: { selectedService: string }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
-  const [form, setForm] = useState({ name: "", contact: "", service: "", detail: "" });
+  const [form, setForm] = useState({ name: "", contact: "", service: "", budget: "", detail: "" });
+
+  useEffect(() => {
+    if (selectedService) {
+      setForm(prev => ({ ...prev, service: selectedService }));
+    }
+  }, [selectedService]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -407,20 +431,39 @@ function ContactForm() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-xs font-prompt text-white/40 mb-1.5 uppercase tracking-wider">บริการที่สนใจ</label>
-              <select
-                required
-                className={cn(inputClass, "cursor-pointer")}
-                value={form.service}
-                onChange={e => setForm(p => ({ ...p, service: e.target.value }))}
-              >
-                <option value="" disabled>เลือกบริการ...</option>
-                {SERVICES.map(s => (
-                  <option key={s.id} value={s.id} className="bg-zinc-900">{s.title}</option>
-                ))}
-                <option value="other" className="bg-zinc-900">บริการอื่นๆ / ปรึกษาก่อน</option>
-              </select>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-prompt text-white/40 mb-1.5 uppercase tracking-wider">บริการที่สนใจ</label>
+                <select
+                  required
+                  className={cn(inputClass, "cursor-pointer")}
+                  value={form.service}
+                  onChange={e => setForm(p => ({ ...p, service: e.target.value }))}
+                >
+                  <option value="" disabled>เลือกบริการ...</option>
+                  {SERVICES.map(s => (
+                    <option key={s.id} value={s.id} className="bg-zinc-900">{s.title}</option>
+                  ))}
+                  <option value="other" className="bg-zinc-900">บริการอื่นๆ / ปรึกษาก่อน</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-prompt text-white/40 mb-1.5 uppercase tracking-wider">งบประมาณที่คาดหวัง</label>
+                <select
+                  required
+                  className={cn(inputClass, "cursor-pointer")}
+                  value={form.budget}
+                  onChange={e => setForm(p => ({ ...p, budget: e.target.value }))}
+                >
+                  <option value="" disabled>เลือกช่วงงบประมาณ...</option>
+                  <option value="less-than-3000" className="bg-zinc-900">น้อยกว่า 3,000 บาท</option>
+                  <option value="3000-5000" className="bg-zinc-900">3,000 - 5,000 บาท</option>
+                  <option value="5000-10000" className="bg-zinc-900">5,000 - 10,000 บาท</option>
+                  <option value="more-than-10000" className="bg-zinc-900">10,000 บาทขึ้นไป</option>
+                  <option value="undecided" className="bg-zinc-900">ยังไม่แน่ใจ / ต้องการปรึกษาขอบข่ายงานก่อน</option>
+                </select>
+              </div>
             </div>
 
             <div>
@@ -471,7 +514,8 @@ function ContactForm() {
 ───────────────────────────────────────────────────────────── */
 
 export function ServicesView() {
-  const [activeTab, setActiveTab] = useState<Category>("all");
+  const [activeTab, setActiveTab] = useState<Category>("tech");
+  const [selectedService, setSelectedService] = useState<string>("");
 
   const filtered = SERVICES.filter(
     (s) => activeTab === "all" || s.category === activeTab
@@ -584,13 +628,18 @@ export function ServicesView() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {filtered.map((service, i) => (
-              <ServiceCard key={service.id} service={service} index={i} />
+              <ServiceCard 
+                key={service.id} 
+                service={service} 
+                index={i} 
+                onSelectService={(id) => setSelectedService(id)}
+              />
             ))}
           </motion.div>
         </AnimatePresence>
 
         {/* ── Contact Form ─────────────────────────────────────────── */}
-        <ContactForm />
+        <ContactForm selectedService={selectedService} />
 
       </div>
     </div>

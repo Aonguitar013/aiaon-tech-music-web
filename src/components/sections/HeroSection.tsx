@@ -136,12 +136,13 @@ export function HeroSection() {
         {/* Subtext */}
         <motion.p
           variants={fadeUp}
-          className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto font-prompt font-light leading-relaxed"
+          className="text-lg md:text-xl text-white/75 max-w-3xl mx-auto font-prompt font-light leading-relaxed"
         >
-          Empowering Education with{" "}
-          <span className="text-blue-400 font-medium">Smart Automation</span>{" "}
-          &amp;{" "}
-          <span className="text-amber-400 font-medium">Soulful Melodies</span>.
+          ลดภาระงานครู นักเรียน และคนทำงานด้วย{" "}
+          <span className="text-blue-400 font-semibold">ระบบอัตโนมัติ (Smart Automation)</span>{" "}
+          และพัฒนาทักษะด้วยคอร์สเรียนไอที พร้อมรองรับบริการ{" "}
+          <span className="text-amber-400 font-semibold">สร้างสรรค์งานดนตรี & มิกซ์เสียง</span>{" "}
+          โดยครูดนตรีสากลมืออาชีพ
         </motion.p>
 
         {/* CTA Buttons */}
@@ -161,13 +162,13 @@ export function HeroSection() {
               aria-hidden="true"
             />
             <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 group-hover:from-blue-500 group-hover:to-cyan-400 text-white font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_24px_rgba(59,130,246,0.35)]">
-              คอร์สเรียนเทคฯ
+              คอร์สเรียน & ระบบอัตโนมัติ
               {/* Arrow slides right on hover */}
               <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" />
             </span>
           </Link>
 
-          {/* ── Amber Music Button ── */}
+          {/* ── Amber Music Button (Secondary styled) ── */}
           <Link
             href="/dashboard/academy?category=Music"
             id="hero-cta-music"
@@ -175,12 +176,12 @@ export function HeroSection() {
             onMouseEnter={() => playControls.start("pulse")}
             onMouseLeave={() => playControls.start("idle")}
           >
-            {/* Pulsing warm glow */}
+            {/* Pulsing warm glow - softer for secondary style */}
             <span
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 blur-md opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500 pointer-events-none"
+              className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 blur-md opacity-10 group-hover:opacity-30 group-hover:scale-105 transition-all duration-500 pointer-events-none"
               aria-hidden="true"
             />
-            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 group-hover:from-amber-400 group-hover:to-orange-400 text-white font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_24px_rgba(245,158,11,0.35)] border border-amber-400/30">
+            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full glass-card border border-amber-500/40 text-amber-400 group-hover:text-amber-300 font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_12px_rgba(245,158,11,0.1)] hover:bg-amber-500/5">
               {/* Animated play icon */}
               <motion.span
                 animate={playControls}
@@ -197,7 +198,7 @@ export function HeroSection() {
               >
                 <PlayCircle className="w-5 h-5" />
               </motion.span>
-              คอร์สเรียนดนตรี
+              บริการทำดนตรี & มิกซ์เสียง
             </span>
           </Link>
         </motion.div>
@@ -208,9 +209,9 @@ export function HeroSection() {
           className="flex items-center justify-center gap-8 pt-4 text-center"
         >
           {[
-            { value: "10+", label: "คอร์สเรียน" },
-            { value: "500+", label: "นักเรียน" },
-            { value: "4.9★", label: "Rating" },
+            { value: "1,200+", label: "ชั่วโมงงานที่ประหยัดได้" },
+            { value: "500+", label: "นักเรียน & ครูร่วมเรียน" },
+            { value: "50+", label: "ระบบอัตโนมัติเปิดใช้งาน" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-0.5">
               <span className="font-prompt text-xl font-bold text-white">{stat.value}</span>

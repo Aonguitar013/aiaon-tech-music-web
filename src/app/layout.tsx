@@ -9,6 +9,7 @@ import { createClient } from "@/utils/supabase/server";
 import { FaYoutube, FaTiktok, FaFacebook, FaLine } from "react-icons/fa6";
 import { BrandThemeProvider } from "@/components/providers/BrandThemeProvider";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { FloatingLINEButton } from "@/components/ui/FloatingLINEButton";
 import Maintenance from "@/components/Maintenance";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
@@ -87,6 +88,7 @@ export default async function RootLayout({
               {/* --- Navbar --- */}
               <Navbar user={data?.user} />
               <ThemeToggle />
+              <FloatingLINEButton />
 
               {/* --- Main Content --- */}
               <main className="flex-grow pt-28 relative z-10">

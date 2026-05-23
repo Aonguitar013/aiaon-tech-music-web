@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Lock, User, ArrowRight } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
+import { RiLineLine } from "react-icons/ri";
 import { login, signup } from "./actions";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
@@ -34,6 +35,16 @@ export default function LoginPage() {
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`
+      }
+    });
+  };
+
+  const handleLineLogin = async () => {
+    const supabase = createClient();
+    await supabase.auth.signInWithOAuth({
+      provider: 'line' as any,
       options: {
         redirectTo: `${window.location.origin}/auth/callback`
       }
@@ -132,13 +143,23 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <button
-          onClick={handleGoogleLogin}
-          type="button"
-          className="mt-6 w-full glass-card hover:bg-white/10 text-white font-prompt font-medium py-3 rounded-xl transition-colors flex justify-center items-center gap-3"
-        >
-          <FcGoogle className="w-5 h-5" /> Google (OAuth)
-        </button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+          <button
+            onClick={handleLineLogin}
+            type="button"
+            className="w-full py-3 bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-medium rounded-xl transition-colors flex justify-center items-center gap-2 cursor-pointer shadow-[0_0_12px_rgba(6,199,85,0.2)]"
+          >
+            <RiLineLine className="w-5 h-5 shrink-0" /> LINE Login
+          </button>
+
+          <button
+            onClick={handleGoogleLogin}
+            type="button"
+            className="w-full glass-card hover:bg-white/10 text-white font-prompt font-medium py-3 rounded-xl transition-colors flex justify-center items-center gap-2 cursor-pointer"
+          >
+            <FcGoogle className="w-5 h-5 shrink-0" /> Google Auth
+          </button>
+        </div>
 
         <p className="mt-8 text-center text-white/50 text-sm font-prompt">
           {isLogin ? "ยังไม่มีบัญชีใช่ไหม? " : "มีบัญชีอยู่แล้วใช่ไหม? "}
