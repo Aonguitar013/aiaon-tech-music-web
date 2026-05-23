@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, ShieldCheck, Mail, ShoppingCart, Download, BadgeCheck } from "lucide-react";
+import { ArrowLeft, CheckCircle2, ShieldCheck, Mail, ShoppingCart, Download, BadgeCheck, BookOpen } from "lucide-react";
 import * as Icons from "lucide-react";
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -149,16 +149,41 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
                   {/* === Conditional CTA Button === */}
                   {isPurchased ? (
-                      // Already purchased — open file_url directly in new tab
-                      <a
-                          href={product.file_url || "/dashboard/profile"}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full py-4 rounded-xl text-white font-prompt font-bold text-lg transition-all shadow-lg shadow-black/40 flex items-center justify-center gap-2 mb-4 group bg-emerald-600 hover:bg-emerald-500"
-                      >
-                          <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
-                          ดาวน์โหลด / เข้าถึงไฟล์
-                      </a>
+                      <div className="flex flex-col gap-3 mb-4">
+                          {/* Already purchased — open file_url directly in new tab */}
+                          <a
+                              href={product.file_url || "/dashboard/profile"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full py-4 rounded-xl text-white font-prompt font-bold text-lg transition-all shadow-lg shadow-black/40 flex items-center justify-center gap-2 group bg-emerald-600 hover:bg-emerald-500"
+                          >
+                              <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+                              ดาวน์โหลด / เข้าถึงไฟล์
+                          </a>
+
+                          {/* eBook / User Guide Reader or Download */}
+                          {product.ebook_content ? (
+                              <Link
+                                  href={`/dashboard/marketplace/${product.id}/reader`}
+                                  className="w-full py-3 rounded-xl text-emerald-400 font-prompt font-medium text-base transition-all border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/5 hover:bg-emerald-500/10 flex items-center justify-center gap-2 group"
+                              >
+                                  <BookOpen className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                  เริ่มอ่าน E-Book ออนไลน์
+                              </Link>
+                          ) : (
+                              product.ebook_url && (
+                                  <a
+                                      href={product.ebook_url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="w-full py-3 rounded-xl text-emerald-400 font-prompt font-medium text-base transition-all border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/5 hover:bg-emerald-500/10 flex items-center justify-center gap-2 group"
+                                  >
+                                      <BookOpen className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                      คู่มือ / E-Book การใช้งาน
+                                  </a>
+                              )
+                          )}
+                      </div>
                   ) : (
                       // Not yet purchased
                       <Link

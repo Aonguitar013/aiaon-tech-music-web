@@ -210,8 +210,8 @@ export function ProductClientGrid({ initialProducts }: { initialProducts: Produc
 
                   <div className="flex items-end justify-between mt-auto pt-4 border-t border-white/10">
                     <div>
-                      <p className="text-xs text-white/40 font-prompt mb-1">ราคาเริ่มต้น</p>
-                      <p className="text-lg font-bold text-white font-prompt">{product.price}</p>
+                      <p className="text-[10px] text-white/40 font-prompt uppercase tracking-wider mb-0.5">ราคาเริ่มต้น</p>
+                      <p className={`text-xl font-bold font-prompt ${product.category === 'Service' || product.category === 'Creative' || brandTheme === 'music' ? 'text-amber-400' : 'text-blue-400'}`}>{product.price}</p>
                     </div>
                     <div
                       className={`px-4 py-2 rounded-lg text-white font-prompt text-sm shadow-lg shadow-black/20 ${

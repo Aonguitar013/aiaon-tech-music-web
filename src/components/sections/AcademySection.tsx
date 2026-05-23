@@ -12,6 +12,7 @@ interface Course {
   id: string;
   title: string;
   description: string;
+  price?: string;
   icon_name?: string;
   color_gradient?: string;
   image_url?: string;
@@ -35,9 +36,29 @@ export function AcademySection({ courses }: AcademySectionProps) {
         <h2 className="font-prompt text-4xl md:text-6xl font-bold mb-6 tracking-tight">Elite <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Academy</span></h2>
         <p className="text-white/70 max-w-2xl mx-auto text-lg md:text-xl font-prompt font-light leading-relaxed">Learn production-ready skills through immersive crash courses and detailed walkthroughs.</p>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {courses.map((course, idx) => {
+          // Parse info
+          let rawDesc = course.description;
+          let lessons = "ไม่ระบุ";
+          let level = "Beginner";
+          let instrument = "";
+          
+          // Check for Music format e.g. (Instrument: Guitar, Level: Beginner)
+          const musicMatch = rawDesc.match(/\(Instrument:\s*(.+?),\s*Level:\s*(.+?)(?:,\s*Lessons:\s*(.+?))?\)/);
+          const techMatch = rawDesc.match(/\(Lessons:\s*(.+?),\s*Level:\s*(.+?)\)/);
+
+          if (musicMatch) {
+             instrument = musicMatch[1];
+             level = musicMatch[2];
+             if (musicMatch[3]) lessons = musicMatch[3];
+             rawDesc = rawDesc.replace(musicMatch[0], "").trim();
+          } else if (techMatch) {
+             lessons = techMatch[1];
+             level = techMatch[2];
+             rawDesc = rawDesc.replace(techMatch[0], "").trim();
+          }
+
           const isCourseActuallyMusic = course.category === "Music";
           const isMusic = isCourseActuallyMusic || brandTheme === "music";
 
@@ -65,16 +86,56 @@ export function AcademySection({ courses }: AcademySectionProps) {
                     let mockImage = course.image_url;
 
                     if (!mockImage) {
-                      if (lowerTitle.includes("next.js") || lowerTitle.includes("masterclass")) {
-                        mockImage = "/images/mockups/nextjs_masterclass_1779443916108.png";
-                      } else if (lowerTitle.includes("workflow") || lowerTitle.includes("automation")) {
-                        mockImage = "/images/mockups/workflow_automation_pro_1779443939357.png";
-                      } else if (lowerTitle.includes("supabase") || lowerTitle.includes("backend")) {
-                        mockImage = "/images/mockups/supabase_backend_crash_course_1779443962868.png";
-                      } else if (lowerTitle.includes("framer motion") || lowerTitle.includes("animations")) {
-                        mockImage = "/images/mockups/framer_motion_animations_1779443987741.png";
-                      } else if (lowerTitle.includes("typescript")) {
+                      if (lowerTitle.includes("gemini") || lowerTitle.includes("tts") || lowerTitle.includes("สั่ง ai")) {
+                        mockImage = "/images/mockups/gemini_tts_cover.png";
+                      } else if (lowerTitle.includes("bass boss")) {
+                        mockImage = "/images/mockups/bass_boss_cover.png";
+                      } else if (lowerTitle.includes("beat master")) {
+                        mockImage = "/images/mockups/beat_master_cover.png";
+                      } else if (lowerTitle.includes("folk guitar") || lowerTitle.includes("indie folk")) {
+                        mockImage = "/images/mockups/indie_folk_guitar_cover.png";
+                      } else if (lowerTitle.includes("typescript for production") || lowerTitle.includes("typescript")) {
                         mockImage = "/images/mockups/typescript_for_production_1779444015579.png";
+                      } else if (lowerTitle.includes("framer motion")) {
+                        mockImage = "/images/mockups/framer_motion_animations_1779443987741.png";
+                      } else if (lowerTitle.includes("next.js") || lowerTitle.includes("nextjs")) {
+                        mockImage = "/images/mockups/nextjs_masterclass_1779443916108.png";
+                      } else if (lowerTitle.includes("workflow") || lowerTitle.includes("n8n")) {
+                        mockImage = "/images/mockups/workflow_automation_pro_1779443939357.png";
+                      } else if (lowerTitle.includes("tailwind")) {
+                        mockImage = "/images/mockups/nextjs_masterclass_1779443916108.png";
+                      } else if (lowerTitle.includes("apps script")) {
+                        mockImage = "/images/mockups/apps_script_course_1779443157476.png";
+                      } else if (lowerTitle.includes("node.js") || lowerTitle.includes("nodejs")) {
+                        mockImage = "/images/mockups/nodejs_cover.png";
+                      } else if (lowerTitle.includes("react native") || lowerTitle.includes("mobile")) {
+                        mockImage = "/images/mockups/react_native_cover.png";
+                      } else if (lowerTitle.includes("ui/ux") || lowerTitle.includes("design")) {
+                        mockImage = "/images/mockups/uiux_design_cover.png";
+                      } else if (lowerTitle.includes("postgresql") || lowerTitle.includes("database")) {
+                        mockImage = "/images/mockups/postgresql_cover.png";
+                      } else if (lowerTitle.includes("docker")) {
+                        mockImage = "/images/mockups/docker_cover.png";
+                      } else if (lowerTitle.includes("graphql")) {
+                        mockImage = "/images/mockups/graphql_cover.png";
+                      } else if (lowerTitle.includes("security")) {
+                        mockImage = "/images/mockups/security_cover.png";
+                      } else if (lowerTitle.includes("redux")) {
+                        mockImage = "/images/mockups/redux_cover.png";
+                      } else if (lowerTitle.includes("angular") || lowerTitle.includes("migration")) {
+                        mockImage = "/images/mockups/angular_react_cover.png";
+                      } else if (lowerTitle.includes("vue")) {
+                        mockImage = "/images/mockups/vue_cover.png";
+                      } else if (lowerTitle.includes("serverless")) {
+                        mockImage = "/images/mockups/serverless_cover.png";
+                      } else if (lowerTitle.includes("system design")) {
+                        mockImage = "/images/mockups/system_design_cover.png";
+                      } else if (lowerTitle.includes("testing") || lowerTitle.includes("jest") || lowerTitle.includes("cypress")) {
+                        mockImage = "/images/mockups/testing_cover.png";
+                      } else if (lowerTitle.includes("react for beginners") || lowerTitle.includes("react")) {
+                        mockImage = "/images/mockups/react_native_cover.png";
+                      } else if (lowerTitle.includes("supabase")) {
+                        mockImage = "/images/mockups/supabase_backend_crash_course_1779443962868.png";
                       }
                     }
 
@@ -98,21 +159,62 @@ export function AcademySection({ courses }: AcademySectionProps) {
 
                 <div className="p-6 flex flex-col flex-1 z-10 bg-gradient-to-b from-black/0 to-black/40">
                   <h3 className={`text-2xl font-bold font-prompt text-white mb-3 transition-colors line-clamp-2 leading-snug ${themeTextHover}`}>{course.title}</h3>
-                  <p className="text-white/60 text-sm md:text-base font-prompt leading-relaxed line-clamp-3 mb-6 flex-1">{course.description}</p>
+                  <p className="text-white/60 text-sm font-prompt leading-relaxed line-clamp-3 mb-4 flex-1">{rawDesc}</p>
                   
-                  {/* Styled action button */}
-                  <div className="mt-auto pt-5 border-t border-white/10 w-full">
-                    <div className={cn(
-                      "w-full py-3 px-4 rounded-xl border flex items-center justify-between text-sm font-semibold tracking-wide transition-all duration-300 font-prompt shadow-sm",
-                      isMusic 
-                        ? "bg-amber-500/5 border-amber-500/20 text-amber-400 group-hover:bg-amber-500/20 group-hover:border-amber-500/40 group-hover:text-white group-hover:shadow-[0_0_20px_rgba(245,158,11,0.25)]"
-                        : "bg-blue-500/5 border-blue-500/20 text-blue-400 group-hover:bg-blue-500/20 group-hover:border-blue-500/40 group-hover:text-white group-hover:shadow-[0_0_20px_rgba(59,130,246,0.25)]"
-                    )}>
-                      <div className="flex items-center gap-2">
-                        <BookOpen className="w-4.5 h-4.5 shrink-0 transition-transform duration-300 group-hover:rotate-12" />
-                        <span>ดูรายละเอียดคอร์ส</span>
+                  {/* Meta info (above divider) */}
+                  <div className="flex items-center gap-4 text-xs font-prompt text-white/40 mb-5">
+                      <div className="flex items-center gap-1.5 transition-colors">
+                          {isMusic && instrument ? (
+                              <>
+                                <Icons.Music className={`w-3.5 h-3.5 ${isMusic ? 'text-amber-400' : 'text-blue-400'}`} />
+                                <span className="truncate max-w-[120px]" title={instrument}>{instrument}</span>
+                              </>
+                          ) : (
+                              <>
+                                <Icons.Clock className={`w-3.5 h-3.5 ${isMusic ? 'text-amber-400' : 'text-blue-400'}`} />
+                                <span>{lessons} บทเรียน</span>
+                              </>
+                          )}
                       </div>
-                      <ArrowRight className="w-4.5 h-4.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1.5" />
+                      <div className="flex items-center gap-1.5 transition-colors">
+                          {isMusic ? (
+                              <Icons.Star className="w-3.5 h-3.5 text-orange-400" />
+                          ) : (
+                              <Icons.Signal className="w-3.5 h-3.5 text-purple-400" />
+                          )}
+                          <span>{level}</span>
+                      </div>
+                  </div>
+
+                  {/* Footer: Price and CTA Button */}
+                  <div className="flex items-end justify-between pt-4 border-t border-white/10 mt-auto w-full">
+                    <div>
+                      <p className="text-[10px] text-white/40 font-prompt uppercase tracking-wider mb-0.5">ราคาคอร์ส</p>
+                      {(() => {
+                        const isFree = course.price === "0" || course.price === "0 THB" || course.price === "0 thb" || !course.price || course.price.trim() === "" || course.price.trim() === "-" || course.price.trim() === "—";
+                        if (isFree) {
+                          return (
+                            <p className="text-xl font-bold font-prompt text-emerald-400 flex items-center gap-1.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                              ฟรี
+                            </p>
+                          );
+                        }
+                        return (
+                          <p className={`text-xl font-bold font-prompt ${isMusic ? 'text-amber-400' : 'text-blue-400'}`}>
+                            {course.price}
+                          </p>
+                        );
+                      })()}
+                    </div>
+                    <div
+                      className={`px-4 py-2 rounded-lg text-white font-prompt text-sm shadow-lg shadow-black/20 transition-all duration-300 font-semibold flex items-center gap-1 ${
+                        isMusic 
+                          ? "bg-amber-600 hover:bg-amber-500 shadow-amber-600/10" 
+                          : "bg-blue-500 hover:bg-blue-600 shadow-blue-500/10"
+                      }`}
+                    >
+                      ดูรายละเอียดคอร์ส →
                     </div>
                   </div>
                 </div>

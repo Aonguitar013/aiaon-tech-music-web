@@ -207,7 +207,7 @@ body {
      GLOW TEXT & BORDER UTILITIES
      ============================================================ */
   .glow-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)];
+    @apply text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-500 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)];
   }
 
   .glow-border {
@@ -299,10 +299,10 @@ body {
   .text-shimmer {
     background: linear-gradient(
       90deg,
-      theme(colors.blue.400) 0%,
-      theme(colors.purple.400) 40%,
-      theme(colors.blue.300) 60%,
-      theme(colors.purple.400) 100%
+      var(--color-blue-400) 0%,
+      var(--color-purple-400) 40%,
+      var(--color-blue-300) 60%,
+      var(--color-purple-400) 100%
     );
     background-size: 200% auto;
     background-clip: text;
@@ -411,6 +411,7 @@ body {
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   pointer-events: none;
   z-index: 10;
@@ -493,4 +494,11 @@ body {
 
 .animate-sparkle-float {
   animation: sparkle-float 5s ease-in-out infinite;
+}
+
+/* Print protection for Secure Web-Book Reader */
+@media print {
+  .secure-reader-body {
+    display: none !important;
+  }
 }

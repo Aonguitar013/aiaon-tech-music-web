@@ -11,7 +11,9 @@ CREATE TABLE IF NOT EXISTS public.products (
   icon_name text DEFAULT 'FileCode2',
   color_classes text,
   button_classes text,
-  download_url text
+  file_url text,
+  ebook_url text,
+  ebook_content text
 );
 
 -- 2. Create Courses Table
@@ -45,7 +47,7 @@ INSERT INTO public.products (title, description, price, icon_name, color_classes
 ('คอร์ส Google Apps Script สำหรับครู', 'เรียนรู้การเขียนสคริปต์บน Google Workspace เพื่อลดเวลาการทำงานซ้ำซ้อน สร้างระบบการจัดการโรงเรียนด้วยตนเอง', '990 THB', 'BookText', 'text-orange-400 bg-orange-500/10 group-hover:bg-orange-500/20 border-orange-500/20', 'bg-orange-500 hover:bg-orange-600'),
 ('ระบบเช็กชื่อและแจ้งเตือนผ่าน LINE', 'ระบบอัตโนมัติแจ้งเตือนการเข้าเรียนหรือพฤติกรรมนักเรียนตรงเข้า LINE ผู้ปกครองแบบเรียลไทม์', '1,500 THB', 'MessageSquareShare', 'text-emerald-400 bg-emerald-500/10 group-hover:bg-emerald-500/20 border-emerald-500/20', 'bg-emerald-500 hover:bg-emerald-600');
 
-INSERT INTO public.courses (title, description, icon_name, color_gradient) VALUES
-('Next.js Fullstack Masterclass', 'Build scalable web apps with App Router & Supabase.', 'LayoutDashboard', 'from-blue-500 to-cyan-400'),
-('Workflow Automation Pro', 'Automate your daily tasks with n8n & Google Apps Script.', 'Database', 'from-purple-500 to-pink-500'),
-('Advanced Tailwind Architecture', 'Master utility frameworks for enterprise apps.', 'Code2', 'from-emerald-400 to-teal-500');
+INSERT INTO public.courses (title, description, price, icon_name, color_gradient) VALUES
+('Next.js Fullstack Masterclass', 'Build scalable web apps with App Router & Supabase.', '2,990 THB', 'LayoutDashboard', 'from-blue-500 to-cyan-400'),
+('Workflow Automation Pro', 'Automate your daily tasks with n8n & Google Apps Script.', '1,990 THB', 'Database', 'from-purple-500 to-pink-500'),
+('Advanced Tailwind Architecture', 'Master utility frameworks for enterprise apps.', '1,490 THB', 'Code2', 'from-emerald-400 to-teal-500');

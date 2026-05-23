@@ -11,7 +11,7 @@ export default async function Home() {
 
   // Fetch first 6 of each for Landing Page preview
   const [{ data: rawCourses }, { data: rawProducts }] = await Promise.all([
-    supabase.from('courses').select('id, title, description, icon_name, color_gradient, image_url, category').order('created_at').limit(6),
+    supabase.from('courses').select('*').order('created_at').limit(6),
     supabase.from('products').select('*').order('created_at').limit(6),
   ]);
 
