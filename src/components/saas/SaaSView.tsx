@@ -682,7 +682,7 @@ export function SaaSView({ user }: SaaSViewProps) {
       </section>
 
       {/* --- PRICING SECTION --- */}
-      <section className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-white/5">
+      <section id="pricing" className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-white/5">
         <div className="text-center mb-16 space-y-4">
           <h2 className="font-prompt text-3xl sm:text-5xl font-bold tracking-tight">
             แผนบริการราคาแพ็คเกจ

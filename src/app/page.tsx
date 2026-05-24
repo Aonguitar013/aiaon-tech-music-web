@@ -4,6 +4,7 @@ import { AutomationShowcase } from "@/components/sections/AutomationShowcase";
 import { AcademySection } from "@/components/sections/AcademySection";
 import { ProductsSection } from "@/components/sections/ProductsSection";
 import { SaaSSection } from "@/components/sections/SaaSSection";
+import { PricingPopup } from "@/components/ui/PricingPopup";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function Home() {
@@ -27,6 +28,7 @@ export default async function Home() {
       <AcademySection courses={courses} />
       <ProductsSection products={products} />
       <SaaSSection />
+      <PricingPopup />
     </div>
   );
 }
