@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase } from "lucide-react";
+import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -25,6 +25,7 @@ const routes = [
   { name: "ระบบออนไลน์", href: "/saas", icon: Terminal, hoverColor: "cyan" },
   { name: "ของแจกฟรี", href: "/freebies", icon: Gift, hoverColor: "purple" },
   { name: "บริการของเรา", href: "/services", icon: Briefcase, hoverColor: "teal" },
+  { name: "เสื้อ AiAonTech", href: "/merch", icon: Shirt, hoverColor: "purple" },
 ];
 
 interface NavbarProps {
