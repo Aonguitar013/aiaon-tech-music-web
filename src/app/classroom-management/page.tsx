@@ -21,7 +21,7 @@ export default function ClassroomManagementPage() {
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz6zs6inUtTP4YMgsLYmvV1UfgOLCPCv-Q3qDa3dTcHCrSueCtuO4_j639_w89CTz6-/exec";
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 font-prompt">
+    <div className="w-full max-w-none mx-auto px-4 sm:px-6 lg:px-8 py-8 font-prompt">
       {/* Header section */}
       <div className="space-y-4 mb-8 text-center md:text-left">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -78,6 +78,7 @@ export default function ClassroomManagementPage() {
         <div className="relative w-full rounded-xl overflow-hidden border border-white/5 bg-[#060913]">
           <iframe
             src={SCRIPT_URL}
+            width="100%"
             className="w-full min-h-[750px] sm:min-h-[850px] border-0"
             scrolling="yes"
             allow="geolocation; microphone; camera"
