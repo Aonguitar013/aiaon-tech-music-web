@@ -3,12 +3,12 @@ import { FreebiesView } from "@/components/freebies/FreebiesView";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "คลังดาวน์โหลดของแจกฟรี | iAonTechxMusic",
+  title: "คลังดาวน์โหลดของแจกฟรี | TechxMusic",
   description:
     "รวมทรัพยากรดิจิทัลฟรีด้านเทคโนโลยีและดนตรี — n8n Workflow, MIDI Pack, Google Sheets Tracker และ Guitar Loop Pack สำหรับครูและนักดนตรีไทย",
   keywords: ["ฟรี", "ดาวน์โหลด", "MIDI", "n8n", "Google Sheets", "Loop Pack", "iAon"],
   openGraph: {
-    title: "คลังดาวน์โหลดของแจกฟรี | iAonTechxMusic",
+    title: "คลังดาวน์โหลดของแจกฟรี | TechxMusic",
     description: "ดาวน์โหลดทรัพยากรดิจิทัลฟรี ทั้งด้านเทคโนโลยีและดนตรีคุณภาพสูง",
     type: "website",
   },

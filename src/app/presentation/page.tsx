@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Manus AI Slide Presentation | iAonTechxMusic",
+  title: "Manus AI Slide Presentation | TechxMusic",
   description: "Interactive presentation on song structure and storytelling.",
 };
 

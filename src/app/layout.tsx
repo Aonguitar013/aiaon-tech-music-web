@@ -26,12 +26,12 @@ const prompt = Prompt({
 });
 
 export const metadata: Metadata = {
-  title: "iAonTechxMusic | Tech Influencer Ecosystem",
+  title: "TechxMusic",
   description:
     "แพลตฟอร์มการศึกษาและดิจิทัลมาร์เก็ตเพลซระดับพรีเมียม สร้างโดย iAonTechxMusic",
   keywords: ["iAon", "Tech", "Music", "Academy", "Marketplace", "SaaS", "Thai"],
   openGraph: {
-    title: "iAonTechxMusic | Tech Influencer Ecosystem",
+    title: "TechxMusic",
     description:
       "แพลตฟอร์มการศึกษาและดิจิทัลมาร์เก็ตเพลซระดับพรีเมียม สร้างโดย iAonTechxMusic",
     locale: "th_TH",
