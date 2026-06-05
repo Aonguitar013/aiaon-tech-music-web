@@ -33,8 +33,8 @@ export function AcademySection({ courses }: AcademySectionProps) {
   return (
     <section className="py-24 px-4 relative z-10 max-w-7xl mx-auto" id="academy">
       <div className="text-center mb-16 px-4">
-        <h2 className="font-prompt text-4xl md:text-6xl font-bold mb-6 tracking-tight">Elite <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Academy</span></h2>
-        <p className="text-white/70 max-w-2xl mx-auto text-lg md:text-xl font-prompt font-light leading-relaxed">Learn production-ready skills through immersive crash courses and detailed walkthroughs.</p>
+        <h2 className="font-prompt text-4xl md:text-6xl font-bold mb-6 tracking-tight">คอร์สเรียน <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">ออนไลน์</span></h2>
+        <p className="text-white/70 max-w-2xl mx-auto text-lg md:text-xl font-prompt font-light leading-relaxed">ยกระดับทักษะของคุณด้วยคอร์สเรียนออนไลน์แบบจับมือทำ ที่ออกแบบมาเพื่อสร้างผลลัพธ์ในการทำงานจริง</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {courses.map((course, idx) => {

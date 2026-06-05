@@ -153,6 +153,14 @@ export function MusicTemplatesView({ initialProducts, user }: MusicTemplatesView
               ? (isMock ? `/dashboard/marketplace` : `/dashboard/marketplace/checkout/${product.id}`)
               : `/login?next=/music-templates`;
 
+            const priceStr = (product.price || "").trim().toLowerCase();
+            const isFree = priceStr === "0" || 
+                           priceStr === "0 thb" || 
+                           priceStr === "ฟรี" || 
+                           priceStr === "0 บาท" || 
+                           priceStr === "free" ||
+                           priceStr === "";
+
             return (
               <motion.div
                 key={product.id}
@@ -164,8 +172,15 @@ export function MusicTemplatesView({ initialProducts, user }: MusicTemplatesView
                 {/* Glow border overlay on hover */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl opacity-0 group-hover:opacity-30 blur-md transition duration-500 pointer-events-none" />
                 
-                <div className="relative glass-card bg-black/40 border border-white/10 hover:border-amber-500/40 p-6 md:p-8 flex flex-col h-full transition-all duration-300">
-                  
+                <div className="relative glass-card bg-black/40 border border-white/10 hover:border-amber-500/40 p-6 md:p-8 flex flex-col h-full transition-all duration-300 overflow-hidden">
+                  {/* FREE Badge */}
+                  {isFree && (
+                    <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-400 text-black text-[10px] font-black font-prompt shadow-[0_0_15px_rgba(52,211,153,0.6)] border border-emerald-300/30 uppercase tracking-wider animate-pulse">
+                      <Icons.Gift className="w-3 h-3 shrink-0" />
+                      <span>แจกฟรี</span>
+                    </div>
+                  )}
+
                   {/* Icon & Format badge */}
                   <div className="flex items-start justify-between gap-4 mb-6">
                     <div className="w-14 h-14 rounded-xl flex items-center justify-center border border-amber-500/20 bg-amber-500/10 text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.15)] group-hover:scale-110 transition-transform duration-300 shrink-0">
@@ -199,7 +214,7 @@ export function MusicTemplatesView({ initialProducts, user }: MusicTemplatesView
                         className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-500 hover:to-orange-400 text-white font-prompt font-bold text-sm px-6 py-3.5 rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] transition-all hover:scale-[1.03] active:scale-95 cursor-pointer"
                       >
                         <Download className="w-4 h-4" />
-                        <span>สั่งซื้อตอนนี้</span>
+                        <span>{isFree ? "ดาวน์โหลดฟรี" : "สั่งซื้อตอนนี้"}</span>
                       </Link>
                     </div>
                   </div>

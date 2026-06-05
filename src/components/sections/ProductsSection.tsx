@@ -1,11 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Download, ArrowRight } from "lucide-react";
-import * as Icons from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
-import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
+import { ProductCard } from "@/components/marketplace/ProductCard";
 
 interface Product {
   id: string;
@@ -19,17 +17,11 @@ interface Product {
   image_url?: string;
 }
 
-function getIconComponent(name?: string) {
-  return name ? ((Icons as any)[name] || Icons.Package) : Icons.Package;
-}
-
 interface ProductsSectionProps {
   products: Product[];
 }
 
 export function ProductsSection({ products }: ProductsSectionProps) {
-  const { brandTheme } = useBrandTheme();
-
   return (
     <section className="py-24 px-4 relative z-10 w-full overflow-hidden bg-black/50 border-y border-white/5" id="products">
       <div className="max-w-7xl mx-auto">
@@ -43,100 +35,9 @@ export function ProductsSection({ products }: ProductsSectionProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product, index) => {
-            const IconComponent = getIconComponent(product.icon_name);
-            const isMusicBrand = brandTheme === 'music';
-            const hoverBorder = isMusicBrand ? "hover:border-amber-500/40" : "hover:border-blue-500/40";
-            const focusGradient = isMusicBrand ? "from-amber-600 to-orange-400" : "from-blue-500 to-cyan-400";
-            const buttonColor = isMusicBrand ? "bg-amber-600" : "bg-blue-600";
-            const glowColor = isMusicBrand ? "bg-amber-500/10" : "bg-blue-500/10";
-            
-            return (
-              <Link
-                key={product.id}
-                href={`/dashboard/marketplace/${product.id}`}
-                className="group block h-full cursor-pointer"
-              >
-                <div className={`glass-card flex flex-col h-full border-white/10 ${hoverBorder} transition-all duration-300 relative overflow-hidden bg-white/5`}>
-                  {/* Decorative ambient glow */}
-                  <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] pointer-events-none transition-colors duration-500 ${glowColor}`} />
-
-                  {/* 16:9 Vault Cover */}
-                  <div className={`relative w-full aspect-video shrink-0 bg-black/40 border-b border-white/10 overflow-hidden ${hoverBorder} transition-colors`}>
-                    {(() => {
-                      // Title matching for mock images
-                      const lowerTitle = product.title.toLowerCase();
-                      let mockImage = product.image_url;
-                      
-                      if (!mockImage) {
-                        if (lowerTitle.includes("e-commerce") || lowerTitle.includes("payment")) {
-                          mockImage = "/images/mockups/ecommerce_store_mockup.png";
-                        } else if (lowerTitle.includes("admin") || lowerTitle.includes("crypto") || lowerTitle.includes("dashboard")) {
-                          mockImage = "/images/mockups/admin_dashboard_pro.png";
-                        } else if (lowerTitle.includes("portfolio") || lowerTitle.includes("gallery") || lowerTitle.includes("design") || lowerTitle.includes("figma")) {
-                          mockImage = "/images/mockups/portfolio_creative_ui.png";
-                        } else if (lowerTitle.includes("fitness") || lowerTitle.includes("social") || lowerTitle.includes("music") || lowerTitle.includes("app")) {
-                          mockImage = "/images/mockups/mobile_app_mockup.png";
-                        } else if (lowerTitle.includes("booking") || lowerTitle.includes("event") || lowerTitle.includes("restaurant") || lowerTitle.includes("travel") || lowerTitle.includes("job")) {
-                          mockImage = "/images/mockups/booking_schedule_ui.png";
-                        } else if (lowerTitle.includes("educational") || lowerTitle.includes("lms") || lowerTitle.includes("mentorship") || lowerTitle.includes("forum")) {
-                          mockImage = "/images/mockups/teaching_media_template_1779443134799.png";
-                        } else if (lowerTitle.includes("supabase") || lowerTitle.includes("database") || lowerTitle.includes("server") || lowerTitle.includes("api") || lowerTitle.includes("deployment") || lowerTitle.includes("pipeline")) {
-                          mockImage = "/images/mockups/workflow_automation_pro_1779443939357.png";
-                        } else if (lowerTitle.includes("code review") || lowerTitle.includes("bug") || lowerTitle.includes("refactoring") || lowerTitle.includes("seo") || lowerTitle.includes("audit") || lowerTitle.includes("conversion") || lowerTitle.includes("testing")) {
-                          mockImage = "/images/mockups/nextjs_masterclass_1779443916108.png";
-                        } else if (lowerTitle.includes("ระบบเช็กชื่อ") || lowerTitle.includes("line") || lowerTitle.includes("notification") || lowerTitle.includes("chat")) {
-                          mockImage = "/images/mockups/system_attendance_line_1779443112798.png";
-                        } else if (lowerTitle.includes("สื่อการสอน")) {
-                          mockImage = "/images/mockups/teaching_media_template_1779443134799.png";
-                        } else if (lowerTitle.includes("apps script")) {
-                          mockImage = "/images/mockups/apps_script_course_1779443157476.png";
-                        } else if (lowerTitle.includes("blog") || lowerTitle.includes("magazine")) {
-                          mockImage = "/images/mockups/blog_magazine_template_1779443181794.png";
-                        } else if (lowerTitle.includes("real estate")) {
-                          mockImage = "/images/mockups/real_estate_ui_1779443205255.png";
-                        } else if (lowerTitle.includes("startup") || lowerTitle.includes("landing page") || lowerTitle.includes("link in bio")) {
-                          mockImage = "/images/mockups/startup_landing_page_1779443225117.png";
-                        } else {
-                          // Fallback generic tech mockup
-                          mockImage = "/images/mockups/portfolio_creative_ui.png";
-                        }
-                      }
-
-                      return mockImage ? (
-                        <Image 
-                          src={mockImage} 
-                          alt={product.title} 
-                          fill 
-                          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out opacity-90 group-hover:opacity-100" 
-                        />
-                      ) : (
-                        <div className={`w-full h-full bg-gradient-to-br ${focusGradient} flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity duration-500`}>
-                          <IconComponent className="w-12 h-12 text-white/50 group-hover:scale-110 group-hover:text-white/80 transition-all duration-500" />
-                        </div>
-                      );
-                    })()}
-                  </div>
-
-                  <div className="p-6 flex flex-col flex-1 relative z-10 bg-gradient-to-b from-black/0 to-black/40">
-                    <h3 className={`text-2xl font-bold font-prompt text-white mb-3 transition-colors line-clamp-2 leading-snug ${isMusicBrand ? "group-hover:text-amber-400" : "group-hover:text-blue-400"}`}>
-                      {product.title}
-                    </h3>
-                    <p className="text-sm md:text-base font-prompt text-white/60 mb-6 flex-1 line-clamp-3 leading-relaxed">
-                      {product.description}
-                    </p>
-
-                    <div className="flex justify-between items-center bg-white/5 border border-white/10 rounded-full p-1.5 pl-5 mt-auto transition-colors">
-                      <span className="font-bold text-white font-prompt tracking-wide text-sm">{product.price}</span>
-                      <div className={`text-white rounded-full p-2 px-4 flex items-center gap-2 text-sm font-prompt transition-colors ${buttonColor}`}>
-                        <Download className="w-4 h-4" /> สั่งซื้อเลย
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+          {products.map((product, index) => (
+            <ProductCard key={product.id || index} product={{ ...product, category: product.category || "Template" }} index={index} />
+          ))}
         </div>
 
         {/* View All CTA */}

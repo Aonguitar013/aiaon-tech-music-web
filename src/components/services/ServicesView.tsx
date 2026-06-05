@@ -513,8 +513,8 @@ function ContactForm({ selectedService }: { selectedService: string }) {
    MAIN VIEW
 ───────────────────────────────────────────────────────────── */
 
-export function ServicesView() {
-  const [activeTab, setActiveTab] = useState<Category>("tech");
+export function OtherServicesSection() {
+  const [activeTab, setActiveTab] = useState<Category>("all");
   const [selectedService, setSelectedService] = useState<string>("");
 
   const filtered = SERVICES.filter(
@@ -522,19 +522,20 @@ export function ServicesView() {
   );
 
   return (
-    <div className="w-full relative overflow-hidden min-h-screen pb-24">
+    <section id="other-services" className="w-full relative overflow-hidden py-24 border-t border-white/5 bg-zinc-950/10 scroll-mt-20">
 
       {/* Background glows */}
-      <div className="absolute top-0 left-1/3 w-[600px] h-[500px] bg-teal-500/6 blur-[140px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/3" />
-      <div className="absolute top-[50%] right-[-100px] w-[450px] h-[450px] bg-emerald-500/6 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/3 w-[600px] h-[400px] bg-teal-500/4 blur-[140px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/3" />
+      <div className="absolute bottom-1/4 right-[-100px] w-[400px] h-[400px] bg-emerald-500/4 blur-[130px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-12 md:pt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* ── Hero ─────────────────────────────────────────────── */}
+        {/* ── Header ─────────────────────────────────────────────── */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-teal-500/30 bg-teal-500/5 text-teal-400 text-sm font-medium"
           >
@@ -542,25 +543,23 @@ export function ServicesView() {
             Custom Services — ออกแบบมาเพื่อคุณโดยเฉพาะ
           </motion.div>
 
-          <motion.h1
+          <motion.h2
             initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.65, delay: 0.1 }}
-            className="font-prompt text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight"
+            className="font-prompt text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight"
           >
-            บริการ
+            บริการพัฒนาเทคโนโลยี
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 drop-shadow-[0_0_20px_rgba(20,184,166,0.35)]">
-              {" "}ออกแบบระบบ
+              {" "}และสตูดิโอดนตรีอื่นๆ
             </span>
-            <br />& ทำ
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 drop-shadow-[0_0_20px_rgba(245,158,11,0.35)]">
-              {" "}เพลง
-            </span>
-          </motion.h1>
+          </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base md:text-lg text-white/55 font-prompt leading-relaxed max-w-xl mx-auto"
           >
@@ -571,7 +570,8 @@ export function ServicesView() {
           {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex items-center justify-center gap-8 pt-2"
           >
@@ -642,6 +642,6 @@ export function ServicesView() {
         <ContactForm selectedService={selectedService} />
 
       </div>
-    </div>
+    </section>
   );
 }

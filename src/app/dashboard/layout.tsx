@@ -9,7 +9,6 @@ import { DesktopNavLink } from "@/components/dashboard/DesktopNavLink";
 // Plain serializable data — no React components/functions in this array
 const navLinks = [
   { label: "ภาพรวม (Overview)",     href: "/dashboard",             iconName: "LayoutDashboard" },
-  { label: "สไลด์นำเสนอ (Slides)",  href: "/presentation",          iconName: "Presentation"    },
   { label: "คอร์สเรียน (Academy)",  href: "/dashboard/academy",     iconName: "BookOpen"        },
   { label: "สินค้า (Marketplace)",  href: "/dashboard/marketplace", iconName: "ShoppingCart"    },
   { label: "โปรไฟล์ (Profile)",     href: "/dashboard/profile",     iconName: "User"            },

@@ -9,7 +9,13 @@ const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PU
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function main() {
-  const { data, error } = await supabase.from('courses').select('id, title, image_url');
-  console.log(data);
+  const [{ data: courses }, { data: products }] = await Promise.all([
+    supabase.from('courses').select('id, title, category'),
+    supabase.from('products').select('id, title, category'),
+  ]);
+  console.log("=== COURSES ===");
+  console.log(courses);
+  console.log("=== PRODUCTS ===");
+  console.log(products);
 }
 main();

@@ -1,22 +1,29 @@
-import { ServicesView } from "@/components/services/ServicesView";
+import { TeacherVideoView } from "@/components/services/teacher-video/TeacherVideoView";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "สอนใช้เทคโนโลยีง่ายๆ สไตล์ iAon | ดนตรีครบวงจร",
+  title: "ที่ปรึกษาและผลิตสื่อวิดีโอวิทยฐานะสำหรับครู (PA) | AiAon Tech",
   description:
-    "บริการออกแบบระบบ Automation สำหรับโรงเรียนและธุรกิจ, รับทำเพลง, Mix & Master และ DAW Template แบบ Custom โดย iAonTechxMusic",
+    "บริการวางแผนแผนการสอน ถ่ายทำและตัดต่อสื่อวิดีโอเสนอสภาพปัญหา (คลิป 10 นาที) และที่ปรึกษาบันทึกคลิปการสอนตามเกณฑ์ ก.ค.ศ. PA ล่าสุด โดยทีมงานครูจริงและผู้เชี่ยวชาญนวัตกรรม",
   keywords: [
-    "บริการ", "ออกแบบระบบ", "Automation", "n8n", "LINE Notify",
-    "แต่งเพลง", "Mix Master", "DAW Template", "iAon"
+    "วิทยฐานะครู",
+    "ประเมิน PA",
+    "ผลิตคลิปการสอน",
+    "คลิปสภาพปัญหา",
+    "ที่ปรึกษา PA",
+    "แผนการสอน PA",
+    "แผนการจัดการเรียนรู้",
+    "AiAon Tech",
+    "คลิปการสอน กคศ"
   ],
   openGraph: {
-    title: "สอนใช้เทคโนโลยีง่ายๆ สไตล์ iAon | ดนตรีครบวงจร",
+    title: "ที่ปรึกษาและผลิตสื่อวิดีโอวิทยฐานะสำหรับครู (PA) | AiAon Tech",
     description:
-      "บริการออกแบบระบบ Automation สำหรับโรงเรียน และงานดนตรีระดับมืออาชีพ — Custom ตามโจทย์ของคุณ",
+      "ช่วยการประเมินวิทยฐานะครูให้เป็นเรื่องง่าย ผลิตวิดีโอและวางแผนตามเกณฑ์ ก.ค.ศ. PA ล่าสุด มั่นใจผ่านประเมิน 100% โดยเพื่อนร่วมวิชาชีพ",
     type: "website",
   },
 };
 
 export default function ServicesPage() {
-  return <ServicesView />;
+  return <TeacherVideoView />;
 }

@@ -14,7 +14,6 @@ import {
   Menu,
   X,
   ChevronRight,
-  Presentation,
 } from "lucide-react";
 import { logout } from "@/app/login/actions";
 
@@ -26,7 +25,6 @@ interface MobileSidebarProps {
 
 const navLinks = [
   { label: "ภาพรวม (Overview)", href: "/dashboard", icon: LayoutDashboard },
-  { label: "สไลด์นำเสนอ (Slides)", href: "/presentation", icon: Presentation },
   { label: "คอร์สเรียน (Academy)", href: "/dashboard/academy", icon: BookOpen },
   { label: "สินค้า (Marketplace)", href: "/dashboard/marketplace", icon: ShoppingCart },
   { label: "โปรไฟล์ (Profile)", href: "/dashboard/profile", icon: User },
