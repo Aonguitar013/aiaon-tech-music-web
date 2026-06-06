@@ -98,7 +98,7 @@ export function SaaSView({ user }: SaaSViewProps) {
   const [messages, setMessages] = useState<LineMessage[]>([
     {
       id: "welcome",
-      title: "LINE Notify",
+      title: "LINE",
       body: "🔔 ยินดีต้อนรับสู่ระบบ iAon ClassFlow! ทดลองกดปุ่มสถานะเช็คชื่อของนักเรียนทางด้านซ้าย เพื่อดูการแจ้งเตือนสดแบบจำลองได้เลยค่ะ",
       time: "ระบบ"
     }
@@ -182,7 +182,7 @@ export function SaaSView({ user }: SaaSViewProps) {
 
     const newMessage: LineMessage = {
       id: `${studentId}-${status}-${Date.now()}`,
-      title: "LINE Notify",
+      title: "LINE",
       body: `📢 [iAon ClassFlow]
 📌 รายงานสถานะเข้าเรียนรายวัน
 -------------------------------
@@ -203,12 +203,12 @@ export function SaaSView({ user }: SaaSViewProps) {
 
   const faqs = [
     {
-      q: "ระบบเช็คชื่อ LINE Notify ทำงานอย่างไร ต้องติดตั้งโปรแกรมไหม?",
+      q: "ระบบเช็คชื่อ LINE ทำงานอย่างไร ต้องติดตั้งโปรแกรมไหม?",
       a: "ไม่ต้องติดตั้งโปรแกรมใดๆ บนคอมพิวเตอร์ครับ ตัวระบบทำงานในรูปแบบ Web Application คุณครูสามารถเช็คชื่อผ่านเว็บบราวเซอร์ในมือถือ แท็บเล็ต หรือโน้ตบุ๊กได้ทันที ข้อมูลจะถูกบันทึกลงฐานข้อมูลและส่งสัญญาณ API ไปหา LINE เพื่อแจ้งกลุ่มคุณครูหรือผู้ปกครองทันที"
     },
     {
       q: "หากต้องการส่งการแจ้งเตือนเข้ากลุ่มผู้ปกครอง ต้องทำอย่างไร?",
-      a: "คุณครูเพียงเชิญ LINE Notify Bot เข้าไปในกลุ่มห้องเรียน จากนั้นคัดลอก Token สำหรับกลุ่มนั้นๆ มาวางในระบบ iAon ClassFlow เพียงเท่านี้ระบบก็จะสามารถยิงข้อมูลสรุปยอดผู้มาเรียน ขาด สาย ลา เข้าสู่กลุ่มผู้ปกครองได้แบบอัตโนมัติ"
+      a: "คุณครูเพียงเชิญ LINE Bot เข้าไปในกลุ่มห้องเรียน จากนั้นคัดลอก Token สำหรับกลุ่มนั้นๆ มาวางในระบบ iAon ClassFlow เพียงเท่านี้ระบบก็จะสามารถยิงข้อมูลสรุปยอดผู้มาเรียน ขาด สาย ลา เข้าสู่กลุ่มผู้ปกครองได้แบบอัตโนมัติ"
     },
     {
       q: "ระบบสคริปต์ Google Apps Script ปลอดภัยและเสถียรแค่ไหน?",
@@ -216,7 +216,7 @@ export function SaaSView({ user }: SaaSViewProps) {
     },
     {
       q: "สามารถกำหนดเทมเพลตข้อความของตัวเองได้ไหม?",
-      a: "ได้แน่นอนครับ ในแพ็กเกจ Pro Teacher คุณครูสามารถเข้าไปปรับแต่งหน้าตาข้อความของ LINE Notify ได้เองอย่างอิสระ เช่น การเพิ่มชื่อเล่นครู, การใส่ลิงก์ดูรายงานสรุปแบบภาพรวม หรือการระบุหมายเหตุพิเศษในวันนั้นๆ"
+      a: "ได้แน่นอนครับ ในแพ็กเกจ Pro Teacher คุณครูสามารถเข้าไปปรับแต่งหน้าตาข้อความของ LINE ได้เองอย่างอิสระ เช่น การเพิ่มชื่อเล่นครู, การใส่ลิงก์ดูรายงานสรุปแบบภาพรวม หรือการระบุหมายเหตุพิเศษในวันนั้นๆ"
     }
   ];
 
@@ -265,7 +265,7 @@ export function SaaSView({ user }: SaaSViewProps) {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="font-prompt text-base sm:text-xl font-light text-white/70 max-w-2xl leading-relaxed"
             >
-              เช็คชื่ออัจฉริยะในชั้นเรียน ส่ง LINE Notify รายบุคคลเข้ากลุ่มทันที พร้อมระบบเก็บข้อมูลอัตโนมัติลง Google Sheets ด้วยคีย์ฟังก์ชัน Apps Script อัจฉริยะ
+              เช็คชื่ออัจฉริยะในชั้นเรียน ส่ง LINE รายบุคคลเข้ากลุ่มทันที พร้อมระบบเก็บข้อมูลอัตโนมัติลง Google Sheets ด้วยคีย์ฟังก์ชัน Apps Script อัจฉริยะ
             </motion.p>
 
             {/* Actions */}
@@ -346,7 +346,7 @@ export function SaaSView({ user }: SaaSViewProps) {
       <section className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 relative z-10" id="demo">
         <div className="text-center mb-16 space-y-4">
           <h2 className="font-prompt text-3xl sm:text-5xl font-bold tracking-tight">
-            ทดลองจำลองระบบ <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">LINE Notify</span>
+            ทดลองจำลองระบบ <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">LINE</span>
           </h2>
           <p className="font-prompt font-light text-white/60 max-w-2xl mx-auto text-base sm:text-lg">
             ลองคลิกปุ่มบันทึกสถานะของเด็กนักเรียนบนหน้าจอแท็บเล็ตของคุณครู (ด้านซ้าย) <br className="hidden sm:inline" />
@@ -496,7 +496,7 @@ export function SaaSView({ user }: SaaSViewProps) {
                   setStudents(prev => prev.map(s => ({ ...s, status: "none" })));
                   setMessages([{
                     id: "welcome",
-                    title: "LINE Notify",
+                    title: "LINE",
                     body: "🔔 ยินดีต้อนรับสู่ระบบ iAon ClassFlow! ทดลองกดปุ่มสถานะเช็คชื่อของนักเรียนทางด้านซ้าย เพื่อดูการแจ้งเตือนสดแบบจำลองได้เลยค่ะ",
                     time: "ระบบ"
                   }]);
@@ -532,7 +532,7 @@ export function SaaSView({ user }: SaaSViewProps) {
                       <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-rose-600 rounded-full"></span>
                     </div>
                     <div className="font-prompt text-left">
-                      <p className="text-sm font-semibold text-white leading-tight">LINE Notify</p>
+                      <p className="text-sm font-semibold text-white leading-tight">LINE</p>
                       <p className="text-[10px] text-white/50">บัญชีทางการ (ส่งอัตโนมัติ)</p>
                     </div>
                   </div>
@@ -555,7 +555,7 @@ export function SaaSView({ user }: SaaSViewProps) {
                         transition={{ type: "spring", stiffness: 350, damping: 25 }}
                         className="flex items-start gap-2 max-w-[90%]"
                       >
-                        {/* LINE Notify Mini Avatar */}
+                        {/* LINE Mini Avatar */}
                         <div className="w-7 h-7 rounded-full bg-[#00c300] flex items-center justify-center text-[10px] text-white font-bold shrink-0 mt-0.5 shadow-sm">
                           LN
                         </div>
@@ -616,7 +616,7 @@ export function SaaSView({ user }: SaaSViewProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             {
-              title: "LINE Notify API",
+              title: "LINE API",
               desc: "ระบบจัดฟอร์แมตข้อความแบบสเปกสูง เพื่อยิงแจ้งเตือนตรงสู่ห้องแชทครอบครัว หรือครูผู้ดูแลโดยไม่ต้องพิมพ์ส่งเองรายคน",
               icon: MessageSquare,
               color: "from-green-500 to-emerald-600",
@@ -735,7 +735,7 @@ export function SaaSView({ user }: SaaSViewProps) {
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/10 border border-slate-500/20 group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-cyan-400" />
                   </span>
-                  <span className="group-hover/item:text-cyan-300 transition-colors">แจ้งเตือน LINE Notify ลิงก์มาตรฐาน</span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">แจ้งเตือน LINE ลิงก์มาตรฐาน</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/10 border border-slate-500/20 group-hover/item:scale-110 transition-transform shrink-0">
