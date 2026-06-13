@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Users, Cpu, ShieldCheck, Flame, Check, HelpCircle } from "lucide-react";
@@ -53,7 +53,7 @@ export function WhyUsSection() {
             </span>
             <h2 className="font-prompt text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
               ทำไมต้องทำคลิป PA กับ{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-green-400">
                 AiAon Tech?
               </span>
             </h2>
@@ -86,7 +86,7 @@ export function WhyUsSection() {
                 href="https://lin.ee/XXLvrKW"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-prompt font-semibold text-sm transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-prompt font-semibold text-sm transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(59,130,246,0.3)]"
               >
                 คุยกับทีมงานครูโดยตรง
               </a>
@@ -107,7 +107,7 @@ export function WhyUsSection() {
                   className="group relative rounded-2xl glass-card border border-white/5 p-6 hover:border-white/15 transition-all duration-300 overflow-hidden"
                 >
                   {/* Subtle hover gradient background */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${pillar.bgGlow} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+                  <div className={`absolute inset-0 bg-linear-to-r ${pillar.bgGlow} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
 
                   <div className="relative z-10 flex flex-col sm:flex-row gap-5 items-start">
                     {/* Icon container */}

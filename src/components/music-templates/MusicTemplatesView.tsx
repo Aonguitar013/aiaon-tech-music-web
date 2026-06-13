@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect } from "react";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
@@ -114,7 +114,7 @@ export function MusicTemplatesView({ initialProducts, user }: MusicTemplatesView
             className="font-prompt text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight"
           >
             สร้างเพลงระดับโปรดิวเซอร์<br />ด้วย{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-500 drop-shadow-[0_0_20px_rgba(245,158,11,0.35)]">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-orange-400 to-yellow-500 drop-shadow-[0_0_20px_rgba(245,158,11,0.35)]">
               Music Templates
             </span>
           </motion.h1>
@@ -170,7 +170,7 @@ export function MusicTemplatesView({ initialProducts, user }: MusicTemplatesView
                 className="group relative"
               >
                 {/* Glow border overlay on hover */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl opacity-0 group-hover:opacity-30 blur-md transition duration-500 pointer-events-none" />
+                <div className="absolute -inset-0.5 bg-linear-to-r from-amber-500 to-orange-600 rounded-2xl opacity-0 group-hover:opacity-30 blur-md transition duration-500 pointer-events-none" />
                 
                 <div className="relative glass-card bg-black/40 border border-white/10 hover:border-amber-500/40 p-6 md:p-8 flex flex-col h-full transition-all duration-300 overflow-hidden">
                   {/* FREE Badge */}
@@ -211,7 +211,7 @@ export function MusicTemplatesView({ initialProducts, user }: MusicTemplatesView
                       
                       <Link
                         href={checkoutUrl}
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-500 hover:to-orange-400 text-white font-prompt font-bold text-sm px-6 py-3.5 rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] transition-all hover:scale-[1.03] active:scale-95 cursor-pointer"
+                        className="inline-flex items-center gap-2 bg-linear-to-r from-amber-600 to-orange-500 hover:from-amber-500 hover:to-orange-400 text-white font-prompt font-bold text-sm px-6 py-3.5 rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] transition-all hover:scale-[1.03] active:scale-95 cursor-pointer"
                       >
                         <Download className="w-4 h-4" />
                         <span>{isFree ? "ดาวน์โหลดฟรี" : "สั่งซื้อตอนนี้"}</span>

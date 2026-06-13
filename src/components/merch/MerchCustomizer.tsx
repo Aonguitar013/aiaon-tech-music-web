@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -1281,7 +1281,7 @@ LINE ID: ${form.lineId}
 
           <h1 className="font-prompt text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight">
             {selectedProduct === "cap" ? "ออกแบบหมวกแก๊ป" : "ออกแบบเสื้อยืด"}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.35)]">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-blue-500 to-purple-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.35)]">
               {" "}AiAonTech
             </span>
           </h1>
@@ -1311,7 +1311,7 @@ LINE ID: ${form.lineId}
                 className={cn(
                   "flex-1 py-2.5 rounded-xl font-prompt text-xs font-semibold transition-all flex items-center justify-center gap-1.5",
                   selectedProduct === "tshirt"
-                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-black shadow-lg"
+                    ? "bg-linear-to-r from-cyan-500 to-blue-600 text-black shadow-lg"
                     : "text-white/60 hover:text-white hover:bg-white/3"
                 )}
               >
@@ -1328,7 +1328,7 @@ LINE ID: ${form.lineId}
                 className={cn(
                   "flex-1 py-2.5 rounded-xl font-prompt text-xs font-semibold transition-all flex items-center justify-center gap-1.5",
                   selectedProduct === "cap"
-                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-black shadow-lg"
+                    ? "bg-linear-to-r from-cyan-500 to-blue-600 text-black shadow-lg"
                     : "text-white/60 hover:text-white hover:bg-white/3"
                 )}
               >
@@ -1980,7 +1980,7 @@ LINE ID: ${form.lineId}
                   ) : (
                     <button
                       onClick={handleProceedToPayment}
-                      className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-500 hover:from-cyan-400 hover:to-indigo-400 text-black hover:scale-[1.02] font-prompt font-bold text-sm transition-all duration-200 flex items-center gap-1.5 shadow-[0_0_25px_rgba(34,211,238,0.2)]"
+                      className="px-6 py-2.5 rounded-xl bg-linear-to-r from-cyan-500 to-indigo-500 hover:from-cyan-400 hover:to-indigo-400 text-black hover:scale-[1.02] font-prompt font-bold text-sm transition-all duration-200 flex items-center gap-1.5 shadow-[0_0_25px_rgba(34,211,238,0.2)]"
                     >
                       <CreditCard className="w-4 h-4 stroke-[2.5]" />
                       <span>ดำเนินการชำระเงิน</span>
@@ -2035,7 +2035,7 @@ LINE ID: ${form.lineId}
                 </div>
                 <div className="flex justify-between pt-2 text-sm font-bold border-t border-white/10 text-white">
                   <span>ยอดเงินรวมทั้งสิ้น</span>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 text-lg">
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-emerald-400 text-lg">
                     {totalPrice} บาท
                   </span>
                 </div>
@@ -2154,7 +2154,7 @@ LINE ID: ${form.lineId}
 
                 <button
                   onClick={() => setPaymentStep("success")}
-                  className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:brightness-110 text-black font-prompt font-bold text-xs transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-[0_0_20px_rgba(16,185,129,0.2)]"
+                  className="flex-1 py-3 px-4 rounded-xl bg-linear-to-r from-emerald-500 to-teal-500 hover:brightness-110 text-black font-prompt font-bold text-xs transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-[0_0_20px_rgba(16,185,129,0.2)]"
                 >
                   <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
                   <span>ฉันโอนเงินเรียบร้อยแล้ว</span>

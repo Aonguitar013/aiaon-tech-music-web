@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -87,7 +87,7 @@ function AuthModal({ onClose }: { onClose: () => void }) {
         </button>
 
         {/* Icon */}
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+        <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(168,85,247,0.4)]">
           <Gift className="w-8 h-8 text-white" />
         </div>
 
@@ -115,7 +115,7 @@ function AuthModal({ onClose }: { onClose: () => void }) {
 
         <Link
           href="/login?next=/freebies"
-          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-[0_0_24px_rgba(168,85,247,0.3)] hover:shadow-[0_0_36px_rgba(168,85,247,0.45)]"
+          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-[1.02] shadow-[0_0_24px_rgba(168,85,247,0.3)] hover:shadow-[0_0_36px_rgba(168,85,247,0.45)]"
           onClick={onClose}
         >
           <LogIn className="w-4 h-4" />
@@ -198,7 +198,7 @@ function FreebieCard({
         {/* Header row */}
         <div className="flex items-start justify-between gap-3">
           {/* Icon */}
-          <div className={`w-13 h-13 rounded-xl flex items-center justify-center bg-gradient-to-br ${freebie.color_from} ${freebie.color_to} shadow-lg group-hover:scale-105 transition-transform duration-300 shrink-0`}
+          <div className={`w-13 h-13 rounded-xl flex items-center justify-center bg-linear-to-br ${freebie.color_from} ${freebie.color_to} shadow-lg group-hover:scale-105 transition-transform duration-300 shrink-0`}
             style={{ width: 52, height: 52 }}>
             <Icon className="w-6 h-6 text-white" />
           </div>
@@ -263,7 +263,7 @@ function FreebieCard({
               </div>
               <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                 <motion.div
-                  className={`h-full rounded-full bg-gradient-to-r ${freebie.color_from} ${freebie.color_to}`}
+                  className={`h-full rounded-full bg-linear-to-r ${freebie.color_from} ${freebie.color_to}`}
                   animate={{ width: `${progress}%` }}
                   transition={{ duration: 0.15, ease: "linear" }}
                   style={{ width: `${progress}%` }}
@@ -360,7 +360,7 @@ export function FreebiesView({ user, initialFreebies }: FreebiesViewProps) {
               className="font-prompt text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight"
             >
               คลัง
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 drop-shadow-[0_0_20px_rgba(168,85,247,0.35)]">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-400 to-rose-400 drop-shadow-[0_0_20px_rgba(168,85,247,0.35)]">
                 {" "}ของแจกฟรี
               </span>
             </motion.h1>
@@ -412,7 +412,7 @@ export function FreebiesView({ user, initialFreebies }: FreebiesViewProps) {
                   onClick={() => setActiveTab(tab.value)}
                   className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-prompt font-medium transition-all duration-250 ${
                     isActive
-                      ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-[0_0_20px_rgba(168,85,247,0.35)]"
+                      ? "bg-linear-to-r from-purple-600 to-pink-500 text-white shadow-[0_0_20px_rgba(168,85,247,0.35)]"
                       : "glass-card border-white/8 text-white/50 hover:text-white hover:border-white/15"
                   }`}
                 >
@@ -453,9 +453,9 @@ export function FreebiesView({ user, initialFreebies }: FreebiesViewProps) {
               transition={{ duration: 0.55, delay: 0.2 }}
               className="mt-20 glass-card border-purple-500/20 p-8 md:p-12 text-center relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-br from-purple-500/5 to-pink-500/5 pointer-events-none" />
               <div className="relative z-10 space-y-5 max-w-lg mx-auto">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+                <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(168,85,247,0.4)]">
                   <Star className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="font-prompt text-2xl font-bold text-white">
@@ -466,7 +466,7 @@ export function FreebiesView({ user, initialFreebies }: FreebiesViewProps) {
                 </p>
                 <Link
                   href="/login?next=/freebies"
-                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-105 shadow-[0_0_24px_rgba(168,85,247,0.3)]"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-105 shadow-[0_0_24px_rgba(168,85,247,0.3)]"
                 >
                   <LogIn className="w-4 h-4" />
                   สมัครสมาชิก / ล็อกอิน

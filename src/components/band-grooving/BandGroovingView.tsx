@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import {
@@ -104,12 +104,12 @@ export function BandGroovingView() {
             className="font-prompt text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight"
           >
             เจาะลึกกลยุทธ์การฝึก{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-sky-300 drop-shadow-[0_0_20px_rgba(56,189,248,0.25)]">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-sky-400 to-sky-300 drop-shadow-[0_0_20px_rgba(56,189,248,0.25)]">
               Band Grooving
             </span>
             <br />
             และการเล่นกับ{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-teal-300 drop-shadow-[0_0_20px_rgba(45,212,191,0.25)]">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-teal-400 to-teal-300 drop-shadow-[0_0_20px_rgba(45,212,191,0.25)]">
               Click Track
             </span>
           </motion.h1>
@@ -228,7 +228,7 @@ export function BandGroovingView() {
               transition={{ duration: 0.4, delay: 0.05 }}
               className="glass-card border-sky-500/20 hover:border-sky-500/30 bg-sky-500/5 p-6 rounded-xl relative group hover:scale-[1.02] transition-all duration-300"
             >
-              <span className="absolute -top-4 left-6 bg-gradient-to-r from-sky-500 to-sky-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-sky-500/20">
+              <span className="absolute -top-4 left-6 bg-linear-to-r from-sky-500 to-sky-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-sky-500/20">
                 1
               </span>
               <h3 className="font-prompt font-bold text-sky-400 mt-2 mb-2 group-hover:text-sky-300 transition-colors">
@@ -247,7 +247,7 @@ export function BandGroovingView() {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="glass-card border-sky-500/20 hover:border-sky-500/30 bg-sky-500/5 p-6 rounded-xl relative group hover:scale-[1.02] transition-all duration-300"
             >
-              <span className="absolute -top-4 left-6 bg-gradient-to-r from-sky-500 to-sky-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-sky-500/20">
+              <span className="absolute -top-4 left-6 bg-linear-to-r from-sky-500 to-sky-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-sky-500/20">
                 2
               </span>
               <h3 className="font-prompt font-bold text-sky-400 mt-2 mb-2 group-hover:text-sky-300 transition-colors">
@@ -266,7 +266,7 @@ export function BandGroovingView() {
               transition={{ duration: 0.4, delay: 0.15 }}
               className="glass-card border-sky-500/20 hover:border-sky-500/30 bg-sky-500/5 p-6 rounded-xl relative group hover:scale-[1.02] transition-all duration-300"
             >
-              <span className="absolute -top-4 left-6 bg-gradient-to-r from-sky-500 to-sky-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-sky-500/20">
+              <span className="absolute -top-4 left-6 bg-linear-to-r from-sky-500 to-sky-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-sky-500/20">
                 3
               </span>
               <h3 className="font-prompt font-bold text-sky-400 mt-2 mb-2 group-hover:text-sky-300 transition-colors">
@@ -285,7 +285,7 @@ export function BandGroovingView() {
               transition={{ duration: 0.4, delay: 0.2 }}
               className="glass-card border-teal-500/20 hover:border-teal-500/30 bg-teal-500/5 p-6 rounded-xl relative group hover:scale-[1.02] transition-all duration-300"
             >
-              <span className="absolute -top-4 left-6 bg-gradient-to-r from-teal-500 to-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-teal-500/20">
+              <span className="absolute -top-4 left-6 bg-linear-to-r from-teal-500 to-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-teal-500/20">
                 4
               </span>
               <h3 className="font-prompt font-bold text-teal-400 mt-2 mb-2 group-hover:text-teal-300 transition-colors">
@@ -304,7 +304,7 @@ export function BandGroovingView() {
               transition={{ duration: 0.4, delay: 0.25 }}
               className="glass-card border-teal-500/20 hover:border-teal-500/30 bg-teal-500/5 p-6 rounded-xl relative group hover:scale-[1.02] transition-all duration-300"
             >
-              <span className="absolute -top-4 left-6 bg-gradient-to-r from-teal-500 to-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-teal-500/20">
+              <span className="absolute -top-4 left-6 bg-linear-to-r from-teal-500 to-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-teal-500/20">
                 5
               </span>
               <h3 className="font-prompt font-bold text-teal-400 mt-2 mb-2 group-hover:text-teal-300 transition-colors">
@@ -323,7 +323,7 @@ export function BandGroovingView() {
               transition={{ duration: 0.4, delay: 0.3 }}
               className="glass-card border-teal-500/20 hover:border-teal-500/30 bg-teal-500/5 p-6 rounded-xl relative group hover:scale-[1.02] transition-all duration-300"
             >
-              <span className="absolute -top-4 left-6 bg-gradient-to-r from-teal-500 to-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-teal-500/20">
+              <span className="absolute -top-4 left-6 bg-linear-to-r from-teal-500 to-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg shadow-teal-500/20">
                 6
               </span>
               <h3 className="font-prompt font-bold text-teal-400 mt-2 mb-2 group-hover:text-teal-300 transition-colors">
@@ -448,7 +448,7 @@ export function BandGroovingView() {
           className="glass-card border-white/8 bg-black/40 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden shadow-2xl"
         >
           {/* Ambient Footer Glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 to-teal-500/5 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-br from-sky-500/5 to-teal-500/5 pointer-events-none" />
           
           <h2 className="font-prompt text-2xl font-bold text-white mb-4">เป้าหมายสุดท้าย: &quot;Lock & Flow&quot;</h2>
           <p className="font-prompt text-white/60 mb-10 max-w-2xl mx-auto leading-relaxed">

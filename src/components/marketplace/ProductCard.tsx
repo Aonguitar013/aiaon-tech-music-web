@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import { Tag, Gift, Download } from "lucide-react";
@@ -124,7 +124,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
             />
           ) : (
             <div className={cn(
-              "w-full h-full flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity duration-500 bg-gradient-to-br",
+              "w-full h-full flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity duration-500 bg-linear-to-br",
               focusGradient
             )}>
               <Download className="w-12 h-12 text-white/50 group-hover:scale-110 group-hover:text-white/80 transition-all duration-500" />
@@ -144,11 +144,11 @@ export function ProductCard({ product, index }: ProductCardProps) {
 
       {/* Decorative glow at bottom */}
       <div className={cn(
-        "absolute bottom-0 right-0 w-40 h-40 opacity-5 group-hover:opacity-15 blur-[40px] rounded-full transition-opacity duration-500 pointer-events-none bg-gradient-to-br",
+        "absolute bottom-0 right-0 w-40 h-40 opacity-5 group-hover:opacity-15 blur-[40px] rounded-full transition-opacity duration-500 pointer-events-none bg-linear-to-br",
         focusGradient
       )}></div>
 
-      <div className="p-6 flex flex-col flex-1 z-10 bg-gradient-to-b from-black/0 to-black/40">
+      <div className="p-6 flex flex-col flex-1 z-10 bg-linear-to-b from-black/0 to-black/40">
         <h3 className={cn(
           "text-lg font-bold font-prompt text-white mb-2 line-clamp-2 leading-tight transition-colors",
           hoverText

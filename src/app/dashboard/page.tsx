@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+﻿import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { DashboardChart } from "@/components/dashboard/DashboardChart";
 import { Users, Zap, BookOpen, Clock, PlayCircle, TrendingUp } from "lucide-react";
@@ -143,7 +143,7 @@ export default async function DashboardPage() {
                                 return (
                                     <Link key={course.id} href={`/dashboard/academy/${course.id}`} className="block p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group cursor-pointer">
                                         <div className="flex items-start gap-4">
-                                            <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${course.color_gradient || 'from-blue-500 to-cyan-400'} flex items-center justify-center shrink-0`}>
+                                            <div className={`w-12 h-12 rounded-lg bg-linear-to-br ${course.color_gradient || 'from-blue-500 to-cyan-400'} flex items-center justify-center shrink-0`}>
                                                 <PlayCircle className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
                                             </div>
                                             <div className="flex-1 min-w-0">

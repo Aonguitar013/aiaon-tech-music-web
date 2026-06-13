@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { GraduationCap, Code, Rocket, Music, Guitar } from "lucide-react";
@@ -24,8 +24,8 @@ export function AboutSection() {
             className="w-48 h-48 md:w-64 md:h-64 rounded-full p-2 shrink-0 relative"
           >
             {/* Dual color border simulation */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400 via-transparent to-amber-400 opacity-50 blur-sm pointer-events-none"></div>
-            <div className="absolute inset-1 rounded-full bg-gradient-to-br from-blue-500 to-amber-500 p-0.5 pointer-events-none mask-gradient">
+            <div className="absolute inset-0 rounded-full bg-linear-to-br from-blue-400 via-transparent to-amber-400 opacity-50 blur-sm pointer-events-none"></div>
+            <div className="absolute inset-1 rounded-full bg-linear-to-br from-blue-500 to-amber-500 p-0.5 pointer-events-none mask-gradient">
                  <div className="w-full h-full bg-black rounded-full pointer-events-none"></div>
             </div>
             
@@ -50,7 +50,7 @@ export function AboutSection() {
                 viewport={{ once: true }}
                 className="font-prompt text-3xl md:text-5xl font-bold text-white mb-2"
               >
-                My <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-amber-400">Journey</span>
+                My <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-purple-400 to-amber-400">Journey</span>
               </motion.h2>
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}

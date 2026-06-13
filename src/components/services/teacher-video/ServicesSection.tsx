@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { BookOpen, Video, Award, CheckCircle, ArrowRight, LucideIcon } from "lucide-react";
@@ -97,7 +97,7 @@ export function ServicesSection() {
           </span>
           <h2 className="font-prompt text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
             บริการเพื่อความสำเร็จ{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-green-400">
               ในทุกขั้นตอนของวิทยฐานะ PA
             </span>
           </h2>
@@ -132,7 +132,7 @@ export function ServicesSection() {
                   {/* Badge */}
                   {service.badge && (
                     <div className="absolute -top-3 left-6">
-                      <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-prompt font-bold tracking-wide text-white bg-gradient-to-r ${service.gradientFrom} ${service.gradientTo} shadow-md`}>
+                      <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-prompt font-bold tracking-wide text-white bg-linear-to-r ${service.gradientFrom} ${service.gradientTo} shadow-md`}>
                         {service.badge}
                       </span>
                     </div>
@@ -140,7 +140,7 @@ export function ServicesSection() {
 
                   {/* Header */}
                   <div className="flex items-start gap-4 mb-6 pt-2">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br ${service.gradientFrom} ${service.gradientTo} shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-linear-to-br ${service.gradientFrom} ${service.gradientTo} shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       <Icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -159,7 +159,7 @@ export function ServicesSection() {
                   </p>
 
                   {/* Features List */}
-                  <ul className="space-y-3 mb-8 flex-grow">
+                  <ul className="space-y-3 mb-8 grow">
                     {service.features.map((feature, fIdx) => (
                       <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-white/80 font-prompt leading-relaxed">
                         <CheckCircle className={`w-4 h-4 shrink-0 mt-0.5 ${service.accentColor}`} />

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -55,7 +55,7 @@ export function AutomationShowcase() {
   };
 
   return (
-    <section className="py-24 px-4 relative z-10 w-full overflow-hidden border-b border-white/5 bg-gradient-to-b from-black via-zinc-950 to-black" id="showcase">
+    <section className="py-24 px-4 relative z-10 w-full overflow-hidden border-b border-white/5 bg-linear-to-b from-black via-zinc-950 to-black" id="showcase">
       {/* Radial glows */}
       <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
@@ -66,7 +66,7 @@ export function AutomationShowcase() {
             <Cpu className="w-4 h-4" /> Smart school automation
           </span>
           <h2 className="font-prompt text-4xl md:text-5xl font-bold mb-6 tracking-tight text-white">
-            นวัตกรรมลดภาระงานครู <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400">เห็นภาพจริงใน 1 นาที</span>
+            นวัตกรรมลดภาระงานครู <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-400 to-teal-400">เห็นภาพจริงใน 1 นาที</span>
           </h2>
           <p className="text-white/60 max-w-2xl mx-auto text-base md:text-lg font-prompt font-light leading-relaxed">
             ทดลองจำลองการคำนวณชั่วโมงการทำงานที่จะประหยัดได้ และดูตัวอย่างระบบแจ้งเตือน LINE ของเราแบบ Interactive ด้านล่างนี้
@@ -143,13 +143,13 @@ export function AutomationShowcase() {
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div className="border-r border-white/10 pr-2">
                   <span className="text-[10px] uppercase font-prompt tracking-wider text-white/40 block mb-1">ประหยัดได้ต่อภาคเรียน</span>
-                  <span className="text-3xl md:text-4xl font-bold font-prompt text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                  <span className="text-3xl md:text-4xl font-bold font-prompt text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-400">
                     {termTimeSavedHours} ชม.
                   </span>
                 </div>
                 <div className="pl-2">
                   <span className="text-[10px] uppercase font-prompt tracking-wider text-white/40 block mb-1">คืนเวลานอนพักผ่อน</span>
-                  <span className="text-3xl md:text-4xl font-bold font-prompt text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">
+                  <span className="text-3xl md:text-4xl font-bold font-prompt text-transparent bg-clip-text bg-linear-to-r from-teal-400 to-emerald-400">
                     ~ {equivalentSleepDays} วัน
                   </span>
                 </div>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Inter, Prompt, Geist } from "next/font/google";
 import "./globals.css";
 import React from "react";
@@ -91,7 +91,7 @@ export default async function RootLayout({
               <FloatingLINEButton />
 
               {/* --- Main Content --- */}
-              <main className="flex-grow pt-28 relative z-10">
+              <main className="grow pt-28 relative z-10">
                 {children}
               </main>
 

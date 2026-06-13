@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { MessageSquare, Sparkles, Gift } from "lucide-react";
 import { FaLine } from "react-icons/fa6";
@@ -8,9 +8,9 @@ export function FinalCTASection() {
     <section className="relative py-20 px-4 md:py-24 scroll-mt-20 overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[300px] bg-gradient-to-r from-blue-600/10 to-green-500/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[300px] bg-linear-to-r from-blue-600/10 to-green-500/10 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto relative z-10 text-center space-y-8 p-8 sm:p-12 md:p-16 rounded-3xl glass-card border border-white/8 bg-gradient-to-b from-white/3 to-white/1 shadow-[0_12px_40px_rgba(0,0,0,0.6)]">
+      <div className="max-w-4xl mx-auto relative z-10 text-center space-y-8 p-8 sm:p-12 md:p-16 rounded-3xl glass-card border border-white/8 bg-linear-to-b from-white/3 to-white/1 shadow-[0_12px_40px_rgba(0,0,0,0.6)]">
         
         {/* Decorative Badge */}
         <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold font-prompt mx-auto">

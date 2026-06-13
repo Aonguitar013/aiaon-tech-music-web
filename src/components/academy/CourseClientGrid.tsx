@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -220,7 +220,7 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
                           className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out opacity-90 group-hover:opacity-100" 
                         />
                       ) : (
-                        <div className={`w-full h-full bg-gradient-to-br ${fallbackGradient} flex items-center justify-center opacity-40 group-hover:opacity-70 transition-opacity duration-500`}>
+                        <div className={`w-full h-full bg-linear-to-br ${fallbackGradient} flex items-center justify-center opacity-40 group-hover:opacity-70 transition-opacity duration-500`}>
                           <FallbackIcon className="w-12 h-12 text-white/50 group-hover:scale-110 group-hover:text-white/80 transition-all duration-500" />
                         </div>
                       );
@@ -228,9 +228,9 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
                   </div>
 
                   {/* Decorative glow at bottom */}
-                  <div className={`absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-br ${fallbackGradient} opacity-5 group-hover:opacity-15 blur-[40px] rounded-full transition-opacity duration-500 pointer-events-none`}></div>
+                  <div className={`absolute bottom-0 right-0 w-40 h-40 bg-linear-to-br ${fallbackGradient} opacity-5 group-hover:opacity-15 blur-[40px] rounded-full transition-opacity duration-500 pointer-events-none`}></div>
                   
-                  <div className="p-5 flex flex-col flex-1 z-10 bg-gradient-to-b from-black/0 to-black/40">
+                  <div className="p-5 flex flex-col flex-1 z-10 bg-linear-to-b from-black/0 to-black/40">
                     <h3 className={`text-lg font-bold font-prompt text-white mb-2 transition-colors line-clamp-2 leading-tight ${themeTextHover}`}>
                         {course.title}
                     </h3>

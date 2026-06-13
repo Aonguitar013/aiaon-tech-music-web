@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { BookOpen, Download, Package, PlayCircle } from "lucide-react";
 import Link from "next/link";
@@ -78,7 +78,7 @@ export function MyLearning({ items }: { items: LearningItem[] }) {
 
                             {/* Icon block */}
                             {isCourse ? (
-                                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${isMusic ? (item.color_gradient || "from-amber-600 to-orange-400") : (item.color_gradient || "from-blue-500 to-cyan-400")} flex items-center justify-center shrink-0 shadow-lg`}>
+                                <div className={`w-14 h-14 rounded-xl bg-linear-to-br ${isMusic ? (item.color_gradient || "from-amber-600 to-orange-400") : (item.color_gradient || "from-blue-500 to-cyan-400")} flex items-center justify-center shrink-0 shadow-lg`}>
                                     {isCourseActuallyMusic ? (
                                         <Icons.Music className="w-7 h-7 text-white group-hover:scale-110 transition-transform" />
                                     ) : (

@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+﻿import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
 export const metadata = {
@@ -27,7 +27,7 @@ export default async function PresentationPage() {
           Interactive Presentation
         </span>
         <h1 className="font-prompt text-3xl md:text-4xl font-bold tracking-tight text-white mt-3">
-          โครงสร้างเพลงและการเล่าเรื่อง <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 drop-shadow-[0_0_20px_rgba(245,158,11,0.2)]">Manus AI Slides</span>
+          โครงสร้างเพลงและการเล่าเรื่อง <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 to-orange-500 drop-shadow-[0_0_20px_rgba(245,158,11,0.2)]">Manus AI Slides</span>
         </h1>
         <p className="text-white/40 font-prompt text-sm max-w-2xl">
           สำรวจรายละเอียดและเจาะลึกเทคนิคการแต่งเพลง การเรียงร้อยอารมณ์ และบทสรุปผ่านสไลด์นําเสนอสุดพิเศษ

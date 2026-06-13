@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Search, ShoppingBag } from "lucide-react";
@@ -105,7 +105,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
             className="font-prompt text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight"
           >
             Digital{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 drop-shadow-[0_0_20px_rgba(168,85,247,0.35)]">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-400 to-rose-400 drop-shadow-[0_0_20px_rgba(168,85,247,0.35)]">
               Vault
             </span>
           </motion.h1>
@@ -133,7 +133,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
               onClick={() => setFilterCategory(cat.id)}
               className={`flex-1 py-2 rounded-lg font-prompt text-sm font-medium transition-all duration-200 active:scale-95 ${
                 filterCategory === cat.id
-                  ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white border border-purple-400/30 shadow-[0_0_15px_rgba(168,85,247,0.45)]"
+                  ? "bg-linear-to-r from-purple-600 to-pink-500 text-white border border-purple-400/30 shadow-[0_0_15px_rgba(168,85,247,0.45)]"
                   : "text-white/50 hover:text-white hover:bg-white/5"
               }`}
             >

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
@@ -40,7 +40,7 @@ export function ClassroomView() {
               Classroom Management System
             </span>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white mt-3 font-prompt">
-              ระบบบริหาร<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(6,182,212,0.2)]">จัดการชั้นเรียน</span>
+              ระบบบริหาร<span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(6,182,212,0.2)]">จัดการชั้นเรียน</span>
             </h1>
             <p className="text-white/40 text-sm max-w-2xl font-light font-prompt">
               จัดการบันทึกข้อมูล เช็คชื่อ และบริหารชั้นเรียนผ่านระบบ Web Application ที่มีประสิทธิภาพสูง
@@ -52,7 +52,7 @@ export function ClassroomView() {
               href={activeSystem.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-semibold text-sm transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(6,182,212,0.3)] font-prompt"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-semibold text-sm transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(6,182,212,0.3)] font-prompt"
             >
               🚀 เปิดในหน้าต่างใหม่ (Open Fullscreen)
             </a>

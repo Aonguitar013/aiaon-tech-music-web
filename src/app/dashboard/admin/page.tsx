@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+﻿import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import {
@@ -494,7 +494,7 @@ function OrderCard({
   return (
     <div className="glass-card border-orange-500/20 overflow-hidden">
       {/* Top accent bar */}
-      <div className="h-1 w-full bg-gradient-to-r from-orange-500 to-amber-400" />
+      <div className="h-1 w-full bg-linear-to-r from-orange-500 to-amber-400" />
 
       <div className="p-6">
         <div className="flex flex-col lg:flex-row gap-6">

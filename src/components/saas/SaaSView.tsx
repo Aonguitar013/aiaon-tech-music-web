@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -254,7 +254,7 @@ export function SaaSView({ user }: SaaSViewProps) {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="font-prompt text-4xl sm:text-6xl font-bold leading-tight tracking-tight text-white"
             >
-              iAon <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-500">ClassFlow</span> <br />
+              iAon <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-400 to-indigo-500">ClassFlow</span> <br />
               <span className="text-2xl sm:text-4xl font-light text-white/90">ลดงานครู 80% เพิ่มความโปร่งใสสู่ผู้ปกครอง</span>
             </motion.h1>
 
@@ -276,7 +276,7 @@ export function SaaSView({ user }: SaaSViewProps) {
               className="flex flex-col sm:flex-row gap-4 pt-4"
             >
               <Link href={user ? "/dashboard" : "/login"}>
-                <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 font-prompt font-semibold text-white shadow-[0_0_30px_rgba(37,99,235,0.4)] hover:shadow-[0_0_35px_rgba(6,182,212,0.6)] active:scale-95 transition-all flex items-center justify-center gap-2 group">
+                <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 font-prompt font-semibold text-white shadow-[0_0_30px_rgba(37,99,235,0.4)] hover:shadow-[0_0_35px_rgba(6,182,212,0.6)] active:scale-95 transition-all flex items-center justify-center gap-2 group">
                   <span>ทดลองใช้งานฟรี</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -346,7 +346,7 @@ export function SaaSView({ user }: SaaSViewProps) {
       <section className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 relative z-10" id="demo">
         <div className="text-center mb-16 space-y-4">
           <h2 className="font-prompt text-3xl sm:text-5xl font-bold tracking-tight">
-            ทดลองจำลองระบบ <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">LINE</span>
+            ทดลองจำลองระบบ <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-cyan-400">LINE</span>
           </h2>
           <p className="font-prompt font-light text-white/60 max-w-2xl mx-auto text-base sm:text-lg">
             ลองคลิกปุ่มบันทึกสถานะของเด็กนักเรียนบนหน้าจอแท็บเล็ตของคุณครู (ด้านซ้าย) <br className="hidden sm:inline" />
@@ -378,7 +378,7 @@ export function SaaSView({ user }: SaaSViewProps) {
           <div className="lg:col-span-7 flex flex-col glass-card border border-white/10 bg-white/5 rounded-2xl overflow-hidden shadow-2xl relative">
             
             {/* Glowing borders */}
-            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"></div>
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-linear-to-r from-transparent via-blue-500/40 to-transparent"></div>
             
             {/* Tablet Header */}
             <div className="bg-black/60 p-5 border-b border-white/10 flex items-center justify-between">
@@ -407,7 +407,7 @@ export function SaaSView({ user }: SaaSViewProps) {
                     
                     {/* Student Info */}
                     <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${student.avatarBg} flex items-center justify-center font-prompt font-bold text-white shadow-md`}>
+                      <div className={`w-10 h-10 rounded-full bg-linear-to-br ${student.avatarBg} flex items-center justify-center font-prompt font-bold text-white shadow-md`}>
                         {student.avatar}
                       </div>
                       <div className="font-prompt">
@@ -594,7 +594,7 @@ export function SaaSView({ user }: SaaSViewProps) {
               </div>
 
               {/* Internal Reflection light glare */}
-              <div className="absolute top-3 left-3 right-3 h-20 bg-gradient-to-b from-white/5 to-transparent rounded-t-[32px] pointer-events-none z-30"></div>
+              <div className="absolute top-3 left-3 right-3 h-20 bg-linear-to-b from-white/5 to-transparent rounded-t-[32px] pointer-events-none z-30"></div>
             </div>
 
           </div>
@@ -662,10 +662,10 @@ export function SaaSView({ user }: SaaSViewProps) {
                 }}
               >
                 {/* Decorative background shadow */}
-                <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${feat.color} opacity-5 group-hover:opacity-10 blur-2xl rounded-full transition-opacity duration-300 pointer-events-none`}></div>
+                <div className={`absolute top-0 right-0 w-24 h-24 bg-linear-to-br ${feat.color} opacity-5 group-hover:opacity-10 blur-2xl rounded-full transition-opacity duration-300 pointer-events-none`}></div>
                 
                 {/* Icon Container */}
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feat.color} flex items-center justify-center mb-6 shadow-md shadow-black/40`}>
+                <div className={`w-12 h-12 rounded-xl bg-linear-to-br ${feat.color} flex items-center justify-center mb-6 shadow-md shadow-black/40`}>
                   <Icon className="w-6 h-6 text-white" />
                 </div>
 
@@ -763,7 +763,7 @@ export function SaaSView({ user }: SaaSViewProps) {
             whileHover={{ y: -12, scale: 1.08 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
             onMouseMove={handleMouseMove}
-            className="glass-card border-glow-premium flex flex-col p-8 rounded-2xl bg-gradient-to-b from-blue-950/25 to-black/90 relative justify-between shadow-[0_0_35px_rgba(6,182,212,0.18)] transition-all duration-300 md:scale-105 z-20"
+            className="glass-card border-glow-premium flex flex-col p-8 rounded-2xl bg-linear-to-b from-blue-950/25 to-black/90 relative justify-between shadow-[0_0_35px_rgba(6,182,212,0.18)] transition-all duration-300 md:scale-105 z-20"
             style={{
               background: "radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.1) 50%, transparent 80%), rgba(9, 9, 11, 0.5)"
             }}
@@ -772,14 +772,14 @@ export function SaaSView({ user }: SaaSViewProps) {
             <FloatingSparkles />
 
             {/* Float recommended label badge */}
-            <div className="absolute top-0 right-8 -translate-y-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 text-[10px] text-white font-bold tracking-wider font-prompt uppercase shadow-md badge-glow-pulse flex items-center gap-1.5">
+            <div className="absolute top-0 right-8 -translate-y-1/2 px-4 py-1.5 rounded-full bg-linear-to-r from-cyan-500 via-blue-500 to-indigo-500 text-[10px] text-white font-bold tracking-wider font-prompt uppercase shadow-md badge-glow-pulse flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-white animate-pulse" />
               <span>RECOMMENDED</span>
             </div>
 
             <div className="space-y-6 font-prompt text-left relative z-10">
               <div>
-                <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-cyan-400 flex items-center gap-2 drop-shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+                <h3 className="text-xl font-bold text-transparent bg-clip-text bg-linear-to-r from-white via-cyan-200 to-cyan-400 flex items-center gap-2 drop-shadow-[0_0_10px_rgba(6,182,212,0.3)]">
                   <span>ครูมืออาชีพ (Pro)</span>
                   <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
                 </h3>
@@ -787,7 +787,7 @@ export function SaaSView({ user }: SaaSViewProps) {
               </div>
 
               <div className="flex items-baseline gap-1 text-white">
-                <span className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-cyan-300 drop-shadow-[0_0_15px_rgba(6,182,212,0.2)]">190</span>
+                <span className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-white via-white to-cyan-300 drop-shadow-[0_0_15px_rgba(6,182,212,0.2)]">190</span>
                 <span className="text-sm font-medium text-white/50">บาท / เดือน</span>
               </div>
 
@@ -827,7 +827,7 @@ export function SaaSView({ user }: SaaSViewProps) {
 
             <div className="pt-8 relative z-10">
               <Link href={user ? "/dashboard" : "/login"} className="w-full block">
-                <button className="btn-shimmer w-full py-4 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-500 text-white font-prompt font-bold text-sm shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] active:scale-95 transition-all cursor-pointer">
+                <button className="btn-shimmer w-full py-4 rounded-full bg-linear-to-r from-blue-600 via-cyan-500 to-indigo-600 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-500 text-white font-prompt font-bold text-sm shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] active:scale-95 transition-all cursor-pointer">
                   สมัครใช้งาน Pro
                 </button>
               </Link>
@@ -854,7 +854,7 @@ export function SaaSView({ user }: SaaSViewProps) {
               </div>
 
               <div className="flex items-baseline gap-1 text-white">
-                <span className="text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-amber-200 drop-shadow-[0_0_10px_rgba(245,158,11,0.2)]">ติดต่อเรา</span>
+                <span className="text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-white to-amber-200 drop-shadow-[0_0_10px_rgba(245,158,11,0.2)]">ติดต่อเรา</span>
                 <span className="text-xs font-medium text-white/50">สำหรับใบเสนอราคา</span>
               </div>
 
@@ -954,7 +954,7 @@ export function SaaSView({ user }: SaaSViewProps) {
 
       {/* --- CTA BOTTOM --- */}
       <section className="max-w-5xl mx-auto py-16 px-4 sm:px-6 relative z-10">
-        <div className="relative rounded-3xl overflow-hidden border border-cyan-500/20 bg-gradient-to-r from-blue-950/20 via-[#0a0f26]/80 to-indigo-950/20 p-8 sm:p-12 text-center shadow-[0_0_50px_rgba(6,182,212,0.1)]">
+        <div className="relative rounded-3xl overflow-hidden border border-cyan-500/20 bg-linear-to-r from-blue-950/20 via-[#0a0f26]/80 to-indigo-950/20 p-8 sm:p-12 text-center shadow-[0_0_50px_rgba(6,182,212,0.1)]">
           
           {/* Radial light in center */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/10 blur-[80px] rounded-full pointer-events-none"></div>

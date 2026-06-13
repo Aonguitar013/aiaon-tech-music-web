@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
@@ -112,7 +112,7 @@ export function SlipUploader({ itemId, itemType, productPrice, promptPayPayload,
                 </p>
 
                 <div className="bg-white p-4 rounded-3xl shadow-[0_0_40px_rgba(59,130,246,0.3)] relative group cursor-pointer transition-transform hover:scale-105 duration-300">
-                    <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-[30px] blur opacity-30 group-hover:opacity-50 transition opacity pointer-events-none"></div>
+                    <div className="absolute -inset-2 bg-linear-to-r from-blue-500 to-purple-500 rounded-[30px] blur opacity-30 group-hover:opacity-50 transition opacity pointer-events-none"></div>
                     <QRCodeSVG 
                         value={promptPayPayload} 
                         size={250}

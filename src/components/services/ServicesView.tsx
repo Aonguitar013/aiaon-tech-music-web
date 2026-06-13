@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -247,7 +247,7 @@ function ServiceCard({
         {service.badge && (
           <div className="absolute -top-3 left-6">
             <span className={cn(
-              "inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-prompt font-bold tracking-wide text-white bg-gradient-to-r",
+              "inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-prompt font-bold tracking-wide text-white bg-linear-to-r",
               service.colorFrom, service.colorTo
             )}>
               <Star className="w-2.5 h-2.5 fill-white" />
@@ -259,7 +259,7 @@ function ServiceCard({
         {/* Header */}
         <div className="flex items-start gap-4 mb-5">
           <div className={cn(
-            "w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br shrink-0 transition-transform duration-300 group-hover:scale-110",
+            "w-12 h-12 rounded-xl flex items-center justify-center bg-linear-to-br shrink-0 transition-transform duration-300 group-hover:scale-110",
             service.colorFrom, service.colorTo,
             "shadow-lg"
           )}>
@@ -383,7 +383,7 @@ function ContactForm({ selectedService }: { selectedService: string }) {
           </div>
           <h2 className="font-prompt text-3xl md:text-4xl font-bold text-white">
             มีโปรเจกต์ในใจแล้วใช่ไหม?{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-teal-400 to-emerald-400">
               คุยกันได้เลย
             </span>
           </h2>
@@ -398,7 +398,7 @@ function ContactForm({ selectedService }: { selectedService: string }) {
             animate={{ scale: 1, opacity: 1 }}
             className="text-center space-y-4 py-12"
           >
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(20,184,166,0.4)]">
+            <div className="w-16 h-16 rounded-full bg-linear-to-br from-teal-500 to-emerald-500 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(20,184,166,0.4)]">
               <CheckCircle2 className="w-8 h-8 text-white" />
             </div>
             <h3 className="font-prompt text-2xl font-bold text-white">ส่งข้อความเรียบร้อยแล้ว!</h3>
@@ -482,7 +482,7 @@ function ContactForm({ selectedService }: { selectedService: string }) {
               type="submit"
               disabled={status === "sending"}
               className={cn(
-                "w-full py-4 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] shadow-[0_0_24px_rgba(20,184,166,0.3)] hover:shadow-[0_0_36px_rgba(20,184,166,0.45)]",
+                "w-full py-4 rounded-xl bg-linear-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] shadow-[0_0_24px_rgba(20,184,166,0.3)] hover:shadow-[0_0_36px_rgba(20,184,166,0.45)]",
                 status === "sending" && "opacity-70 cursor-not-allowed"
               )}
             >
@@ -551,7 +551,7 @@ export function OtherServicesSection() {
             className="font-prompt text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight"
           >
             บริการพัฒนาเทคโนโลยี
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 drop-shadow-[0_0_20px_rgba(20,184,166,0.35)]">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-teal-400 via-emerald-400 to-cyan-400 drop-shadow-[0_0_20px_rgba(20,184,166,0.35)]">
               {" "}และสตูดิโอดนตรีอื่นๆ
             </span>
           </motion.h2>
@@ -606,7 +606,7 @@ export function OtherServicesSection() {
                 className={cn(
                   "inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-prompt font-medium transition-all duration-250",
                   isActive
-                    ? "bg-gradient-to-r from-teal-600 to-emerald-500 text-white shadow-[0_0_20px_rgba(20,184,166,0.35)]"
+                    ? "bg-linear-to-r from-teal-600 to-emerald-500 text-white shadow-[0_0_20px_rgba(20,184,166,0.35)]"
                     : "glass-card border-white/8 text-white/50 hover:text-white hover:border-white/15"
                 )}
               >

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { ArrowLeft, PlayCircle, CheckCircle, Clock, BadgeCheck, ShoppingCart } from "lucide-react";
@@ -27,7 +27,7 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
                    ? (isMusic ? "border-amber-500/20" : "border-emerald-500/20") 
                    : "border-white/10"
              }`}>
-                 <div className={`absolute inset-0 bg-gradient-to-br pointer-events-none ${isMusic ? "from-amber-900/20 to-orange-900/20" : "from-blue-900/20 to-purple-900/20"}`}></div>
+                 <div className={`absolute inset-0 bg-linear-to-br pointer-events-none ${isMusic ? "from-amber-900/20 to-orange-900/20" : "from-blue-900/20 to-purple-900/20"}`}></div>
 
                  {/* Lock overlay for unpurchased */}
                  {!isPurchased && (

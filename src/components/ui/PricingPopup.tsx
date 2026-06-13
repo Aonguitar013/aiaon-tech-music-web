@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -97,14 +97,14 @@ export function PricingPopup() {
             <div className="relative w-full max-w-md pointer-events-auto">
 
               {/* Outer glow halo */}
-              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-cyan-500/30 via-blue-500/20 to-purple-500/20 blur-2xl pointer-events-none" />
+              <div className="absolute -inset-1 rounded-3xl bg-linear-to-br from-cyan-500/30 via-blue-500/20 to-purple-500/20 blur-2xl pointer-events-none" />
 
               {/* Card */}
               <div className="relative border-glow-premium rounded-3xl overflow-hidden bg-[#09090b] shadow-[0_0_80px_rgba(6,182,212,0.18)]">
                 <FloatingStars />
 
                 {/* Top gradient stripe */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 z-10" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-cyan-500 via-blue-500 to-purple-500 z-10" />
 
                 {/* Content wrapper */}
                 <div className="relative z-10 p-7 sm:p-8">
@@ -120,7 +120,7 @@ export function PricingPopup() {
 
                   {/* Header badge */}
                   <div className="flex items-center gap-2 mb-5">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-[10px] text-white font-bold tracking-wider uppercase badge-glow-pulse font-prompt">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-linear-to-r from-cyan-500 to-blue-600 text-[10px] text-white font-bold tracking-wider uppercase badge-glow-pulse font-prompt">
                       <Sparkles className="w-3 h-3 animate-pulse" />
                       RECOMMENDED
                     </span>
@@ -133,7 +133,7 @@ export function PricingPopup() {
                     className="font-prompt text-2xl sm:text-3xl font-bold leading-snug text-white mb-1"
                   >
                     อัปเกรดสู่{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]">
+                    <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-blue-400 to-purple-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]">
                       ครูมืออาชีพ Pro
                     </span>
                   </h2>
@@ -144,7 +144,7 @@ export function PricingPopup() {
                   {/* Price */}
                   <div className="flex items-baseline gap-1.5 mb-6 bg-white/3 border border-white/8 rounded-2xl px-5 py-4">
                     <Zap className="w-5 h-5 text-cyan-400 shrink-0 mb-0.5" />
-                    <span className="font-prompt text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-300">
+                    <span className="font-prompt text-5xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-white to-cyan-300">
                       190
                     </span>
                     <span className="font-prompt text-white/50 text-sm pb-1">บาท / เดือน</span>
@@ -168,7 +168,7 @@ export function PricingPopup() {
                   {/* CTA Buttons */}
                   <div className="flex flex-col gap-3">
                     <Link href="/login" onClick={dismiss} className="block">
-                      <button className="btn-shimmer w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-500 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(6,182,212,0.35)] hover:shadow-[0_0_36px_rgba(6,182,212,0.55)] active:scale-[0.98] transition-all cursor-pointer">
+                      <button className="btn-shimmer w-full py-4 rounded-2xl bg-linear-to-r from-blue-600 via-cyan-500 to-indigo-600 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-500 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(6,182,212,0.35)] hover:shadow-[0_0_36px_rgba(6,182,212,0.55)] active:scale-[0.98] transition-all cursor-pointer">
                         <Sparkles className="w-4 h-4" />
                         สมัครใช้งาน Pro เลย
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

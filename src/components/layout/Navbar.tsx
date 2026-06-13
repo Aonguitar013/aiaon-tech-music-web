@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -92,7 +92,7 @@ export function Navbar({ user }: NavbarProps) {
       <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         
         {/* Logo */}
-        <div className="flex-shrink-0 flex items-center">
+        <div className="shrink-0 flex items-center">
           <Link href="/" className="font-prompt text-xl font-normal text-white flex items-center gap-1 transition-all duration-300 hover:text-cyan-400 hover:-translate-y-0.5 group">
             iAonTech<span className="text-blue-500 group-hover:text-cyan-400 transition-colors duration-300">xMusic</span>
           </Link>
@@ -178,12 +178,12 @@ export function Navbar({ user }: NavbarProps) {
                       <span className={cn(
                         "absolute bottom-0 left-3 right-3 h-[2px] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center",
                         isTeal
-                          ? "bg-gradient-to-r from-teal-400 to-emerald-400 shadow-[0_0_8px_rgba(20,184,166,0.8)]"
+                          ? "bg-linear-to-r from-teal-400 to-emerald-400 shadow-[0_0_8px_rgba(20,184,166,0.8)]"
                           : isPurple
-                          ? "bg-gradient-to-r from-purple-400 to-pink-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]"
+                          ? "bg-linear-to-r from-purple-400 to-pink-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]"
                           : isCyan 
-                          ? "bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]"
-                          : "bg-gradient-to-r from-amber-400 to-orange-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"
+                          ? "bg-linear-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]"
+                          : "bg-linear-to-r from-amber-400 to-orange-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"
                       )} />
                     </NavigationMenuLink>
                   </NavigationMenuItem>
@@ -199,7 +199,7 @@ export function Navbar({ user }: NavbarProps) {
                     className="relative bg-transparent text-white/70 px-4 py-2 rounded-lg font-prompt text-xl font-normal transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2 group overflow-hidden hover:text-cyan-400 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.25)]"
                   >
                       <LayoutDashboard className="w-5 h-5" /> แผงควบคุม
-                      <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+                      <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center bg-linear-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
                   </Link>
                   <Button 
                     variant="outline" 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion, useAnimation, Variants } from "framer-motion";
 import { ArrowRight, PlayCircle, ChevronDown } from "lucide-react";
@@ -123,12 +123,12 @@ export function HeroSection() {
           variants={headingVariant}
           className="font-prompt text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.08]"
         >
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-cyan-400 drop-shadow-[0_0_28px_rgba(59,130,246,0.35)]">
+          <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-300 to-cyan-400 drop-shadow-[0_0_28px_rgba(59,130,246,0.35)]">
             AiAon Tech
           </span>
           <span className="text-white/25 mx-3 md:mx-5 font-extralight">&amp;</span>
           <br className="sm:hidden" />
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-orange-500 drop-shadow-[0_0_28px_rgba(245,158,11,0.35)]">
+          <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-orange-400 to-orange-500 drop-shadow-[0_0_28px_rgba(245,158,11,0.35)]">
             Music Studio
           </span>
         </motion.h1>
@@ -158,10 +158,10 @@ export function HeroSection() {
           >
             {/* Expanding glow layer behind the button */}
             <span
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 blur-md opacity-40 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500 pointer-events-none"
+              className="absolute inset-0 rounded-full bg-linear-to-r from-blue-600 to-cyan-500 blur-md opacity-40 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500 pointer-events-none"
               aria-hidden="true"
             />
-            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 group-hover:from-blue-500 group-hover:to-cyan-400 text-white font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_24px_rgba(59,130,246,0.35)]">
+            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full bg-linear-to-r from-blue-600 to-cyan-500 group-hover:from-blue-500 group-hover:to-cyan-400 text-white font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_24px_rgba(59,130,246,0.35)]">
               คอร์สเรียน & ระบบอัตโนมัติ
               {/* Arrow slides right on hover */}
               <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" />
@@ -178,7 +178,7 @@ export function HeroSection() {
           >
             {/* Pulsing warm glow - softer for secondary style */}
             <span
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 blur-md opacity-10 group-hover:opacity-30 group-hover:scale-105 transition-all duration-500 pointer-events-none"
+              className="absolute inset-0 rounded-full bg-linear-to-r from-amber-500 to-orange-500 blur-md opacity-10 group-hover:opacity-30 group-hover:scale-105 transition-all duration-500 pointer-events-none"
               aria-hidden="true"
             />
             <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full glass-card border border-amber-500/40 text-amber-400 group-hover:text-amber-300 font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_12px_rgba(245,158,11,0.1)] hover:bg-amber-500/5">

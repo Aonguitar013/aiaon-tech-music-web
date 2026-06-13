@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -89,7 +89,7 @@ export function SocialProofFAQSection() {
             </span>
             <h2 className="font-prompt text-3xl sm:text-4xl font-bold text-white leading-tight">
               เสียงตอบรับจาก{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-green-400">
                 คุณครูผู้ผ่านเกณฑ์ประเมินจริง
               </span>
             </h2>
@@ -125,7 +125,7 @@ export function SocialProofFAQSection() {
 
                 {/* Profile Detail */}
                 <div className="mt-6 pt-5 border-t border-white/8 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-prompt font-semibold text-sm">
+                  <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-prompt font-semibold text-sm">
                     {testimonial.name.slice(6, 8) || "ครู"}
                   </div>
                   <div>
@@ -152,7 +152,7 @@ export function SocialProofFAQSection() {
             </span>
             <h2 className="font-prompt text-3xl sm:text-4xl font-bold text-white leading-tight">
               คำถามที่พบบ่อยเกี่ยวกับการประเมิน{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-green-400">
                 และวิดีโอวิทยฐานะ PA
               </span>
             </h2>

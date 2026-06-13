@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Award, BadgeCheck, Calendar, ExternalLink, Hash } from "lucide-react";
@@ -85,7 +85,7 @@ export function CertificatesSection() {
             className="font-prompt text-4xl md:text-5xl font-bold mb-4 tracking-tight text-white"
           >
             Certificates &{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-purple-400 to-pink-400">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-purple-400 to-pink-400">
               Achievements
             </span>
           </motion.h2>
@@ -118,7 +118,7 @@ export function CertificatesSection() {
                          hover:border-white/25 hover:shadow-[0_8px_40px_rgba(168,85,247,0.18)] hover:-translate-y-1"
             >
               {/* Glow on hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-purple-500/5 via-transparent to-amber-500/5 pointer-events-none" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-purple-500/5 via-transparent to-amber-500/5 pointer-events-none" />
 
               {/* Certificate Image */}
               <div className="relative w-full aspect-[16/9] overflow-hidden bg-white/5">
@@ -130,7 +130,7 @@ export function CertificatesSection() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                 />
                 {/* Shimmer overlay on hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
 
                 {/* Category badge */}
                 <div className="absolute top-3 left-3">

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Geist, Prompt } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -35,10 +35,10 @@ export default function Maintenance() {
 
                 {/* Heading: AIAON TECH */}
                 <h1 className="font-prompt text-5xl md:text-7xl font-bold tracking-tighter text-white mb-8 uppercase">
-                    AIAON <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent filter drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]">TECH</span>
+                    AIAON <span className="bg-linear-to-r from-blue-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent filter drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]">TECH</span>
                 </h1>
 
-                <div className="h-[2px] w-32 bg-gradient-to-r from-transparent via-white/10 to-transparent mx-auto mb-10" />
+                <div className="h-[2px] w-32 bg-linear-to-r from-transparent via-white/10 to-transparent mx-auto mb-10" />
 
                 <p className="font-prompt text-xl md:text-2xl text-white/70 font-light leading-relaxed max-w-xl mx-auto mb-12">
                     " Coming Soon! <strong className="text-white font-medium"> เรากำลังอัปเดตคอร์สเรียนและเพิ่มสินค้าดิจิทัลใหม่ให้ครบครันยิ่งขึ้น </strong>.
@@ -51,7 +51,7 @@ export default function Maintenance() {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                     </span>
-                    <span className="text-sm font-mono tracking-[0.3em] bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent uppercase font-bold">
+                    <span className="text-sm font-mono tracking-[0.3em] bg-linear-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent uppercase font-bold">
                         Optimizing Ecosystem
                     </span>
                 </div>

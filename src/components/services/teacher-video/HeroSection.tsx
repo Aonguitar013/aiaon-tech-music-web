@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion, useAnimation, Variants } from "framer-motion";
 import { ArrowRight, MessageSquare, ChevronDown, CheckCircle, Video, GraduationCap } from "lucide-react";
@@ -101,12 +101,12 @@ export function HeroSection() {
           className="font-prompt text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.15] max-w-4xl"
         >
           เปลี่ยนการทำ
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 drop-shadow-[0_0_24px_rgba(59,130,246,0.3)] mx-2">
+          <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-400 to-blue-500 drop-shadow-[0_0_24px_rgba(59,130,246,0.3)] mx-2">
             วิทยฐานะครู
           </span>
           <br />
           ให้เป็นเรื่อง
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 drop-shadow-[0_0_24px_rgba(16,185,129,0.3)] ml-2">
+          <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-green-400 via-emerald-400 to-teal-400 drop-shadow-[0_0_24px_rgba(16,185,129,0.3)] ml-2">
             ง่ายและมั่นใจ
           </span>
         </motion.h1>
@@ -135,7 +135,7 @@ export function HeroSection() {
             className="group relative w-full sm:w-auto"
           >
             <span
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-[#06C755] to-emerald-500 blur-md opacity-40 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500 pointer-events-none"
+              className="absolute inset-0 rounded-full bg-linear-to-r from-[#06C755] to-emerald-500 blur-md opacity-40 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500 pointer-events-none"
               aria-hidden="true"
             />
             <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_20px_rgba(6,199,85,0.35)]">
@@ -167,7 +167,7 @@ export function HeroSection() {
             { value: "ก.ค.ศ.", label: "ตรงตามเกณฑ์ใหม่ 100%" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-1.5 p-3 rounded-2xl glass-card bg-white/2 border border-white/5">
-              <span className="font-prompt text-lg sm:text-2xl font-bold text-white bg-clip-text bg-gradient-to-r from-white to-white/70">{stat.value}</span>
+              <span className="font-prompt text-lg sm:text-2xl font-bold text-white bg-clip-text bg-linear-to-r from-white to-white/70">{stat.value}</span>
               <span className="font-prompt text-[10px] sm:text-xs text-white/50 tracking-wide font-light">{stat.label}</span>
             </div>
           ))}

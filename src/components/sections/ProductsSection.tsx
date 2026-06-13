@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -27,7 +27,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 px-4">
           <h2 className="font-prompt text-4xl md:text-6xl font-bold mb-6 tracking-tight">
-            Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Vault</span>
+            Digital <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-400">Vault</span>
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto text-lg md:text-xl font-prompt font-light leading-relaxed">
             รวมสินค้าดิจิทัลและคู่มือปฏิบัติงานที่ออกแบบมาเพื่อช่วยผ่อนแรงครูไทย ยกระดับประสิทธิภาพการสอนให้สูงสุด

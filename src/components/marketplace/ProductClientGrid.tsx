@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Search, ShoppingCart } from "lucide-react";
@@ -55,7 +55,7 @@ export function ProductClientGrid({ initialProducts }: { initialProducts: Produc
                   onClick={() => setFilterCategory(cat.id)}
                   className={`flex-1 py-2 rounded-lg font-prompt text-sm font-medium transition-all duration-200 active:scale-95 ${
                       filterCategory === cat.id
-                          ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white border border-amber-400/30 shadow-[0_0_15px_rgba(245,158,11,0.45)]"
+                          ? "bg-linear-to-r from-amber-500 to-orange-500 text-white border border-amber-400/30 shadow-[0_0_15px_rgba(245,158,11,0.45)]"
                           : "text-white/50 hover:text-white hover:bg-white/5"
                   }`}
               >

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "ระบบบันทึกข้อมูลการใช้ยานพาหนะ | Hatyaiwittayalai School",
@@ -18,7 +18,7 @@ export default function VehicleLogPage() {
               Vehicle Log System
             </span>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white mt-3">
-              ระบบบันทึกข้อมูล<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(6,182,212,0.2)]">การใช้ยานพาหนะ</span>
+              ระบบบันทึกข้อมูล<span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_20px_rgba(6,182,212,0.2)]">การใช้ยานพาหนะ</span>
             </h1>
             <p className="text-white/40 text-sm max-w-2xl font-light">
               บันทึกเวลาและสถิติการใช้รถส่วนกลาง โรงเรียนหาดใหญ่วิทยาลัย (Hatyaiwittayalai School • Vehicle Department)
@@ -30,7 +30,7 @@ export default function VehicleLogPage() {
               href={SCRIPT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-semibold text-sm transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-semibold text-sm transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
             >
               🚀 เปิดในหน้าต่างใหม่ (Open Fullscreen)
             </a>
