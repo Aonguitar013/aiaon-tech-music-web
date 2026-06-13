@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { CertificatesSection } from "@/components/sections/CertificatesSection";
 import { AutomationShowcase } from "@/components/sections/AutomationShowcase";
 
 export const metadata = {
@@ -12,6 +13,7 @@ export default function AboutPage() {
     <div className="flex flex-col gap-24 pb-24">
       <HeroSection />
       <AboutSection />
+      <CertificatesSection />
       <AutomationShowcase />
     </div>
   );
