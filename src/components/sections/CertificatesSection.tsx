@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import { Award, BadgeCheck, Calendar, ExternalLink, Hash } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { Award, BadgeCheck, Calendar, ExternalLink, Hash, X, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 interface Certificate {
@@ -38,6 +39,17 @@ const certificates: Certificate[] = [
     category: "AI & Design",
     categoryColor: "text-purple-400",
   },
+  {
+    id: "cert-workspace-ai",
+    imageSrc: "/images/cert-workspace-ai.png",
+    title: "AI FOR DIGITAL INNOVATION",
+    issuer: "Workspace Thailand",
+    credentialId: "CERT202606130001",
+    issueDate: "June 13, 2026",
+    category: "AI & Innovation",
+    categoryColor: "text-cyan-400",
+    verifyUrl: "https://www.workspace.in.th",
+  },
 ];
 
 const containerVariants: Variants = {
@@ -55,6 +67,55 @@ const cardVariants: Variants = {
 };
 
 export function CertificatesSection() {
+  const [selectedCertIndex, setSelectedCertIndex] = useState<number | null>(null);
+
+  // Navigation handlers
+  const handlePrev = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (selectedCertIndex === null) return;
+    setSelectedCertIndex((prev) => 
+      prev !== null ? (prev - 1 + certificates.length) % certificates.length : null
+    );
+  };
+
+  const handleNext = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (selectedCertIndex === null) return;
+    setSelectedCertIndex((prev) => 
+      prev !== null ? (prev + 1) % certificates.length : null
+    );
+  };
+
+  const handleClose = () => {
+    setSelectedCertIndex(null);
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (selectedCertIndex === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleClose();
+      } else if (e.key === "ArrowLeft") {
+        handlePrev();
+      } else if (e.key === "ArrowRight") {
+        handleNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    // Prevent scrolling on main body when modal is open
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [selectedCertIndex]);
+
+  const activeCert = selectedCertIndex !== null ? certificates[selectedCertIndex] : null;
+
   return (
     <section
       className="py-24 px-4 relative z-10 w-full overflow-hidden"
@@ -109,11 +170,12 @@ export function CertificatesSection() {
           viewport={{ once: true, margin: "-80px" }}
           className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8"
         >
-          {certificates.map((cert) => (
+          {certificates.map((cert, index) => (
             <motion.div
               key={cert.id}
               variants={cardVariants}
-              className="group relative rounded-2xl border border-white/10 bg-white/3 backdrop-blur-sm overflow-hidden cursor-default
+              onClick={() => setSelectedCertIndex(index)}
+              className="group relative rounded-2xl border border-white/10 bg-white/3 backdrop-blur-sm overflow-hidden cursor-pointer
                          transition-all duration-300 ease-out
                          hover:border-white/25 hover:shadow-[0_8px_40px_rgba(168,85,247,0.18)] hover:-translate-y-1"
             >
@@ -184,6 +246,131 @@ export function CertificatesSection() {
           ))}
         </motion.div>
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {activeCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={handleClose}
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md select-none"
+          >
+            {/* Close Button */}
+            <button
+              onClick={handleClose}
+              className="absolute top-4 right-4 z-50 p-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:bg-white/15 transition-all cursor-pointer focus:outline-none"
+              aria-label="Close modal"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Navigation Buttons */}
+            {certificates.length > 1 && (
+              <>
+                <button
+                  onClick={handlePrev}
+                  className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:bg-white/15 transition-all cursor-pointer focus:outline-none hidden sm:block"
+                  aria-label="Previous certificate"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:bg-white/15 transition-all cursor-pointer focus:outline-none hidden sm:block"
+                  aria-label="Next certificate"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </>
+            )}
+
+            {/* Content Wrapper */}
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: "spring", damping: 28, stiffness: 220 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-5xl flex flex-col items-center gap-6"
+            >
+              {/* Image Container */}
+              <div className="relative w-full aspect-[16/10] max-h-[65vh] rounded-xl overflow-hidden border border-white/15 bg-black/40 flex items-center justify-center">
+                <Image
+                  src={activeCert.imageSrc}
+                  alt={activeCert.title}
+                  fill
+                  className="object-contain p-2"
+                  sizes="(max-width: 1280px) 100vw, 1280px"
+                  priority
+                />
+              </div>
+
+              {/* Certificate Details */}
+              <div className="w-full max-w-3xl text-center px-4 space-y-3">
+                <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-prompt font-semibold backdrop-blur-md bg-white/5 border border-white/10 ${activeCert.categoryColor}`}>
+                  <BadgeCheck className="w-3.5 h-3.5" />
+                  {activeCert.category}
+                </span>
+
+                <h3 className="font-prompt text-lg md:text-2xl font-bold text-white tracking-tight leading-snug">
+                  {activeCert.title}
+                </h3>
+
+                <p className="text-sm md:text-base font-prompt text-white/70">
+                  {activeCert.issuer}
+                </p>
+
+                <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pt-2 border-t border-white/10 text-xs md:text-sm font-prompt text-white/50">
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="w-4 h-4 text-amber-400/80 shrink-0" />
+                    <span>Issue Date:</span>
+                    <span className="text-white/80 font-medium">{activeCert.issueDate}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Hash className="w-4 h-4 text-purple-400/80 shrink-0" />
+                    <span>Credential ID:</span>
+                    <span className="text-purple-300 font-mono font-semibold">{activeCert.credentialId}</span>
+                  </div>
+                  {activeCert.verifyUrl && (
+                    <a
+                      href={activeCert.verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      Verify Certificate
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Mobile Swipe / Tap Hint or Mobile Nav dots */}
+              {certificates.length > 1 && (
+                <div className="flex gap-2 justify-center sm:hidden pt-2">
+                  <button
+                    onClick={handlePrev}
+                    className="p-2 rounded-lg border border-white/10 bg-white/5 text-white/70"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <span className="self-center font-prompt text-xs text-white/50">
+                    {selectedCertIndex + 1} / {certificates.length}
+                  </span>
+                  <button
+                    onClick={handleNext}
+                    className="p-2 rounded-lg border border-white/10 bg-white/5 text-white/70"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
