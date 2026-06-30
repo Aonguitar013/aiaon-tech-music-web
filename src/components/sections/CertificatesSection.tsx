@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-import { Award, BadgeCheck, Calendar, ExternalLink, Hash, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Award, BadgeCheck, Calendar, ExternalLink, Hash, X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import Image from "next/image";
 
 interface Certificate {
@@ -192,7 +192,14 @@ export function CertificatesSection() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                 />
                 {/* Shimmer overlay on hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+
+                {/* Zoom icon overlay on hover */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="p-3 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 shadow-lg">
+                    <ZoomIn className="w-6 h-6 text-white" />
+                  </div>
+                </div>
 
                 {/* Category badge */}
                 <div className="absolute top-3 left-3">
@@ -357,7 +364,7 @@ export function CertificatesSection() {
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <span className="self-center font-prompt text-xs text-white/50">
-                    {selectedCertIndex + 1} / {certificates.length}
+                    {selectedCertIndex !== null ? selectedCertIndex + 1 : 1} / {certificates.length}
                   </span>
                   <button
                     onClick={handleNext}
