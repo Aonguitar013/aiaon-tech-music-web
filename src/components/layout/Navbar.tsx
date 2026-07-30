@@ -1,8 +1,8 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench } from "lucide-react";
+import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -39,6 +39,7 @@ const routes: RouteItem[] = [
     items: [
       { name: "จัดการชั้นเรียน", href: "/classroom-management", icon: GraduationCap, hoverColor: "cyan" },
       { name: "ของแจกฟรี", href: "/freebies", icon: Gift, hoverColor: "purple" },
+      { name: "ข้อตกลงในการพัฒนางาน (วPA)", href: "/presentation/vpa", icon: FileText, hoverColor: "cyan" },
     ],
   },
   {
