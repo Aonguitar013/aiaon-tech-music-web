@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,6 +6,8 @@ import {
   Briefcase, Code2, Music, CheckCircle2, ArrowRight,
   MessageCircle, Cpu, Workflow, Bot, Mic2, Headphones,
   Music2, Star, Clock, Sparkles, Filter, Send,
+  Presentation, GraduationCap, Building2, Calendar, Users,
+  X, School, Phone, MapPin, Award
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -37,6 +39,33 @@ interface ServicePackage {
 }
 
 const SERVICES: ServicePackage[] = [
+  {
+    id: "ai-speaker",
+    category: "tech",
+    icon: Presentation,
+    title: "วิทยากรบรรยาย & Workshop อบรม AI",
+    subtitle: "AI Keynote Speaker & Training Workshop",
+    description:
+      "บริการบรรยายและจัดอบรมเชิงปฏิบัติการ (Workshop) เรื่อง Generative AI, AI เพื่อการศึกษาลดภาระครู และ Automation สำหรับองค์กรและโรงเรียน",
+    features: [
+      "หลักสูตรประยุกต์เฉพาะตามความต้องการของสถาบัน/หน่วยงาน",
+      "เน้นลงมือทำจริง (Hands-on) พร้อม Prompt Templates แจกฟรี",
+      "รองรับทั้งรูปแบบ On-site (ณ สถานที่) และ Online (Zoom / Meet)",
+      "มีหนังสือขอเชิญวิทยากร + เอกสารเสนอราคาถูกต้องตามระบบราชการ",
+      "มีเกียรติบัตรอิเล็กทรอนิกส์และวิดีโอทบทวนหลังจบการอบรม",
+    ],
+    price: "ขอใบเสนอราคา / คิวบรรยาย",
+    priceNote: "ปรับตามรูปแบบ ระยะเวลา และจำนวนผู้เข้าร่วม",
+    badge: "บริการยอดนิยมสำหรับโรงเรียน & สถาบัน",
+    colorFrom: "from-amber-400",
+    colorTo: "to-orange-500",
+    glowColor: "rgba(245,158,11,0.3)",
+    borderColor: "border-amber-500/35",
+    textColor: "text-amber-400",
+    bgColor: "bg-amber-500/10",
+    btnClass: "from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 shadow-[0_0_24px_rgba(245,158,11,0.4)]",
+    deliveryDays: "จองคิวิทยากรล่วงหน้า 7–14 วัน",
+  },
   {
     id: "line-attendance",
     category: "tech",
@@ -313,11 +342,16 @@ function ServiceCard({
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <a
-                href="#contact-form"
-                onClick={() => onSelectService(service.id)}
-                className="w-full text-center py-2.5 px-3 rounded-xl border border-white/10 hover:border-white/20 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-xs font-prompt flex items-center justify-center gap-1"
+                href={service.id === "ai-speaker" ? "#" : "#contact-form"}
+                onClick={(e) => {
+                  if (service.id === "ai-speaker") {
+                    e.preventDefault();
+                  }
+                  onSelectService(service.id);
+                }}
+                className="w-full text-center py-2.5 px-3 rounded-xl border border-white/10 hover:border-white/20 text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200 text-xs font-prompt flex items-center justify-center gap-1 cursor-pointer"
               >
-                กรอกรายละเอียด
+                {service.id === "ai-speaker" ? "จองคิวิทยากร" : "กรอกรายละเอียด"}
               </a>
               <a
                 href="https://lin.ee/XXLvrKW"
@@ -332,6 +366,336 @@ function ServiceCard({
           </div>
         </div>
 
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SPEAKER BOOKING MODAL
+───────────────────────────────────────────────────────────── */
+
+function SpeakerBookingModal({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [form, setForm] = useState({
+    orgName: "",
+    contactName: "",
+    phoneLine: "",
+    eventDate: "",
+    format: "onsite",
+    topic: "ai-education",
+    participants: "30-50",
+    note: "",
+  });
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    setTimeout(() => setStatus("sent"), 1500);
+  };
+
+  const inputClass =
+    "w-full bg-white/5 border border-white/10 hover:border-amber-500/40 focus:border-amber-400 focus:outline-none rounded-xl px-4 py-3 text-white font-prompt text-sm placeholder:text-white/30 transition-all duration-200 focus:shadow-[0_0_15px_rgba(245,158,11,0.2)]";
+
+  return (
+    <AnimatePresence>
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        {/* Backdrop */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          className="fixed inset-0 bg-black/80 backdrop-blur-md"
+        />
+
+        {/* Modal Window */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          className="relative w-full max-w-2xl glass-card border-amber-500/30 bg-zinc-950/95 rounded-3xl p-6 md:p-8 z-10 my-auto shadow-[0_0_60px_rgba(245,158,11,0.25)] overflow-hidden"
+        >
+          {/* Background Glow */}
+          <div className="absolute top-0 right-0 w-72 h-72 bg-amber-500/10 blur-[100px] rounded-full pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-60 h-60 bg-orange-500/10 blur-[90px] rounded-full pointer-events-none" />
+
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-5 right-5 p-2.5 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all duration-200 z-20 cursor-pointer"
+            aria-label="Close modal"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
+          {/* Modal Header */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.4)] shrink-0">
+              <Presentation className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-prompt font-semibold">
+                <Sparkles className="w-3.5 h-3.5" />
+                จองคิวิทยากร / Workshop AI
+              </span>
+              <h3 className="font-prompt text-2xl font-bold text-white mt-1">
+                แบบฟอร์มขอเชิญวิทยากรบรรยาย
+              </h3>
+            </div>
+          </div>
+
+          {status === "sent" ? (
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="text-center space-y-4 py-8"
+            >
+              <div className="w-16 h-16 rounded-full bg-linear-to-br from-amber-500 to-orange-500 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(245,158,11,0.4)]">
+                <CheckCircle2 className="w-8 h-8 text-white" />
+              </div>
+              <h4 className="font-prompt text-2xl font-bold text-white">ส่งข้อมูลการจองคิวเรียบร้อยแล้ว!</h4>
+              <p className="font-prompt text-white/70 text-sm max-w-md mx-auto leading-relaxed">
+                ขอบคุณที่สนใจเชิญครูอ้นเป็นวิทยากรครับ ทีมงานจะติดต่อกลับเพื่อยืนยันวันเวลาและจัดทำหนังสือขอเชิญ/เสนอราคาภายใน 24 ชั่วโมง
+              </p>
+              <button
+                onClick={() => { setStatus("idle"); onClose(); }}
+                className="mt-4 px-6 py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-prompt font-bold text-sm hover:bg-amber-400 transition-all duration-200 cursor-pointer"
+              >
+                ปิดหน้าต่าง
+              </button>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-prompt text-amber-400/90 mb-1.5 font-medium">
+                    ชื่อหน่วยงาน / โรงเรียน / บริษัท *
+                  </label>
+                  <div className="relative">
+                    <School className="w-4 h-4 text-white/40 absolute left-3.5 top-3.5 pointer-events-none" />
+                    <input
+                      required
+                      className={cn(inputClass, "pl-10")}
+                      placeholder="เช่น โรงเรียนสาธิต... / บริษัท..."
+                      value={form.orgName}
+                      onChange={(e) => setForm((p) => ({ ...p, orgName: e.target.value }))}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-prompt text-amber-400/90 mb-1.5 font-medium">
+                    วันที่ต้องการจัดอบรม (โดยประมาณ) *
+                  </label>
+                  <div className="relative">
+                    <Calendar className="w-4 h-4 text-white/40 absolute left-3.5 top-3.5 pointer-events-none" />
+                    <input
+                      required
+                      type="date"
+                      className={cn(inputClass, "pl-10 text-white")}
+                      value={form.eventDate}
+                      onChange={(e) => setForm((p) => ({ ...p, eventDate: e.target.value }))}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-prompt text-amber-400/90 mb-1.5 font-medium">
+                    ชื่อผู้ติดต่อ *
+                  </label>
+                  <input
+                    required
+                    className={inputClass}
+                    placeholder="คุณ / อ. / ผอ...."
+                    value={form.contactName}
+                    onChange={(e) => setForm((p) => ({ ...p, contactName: e.target.value }))}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-prompt text-amber-400/90 mb-1.5 font-medium">
+                    เบอร์โทรศัพท์ / LINE ID *
+                  </label>
+                  <div className="relative">
+                    <Phone className="w-4 h-4 text-white/40 absolute left-3.5 top-3.5 pointer-events-none" />
+                    <input
+                      required
+                      className={cn(inputClass, "pl-10")}
+                      placeholder="08X-XXX-XXXX หรือ LINE ID"
+                      value={form.phoneLine}
+                      onChange={(e) => setForm((p) => ({ ...p, phoneLine: e.target.value }))}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-prompt text-amber-400/90 mb-1.5 font-medium">
+                    หัวข้อการอบรมที่สนใจ *
+                  </label>
+                  <select
+                    className={cn(inputClass, "cursor-pointer")}
+                    value={form.topic}
+                    onChange={(e) => setForm((p) => ({ ...p, topic: e.target.value }))}
+                  >
+                    <option value="ai-education" className="bg-zinc-900">AI เพื่อการศึกษา & ลดภาระครู</option>
+                    <option value="ai-automation" className="bg-zinc-900">AI & Automation Workflow (n8n)</option>
+                    <option value="generative-ai" className="bg-zinc-900">Generative AI & Prompt Engineering</option>
+                    <option value="custom" className="bg-zinc-900">หลักสูตร Custom เฉพาะองค์กร</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-prompt text-amber-400/90 mb-1.5 font-medium">
+                    รูปแบบการบรรยาย / อบรม
+                  </label>
+                  <select
+                    className={cn(inputClass, "cursor-pointer")}
+                    value={form.format}
+                    onChange={(e) => setForm((p) => ({ ...p, format: e.target.value }))}
+                  >
+                    <option value="onsite" className="bg-zinc-900">On-site (ออนไซต์ ณ สถานที่)</option>
+                    <option value="online" className="bg-zinc-900">Online (ผ่าน Zoom / MS Teams)</option>
+                    <option value="hybrid" className="bg-zinc-900">Hybrid (ผสมผสาน)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-prompt text-amber-400/90 mb-1.5 font-medium">
+                  รายละเอียดเพิ่มเติม (สถานที่จัด / เป้าหมาย / งบประมาณ)
+                </label>
+                <textarea
+                  rows={3}
+                  className={cn(inputClass, "resize-none")}
+                  placeholder="ระบุสถานที่จัดอบรม, จำนวนครู/ผู้เข้าร่วมโดยประมาณ หรือความต้องการพิเศษ..."
+                  value={form.note}
+                  onChange={(e) => setForm((p) => ({ ...p, note: e.target.value }))}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className={cn(
+                  "w-full py-4 rounded-xl bg-linear-to-r from-amber-500 via-orange-500 to-amber-400 hover:from-amber-400 hover:to-orange-400 text-zinc-950 font-prompt font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] shadow-[0_0_30px_rgba(245,158,11,0.4)] cursor-pointer",
+                  status === "sending" && "opacity-70 cursor-not-allowed"
+                )}
+              >
+                {status === "sending" ? (
+                  <>
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      className="w-5 h-5 border-2 border-zinc-950/30 border-t-zinc-950 rounded-full"
+                    />
+                    กำลังส่งข้อมูล...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    ยืนยันจองคิวิทยากร / ขอใบเสนอราคา
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SPEAKER HIGHLIGHT BANNER
+───────────────────────────────────────────────────────────── */
+
+function SpeakerHighlightBanner({ onOpenModal }: { onOpenModal: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="mb-16 relative glass-card border-amber-500/30 p-8 md:p-10 rounded-3xl overflow-hidden bg-linear-to-br from-amber-500/10 via-zinc-900/80 to-purple-950/40 shadow-[0_0_50px_rgba(245,158,11,0.18)]"
+    >
+      {/* Background glow effects */}
+      <div className="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/15 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-purple-600/15 blur-[100px] rounded-full pointer-events-none" />
+
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+        {/* Text Content */}
+        <div className="space-y-4 text-center lg:text-left max-w-2xl">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs md:text-sm font-prompt font-semibold tracking-wide">
+            <Presentation className="w-4 h-4 text-amber-400" />
+            บริการวิทยากรบรรยาย &amp; จัด WORKSHOP อบรม AI
+          </div>
+
+          <h3 className="font-prompt text-2xl md:text-4xl font-extrabold text-white leading-tight">
+            ยกระดับองค์กรและครูผู้สอนด้วย{" "}
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-orange-400 to-yellow-300 drop-shadow-[0_0_25px_rgba(245,158,11,0.5)]">
+              AI &amp; Automation เทคโนโลยีล่าสุด
+            </span>
+          </h3>
+
+          <p className="font-prompt text-white/70 text-sm md:text-base leading-relaxed">
+            ถ่ายทอดจากประสบการณ์จริงโดย <span className="text-amber-300 font-semibold">ครูอ้น iAon Tech</span> เน้นการใช้งานได้จริง (Hands-on 100%) อบรมเข้าใจง่าย นำไปประยุกต์ใช้ลดภาระงานและเพิ่มประสิทธิภาพการสอนได้ทันที
+          </p>
+
+          {/* Highlights grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-left">
+            {[
+              { icon: GraduationCap, title: "AI เพื่อการศึกษา & สื่อการสอน" },
+              { icon: Workflow, title: "Automation & n8n Workflow" },
+              { icon: Award, title: "มีหนังสือเชิญ + เอกสารราชการครบ" },
+              { icon: Users, title: "รองรับทั้ง On-site และ Online" },
+            ].map((item, idx) => {
+              const IconComp = item.icon;
+              return (
+                <div key={idx} className="flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-xl p-2.5">
+                  <div className="p-1.5 rounded-lg bg-amber-500/20 text-amber-400 shrink-0">
+                    <IconComp className="w-4 h-4" />
+                  </div>
+                  <span className="font-prompt text-xs md:text-sm text-white/80 font-medium">
+                    {item.title}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* CTA Button Block */}
+        <div className="flex flex-col items-center shrink-0 w-full lg:w-auto space-y-3">
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={onOpenModal}
+            className="w-full lg:w-auto px-8 py-5 rounded-2xl bg-linear-to-r from-amber-500 via-orange-500 to-amber-400 hover:from-amber-400 hover:to-orange-400 text-zinc-950 font-prompt font-extrabold text-base md:text-lg flex items-center justify-center gap-3 shadow-[0_0_40px_rgba(245,158,11,0.45)] hover:shadow-[0_0_60px_rgba(245,158,11,0.6)] transition-all duration-300 border border-amber-300/50 cursor-pointer"
+          >
+            <Sparkles className="w-5 h-5 text-zinc-950 fill-zinc-950 shrink-0" />
+            <span>ขอเชิญครูอ้นเป็นวิทยากรบรรยาย / จัด Workshop AI</span>
+            <ArrowRight className="w-5 h-5 text-zinc-950 shrink-0" />
+          </motion.button>
+
+          <span className="font-prompt text-xs text-white/40 flex items-center gap-1.5">
+            <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            ตอบกลับและออกหนังสือเสนอราคาภายใน 24 ชั่วโมง
+          </span>
+        </div>
       </div>
     </motion.div>
   );
@@ -482,7 +846,7 @@ function ContactForm({ selectedService }: { selectedService: string }) {
               type="submit"
               disabled={status === "sending"}
               className={cn(
-                "w-full py-4 rounded-xl bg-linear-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] shadow-[0_0_24px_rgba(20,184,166,0.3)] hover:shadow-[0_0_36px_rgba(20,184,166,0.45)]",
+                "w-full py-4 rounded-xl bg-linear-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] shadow-[0_0_24px_rgba(20,184,166,0.3)] hover:shadow-[0_0_36px_rgba(20,184,166,0.45)] cursor-pointer",
                 status === "sending" && "opacity-70 cursor-not-allowed"
               )}
             >
@@ -516,19 +880,37 @@ function ContactForm({ selectedService }: { selectedService: string }) {
 export function OtherServicesSection() {
   const [activeTab, setActiveTab] = useState<Category>("all");
   const [selectedService, setSelectedService] = useState<string>("");
+  const [isSpeakerModalOpen, setIsSpeakerModalOpen] = useState<boolean>(false);
 
   const filtered = SERVICES.filter(
     (s) => activeTab === "all" || s.category === activeTab
   );
 
+  const handleSelectService = (id: string) => {
+    if (id === "ai-speaker") {
+      setIsSpeakerModalOpen(true);
+    } else {
+      setSelectedService(id);
+    }
+  };
+
   return (
     <section id="other-services" className="w-full relative overflow-hidden py-24 border-t border-white/5 bg-zinc-950/10 scroll-mt-20">
 
+      {/* Speaker Booking Modal */}
+      <SpeakerBookingModal
+        isOpen={isSpeakerModalOpen}
+        onClose={() => setIsSpeakerModalOpen(false)}
+      />
+
       {/* Background glows */}
-      <div className="absolute top-0 left-1/3 w-[600px] h-[400px] bg-teal-500/4 blur-[140px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/3" />
+      <div className="absolute top-0 left-1/3 w-[600px] h-[400px] bg-amber-500/5 blur-[140px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/3" />
       <div className="absolute bottom-1/4 right-[-100px] w-[400px] h-[400px] bg-emerald-500/4 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        {/* ── Speaker Showcase Banner ─────────────────────────────── */}
+        <SpeakerHighlightBanner onOpenModal={() => setIsSpeakerModalOpen(true)} />
 
         {/* ── Header ─────────────────────────────────────────────── */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
@@ -564,7 +946,7 @@ export function OtherServicesSection() {
             className="text-base md:text-lg text-white/55 font-prompt leading-relaxed max-w-xl mx-auto"
           >
             บริการแบบ Custom ที่ออกแบบมาเพื่อตอบโจทย์เฉพาะของคุณ
-            ทั้งระบบ Automation สำหรับโรงเรียน และงานดนตรีระดับมืออาชีพ
+            ทั้งการจัดบรรยาย/อบรม AI, ระบบ Automation และงานดนตรีระดับมืออาชีพ
           </motion.p>
 
           {/* Stats */}
@@ -604,7 +986,7 @@ export function OtherServicesSection() {
                 key={tab.value}
                 onClick={() => setActiveTab(tab.value)}
                 className={cn(
-                  "inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-prompt font-medium transition-all duration-250",
+                  "inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-prompt font-medium transition-all duration-250 cursor-pointer",
                   isActive
                     ? "bg-linear-to-r from-teal-600 to-emerald-500 text-white shadow-[0_0_20px_rgba(20,184,166,0.35)]"
                     : "glass-card border-white/8 text-white/50 hover:text-white hover:border-white/15"
@@ -632,7 +1014,7 @@ export function OtherServicesSection() {
                 key={service.id} 
                 service={service} 
                 index={i} 
-                onSelectService={(id) => setSelectedService(id)}
+                onSelectService={handleSelectService}
               />
             ))}
           </motion.div>

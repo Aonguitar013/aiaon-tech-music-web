@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -131,53 +131,174 @@ function AuthModal({ onClose }: { onClose: () => void }) {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   LINE UNLOCK MODAL
+───────────────────────────────────────────────────────────── */
+
+function LineUnlockModal({
+  freebie,
+  onClose,
+  onSuccessDownload,
+}: {
+  freebie: Freebie | null;
+  onClose: () => void;
+  onSuccessDownload: (freebie: Freebie) => void;
+}) {
+  const [passcode, setPasscode] = useState("");
+  const [error, setError] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
+
+  if (!freebie) return null;
+
+  const handleUnlock = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!passcode.trim()) {
+      setError("กรุณากรอกรหัสผ่านปลดล็อกเพื่อดาวน์โหลด");
+      return;
+    }
+
+    setError("");
+    setIsVerifying(true);
+
+    setTimeout(() => {
+      setIsVerifying(false);
+      onSuccessDownload(freebie);
+      onClose();
+    }, 700);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[999] flex items-center justify-center p-4 overflow-y-auto"
+      onClick={onClose}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
+
+      {/* Modal Card */}
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        transition={{ type: "spring", damping: 22, stiffness: 280 }}
+        className="relative z-10 glass-card p-6 md:p-8 max-w-md w-full text-center border-[#06C755]/35 bg-zinc-950/95 shadow-[0_0_60px_rgba(6,199,85,0.25)] overflow-hidden my-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Glow Effects */}
+        <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#06C755]/15 blur-[60px] rounded-full pointer-events-none" />
+        <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-emerald-500/15 blur-[60px] rounded-full pointer-events-none" />
+
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/10 cursor-pointer"
+          aria-label="Close modal"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        {/* Icon Header */}
+        <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-[#06C755] to-emerald-600 flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(6,199,85,0.4)]">
+          <RiLineLine className="w-9 h-9 text-white" />
+        </div>
+
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#06C755]/15 border border-[#06C755]/30 text-[#06C755] text-xs font-prompt font-semibold mb-3">
+          <Sparkles className="w-3.5 h-3.5" />
+          ปลดล็อกโค้ดและไฟล์ดาวน์โหลดฟรี
+        </span>
+
+        <h3 className="font-prompt text-xl md:text-2xl font-bold text-white mb-2 leading-snug">
+          {freebie.title}
+        </h3>
+
+        <p className="text-white/80 font-prompt text-sm leading-relaxed mb-6">
+          รับรหัสปลดล็อกโค้ดฟรี! เพียงกดเพิ่มเพื่อนใน LINE OA{" "}
+          <span className="text-[#06C755] font-bold">@poMESoP</span>
+        </p>
+
+        {/* Action 1: Add LINE Button */}
+        <a
+          href="https://lin.ee/poMESoP"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full py-3.5 px-6 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-base flex items-center justify-center gap-2.5 shadow-[0_0_25px_rgba(6,199,85,0.35)] hover:shadow-[0_0_35px_rgba(6,199,85,0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-95 mb-6 cursor-pointer"
+        >
+          <RiLineLine className="w-6 h-6 fill-white shrink-0" />
+          <span>แอด LINE รับรหัสทันที</span>
+        </a>
+
+        {/* Divider */}
+        <div className="relative flex items-center justify-center mb-6">
+          <div className="border-t border-white/10 w-full" />
+          <span className="bg-zinc-950 px-3 text-[11px] font-prompt text-white/40 absolute uppercase tracking-wider">
+            กรอกรหัสผ่านปลดล็อก
+          </span>
+        </div>
+
+        {/* Action 2: Passcode Form */}
+        <form onSubmit={handleUnlock} className="space-y-4 text-left">
+          <div>
+            <label className="block text-xs font-prompt text-white/70 mb-1.5 font-medium">
+              รหัสผ่านปลดล็อกไฟล์ *
+            </label>
+            <input
+              type="text"
+              required
+              className="w-full bg-white/5 border border-white/15 focus:border-[#06C755] focus:outline-none rounded-xl px-4 py-3 text-white font-prompt text-sm placeholder:text-white/30 transition-all focus:shadow-[0_0_15px_rgba(6,199,85,0.2)]"
+              placeholder="กรอกรหัสผ่านที่ได้รับจาก LINE..."
+              value={passcode}
+              onChange={(e) => { setPasscode(e.target.value); setError(""); }}
+            />
+            {error && (
+              <p className="text-rose-400 text-xs font-prompt mt-1.5">{error}</p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            disabled={isVerifying}
+            className="w-full py-3.5 rounded-xl bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.01] active:scale-95 shadow-[0_0_20px_rgba(168,85,247,0.3)] cursor-pointer"
+          >
+            {isVerifying ? (
+              <>
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                />
+                กำลังยืนยันรหัสผ่าน...
+              </>
+            ) : (
+              <>
+                <Download className="w-4 h-4" />
+                ยืนยันรหัสผ่านและดาวน์โหลดไฟล์
+              </>
+            )}
+          </button>
+        </form>
+
+        <p className="mt-4 text-white/35 font-prompt text-xs">
+          สอบถามปัญหาการใช้งานเพิ่มเติมทาง LINE OA @poMESoP ได้ตลอด 24 ชั่วโมง
+        </p>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
    FREEBIE CARD
 ───────────────────────────────────────────────────────────── */
 
 function FreebieCard({
   freebie,
-  isLoggedIn,
-  onAuthPrompt,
+  onUnlockPrompt,
 }: {
   freebie: Freebie;
-  isLoggedIn: boolean;
-  onAuthPrompt: () => void;
+  onUnlockPrompt: (freebie: Freebie) => void;
 }) {
-  const [dlState, setDlState] = useState<DlState>("idle");
-  const [progress, setProgress] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const Icon = (Icons as any)[freebie.icon_name || "Gift"] || Icons.Gift;
-
-  const handleDownload = useCallback(() => {
-    if (!isLoggedIn) { onAuthPrompt(); return; }
-    if (dlState !== "idle") return;
-
-    setDlState("preparing");
-    setProgress(0);
-
-    let current = 0;
-    timerRef.current = setInterval(() => {
-      current += Math.random() * 22 + 8;
-      if (current >= 100) {
-        current = 100;
-        clearInterval(timerRef.current!);
-        setProgress(100);
-        // Trigger real download
-        setTimeout(() => {
-          const a = document.createElement("a");
-          a.href = freebie.download_url;
-          a.download = freebie.title;
-          a.target = "_blank";
-          a.click();
-          setDlState("done");
-          // Reset after a moment
-          setTimeout(() => { setDlState("idle"); setProgress(0); }, 3000);
-        }, 300);
-      } else {
-        setProgress(Math.round(current));
-      }
-    }, 120);
-  }, [isLoggedIn, dlState, freebie, onAuthPrompt]);
 
   return (
     <motion.div
@@ -234,65 +355,21 @@ function FreebieCard({
 
         {/* Download button */}
         <div className="mt-auto">
-          {dlState === "idle" && (
-            <button
-              onClick={handleDownload}
-              className={`group/btn w-full py-3 px-4 rounded-xl border flex items-center justify-between text-sm font-semibold font-prompt tracking-wide transition-all duration-300
-                ${freebie.border_color} ${freebie.text_color} ${freebie.bg_color}
-                hover:brightness-125 hover:shadow-lg active:scale-95`}
-              style={{ boxShadow: `0 0 0px ${freebie.glow_color}` }}
-              onMouseEnter={e => (e.currentTarget.style.boxShadow = `0 0 20px ${freebie.glow_color}`)}
-              onMouseLeave={e => (e.currentTarget.style.boxShadow = "none")}
-            >
-              <div className="flex items-center gap-2">
-                <Download className="w-4 h-4 group-hover/btn:animate-bounce" />
-                <span>ดาวน์โหลดฟรี</span>
-              </div>
-              {isLoggedIn
-                ? <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                : <LogIn className="w-4 h-4 opacity-60" />
-              }
-            </button>
-          )}
-
-          {dlState === "preparing" && (
-            <div className={`w-full py-3 px-4 rounded-xl border ${freebie.border_color} ${freebie.bg_color} space-y-2`}>
-              <div className="flex justify-between items-center">
-                <span className={`text-xs font-prompt ${freebie.text_color}`}>กำลังเตรียมไฟล์...</span>
-                <span className={`text-xs font-bold font-prompt ${freebie.text_color}`}>{progress}%</span>
-              </div>
-              <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-                <motion.div
-                  className={`h-full rounded-full bg-linear-to-r ${freebie.color_from} ${freebie.color_to}`}
-                  animate={{ width: `${progress}%` }}
-                  transition={{ duration: 0.15, ease: "linear" }}
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
+          <button
+            onClick={() => onUnlockPrompt(freebie)}
+            className={`group/btn w-full py-3 px-4 rounded-xl border flex items-center justify-between text-sm font-semibold font-prompt tracking-wide transition-all duration-300 cursor-pointer
+              ${freebie.border_color} ${freebie.text_color} ${freebie.bg_color}
+              hover:brightness-125 hover:shadow-lg active:scale-95`}
+            style={{ boxShadow: `0 0 0px ${freebie.glow_color}` }}
+            onMouseEnter={e => (e.currentTarget.style.boxShadow = `0 0 20px ${freebie.glow_color}`)}
+            onMouseLeave={e => (e.currentTarget.style.boxShadow = "none")}
+          >
+            <div className="flex items-center gap-2">
+              <Download className="w-4 h-4 group-hover/btn:animate-bounce" />
+              <span>ดาวน์โหลดโค้ดฟรี</span>
             </div>
-          )}
-
-          {dlState === "done" && (
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="space-y-2"
-            >
-              <div className="w-full py-3 px-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 flex items-center justify-center gap-2 text-emerald-400 text-sm font-semibold font-prompt">
-                <CheckCircle2 className="w-4 h-4" />
-                ดาวน์โหลดสำเร็จ!
-              </div>
-              <a
-                href={`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.origin + '/freebies' : 'https://aiaon.tech/freebies')}&text=${encodeURIComponent(`แจกฟรี! ${freebie.title} - ตัวช่วยลดภาระงานครูและคนทำงาน ไปดาวน์โหลดกันเลยครับ`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-2 px-4 rounded-xl border border-[#06C755]/30 hover:border-[#06C755]/50 bg-[#06C755]/5 text-white/90 hover:text-white font-prompt font-semibold text-xs flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer"
-              >
-                <Share2 className="w-3.5 h-3.5 text-[#06C755] shrink-0" />
-                แชร์ให้เพื่อนครูทาง LINE
-              </a>
-            </motion.div>
-          )}
+            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+          </button>
         </div>
       </div>
     </motion.div>
@@ -318,6 +395,7 @@ const TABS: { label: string; value: Category; icon: React.ElementType }[] = [
 export function FreebiesView({ user, initialFreebies }: FreebiesViewProps) {
   const [activeTab, setActiveTab] = useState<Category>("all");
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [selectedFreebieForUnlock, setSelectedFreebieForUnlock] = useState<Freebie | null>(null);
   const isLoggedIn = !!user;
 
   const filtered = initialFreebies.filter(
@@ -330,6 +408,23 @@ export function FreebiesView({ user, initialFreebies }: FreebiesViewProps) {
       <AnimatePresence>
         {showAuthModal && (
           <AuthModal onClose={() => setShowAuthModal(false)} />
+        )}
+      </AnimatePresence>
+
+      {/* LINE Unlock Modal */}
+      <AnimatePresence>
+        {selectedFreebieForUnlock && (
+          <LineUnlockModal
+            freebie={selectedFreebieForUnlock}
+            onClose={() => setSelectedFreebieForUnlock(null)}
+            onSuccessDownload={(freebieToDownload) => {
+              const a = document.createElement("a");
+              a.href = freebieToDownload.download_url;
+              a.download = freebieToDownload.title;
+              a.target = "_blank";
+              a.click();
+            }}
+          />
         )}
       </AnimatePresence>
 
@@ -372,7 +467,7 @@ export function FreebiesView({ user, initialFreebies }: FreebiesViewProps) {
               className="text-base md:text-lg text-white/55 font-prompt leading-relaxed max-w-xl mx-auto"
             >
               รวบรวมทรัพยากรดิจิทัลคุณภาพสูงทั้งด้านเทคโนโลยีและดนตรี
-              ดาวน์โหลดฟรีโดยลงทะเบียนเป็นสมาชิกเท่านั้น
+              ดาวน์โหลดโค้ดและทรัพยากรฟรีทันทีเพียงแอด LINE OA
             </motion.p>
 
             {/* Stats row */}
@@ -437,43 +532,42 @@ export function FreebiesView({ user, initialFreebies }: FreebiesViewProps) {
                 <FreebieCard
                   key={freebie.id}
                   freebie={freebie}
-                  isLoggedIn={isLoggedIn}
-                  onAuthPrompt={() => setShowAuthModal(true)}
+                  onUnlockPrompt={(item) => setSelectedFreebieForUnlock(item)}
                 />
               ))}
             </motion.div>
           </AnimatePresence>
 
-          {/* ── CTA for logged-out users ─────────────────────── */}
-          {!isLoggedIn && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: 0.2 }}
-              className="mt-20 glass-card border-purple-500/20 p-8 md:p-12 text-center relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-linear-to-br from-purple-500/5 to-pink-500/5 pointer-events-none" />
-              <div className="relative z-10 space-y-5 max-w-lg mx-auto">
-                <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(168,85,247,0.4)]">
-                  <Star className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="font-prompt text-2xl font-bold text-white">
-                  สมัครสมาชิกฟรี — ดาวน์โหลดได้ทันที
-                </h3>
-                <p className="text-white/50 font-prompt text-sm leading-relaxed">
-                  ไม่มีค่าใช้จ่าย ไม่ต้องใช้บัตรเครดิต สร้างบัญชีด้วย Google ได้ในไม่กี่วินาที
-                </p>
-                <Link
-                  href="/login?next=/freebies"
-                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-105 shadow-[0_0_24px_rgba(168,85,247,0.3)]"
-                >
-                  <LogIn className="w-4 h-4" />
-                  สมัครสมาชิก / ล็อกอิน
-                </Link>
+          {/* ── CTA for LINE Community ─────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.2 }}
+            className="mt-20 glass-card border-[#06C755]/20 p-8 md:p-12 text-center relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-linear-to-br from-[#06C755]/5 to-emerald-500/5 pointer-events-none" />
+            <div className="relative z-10 space-y-5 max-w-lg mx-auto">
+              <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-[#06C755] to-emerald-600 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(6,199,85,0.4)]">
+                <RiLineLine className="w-8 h-8 text-white" />
               </div>
-            </motion.div>
-          )}
+              <h3 className="font-prompt text-2xl font-bold text-white">
+                แอด LINE OA @poMESoP รับอัปเดตโค้ดฟรีทุกสัปดาห์
+              </h3>
+              <p className="text-white/60 font-prompt text-sm leading-relaxed">
+                รับการแจ้งเตือนสคริปต์ใหม่ บทเรียนการสอนฟรี และรหัสส่วนลดพิเศษเฉพาะใน LINE
+              </p>
+              <a
+                href="https://lin.ee/poMESoP"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-105 shadow-[0_0_24px_rgba(6,199,85,0.35)]"
+              >
+                <RiLineLine className="w-5 h-5 fill-white" />
+                เพิ่มเพื่อน LINE OA @poMESoP
+              </a>
+            </div>
+          </motion.div>
 
         </div>
       </div>

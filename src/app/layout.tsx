@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Inter, Prompt, Geist } from "next/font/google";
 import "./globals.css";
 import React from "react";
@@ -134,16 +134,44 @@ export default async function RootLayout({
                   <div className="space-y-4">
                     <h3 className="text-white font-bold font-prompt text-lg">Connect With Me</h3>
                     <div className="flex justify-center md:justify-start gap-3">
-                      <a href="#" className="p-2.5 glass-card hover:bg-red-500/20 text-white hover:text-red-400 transition-all duration-200 hover:scale-110" title="YouTube" aria-label="YouTube">
+                      <a
+                        href="https://www.youtube.com/@aiaontech"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2.5 glass-card hover:bg-red-500/20 text-white hover:text-red-400 transition-all duration-200 hover:scale-110"
+                        title="YouTube"
+                        aria-label="YouTube"
+                      >
                         <FaYoutube className="w-5 h-5" />
                       </a>
-                      <a href="#" className="p-2.5 glass-card hover:bg-white/10 text-white hover:text-white transition-all duration-200 hover:scale-110" title="TikTok" aria-label="TikTok">
+                      <a
+                        href="https://www.tiktok.com/@aiaontech"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2.5 glass-card hover:bg-white/10 text-white hover:text-white transition-all duration-200 hover:scale-110"
+                        title="TikTok"
+                        aria-label="TikTok"
+                      >
                         <FaTiktok className="w-5 h-5" />
                       </a>
-                      <a href="#" className="p-2.5 glass-card hover:bg-blue-600/20 text-white hover:text-blue-400 transition-all duration-200 hover:scale-110" title="Facebook" aria-label="Facebook">
+                      <a
+                        href="https://www.facebook.com/iAontech"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2.5 glass-card hover:bg-blue-600/20 text-white hover:text-blue-400 transition-all duration-200 hover:scale-110"
+                        title="Facebook"
+                        aria-label="Facebook"
+                      >
                         <FaFacebook className="w-5 h-5" />
                       </a>
-                      <a href="#" className="p-2.5 glass-card hover:bg-green-500/20 text-white hover:text-green-400 transition-all duration-200 hover:scale-110" title="LINE" aria-label="LINE">
+                      <a
+                        href="https://lin.ee/poMESoP"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2.5 glass-card hover:bg-green-500/20 text-white hover:text-green-400 transition-all duration-200 hover:scale-110"
+                        title="LINE"
+                        aria-label="LINE"
+                      >
                         <FaLine className="w-5 h-5" />
                       </a>
                     </div>
