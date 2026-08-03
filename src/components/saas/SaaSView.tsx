@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -685,10 +685,10 @@ export function SaaSView({ user }: SaaSViewProps) {
       <section id="pricing" className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-white/5">
         <div className="text-center mb-16 space-y-4">
           <h2 className="font-prompt text-3xl sm:text-5xl font-bold tracking-tight">
-            แผนบริการราคาแพ็คเกจ
+            แผนบริการและแพ็กเกจ iAon Tech All-Access
           </h2>
           <p className="font-prompt font-light text-white/60 max-w-2xl mx-auto text-base sm:text-lg">
-            เลือกแผนบริการที่เหมาะสมกับขนาดห้องเรียนและรูปแบบการเรียนการสอนของคุณครู
+            เลือกแผนการเรียนรู้และระบบอัจฉริยะที่เหมาะสมกับคุณครู คนทำงาน และองค์กรของคุณ
           </p>
         </div>
 
@@ -709,8 +709,8 @@ export function SaaSView({ user }: SaaSViewProps) {
           >
             <div className="space-y-6 font-prompt text-left relative z-10">
               <div>
-                <h3 className="text-lg font-semibold text-white/80">คุณครูทั่วไป (Free)</h3>
-                <p className="text-xs text-white/40 mt-1">เหมาะสำหรับทดลองระบบหรือใช้ห้องเรียนเดี่ยว</p>
+                <h3 className="text-lg font-semibold text-white/80">ผู้เริ่มต้นใช้งานทั่วไป (Free)</h3>
+                <p className="text-xs text-white/40 mt-1">เหมาะสำหรับทดลองเรียนรู้และใช้งานมินิระบบเบื้องต้น</p>
               </div>
 
               <div className="flex items-baseline gap-1 text-white">
@@ -723,25 +723,25 @@ export function SaaSView({ user }: SaaSViewProps) {
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/10 border border-slate-500/20 group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-cyan-400" />
                   </span>
-                  <span className="group-hover/item:text-cyan-300 transition-colors">บันทึกชื่อนักเรียนสูงสุด 30 คน</span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">เข้าเรียน 15 คอร์สเรียนฟรี ได้ตลอดชีพ</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/10 border border-slate-500/20 group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-cyan-400" />
                   </span>
-                  <span className="group-hover/item:text-cyan-300 transition-colors">เช็คชื่อมา สาย ลา ขาด ได้ปกติ</span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">ดาวน์โหลด Code & Template ฟรี ในหน้า Freebies</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/10 border border-slate-500/20 group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-cyan-400" />
                   </span>
-                  <span className="group-hover/item:text-cyan-300 transition-colors">แจ้งเตือน LINE ลิงก์มาตรฐาน</span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">เข้าร่วมกลุ่ม LINE OA "AiAon Tech โดยครูอ้น"</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-slate-500/10 border border-slate-500/20 group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-cyan-400" />
                   </span>
-                  <span className="group-hover/item:text-cyan-300 transition-colors">จัดเก็บข้อมูลใน Google Sheets</span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">ทดลองใช้งานมินิแอปเช็กชื่อและระบบพื้นฐาน</span>
                 </li>
               </ul>
             </div>
@@ -780,14 +780,14 @@ export function SaaSView({ user }: SaaSViewProps) {
             <div className="space-y-6 font-prompt text-left relative z-10">
               <div>
                 <h3 className="text-xl font-bold text-transparent bg-clip-text bg-linear-to-r from-white via-cyan-200 to-cyan-400 flex items-center gap-2 drop-shadow-[0_0_10px_rgba(6,182,212,0.3)]">
-                  <span>ครูมืออาชีพ (Pro)</span>
+                  <span>สมาชิก VIP Pro Academy (Pro)</span>
                   <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
                 </h3>
-                <p className="text-xs text-cyan-300/80 mt-1">ฟีเจอร์ครบ สำหรับการจัดการห้องเรียนส่วนตัวขั้นเทพ</p>
+                <p className="text-xs text-cyan-300/80 mt-1">ปลดล็อกเข้าถึงคอร์สเรียนพรีเมียมและแม่แบบระบบทั้งหมด</p>
               </div>
 
               <div className="flex items-baseline gap-1 text-white">
-                <span className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-white via-white to-cyan-300 drop-shadow-[0_0_15px_rgba(6,182,212,0.2)]">190</span>
+                <span className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-white via-white to-cyan-300 drop-shadow-[0_0_15px_rgba(6,182,212,0.2)]">290</span>
                 <span className="text-sm font-medium text-white/50">บาท / เดือน</span>
               </div>
 
@@ -796,25 +796,25 @@ export function SaaSView({ user }: SaaSViewProps) {
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-cyan-400" />
                   </span>
-                  <span className="font-medium text-white group-hover/item:text-cyan-300 transition-colors">บันทึกชื่อนักเรียนได้ไม่จำกัด</span>
+                  <span className="font-medium text-white group-hover/item:text-cyan-300 transition-colors">ปลดล็อกเข้าเรียน 10 คอร์สเรียนพรีเมียม ทั้งหมดบนเว็บ</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-cyan-400" />
                   </span>
-                  <span className="group-hover/item:text-cyan-300 transition-colors">จัดการห้องเรียนแยกกันสูงสุด 5 ห้อง</span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">รับแม่แบบซอฟต์แวร์สำเร็จรูปครบทั้ง 30 ระบบ</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-cyan-400" />
                   </span>
-                  <span className="text-cyan-300 font-medium group-hover/item:text-cyan-200 transition-colors">ปรับแต่งเนื้อหาข้อความ LINE เองได้</span>
+                  <span className="text-cyan-300 font-medium group-hover/item:text-cyan-200 transition-colors">อัปเดตคอร์สและระบบใหม่ฟรีตลอดระยะเวลาสมาชิก</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-cyan-400" />
                   </span>
-                  <span className="group-hover/item:text-cyan-300 transition-colors">ระบบวิเคราะห์ประเมินกราฟสถิติรายสัปดาห์</span>
+                  <span className="group-hover/item:text-cyan-300 transition-colors">รับใบรับรอง Certificate หลังเรียนจบรายคอร์ส</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
@@ -828,7 +828,7 @@ export function SaaSView({ user }: SaaSViewProps) {
             <div className="pt-8 relative z-10">
               <Link href={user ? "/dashboard" : "/login"} className="w-full block">
                 <button className="btn-shimmer w-full py-4 rounded-full bg-linear-to-r from-blue-600 via-cyan-500 to-indigo-600 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-500 text-white font-prompt font-bold text-sm shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] active:scale-95 transition-all cursor-pointer">
-                  สมัครใช้งาน Pro
+                  สมัครใช้งาน VIP Pro
                 </button>
               </Link>
             </div>
@@ -849,8 +849,8 @@ export function SaaSView({ user }: SaaSViewProps) {
           >
             <div className="space-y-6 font-prompt text-left relative z-10">
               <div>
-                <h3 className="text-lg font-semibold text-white/80">ระดับโรงเรียน (School)</h3>
-                <p className="text-xs text-white/40 mt-1">ยกระดับทั้งระดับสายชั้น หรือระบบใหญ่ทั้งโรงเรียน</p>
+                <h3 className="text-lg font-semibold text-white/80">ระดับโรงเรียน & องค์กร (Enterprise)</h3>
+                <p className="text-xs text-white/40 mt-1">ยกระดับทั้งโรงเรียนหรือองค์กรด้วยระบบอัจฉริยะครบวงจร</p>
               </div>
 
               <div className="flex items-baseline gap-1 text-white">
@@ -863,31 +863,31 @@ export function SaaSView({ user }: SaaSViewProps) {
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-amber-400" />
                   </span>
-                  <span className="group-hover/item:text-amber-300 transition-colors">ไม่จำกัดนักเรียน และไม่จำกัดจำนวนคุณครู</span>
+                  <span className="group-hover/item:text-amber-300 transition-colors">ติดตั้งระบบบริหารโรงเรียนอัจฉริยะ Smart School System 10 in 1</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-amber-400" />
                   </span>
-                  <span className="group-hover/item:text-amber-300 transition-colors">ระบบ Portal แอดมินกลางสำหรับโรงเรียน</span>
+                  <span className="group-hover/item:text-amber-300 transition-colors">บริการจัดอบรม Workshop บุคลากรครู/พนักงาน โดยครูอ้น</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-amber-400" />
                   </span>
-                  <span className="group-hover/item:text-amber-300 transition-colors">รองรับการเชื่อมต่อ LINE Official Account</span>
+                  <span className="group-hover/item:text-amber-300 transition-colors">รองรับการเชื่อมต่อ LINE Official Account ของโรงเรียน</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-amber-400" />
                   </span>
-                  <span className="group-hover/item:text-amber-300 transition-colors">บริการเชื่อมต่อ API ดาต้าเบสเดิมของโรงเรียน</span>
+                  <span className="group-hover/item:text-amber-300 transition-colors">บริการเชื่อมต่อ API ดาต้าเบสเดิมของโรงเรียน/องค์กร</span>
                 </li>
                 <li className="flex items-center gap-2.5 group/item">
                   <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/10 border border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.3)] group-hover/item:scale-110 transition-transform shrink-0">
                     <Check className="w-3.5 h-3.5 text-amber-400" />
                   </span>
-                  <span className="group-hover/item:text-amber-300 transition-colors">ให้คำปรึกษาและซัพพอร์ตโดยวิศวกรตรง</span>
+                  <span className="group-hover/item:text-amber-300 transition-colors">ให้คำปรึกษาและซัพพอร์ตโดยทีมวิศวกรตรง</span>
                 </li>
               </ul>
             </div>
@@ -895,7 +895,7 @@ export function SaaSView({ user }: SaaSViewProps) {
             <div className="pt-8 relative z-10">
               <a href="mailto:contact@iaontechxmusic.com" className="w-full block">
                 <button className="w-full py-3.5 rounded-full border border-amber-500/30 hover:border-amber-500/60 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 font-prompt font-semibold text-sm active:scale-95 transition-all cursor-pointer shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-                  ติดต่อฝ่ายขาย
+                  ติดต่อขอใบเสนอราคา / เชิญวิทยากร
                 </button>
               </a>
             </div>

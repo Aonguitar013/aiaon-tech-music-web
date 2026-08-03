@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -59,11 +59,11 @@ export function PricingPopup() {
   };
 
   const features = [
-    "บันทึกชื่อนักเรียนได้ไม่จำกัด",
-    "จัดการห้องเรียนสูงสุด 5 ห้อง",
-    "ปรับแต่งเนื้อหาข้อความ LINE เองได้",
-    "ระบบกราฟสถิติรายสัปดาห์",
-    "สำรองข้อมูลอัตโนมัติทุกวัน",
+    "ปลดล็อกเข้าเรียน 10 คอร์สเรียนพรีเมียม ทั้งหมดบนเว็บ",
+    "รับแม่แบบซอฟต์แวร์สำเร็จรูปครบทั้ง 30 ระบบ",
+    "อัปเดตคอร์สและระบบใหม่ฟรีตลอดระยะเวลาสมาชิก",
+    "รับใบรับรอง Certificate หลังเรียนจบรายคอร์ส",
+    "สำรองข้อมูลแบบรายวันลงคลาวด์ระบบ",
   ];
 
   return (
@@ -134,18 +134,18 @@ export function PricingPopup() {
                   >
                     อัปเกรดสู่{" "}
                     <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-blue-400 to-purple-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]">
-                      ครูมืออาชีพ Pro
+                      VIP Pro Academy
                     </span>
                   </h2>
                   <p className="font-prompt text-white/50 text-sm leading-relaxed mb-6">
-                    ปลดล็อกฟีเจอร์ครบครันที่ออกแบบมาเพื่อครูยุคดิจิทัล ลดงานเอกสาร เพิ่มประสิทธิภาพ
+                    ปลดล็อกเข้าถึงคอร์สเรียนพรีเมียมและแม่แบบระบบทั้งหมด
                   </p>
 
                   {/* Price */}
                   <div className="flex items-baseline gap-1.5 mb-6 bg-white/3 border border-white/8 rounded-2xl px-5 py-4">
                     <Zap className="w-5 h-5 text-cyan-400 shrink-0 mb-0.5" />
                     <span className="font-prompt text-5xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-white to-cyan-300">
-                      190
+                      290
                     </span>
                     <span className="font-prompt text-white/50 text-sm pb-1">บาท / เดือน</span>
                     <span className="ml-auto font-prompt text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full font-semibold whitespace-nowrap">
@@ -170,7 +170,7 @@ export function PricingPopup() {
                     <Link href="/login" onClick={dismiss} className="block">
                       <button className="btn-shimmer w-full py-4 rounded-2xl bg-linear-to-r from-blue-600 via-cyan-500 to-indigo-600 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-500 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(6,182,212,0.35)] hover:shadow-[0_0_36px_rgba(6,182,212,0.55)] active:scale-[0.98] transition-all cursor-pointer">
                         <Sparkles className="w-4 h-4" />
-                        สมัครใช้งาน Pro เลย
+                        สมัครใช้งาน VIP Pro เลย
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </button>
                     </Link>
