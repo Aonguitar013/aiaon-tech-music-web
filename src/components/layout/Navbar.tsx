@@ -37,8 +37,8 @@ const routes: RouteItem[] = [
     icon: Wrench,
     hoverColor: "cyan",
     items: [
+      { name: "iAon IT ง่ายๆ", href: "/saas", icon: Terminal, hoverColor: "cyan" },
       { name: "ของแจกฟรี", href: "/freebies", icon: Gift, hoverColor: "purple" },
-      { name: "ข้อตกลงในการพัฒนางาน (วPA)", href: "/presentation/vpa", icon: FileText, hoverColor: "cyan" },
     ],
   },
   {
