@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion, useAnimation, Variants } from "framer-motion";
 import { ArrowRight, PlayCircle, ChevronDown } from "lucide-react";
@@ -136,13 +136,14 @@ export function HeroSection() {
         {/* Subtext */}
         <motion.p
           variants={fadeUp}
-          className="text-lg md:text-xl text-white/75 max-w-3xl mx-auto font-prompt font-light leading-relaxed"
+          className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto font-prompt font-light leading-relaxed"
         >
-          ลดภาระงานครู นักเรียน และคนทำงานด้วย{" "}
-          <span className="text-blue-400 font-semibold">ระบบอัตโนมัติ (Smart Automation)</span>{" "}
-          และพัฒนาทักษะด้วยคอร์สเรียนไอที พร้อมรองรับบริการ{" "}
-          <span className="text-amber-400 font-semibold">สร้างสรรค์งานดนตรี & มิกซ์เสียง</span>{" "}
-          โดยครูดนตรีสากลมืออาชีพ
+          เสกงานเอกสารให้เสร็จในคลิกเดียว ด้วย{" "}
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300 font-semibold">
+            ระบบอัตโนมัติ & AI สไตล์บ้านๆ
+          </span>{" "}
+          ช่วยผ่อนแรงครูไทย เลิกงานตรงเวลา พร้อมคลัง{" "}
+          <span className="text-amber-400 font-semibold">20 ระบบสำเร็จรูป</span> และบริการงานดนตรีครบวงจร
         </motion.p>
 
         {/* CTA Buttons */}
@@ -152,7 +153,7 @@ export function HeroSection() {
         >
           {/* ── Cyan Tech Button ── */}
           <Link
-            href="/dashboard/academy?category=Technology"
+            href="/digital-vault"
             id="hero-cta-tech"
             className="group relative w-full sm:w-auto"
           >
@@ -162,7 +163,7 @@ export function HeroSection() {
               aria-hidden="true"
             />
             <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full bg-linear-to-r from-blue-600 to-cyan-500 group-hover:from-blue-500 group-hover:to-cyan-400 text-white font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_24px_rgba(59,130,246,0.35)]">
-              คอร์สเรียน & ระบบอัตโนมัติ
+              📦 คลัง 20 ระบบพร้อมใช้งาน (Digital Vault)
               {/* Arrow slides right on hover */}
               <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" />
             </span>
