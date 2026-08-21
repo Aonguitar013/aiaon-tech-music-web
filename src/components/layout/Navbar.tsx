@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText } from "lucide-react";
+import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -30,7 +30,7 @@ interface RouteItem {
 }
 
 const routes: RouteItem[] = [
-  { name: "หน้าแรก", href: "/saas", icon: Terminal, hoverColor: "cyan" },
+  { name: "หน้าแรก", href: "/", icon: Terminal, hoverColor: "cyan" },
   { name: "คอร์สเรียน", href: "/#academy", icon: GraduationCap, hoverColor: "cyan" },
   {
     name: "เครื่องมือ & ระบบ",
@@ -46,9 +46,9 @@ const routes: RouteItem[] = [
     icon: ShoppingBag,
     hoverColor: "amber",
     items: [
+      { name: "แพ็กเกจเหมาสุดคุ้ม (Bundles)", href: "/bundles", icon: Sparkles, hoverColor: "purple" },
       { name: "คลังสินค้าดิจิทัล (Digital Vault)", href: "/digital-vault", icon: ShoppingBag, hoverColor: "amber" },
-      { name: "บริการของเรา", href: "/services", icon: Briefcase, hoverColor: "teal" },
-      { name: "เสื้อ AiAonTech", href: "/merch", icon: Shirt, hoverColor: "purple" },
+      { name: "บริการติดตั้ง DFY", href: "/services", icon: Briefcase, hoverColor: "teal" },
     ],
   },
   { name: "เกี่ยวกับเรา", href: "/about", icon: Info, hoverColor: "cyan" },
