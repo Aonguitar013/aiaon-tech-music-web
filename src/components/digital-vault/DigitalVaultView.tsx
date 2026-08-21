@@ -376,26 +376,29 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
           </Link>
         </motion.div>
 
-        {/* Categories Bar */}
+        {/* Categories Pills - Responsive Flex Wrap (No scrollbar, shows all 6 buttons cleanly) */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex bg-white/5 p-1 rounded-xl w-full max-w-lg mb-6 border border-white/10 mx-auto md:mx-0 overflow-x-auto"
+          className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-8 max-w-5xl mx-auto"
         >
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => handleCategoryClick(cat.id)}
-              className={`flex-1 py-2 px-3 whitespace-nowrap rounded-lg font-prompt text-xs sm:text-sm font-medium transition-all duration-200 active:scale-95 cursor-pointer ${
-                filterCategory === cat.id
-                  ? "bg-linear-to-r from-purple-600 to-pink-500 text-white border border-purple-400/30 shadow-[0_0_15px_rgba(168,85,247,0.45)]"
-                  : "text-white/50 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const isActive = filterCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => handleCategoryClick(cat.id)}
+                className={`py-2.5 px-4 sm:px-5 rounded-2xl font-prompt text-xs sm:text-sm font-semibold transition-all duration-300 active:scale-95 cursor-pointer flex items-center gap-2 ${
+                  isActive
+                    ? "bg-linear-to-r from-purple-600 via-pink-600 to-rose-500 text-white border border-purple-400/40 shadow-[0_0_25px_rgba(168,85,247,0.45)] scale-105"
+                    : "bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20"
+                }`}
+              >
+                <span>{cat.label}</span>
+              </button>
+            );
+          })}
         </motion.div>
 
         {/* Search Input */}
@@ -403,16 +406,16 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.35 }}
-          className="flex flex-col md:flex-row gap-4 mb-12"
+          className="max-w-3xl mx-auto mb-12"
         >
-          <div className="relative flex-1">
+          <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="w-5 h-5 text-white/40" />
             </div>
             <input
               type="text"
-              className="w-full bg-black/40 border border-white/10 hover:border-white/20 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-white/40 transition-all font-prompt text-sm outline-none"
-              placeholder="ค้นหาสินค้า (เช่น ระบบเช็คชื่อ, ให้คำปรึกษา)..."
+              className="w-full bg-black/40 border border-white/10 hover:border-white/20 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 rounded-2xl py-3.5 pl-12 pr-4 text-white placeholder-white/40 transition-all font-prompt text-sm outline-none shadow-inner"
+              placeholder="ค้นหาชื่อระบบ (เช่น เช็คชื่อ, เกียรติบัตร, ยานพาหนะ, รถโรงเรียน, ลูกเสือ, ดนตรี)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
