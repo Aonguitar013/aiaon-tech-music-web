@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { 
   Search, ShoppingBag, Mic, Sliders, Keyboard, Headphones, 
-  ExternalLink, Sparkles, CheckCircle2, Cpu 
+  ExternalLink, Sparkles, CheckCircle2, Cpu, ArrowRight, Crown 
 } from "lucide-react";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
 import { motion } from "framer-motion";
@@ -207,18 +208,15 @@ function HardwareGadgetsSection() {
                   </div>
                 </div>
 
-                {/* Highlight Tag */}
                 <div className="mb-4 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-amber-300 text-xs font-prompt font-medium flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 shrink-0 text-amber-400" />
                   <span>{item.tag}</span>
                 </div>
 
-                {/* Description */}
                 <p className="font-prompt text-xs text-white/70 leading-relaxed mb-4">
                   {item.description}
                 </p>
 
-                {/* Feature Bullet Points */}
                 <ul className="space-y-2 mb-6 flex-1">
                   {item.highlights.map((hl, i) => (
                     <li key={i} className="flex items-start gap-2 text-xs font-prompt text-white/80">
@@ -228,7 +226,6 @@ function HardwareGadgetsSection() {
                   ))}
                 </ul>
 
-                {/* Shopee Button */}
                 <div className="mt-auto pt-4 border-t border-white/10">
                   <a
                     href={item.shopeeUrl}
@@ -251,16 +248,16 @@ function HardwareGadgetsSection() {
 }
 
 export function DigitalVaultView({ initialProducts }: { initialProducts: Product[] }) {
-  const { brandTheme } = useBrandTheme();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState<string>("All");
 
   const categories = [
-    { id: "All", label: "ทั้งหมด" },
-    { id: "GoogleScript", label: "กูเกิลสคริปต์" },
-    { id: "EBook", label: "E-Book" },
-    { id: "Service", label: "ดนตรี/ดีไซน์" },
-    { id: "Hardware", label: "อุปกรณ์ไอที & Studio" },
+    { id: "All", label: "ทั้งหมด (20 ระบบ)" },
+    { id: "Academic", label: "🎓 วิชาการ & นักเรียน (หมวด E)" },
+    { id: "Admin", label: "🏢 บริหาร & ยานพาหนะ (หมวด A)" },
+    { id: "Activity", label: "🎪 กิจกรรม & ลูกเสือ (หมวด M)" },
+    { id: "Free", label: "🎁 แจกฟรี (Gift)" },
+    { id: "Hardware", label: "🎙️ อุปกรณ์สตูดิโอ & Gadgets" },
   ];
 
   const handleCategoryClick = (catId: string) => {
@@ -274,46 +271,23 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
   };
 
   const filteredProducts = initialProducts.filter((product) => {
+    const title = (product.title || "").toLowerCase();
+    const desc = (product.description || "").toLowerCase();
     const matchesSearch =
-      product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchTerm.toLowerCase());
+      title.includes(searchTerm.toLowerCase()) ||
+      desc.includes(searchTerm.toLowerCase());
     
     let matchesFilter = false;
     if (filterCategory === "All" || filterCategory === "Hardware") {
       matchesFilter = true;
-    } else if (filterCategory === "GoogleScript") {
-      const cat = product.category?.toLowerCase() || "";
-      const title = product.title.toLowerCase();
-      const desc = product.description.toLowerCase();
-      matchesFilter = 
-        cat === "template" || 
-        cat === "automation" || 
-        cat === "script" || 
-        cat === "googlescript" ||
-        cat === "google script" ||
-        cat === "google apps script" ||
-        title.includes("script") || 
-        title.includes("สคริปต์") || 
-        desc.includes("script") || 
-        desc.includes("สคริปต์");
-    } else if (filterCategory === "EBook") {
-      const cat = product.category?.toLowerCase() || "";
-      const title = product.title.toLowerCase();
-      const desc = product.description.toLowerCase();
-      matchesFilter = 
-        cat === "ebook" || 
-        cat === "e-book" || 
-        title.includes("ebook") || 
-        title.includes("e-book") || 
-        title.includes("อีบุ๊ก") || 
-        title.includes("หนังสือ") || 
-        desc.includes("ebook") || 
-        desc.includes("e-book") || 
-        desc.includes("อีบุ๊ก") || 
-        desc.includes("หนังสือ") || 
-        desc.includes("คู่มือ");
-    } else if (filterCategory === "Service") {
-      matchesFilter = product.category?.toLowerCase() === "service" || product.category?.toLowerCase() === "creative";
+    } else if (filterCategory === "Academic") {
+      matchesFilter = title.includes("aone") || title.includes("นักเรียน") || title.includes("คะแนน") || title.includes("เช็คชื่อ") || title.includes("พฤติกรรม") || title.includes("เครื่องแต่งกาย") || title.includes("ห้องเรียนสีขาว") || title.includes("สอบ");
+    } else if (filterCategory === "Admin") {
+      matchesFilter = title.includes("aona") || title.includes("บริหาร") || title.includes("ยานพาหนะ") || title.includes("เกียรติบัตร") || title.includes("พัสดุ") || title.includes("สมุดติดต่อ") || title.includes("การลา");
+    } else if (filterCategory === "Activity") {
+      matchesFilter = title.includes("aonm") || title.includes("ลูกเสือ") || title.includes("ดนตรี") || title.includes("ซ้อมดนตรี");
+    } else if (filterCategory === "Free") {
+      matchesFilter = product.price === "แจกฟรี" || product.price === "0" || title.includes("แจกฟรี") || title.includes("aone10");
     } else {
       matchesFilter = product.category === filterCategory;
     }
@@ -322,20 +296,21 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
   });
 
   return (
-    <div className="w-full relative overflow-hidden min-h-screen pb-24">
-      {/* Background ambient glows */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[500px] bg-purple-500/5 blur-[140px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/3" />
-      <div className="absolute top-[35%] right-[-100px] w-[500px] h-[500px] bg-pink-500/5 blur-[130px] rounded-full pointer-events-none" />
+    <div className="min-h-screen text-white pt-24 pb-20 relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      
+      {/* Background Orbs */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-purple-500/10 blur-[140px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* Main Content Area */}
+      <div className="relative z-10">
         
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-6 pt-12 md:pt-16">
+        <div className="text-center max-w-2xl mx-auto mb-10 space-y-4">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-purple-500/30 bg-purple-500/5 text-purple-400 text-sm font-prompt font-medium"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-prompt"
           >
             <ShoppingBag className="w-4 h-4" />
             <span>Digital Vault — คลังสินค้าดิจิทัลและระบบช่วยเหลือ</span>
@@ -357,11 +332,49 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base md:text-lg text-white/55 font-prompt leading-relaxed max-w-xl mx-auto"
+            className="text-base md:text-lg text-white/60 font-prompt leading-relaxed max-w-xl mx-auto"
           >
-            รวมสินค้าดิจิทัล คู่มือปฏิบัติงาน และอุปกรณ์ไอที/สตูดิโอที่ออกแบบและเลือกใช้โดยครูอ้น
+            รวม 20 ระบบ Google Apps Script สำเร็จรูป คู่มือปฏิบัติงาน และอุปกรณ์ไอทีสตูดิโอโดยครูอ้น
           </motion.p>
         </div>
+
+        {/* --- VIP BUNDLE PROMO BANNER --- */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="mb-10 max-w-4xl mx-auto"
+        >
+          <Link 
+            href="/bundles" 
+            className="block p-4 sm:p-5 rounded-2xl bg-linear-to-r from-purple-950/70 via-indigo-950/50 to-pink-950/70 border border-purple-500/40 hover:border-purple-400 shadow-[0_0_30px_rgba(168,85,247,0.2)] hover:shadow-[0_0_40px_rgba(168,85,247,0.35)] transition-all group"
+          >
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-300 shrink-0 group-hover:scale-110 transition-transform">
+                  <Sparkles className="w-6 h-6 text-purple-300 animate-pulse" />
+                </div>
+                <div>
+                  <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-prompt font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                      👑 LIFETIME DEAL
+                    </span>
+                    <p className="font-prompt text-sm sm:text-base font-extrabold text-white group-hover:text-purple-300 transition-colors">
+                      เหมาคลัง 20 ระบบตลอดชีพ (ประหยัดสูงสุด 51%)
+                    </p>
+                  </div>
+                  <p className="font-prompt text-xs text-white/60">
+                    จ่ายเพียง 4,990 ฿ ได้ครบทั้ง 20 ระบบ + สิทธิ์รับทุกระบบใหม่ตลอดชีพ พร้อมซัพพอร์ต VIP
+                  </p>
+                </div>
+              </div>
+              <span className="px-5 py-2.5 rounded-xl bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-prompt text-xs font-bold shrink-0 inline-flex items-center gap-1.5 shadow-lg group-hover:scale-105 transition-transform">
+                <span>ดูแพ็กเกจ Bundle</span>
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </div>
+          </Link>
+        </motion.div>
 
         {/* Categories Bar */}
         <motion.div

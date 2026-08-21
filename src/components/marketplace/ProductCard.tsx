@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import { Tag, Gift, Download } from "lucide-react";
@@ -180,11 +180,22 @@ export function ProductCard({ product, index }: ProductCardProps) {
           </div>
 
           <div className={cn(
-            "w-full flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-white font-prompt text-sm font-semibold transition-all duration-300 active:scale-95 cursor-pointer shadow-md",
-            isValidId ? buttonBg : "bg-white/10 text-white/40 cursor-not-allowed"
+            "w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-white font-prompt text-sm font-bold transition-all duration-300 group-hover:scale-[1.02] active:scale-95 shadow-lg",
+            isValidId 
+              ? (isFree ? "bg-linear-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 shadow-[0_0_20px_rgba(16,185,129,0.3)]" : buttonBg) 
+              : "bg-white/10 text-white/40 cursor-not-allowed"
           )}>
-            <Download className="w-4 h-4 shrink-0" />
-            <span>{isValidId ? (isFree ? "โหลดฟรี →" : "สั่งซื้อเลย →") : "ไม่มีข้อมูล"}</span>
+            {isFree ? (
+              <>
+                <Gift className="w-4 h-4 shrink-0" />
+                <span>รับระบบและโค้ดฟรี →</span>
+              </>
+            ) : (
+              <>
+                <Download className="w-4 h-4 shrink-0" />
+                <span>สั่งซื้อระบบพร้อมใช้ →</span>
+              </>
+            )}
           </div>
         </div>
       </div>
