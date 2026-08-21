@@ -99,7 +99,7 @@ export function SaaSView({ user }: SaaSViewProps) {
     {
       id: "welcome",
       title: "LINE",
-      body: "🔔 ยินดีต้อนรับสู่ระบบ iAon ClassFlow! ทดลองกดปุ่มสถานะเช็คชื่อของนักเรียนทางด้านซ้าย เพื่อดูการแจ้งเตือนสดแบบจำลองได้เลยค่ะ",
+      body: "🔔 ยินดีต้อนรับสู่ระบบ iAon IT ง่ายๆ! ทดลองกดปุ่มสถานะเช็คชื่อของนักเรียนทางด้านซ้าย เพื่อดูการแจ้งเตือนสดแบบจำลองได้เลยค่ะ",
       time: "ระบบ"
     }
   ]);
@@ -183,7 +183,7 @@ export function SaaSView({ user }: SaaSViewProps) {
     const newMessage: LineMessage = {
       id: `${studentId}-${status}-${Date.now()}`,
       title: "LINE",
-      body: `📢 [iAon ClassFlow]
+      body: `📢 [iAon IT ง่ายๆ]
 📌 รายงานสถานะเข้าเรียนรายวัน
 -------------------------------
 👤 ชื่อ: ${student.name} (เลขที่ ${student.no})
@@ -208,7 +208,7 @@ export function SaaSView({ user }: SaaSViewProps) {
     },
     {
       q: "หากต้องการส่งการแจ้งเตือนเข้ากลุ่มผู้ปกครอง ต้องทำอย่างไร?",
-      a: "คุณครูเพียงเชิญ LINE Bot เข้าไปในกลุ่มห้องเรียน จากนั้นคัดลอก Token สำหรับกลุ่มนั้นๆ มาวางในระบบ iAon ClassFlow เพียงเท่านี้ระบบก็จะสามารถยิงข้อมูลสรุปยอดผู้มาเรียน ขาด สาย ลา เข้าสู่กลุ่มผู้ปกครองได้แบบอัตโนมัติ"
+      a: "คุณครูเพียงเชิญ LINE Bot เข้าไปในกลุ่มห้องเรียน จากนั้นคัดลอก Token สำหรับกลุ่มนั้นๆ มาวางในระบบ iAon IT ง่ายๆ เพียงเท่านี้ระบบก็จะสามารถยิงข้อมูลสรุปยอดผู้มาเรียน ขาด สาย ลา เข้าสู่กลุ่มผู้ปกครองได้แบบอัตโนมัติ"
     },
     {
       q: "ระบบสคริปต์ Google Apps Script ปลอดภัยและเสถียรแค่ไหน?",
@@ -254,7 +254,7 @@ export function SaaSView({ user }: SaaSViewProps) {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="font-prompt text-4xl sm:text-6xl font-bold leading-tight tracking-tight text-white"
             >
-              iAon <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-400 to-indigo-500">ClassFlow</span> <br />
+              iAon <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-400 to-indigo-500">IT ง่ายๆ</span> <br />
               <span className="text-2xl sm:text-4xl font-light text-white/90">ลดงานครู 80% เพิ่มความโปร่งใสสู่ผู้ปกครอง</span>
             </motion.h1>
 
@@ -497,7 +497,7 @@ export function SaaSView({ user }: SaaSViewProps) {
                   setMessages([{
                     id: "welcome",
                     title: "LINE",
-                    body: "🔔 ยินดีต้อนรับสู่ระบบ iAon ClassFlow! ทดลองกดปุ่มสถานะเช็คชื่อของนักเรียนทางด้านซ้าย เพื่อดูการแจ้งเตือนสดแบบจำลองได้เลยค่ะ",
+                    body: "🔔 ยินดีต้อนรับสู่ระบบ iAon IT ง่ายๆ! ทดลองกดปุ่มสถานะเช็คชื่อของนักเรียนทางด้านซ้าย เพื่อดูการแจ้งเตือนสดแบบจำลองได้เลยค่ะ",
                     time: "ระบบ"
                   }]);
                 }}
@@ -609,7 +609,7 @@ export function SaaSView({ user }: SaaSViewProps) {
             ระบบมีอะไรน่าสนใจบ้าง?
           </h2>
           <p className="font-prompt font-light text-white/60 max-w-2xl mx-auto text-base sm:text-lg">
-            ฟีเจอร์เด็ดของระบบ iAon ClassFlow ที่ออกแบบมาโดยผสานเทคโนโลยีคลาวด์และ API ที่มีประสิทธิภาพสูง
+            ฟีเจอร์เด็ดของระบบ iAon IT ง่ายๆ ที่ออกแบบมาโดยผสานเทคโนโลยีคลาวด์และ API ที่มีประสิทธิภาพสูง
           </p>
         </div>
 
@@ -911,7 +911,7 @@ export function SaaSView({ user }: SaaSViewProps) {
             คำถามที่พบบ่อย
           </h2>
           <p className="font-prompt font-light text-white/60 text-base">
-            ตอบคำถามและข้อสงสัยเบื้องต้นเกี่ยวกับการทำงานของระบบจัดการเข้าเรียนครู iAon ClassFlow
+            ตอบคำถามและข้อสงสัยเบื้องต้นเกี่ยวกับการทำงานของระบบจัดการเข้าเรียนครู iAon IT ง่ายๆ
           </p>
         </div>
 

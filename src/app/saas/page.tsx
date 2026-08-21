@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "ระบบจัดการงานครูอัจฉริยะ LINE | TechxMusic",
   description:
-    "iAon ClassFlow ระบบเช็คชื่อและแจ้งเตือนผ่าน LINE อัตโนมัติสำหรับครูยุคใหม่ ลดงานเอกสาร เพิ่มความโปร่งใสกับผู้ปกครอง",
+    "iAon IT ง่ายๆ ระบบเช็คชื่อและแจ้งเตือนผ่าน LINE อัตโนมัติสำหรับครูยุคใหม่ ลดงานเอกสาร เพิ่มความโปร่งใสกับผู้ปกครอง",
   keywords: [
     "ระบบเช็คชื่อ", "LINE", "เช็คชื่อนักเรียน", "งานครู", "ครูยุคใหม่", "Apps Script", "iAon", "SaaS"
   ],
