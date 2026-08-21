@@ -1,29 +1,28 @@
-import { TeacherVideoView } from "@/components/services/teacher-video/TeacherVideoView";
+import { ServicesView } from "@/components/services/ServicesView";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ที่ปรึกษาและผลิตสื่อวิดีโอวิทยฐานะสำหรับครู (PA) | AiAon Tech",
+  title: "รับออกแบบ & พัฒนาระบบตามสั่งสำหรับโรงเรียน | AiAon Tech",
   description:
-    "บริการวางแผนแผนการสอน ถ่ายทำและตัดต่อสื่อวิดีโอเสนอสภาพปัญหา (คลิป 10 นาที) และที่ปรึกษาบันทึกคลิปการสอนตามเกณฑ์ ก.ค.ศ. PA ล่าสุด โดยทีมงานครูจริงและผู้เชี่ยวชาญนวัตกรรม",
+    "บริการรับออกแบบและพัฒนาระบบ Google Apps Script & Web App ตามบริบทโรงเรียนของคุณโดยเฉพาะ รันบน Google Workspace ตัวเอง ปลอดภัย ไม่มีค่าบริการรายเดือน",
   keywords: [
-    "วิทยฐานะครู",
-    "ประเมิน PA",
-    "ผลิตคลิปการสอน",
-    "คลิปสภาพปัญหา",
-    "ที่ปรึกษา PA",
-    "แผนการสอน PA",
-    "แผนการจัดการเรียนรู้",
+    "รับทำระบบโรงเรียน",
+    "พัฒนาระบบตามสั่ง",
+    "Google Apps Script",
+    "ระบบเช็คชื่อ",
+    "ระบบยานพาหนะ",
+    "เกียรติบัตร QR",
     "AiAon Tech",
-    "คลิปการสอน กคศ"
+    "ครูอ้น"
   ],
   openGraph: {
-    title: "ที่ปรึกษาและผลิตสื่อวิดีโอวิทยฐานะสำหรับครู (PA) | AiAon Tech",
+    title: "รับออกแบบ & พัฒนาระบบตามสั่งสำหรับโรงเรียน | AiAon Tech",
     description:
-      "ช่วยการประเมินวิทยฐานะครูให้เป็นเรื่องง่าย ผลิตวิดีโอและวางแผนตามเกณฑ์ ก.ค.ศ. PA ล่าสุด มั่นใจผ่านประเมิน 100% โดยเพื่อนร่วมวิชาชีพ",
+      "บริการรับออกแบบและพัฒนาระบบ Google Apps Script & Web App ตามบริบทโรงเรียนของคุณโดยเฉพาะ รันบน Google Workspace ตัวเอง",
     type: "website",
   },
 };
 
 export default function ServicesPage() {
-  return <TeacherVideoView />;
+  return <ServicesView />;
 }

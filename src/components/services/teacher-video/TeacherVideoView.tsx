@@ -3,7 +3,6 @@
 import { HeroSection } from "./HeroSection";
 import { ServicesSection } from "./ServicesSection";
 import { WhyUsSection } from "./WhyUsSection";
-import { OtherServicesSection } from "@/components/services/ServicesView";
 import { SocialProofFAQSection } from "./SocialProofFAQSection";
 import { FinalCTASection } from "./FinalCTASection";
 
@@ -23,9 +22,6 @@ export function TeacherVideoView() {
 
       {/* Why Us Section */}
       <WhyUsSection />
-
-      {/* Other Services Section (n8n, Apps Script, Music, Mixing) */}
-      <OtherServicesSection />
 
       {/* Social Proof & FAQ Section */}
       <SocialProofFAQSection />
