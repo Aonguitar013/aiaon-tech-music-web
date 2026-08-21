@@ -37,7 +37,6 @@ const routes: RouteItem[] = [
     icon: Wrench,
     hoverColor: "cyan",
     items: [
-      { name: "จัดการชั้นเรียน", href: "/classroom-management", icon: GraduationCap, hoverColor: "cyan" },
       { name: "ของแจกฟรี", href: "/freebies", icon: Gift, hoverColor: "purple" },
       { name: "ข้อตกลงในการพัฒนางาน (วPA)", href: "/presentation/vpa", icon: FileText, hoverColor: "cyan" },
     ],

@@ -126,7 +126,6 @@ export default async function RootLayout({
                       <li><a href="/#academy"  className="hover:text-blue-400 transition-colors duration-200">Academy</a></li>
                       <li><a href="/digital-vault" className="hover:text-blue-400 transition-colors duration-200">Marketplace</a></li>
                       <li><a href="/saas"     className="hover:text-blue-400 transition-colors duration-200">SaaS Tools</a></li>
-                      <li><a href="/classroom-management" className="hover:text-blue-400 transition-colors duration-200">ระบบจัดการชั้นเรียน</a></li>
                     </ul>
                   </div>
 
