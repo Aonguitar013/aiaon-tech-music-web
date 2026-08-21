@@ -7,10 +7,12 @@ import { cn } from '@/lib/utils'; // assuming standard shadcn/tailwind utils
 export interface Lesson {
   id: string;
   title: string;
+  description?: string;
   module_name: string;
   lesson_order: number;
   duration_seconds: number;
   is_free_preview: boolean;
+  video_url?: string;
 }
 
 interface LessonSidebarProps {

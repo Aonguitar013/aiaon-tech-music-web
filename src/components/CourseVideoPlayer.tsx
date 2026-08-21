@@ -3,12 +3,12 @@
 import React from 'react';
 
 interface CourseVideoPlayerProps {
-  videoUrl: string;
+  videoUrl?: string;
 }
 
-export function CourseVideoPlayer({ videoUrl }: CourseVideoPlayerProps) {
+export function CourseVideoPlayer({ videoUrl = '' }: CourseVideoPlayerProps) {
   // Simple check for youtube URLs
-  const isYouTube = videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be');
+  const isYouTube = (videoUrl || '').includes('youtube.com') || (videoUrl || '').includes('youtu.be');
 
   return (
     <div className="w-full bg-black rounded-xl overflow-hidden shadow-2xl border border-white/10 ring-1 ring-white/5">
