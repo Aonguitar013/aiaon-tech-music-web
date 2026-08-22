@@ -1,8 +1,9 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, ShieldCheck, Mail, ShoppingCart, Download, BadgeCheck, BookOpen, Wrench, Sparkles, MessageSquare } from "lucide-react";
+import { ArrowLeft, CheckCircle2, ShieldCheck, Mail, ShoppingCart, Download, BadgeCheck, BookOpen, Wrench, Sparkles, MessageSquare, ArrowRight, Gift } from "lucide-react";
 import * as Icons from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function getVipSetupDetails(title: string) {
   const upper = title.toUpperCase();
@@ -282,26 +283,58 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                           )}
                       </div>
                   ) : (
-                      <div className="space-y-3 mb-4">
+                      <div className="space-y-3.5 mb-4">
+                        {/* ── 🌟 ULTRA-MAGNETIC HIGH-CONVERTING BUY BUTTON ── */}
                         <Link
                             href={`/dashboard/marketplace/checkout/${product.id}`}
-                            className={`w-full py-4 rounded-2xl text-white font-prompt font-bold text-base transition-all shadow-lg flex items-center justify-center gap-2 group cursor-pointer ${buttonClass}`}
+                            className={cn(
+                              "w-full py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 shadow-2xl flex flex-col items-center justify-center gap-1 group relative overflow-hidden cursor-pointer",
+                              isService
+                                ? "bg-linear-to-r from-blue-600 via-cyan-500 to-teal-500 hover:from-blue-500 hover:to-cyan-400 text-white shadow-[0_0_35px_rgba(6,182,212,0.4)]"
+                                : isFree
+                                  ? "bg-linear-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-zinc-950 shadow-[0_0_35px_rgba(16,185,129,0.5)]"
+                                  : "bg-linear-to-r from-amber-400 via-orange-500 to-rose-500 hover:from-amber-300 hover:via-orange-400 hover:to-rose-400 text-zinc-950 shadow-[0_0_40px_rgba(249,115,22,0.6)] hover:shadow-[0_0_60px_rgba(249,115,22,0.8)] hover:scale-[1.03] active:scale-[0.98]"
+                            )}
                         >
-                            {isService ? (
-                                <><Mail className="w-5 h-5 group-hover:-translate-y-1 transition-transform" /> ติดต่อขอใบเสนอราคา</>
-                            ) : (
-                                <><ShoppingCart className="w-5 h-5 group-hover:-translate-y-1 transition-transform" /> สั่งซื้อระบบทันที</>
+                            {/* Shimmer light beam animation */}
+                            <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+
+                            <div className="flex items-center justify-center gap-2.5 text-base sm:text-lg font-black tracking-wide relative z-10">
+                              {isService ? (
+                                <>
+                                  <Mail className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
+                                  <span>ติดต่อขอใบเสนอราคา</span>
+                                </>
+                              ) : isFree ? (
+                                <>
+                                  <Gift className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                  <span>รับระบบและโค้ดฟรีทันที →</span>
+                                </>
+                              ) : (
+                                <>
+                                  <ShoppingCart className="w-5 h-5 fill-zinc-950/20 group-hover:scale-110 transition-transform" />
+                                  <span>⚡ สั่งซื้อระบบทันที (รับไฟล์ใน 1 วิ)</span>
+                                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
+                                </>
+                              )}
+                            </div>
+
+                            {!isService && !isFree && (
+                              <span className="text-[10px] font-bold text-zinc-950/80 uppercase tracking-widest relative z-10">
+                                🔒 ลิขสิทธิ์ตลอดชีพ • พร้อมติดตั้งทันที
+                              </span>
                             )}
                         </Link>
 
+                        {/* Secondary LINE Button */}
                         <a
                           href="https://lin.ee/poMESoP"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full py-3 rounded-2xl bg-[#06C755]/10 hover:bg-[#06C755]/20 border border-[#06C755]/40 text-[#06C755] font-prompt font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
+                          className="w-full py-3 rounded-2xl bg-[#06C755]/10 hover:bg-[#06C755]/20 border border-[#06C755]/40 text-[#06C755] font-prompt font-bold text-xs flex items-center justify-center gap-2 transition-all hover:scale-[1.01] cursor-pointer shadow-sm"
                         >
                           <MessageSquare className="w-4 h-4" />
-                          <span>ปรึกษาหรือสั่งซื้อผ่าน LINE OA</span>
+                          <span>ปรึกษาหรือสั่งซื้อผ่าน LINE OA (@deu6776s)</span>
                         </a>
                       </div>
                   )}

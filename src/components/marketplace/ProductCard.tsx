@@ -5,7 +5,7 @@ import {
   Tag, Gift, Download, Sparkles, ShieldCheck, Zap, ArrowRight, Check,
   QrCode, Award, Truck, FileText, CheckSquare, Users, BookOpen, Clock,
   Music, Compass, Smartphone, Cpu, GraduationCap, Flame, Bot, Calendar,
-  Activity, Star, Layers, CheckCircle2
+  Activity, Star, Layers, CheckCircle2, ShoppingCart
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -538,25 +538,28 @@ export function ProductCard({ product, index }: ProductCardProps) {
             );
           })()}
 
-          {/* Glowing CTA Button */}
+          {/* Glowing Ultra-Magnetic CTA Button */}
           <div className={cn(
-            "w-full py-3.5 px-5 rounded-2xl text-white font-prompt text-sm font-bold flex items-center justify-center gap-2 transition-all duration-300 group-hover:scale-[1.02] shadow-lg cursor-pointer",
+            "w-full py-3.5 px-5 rounded-2xl font-prompt text-sm font-extrabold flex items-center justify-center gap-2 transition-all duration-300 group-hover:scale-[1.03] active:scale-[0.98] shadow-xl cursor-pointer relative overflow-hidden",
             isValidId 
               ? (isFree 
                   ? "bg-linear-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.4)]" 
-                  : "bg-linear-to-r from-blue-600 via-cyan-500 to-indigo-600 hover:from-blue-500 hover:to-cyan-400 text-white shadow-[0_0_25px_rgba(6,182,212,0.35)]") 
+                  : "bg-linear-to-r from-amber-400 via-orange-500 to-rose-500 hover:from-amber-300 hover:via-orange-400 hover:to-rose-400 text-zinc-950 shadow-[0_0_30px_rgba(249,115,22,0.5)] group-hover:shadow-[0_0_45px_rgba(249,115,22,0.8)]") 
               : "bg-white/10 text-white/40 cursor-not-allowed"
           )}>
+            {/* Shimmer sweep effect */}
+            <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/35 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+
             {isFree ? (
               <>
-                <Gift className="w-4 h-4 shrink-0" />
-                <span>รับระบบและโค้ดฟรี →</span>
+                <Gift className="w-4 h-4 shrink-0 text-zinc-950 relative z-10" />
+                <span className="relative z-10">🎁 รับระบบและโค้ดฟรี →</span>
               </>
             ) : (
               <>
-                <Download className="w-4 h-4 shrink-0" />
-                <span>สั่งซื้อระบบพร้อมใช้ →</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <ShoppingCart className="w-4 h-4 shrink-0 fill-zinc-950/20 text-zinc-950 relative z-10" />
+                <span className="relative z-10">⚡ สั่งซื้อรับระบบทันที</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5 text-zinc-950 relative z-10" />
               </>
             )}
           </div>
