@@ -220,7 +220,7 @@ function LineUnlockModal({
 
         {/* Action 1: Add LINE Button */}
         <a
-          href="https://lin.ee/poMESoP"
+          href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent("ขอรับรหัสปลดล็อกฟรี: " + freebie.title)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="w-full py-3.5 px-6 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-base flex items-center justify-center gap-2.5 shadow-[0_0_25px_rgba(6,199,85,0.35)] hover:shadow-[0_0_35px_rgba(6,199,85,0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-95 mb-6 cursor-pointer"
@@ -280,7 +280,7 @@ function LineUnlockModal({
         </form>
 
         <p className="mt-4 text-white/35 font-prompt text-xs">
-          สอบถามปัญหาการใช้งานเพิ่มเติมทาง LINE OA @poMESoP ได้ตลอด 24 ชั่วโมง
+          สอบถามปัญหาการใช้งานเพิ่มเติมทาง LINE OA @deu6776s (AiAon Tech) ได้ตลอด 24 ชั่วโมง
         </p>
       </motion.div>
     </motion.div>
