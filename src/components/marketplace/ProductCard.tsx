@@ -1,7 +1,12 @@
 "use client";
 
 import React from "react";
-import { Tag, Gift, Download, Sparkles, ShieldCheck, Zap, ArrowRight, Check } from "lucide-react";
+import {
+  Tag, Gift, Download, Sparkles, ShieldCheck, Zap, ArrowRight, Check,
+  QrCode, Award, Truck, FileText, CheckSquare, Users, BookOpen, Clock,
+  Music, Compass, Smartphone, Cpu, GraduationCap, Flame, Bot, Calendar,
+  Activity, Star, Layers, CheckCircle2
+} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
@@ -24,6 +29,327 @@ interface ProductCardProps {
   index: number;
 }
 
+/** Helper to detect system code and metadata for bespoke cover art */
+function getSystemCoverTheme(title: string, category: string) {
+  const upper = title.toUpperCase();
+
+  // 1. AONA Series (Administration & School Ops)
+  if (upper.includes("AONA01") || upper.includes("ทะเบียน") || upper.includes("รับ-ส่ง")) {
+    return {
+      code: "AONA01",
+      categoryName: "บริหาร & ธุรการ",
+      tagline: "SMART DOCUMENT ROUTING",
+      icon: FileText,
+      gradient: "from-blue-950 via-slate-900 to-indigo-950",
+      borderAccent: "border-blue-500/40",
+      glowColor: "rgba(59,130,246,0.3)",
+      badgeBg: "bg-blue-500/20 text-blue-300 border-blue-500/40",
+      pills: ["สารบรรณ", "Google Sheets", "ออกเลขทันที"],
+      iconColor: "text-blue-400"
+    };
+  }
+  if (upper.includes("AONA02") || upper.includes("ยานพาหนะ") || upper.includes("รถ")) {
+    return {
+      code: "AONA02",
+      categoryName: "บริหารยานพาหนะ",
+      tagline: "SMART VEHICLE LOG",
+      icon: Truck,
+      gradient: "from-sky-950 via-slate-900 to-blue-950",
+      borderAccent: "border-sky-500/40",
+      glowColor: "rgba(14,165,233,0.3)",
+      badgeBg: "bg-sky-500/20 text-sky-300 border-sky-500/40",
+      pills: ["บันทึกไมล์", "คำนวณน้ำมัน", "คิวรถโรงเรียน"],
+      iconColor: "text-sky-400"
+    };
+  }
+  if (upper.includes("AONA03") || upper.includes("เกียรติบัตร") || upper.includes("CERTIFICATE")) {
+    return {
+      code: "AONA03",
+      categoryName: "ระบบประเมินผล",
+      tagline: "AUTO-CERTIFICATE QR VERIFY",
+      icon: Award,
+      gradient: "from-amber-950 via-slate-900 to-yellow-950",
+      borderAccent: "border-amber-500/50",
+      glowColor: "rgba(245,158,11,0.35)",
+      badgeBg: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+      pills: ["สร้าง QR ตรวจสอบ", "ส่งอีเมลออโต้", "Google Slides"],
+      iconColor: "text-amber-400"
+    };
+  }
+  if (upper.includes("AONA04") || upper.includes("ทรัพย์สิน") || upper.includes("ครุภัณฑ์")) {
+    return {
+      code: "AONA04",
+      categoryName: "บริหารพัสดุ",
+      tagline: "ASSET TAG QR GENERATOR",
+      icon: QrCode,
+      gradient: "from-indigo-950 via-slate-900 to-purple-950",
+      borderAccent: "border-indigo-500/40",
+      glowColor: "rgba(99,102,241,0.3)",
+      badgeBg: "bg-indigo-500/20 text-indigo-300 border-indigo-500/40",
+      pills: ["QR ครุภัณฑ์", "พิมพ์สติกเกอร์", "ตรวจนับพัสดุ"],
+      iconColor: "text-indigo-400"
+    };
+  }
+  if (upper.includes("AONA05") || upper.includes("ยืม-คืน") || upper.includes("อุปกรณ์")) {
+    return {
+      code: "AONA05",
+      categoryName: "บริหารห้องปฏิบัติการ",
+      tagline: "LAB LOAN & RETURN HUB",
+      icon: Layers,
+      gradient: "from-teal-950 via-slate-900 to-cyan-950",
+      borderAccent: "border-teal-500/40",
+      glowColor: "rgba(20,184,166,0.3)",
+      badgeBg: "bg-teal-500/20 text-teal-300 border-teal-500/40",
+      pills: ["ยืมคืนอุปกรณ์", "แจ้งเตือนคืน", "เช็คของคงคลัง"],
+      iconColor: "text-teal-400"
+    };
+  }
+  if (upper.includes("AONA06") || upper.includes("บันทึกข้อความ") || upper.includes("ติดตาม")) {
+    return {
+      code: "AONA06",
+      categoryName: "งานสารบรรณ",
+      tagline: "MEMO ROUTING & TIMELINE",
+      icon: CheckSquare,
+      gradient: "from-blue-950 via-slate-900 to-cyan-950",
+      borderAccent: "border-blue-500/40",
+      glowColor: "rgba(59,130,246,0.3)",
+      badgeBg: "bg-blue-500/20 text-blue-300 border-blue-500/40",
+      pills: ["เซ็นอนุมัติ", "ไทม์ไลน์สถานะ", "แจ้งเตือน LINE"],
+      iconColor: "text-blue-400"
+    };
+  }
+
+  // 2. AONE Series (Academic & Classroom Education)
+  if (upper.includes("AONE01") || upper.includes("เช็คชื่อ") || upper.includes("ATTENDANCE")) {
+    return {
+      code: "AONE01",
+      categoryName: "กิจการนักเรียน",
+      tagline: "SMART ATTENDANCE & LINE",
+      icon: Smartphone,
+      gradient: "from-cyan-950 via-slate-900 to-blue-950",
+      borderAccent: "border-cyan-500/40",
+      glowColor: "rgba(6,182,212,0.35)",
+      badgeBg: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
+      pills: ["LINE แจ้งผู้ปกครอง", "เช็คชื่อ 2 วิ", "Google Sheets"],
+      iconColor: "text-cyan-400"
+    };
+  }
+  if (upper.includes("AONE02") || upper.includes("ส่งงาน") || upper.includes("การสอน")) {
+    return {
+      code: "AONE02",
+      categoryName: "วิชาการ & ส่งงาน",
+      tagline: "HOMEWORK SUBMISSION HUB",
+      icon: BookOpen,
+      gradient: "from-emerald-950 via-slate-900 to-teal-950",
+      borderAccent: "border-emerald-500/40",
+      glowColor: "rgba(16,185,129,0.3)",
+      badgeBg: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+      pills: ["ส่งไฟล์การบ้าน", "เช็คส่งงานตรงเวลา", "บันทึกคะแนน"],
+      iconColor: "text-emerald-400"
+    };
+  }
+  if (upper.includes("AONE03") || upper.includes("วินัย") || upper.includes("เครื่องแบบ")) {
+    return {
+      code: "AONE03",
+      categoryName: "วินัย & พฤติกรรม",
+      tagline: "UNIFORM & DISCIPLINE CHECK",
+      icon: ShieldCheck,
+      gradient: "from-violet-950 via-slate-900 to-purple-950",
+      borderAccent: "border-violet-500/40",
+      glowColor: "rgba(139,92,246,0.3)",
+      badgeBg: "bg-violet-500/20 text-violet-300 border-violet-500/40",
+      pills: ["ตัดคะแนนพฤติกรรม", "ตรวจชุดนักเรียน", "รายงานระดับชั้น"],
+      iconColor: "text-violet-400"
+    };
+  }
+  if (upper.includes("AONE04") || upper.includes("ว.PA") || upper.includes("PA")) {
+    return {
+      code: "AONE04",
+      categoryName: "วิทยฐานะครู",
+      tagline: "TEACHER PA PORTFOLIO HUB",
+      icon: Star,
+      gradient: "from-amber-950 via-slate-900 to-orange-950",
+      borderAccent: "border-amber-500/40",
+      glowColor: "rgba(245,158,11,0.3)",
+      badgeBg: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+      pills: ["ประเมิน ว.PA", "สรุปผลลัพธ์การเรียน", "ครู คศ.3"],
+      iconColor: "text-amber-400"
+    };
+  }
+  if (upper.includes("AONE05") || upper.includes("วิชาเลือก") || upper.includes("ชุมนุม")) {
+    return {
+      code: "AONE05",
+      categoryName: "กิจกรรมพัฒนาผู้เรียน",
+      tagline: "ELECTIVE & CLUB SELECTION",
+      icon: Users,
+      gradient: "from-cyan-950 via-slate-900 to-emerald-950",
+      borderAccent: "border-cyan-500/40",
+      glowColor: "rgba(6,182,212,0.3)",
+      badgeBg: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
+      pills: ["จองชุมนุมออนไลน์", "นับโควตาอัตโนมัติ", "ไม่ชนคาบ"],
+      iconColor: "text-cyan-400"
+    };
+  }
+  if (upper.includes("AONE06") || upper.includes("AONE07") || upper.includes("ข้อสอบ") || upper.includes("ตัดเกรด")) {
+    return {
+      code: upper.includes("AONE06") ? "AONE06" : "AONE07",
+      categoryName: "วัด & ประเมินผล",
+      tagline: "EXAM ANALYTICS & GRADING",
+      icon: Activity,
+      gradient: "from-rose-950 via-slate-900 to-purple-950",
+      borderAccent: "border-rose-500/40",
+      glowColor: "rgba(244,63,94,0.3)",
+      badgeBg: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+      pills: ["วิเคราะห์ความยากง่าย", "ตัดเกรด A-F", "กราฟสถิติ"],
+      iconColor: "text-rose-400"
+    };
+  }
+  if (upper.includes("AONE08") || upper.includes("ขออนุญาต") || upper.includes("ออกห้อง")) {
+    return {
+      code: "AONE08",
+      categoryName: "กิจการนักเรียน",
+      tagline: "DIGITAL E-PASS & TIMER",
+      icon: Clock,
+      gradient: "from-blue-950 via-slate-900 to-indigo-950",
+      borderAccent: "border-blue-500/40",
+      glowColor: "rgba(59,130,246,0.3)",
+      badgeBg: "bg-blue-500/20 text-blue-300 border-blue-500/40",
+      pills: ["บัตร E-Pass", "จับเวลานับถอยหลัง", "สแกน QR อนุมัติ"],
+      iconColor: "text-blue-400"
+    };
+  }
+  if (upper.includes("AONE09") || upper.includes("คะแนนเก็บ") || upper.includes("GRADEBOOK")) {
+    return {
+      code: "AONE09",
+      categoryName: "วิชาการ & ตัดเกรด",
+      tagline: "REALTIME GRADEBOOK ENGINE",
+      icon: Award,
+      gradient: "from-emerald-950 via-slate-900 to-cyan-950",
+      borderAccent: "border-emerald-500/40",
+      glowColor: "rgba(16,185,129,0.3)",
+      badgeBg: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+      pills: ["สมุดพกออนไลน์", "ซิงค์คะแนนเก็บ", "ดูผลสอบสด"],
+      iconColor: "text-emerald-400"
+    };
+  }
+  if (upper.includes("AONE10") || upper.includes("จำหน้า") || upper.includes("3D FLASHCARD")) {
+    return {
+      code: "AONE10",
+      categoryName: "นวัตกรรม AI & สื่อการสอน",
+      tagline: "3D FLASHCARD RECOGNITION",
+      icon: Cpu,
+      gradient: "from-pink-950 via-slate-900 to-purple-950",
+      borderAccent: "border-pink-500/50",
+      glowColor: "rgba(236,72,153,0.35)",
+      badgeBg: "bg-pink-500/20 text-pink-300 border-pink-500/40",
+      pills: ["การ์ด 3D หมุน 360°", "จำหน้านักเรียน", "ซิงค์ Drive อัตโนมัติ"],
+      iconColor: "text-pink-400"
+    };
+  }
+  if (upper.includes("AONE11") || upper.includes("สอบปฏิบัติ") || upper.includes("ดนตรี")) {
+    return {
+      code: "AONE11",
+      categoryName: "ดนตรี & ปฏิบัติ",
+      tagline: "PRACTICE EXAM & AUDIO LOG",
+      icon: Music,
+      gradient: "from-purple-950 via-slate-900 to-pink-950",
+      borderAccent: "border-purple-500/40",
+      glowColor: "rgba(168,85,247,0.3)",
+      badgeBg: "bg-purple-500/20 text-purple-300 border-purple-500/40",
+      pills: ["อัดเสียงสอบปฏิบัติ", "เกณฑ์รูบริกส์", "ดนตรีสากล"],
+      iconColor: "text-purple-400"
+    };
+  }
+
+  // 3. AONM Series (Scouts, Activities & Music)
+  if (upper.includes("AONM01") || upper.includes("AONM02") || upper.includes("ลูกเสือ")) {
+    return {
+      code: upper.includes("AONM01") ? "AONM01" : "AONM02",
+      categoryName: "กิจกรรมพัฒนาผู้เรียน",
+      tagline: "SCOUT ACTIVITY & EXPEDITION",
+      icon: Compass,
+      gradient: "from-amber-950 via-slate-900 to-emerald-950",
+      borderAccent: "border-amber-500/40",
+      glowColor: "rgba(245,158,11,0.3)",
+      badgeBg: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+      pills: ["เช็คฐานลูกเสือ", "วิชาพิเศษ", "ตรวจระเบียบแถว"],
+      iconColor: "text-amber-400"
+    };
+  }
+  if (upper.includes("AONM03") || upper.includes("ห้องซ้อม") || upper.includes("BAND")) {
+    return {
+      code: "AONM03",
+      categoryName: "ดนตรี & สตูดิโอ",
+      tagline: "BAND REHEARSAL & STUDIO BOOKING",
+      icon: Music,
+      gradient: "from-pink-950 via-slate-900 to-purple-950",
+      borderAccent: "border-pink-500/40",
+      glowColor: "rgba(236,72,153,0.3)",
+      badgeBg: "bg-pink-500/20 text-pink-300 border-pink-500/40",
+      pills: ["จองห้องซ้อมดนตรี", "ปฏิทินสด Realtime", "ยืมเครื่องดนตรี"],
+      iconColor: "text-pink-400"
+    };
+  }
+
+  // 4. Student Series (STU01, STU02, STU03)
+  if (upper.includes("STU01") || upper.includes("PORTFOLIO") || upper.includes("TCAS")) {
+    return {
+      code: "STU01",
+      categoryName: "สำหรับนักเรียน Gen Z",
+      tagline: "WEB PORTFOLIO TCAS 3D",
+      icon: GraduationCap,
+      gradient: "from-pink-950 via-slate-900 to-purple-950",
+      borderAccent: "border-pink-500/50",
+      glowColor: "rgba(236,72,153,0.4)",
+      badgeBg: "bg-pink-500/20 text-pink-300 border-pink-500/40",
+      pills: ["QR แปะหน้าปกพอร์ต", "เว็บ 3D ส่วนตัว", "ยื่น TCAS รอบ 1"],
+      iconColor: "text-pink-300"
+    };
+  }
+  if (upper.includes("STU02") || upper.includes("การบ้าน") || upper.includes("HOMEWORK")) {
+    return {
+      code: "STU02",
+      categoryName: "สำหรับนักเรียน Gen Z",
+      tagline: "CLASSROOM HOMEWORK HUB",
+      icon: Clock,
+      gradient: "from-cyan-950 via-slate-900 to-blue-950",
+      borderAccent: "border-cyan-500/40",
+      glowColor: "rgba(6,182,212,0.35)",
+      badgeBg: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
+      pills: ["นับถอยหลังวันส่ง", "ดูการบ้านทุกวิชา", "หารคนละ 7 ฿"],
+      iconColor: "text-cyan-300"
+    };
+  }
+  if (upper.includes("STU03") || upper.includes("PROMPT") || upper.includes("AI SECRET")) {
+    return {
+      code: "STU03",
+      categoryName: "สำหรับนักเรียน Gen Z",
+      tagline: "STUDENT AI SECRET KIT",
+      icon: Bot,
+      gradient: "from-amber-950 via-slate-900 to-orange-950",
+      borderAccent: "border-amber-500/40",
+      glowColor: "rgba(245,158,11,0.3)",
+      badgeBg: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+      pills: ["เสกรายงาน 5 บท", "สไลด์ Canva 3 นาที", "ราคา 69 ฿"],
+      iconColor: "text-amber-300"
+    };
+  }
+
+  // Default Generic EduTech Fallback
+  return {
+    code: "AIAON",
+    categoryName: category || "Google Apps Script",
+    tagline: "AUTOMATION ENGINE",
+    icon: Zap,
+    gradient: "from-slate-950 via-slate-900 to-indigo-950",
+    borderAccent: "border-cyan-500/30",
+    glowColor: "rgba(6,182,212,0.25)",
+    badgeBg: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+    pills: ["Google Apps Script", "รันบนชีตตัวเอง", "ไร้ค่ารายเดือน"],
+    iconColor: "text-cyan-400"
+  };
+}
+
 export function ProductCard({ product, index }: ProductCardProps) {
   const { brandTheme } = useBrandTheme();
 
@@ -44,7 +370,6 @@ export function ProductCard({ product, index }: ProductCardProps) {
     ? "hover:border-amber-400 hover:shadow-[0_0_35px_rgba(245,158,11,0.25)]" 
     : "hover:border-cyan-400 hover:shadow-[0_0_35px_rgba(6,182,212,0.25)]";
   const hoverText = isMusicBrand ? "group-hover:text-amber-300" : "group-hover:text-cyan-300";
-  const focusGradient = isMusicBrand ? "from-amber-600 to-orange-400" : "from-cyan-500 to-blue-600";
 
   const priceStr = (product.price || "").trim().toLowerCase();
   const isFree =
@@ -55,85 +380,84 @@ export function ProductCard({ product, index }: ProductCardProps) {
     priceStr === "free" ||
     priceStr === "";
 
-  // Parse numeric price for friendly discount anchor calculation
   const numericPrice = parseInt(priceStr.replace(/[^0-9]/g, ""), 10) || 0;
   const originalAnchorPrice = numericPrice > 0 ? Math.round(numericPrice * 1.6 + 100) : 590;
 
   const isValidId =
     product.id && typeof product.id === "string" && product.id.length > 8;
 
+  // Generate dynamic bespoke theme
+  const coverTheme = getSystemCoverTheme(product.title, product.category);
+  const CoverIcon = coverTheme.icon;
+
   const CardInner = (
     <div className={cn(
       "glass-card flex flex-col h-full rounded-3xl border border-white/10 transition-all duration-300 relative overflow-hidden bg-slate-950/70 shadow-xl hover:bg-slate-900/90",
       hoverBorder
     )}>
-      {/* Top Ambient Glow */}
-      <div className="absolute top-0 right-0 w-36 h-36 bg-cyan-500/10 blur-[50px] rounded-full pointer-events-none" />
+      
+      {/* ── BESPOKE 3D HOLOGRAPHIC COVER ART ─────────────────── */}
+      <div className={cn(
+        "relative w-full aspect-[16/10] shrink-0 border-b border-white/10 overflow-hidden flex flex-col justify-between p-4 sm:p-5 bg-linear-to-br",
+        coverTheme.gradient
+      )}>
+        {/* Background Grid Accent */}
+        <div 
+          className="absolute inset-0 opacity-20 pointer-events-none"
+          style={{
+            backgroundImage: "linear-gradient(to right,#ffffff15 1px,transparent 1px), linear-gradient(to bottom,#ffffff15 1px,transparent 1px)",
+            backgroundSize: "20px 20px"
+          }}
+        />
 
-      {/* FREE Badge Overlay */}
-      {isFree && (
-        <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500 text-zinc-950 text-xs font-black font-prompt shadow-[0_0_20px_rgba(16,185,129,0.7)] border border-emerald-300/40 uppercase tracking-wider animate-pulse">
-          <Gift className="w-3.5 h-3.5 shrink-0" />
-          <span>🎁 รับโค้ดฟรี</span>
+        {/* Ambient Neon Orb */}
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 blur-[50px] rounded-full pointer-events-none opacity-40 group-hover:opacity-75 transition-opacity"
+          style={{ backgroundColor: coverTheme.glowColor }}
+        />
+
+        {/* Top Bar: System Code & Category Badge */}
+        <div className="flex items-center justify-between relative z-10">
+          <div className="flex items-center gap-1.5">
+            <span className="px-2.5 py-1 rounded-lg bg-black/60 border border-white/20 text-white font-mono font-black text-xs tracking-wider shadow-md">
+              {coverTheme.code}
+            </span>
+            {isFree && (
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500 text-zinc-950 text-[10px] font-prompt font-black animate-pulse shadow-md">
+                FREE 🎁
+              </span>
+            )}
+          </div>
+
+          <span className={cn(
+            "px-2.5 py-1 rounded-full text-[10px] font-prompt font-bold border backdrop-blur-md shadow-md",
+            coverTheme.badgeBg
+          )}>
+            {coverTheme.categoryName}
+          </span>
         </div>
-      )}
 
-      {/* 16:9 Cover Image */}
-      <div className="relative w-full aspect-video shrink-0 bg-black/50 border-b border-white/10 overflow-hidden">
-        {(() => {
-          const lowerTitle = product.title.toLowerCase();
-          let mockImage = product.image_url;
+        {/* Center: Hologram 3D Icon & Tagline */}
+        <div className="my-auto flex flex-col items-center justify-center text-center relative z-10 py-1">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-black/40 border border-white/20 backdrop-blur-md flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 mb-2">
+            <CoverIcon className={cn("w-8 h-8 sm:w-9 sm:h-9", coverTheme.iconColor)} />
+          </div>
+          <span className="text-[9px] sm:text-[10px] font-mono uppercase font-black tracking-widest text-white/50 group-hover:text-white/80 transition-colors">
+            {coverTheme.tagline}
+          </span>
+        </div>
 
-          if (!mockImage) {
-            if (lowerTitle.includes("e-commerce") || lowerTitle.includes("payment")) {
-              mockImage = "/images/mockups/ecommerce_store_mockup.png";
-            } else if (lowerTitle.includes("admin") || lowerTitle.includes("crypto") || lowerTitle.includes("dashboard")) {
-              mockImage = "/images/mockups/admin_dashboard_pro.png";
-            } else if (lowerTitle.includes("portfolio") || lowerTitle.includes("gallery") || lowerTitle.includes("design") || lowerTitle.includes("figma")) {
-              mockImage = "/images/mockups/portfolio_creative_ui.png";
-            } else if (lowerTitle.includes("fitness") || lowerTitle.includes("social") || lowerTitle.includes("music") || lowerTitle.includes("app")) {
-              mockImage = "/images/mockups/mobile_app_mockup.png";
-            } else if (lowerTitle.includes("booking") || lowerTitle.includes("event") || lowerTitle.includes("restaurant") || lowerTitle.includes("travel") || lowerTitle.includes("job")) {
-              mockImage = "/images/mockups/booking_schedule_ui.png";
-            } else if (lowerTitle.includes("educational") || lowerTitle.includes("lms") || lowerTitle.includes("mentorship") || lowerTitle.includes("forum")) {
-              mockImage = "/images/mockups/teaching_media_template_1779443134799.png";
-            } else if (lowerTitle.includes("supabase") || lowerTitle.includes("database") || lowerTitle.includes("server") || lowerTitle.includes("api") || lowerTitle.includes("deployment") || lowerTitle.includes("pipeline")) {
-              mockImage = "/images/mockups/workflow_automation_pro_1779443939357.png";
-            } else if (lowerTitle.includes("code review") || lowerTitle.includes("bug") || lowerTitle.includes("refactoring") || lowerTitle.includes("seo") || lowerTitle.includes("audit") || lowerTitle.includes("conversion") || lowerTitle.includes("testing")) {
-              mockImage = "/images/mockups/nextjs_masterclass_1779443916108.png";
-            } else {
-              mockImage = "/images/mockups/system_attendance_line_1779443112798.png";
-            }
-          }
-
-          return mockImage ? (
-            <Image
-              src={mockImage}
-              alt={product.title}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out opacity-85 group-hover:opacity-100"
-            />
-          ) : (
-            <div className={cn(
-              "w-full h-full flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity duration-500 bg-linear-to-br",
-              focusGradient
-            )}>
-              <Download className="w-12 h-12 text-white/50 group-hover:scale-110 group-hover:text-white/80 transition-all duration-500" />
-            </div>
-          );
-        })()}
-
-        {/* Category Badge Overlay */}
-        <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-white/90 border border-white/20 px-3 py-1 rounded-full text-[10px] font-prompt font-semibold tracking-wider shadow-lg z-10">
-          {product.category === "Template" ? "Automation" :
-           product.category === "Service" ? "Creative" :
-           product.category?.toLowerCase() === "ebook" || product.category?.toLowerCase() === "e-book" ? "E-Book" :
-           product.category?.toLowerCase() === "googlescript" || product.category?.toLowerCase() === "google script" ? "Google Script" :
-           product.category}
+        {/* Bottom Bar: Mini Tech Feature Pills */}
+        <div className="flex items-center justify-center gap-1.5 relative z-10 flex-wrap">
+          {coverTheme.pills.map((pill, pIdx) => (
+            <span key={pIdx} className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[9px] font-prompt text-white/60">
+              {pill}
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* Card Body */}
+      {/* ── CARD BODY ─────────────────────────────────────────── */}
       <div className="p-6 flex flex-col flex-1 z-10">
         <h3 className={cn(
           "text-lg font-bold font-prompt text-white mb-2 line-clamp-2 leading-snug transition-colors",
@@ -157,9 +481,6 @@ export function ProductCard({ product, index }: ProductCardProps) {
         <div className="mt-auto space-y-3">
           
           <div className="p-3.5 rounded-2xl bg-linear-to-r from-slate-900 via-black to-slate-900 border border-cyan-500/30 shadow-[inset_0_1px_15px_rgba(6,182,212,0.12)] relative overflow-hidden">
-            {/* Ambient accent light */}
-            <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 blur-[30px] rounded-full pointer-events-none" />
-
             <div className="flex items-center justify-between mb-1.5">
               <span className="text-[10px] font-prompt text-cyan-300 font-semibold flex items-center gap-1">
                 <Zap className="w-3 h-3 text-cyan-400" />
