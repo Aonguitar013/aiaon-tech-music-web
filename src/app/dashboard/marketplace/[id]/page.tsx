@@ -4,6 +4,43 @@ import Link from "next/link";
 import { ArrowLeft, CheckCircle2, ShieldCheck, Mail, ShoppingCart, Download, BadgeCheck, BookOpen, Wrench, Sparkles, MessageSquare } from "lucide-react";
 import * as Icons from "lucide-react";
 
+export function getVipSetupDetails(title: string) {
+  const upper = title.toUpperCase();
+
+  // Tier 3: High Complexity (Multi-Folders + Slides/Docs Template + Triggers + PDF Generator)
+  if (upper.includes("AONE09") || upper.includes("ห้องเรียนสีขาว") || upper.includes("AONA02") || upper.includes("ยานพาหนะ")) {
+    return {
+      priceText: "+690 ฿",
+      tierName: "Enterprise Setup",
+      badge: "ระดับสูง ⭐⭐⭐",
+      description: "ผูก Template เอกสาร Google Docs/Slides + สร้าง 3 Drive Folders + ตั้งค่า Time Triggers และ Deploy พร้อมใช้ 100%"
+    };
+  }
+
+  // Tier 2: Medium Complexity (Drive Folder + QR + Time Trigger + Photo Uploads + Template)
+  if (
+    upper.includes("AONA01") || upper.includes("AONA03") || upper.includes("เกียรติบัตร") ||
+    upper.includes("AONE01") || upper.includes("AONE02") || upper.includes("AONE05") ||
+    upper.includes("AONE08") || upper.includes("AONE10") || upper.includes("3D") ||
+    upper.includes("AONM01") || upper.includes("AONA06")
+  ) {
+    return {
+      priceText: "+350 ฿",
+      tierName: "Standard Setup",
+      badge: "ยอดนิยม ⭐⭐",
+      description: "สร้าง Drive Folder รับไฟล์/รูปภาพ + ผูก Folder ID + เชื่อมฐานข้อมูลชีต และ Deploy พร้อมใช้ 100%"
+    };
+  }
+
+  // Tier 1: Quick Plug & Play (Single Sheet ID / Simple Table)
+  return {
+    priceText: "+190 ฿",
+    tierName: "Quick Setup",
+    badge: "ติดตั้งง่าย ⭐",
+    description: "นำเข้าโครงสร้างตาราง Google Sheets + วางสคริปต์และ Deploy ส่งมอบลิงก์พร้อมใช้ทันที"
+  };
+}
+
 export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const supabase = await createClient();
@@ -67,6 +104,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     priceStr === "free" ||
     priceStr === "";
 
+  const vipSetup = getVipSetupDetails(product.title);
+
   return (
     <div className="w-full max-w-[1200px] mx-auto min-h-screen flex flex-col pb-20">
       <div className="mb-6">
@@ -128,14 +167,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                           {/* Option 2: VIP Setup */}
                           <div className="p-4 rounded-xl border border-amber-500/40 bg-amber-950/20 space-y-2 relative overflow-hidden">
                             <div className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-amber-500 text-zinc-950 text-[10px] font-prompt font-black uppercase">
-                              แนะนำ ⭐
+                              {vipSetup.badge}
                             </div>
-                            <div className="flex items-center justify-between pr-14">
+                            <div className="flex items-center justify-between pr-20">
                               <span className="font-prompt font-bold text-amber-300 text-sm">👑 2. แพ็กเกจ VIP Setup</span>
-                              <span className="font-prompt text-amber-300 font-bold text-sm">+200 ฿</span>
+                              <span className="font-prompt text-amber-300 font-bold text-sm">{vipSetup.priceText}</span>
                             </div>
                             <p className="font-prompt text-xs text-white/60 leading-relaxed">
-                              ครูอ้นนำเข้ารายชื่อนักเรียน/ครู และตั้งค่า Deploy ให้เสร็จสรรพ พร้อมส่งลิงก์ Web App ใช้งานได้ทันทีใน 24 ชม.!
+                              {vipSetup.description}
                             </p>
                           </div>
                         </div>
@@ -187,12 +226,15 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
                   {!isPurchased && !isFree && (
                     <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-prompt text-xs mb-6 space-y-1">
-                      <div className="flex items-center gap-1.5 font-bold">
-                        <Wrench className="w-4 h-4 shrink-0" />
-                        <span>ออปชันเสริม VIP Setup (+200 ฿):</span>
+                      <div className="flex items-center justify-between font-bold">
+                        <span className="flex items-center gap-1.5">
+                          <Wrench className="w-4 h-4 shrink-0" />
+                          <span>ออปชัน VIP Setup ({vipSetup.priceText}):</span>
+                        </span>
+                        <span className="text-[10px] text-amber-400/70">{vipSetup.badge}</span>
                       </div>
                       <p className="text-white/70 text-[11px] leading-relaxed">
-                        ต้องการให้ครูอ้นติดตั้งและขึ้นระบบให้พร้อมใช้ สามารถแจ้งใน LINE ตอนส่งสลิปได้เลยครับ
+                        {vipSetup.description} แจ้งรับบริการใน LINE ตอนส่งสลิปได้เลยครับ
                       </p>
                     </div>
                   )}

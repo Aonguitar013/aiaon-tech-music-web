@@ -517,11 +517,26 @@ export function ProductCard({ product, index }: ProductCardProps) {
           </div>
 
           {/* VIP Setup Micro-badge */}
-          {!isFree && (
-            <div className="text-[10px] font-prompt text-amber-300/80 text-center flex items-center justify-center gap-1.5 py-0.5">
-              <span>🛠️ ออปชันเสริม: ครูอ้นติดตั้งให้พร้อมใช้ (+200 ฿)</span>
-            </div>
-          )}
+          {!isFree && (() => {
+            const upper = product.title.toUpperCase();
+            let vipPrice = "+190 ฿";
+            if (upper.includes("AONE09") || upper.includes("ห้องเรียนสีขาว") || upper.includes("AONA02") || upper.includes("ยานพาหนะ")) {
+              vipPrice = "+690 ฿";
+            } else if (
+              upper.includes("AONA01") || upper.includes("AONA03") || upper.includes("เกียรติบัตร") ||
+              upper.includes("AONE01") || upper.includes("AONE02") || upper.includes("AONE05") ||
+              upper.includes("AONE08") || upper.includes("AONE10") || upper.includes("3D") ||
+              upper.includes("AONM01") || upper.includes("AONA06")
+            ) {
+              vipPrice = "+350 ฿";
+            }
+
+            return (
+              <div className="text-[10px] font-prompt text-amber-300/80 text-center flex items-center justify-center gap-1.5 py-0.5">
+                <span>🛠️ ออปชันเสริม: ครูอ้นติดตั้งให้พร้อมใช้ ({vipPrice})</span>
+              </div>
+            );
+          })()}
 
           {/* Glowing CTA Button */}
           <div className={cn(
