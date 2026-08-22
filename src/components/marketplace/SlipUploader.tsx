@@ -4,9 +4,10 @@ import { useState, useMemo } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import generatePayload from "promptpay-qr";
 import { createClient } from "@/utils/supabase/client";
-import { Upload, CheckCircle, Smartphone, Info, Wrench, Sparkles, ShieldCheck } from "lucide-react";
+import { Upload, CheckCircle, Smartphone, Info, Wrench, Sparkles, ShieldCheck, MessageSquare, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface SlipUploaderProps {
     itemId: string;
@@ -49,6 +50,10 @@ export function SlipUploader({
             return `00020101021129370016A00000067701011101130066${PROMPTPAY_ID.substring(1)}5802TH5303764540${totalAmount}5802TH6304`;
         }
     }, [totalAmount]);
+
+    const lineSetupMessage = useMemo(() => {
+        return `สวัสดีครับครูอ้น ผมสั่งซื้อระบบ "${productTitle}" (ยอด ${totalAmount} ฿) ${includeVipSetup ? "พร้อมเลือกบริการ VIP Setup ให้ครูอ้นติดตั้งให้" : ""} เรียบร้อยแล้วครับ นี่คือข้อมูลสำหรับขึ้นระบบครับ:`;
+    }, [productTitle, totalAmount, includeVipSetup]);
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files || e.target.files.length === 0) return;
@@ -94,9 +99,11 @@ export function SlipUploader({
             if (insertError) throw insertError;
 
             setSuccess(true);
-            setTimeout(() => {
-                router.push(itemType === "course" ? "/dashboard/academy" : "/dashboard/marketplace");
-            }, 5000);
+            if (!includeVipSetup) {
+                setTimeout(() => {
+                    router.push(itemType === "course" ? "/dashboard/academy" : "/dashboard/marketplace");
+                }, 4000);
+            }
 
         } catch (err: unknown) {
             console.error("Upload error: ", err);
@@ -108,15 +115,55 @@ export function SlipUploader({
 
     if (success) {
         return (
-            <div className="glass-card p-10 flex flex-col items-center justify-center text-center border-emerald-500/30 w-full min-h-[400px] rounded-3xl bg-slate-950/80">
-                <CheckCircle className="w-20 h-20 text-emerald-400 mb-6 animate-bounce" />
-                <h2 className="text-3xl font-bold font-prompt text-white mb-4">ส่งหลักฐานการชำระเงินสำเร็จ!</h2>
-                <p className="text-white/70 font-prompt text-base sm:text-lg mb-6 max-w-md">
-                    ขอบคุณสำหรับการสั่งซื้อ ระบบได้แจ้งเตือนครูอ้นเรียบร้อยแล้ว {includeVipSetup && "พร้อมบันทึกคำขอรับบริการติดตั้ง VIP Setup"} กรุณารอการตรวจสอบและปลดล็อกภายใน 24 ชั่วโมงครับ
-                </p>
-                <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden max-w-[200px]">
-                    <div className="h-full bg-emerald-500 rounded-full animate-pulse blur-[1px]"></div>
+            <div className="glass-card p-8 sm:p-12 flex flex-col items-center justify-center text-center border-emerald-500/30 w-full min-h-[450px] rounded-3xl bg-slate-950/90 shadow-2xl space-y-6">
+                <CheckCircle className="w-20 h-20 text-emerald-400 animate-bounce" />
+                
+                <div className="space-y-2">
+                    <h2 className="text-3xl sm:text-4xl font-extrabold font-prompt text-white">
+                        ส่งหลักฐานการชำระเงินสำเร็จ!
+                    </h2>
+                    <p className="text-white/70 font-prompt text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+                        ขอบคุณสำหรับการสั่งซื้อ ระบบได้บันทึกคำสั่งซื้อยอด <strong className="text-emerald-400">{totalAmount} ฿</strong> เรียบร้อยแล้วครับ
+                    </p>
                 </div>
+
+                {/* VIP Setup Action Box */}
+                {includeVipSetup ? (
+                    <div className="w-full max-w-lg p-6 rounded-2xl bg-amber-950/30 border border-amber-500/40 text-left space-y-4 shadow-[0_0_30px_rgba(245,158,11,0.2)]">
+                        <div className="flex items-center gap-2">
+                            <span className="px-3 py-1 rounded-full bg-amber-500 text-zinc-950 text-xs font-prompt font-black uppercase">
+                                👑 บริการ VIP SETUP
+                            </span>
+                            <span className="text-xs text-amber-300 font-prompt">ขั้นตอนถัดไปสำหรับคุณ:</span>
+                        </div>
+                        <p className="text-xs sm:text-sm text-white/80 font-prompt leading-relaxed">
+                            กรุณากดปุ่มด้านล่างเพื่อส่ง <strong>อีเมล Gmail</strong> และ <strong>ไฟล์รายชื่อนักเรียน/บุคลากร</strong> ให้ครูอ้นใน LINE OA เพื่อเริ่มขึ้นระบบให้ทันทีครับ!
+                        </p>
+                        
+                        <a
+                            href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(lineSetupMessage)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full py-4 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-102 cursor-pointer"
+                        >
+                            <MessageSquare className="w-5 h-5 fill-white text-white" />
+                            <span>📲 ส่งรายชื่อ &amp; Gmail ให้ครูอ้นใน LINE OA ทันที</span>
+                        </a>
+                    </div>
+                ) : (
+                    <div className="space-y-3">
+                        <p className="text-xs text-white/50 font-prompt">
+                            แอดมินจะทำการตรวจสอบสลิปและปลดล็อกปุ่มดาวน์โหลดในคลังสินค้าของคุณโดยเร็วที่สุดครับ
+                        </p>
+                        <Link
+                            href="/dashboard/marketplace"
+                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-prompt text-xs font-semibold transition-all"
+                        >
+                            <span>กลับสู่หน้าคลังสินค้า</span>
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </div>
+                )}
             </div>
         );
     }
