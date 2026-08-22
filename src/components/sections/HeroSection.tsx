@@ -1,256 +1,179 @@
 "use client";
 
 import { motion, useAnimation, Variants } from "framer-motion";
-import { ArrowRight, PlayCircle, ChevronDown } from "lucide-react";
+import { ArrowRight, Sparkles, Gift, GraduationCap, Package, CheckCircle2, ShieldCheck, Zap, Users, School } from "lucide-react";
 import Link from "next/link";
 
 /* ============================================================
-   ANIMATION VARIANTS — defined outside component to avoid
-   re-creation on every render.
+   ANIMATION VARIANTS
 ============================================================ */
 
-/** Shared staggered container — children animate in sequence */
 const containerVariants: Variants = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.13,
+      staggerChildren: 0.1,
       delayChildren: 0.1,
     },
   },
 };
 
-/** Fade-up for badge, subtext, and buttons */
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 24 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
-/** Scale-in with slight upward drift for the main heading */
 const headingVariant: Variants = {
-  hidden: { opacity: 0, y: 36, scale: 0.97 },
+  hidden: { opacity: 0, y: 30, scale: 0.98 },
   show: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
   },
 };
-
-/** Scroll chevron infinite bounce */
-const chevronVariants: Variants = {
-  initial: { y: 0, opacity: 0.5 },
-  animate: {
-    y: [0, 10, 0],
-    opacity: [0.5, 1, 0.5],
-    transition: {
-      duration: 2,
-      ease: "easeInOut",
-      repeat: Infinity,
-    },
-  },
-};
-
-/* ============================================================
-   COMPONENT
-============================================================ */
 
 export function HeroSection() {
-  const playControls = useAnimation();
-
   return (
     <section
-      className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden px-4"
+      className="relative pt-12 pb-16 flex flex-col items-center justify-center overflow-hidden px-4"
       aria-label="Hero Section"
     >
-      {/* ── Background decorations ──────────────────────────── */}
+      {/* Background ambient orbs */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[500px] bg-blue-600/10 blur-[140px] rounded-full mix-blend-screen pointer-events-none -translate-x-1/2" />
+      <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-pink-600/10 blur-[140px] rounded-full mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-0 left-1/3 w-[500px] h-[500px] bg-purple-600/10 blur-[140px] rounded-full mix-blend-screen pointer-events-none" />
 
-      {/* Diagonal tinted overlay */}
+      {/* Grid Pattern Overlay */}
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(59,130,246,0.08) 0%, transparent 50%, rgba(245,158,11,0.08) 100%)",
-        }}
-      />
-
-      {/* Blue ambient orb — top-left */}
-      <div className="absolute top-0 left-0 w-1/2 h-[75%] bg-blue-600/10 blur-[130px] rounded-full mix-blend-screen pointer-events-none -translate-x-1/4 -translate-y-1/4" />
-
-      {/* Amber ambient orb — bottom-right */}
-      <div className="absolute bottom-0 right-0 w-1/2 h-[75%] bg-amber-600/10 blur-[130px] rounded-full mix-blend-screen pointer-events-none translate-x-1/4 translate-y-1/4" />
-
-      {/* Fine inner grid (denser than global grid for hero depth) */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-50"
+        className="absolute inset-0 pointer-events-none opacity-40"
         style={{
           backgroundImage:
             "linear-gradient(to right,rgba(255,255,255,0.04) 1px,transparent 1px), linear-gradient(to bottom,rgba(255,255,255,0.04) 1px,transparent 1px)",
-          backgroundSize: "32px 32px",
+          backgroundSize: "36px 36px",
         }}
       />
 
-      {/* ── Main content container ───────────────────────────── */}
+      {/* Main Content Container */}
       <motion.div
-        className="max-w-5xl mx-auto text-center z-10 space-y-8 flex-1 flex flex-col items-center justify-center"
+        className="max-w-5xl mx-auto text-center z-10 space-y-7 flex flex-col items-center justify-center"
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
-        {/* Badge */}
+        {/* Top Floating Badge */}
         <motion.div variants={fadeUp}>
-          <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-card text-sm font-medium text-white/80 select-none">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75 animate-ping" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-400" />
-            </span>
-            <span className="text-blue-400 font-semibold tracking-wide">Technology</span>
-            <span className="text-white/25 font-light">×</span>
-            <span className="text-amber-400 font-semibold tracking-wide">Music</span>
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75 animate-ping" style={{ animationDelay: "0.5s" }} />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
-            </span>
-          </span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs sm:text-sm font-prompt font-semibold tracking-wide shadow-[0_0_25px_rgba(6,182,212,0.25)]">
+            <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
+            <span>ไอทีง่ายๆ สไตล์ไอ้อ้น — ระบบอัตโนมัติและ AI เพื่อการศึกษา</span>
+          </div>
         </motion.div>
 
         {/* Main Heading */}
         <motion.h1
           variants={headingVariant}
-          className="font-prompt text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.08]"
+          className="font-prompt text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.12]"
         >
-          <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-300 to-cyan-400 drop-shadow-[0_0_28px_rgba(59,130,246,0.35)]">
-            AiAon Tech
-          </span>
-          <span className="text-white/25 mx-3 md:mx-5 font-extralight">&amp;</span>
-          <br className="sm:hidden" />
-          <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-orange-400 to-orange-500 drop-shadow-[0_0_28px_rgba(245,158,11,0.35)]">
-            Music Studio
+          เสกงานเอกสารโรงเรียน &amp; งานเรียน{" "}
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-purple-400 to-pink-400 drop-shadow-[0_0_35px_rgba(168,85,247,0.4)]">
+            เสร็จในคลิกเดียว
           </span>
         </motion.h1>
 
         {/* Subtext */}
         <motion.p
           variants={fadeUp}
-          className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto font-prompt font-light leading-relaxed"
+          className="text-base sm:text-xl text-white/75 max-w-3xl mx-auto font-prompt font-normal leading-relaxed"
         >
-          เสกงานเอกสารให้เสร็จในคลิกเดียว ด้วย{" "}
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300 font-semibold">
-            ระบบอัตโนมัติ & AI สไตล์บ้านๆ
-          </span>{" "}
-          ช่วยผ่อนแรงครูไทย เลิกงานตรงเวลา พร้อมคลัง{" "}
-          <span className="text-amber-400 font-semibold">20 ระบบสำเร็จรูป</span> และบริการงานดนตรีครบวงจร
+          ช่วยผ่อนแรงครูไทย เลิกงานตรงเวลา พร้อมเครื่องมือช่วยเรียนสำหรับนักเรียนยุคใหม่ รันบน Google Workspace ของตัวเอง ปลอดภัย 100% ไม่มีค่าบริการรายเดือน
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* --- DUAL ACTION BUTTONS + FREEBIE BADGE --- */}
         <motion.div
           variants={fadeUp}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 w-full sm:w-auto"
         >
-          {/* ── Cyan Tech Button ── */}
+          {/* Cyan Teacher Button */}
           <Link
             href="/digital-vault"
-            id="hero-cta-tech"
             className="group relative w-full sm:w-auto"
           >
-            {/* Expanding glow layer behind the button */}
             <span
-              className="absolute inset-0 rounded-full bg-linear-to-r from-blue-600 to-cyan-500 blur-md opacity-40 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500 pointer-events-none"
+              className="absolute inset-0 rounded-2xl bg-linear-to-r from-blue-600 to-cyan-500 blur-md opacity-40 group-hover:opacity-80 transition-all duration-300 pointer-events-none"
               aria-hidden="true"
             />
-            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full bg-linear-to-r from-blue-600 to-cyan-500 group-hover:from-blue-500 group-hover:to-cyan-400 text-white font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_24px_rgba(59,130,246,0.35)]">
-              📦 คลัง 20 ระบบพร้อมใช้งาน (Digital Vault)
-              {/* Arrow slides right on hover */}
-              <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" />
+            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-7 py-4 rounded-2xl bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-prompt font-bold text-base transition-all duration-300 group-hover:scale-105 shadow-lg">
+              <Package className="w-5 h-5 shrink-0" />
+              <span>📦 ดูคลัง 20 ระบบครู &amp; โรงเรียน</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
           </Link>
 
-          {/* ── Amber Music Button (Secondary styled) ── */}
+          {/* Pink Student Button */}
           <Link
-            href="/dashboard/academy?category=Music"
-            id="hero-cta-music"
+            href="/student-vault"
             className="group relative w-full sm:w-auto"
-            onMouseEnter={() => playControls.start("pulse")}
-            onMouseLeave={() => playControls.start("idle")}
           >
-            {/* Pulsing warm glow - softer for secondary style */}
             <span
-              className="absolute inset-0 rounded-full bg-linear-to-r from-amber-500 to-orange-500 blur-md opacity-10 group-hover:opacity-30 group-hover:scale-105 transition-all duration-500 pointer-events-none"
+              className="absolute inset-0 rounded-2xl bg-linear-to-r from-pink-600 via-purple-600 to-indigo-600 blur-md opacity-30 group-hover:opacity-75 transition-all duration-300 pointer-events-none"
               aria-hidden="true"
             />
-            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full glass-card border border-amber-500/40 text-amber-400 group-hover:text-amber-300 font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_12px_rgba(245,158,11,0.1)] hover:bg-amber-500/5">
-              {/* Animated play icon */}
-              <motion.span
-                animate={playControls}
-                variants={{
-                  idle: { rotate: 0, scale: 1 },
-                  pulse: {
-                    rotate: [0, -12, 0, -8, 0],
-                    scale: [1, 1.18, 1, 1.12, 1],
-                    transition: { duration: 0.55, ease: "easeInOut" },
-                  },
-                }}
-                initial="idle"
-                className="flex items-center"
-              >
-                <PlayCircle className="w-5 h-5" />
-              </motion.span>
-              บริการทำดนตรี & มิกซ์เสียง
+            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-7 py-4 rounded-2xl bg-linear-to-r from-pink-600 via-purple-600 to-indigo-600 hover:from-pink-500 hover:to-indigo-500 text-white font-prompt font-bold text-base transition-all duration-300 group-hover:scale-105 shadow-lg border border-pink-400/30">
+              <GraduationCap className="w-5 h-5 shrink-0 text-pink-200" />
+              <span>🎒 คลังนักเรียน &amp; TCAS (69-129 ฿)</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
           </Link>
         </motion.div>
 
-        {/* Stats row — subtle social proof */}
+        {/* Freebie Claim Hook */}
+        <motion.div variants={fadeUp} className="pt-1">
+          <Link
+            href="/digital-vault"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-prompt text-xs sm:text-sm font-semibold hover:bg-emerald-500/20 transition-all hover:scale-105"
+          >
+            <Gift className="w-4 h-4 text-emerald-400 shrink-0 animate-bounce" />
+            <span>🎁 สมาชิกใหม่รับฟรี: ระบบฝึกจำหน้านักเรียน &amp; คำศัพท์ 3D Flashcard →</span>
+          </Link>
+        </motion.div>
+
+        {/* --- BLOCK 2: TRUST & SOCIAL PROOF BADGES --- */}
         <motion.div
           variants={fadeUp}
-          className="flex items-center justify-center gap-8 pt-4 text-center"
+          className="pt-6 w-full max-w-4xl"
         >
-          {[
-            { value: "1,200+", label: "ชั่วโมงงานที่ประหยัดได้" },
-            { value: "500+", label: "นักเรียน & ครูร่วมเรียน" },
-            { value: "50+", label: "ระบบอัตโนมัติเปิดใช้งาน" },
-          ].map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center gap-0.5">
-              <span className="font-prompt text-xl font-bold text-white">{stat.value}</span>
-              <span className="font-prompt text-xs text-white/40 uppercase tracking-wider">{stat.label}</span>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10 shadow-lg">
+            <div className="flex flex-col items-center justify-center p-2 text-center">
+              <Zap className="w-5 h-5 text-cyan-400 mb-1" />
+              <span className="font-prompt text-xl sm:text-2xl font-black text-white">20+</span>
+              <span className="font-prompt text-[11px] text-white/50">ระบบ Apps Script พร้อมใช้</span>
             </div>
-          ))}
-        </motion.div>
-      </motion.div>
 
-      {/* ── Scroll Indicator ────────────────────────────────── */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5">
-        <span className="font-prompt text-[10px] uppercase tracking-[0.2em] text-white/30 select-none">
-          Scroll
-        </span>
-        {/* Animated mouse icon */}
-        <div className="w-6 h-9 rounded-full border border-white/20 flex items-start justify-center pt-1.5 relative overflow-hidden">
-          <motion.div
-            className="w-1 h-2 rounded-full bg-white/50"
-            animate={{
-              y: [0, 10, 0],
-              opacity: [0.8, 0.2, 0.8],
-            }}
-            transition={{
-              duration: 1.8,
-              ease: "easeInOut",
-              repeat: Infinity,
-            }}
-          />
-        </div>
-        {/* Bouncing chevron */}
-        <motion.div
-          variants={chevronVariants}
-          initial="initial"
-          animate="animate"
-        >
-          <ChevronDown className="w-4 h-4 text-white/30" />
+            <div className="flex flex-col items-center justify-center p-2 text-center border-l border-white/10">
+              <Users className="w-5 h-5 text-pink-400 mb-1" />
+              <span className="font-prompt text-xl sm:text-2xl font-black text-white">2,390+</span>
+              <span className="font-prompt text-[11px] text-white/50">เพื่อนสมาชิกร่วมติดตาม</span>
+            </div>
+
+            <div className="flex flex-col items-center justify-center p-2 text-center border-l border-white/10">
+              <ShieldCheck className="w-5 h-5 text-emerald-400 mb-1" />
+              <span className="font-prompt text-xl sm:text-2xl font-black text-white">100%</span>
+              <span className="font-prompt text-[11px] text-white/50">รันบน Google ตัวเองปลอดภัย</span>
+            </div>
+
+            <div className="flex flex-col items-center justify-center p-2 text-center border-l border-white/10">
+              <School className="w-5 h-5 text-amber-400 mb-1" />
+              <span className="font-prompt text-xl sm:text-2xl font-black text-white">0 ฿</span>
+              <span className="font-prompt text-[11px] text-white/50">ไม่มีค่าบริการรายเดือน</span>
+            </div>
+          </div>
         </motion.div>
-      </div>
+
+      </motion.div>
     </section>
   );
 }

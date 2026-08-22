@@ -1,26 +1,21 @@
-import { AcademySection } from "@/components/sections/AcademySection";
-import { SaaSSection } from "@/components/sections/SaaSSection";
-import { PricingPopup } from "@/components/ui/PricingPopup";
-import { createClient } from "@/utils/supabase/server";
+import { HomeView } from "@/components/home/HomeView";
+import type { Metadata } from "next";
 
-export default async function Home() {
-  const supabase = await createClient();
+export const metadata: Metadata = {
+  title: "AiAon Tech — เสกงานเอกสารโรงเรียน & งานเรียนให้เสร็จในคลิกเดียว",
+  description:
+    "รวมระบบอัตโนมัติ Google Apps Script สำเร็จรูป 20 ระบบ, คลังไอเทมช่วยเรียนสำหรับนักเรียน Gen Z, แพ็กเกจเหมาลด 51% และบริการรับพัฒนาระบบตามสั่งสำหรับสถานศึกษา",
+  keywords: [
+    "AiAon Tech", "ครูอ้น", "Google Apps Script", "ระบบเช็คชื่อ", "ระบบโรงเรียน", "Portfolio TCAS", "SaaS", "การศึกษาไทย"
+  ],
+  openGraph: {
+    title: "AiAon Tech — เสกงานเอกสารโรงเรียน & งานเรียนให้เสร็จในคลิกเดียว",
+    description:
+      "รวมระบบอัตโนมัติ Google Apps Script สำเร็จรูป 20 ระบบ, คลังไอเทมช่วยเรียนสำหรับนักเรียน Gen Z และบริการรับพัฒนาระบบตามสั่ง",
+    type: "website",
+  },
+};
 
-  // Preserved for future online courses release
-  const { data: rawCourses } = await supabase
-    .from('courses')
-    .select('*')
-    .order('created_at')
-    .limit(6);
-
-  const courses = rawCourses ?? [];
-
-  return (
-    <div className="flex flex-col gap-24 pb-24">
-      {/* Temporarily hidden until course videos are ready */}
-      {/* <AcademySection courses={courses} /> */}
-      <SaaSSection />
-      <PricingPopup />
-    </div>
-  );
+export default function Home() {
+  return <HomeView />;
 }
