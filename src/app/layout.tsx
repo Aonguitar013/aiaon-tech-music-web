@@ -123,10 +123,10 @@ export default async function RootLayout({
                     <h3 className="text-white font-bold font-prompt text-lg">Quick Links</h3>
                     <ul className="space-y-2 text-white/50 text-sm font-prompt">
                        <li><a href="/about"    className="hover:text-blue-400 transition-colors duration-200">About Me</a></li>
-                      <li><a href="/#academy"  className="hover:text-blue-400 transition-colors duration-200">Academy</a></li>
+                      <li><a href="/student-vault" className="hover:text-pink-400 text-pink-300 font-semibold transition-colors duration-200">🎒 คลังนักเรียน &amp; TCAS</a></li>
                       <li><a href="/bundles"   className="hover:text-purple-400 text-purple-300 font-semibold transition-colors duration-200">✨ แพ็กเกจเหมาสุดคุ้ม (Bundles)</a></li>
-                      <li><a href="/digital-vault" className="hover:text-blue-400 transition-colors duration-200">Marketplace (20 ระบบ)</a></li>
-                      <li><a href="/saas"     className="hover:text-blue-400 transition-colors duration-200">iAon IT ง่ายๆ</a></li>
+                      <li><a href="/digital-vault" className="hover:text-blue-400 transition-colors duration-200">คลัง 20 ระบบ (Digital Vault)</a></li>
+                      <li><a href="/services" className="hover:text-teal-400 transition-colors duration-200">บริการรับทำระบบตามสั่ง</a></li>
                     </ul>
                   </div>
 

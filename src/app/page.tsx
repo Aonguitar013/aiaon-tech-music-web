@@ -6,7 +6,7 @@ import { createClient } from "@/utils/supabase/server";
 export default async function Home() {
   const supabase = await createClient();
 
-  // Fetch first 6 courses for Landing Page preview
+  // Preserved for future online courses release
   const { data: rawCourses } = await supabase
     .from('courses')
     .select('*')
@@ -17,7 +17,8 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col gap-24 pb-24">
-      <AcademySection courses={courses} />
+      {/* Temporarily hidden until course videos are ready */}
+      {/* <AcademySection courses={courses} /> */}
       <SaaSSection />
       <PricingPopup />
     </div>

@@ -31,7 +31,6 @@ interface RouteItem {
 
 const routes: RouteItem[] = [
   { name: "หน้าแรก", href: "/", icon: Terminal, hoverColor: "cyan" },
-  { name: "คอร์สเรียน", href: "/#academy", icon: GraduationCap, hoverColor: "cyan" },
   {
     name: "เครื่องมือ & ระบบ",
     icon: Wrench,
