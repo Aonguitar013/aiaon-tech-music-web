@@ -516,6 +516,13 @@ export function ProductCard({ product, index }: ProductCardProps) {
             </div>
           </div>
 
+          {/* VIP Setup Micro-badge */}
+          {!isFree && (
+            <div className="text-[10px] font-prompt text-amber-300/80 text-center flex items-center justify-center gap-1.5 py-0.5">
+              <span>🛠️ ออปชันเสริม: ครูอ้นติดตั้งให้พร้อมใช้ (+200 ฿)</span>
+            </div>
+          )}
+
           {/* Glowing CTA Button */}
           <div className={cn(
             "w-full py-3.5 px-5 rounded-2xl text-white font-prompt text-sm font-bold flex items-center justify-center gap-2 transition-all duration-300 group-hover:scale-[1.02] shadow-lg cursor-pointer",

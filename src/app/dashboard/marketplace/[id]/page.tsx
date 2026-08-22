@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, ShieldCheck, Mail, ShoppingCart, Download, BadgeCheck, BookOpen } from "lucide-react";
+import { ArrowLeft, CheckCircle2, ShieldCheck, Mail, ShoppingCart, Download, BadgeCheck, BookOpen, Wrench, Sparkles, MessageSquare } from "lucide-react";
 import * as Icons from "lucide-react";
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -52,10 +52,20 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     rawDesc = rawDesc.replace(matchType[0], "").trim();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const IconComponent = (Icons as any)[product.icon_name || "Package"] || Icons.Package;
   const isService = product.category === "Service" || product.category === "Creative";
   const colorClass = product.color_classes || "text-amber-400 bg-amber-500/10 border-amber-500/20";
   const buttonClass = product.button_classes || "bg-amber-600 hover:bg-amber-500 shadow-amber-600/10 hover:shadow-[0_0_15px_rgba(245,158,11,0.35)]";
+
+  const priceStr = (product.price || "").trim().toLowerCase();
+  const isFree =
+    priceStr === "0" ||
+    priceStr === "0 thb" ||
+    priceStr === "ฟรี" ||
+    priceStr === "0 บาท" ||
+    priceStr === "free" ||
+    priceStr === "";
 
   return (
     <div className="w-full max-w-[1200px] mx-auto min-h-screen flex flex-col pb-20">
@@ -68,8 +78,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Detail Area */}
           <div className="lg:col-span-2 flex flex-col gap-6">
-             <div className="glass-card p-8 md:p-10 border-white/10 relative overflow-hidden">
-                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 blur-3xl rounded-full pointer-events-none -mr-20 -mt-20"></div>
+             <div className="glass-card p-8 md:p-10 border-white/10 relative overflow-hidden bg-slate-950/80 rounded-3xl">
+                 <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 blur-3xl rounded-full pointer-events-none -mr-20 -mt-20"></div>
                  
                  <div className="flex items-start justify-between gap-4 mb-6">
                      <div className={`w-20 h-20 rounded-2xl flex items-center justify-center border shadow-lg ${colorClass}`}>
@@ -85,16 +95,53 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                  </div>
 
                  <div className="bg-white/10 text-white/80 border border-white/20 inline-block px-3 py-1 rounded-full text-xs font-prompt font-medium uppercase tracking-wider mb-4 shadow">
-                     {product.category === "Template" ? "ระบบ / สคริปต์" : product.category === "Service" ? "ดนตรี / ดีไซน์" : "บริการ / ที่ปรึกษา"}
+                     {product.category === "Template" ? "Google Apps Script" : product.category === "Service" ? "บริการพัฒนา" : "เทมเพลตอัตโนมัติ"}
                  </div>
 
                  <h1 className="text-3xl md:text-5xl font-bold font-prompt text-white mb-6 leading-tight">
                      {product.title}
                  </h1>
                  
-                 <div className="prose prose-invert max-w-none font-prompt text-white/70 leading-relaxed text-lg">
+                 <div className="prose prose-invert max-w-none font-prompt text-white/70 leading-relaxed text-base sm:text-lg">
                     <p>{rawDesc}</p>
                     
+                    {/* 2 Package Options Box */}
+                    {!isFree && (
+                      <div className="my-8 p-6 rounded-2xl border border-cyan-500/30 bg-cyan-950/20 space-y-4">
+                        <h3 className="text-lg font-bold font-prompt text-white flex items-center gap-2 m-0">
+                          <Sparkles className="w-5 h-5 text-cyan-400" />
+                          <span>เลือกรูปแบบการรับระบบที่เหมาะกับคุณ:</span>
+                        </h3>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1 not-prose">
+                          {/* Option 1: DIY */}
+                          <div className="p-4 rounded-xl border border-white/10 bg-black/40 space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="font-prompt font-bold text-white text-sm">📦 1. แพ็กเกจติดตั้งเอง (DIY)</span>
+                              <span className="font-prompt text-cyan-400 font-bold text-sm">{product.price}</span>
+                            </div>
+                            <p className="font-prompt text-xs text-white/60 leading-relaxed">
+                              รับไฟล์โค้ดคลีนแล้ว + ตาราง CSV + คู่มือ 3 สเต็ปเสร็จใน 2 นาที รันบนชีตตัวเองได้ทันที
+                            </p>
+                          </div>
+
+                          {/* Option 2: VIP Setup */}
+                          <div className="p-4 rounded-xl border border-amber-500/40 bg-amber-950/20 space-y-2 relative overflow-hidden">
+                            <div className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-amber-500 text-zinc-950 text-[10px] font-prompt font-black uppercase">
+                              แนะนำ ⭐
+                            </div>
+                            <div className="flex items-center justify-between pr-14">
+                              <span className="font-prompt font-bold text-amber-300 text-sm">👑 2. แพ็กเกจ VIP Setup</span>
+                              <span className="font-prompt text-amber-300 font-bold text-sm">+200 ฿</span>
+                            </div>
+                            <p className="font-prompt text-xs text-white/60 leading-relaxed">
+                              ครูอ้นนำเข้ารายชื่อนักเรียน/ครู และตั้งค่า Deploy ให้เสร็จสรรพ พร้อมส่งลิงก์ Web App ใช้งานได้ทันทีใน 24 ชม.!
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     <h3 className="text-xl text-white font-bold mt-10 mb-4 border-b border-white/10 pb-2">สิ่งที่คุณจะได้รับ</h3>
                     <ul className="space-y-3 mt-4 list-none pl-0">
                         <li className="flex items-start gap-3">
@@ -103,18 +150,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                         </li>
                         <li className="flex items-start gap-3">
                             <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-1" />
-                            <span>คู่มือการติดตั้งและการใช้งานทีละขั้นตอนอย่างละเอียด</span>
+                            <span>โฟลเดอร์ภาษาไทยระดับ Gold Standard พร้อมคู่มือการติดตั้ง 3 สเต็ปอย่างละเอียด</span>
                         </li>
                         <li className="flex items-start gap-3">
                             <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-1" />
-                            <span>อัปเดตเวอร์ชันใหม่ฟรีตลอดอายุการใช้งาน</span>
+                            <span>โครงสร้าง Google Sheets ตัวอย่าง และซอร์สโค้ด Apps Script พร้อม Deploy ทันที</span>
                         </li>
-                        {isService && (
-                            <li className="flex items-start gap-3">
-                                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-1" />
-                                <span>Support ตอบคำถามและให้คำปรึกษาทางเทคนิคส่วนตัว</span>
-                            </li>
-                        )}
+                        <li className="flex items-start gap-3">
+                            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-1" />
+                            <span>Support ตอบคำถามและให้คำปรึกษาทางเทคนิคโดยครูอ้นผ่าน LINE OA @deu6776s</span>
+                        </li>
                     </ul>
                  </div>
              </div>
@@ -122,7 +167,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
           {/* Sticky Checkout Sidebar */}
           <div className="lg:col-span-1 relative">
-              <div className={`sticky top-8 glass-card p-6 flex flex-col shadow-2xl transition-all ${isPurchased ? "border-emerald-500/20" : "border-white/10"}`}>
+              <div className={`sticky top-8 glass-card p-6 flex flex-col shadow-2xl transition-all rounded-3xl bg-slate-950/90 ${isPurchased ? "border-emerald-500/30" : "border-white/10"}`}>
                   
                   {/* Purchased banner inside sidebar */}
                   {isPurchased && (
@@ -135,40 +180,50 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                       </div>
                   )}
 
-                  <p className="text-sm text-white/50 font-prompt mb-1">ราคา</p>
-                  <div className={`text-4xl font-bold font-prompt mb-6 ${isPurchased ? "text-emerald-400" : "text-white"}`}>
+                  <p className="text-xs text-white/50 font-prompt mb-1">ราคาเริ่มต้น (แพ็กเกจไฟล์โค้ด)</p>
+                  <div className={`text-4xl font-black font-prompt mb-4 ${isPurchased ? "text-emerald-400" : "text-white"}`}>
                       {product.price}
                   </div>
 
+                  {!isPurchased && !isFree && (
+                    <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-prompt text-xs mb-6 space-y-1">
+                      <div className="flex items-center gap-1.5 font-bold">
+                        <Wrench className="w-4 h-4 shrink-0" />
+                        <span>ออปชันเสริม VIP Setup (+200 ฿):</span>
+                      </div>
+                      <p className="text-white/70 text-[11px] leading-relaxed">
+                        ต้องการให้ครูอ้นติดตั้งและขึ้นระบบให้พร้อมใช้ สามารถแจ้งใน LINE ตอนส่งสลิปได้เลยครับ
+                      </p>
+                    </div>
+                  )}
+
                   {parsedType && (
-                      <div className="bg-black/30 rounded-lg p-4 mb-6 border border-white/5">
-                          <p className="text-xs text-white/40 font-prompt mb-1">รูปแบบการส่งมอบ / ประเภท</p>
-                          <p className="text-sm text-white/80 font-prompt font-medium">{parsedType}</p>
+                      <div className="bg-black/30 rounded-lg p-3 mb-6 border border-white/5">
+                          <p className="text-[10px] text-white/40 font-prompt mb-0.5">รูปแบบการส่งมอบ / ประเภท</p>
+                          <p className="text-xs text-white/80 font-prompt font-medium">{parsedType}</p>
                       </div>
                   )}
 
                   {/* === Conditional CTA Button === */}
                   {isPurchased ? (
                       <div className="flex flex-col gap-3 mb-4">
-                          {/* Already purchased — open file_url directly in new tab */}
                           <a
                               href={product.file_url || "/dashboard/profile"}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="w-full py-4 rounded-xl text-white font-prompt font-bold text-lg transition-all shadow-lg shadow-black/40 flex items-center justify-center gap-2 group bg-emerald-600 hover:bg-emerald-500"
+                              className="w-full py-4 rounded-2xl text-zinc-950 font-prompt font-bold text-base transition-all shadow-lg flex items-center justify-center gap-2 group bg-emerald-400 hover:bg-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.4)] cursor-pointer"
                           >
                               <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
-                              ดาวน์โหลด / เข้าถึงไฟล์
+                              <span>📥 ดาวน์โหลด / เข้าถึงไฟล์</span>
                           </a>
 
-                          {/* eBook / User Guide Reader or Download */}
                           {product.ebook_content ? (
                               <Link
                                   href={`/dashboard/marketplace/${product.id}/reader`}
-                                  className="w-full py-3 rounded-xl text-emerald-400 font-prompt font-medium text-base transition-all border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/5 hover:bg-emerald-500/10 flex items-center justify-center gap-2 group"
+                                  className="w-full py-3 rounded-2xl text-emerald-400 font-prompt font-medium text-sm transition-all border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/5 hover:bg-emerald-500/10 flex items-center justify-center gap-2 group"
                               >
                                   <BookOpen className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                                  เริ่มอ่าน E-Book ออนไลน์
+                                  เริ่มอ่านคู่มือออนไลน์
                               </Link>
                           ) : (
                               product.ebook_url && (
@@ -176,38 +231,53 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                       href={product.ebook_url}
                                       target="_blank"
                                       rel="noopener noreferrer"
-                                      className="w-full py-3 rounded-xl text-emerald-400 font-prompt font-medium text-base transition-all border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/5 hover:bg-emerald-500/10 flex items-center justify-center gap-2 group"
+                                      className="w-full py-3 rounded-2xl text-emerald-400 font-prompt font-medium text-sm transition-all border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/5 hover:bg-emerald-500/10 flex items-center justify-center gap-2 group"
                                   >
                                       <BookOpen className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                                      คู่มือ / E-Book การใช้งาน
+                                      คู่มือการใช้งาน
                                   </a>
                               )
                           )}
                       </div>
                   ) : (
-                      // Not yet purchased
-                      <Link
-                          href={`/dashboard/marketplace/checkout/${product.id}`}
-                          className={`w-full py-4 rounded-xl text-white font-prompt font-bold text-lg transition-all shadow-lg shadow-black/40 flex items-center justify-center gap-2 mb-4 group ${buttonClass}`}
-                      >
-                          {isService ? (
-                              <><Mail className="w-5 h-5 group-hover:-translate-y-1 transition-transform" /> ติดต่อขอใบเสนอราคา</>
-                          ) : (
-                              <><ShoppingCart className="w-5 h-5 group-hover:-translate-y-1 transition-transform" /> สั่งซื้อเลยตอนนี้</>
-                          )}
-                      </Link>
+                      <div className="space-y-3 mb-4">
+                        <Link
+                            href={`/dashboard/marketplace/checkout/${product.id}`}
+                            className={`w-full py-4 rounded-2xl text-white font-prompt font-bold text-base transition-all shadow-lg flex items-center justify-center gap-2 group cursor-pointer ${buttonClass}`}
+                        >
+                            {isService ? (
+                                <><Mail className="w-5 h-5 group-hover:-translate-y-1 transition-transform" /> ติดต่อขอใบเสนอราคา</>
+                            ) : (
+                                <><ShoppingCart className="w-5 h-5 group-hover:-translate-y-1 transition-transform" /> สั่งซื้อระบบทันที</>
+                            )}
+                        </Link>
+
+                        <a
+                          href="https://lin.ee/poMESoP"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-3 rounded-2xl bg-[#06C755]/10 hover:bg-[#06C755]/20 border border-[#06C755]/40 text-[#06C755] font-prompt font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
+                        >
+                          <MessageSquare className="w-4 h-4" />
+                          <span>ปรึกษาหรือสั่งซื้อผ่าน LINE OA</span>
+                        </a>
+                      </div>
                   )}
-                  
-                  <div className="flex items-center justify-center gap-2 text-xs text-white/40 font-prompt mt-2">
-                       {isPurchased ? (
-                           <><BadgeCheck className="w-4 h-4 text-emerald-500/70" /> คุณเป็นเจ้าของสินค้านี้แล้ว</>
-                       ) : (
-                           <><ShieldCheck className="w-4 h-4 text-emerald-500/70" /> การันตีความปลอดภัย ชำระเงินผ่านระบบ 100%</>
-                       )}
+
+                  <div className="pt-4 border-t border-white/5 space-y-2 text-white/50 text-[11px] font-prompt">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                      <span>รันบน Google Workspace ตัวเอง 100%</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                      <span>ไม่มีค่าธรรมเนียมรายเดือน จ่ายครั้งเดียวตลอดชีพ</span>
+                    </div>
                   </div>
+                  
               </div>
           </div>
       </div>
     </div>
-  )
+  );
 }
