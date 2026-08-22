@@ -1,18 +1,123 @@
 import { createClient } from "@/utils/supabase/server";
-import { FreebiesView } from "@/components/freebies/FreebiesView";
+import { FreebiesView, Freebie } from "@/components/freebies/FreebiesView";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "คลังดาวน์โหลดของแจกฟรี | TechxMusic",
+  title: "คลังของแจกฟรี — โค้ด Google Apps Script, เทมเพลต และ AI Prompts | AiAon Tech",
   description:
-    "รวมทรัพยากรดิจิทัลฟรีด้านเทคโนโลยีและดนตรี — n8n Workflow, MIDI Pack, Google Sheets Tracker และ Guitar Loop Pack สำหรับครูและนักดนตรีไทย",
-  keywords: ["ฟรี", "ดาวน์โหลด", "MIDI", "n8n", "Google Sheets", "Loop Pack", "iAon"],
+    "ดาวน์โหลดทรัพยากรดิจิทัลฟรี 100% — ระบบ Google Apps Script, เทมเพลต Google Sheets ตัดเกรด, คัมภีร์ AI Prompts สำหรับครูและนักเรียน และ Backing Track ดนตรี",
+  keywords: ["ของแจกฟรี", "Google Apps Script ฟรี", "เทมเพลตชีต", "AI Prompt ครู", "AiAon Tech", "ครูอ้น"],
   openGraph: {
-    title: "คลังดาวน์โหลดของแจกฟรี | TechxMusic",
-    description: "ดาวน์โหลดทรัพยากรดิจิทัลฟรี ทั้งด้านเทคโนโลยีและดนตรีคุณภาพสูง",
+    title: "คลังของแจกฟรี — โค้ด Google Apps Script, เทมเพลต และ AI Prompts | AiAon Tech",
+    description: "ดาวน์โหลดทรัพยากรดิจิทัลฟรี 100% จาก AiAon Tech โดย ครูอ้น",
     type: "website",
   },
 };
+
+const REAL_BUILTIN_FREEBIES: Freebie[] = [
+  {
+    id: "freebie-gas-3d-flashcard",
+    title: "ระบบฝึกจำหน้านักเรียน & คำศัพท์ 3D Flashcard",
+    description: "ระบบเว็บแอป Web App สไตล์ 3D หมุนการ์ด ดึงรูปภาพจาก Google Drive และ Google Sheets ซิงค์คะแนนอัตโนมัติ สำหรับเปิดในห้องเรียนหรือให้นักเรียนฝึกจำ",
+    category: "tech",
+    icon_name: "Code2",
+    color_from: "from-cyan-500",
+    color_to: "to-blue-600",
+    glow_color: "rgba(6,182,212,0.3)",
+    border_color: "border-cyan-500/30",
+    text_color: "text-cyan-400",
+    bg_color: "bg-cyan-500/10",
+    tag: "AONE10 (Google Apps Script)",
+    file_size: "1.2 MB",
+    file_type: "GAS Web App",
+    download_url: "https://lin.ee/poMESoP",
+  },
+  {
+    id: "freebie-gas-asset-qr",
+    title: "ระบบบัตรติดทรัพย์สิน & สร้าง QR Code ครุภัณฑ์",
+    description: "ระบบสร้างรหัส QR Code ติดอุปกรณ์และครุภัณฑ์โรงเรียนแบบชุดใหญ่ พิมพ์เป็นสติกเกอร์ติดทรัพย์สินได้ใน 1 วินาที สแกนเช็คประวัติได้ทันที",
+    category: "tech",
+    icon_name: "QrCode",
+    color_from: "from-purple-500",
+    color_to: "to-pink-600",
+    glow_color: "rgba(168,85,247,0.3)",
+    border_color: "border-purple-500/30",
+    text_color: "text-purple-400",
+    bg_color: "bg-purple-500/10",
+    tag: "AONA04 (ระบบบริหารงานครู)",
+    file_size: "850 KB",
+    file_type: "GAS & Sheet",
+    download_url: "https://lin.ee/poMESoP",
+  },
+  {
+    id: "freebie-smart-grade-tracker",
+    title: "เทมเพลต Google Sheets คำนวณคะแนน & ตัดเกรดอัตโนมัติ",
+    description: "ตารางบันทึกคะแนนเก็บและตัดเกรดอัตโนมัติ 8 กลุ่มสาระ พร้อมสูตรคำนวณเกรดเฉลี่ย, สถิติร้อยละ และกราฟแท่งสรุปผลการเรียนแบบมือโปร",
+    category: "tech",
+    icon_name: "FileSpreadsheet",
+    color_from: "from-emerald-500",
+    color_to: "to-teal-600",
+    glow_color: "rgba(16,185,129,0.3)",
+    border_color: "border-emerald-500/30",
+    text_color: "text-emerald-400",
+    bg_color: "bg-emerald-500/10",
+    tag: "Google Sheets Template",
+    file_size: "450 KB",
+    file_type: "Google Sheet",
+    download_url: "https://lin.ee/poMESoP",
+  },
+  {
+    id: "freebie-teacher-ai-prompts",
+    title: "คัมภีร์ 20 AI Prompts สำหรับครูไทย ยุคใหม่",
+    description: "รวมชุดคำสั่ง AI Prompts ภาษาไทย ช่วยคุณครูเขียนแผนการจัดการเรียนรู้, ออกข้อสอบกากบาทพร้อมเฉลย และเขียนรายงานสรุปผลงาน ว.PA ใน 3 นาที",
+    category: "tech",
+    icon_name: "Sparkles",
+    color_from: "from-amber-500",
+    color_to: "to-orange-600",
+    glow_color: "rgba(245,158,11,0.3)",
+    border_color: "border-amber-500/30",
+    text_color: "text-amber-400",
+    bg_color: "bg-amber-500/10",
+    tag: "AI Teacher Mastery",
+    file_size: "2.4 MB",
+    file_type: "PDF & Prompts",
+    download_url: "https://lin.ee/poMESoP",
+  },
+  {
+    id: "freebie-student-ai-starter",
+    title: "Student AI Prompts Starter Pack (สำหรับนักเรียน)",
+    description: "รวมชุดคำสั่ง AI สำหรับนักเรียน ช่วยเสกโครงร่างรายงาน 5 บท, สรุปบทเรียนทำข้อสอบ และเจนเนื้อหาสไลด์ Canva พรีเซนต์ใน 3 นาที",
+    category: "tech",
+    icon_name: "GraduationCap",
+    color_from: "from-pink-500",
+    color_to: "to-rose-600",
+    glow_color: "rgba(244,63,94,0.3)",
+    border_color: "border-pink-500/30",
+    text_color: "text-pink-400",
+    bg_color: "bg-pink-500/10",
+    tag: "สำหรับนักเรียน Gen Z",
+    file_size: "1.8 MB",
+    file_type: "Digital PDF",
+    download_url: "https://lin.ee/poMESoP",
+  },
+  {
+    id: "freebie-guitar-backing-pack",
+    title: "Lo-Fi & Acoustic Guitar Backing Track Pack (10 แทร็ค)",
+    description: "รวม 10 แทร็คดนตรี Backing Track สไตล์ Lo-Fi/Acoustic คุณภาพเสียงสตูดิโอ พร้อมตารางคอร์ดประกอบ สำหรับนักเรียนและคุณครูซ้อมดนตรีและทำคลิป",
+    category: "music",
+    icon_name: "Music2",
+    color_from: "from-purple-600",
+    color_to: "to-indigo-600",
+    glow_color: "rgba(147,51,234,0.3)",
+    border_color: "border-purple-500/30",
+    text_color: "text-purple-300",
+    bg_color: "bg-purple-500/10",
+    tag: "Studio Music Assets",
+    file_size: "68 MB",
+    file_type: "ZIP Audio (WAV/MP3)",
+    download_url: "https://lin.ee/poMESoP",
+  },
+];
 
 export default async function FreebiesPage() {
   const supabase = await createClient();
@@ -20,96 +125,14 @@ export default async function FreebiesPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // 1. Fetch native freebies
-  const { data: freebies } = await supabase
+  // Fetch optional database freebies
+  const { data: dbFreebies } = await supabase
     .from('freebies')
     .select('*')
     .order('created_at', { ascending: true });
 
-  // 2. Fetch all products to check for free ones (price = 0 or free)
-  const { data: products } = await supabase
-    .from('products')
-    .select('*');
-
-  const freeProducts = (products || []).filter(product => {
-    const priceStr = (product.price || "").trim().toLowerCase();
-    return priceStr === "0" || 
-           priceStr === "0 thb" || 
-           priceStr === "ฟรี" || 
-           priceStr === "0 บาท" || 
-           priceStr === "free" ||
-           priceStr === "";
-  });
-
-  // 3. Map free products to Freebie structure
-  const mappedProducts = freeProducts.map(product => {
-    const lowerTitle = product.title.toLowerCase();
-    
-    let description = product.description;
-    let fileType = "ZIP";
-    let fileSize = "-";
-    
-    // Parse formatting info from description if present
-    const matchFormat = description.match(/\(Format:\s*(.+?)\)/i);
-    const matchType = description.match(/\(Type:\s*(.+?)\)/i);
-    const matchSize = description.match(/\(Size:\s*(.+?)\)/i);
-    
-    if (matchFormat) {
-      fileType = matchFormat[1];
-      description = description.replace(matchFormat[0], "").trim();
-    } else if (matchType) {
-      fileType = matchType[1];
-      description = description.replace(matchType[0], "").trim();
-    }
-    if (matchSize) {
-      fileSize = matchSize[1];
-      description = description.replace(matchSize[0], "").trim();
-    }
-
-    // Determine category: tech or music
-    const isMusic = product.category?.toLowerCase() === "service" || 
-                    product.category?.toLowerCase() === "creative" ||
-                    lowerTitle.includes("music") || 
-                    lowerTitle.includes("guitar") || 
-                    lowerTitle.includes("loop") || 
-                    lowerTitle.includes("chords");
-
-    const category = isMusic ? "music" : "tech";
-
-    // Setup visual tokens depending on category
-    const color_from = isMusic ? "from-purple-500" : "from-cyan-500";
-    const color_to = isMusic ? "to-pink-600" : "to-blue-600";
-    const glow_color = isMusic ? "rgba(168,85,247,0.25)" : "rgba(34,211,238,0.25)";
-    const border_color = isMusic ? "border-purple-500/20" : "border-cyan-500/20";
-    const text_color = isMusic ? "text-purple-400" : "text-cyan-400";
-    const bg_color = isMusic ? "bg-purple-500/8" : "bg-cyan-500/8";
-
-    // Download URL: if direct file or ebook URL exists, download it, else route to product details page
-    const download_url = product.file_url || 
-                          product.ebook_url || 
-                          `/dashboard/marketplace/${product.id}`;
-
-    return {
-      id: product.id,
-      title: product.title,
-      description: description,
-      category: category as "tech" | "music",
-      icon_name: product.icon_name || "Gift",
-      color_from,
-      color_to,
-      glow_color,
-      border_color,
-      text_color,
-      bg_color,
-      tag: product.category === "Template" ? "Automation" : product.category === "Service" ? "Creative" : (product.category || "ของแจกฟรี"),
-      file_size: fileSize,
-      file_type: fileType,
-      download_url: download_url
-    };
-  });
-
-  // Combine both arrays
-  const combinedFreebies = [...(freebies || []), ...mappedProducts];
+  // Merge built-in real systems with any database freebies
+  const combinedFreebies = [...REAL_BUILTIN_FREEBIES, ...(dbFreebies || [])];
 
   return <FreebiesView user={user} initialFreebies={combinedFreebies} />;
 }

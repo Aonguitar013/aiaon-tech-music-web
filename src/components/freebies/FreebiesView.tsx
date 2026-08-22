@@ -214,8 +214,8 @@ function LineUnlockModal({
         </h3>
 
         <p className="text-white/80 font-prompt text-sm leading-relaxed mb-6">
-          รับรหัสปลดล็อกโค้ดฟรี! เพียงกดเพิ่มเพื่อนใน LINE OA{" "}
-          <span className="text-[#06C755] font-bold">@poMESoP</span>
+          รับรหัสและลิงก์ปลดล็อกไฟล์ฟรี! เพียงกดเพิ่มเพื่อนใน LINE OA{" "}
+          <span className="text-[#06C755] font-bold">@deu6776s (AiAon Tech)</span>
         </p>
 
         {/* Action 1: Add LINE Button */}
