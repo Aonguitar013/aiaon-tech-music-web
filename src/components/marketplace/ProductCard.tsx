@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Tag, Gift, Download } from "lucide-react";
+import { Tag, Gift, Download, Sparkles, ShieldCheck, Zap, ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
@@ -40,12 +40,11 @@ export function ProductCard({ product, index }: ProductCardProps) {
   }
 
   const isMusicBrand = brandTheme === "music";
-  const hoverBorder = isMusicBrand ? "hover:border-amber-500/40" : "hover:border-blue-500/30";
-  const hoverText = isMusicBrand ? "group-hover:text-amber-400" : "group-hover:text-blue-400";
-  const focusGradient = isMusicBrand ? "from-amber-600 to-orange-400" : "from-blue-500 to-cyan-400";
-  const buttonBg = isMusicBrand
-    ? "bg-amber-600 hover:bg-amber-500 shadow-amber-600/10 hover:shadow-[0_0_15px_rgba(245,158,11,0.35)]"
-    : "bg-blue-600 hover:bg-blue-500 shadow-blue-600/10 hover:shadow-[0_0_15px_rgba(59,130,246,0.35)]";
+  const hoverBorder = isMusicBrand 
+    ? "hover:border-amber-400 hover:shadow-[0_0_35px_rgba(245,158,11,0.25)]" 
+    : "hover:border-cyan-400 hover:shadow-[0_0_35px_rgba(6,182,212,0.25)]";
+  const hoverText = isMusicBrand ? "group-hover:text-amber-300" : "group-hover:text-cyan-300";
+  const focusGradient = isMusicBrand ? "from-amber-600 to-orange-400" : "from-cyan-500 to-blue-600";
 
   const priceStr = (product.price || "").trim().toLowerCase();
   const isFree =
@@ -56,27 +55,31 @@ export function ProductCard({ product, index }: ProductCardProps) {
     priceStr === "free" ||
     priceStr === "";
 
+  // Parse numeric price for friendly discount anchor calculation
+  const numericPrice = parseInt(priceStr.replace(/[^0-9]/g, ""), 10) || 0;
+  const originalAnchorPrice = numericPrice > 0 ? Math.round(numericPrice * 1.6 + 100) : 590;
+
   const isValidId =
     product.id && typeof product.id === "string" && product.id.length > 8;
 
   const CardInner = (
     <div className={cn(
-      "glass-card flex flex-col h-full border border-white/10 transition-all duration-300 relative overflow-hidden bg-white/5 shadow-xl hover:bg-white/[0.03]",
+      "glass-card flex flex-col h-full rounded-3xl border border-white/10 transition-all duration-300 relative overflow-hidden bg-slate-950/70 shadow-xl hover:bg-slate-900/90",
       hoverBorder
     )}>
-      {/* FREE Badge */}
+      {/* Top Ambient Glow */}
+      <div className="absolute top-0 right-0 w-36 h-36 bg-cyan-500/10 blur-[50px] rounded-full pointer-events-none" />
+
+      {/* FREE Badge Overlay */}
       {isFree && (
-        <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-400 text-black text-[10px] font-black font-prompt shadow-[0_0_15px_rgba(52,211,153,0.6)] border border-emerald-300/30 uppercase tracking-wider animate-pulse">
-          <Gift className="w-3 h-3 shrink-0" />
-          <span>แจกฟรี</span>
+        <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500 text-zinc-950 text-xs font-black font-prompt shadow-[0_0_20px_rgba(16,185,129,0.7)] border border-emerald-300/40 uppercase tracking-wider animate-pulse">
+          <Gift className="w-3.5 h-3.5 shrink-0" />
+          <span>🎁 รับโค้ดฟรี</span>
         </div>
       )}
 
       {/* 16:9 Cover Image */}
-      <div className={cn(
-        "relative w-full aspect-video shrink-0 bg-black/40 border-b border-white/10 overflow-hidden transition-colors",
-        hoverBorder
-      )}>
+      <div className="relative w-full aspect-video shrink-0 bg-black/50 border-b border-white/10 overflow-hidden">
         {(() => {
           const lowerTitle = product.title.toLowerCase();
           let mockImage = product.image_url;
@@ -98,20 +101,8 @@ export function ProductCard({ product, index }: ProductCardProps) {
               mockImage = "/images/mockups/workflow_automation_pro_1779443939357.png";
             } else if (lowerTitle.includes("code review") || lowerTitle.includes("bug") || lowerTitle.includes("refactoring") || lowerTitle.includes("seo") || lowerTitle.includes("audit") || lowerTitle.includes("conversion") || lowerTitle.includes("testing")) {
               mockImage = "/images/mockups/nextjs_masterclass_1779443916108.png";
-            } else if (lowerTitle.includes("ระบบเช็กชื่อ") || lowerTitle.includes("line") || lowerTitle.includes("notification") || lowerTitle.includes("chat")) {
-              mockImage = "/images/mockups/system_attendance_line_1779443112798.png";
-            } else if (lowerTitle.includes("สื่อการสอน")) {
-              mockImage = "/images/mockups/teaching_media_template_1779443134799.png";
-            } else if (lowerTitle.includes("apps script")) {
-              mockImage = "/images/mockups/apps_script_course_1779443157476.png";
-            } else if (lowerTitle.includes("blog") || lowerTitle.includes("magazine")) {
-              mockImage = "/images/mockups/blog_magazine_template_1779443181794.png";
-            } else if (lowerTitle.includes("real estate")) {
-              mockImage = "/images/mockups/real_estate_ui_1779443205255.png";
-            } else if (lowerTitle.includes("startup") || lowerTitle.includes("landing page") || lowerTitle.includes("link in bio")) {
-              mockImage = "/images/mockups/startup_landing_page_1779443225117.png";
             } else {
-              mockImage = "/images/mockups/portfolio_creative_ui.png";
+              mockImage = "/images/mockups/system_attendance_line_1779443112798.png";
             }
           }
 
@@ -120,7 +111,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
               src={mockImage}
               alt={product.title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out opacity-90 group-hover:opacity-100"
+              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out opacity-85 group-hover:opacity-100"
             />
           ) : (
             <div className={cn(
@@ -133,7 +124,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
         })()}
 
         {/* Category Badge Overlay */}
-        <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white/80 border border-white/20 px-3 py-1 rounded-full text-[10px] font-prompt font-medium uppercase tracking-wider shadow-lg z-10">
+        <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-white/90 border border-white/20 px-3 py-1 rounded-full text-[10px] font-prompt font-semibold tracking-wider shadow-lg z-10">
           {product.category === "Template" ? "Automation" :
            product.category === "Service" ? "Creative" :
            product.category?.toLowerCase() === "ebook" || product.category?.toLowerCase() === "e-book" ? "E-Book" :
@@ -142,47 +133,75 @@ export function ProductCard({ product, index }: ProductCardProps) {
         </div>
       </div>
 
-      {/* Decorative glow at bottom */}
-      <div className={cn(
-        "absolute bottom-0 right-0 w-40 h-40 opacity-5 group-hover:opacity-15 blur-[40px] rounded-full transition-opacity duration-500 pointer-events-none bg-linear-to-br",
-        focusGradient
-      )}></div>
-
-      <div className="p-6 flex flex-col flex-1 z-10 bg-linear-to-b from-black/0 to-black/40">
+      {/* Card Body */}
+      <div className="p-6 flex flex-col flex-1 z-10">
         <h3 className={cn(
-          "text-lg font-bold font-prompt text-white mb-2 line-clamp-2 leading-tight transition-colors",
+          "text-lg font-bold font-prompt text-white mb-2 line-clamp-2 leading-snug transition-colors",
           hoverText
         )}>
           {product.title}
         </h3>
 
         {parsedType && (
-          <div className="flex items-center gap-1.5 mb-3 text-xs font-prompt text-emerald-400">
-            <Tag className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-1.5 mb-2.5 text-xs font-prompt text-cyan-400">
+            <Tag className="w-3.5 h-3.5 shrink-0" />
             <span className="truncate">{parsedType}</span>
           </div>
         )}
 
-        <p className="text-sm font-prompt text-white/50 mb-6 flex-1 line-clamp-3 leading-relaxed">
+        <p className="text-xs font-prompt text-white/60 mb-5 flex-1 line-clamp-3 leading-relaxed">
           {rawDesc}
         </p>
 
-        {/* Price & Action Section */}
-        <div className="mt-auto pt-4 border-t border-white/10">
-          <div className="flex justify-between items-center border-b border-white/10 pb-3 mb-4">
-            <span className="text-xs text-white/40 font-prompt uppercase tracking-wider">ราคาเริ่มต้น</span>
-            <span className={cn(
-              "text-xl font-bold font-prompt",
-              isMusicBrand ? "text-amber-400" : "text-blue-400"
-            )}>
-              {product.price}
-            </span>
+        {/* --- FUTURISTIC & FRIENDLY CYBERPUNK NEON PRICE CAPSULE --- */}
+        <div className="mt-auto space-y-3">
+          
+          <div className="p-3.5 rounded-2xl bg-linear-to-r from-slate-900 via-black to-slate-900 border border-cyan-500/30 shadow-[inset_0_1px_15px_rgba(6,182,212,0.12)] relative overflow-hidden">
+            {/* Ambient accent light */}
+            <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 blur-[30px] rounded-full pointer-events-none" />
+
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[10px] font-prompt text-cyan-300 font-semibold flex items-center gap-1">
+                <Zap className="w-3 h-3 text-cyan-400" />
+                {isFree ? "ของขวัญฟรีสำหรับคุณ" : "ดีลพิเศษสำหรับครู & นักเรียน"}
+              </span>
+              <span className="text-[9px] font-prompt text-white/50 bg-white/10 px-2 py-0.5 rounded-md border border-white/10">
+                {isFree ? "แจกฟรี 100%" : "จ่ายครั้งเดียวตลอดชีพ"}
+              </span>
+            </div>
+
+            <div className="flex items-baseline justify-between pt-0.5">
+              <div className="flex items-baseline gap-2">
+                <span className={cn(
+                  "font-prompt text-2xl font-black tracking-tight",
+                  isFree 
+                    ? "text-emerald-400 drop-shadow-[0_0_12px_rgba(16,185,129,0.5)]" 
+                    : "text-transparent bg-clip-text bg-linear-to-r from-cyan-300 via-white to-amber-200 drop-shadow-[0_0_12px_rgba(6,182,212,0.4)]"
+                )}>
+                  {isFree ? "0 ฿" : product.price}
+                </span>
+
+                {!isFree && numericPrice > 0 && (
+                  <span className="font-prompt text-xs text-white/35 line-through">
+                    {originalAnchorPrice} ฿
+                  </span>
+                )}
+              </div>
+
+              <span className="text-[10px] font-prompt text-emerald-400 flex items-center gap-1 font-medium">
+                <ShieldCheck className="w-3 h-3" />
+                <span>ไม่มีรายเดือน</span>
+              </span>
+            </div>
           </div>
 
+          {/* Glowing CTA Button */}
           <div className={cn(
-            "w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-white font-prompt text-sm font-bold transition-all duration-300 group-hover:scale-[1.02] active:scale-95 shadow-lg",
+            "w-full py-3.5 px-5 rounded-2xl text-white font-prompt text-sm font-bold flex items-center justify-center gap-2 transition-all duration-300 group-hover:scale-[1.02] shadow-lg cursor-pointer",
             isValidId 
-              ? (isFree ? "bg-linear-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 shadow-[0_0_20px_rgba(16,185,129,0.3)]" : buttonBg) 
+              ? (isFree 
+                  ? "bg-linear-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.4)]" 
+                  : "bg-linear-to-r from-blue-600 via-cyan-500 to-indigo-600 hover:from-blue-500 hover:to-cyan-400 text-white shadow-[0_0_25px_rgba(6,182,212,0.35)]") 
               : "bg-white/10 text-white/40 cursor-not-allowed"
           )}>
             {isFree ? (
@@ -194,9 +213,11 @@ export function ProductCard({ product, index }: ProductCardProps) {
               <>
                 <Download className="w-4 h-4 shrink-0" />
                 <span>สั่งซื้อระบบพร้อมใช้ →</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </>
             )}
           </div>
+
         </div>
       </div>
     </div>
