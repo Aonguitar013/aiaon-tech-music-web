@@ -178,8 +178,8 @@ export function SlipUploader({
                 <h3 className="text-xl font-bold font-prompt text-white mb-1.5 flex items-center gap-2">
                     <Smartphone className="w-5 h-5 text-cyan-400" /> สแกนจ่ายผ่าน QR Code พร้อมเพย์
                 </h3>
-                <p className="text-xs font-prompt text-white/50 mb-6 text-center max-w-[280px]">
-                    โอนตรงเข้าพร้อมเพย์ครูอ้น (083-539-9340) ยอดเงินจะเปลี่ยนอัตโนมัติ
+                <p className="text-xs font-prompt text-white/60 mb-6 text-center max-w-[280px]">
+                    ชื่อบัญชี: <strong className="text-white">นายจิรวัฒน์ เดชเส้ง</strong> (083-539-9340)
                 </p>
 
                 {/* QR Code Container */}
