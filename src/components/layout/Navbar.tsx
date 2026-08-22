@@ -46,9 +46,10 @@ const routes: RouteItem[] = [
     icon: ShoppingBag,
     hoverColor: "amber",
     items: [
+      { name: "คลังนักเรียน & TCAS (69-129 ฿)", href: "/student-vault", icon: GraduationCap, hoverColor: "pink" },
       { name: "แพ็กเกจเหมาสุดคุ้ม (Bundles)", href: "/bundles", icon: Sparkles, hoverColor: "purple" },
       { name: "คลังสินค้าดิจิทัล (Digital Vault)", href: "/digital-vault", icon: ShoppingBag, hoverColor: "amber" },
-      { name: "บริการติดตั้ง DFY", href: "/services", icon: Briefcase, hoverColor: "teal" },
+      { name: "บริการรับทำระบบตามสั่ง", href: "/services", icon: Briefcase, hoverColor: "teal" },
     ],
   },
   { name: "เกี่ยวกับเรา", href: "/about", icon: Info, hoverColor: "cyan" },
