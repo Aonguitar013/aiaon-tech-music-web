@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import generatePayload from "promptpay-qr";
 import { createClient } from "@/utils/supabase/client";
-import { Upload, CheckCircle, Smartphone, Info, Wrench, Sparkles, ShieldCheck, MessageSquare, ArrowRight } from "lucide-react";
+import { Upload, CheckCircle, Smartphone, Info, Wrench, Sparkles, ShieldCheck, MessageSquare, ArrowRight, Download } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -142,6 +142,12 @@ export function SlipUploader({
         }
     };
 
+    const PRODUCT_DOWNLOAD_LINKS: Record<string, string> = {
+        'AONE02': 'https://1drv.ms/f/c/ce3ad5ba004eb0c7/IgATR6et6O-BS61MuoKMqj_GAYU-TtWQfIJanJqGekSkGbk?e=AaoHOh',
+    };
+    const matchedDownloadUrl = Object.entries(PRODUCT_DOWNLOAD_LINKS).find(([k]) => productTitle.includes(k))?.[1];
+    const directDownloadUrl = matchedDownloadUrl || (itemType === "course" ? `/dashboard/academy/${itemId}` : `/dashboard/marketplace/${itemId}`);
+
     if (success) {
         return (
             <div className="glass-card p-8 sm:p-12 flex flex-col items-center justify-center text-center border-emerald-500/30 w-full min-h-[450px] rounded-3xl bg-slate-950/90 shadow-2xl space-y-6">
@@ -182,6 +188,25 @@ export function SlipUploader({
                             <MessageSquare className="w-5 h-5 fill-white text-white" />
                             <span>📲 ส่งรายชื่อ &amp; Gmail ให้ครูอ้นใน LINE OA ทันที</span>
                         </a>
+                    </div>
+                ) : aiApproved ? (
+                    <div className="w-full max-w-md space-y-3 pt-2">
+                        <a
+                            href={directDownloadUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full py-4 px-6 rounded-2xl bg-linear-to-r from-emerald-400 via-teal-400 to-emerald-300 hover:from-emerald-300 hover:to-teal-200 text-zinc-950 font-prompt font-extrabold text-base flex items-center justify-center gap-2 shadow-[0_0_35px_rgba(16,185,129,0.5)] transition-all hover:scale-102 cursor-pointer"
+                        >
+                            <Download className="w-5 h-5" />
+                            <span>📥 ดาวน์โหลด / เข้าถึงไฟล์ใน OneDrive ทันที</span>
+                        </a>
+                        <Link
+                            href={itemType === "course" ? `/dashboard/academy/${itemId}` : `/dashboard/marketplace/${itemId}`}
+                            className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-prompt text-xs font-semibold transition-all"
+                        >
+                            <span>หน้ารายละเอียดและคู่มือ</span>
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
                     </div>
                 ) : (
                     <div className="space-y-3">
