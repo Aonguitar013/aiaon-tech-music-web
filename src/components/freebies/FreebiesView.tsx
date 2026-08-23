@@ -213,20 +213,41 @@ function LineUnlockModal({
           {freebie.title}
         </h3>
 
-        <p className="text-white/80 font-prompt text-sm leading-relaxed mb-6">
-          รับรหัสและลิงก์ปลดล็อกไฟล์ฟรี! เพียงกดเพิ่มเพื่อนใน LINE OA{" "}
+        <p className="text-white/80 font-prompt text-sm leading-relaxed mb-4">
+          รับรหัสและลิงก์ปลดล็อกไฟล์ฟรี! เพียงสแกน QR Code หรือกดเพิ่มเพื่อนใน LINE OA{" "}
           <span className="text-[#06C755] font-bold">@deu6776s (AiAon Tech)</span>
         </p>
 
-        {/* Action 1: Add LINE Button */}
+        {/* QR Code Card for Desktop & Mobile */}
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 mb-4 flex flex-col items-center gap-2.5 shadow-inner">
+          <div className="p-2 bg-white rounded-xl shadow-md ring-2 ring-[#06C755]/40">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fpage.line.me%2Fdeu6776s" 
+              alt="LINE OA @deu6776s QR Code" 
+              className="w-32 h-32 md:w-36 md:h-36 block rounded-lg"
+            />
+          </div>
+          <div className="text-center">
+            <div className="text-xs font-prompt text-white/90 font-semibold flex items-center justify-center gap-1.5 flex-wrap">
+              <span>สแกน QR Code หรือค้นหา LINE ID:</span>
+              <span className="text-[#06C755] font-bold select-all bg-[#06C755]/15 px-2 py-0.5 rounded-md border border-[#06C755]/30">@deu6776s</span>
+            </div>
+            <p className="text-[11px] font-prompt text-white/50 mt-1">
+              เปิดกล้องมือถือสแกน เพื่อทักแชตรับรหัสผ่านปลดล็อกได้ทันที
+            </p>
+          </div>
+        </div>
+
+        {/* Action 1: Add LINE Button (Universal Link: page.line.me) */}
         <a
-          href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent("ขอรับรหัสปลดล็อกฟรี: " + freebie.title)}`}
+          href="https://page.line.me/deu6776s"
           target="_blank"
           rel="noopener noreferrer"
           className="w-full py-3.5 px-6 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-base flex items-center justify-center gap-2.5 shadow-[0_0_25px_rgba(6,199,85,0.35)] hover:shadow-[0_0_35px_rgba(6,199,85,0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-95 mb-6 cursor-pointer"
         >
           <RiLineLine className="w-6 h-6 fill-white shrink-0" />
-          <span>แอด LINE รับรหัสทันที</span>
+          <span>เปิดหน้า LINE OA (@deu6776s)</span>
         </a>
 
         {/* Divider */}
