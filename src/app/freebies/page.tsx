@@ -30,7 +30,7 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
     tag: "AONE12 (ระบบบริหารความปลอดภัยสถานศึกษา)",
     file_size: "1.5 MB",
     file_type: "GAS Web App & A4 Print",
-    download_url: "https://lin.ee/poMESoP",
+    download_url: "https://1drv.ms/f/c/ce3ad5ba004eb0c7/IgD_Jr6rfSsxSpAKzMlvYwa0AUZTGXnV_mi0Q5WW4ra9jKI?e=6afyzo",
   },
   {
     id: "freebie-gas-3d-flashcard",
