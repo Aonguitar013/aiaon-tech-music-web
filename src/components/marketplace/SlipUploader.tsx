@@ -128,11 +128,6 @@ export function SlipUploader({
 
             setAiApproved(isAiVerified);
             setSuccess(true);
-            if (!includeVipSetup) {
-                setTimeout(() => {
-                    router.push(itemType === "course" ? `/dashboard/academy/${itemId}` : `/dashboard/marketplace/${itemId}`);
-                }, 3500);
-            }
 
         } catch (err: unknown) {
             console.error("Upload error: ", err);
