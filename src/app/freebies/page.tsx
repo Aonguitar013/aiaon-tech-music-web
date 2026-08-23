@@ -16,6 +16,23 @@ export const metadata: Metadata = {
 
 const REAL_BUILTIN_FREEBIES: Freebie[] = [
   {
+    id: "freebie-gas-active-shooter",
+    title: "ระบบเช็กชื่อเผชิญเหตุฉุกเฉิน & Active Shooter (Auto Safe Zone)",
+    description: "ระบบเช็กชื่อออนไลน์ Real-time แผนเผชิญเหตุฉุกเฉิน คัดกรองกลุ่มเปราะบางเข้า Safe Zone อัตโนมัติ เช็คมาทุกคน 1 คลิก พร้อม Dashboard สรุปยอด และแบบพิมพ์รายงาน A4 เสนอผู้บริหาร",
+    category: "tech",
+    icon_name: "ShieldAlert",
+    color_from: "from-rose-500",
+    color_to: "to-red-700",
+    glow_color: "rgba(225,29,72,0.35)",
+    border_color: "border-rose-500/30",
+    text_color: "text-rose-400",
+    bg_color: "bg-rose-500/10",
+    tag: "AONE12 (ระบบบริหารความปลอดภัยสถานศึกษา)",
+    file_size: "1.5 MB",
+    file_type: "GAS Web App & A4 Print",
+    download_url: "https://lin.ee/poMESoP",
+  },
+  {
     id: "freebie-gas-3d-flashcard",
     title: "ระบบฝึกจำหน้านักเรียน & คำศัพท์ 3D Flashcard",
     description: "ระบบเว็บแอป Web App สไตล์ 3D หมุนการ์ด ดึงรูปภาพจาก Google Drive และ Google Sheets ซิงค์คะแนนอัตโนมัติ สำหรับเปิดในห้องเรียนหรือให้นักเรียนฝึกจำ",
