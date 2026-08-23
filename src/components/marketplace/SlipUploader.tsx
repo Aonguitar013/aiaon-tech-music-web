@@ -33,6 +33,7 @@ export function SlipUploader({
     const [includeVipSetup, setIncludeVipSetup] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [aiApproved, setAiApproved] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
     const supabase = createClient();
@@ -92,17 +93,45 @@ export function SlipUploader({
                 orderPayload.product_id = itemId;
             }
 
-            const { error: insertError } = await supabase
+            const { data: insertedOrder, error: insertError } = await supabase
                 .from("orders")
-                .insert([orderPayload]);
+                .insert([orderPayload])
+                .select()
+                .single();
 
             if (insertError) throw insertError;
 
+            // 4. Trigger Gemini AI Slip Verification
+            let isAiVerified = false;
+            try {
+                const verifyRes = await fetch("/api/checkout/verify-slip", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        orderId: insertedOrder?.id,
+                        slipUrl: publicUrl,
+                        expectedAmount: totalAmount
+                    })
+                });
+                if (verifyRes.ok) {
+                    const verifyData = await verifyRes.json();
+                    if (verifyData.verified) {
+                        isAiVerified = true;
+                    }
+                }
+            } catch (vErr) {
+                console.warn("AI Verification call failed, fallback to manual approval:", vErr);
+            }
+
+            // 5. Admin Notification Hook
+            console.log(`[ADMIN NOTIFICATION] 🌟 New Order! User ${userId} paid for ${itemType}: "${productTitle}" (ID: ${itemId}). Slip: ${publicUrl}, AI Verified: ${isAiVerified}`);
+
+            setAiApproved(isAiVerified);
             setSuccess(true);
             if (!includeVipSetup) {
                 setTimeout(() => {
-                    router.push(itemType === "course" ? "/dashboard/academy" : "/dashboard/marketplace");
-                }, 4000);
+                    router.push(itemType === "course" ? `/dashboard/academy/${itemId}` : `/dashboard/marketplace/${itemId}`);
+                }, 3500);
             }
 
         } catch (err: unknown) {
@@ -120,10 +149,14 @@ export function SlipUploader({
                 
                 <div className="space-y-2">
                     <h2 className="text-3xl sm:text-4xl font-extrabold font-prompt text-white">
-                        ส่งหลักฐานการชำระเงินสำเร็จ!
+                        {aiApproved ? "⚡ AI อนุมัติการสั่งซื้อสำเร็จ!" : "ส่งหลักฐานการชำระเงินสำเร็จ!"}
                     </h2>
-                    <p className="text-white/70 font-prompt text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-                        ขอบคุณสำหรับการสั่งซื้อ ระบบได้บันทึกคำสั่งซื้อยอด <strong className="text-emerald-400">{totalAmount} ฿</strong> เรียบร้อยแล้วครับ
+                    <p className="text-white/80 font-prompt text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+                        {aiApproved ? (
+                            <>ระบบ AI ตรวจสอบยอดเงิน <strong className="text-emerald-400">{totalAmount} ฿</strong> และบัญชีถูกต้องเรียบร้อยแล้ว ปลดล็อกสิทธิ์การเข้าใช้งาน <span className="text-emerald-400 font-bold">{productTitle}</span> ให้คุณทันที!</>
+                        ) : (
+                            <>ขอบคุณสำหรับการสั่งซื้อ ระบบได้บันทึกคำสั่งซื้อยอด <strong className="text-emerald-400">{totalAmount} ฿</strong> เรียบร้อยแล้ว กรุณารอการตรวจสอบและอนุมัติภายใน 24 ชั่วโมง</>
+                        )}
                     </p>
                 </div>
 

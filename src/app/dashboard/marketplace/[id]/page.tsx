@@ -91,6 +91,13 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const PRODUCT_DOWNLOAD_LINKS: Record<string, string> = {
+    'AONE02': 'https://1drv.ms/f/c/ce3ad5ba004eb0c7/IgATR6et6O-BS61MuoKMqj_GAYU-TtWQfIJanJqGekSkGbk?e=AaoHOh',
+  };
+
+  const matchedLink = Object.entries(PRODUCT_DOWNLOAD_LINKS).find(([k]) => product.title?.includes(k))?.[1];
+  const finalDownloadUrl = product.file_url || matchedLink || "/dashboard/profile";
+
   const IconComponent = (Icons as any)[product.icon_name || "Package"] || Icons.Package;
   const isService = product.category === "Service" || product.category === "Creative";
   const colorClass = product.color_classes || "text-amber-400 bg-amber-500/10 border-amber-500/20";
@@ -251,7 +258,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   {isPurchased ? (
                       <div className="flex flex-col gap-3 mb-4">
                           <a
-                              href={product.file_url || "/dashboard/profile"}
+                              href={finalDownloadUrl}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="w-full py-4 rounded-2xl text-zinc-950 font-prompt font-bold text-base transition-all shadow-lg flex items-center justify-center gap-2 group bg-emerald-400 hover:bg-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.4)] cursor-pointer"

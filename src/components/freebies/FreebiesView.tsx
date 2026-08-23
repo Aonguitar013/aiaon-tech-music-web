@@ -147,10 +147,13 @@ function LineUnlockModal({
   const [error, setError] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
 
+  if (!freebie) return null;
+
   const VALID_PASSCODES = ["FREE69", "AIAON2026", "AIAONTECH"];
 
   const handleUnlock = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!freebie) return;
     const cleanInput = passcode.trim().toUpperCase();
 
     if (!cleanInput) {
