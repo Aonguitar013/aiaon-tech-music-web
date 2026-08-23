@@ -147,12 +147,19 @@ function LineUnlockModal({
   const [error, setError] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
 
-  if (!freebie) return null;
+  const VALID_PASSCODES = ["FREE69", "AIAON2026", "AIAONTECH"];
 
   const handleUnlock = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!passcode.trim()) {
+    const cleanInput = passcode.trim().toUpperCase();
+
+    if (!cleanInput) {
       setError("กรุณากรอกรหัสผ่านปลดล็อกเพื่อดาวน์โหลด");
+      return;
+    }
+
+    if (!VALID_PASSCODES.includes(cleanInput)) {
+      setError("❌ รหัสผ่านไม่ถูกต้อง กรุณาสแกนหรือแอด LINE OA @deu6776s เพื่อรับรหัสฟรี");
       return;
     }
 
@@ -163,7 +170,7 @@ function LineUnlockModal({
       setIsVerifying(false);
       onSuccessDownload(freebie);
       onClose();
-    }, 700);
+    }, 600);
   };
 
   return (
