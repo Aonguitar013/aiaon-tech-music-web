@@ -256,7 +256,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
     { id: "Academic", label: "🎓 วิชาการ & นักเรียน (หมวด E)", count: 11 },
     { id: "Admin", label: "🏢 บริหาร & ยานพาหนะ (หมวด A)", count: 6 },
     { id: "Activity", label: "🎪 กิจกรรม & ดนตรี (หมวด M)", count: 3 },
-    { id: "Free", label: "🎁 แจกฟรี (Freebies)", count: 7 },
+    { id: "Free", label: "🎁 แจกฟรี (Freebies)", count: 8 },
     { id: "Hardware", label: "🎙️ สตูดิโอ & Gadgets", count: 4 },
   ];
 

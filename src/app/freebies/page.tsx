@@ -16,6 +16,23 @@ export const metadata: Metadata = {
 
 const REAL_BUILTIN_FREEBIES: Freebie[] = [
   {
+    id: "freebie-gas-sar-aona07",
+    title: "ระบบจัดการเอกสารประเมินตนเอง SAR & ว.PA 15 ตัวชี้วัด อัตโนมัติ (AONA07)",
+    description: "ระบบ Web App สรุปความก้าวหน้า 15 ตัวชี้วัด, คลังหลักฐานเชื่อม Google Drive, สร้างเล่มรายงานดิจิทัลจัดพิมพ์ A4, ส่งออก Google Docs อัตโนมัติ พร้อมระบบลงนามรับรองผลโดยกรรมการด้วยรหัส PIN",
+    category: "tech",
+    icon_name: "BookOpenCheck",
+    color_from: "from-emerald-500",
+    color_to: "to-teal-700",
+    glow_color: "rgba(16,185,129,0.35)",
+    border_color: "border-emerald-500/30",
+    text_color: "text-emerald-400",
+    bg_color: "bg-emerald-500/10",
+    tag: "AONA07 (ระบบบริหารงานวิชาการ & ว.PA)",
+    file_size: "2.8 MB",
+    file_type: "GAS Web App & SAR Docs",
+    download_url: "https://page.line.me/deu6776s",
+  },
+  {
     id: "freebie-gas-active-shooter",
     title: "ระบบเช็กชื่อเผชิญเหตุฉุกเฉิน & Active Shooter (Auto Safe Zone)",
     description: "ระบบเช็กชื่อออนไลน์ Real-time แผนเผชิญเหตุฉุกเฉิน คัดกรองกลุ่มเปราะบางเข้า Safe Zone อัตโนมัติ เช็คมาทุกคน 1 คลิก พร้อม Dashboard สรุปยอด และแบบพิมพ์รายงาน A4 เสนอผู้บริหาร",
