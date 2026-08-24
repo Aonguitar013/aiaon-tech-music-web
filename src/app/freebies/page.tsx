@@ -30,7 +30,7 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
     tag: "AONA07 (ระบบบริหารงานวิชาการ & ว.PA)",
     file_size: "2.8 MB",
     file_type: "GAS Web App & SAR Docs",
-    download_url: "https://page.line.me/deu6776s",
+    download_url: "https://1drv.ms/f/c/ce3ad5ba004eb0c7/IgDJlCMMPrrsT41Ts0p0_mG3ARQDzg2jFhgxYKp8p5n6gNA?e=X8Nj74",
   },
   {
     id: "freebie-gas-active-shooter",
