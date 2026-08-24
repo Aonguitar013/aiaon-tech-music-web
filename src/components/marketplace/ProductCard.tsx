@@ -538,28 +538,42 @@ export function ProductCard({ product, index }: ProductCardProps) {
             );
           })()}
 
-          {/* Glowing Ultra-Magnetic CTA Button */}
+          {/* ── 🌟 ULTRA-MODERN HIGH-POWER CTA BUTTON ── */}
           <div className={cn(
-            "w-full py-3.5 px-5 rounded-2xl font-prompt text-sm font-extrabold flex items-center justify-center gap-2 transition-all duration-300 group-hover:scale-[1.03] active:scale-[0.98] shadow-xl cursor-pointer relative overflow-hidden",
+            "w-full py-3.5 px-4 rounded-2xl font-prompt text-sm font-bold flex items-center justify-between transition-all duration-300 group-hover:scale-[1.02] active:scale-[0.98] cursor-pointer relative overflow-hidden border backdrop-blur-md shadow-lg",
             isValidId 
               ? (isFree 
-                  ? "bg-linear-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.4)]" 
-                  : "bg-linear-to-r from-amber-400 via-orange-500 to-rose-500 hover:from-amber-300 hover:via-orange-400 hover:to-rose-400 text-zinc-950 shadow-[0_0_30px_rgba(249,115,22,0.5)] group-hover:shadow-[0_0_45px_rgba(249,115,22,0.8)]") 
-              : "bg-white/10 text-white/40 cursor-not-allowed"
+                  ? "bg-linear-to-r from-emerald-600 via-teal-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-white border-emerald-400/40 shadow-[0_0_20px_rgba(16,185,129,0.35)] group-hover:shadow-[0_0_35px_rgba(16,185,129,0.6)]" 
+                  : "bg-linear-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:via-blue-500 hover:to-indigo-500 text-white border-cyan-300/30 group-hover:border-cyan-300/60 shadow-[0_0_25px_rgba(6,182,212,0.35)] group-hover:shadow-[0_0_40px_rgba(6,182,212,0.65)]") 
+              : "bg-white/10 text-white/40 cursor-not-allowed border-transparent"
           )}>
-            {/* Shimmer sweep effect */}
-            <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/35 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+            {/* Cyber Laser Shimmer Sweep Effect */}
+            <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
 
             {isFree ? (
               <>
-                <Gift className="w-4 h-4 shrink-0 text-zinc-950 relative z-10" />
-                <span className="relative z-10">🎁 รับระบบและโค้ดฟรี →</span>
+                <div className="flex items-center gap-2.5 relative z-10">
+                  <div className="w-7 h-7 rounded-lg bg-white/20 border border-white/20 flex items-center justify-center shrink-0 shadow-inner">
+                    <Gift className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="font-bold tracking-wide">รับระบบและโค้ดฟรี</span>
+                </div>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 text-white relative z-10" />
               </>
             ) : (
               <>
-                <ShoppingCart className="w-4 h-4 shrink-0 fill-zinc-950/20 text-zinc-950 relative z-10" />
-                <span className="relative z-10">⚡ สั่งซื้อรับระบบทันที</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5 text-zinc-950 relative z-10" />
+                <div className="flex items-center gap-2.5 relative z-10">
+                  <div className="w-7 h-7 rounded-lg bg-white/20 border border-white/30 flex items-center justify-center shrink-0 shadow-inner">
+                    <Zap className="w-4 h-4 text-amber-300 fill-amber-300/60 group-hover:scale-110 transition-transform" />
+                  </div>
+                  <span className="font-extrabold tracking-wide text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
+                    สั่งซื้อรับระบบทันที
+                  </span>
+                </div>
+                <div className="flex items-center gap-1 text-cyan-200 font-bold text-xs relative z-10 group-hover:text-white transition-colors">
+                  <span>ปลดล็อก</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
+                </div>
               </>
             )}
           </div>
