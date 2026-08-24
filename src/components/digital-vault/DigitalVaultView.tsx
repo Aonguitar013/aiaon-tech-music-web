@@ -252,12 +252,12 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
   const [filterCategory, setFilterCategory] = useState<string>("All");
 
   const categories = [
-    { id: "All", label: "ทั้งหมด (20 ระบบ)" },
-    { id: "Academic", label: "🎓 วิชาการ & นักเรียน (หมวด E)" },
-    { id: "Admin", label: "🏢 บริหาร & ยานพาหนะ (หมวด A)" },
-    { id: "Activity", label: "🎪 กิจกรรม & ลูกเสือ (หมวด M)" },
-    { id: "Free", label: "🎁 แจกฟรี (Gift)" },
-    { id: "Hardware", label: "🎙️ อุปกรณ์สตูดิโอ & Gadgets" },
+    { id: "All", label: "ทั้งหมด", count: initialProducts.length || 20 },
+    { id: "Academic", label: "🎓 วิชาการ & นักเรียน (หมวด E)", count: 11 },
+    { id: "Admin", label: "🏢 บริหาร & ยานพาหนะ (หมวด A)", count: 6 },
+    { id: "Activity", label: "🎪 กิจกรรม & ดนตรี (หมวด M)", count: 3 },
+    { id: "Free", label: "🎁 แจกฟรี (Freebies)", count: 7 },
+    { id: "Hardware", label: "🎙️ สตูดิโอ & Gadgets", count: 4 },
   ];
 
   const handleCategoryClick = (catId: string) => {
@@ -305,26 +305,26 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
       <div className="relative z-10">
         
         {/* Header Section */}
-        <div className="text-center max-w-2xl mx-auto mb-10 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-8 space-y-4">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-prompt"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border-purple-500/30 bg-purple-500/10 text-purple-300 text-xs font-prompt font-semibold"
           >
-            <ShoppingBag className="w-4 h-4" />
-            <span>Digital Vault — คลังสินค้าดิจิทัลและระบบช่วยเหลือ</span>
+            <ShoppingBag className="w-4 h-4 text-purple-400" />
+            <span>DIGITAL VAULT — คลัง 20 ระบบ Google Apps Script สำเร็จรูป</span>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-prompt text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight"
+            className="font-prompt text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight"
           >
-            Digital{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-400 to-rose-400 drop-shadow-[0_0_20px_rgba(168,85,247,0.35)]">
-              Vault
+            คลังระบบอัตโนมัติ{" "}
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-400 to-amber-300 drop-shadow-[0_0_25px_rgba(168,85,247,0.35)]">
+              ช่วยผ่อนแรงครู
             </span>
           </motion.h1>
 
@@ -332,10 +332,26 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base md:text-lg text-white/60 font-prompt leading-relaxed max-w-xl mx-auto"
+            className="text-base md:text-lg text-white/70 font-prompt leading-relaxed max-w-2xl mx-auto"
           >
-            รวม 20 ระบบ Google Apps Script สำเร็จรูป คู่มือปฏิบัติงาน และอุปกรณ์ไอทีสตูดิโอโดยครูอ้น
+            รวบรวมระบบ Google Apps Script พร้อมคู่มือภาษาไทย 2 นาที รันบน Google Workspace ตัวเอง ปลอดภัย 100% ไร้ค่าบริการรายเดือน
           </motion.p>
+
+          {/* Value Highlights Pill Bar */}
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-xs font-prompt">
+            <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <span>ตรวจสลิปผ่าน AI อนุมัติใน 2 วิ</span>
+            </span>
+            <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+              <span>ดาวน์โหลดไฟล์ผ่าน OneDrive ทันที</span>
+            </span>
+            <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+              <span>มีออปชันให้ครูอ้นติดตั้งให้ (VIP Setup)</span>
+            </span>
+          </div>
         </div>
 
         {/* --- VIP BUNDLE PROMO BANNER --- */}
@@ -376,7 +392,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
           </Link>
         </motion.div>
 
-        {/* Categories Pills - Responsive Flex Wrap (No scrollbar, shows all 6 buttons cleanly) */}
+        {/* Categories Pills - Responsive Flex Wrap */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -396,6 +412,9 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
                 }`}
               >
                 <span>{cat.label}</span>
+                <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${isActive ? "bg-white/20 text-white" : "bg-white/10 text-white/50"}`}>
+                  {cat.count}
+                </span>
               </button>
             );
           })}
@@ -414,11 +433,19 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
             </div>
             <input
               type="text"
-              className="w-full bg-black/40 border border-white/10 hover:border-white/20 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 rounded-2xl py-3.5 pl-12 pr-4 text-white placeholder-white/40 transition-all font-prompt text-sm outline-none shadow-inner"
+              className="w-full bg-black/40 border border-white/10 hover:border-white/20 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 rounded-2xl py-3.5 pl-12 pr-12 text-white placeholder-white/40 transition-all font-prompt text-sm outline-none shadow-inner"
               placeholder="ค้นหาชื่อระบบ (เช่น เช็คชื่อ, เกียรติบัตร, ยานพาหนะ, รถโรงเรียน, ลูกเสือ, ดนตรี)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm("")}
+                className="absolute inset-y-0 right-0 pr-4 flex items-center text-xs font-prompt text-white/40 hover:text-white"
+              >
+                ล้างคำค้น
+              </button>
+            )}
           </div>
         </motion.div>
 
@@ -434,12 +461,12 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
           ) : (
             <div className="col-span-full flex flex-col items-center justify-center py-20 text-white/40 glass-card border-white/5">
               <ShoppingBag className="w-16 h-16 mb-4 opacity-20" />
-              <p className="font-prompt text-lg">ไม่พบสินค้าในคลังสินค้าดิจิทัล</p>
+              <p className="font-prompt text-lg">ไม่พบระบบที่ตรงกับคำค้นหา</p>
               <button
                 onClick={() => { setSearchTerm(""); setFilterCategory("All"); }}
-                className="mt-4 px-4 py-2 border border-purple-500/30 text-purple-400 rounded-lg hover:bg-purple-500/10 font-prompt text-sm transition-colors animate-pulse cursor-pointer"
+                className="mt-4 px-5 py-2.5 bg-purple-600/30 border border-purple-500/40 text-purple-300 rounded-xl hover:bg-purple-600/50 font-prompt text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-lg"
               >
-                ล้างการค้นหา
+                ดูระบบทั้งหมด (20 ระบบ)
               </button>
             </div>
           )}

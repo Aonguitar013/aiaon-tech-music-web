@@ -377,6 +377,69 @@ export function BundlesView() {
           })}
         </div>
 
+        {/* --- BUNDLE COMPARISON TABLE --- */}
+        <div className="rounded-3xl p-8 sm:p-12 border border-white/10 bg-slate-900/70 max-w-5xl mx-auto mb-20 space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-xs font-prompt font-bold text-purple-300 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">
+              📊 COMPARISON TABLE — ตารางเปรียบเทียบแพ็กเกจ
+            </span>
+            <h3 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
+              เลือกแพ็กเกจที่เหมาะกับภาระงานของคุณ
+            </h3>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left font-prompt text-xs sm:text-sm">
+              <thead>
+                <tr className="border-b border-white/10 text-white/50">
+                  <th className="py-3 px-4">คุณสมบัติ / แพ็กเกจ</th>
+                  <th className="py-3 px-4 text-cyan-300">Classroom Pro</th>
+                  <th className="py-3 px-4 text-amber-300">Admin Suite</th>
+                  <th className="py-3 px-4 text-emerald-300">Scout &amp; Activity</th>
+                  <th className="py-3 px-4 text-purple-300 font-bold bg-purple-500/10 rounded-t-xl">All-in-One Lifetime 👑</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5 text-white/80">
+                <tr>
+                  <td className="py-3 px-4 font-semibold text-white">จำนวนระบบที่ได้รับ</td>
+                  <td className="py-3 px-4">3 ระบบ (ม.3 &amp; สีขาว)</td>
+                  <td className="py-3 px-4">3 ระบบ (ยานพาหนะ &amp; พัสดุ)</td>
+                  <td className="py-3 px-4">3 ระบบ (ลูกเสือ &amp; ดนตรี)</td>
+                  <td className="py-3 px-4 font-bold text-purple-300 bg-purple-500/5">ครบทั้ง 20 ระบบ ⚡</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 font-semibold text-white">สิทธิ์ใช้งานตลอดชีพ</td>
+                  <td className="py-3 px-4 text-emerald-400">✓ มี</td>
+                  <td className="py-3 px-4 text-emerald-400">✓ มี</td>
+                  <td className="py-3 px-4 text-emerald-400">✓ มี</td>
+                  <td className="py-3 px-4 text-emerald-400 font-bold bg-purple-500/5">✓ มีตลอดชีพ</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 font-semibold text-white">สิทธิ์รับระบบใหม่ในอนาคตฟรี</td>
+                  <td className="py-3 px-4 text-white/40">-</td>
+                  <td className="py-3 px-4 text-white/40">-</td>
+                  <td className="py-3 px-4 text-white/40">-</td>
+                  <td className="py-3 px-4 text-emerald-400 font-bold bg-purple-500/5">✓ ฟรีตลอดชีพ 🚀</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 font-semibold text-white">สิทธิ์ปรึกษาครูอ้นผ่าน LINE OA</td>
+                  <td className="py-3 px-4 text-emerald-400">✓ มี</td>
+                  <td className="py-3 px-4 text-emerald-400">✓ มี</td>
+                  <td className="py-3 px-4 text-emerald-400">✓ มี</td>
+                  <td className="py-3 px-4 text-emerald-400 font-bold bg-purple-500/5">✓ VIP Priority Support</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4 font-semibold text-white">ราคาพิเศษ</td>
+                  <td className="py-3 px-4 font-bold text-cyan-300">1,490 ฿</td>
+                  <td className="py-3 px-4 font-bold text-amber-300">1,990 ฿</td>
+                  <td className="py-3 px-4 font-bold text-emerald-300">990 ฿</td>
+                  <td className="py-3 px-4 font-black text-purple-300 bg-purple-500/10 rounded-b-xl text-base">4,990 ฿ (ลด 51%)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         {/* --- WHY BUY BUNDLE SECTION --- */}
         <div className="rounded-3xl p-8 sm:p-12 border border-white/10 bg-slate-900/60 max-w-5xl mx-auto mb-20 relative overflow-hidden">
           <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />

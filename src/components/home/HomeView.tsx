@@ -6,7 +6,7 @@ import {
   Sparkles, ArrowRight, CheckCircle2, MessageCircle,
   GraduationCap, Package, Briefcase, Zap, ShieldCheck,
   Bell, Volume2, Check, ExternalLink, QrCode, Cpu,
-  Award, School, Heart, Flame, Gift
+  Award, School, Heart, Flame, Gift, Star
 } from "lucide-react";
 import Link from "next/link";
 import { HeroSection } from "@/components/sections/HeroSection";
@@ -337,6 +337,127 @@ export function HomeView() {
               </Link>
             </div>
 
+          </div>
+        </section>
+
+        {/* ── TESTIMONIALS & SOCIAL PROOF ─────────────────────────── */}
+        <section className="space-y-10">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-prompt font-semibold">
+              <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+              <span>REAL USER VOICES — เสียงตอบรับจากผู้ใช้งานจริง</span>
+            </div>
+            <h2 className="font-prompt text-3xl sm:text-4xl font-extrabold text-white">
+              ความประทับใจจาก{" "}
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 to-orange-400">
+                คุณครูและนักเรียน
+              </span>
+            </h2>
+            <p className="font-prompt text-sm text-white/60">
+              ประสบการณ์จริงจากการนำระบบอัตโนมัติของ AiAon Tech ไปใช้งานจริงในโรงเรียน
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                name: "ครูวิภาดา กลิ่นแก้ว",
+                role: "ครูประจำชั้น ม.3 โรงเรียนมัธยม",
+                quote: "ระบบเช็คชื่อ LINE V2 ช่วยลดเวลาเช็คแถวหน้าเสาธงไปเยอะมาก ผปค. ได้รับข้อความทันที ไม่ต้องโทรตามเด็กรายคนอีกต่อไป",
+                stars: 5,
+                badge: "ระบบเช็คชื่อ AONE01",
+                badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30"
+              },
+              {
+                name: "ครูธีรพัฒน์ สุขสำราญ",
+                role: "หัวหน้างานสารสนเทศและยานพาหนะ",
+                quote: "ระบบ Smart Vehicle ช่วยให้งานขอใช้รถและบันทึกบิลค่าน้ำมันมีความโปร่งใส ตรวจสอบง่าย เลิกปวดหัวกับเอกสารกระดาษหาย 100%",
+                stars: 5,
+                badge: "Smart Vehicle AONA02",
+                badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30"
+              },
+              {
+                name: "น้องก้องภพ (ก้อง)",
+                role: "นักเรียน ม.6 ยื่น TCAS รอบ 1",
+                quote: "เว็บ Portfolio 3D เท่มากครับ อาจารย์สัมภาษณ์สแกน QR Code หน้าปกแล้วชมว่าพอร์ตแปลกใหม่ ไม่เหมือนใคร ติดรอบ 1 เรียบร้อย!",
+                stars: 5,
+                badge: "เว็บพอร์ต 3D STU01",
+                badgeColor: "bg-pink-500/20 text-pink-300 border-pink-500/30"
+              }
+            ].map((review, rIdx) => (
+              <div key={rIdx} className="rounded-3xl p-6 bg-slate-900/60 border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1 text-amber-400">
+                      {[...Array(review.stars)].map((_, s) => (
+                        <Star key={s} className="w-4 h-4 fill-amber-400" />
+                      ))}
+                    </div>
+                    <span className={`text-[10px] font-prompt font-semibold px-2 py-0.5 rounded-full border ${review.badgeColor}`}>
+                      {review.badge}
+                    </span>
+                  </div>
+                  <p className="font-prompt text-xs sm:text-sm text-white/80 leading-relaxed italic">
+                    &ldquo;{review.quote}&rdquo;
+                  </p>
+                </div>
+                <div className="border-t border-white/10 pt-3 flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-linear-to-br from-cyan-500 to-purple-600 flex items-center justify-center font-bold text-xs text-white">
+                    {review.name.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="font-prompt text-xs font-bold text-white">{review.name}</h4>
+                    <p className="font-prompt text-[10px] text-white/50">{review.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── FAQ ACCORDION ───────────────────────────────────────── */}
+        <section className="rounded-3xl p-8 sm:p-12 border border-white/10 bg-slate-900/50 space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
+              คำถามที่พบบ่อย (FAQ)
+            </h2>
+            <p className="font-prompt text-xs sm:text-sm text-white/60">
+              ทุกข้อสงสัยเกี่ยวกับระบบ สิทธิ์การใช้งาน และการติดตั้ง
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-3">
+            {[
+              {
+                q: "1. ไม่มีความรู้เรื่องเขียนโค้ดเลย จะใช้งานได้ไหม?",
+                a: "ใช้งานได้ 100% ครับ ทุกระบบมีคู่มือติดตั้งภาษาไทยแบบทีละสเต็ป (เสร็จใน 2-3 นาที) เพียงแค่คัดลอกไฟล์ลงใน Google Drive ของคุณเองก็พร้อมใช้งานได้ทันที หรือจะเลือกออปชัน VIP Setup ให้ครูอ้นติดตั้งให้ก็ได้ครับ"
+              },
+              {
+                q: "2. สิทธิ์การใช้งานเป็นอย่างไร มีค่าบริการรายเดือนหรือไม่?",
+                a: "ทุกระบบเป็นการจ่ายครั้งเดียวและเป็นเจ้าของสิทธิ์ใช้งานตลอดชีพ (One-Time Lifetime) ไม่มีค่าบริการรายเดือนหรือรายปีใดๆ ทั้งสิ้น เพราะระบบรันอยู่บน Google Workspace ฟรีของท่านเอง"
+              },
+              {
+                q: "3. ระบบชำระเงินและส่งมอบไฟล์ทำงานอย่างไร?",
+                a: "หลังจากโอนเงินผ่าน PromptPay QR และอัปโหลดสลิป ระบบ Gemini 2.5 Flash Vision จะตรวจสลิปและอนุมัติอัตโนมัติภายใน 2 วินาที พร้อมเปิดปุ่มดาวน์โหลดไฟล์และเทมเพลตผ่าน OneDrive ให้ท่านทันที"
+              },
+              {
+                q: "4. ปลอดภัยหรือไม่ ข้อมูลนักเรียนและโรงเรียนจะรั่วไหลไหม?",
+                a: "ปลอดภัยสูงสุด 100% ครับ เนื่องจากระบบจะทำงานบน Google Drive และ Google Sheets ในบัญชี Google ส่วนตัวของท่านเอง ทางเราไม่เก็บข้อมูลส่วนบุคคลหรือข้อมูลนักเรียนไว้ในเซิร์ฟเวอร์ภายนอก"
+              },
+              {
+                q: "5. หากติดปัญหาในการติดตั้งหรือใช้งาน มีคนช่วยเหลือไหม?",
+                a: "มีครูอ้นคอยให้คำปรึกษาและซัพพอร์ตโดยตรงผ่าน LINE Official Account (@deu6776s) ท่านสามารถทักแชตมาสอบถามได้ตลอดเวลาครับ"
+              }
+            ].map((faq, fIdx) => (
+              <div key={fIdx} className="rounded-2xl bg-white/5 border border-white/10 p-5 space-y-2 hover:bg-white/8 transition-colors">
+                <h3 className="font-prompt text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                  <span className="text-cyan-400">❓</span> {faq.q}
+                </h3>
+                <p className="font-prompt text-xs sm:text-sm text-white/70 leading-relaxed pl-6">
+                  {faq.a}
+                </p>
+              </div>
+            ))}
           </div>
         </section>
 

@@ -40,7 +40,7 @@ const headingVariant: Variants = {
 export function HeroSection() {
   return (
     <section
-      className="relative pt-12 pb-16 flex flex-col items-center justify-center overflow-hidden px-4"
+      className="relative pt-8 sm:pt-14 pb-16 flex flex-col items-center justify-center overflow-hidden px-4"
       aria-label="Hero Section"
     >
       {/* Background ambient orbs */}
@@ -58,6 +58,30 @@ export function HeroSection() {
         }}
       />
 
+      {/* Live Feature Marquee Strip */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-4xl mb-6 overflow-hidden rounded-full border border-white/10 bg-white/5 backdrop-blur-md py-2 px-4 shadow-inner"
+      >
+        <div className="flex items-center justify-center gap-4 sm:gap-8 text-xs font-prompt text-white/70 overflow-x-auto no-scrollbar whitespace-nowrap">
+          <span className="inline-flex items-center gap-1.5 text-cyan-300 font-semibold">
+            <Zap className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+            <span>🤖 Gemini 2.5 Flash ตรวจสลิปอัตโนมัติใน 2 วิ</span>
+          </span>
+          <span className="text-white/20">•</span>
+          <span className="inline-flex items-center gap-1.5 text-emerald-300 font-semibold">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+            <span>📥 ปลดล็อกดาวน์โหลดผ่าน OneDrive ทันที</span>
+          </span>
+          <span className="text-white/20">•</span>
+          <span className="inline-flex items-center gap-1.5 text-amber-300 font-semibold">
+            <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+            <span>🔒 Google Sheets 100% ไร้ค่าบริการรายเดือน</span>
+          </span>
+        </div>
+      </motion.div>
+
       {/* Main Content Container */}
       <motion.div
         className="max-w-5xl mx-auto text-center z-10 space-y-7 flex flex-col items-center justify-center"
@@ -69,7 +93,7 @@ export function HeroSection() {
         <motion.div variants={fadeUp}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs sm:text-sm font-prompt font-semibold tracking-wide shadow-[0_0_25px_rgba(6,182,212,0.25)]">
             <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
-            <span>ไอทีง่ายๆ สไตล์ไอ้อ้น — ระบบอัตโนมัติและ AI เพื่อการศึกษา</span>
+            <span>ไอทีง่ายๆ สไตล์ไอ้อ้น — นวัตกรรม Google Apps Script &amp; AI เพื่อการศึกษา</span>
           </div>
         </motion.div>
 
@@ -89,7 +113,7 @@ export function HeroSection() {
           variants={fadeUp}
           className="text-base sm:text-xl text-white/75 max-w-3xl mx-auto font-prompt font-normal leading-relaxed"
         >
-          ช่วยผ่อนแรงครูไทย เลิกงานตรงเวลา พร้อมเครื่องมือช่วยเรียนสำหรับนักเรียนยุคใหม่ รันบน Google Workspace ของตัวเอง ปลอดภัย 100% ไม่มีค่าบริการรายเดือน
+          เปลี่ยนงานเอกสารซ้ำซากให้กลายเป็นระบบอัตโนมัติบน Google Workspace ของคุณเอง เลิกงานตรงเวลา พร้อมคลังเครื่องมือช่วยเรียนสำหรับนักเรียน Gen Z รันบนคลาวด์ ปลอดภัย 100% ไม่มีรายเดือน
         </motion.p>
 
         {/* --- DUAL ACTION BUTTONS + FREEBIE BADGE --- */}
@@ -133,11 +157,11 @@ export function HeroSection() {
         {/* Freebie Claim Hook */}
         <motion.div variants={fadeUp} className="pt-1">
           <Link
-            href="/digital-vault"
+            href="/freebies"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-prompt text-xs sm:text-sm font-semibold hover:bg-emerald-500/20 transition-all hover:scale-105"
           >
             <Gift className="w-4 h-4 text-emerald-400 shrink-0 animate-bounce" />
-            <span>🎁 สมาชิกใหม่รับฟรี: ระบบฝึกจำหน้านักเรียน &amp; คำศัพท์ 3D Flashcard →</span>
+            <span>🎁 สมาชิกใหม่รับฟรี: คลังแจกฟรี 7 รายการ พร้อมรหัสปลดล็อกทันที →</span>
           </Link>
         </motion.div>
 

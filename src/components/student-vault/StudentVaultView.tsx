@@ -285,6 +285,125 @@ export function StudentVaultView() {
           </div>
         </div>
 
+        {/* --- INTERACTIVE TCAS 3D PORTFOLIO DEMO SIMULATOR --- */}
+        <div className="rounded-3xl p-8 sm:p-12 border border-pink-500/30 bg-slate-900/60 max-w-4xl mx-auto mb-20 relative overflow-hidden">
+          <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
+            <span className="text-xs font-prompt font-bold text-pink-400 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20">
+              🎮 LIVE SIMULATOR — ตัวอย่างหน้าเว็บ Portfolio 3D
+            </span>
+            <h3 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
+              เมื่อกรรมการสแกน QR Code จะเห็นหน้านี้ทันที
+            </h3>
+            <p className="font-prompt text-xs text-white/60">
+              จำลองหน้าเว็บ Portfolio ดิจิทัล ที่คุณสามารถเปลี่ยนรูปและข้อความผ่าน Google Sheets ของตัวเองได้ง่ายๆ
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-black/60 p-6 space-y-6">
+            <div className="flex flex-col sm:flex-row items-center gap-5 border-b border-white/10 pb-6">
+              <div className="w-20 h-20 rounded-2xl bg-linear-to-br from-pink-500 to-purple-600 flex items-center justify-center text-3xl shadow-[0_0_25px_rgba(236,72,153,0.4)]">
+                🎓
+              </div>
+              <div className="text-center sm:text-left space-y-1">
+                <div className="flex items-center justify-center sm:justify-start gap-2">
+                  <h4 className="font-prompt text-xl font-extrabold text-white">นายกิตติคุณ นวัตกรรม (น้องคิง)</h4>
+                  <span className="text-[10px] font-prompt bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                    ม.6 สายวิทย์-คอม
+                  </span>
+                </div>
+                <p className="font-prompt text-xs text-pink-300 font-semibold">
+                  เป้าหมาย: คณะวิศวกรรมศาสตร์ สาขาวิศวกรรมคอมพิวเตอร์และ AI
+                </p>
+                <p className="font-prompt text-xs text-white/50">
+                  โรงเรียนตัวอย่างวิทยา • GPAX: 3.89 • กิจกรรมดีเด่นระดับชาติ
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-center space-y-1">
+                <span className="text-xs font-prompt text-white/50">🏆 ผลงาน &amp; รางวัล</span>
+                <p className="font-prompt text-sm font-bold text-cyan-300">12 เกียรติบัตร</p>
+              </div>
+              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-center space-y-1">
+                <span className="text-xs font-prompt text-white/50">🚀 โครงงานที่พัฒนา</span>
+                <p className="font-prompt text-sm font-bold text-pink-300">3 AI Projects</p>
+              </div>
+              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-center space-y-1">
+                <span className="text-xs font-prompt text-white/50">📱 วิดีโอแนะนำตัว</span>
+                <p className="font-prompt text-sm font-bold text-amber-300">YouTube 4K HD</p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between text-xs font-prompt text-white/50 pt-2 border-t border-white/10">
+              <span>⚡ แก้ไขข้อมูลสดผ่าน Google Sheets ไม่ต้องเขียนโค้ด</span>
+              <span className="text-pink-300 font-bold">STU01 (129 ฿)</span>
+            </div>
+          </div>
+        </div>
+
+        {/* --- STUDENT PROMPT TESTER --- */}
+        <div className="rounded-3xl p-8 sm:p-10 border border-amber-500/30 bg-slate-900/50 max-w-4xl mx-auto mb-20 space-y-5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-amber-300 font-prompt text-sm font-bold">
+              <Bot className="w-5 h-5" />
+              <span>ตัวอย่าง Prompt ในชุดคัมภีร์ AI Secret Kit (STU03)</span>
+            </div>
+            <button
+              onClick={handleCopyPrompt}
+              className="px-3.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/30 text-amber-300 font-prompt text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              {copiedPrompt ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copiedPrompt ? "คัดลอกสำเร็จ!" : "ก๊อปปี้ไปลองใช้"}</span>
+            </button>
+          </div>
+
+          <div className="p-4 rounded-xl bg-black/50 border border-white/10 font-mono text-xs text-white/80 leading-relaxed">
+            {samplePrompt}
+          </div>
+          <p className="text-xs font-prompt text-white/50">
+            💡 ในคัมภีร์ฉบับเต็มมี Prompt พร้อมใช้กว่า 20 หมวดหมู่ (รายงาน, สไลด์ Canva, สรุปสอบ, ออกแบบโครงงาน) ราคาเพียง 69 ฿
+          </p>
+        </div>
+
+        {/* --- STUDENT FAQ ACCORDION --- */}
+        <div className="rounded-3xl p-8 sm:p-12 border border-white/10 bg-slate-900/40 max-w-4xl mx-auto space-y-6">
+          <div className="text-center space-y-2">
+            <h3 className="font-prompt text-2xl font-extrabold text-white">
+              คำถามที่น้องๆ ถามบ่อย (Student FAQ)
+            </h3>
+            <p className="font-prompt text-xs text-white/60">
+              ทุกข้อสงสัยเกี่ยวกับการสั่งซื้อ การติดตั้ง และการใช้งาน
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            {[
+              {
+                q: "1. ไม่เคยเขียนโค้ดมาก่อนเลย จะทำเว็บ Portfolio เองได้ไหม?",
+                a: "ทำได้แน่นอน 100% ครับ! น้องแค่กรอกชื่อ รูปผลงาน และเกียรติบัตรลงใน Google Sheets ของตัวเอง เว็บจะสร้างหน้า 3D ให้อัตโนมัติใน 1 นาที พร้อม QR Code ไปแปะหน้าปกพอร์ตได้ทันที มีคลิปสอน 2 นาทีให้ดูด้วยครับ"
+              },
+              {
+                q: "2. สั่งซื้อแล้วชำระเงินทางไหนได้บ้าง?",
+                a: "ชำระเงินผ่าน PromptPay QR Code หรือแอปธนาคารใดก็ได้ครับ หลังจากโอนเงินระบบจะอนุมัติและส่งมอบไฟล์ทันที"
+              },
+              {
+                q: "3. ระบบเช็คการบ้านห้อง (290 ฿) ใช้ได้กี่คน?",
+                a: "ซื้อครั้งเดียวใช้ได้ทั้งห้องตลอดปีการศึกษาเลยครับ! สามารถแชร์ลิงก์ให้เพื่อนในห้อง 40 คนเปิดดูการบ้านบนมือถือได้ทุกคน ตกคนละ 7 บาทเท่านั้น"
+              }
+            ].map((faq, fIdx) => (
+              <div key={fIdx} className="rounded-2xl bg-white/5 border border-white/10 p-5 space-y-2">
+                <h4 className="font-prompt text-sm font-bold text-white flex items-center gap-2">
+                  <span className="text-pink-400">💡</span> {faq.q}
+                </h4>
+                <p className="font-prompt text-xs text-white/70 leading-relaxed pl-6">
+                  {faq.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );
