@@ -172,7 +172,7 @@ function getSystemCoverTheme(title: string, category: string) {
       borderAccent: "border-amber-500/40",
       glowColor: "rgba(245,158,11,0.3)",
       badgeBg: "bg-amber-500/20 text-amber-300 border-amber-500/40",
-      pills: ["ประเมิน ว.PA", "สรุปผลลัพธ์การเรียน", "ครู คศ.3"],
+      pills: ["ประเมิน ว.PA", "สรุปผลลัพธ์การเรียน", "ครู ค.ศ.2"],
       iconColor: "text-amber-400"
     };
   }

@@ -244,7 +244,7 @@ export function SaaSView({ user }: SaaSViewProps) {
                   </div>
                   <div>
                     <h3 className="font-prompt font-bold text-white text-base">ครูอ้น (จิรวัฒน์ เดชเส้ง)</h3>
-                    <p className="text-xs text-white/50 font-prompt">ครู คศ.3 โรงเรียนหาดใหญ่วิทยาลัย</p>
+                    <p className="text-xs text-white/50 font-prompt">ครู ค.ศ.2 (ชำนาญการ) โรงเรียนหาดใหญ่วิทยาลัย</p>
                   </div>
                 </div>
                 <span className="px-2.5 py-1 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 text-[10px] font-prompt font-bold">

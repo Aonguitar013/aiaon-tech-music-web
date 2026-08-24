@@ -487,7 +487,7 @@ export function HomeView() {
                 </span>
               </h3>
               <p className="font-prompt text-sm text-white/70 leading-relaxed">
-                ครู คศ.3 โรงเรียนหาดใหญ่วิทยาลัย ผู้พัฒนานวัตกรรม Google Apps Script และ AI เพื่อการศึกษา ด้วยแนวคิด 
+                ครู ค.ศ.2 (ชำนาญการ) โรงเรียนหาดใหญ่วิทยาลัย ผู้พัฒนานวัตกรรม Google Apps Script และ AI เพื่อการศึกษา ด้วยแนวคิด 
                 <strong className="text-white"> "ไอทีง่ายๆ สไตล์ไอ้อ้น"</strong> เราสร้างระบบเหล่านี้ขึ้นมาจากปัญหาจริงในห้องเรียน เพื่อช่วยให้ครูและนักเรียนไทยทำงานได้เร็วขึ้น 10 เท่า โดยไม่ต้องพึ่งพาโปรแกรมรายเดือนราคาแพง
               </p>
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2 text-xs font-prompt text-white/60">
