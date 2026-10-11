@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText, Sparkles } from "lucide-react";
+import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText, Sparkles, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -85,6 +85,15 @@ const routes: RouteItem[] = [
     hoverColor: "teal",
     items: [
       { 
+        name: "รับติดตั้ง & เฝ้าดูแล AI รายเดือน", 
+        href: "/ai-caretaker", 
+        description: "แอดมิน AI ตอบแชท ตรวจสลิป จองคิว พร้อมระบบเฝ้าระวัง 24 ชม.", 
+        badge: "ใหม่! 990฿/ด.", 
+        badgeColor: "teal", 
+        icon: ShieldCheck, 
+        hoverColor: "teal" 
+      },
+      { 
         name: "บริการรับพัฒนาระบบตามสั่ง", 
         href: "/services", 
         description: "ออกแบบและพัฒนา Web App เฉพาะโรงเรียนและองค์กร", 
@@ -99,6 +108,13 @@ const routes: RouteItem[] = [
         hoverColor: "cyan" 
       },
     ],
+  },
+  { 
+    name: "🛡️ เฝ้าดูแล AI รายเดือน", 
+    href: "/ai-caretaker", 
+    icon: ShieldCheck, 
+    hoverColor: "teal",
+    badge: "NEW"
   },
   { 
     name: "ของแจกฟรี", 

@@ -314,8 +314,8 @@ export function HomeView() {
                 </p>
                 <ul className="space-y-2 mb-8 text-xs font-prompt text-white/80">
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
-                    <span>Quick Custom ปรับแก้ชีตเดิม (2,490 ฿)</span>
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span className="text-emerald-300 font-bold">🛡️ รับเฝ้าดูแล AI ร้านค้ารายเดือน (990 ฿/ด.)</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
@@ -328,13 +328,23 @@ export function HomeView() {
                 </ul>
               </div>
 
-              <Link
-                href="/services"
-                className="w-full py-3.5 px-6 rounded-2xl bg-linear-to-r from-cyan-500 to-teal-600 hover:from-cyan-400 hover:to-teal-500 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all group-hover:scale-102"
-              >
-                <span>ประเมินราคา &amp; สั่งทำระบบ</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="space-y-2.5">
+                <Link
+                  href="/ai-caretaker"
+                  className="w-full py-3.5 px-6 rounded-2xl bg-linear-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-zinc-950 font-prompt font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg transition-all group-hover:scale-102"
+                >
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>บริการเฝ้าดูแล AI รายเดือน (SME)</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/services"
+                  className="w-full py-2.5 px-6 rounded-xl bg-white/5 hover:bg-white/10 border border-cyan-500/30 text-cyan-300 font-prompt font-semibold text-xs flex items-center justify-center gap-1.5 transition-all"
+                >
+                  <span>สั่งทำระบบโรงเรียน &amp; วิทยากร</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
 
           </div>

@@ -273,6 +273,36 @@ export function ServicesView() {
           </motion.div>
         </div>
 
+        {/* --- NEW! AI CARETAKER MONTHLY RETAINER BANNER FOR SMEs --- */}
+        <div className="mb-20 rounded-3xl p-7 sm:p-10 border border-emerald-500/40 bg-linear-to-r from-emerald-950/60 via-slate-900 to-cyan-950/50 relative overflow-hidden shadow-[0_0_50px_rgba(16,185,129,0.2)]">
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="space-y-3 text-center lg:text-left max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-prompt font-bold">
+                <ShieldCheck className="w-4 h-4 text-emerald-400 animate-pulse" />
+                <span>🔥 บริการใหม่สำหรับพ่อค้าแม่ค้า &amp; ร้านค้าทั่วไป (AI CARETAKER)</span>
+              </div>
+              <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
+                อยากมีแอดมิน AI ตอบแชท + ตรวจสลิป + รับจองคิว{" "}
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-300 to-cyan-300">
+                  พร้อมคนเฝ้าดูแลระบบให้รายเดือน?
+                </span>
+              </h2>
+              <p className="font-prompt text-xs sm:text-sm text-white/75 leading-relaxed">
+                ไม่ต้องปวดหัวเซตเอง! เราติดตั้งระบบ AI มาตรฐานให้พร้อมใช้ และมีระบบ <strong>&ldquo;AI คุม AI (Watchdog)&rdquo;</strong> คอยเฝ้าระวัง ซ่อมตาราง Google Sheets เมื่อเผลอทำพัง และส่งการ์ดสรุปผลงานเข้า LINE ทุกสัปดาห์ <strong className="text-amber-300">เริ่มต้นเพียง 990 ฿/เดือน (วันละ 33 บาท!)</strong>
+              </p>
+            </div>
+
+            <Link
+              href="/ai-caretaker"
+              className="px-7 py-4 rounded-2xl bg-linear-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:from-emerald-300 hover:to-cyan-300 text-zinc-950 font-prompt font-black text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-[0_0_30px_rgba(16,185,129,0.45)] hover:scale-105 transition-all shrink-0"
+            >
+              <ShieldCheck className="w-5 h-5" />
+              <span>ดูแพ็กเกจเฝ้าดูแล AI รายเดือน</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
         {/* --- 4-STEP TRANSPARENT PROCESS --- */}
         <div className="mb-24">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
