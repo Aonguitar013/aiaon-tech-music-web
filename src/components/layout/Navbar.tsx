@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText, Sparkles, ShieldCheck } from "lucide-react";
+import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText, Sparkles, ShieldCheck, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -94,6 +94,15 @@ const routes: RouteItem[] = [
         hoverColor: "teal" 
       },
       { 
+        name: "รวมช่องทาง & หน้าร้านไอทีครูอ้น", 
+        href: "/channels", 
+        description: "ครบทุกแพลตฟอร์ม + พิกัดอุปกรณ์ไอทีของแท้ TikTok Shop, Shopee, Lazada", 
+        badge: "HUB", 
+        badgeColor: "amber", 
+        icon: Globe, 
+        hoverColor: "amber" 
+      },
+      { 
         name: "บริการรับพัฒนาระบบตามสั่ง", 
         href: "/services", 
         description: "ออกแบบและพัฒนา Web App เฉพาะโรงเรียนและองค์กร", 
@@ -115,6 +124,12 @@ const routes: RouteItem[] = [
     icon: ShieldCheck, 
     hoverColor: "teal",
     badge: "NEW"
+  },
+  { 
+    name: "🛒 ช่องทาง & ร้านไอที", 
+    href: "/channels", 
+    icon: Globe, 
+    hoverColor: "amber"
   },
   { 
     name: "ของแจกฟรี", 
