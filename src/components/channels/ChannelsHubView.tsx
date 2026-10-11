@@ -2,26 +2,16 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   ExternalLink,
-  ShoppingBag,
-  Tv,
-  Smartphone,
-  Mic,
-  Monitor,
   Sparkles,
   ShieldCheck,
-  CheckCircle2,
   Copy,
   Check,
   MessageCircle,
-  Play,
-  Share2,
   Store,
-  Flame,
   Cpu,
-  Headphones,
-  ArrowRight,
   Radio,
   Globe,
 } from "lucide-react";
@@ -192,7 +182,7 @@ const GADGET_STORES = [
     buttonLabel: "เข้าสู่ TikTok Shop: iAonTech Studio & Gadget",
     badge: "ขายดีในคลิปสั้น",
     accent: "from-cyan-500 to-rose-500",
-    border: "border-cyan-500/40",
+    border: "border-cyan-500/40 hover:border-cyan-400",
     icon: "🎵",
   },
   {
@@ -206,7 +196,7 @@ const GADGET_STORES = [
     buttonLabel: "เข้าสู่ Shopee: iAonTech Gadget",
     badge: "โค้ดลด Shopee Video โหดมาก",
     accent: "from-orange-500 to-amber-500",
-    border: "border-orange-500/40",
+    border: "border-orange-500/40 hover:border-orange-400",
     icon: "🧡",
   },
   {
@@ -220,7 +210,7 @@ const GADGET_STORES = [
     buttonLabel: "เข้าสู่ Lazada: iAonTech Official Select",
     badge: "LazMall ประกันศูนย์",
     accent: "from-blue-500 to-indigo-600",
-    border: "border-blue-500/40",
+    border: "border-blue-500/40 hover:border-blue-400",
     icon: "💙",
   },
 ];
@@ -312,285 +302,325 @@ export function ChannelsHubView() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 pb-24">
-      {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden pt-28 pb-16 border-b border-slate-800/80">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/25 via-slate-950 to-slate-950 pointer-events-none" />
-        <div className="container mx-auto px-4 max-w-6xl relative z-10">
-          <div className="flex flex-col items-center text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-sm font-medium mb-6">
-              <Globe className="w-4 h-4 text-cyan-400 animate-pulse" />
-              <span>ศูนย์รวมช่องทางทางการ & พิกัดอุปกรณ์ไอทีของแท้ 100%</span>
-            </div>
+    <div className="w-full relative overflow-hidden min-h-screen pb-28 font-prompt text-white">
+      {/* Ambient Background Glows matching HomeView & FreebiesView */}
+      <div className="absolute top-0 left-1/4 w-[650px] h-[550px] bg-cyan-600/12 blur-[180px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-[600px] h-[600px] bg-purple-600/10 blur-[180px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-20 left-1/3 w-[600px] h-[600px] bg-amber-500/10 blur-[180px] rounded-full pointer-events-none" />
 
-            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
-              จักรวาลช่องทาง{" "}
-              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-300 bg-clip-text text-transparent">
-                iAonTech & ไอทีง่ายๆ สไตล์ iAon
-              </span>
-            </h1>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 relative z-10">
+        {/* 1. HERO SECTION */}
+        <section className="text-center max-w-4xl mx-auto pb-16 border-b border-white/10">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-prompt text-xs sm:text-sm font-bold tracking-wide mb-6 shadow-[0_0_25px_rgba(6,182,212,0.2)]"
+          >
+            <Globe className="w-4 h-4 text-cyan-400 animate-pulse" />
+            <span>OFFICIAL CHANNELS &amp; TECH GADGET HUB • ของแท้ 100%</span>
+          </motion.div>
 
-            <p className="text-slate-300 max-w-3xl text-base md:text-lg mb-8 leading-relaxed">
-              รวมทุกช่องทางโซเชียลมีเดีย หน้าร้านป้ายยาอุปกรณ์เทคโนโลยีทั้ง 3 แพลตฟอร์ม
-              และจุดติดต่องานระบบ <strong className="text-teal-300">AI Caretaker</strong> ของ{" "}
-              <strong className="text-white">ครูอ้น (จิรวัฒน์ เดชเส้ง)</strong> ไว้ในหน้าเดียว
-              คลิกเชื่อมต่อไปยังลิงก์ต้นทางของแท้ได้ทันที!
-            </p>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.08 }}
+            className="font-prompt text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-5 leading-tight"
+          >
+            จักรวาลช่องทาง{" "}
+            <span className="block sm:inline bg-linear-to-r from-cyan-400 via-teal-300 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
+              iAonTech &amp; ไอทีง่ายๆ สไตล์ iAon
+            </span>
+          </motion.h1>
 
-            {/* Quick Action Bar */}
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <a
-                href="https://lin.ee/poMESoP"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold shadow-lg shadow-emerald-950/50 transition-all"
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>ทัก LINE OA: AiAon Tech (@deu6776s)</span>
-                <ExternalLink className="w-4 h-4 opacity-80" />
-              </a>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="font-prompt text-white/75 max-w-3xl mx-auto text-base sm:text-lg mb-8 leading-relaxed"
+          >
+            รวมทุกช่องทางโซเชียลมีเดีย หน้าร้านป้ายยาอุปกรณ์เทคโนโลยีทั้ง 3 แพลตฟอร์ม
+            และจุดติดต่องานระบบ <strong className="text-teal-300">AI Caretaker</strong> ของ{" "}
+            <strong className="text-white">ครูอ้น (จิรวัฒน์ เดชเส้ง)</strong> ไว้ในหน้าเดียว
+            คลิกเชื่อมต่อไปยังลิงก์ต้นทางของแท้ได้ทันที!
+          </motion.p>
 
-              <Link
-                href="/ai-caretaker"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-teal-500/40 text-teal-300 font-semibold transition-all"
-              >
-                <ShieldCheck className="w-5 h-5 text-teal-400" />
-                <span>ดูบริการเฝ้าดูแล AI รายเดือน (990฿/ด.)</span>
-              </Link>
-
-              <button
-                onClick={handleCopyHubUrl}
-                className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-300 text-sm font-medium transition-all cursor-pointer"
-              >
-                {copiedBioLink ? (
-                  <>
-                    <Check className="w-4 h-4 text-emerald-400" />
-                    <span className="text-emerald-300">คัดลอกลิงก์ aiaon.tech/channels แล้ว!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4 text-slate-400" />
-                    <span>คัดลอกลิงก์หน้านี้ (สำหรับแปะ Bio)</span>
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. 3 OFFICIAL GADGET & AFFILIATE STORES */}
-      <section className="container mx-auto px-4 max-w-6xl pt-14">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 text-amber-400 text-sm font-bold uppercase tracking-wider mb-2">
-              <Store className="w-4 h-4" />
-              <span>OFFICIAL GADGET & TECH STORES (3 แพลตฟอร์มหลัก)</span>
-            </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">
-              🛒 หน้าร้านขายของไอที & พิกัดอุปกรณ์ที่ครูอ้นคัดมาให้แล้ว
-            </h2>
-          </div>
-          <p className="text-slate-400 text-sm md:text-right max-w-md">
-            สะดวกแอปไหน กดคลิกไปที่หน้าร้านต้นทางได้เลย ทุกชิ้นคัดเฉพาะร้านของแท้ที่ครูอ้นใช้งานจริง
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {GADGET_STORES.map((store) => (
-            <div
-              key={store.id}
-              className={`relative rounded-2xl bg-slate-900/80 border ${store.border} p-6 flex flex-col justify-between hover:translate-y-[-3px] transition-all duration-200 shadow-xl`}
+          {/* Quick Action Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.22 }}
+            className="flex flex-wrap items-center justify-center gap-3.5"
+          >
+            <a
+              href="https://lin.ee/poMESoP"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-prompt inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-linear-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-zinc-950 font-extrabold text-sm sm:text-base shadow-[0_0_25px_rgba(16,185,129,0.35)] transition-all hover:scale-[1.02]"
             >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className="text-3xl">{store.icon}</span>
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-amber-300 border border-amber-500/30">
-                    {store.badge}
-                  </span>
-                </div>
+              <MessageCircle className="w-5 h-5" />
+              <span>ทัก LINE OA: AiAon Tech (@deu6776s)</span>
+              <ExternalLink className="w-4 h-4 opacity-80" />
+            </a>
 
-                <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                  {store.platform}
-                </div>
-                <h3 className="text-xl font-extrabold text-white mb-2">{store.storeName}</h3>
-                <p className="text-cyan-300 text-xs font-medium mb-3">{store.tagline}</p>
-                <p className="text-slate-400 text-sm leading-relaxed mb-6">{store.description}</p>
-              </div>
-
-              <a
-                href={store.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r ${store.accent} text-white font-bold text-sm shadow-md hover:opacity-95 transition-all`}
-              >
-                <span>{store.buttonLabel}</span>
-                <ExternalLink className="w-4 h-4 shrink-0" />
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. CHRONOLOGICAL SOCIAL CHANNELS (ORDERED BY REAL CONTENT FLOW) */}
-      <section className="container mx-auto px-4 max-w-6xl pt-16">
-        <div className="mb-8">
-          <div className="inline-flex items-center gap-2 text-cyan-400 text-sm font-bold uppercase tracking-wider mb-2">
-            <Radio className="w-4 h-4" />
-            <span>ALL OFFICIAL CHANNELS (เรียงตามลำดับการปล่อยคอนเทนต์จริง)</span>
-          </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-            📲 ติดตามครูอ้นได้ครบทุกช่องทาง (คลิกไปที่ลิงก์ต้นทางได้ทันที)
-          </h2>
-          <p className="text-slate-400 text-sm">
-            เรียงลำดับจากจุดปล่อยไลฟ์สดแม่พิมพ์ ➔ กระจายสู่เฟซบุ๊ก/IG/Threads ➔ หั่นเป็นคลิปสั้น TikTok ➔ คลิปยาว YouTube ➔ ปิดจบรับงานที่ LINE OA
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {OFFICIAL_CHANNELS.map((ch) => (
-            <div
-              key={ch.id}
-              className={`group relative rounded-2xl bg-gradient-to-br ${ch.bgGlow} bg-slate-900/80 border ${ch.borderClass} p-6 transition-all duration-200 flex flex-col justify-between`}
+            <Link
+              href="/ai-caretaker"
+              className="font-prompt inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass-card border border-teal-500/40 hover:border-teal-400 text-teal-300 font-bold text-sm sm:text-base transition-all hover:bg-teal-500/10"
             >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-slate-950/80 text-slate-300 border border-slate-800">
-                    {ch.stepLabel}
-                  </span>
-                  <span className={`text-xs font-extrabold ${ch.colorClass}`}>{ch.badge}</span>
-                </div>
+              <ShieldCheck className="w-5 h-5 text-teal-400" />
+              <span>ดูบริการเฝ้าดูแล AI รายเดือน (990฿/ด.)</span>
+            </Link>
 
-                <div className="flex items-start gap-3.5 mb-3">
-                  <div className="text-3xl shrink-0 bg-slate-950/90 w-12 h-12 rounded-xl flex items-center justify-center border border-slate-800">
-                    {ch.iconText}
-                  </div>
-                  <div>
-                    <div className="text-xs text-slate-400 font-medium">{ch.platform}</div>
-                    <h3 className="text-lg md:text-xl font-extrabold text-white group-hover:text-cyan-300 transition-colors">
-                      {ch.name}
-                    </h3>
-                    <div className="text-xs font-mono text-cyan-400">{ch.handle}</div>
-                  </div>
-                </div>
+            <button
+              onClick={handleCopyHubUrl}
+              className="font-prompt inline-flex items-center gap-2 px-5 py-3.5 rounded-full glass-card border border-white/15 hover:border-cyan-400/50 text-white/80 hover:text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer"
+            >
+              {copiedBioLink ? (
+                <>
+                  <Check className="w-4 h-4 text-emerald-400" />
+                  <span className="text-emerald-300">คัดลอกลิงก์ aiaon.tech/channels แล้ว!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-4 h-4 text-cyan-400" />
+                  <span>คัดลอกลิงก์หน้านี้ (สำหรับแปะ Bio)</span>
+                </>
+              )}
+            </button>
+          </motion.div>
+        </section>
 
-                <p className="text-slate-300 text-sm leading-relaxed mb-3">{ch.role}</p>
-                <div className="text-xs text-amber-300/90 font-medium mb-5">{ch.schedule}</div>
-              </div>
-
-              <a
-                href={ch.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-xl bg-slate-950/90 hover:bg-cyan-500/20 border border-slate-800 group-hover:border-cyan-500/40 text-sm font-semibold text-white transition-all"
-              >
-                <span>{ch.buttonText}</span>
-                <ExternalLink className="w-4 h-4 text-cyan-400" />
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 4. KRU AON'S REAL STUDIO & TECH GEAR SHOWCASE */}
-      <section className="container mx-auto px-4 max-w-6xl pt-16">
-        <div className="rounded-3xl bg-slate-900/70 border border-slate-800 p-6 md:p-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        {/* 2. 3 OFFICIAL GADGET & AFFILIATE STORES */}
+        <section className="pt-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 text-teal-400 text-sm font-bold uppercase tracking-wider mb-2">
-                <Cpu className="w-4 h-4" />
-                <span>KRU AON&apos;S REAL WORKING GEAR</span>
+              <div className="font-prompt inline-flex items-center gap-2 text-amber-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
+                <Store className="w-4 h-4" />
+                <span>OFFICIAL GADGET &amp; TECH STORES (3 แพลตฟอร์มหลัก)</span>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">
-                🎧 เปิดกรุอุปกรณ์จริงบนโต๊ะทำงานครูอ้น (ใช้จริง รีวิวจริงทุกชิ้น)
+              <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                🛒 หน้าร้านขายของไอที &amp; พิกัดอุปกรณ์ที่ครูอ้นคัดมาให้แล้ว
               </h2>
-              <p className="text-slate-400 text-sm mt-1">
-                อุปกรณ์ทุกชิ้นข้างล่างนี้คืออาวุธจริงที่ครูอ้นใช้สร้างระบบ AI, ไลฟ์สด และสอนดนตรี กดเทียบราคาจากทั้ง 3 ร้านได้เลย
-              </p>
             </div>
-
-            {/* Category Filter Tabs */}
-            <div className="flex flex-wrap gap-2">
-              {[
-                { key: "all", label: "ทั้งหมด (6)" },
-                { key: "mobile", label: "📱 มือถือ & ไอแพด" },
-                { key: "audio", label: "🎙️ ไมค์ & กล้องไลฟ์สด" },
-                { key: "pc", label: "💻 คอม & โน้ตบุ๊ก" },
-              ].map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => setSelectedGearCat(tab.key as GearCategory)}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                    selectedGearCat === tab.key
-                      ? "bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20"
-                      : "bg-slate-950 text-slate-300 border border-slate-800 hover:border-slate-700"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+            <p className="font-prompt text-white/60 text-sm md:text-right max-w-md">
+              สะดวกแอปไหน กดคลิกไปที่หน้าร้านต้นทางได้เลย ทุกชิ้นคัดเฉพาะร้านของแท้ที่ครูอ้นใช้งานจริง
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filteredGear.map((gear) => (
-              <div
-                key={gear.id}
-                className="rounded-2xl bg-slate-950/90 border border-slate-800/90 p-5 flex flex-col justify-between hover:border-cyan-500/40 transition-all"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {GADGET_STORES.map((store, idx) => (
+              <motion.div
+                key={store.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + idx * 0.08 }}
+                className={`glass-card relative rounded-3xl border ${store.border} p-6 sm:p-7 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 shadow-xl`}
               >
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="px-2.5 py-1 rounded-md bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-bold">
-                      {gear.badge}
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className="text-3xl">{store.icon}</span>
+                    <span className="font-prompt px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                      {store.badge}
                     </span>
-                    <Sparkles className="w-4 h-4 text-amber-400" />
                   </div>
 
-                  <h3 className="text-base font-bold text-white mb-2">{gear.name}</h3>
-                  <p className="text-xs text-cyan-300/90 mb-2">
-                    <strong>หน้าที่ในระบบครูอ้น:</strong> {gear.roleInWorkflow}
+                  <div className="font-prompt text-xs font-bold uppercase tracking-wider text-white/50 mb-1">
+                    {store.platform}
+                  </div>
+                  <h3 className="font-prompt text-xl font-extrabold text-white mb-2">
+                    {store.storeName}
+                  </h3>
+                  <p className="font-prompt text-cyan-300 text-xs sm:text-sm font-semibold mb-3">
+                    {store.tagline}
                   </p>
-                  <p className="text-xs text-slate-400 leading-relaxed mb-5">
-                    &ldquo;{gear.whyKruAonLovesIt}&rdquo;
+                  <p className="font-prompt text-white/70 text-sm leading-relaxed mb-6">
+                    {store.description}
                   </p>
                 </div>
 
-                <div className="space-y-2 pt-3 border-t border-slate-800/80">
-                  <div className="text-[11px] font-semibold text-slate-400">
-                    คลิกเช็กราคาของแท้ในหน้าร้านครูอ้น:
+                <a
+                  href={store.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`font-prompt w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-linear-to-r ${store.accent} text-white font-bold text-sm shadow-lg hover:opacity-95 transition-all`}
+                >
+                  <span>{store.buttonLabel}</span>
+                  <ExternalLink className="w-4 h-4 shrink-0" />
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* 3. CHRONOLOGICAL SOCIAL CHANNELS (ORDERED BY REAL CONTENT FLOW) */}
+        <section className="pt-20">
+          <div className="mb-8">
+            <div className="font-prompt inline-flex items-center gap-2 text-cyan-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
+              <Radio className="w-4 h-4" />
+              <span>ALL OFFICIAL CHANNELS (เรียงตามลำดับการปล่อยคอนเทนต์จริง)</span>
+            </div>
+            <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white mb-2 tracking-tight">
+              📲 ติดตามครูอ้นได้ครบทุกช่องทาง (คลิกไปที่ลิงก์ต้นทางได้ทันที)
+            </h2>
+            <p className="font-prompt text-white/65 text-sm sm:text-base">
+              เรียงลำดับจากจุดปล่อยไลฟ์สดแม่พิมพ์ ➔ กระจายสู่เฟซบุ๊ก/IG/Threads ➔ หั่นเป็นคลิปสั้น TikTok ➔ คลิปยาว YouTube ➔ ปิดจบรับงานที่ LINE OA
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {OFFICIAL_CHANNELS.map((ch) => (
+              <div
+                key={ch.id}
+                className={`group glass-card relative rounded-3xl bg-linear-to-br ${ch.bgGlow} border ${ch.borderClass} p-6 sm:p-7 transition-all duration-300 hover:-translate-y-0.5 flex flex-col justify-between`}
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className="font-prompt text-xs font-bold px-3 py-1 rounded-full bg-white/5 text-white/80 border border-white/10">
+                      {ch.stepLabel}
+                    </span>
+                    <span className={`font-prompt text-xs font-extrabold tracking-wider ${ch.colorClass}`}>
+                      {ch.badge}
+                    </span>
                   </div>
-                  <div className="grid grid-cols-3 gap-2">
-                    <a
-                      href={gear.tiktokShopUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-cyan-500/30 text-[11px] font-bold text-cyan-300 transition-all"
-                    >
-                      <span>🎵 TikTok</span>
-                    </a>
-                    <a
-                      href={gear.shopeeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-orange-500/30 text-[11px] font-bold text-orange-300 transition-all"
-                    >
-                      <span>🧡 Shopee</span>
-                    </a>
-                    <a
-                      href={gear.lazadaUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-blue-500/30 text-[11px] font-bold text-blue-300 transition-all"
-                    >
-                      <span>💙 Lazada</span>
-                    </a>
+
+                  <div className="flex items-start gap-3.5 mb-3.5">
+                    <div className="text-3xl shrink-0 bg-white/5 w-12 h-12 rounded-2xl flex items-center justify-center border border-white/10">
+                      {ch.iconText}
+                    </div>
+                    <div>
+                      <div className="font-prompt text-xs text-white/55 font-semibold">
+                        {ch.platform}
+                      </div>
+                      <h3 className="font-prompt text-lg sm:text-xl font-extrabold text-white group-hover:text-cyan-300 transition-colors">
+                        {ch.name}
+                      </h3>
+                      <div className="font-mono text-xs text-cyan-400">{ch.handle}</div>
+                    </div>
+                  </div>
+
+                  <p className="font-prompt text-white/75 text-sm leading-relaxed mb-3">
+                    {ch.role}
+                  </p>
+                  <div className="font-prompt text-xs text-amber-300/95 font-semibold mb-5">
+                    {ch.schedule}
                   </div>
                 </div>
+
+                <a
+                  href={ch.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-prompt inline-flex items-center justify-between w-full px-4 py-3 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 group-hover:border-cyan-500/40 text-sm font-bold text-white transition-all"
+                >
+                  <span>{ch.buttonText}</span>
+                  <ExternalLink className="w-4 h-4 text-cyan-400" />
+                </a>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* 4. KRU AON'S REAL STUDIO & TECH GEAR SHOWCASE */}
+        <section className="pt-20">
+          <div className="glass-card rounded-3xl border border-white/10 p-6 sm:p-10">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-8">
+              <div>
+                <div className="font-prompt inline-flex items-center gap-2 text-teal-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
+                  <Cpu className="w-4 h-4" />
+                  <span>KRU AON&apos;S REAL WORKING GEAR</span>
+                </div>
+                <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                  🎧 เปิดกรุอุปกรณ์จริงบนโต๊ะทำงานครูอ้น (ใช้จริง รีวิวจริงทุกชิ้น)
+                </h2>
+                <p className="font-prompt text-white/65 text-sm mt-1">
+                  อุปกรณ์ทุกชิ้นข้างล่างนี้คืออาวุธจริงที่ครูอ้นใช้สร้างระบบ AI, ไลฟ์สด และสอนดนตรี กดเทียบราคาจากทั้ง 3 ร้านได้เลย
+                </p>
+              </div>
+
+              {/* Category Filter Tabs */}
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { key: "all", label: "ทั้งหมด (6)" },
+                  { key: "mobile", label: "📱 มือถือ & ไอแพด" },
+                  { key: "audio", label: "🎙️ ไมค์ & กล้องไลฟ์สด" },
+                  { key: "pc", label: "💻 คอม & โน้ตบุ๊ก" },
+                ].map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setSelectedGearCat(tab.key as GearCategory)}
+                    className={`font-prompt px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                      selectedGearCat === tab.key
+                        ? "bg-linear-to-r from-cyan-400 to-teal-400 text-zinc-950 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                        : "bg-white/5 text-white/75 border border-white/10 hover:border-white/25 hover:text-white"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {filteredGear.map((gear) => (
+                <div
+                  key={gear.id}
+                  className="rounded-2xl bg-black/40 border border-white/10 p-5 sm:p-6 flex flex-col justify-between hover:border-cyan-500/40 transition-all"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="font-prompt px-2.5 py-1 rounded-full bg-teal-500/15 border border-teal-500/30 text-teal-300 text-xs font-bold">
+                        {gear.badge}
+                      </span>
+                      <Sparkles className="w-4 h-4 text-amber-400" />
+                    </div>
+
+                    <h3 className="font-prompt text-base sm:text-lg font-extrabold text-white mb-2">
+                      {gear.name}
+                    </h3>
+                    <p className="font-prompt text-xs text-cyan-300/95 mb-2 leading-relaxed">
+                      <strong>หน้าที่ในระบบครูอ้น:</strong> {gear.roleInWorkflow}
+                    </p>
+                    <p className="font-prompt text-xs text-white/65 leading-relaxed mb-5">
+                      &ldquo;{gear.whyKruAonLovesIt}&rdquo;
+                    </p>
+                  </div>
+
+                  <div className="space-y-2.5 pt-3.5 border-t border-white/10">
+                    <div className="font-prompt text-[11px] font-semibold text-white/55">
+                      คลิกเช็กราคาของแท้ในหน้าร้านครูอ้น:
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      <a
+                        href={gear.tiktokShopUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-white/5 hover:bg-cyan-500/15 border border-cyan-500/30 text-[11px] font-bold text-cyan-300 transition-all"
+                      >
+                        <span>🎵 TikTok</span>
+                      </a>
+                      <a
+                        href={gear.shopeeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-white/5 hover:bg-orange-500/15 border border-orange-500/30 text-[11px] font-bold text-orange-300 transition-all"
+                      >
+                        <span>🧡 Shopee</span>
+                      </a>
+                      <a
+                        href={gear.lazadaUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-white/5 hover:bg-blue-500/15 border border-blue-500/30 text-[11px] font-bold text-blue-300 transition-all"
+                      >
+                        <span>💙 Lazada</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

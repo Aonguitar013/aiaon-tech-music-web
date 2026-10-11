@@ -63,7 +63,7 @@ html {
 }
 
 body {
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-prompt), var(--font-sans), sans-serif;
   overflow-x: hidden;
   /* Global transition for dark mode switching */
   transition: background-color 0.4s ease, color 0.4s ease;

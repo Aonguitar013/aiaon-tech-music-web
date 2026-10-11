@@ -113,13 +113,13 @@ export function AICaretakerView() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070913] text-white overflow-hidden relative pb-28">
+    <div className="w-full min-h-screen text-white overflow-hidden relative pb-28 font-prompt">
       {/* Ambient Background Glows */}
       <div className="absolute top-0 left-1/4 w-[650px] h-[550px] bg-emerald-600/10 blur-[180px] rounded-full pointer-events-none" />
       <div className="absolute top-1/3 right-10 w-[600px] h-[600px] bg-cyan-600/10 blur-[180px] rounded-full pointer-events-none" />
       <div className="absolute bottom-20 left-1/3 w-[600px] h-[600px] bg-amber-600/10 blur-[180px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 relative z-10">
 
         {/* ── 1. HERO SECTION ─────────────────────────────────────── */}
         <div className="text-center max-w-4xl mx-auto mb-20 space-y-6">

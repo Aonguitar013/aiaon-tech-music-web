@@ -119,14 +119,7 @@ const routes: RouteItem[] = [
     ],
   },
   { 
-    name: "🛡️ เฝ้าดูแล AI รายเดือน", 
-    href: "/ai-caretaker", 
-    icon: ShieldCheck, 
-    hoverColor: "teal",
-    badge: "NEW"
-  },
-  { 
-    name: "🛒 ช่องทาง & ร้านไอที", 
+    name: "ช่องทาง & ร้านไอที", 
     href: "/channels", 
     icon: Globe, 
     hoverColor: "amber"
@@ -177,19 +170,19 @@ export function Navbar({ user }: NavbarProps) {
         ? "glass-nav py-2" 
         : "bg-transparent border-b border-transparent py-4"
     )}>
-      <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto flex h-16 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         
         {/* Logo */}
         <div className="shrink-0 flex items-center">
-          <Link href="/" className="font-prompt text-xl font-normal text-white flex items-center gap-1 transition-all duration-300 hover:text-cyan-400 hover:-translate-y-0.5 group">
+          <Link href="/" className="font-prompt text-xl font-normal text-white flex items-center gap-1 transition-all duration-300 hover:text-cyan-400 hover:-translate-y-0.5 group whitespace-nowrap">
             iAonTech<span className="text-blue-500 group-hover:text-cyan-400 transition-colors duration-300">xMusic</span>
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-2 shrink-0">
           <NavigationMenu>
-            <NavigationMenuList className="gap-1.5">
+            <NavigationMenuList className="gap-1 flex-nowrap">
               {routes.map((route) => {
                 const isCyan   = route.hoverColor === "cyan";
                 const isPurple = route.hoverColor === "purple";
@@ -198,12 +191,12 @@ export function Navbar({ user }: NavbarProps) {
                 // 1. Special Highlighted Item (e.g. ของแจกฟรี 🎁)
                 if (route.isSpecial) {
                   return (
-                    <NavigationMenuItem key={route.name}>
+                    <NavigationMenuItem key={route.name} className="shrink-0">
                       <NavigationMenuLink 
-                        className="relative px-3.5 py-1.5 rounded-xl font-prompt text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-1.5 bg-linear-to-r from-purple-500/15 to-pink-500/15 border border-purple-500/30 text-purple-200 hover:text-white hover:border-purple-400/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] cursor-pointer group select-none"
+                        className="relative w-max whitespace-nowrap shrink-0 px-3 py-1.5 rounded-xl font-prompt text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-1.5 bg-linear-to-r from-purple-500/15 to-pink-500/15 border border-purple-500/30 text-purple-200 hover:text-white hover:border-purple-400/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] cursor-pointer group select-none"
                         render={<Link href={route.href || ""} />}
                       >
-                        <Gift className="w-4 h-4 text-pink-400 group-hover:rotate-12 transition-transform duration-300" />
+                        <Gift className="w-4 h-4 text-pink-400 group-hover:rotate-12 transition-transform duration-300 shrink-0" />
                         <span>{route.name}</span>
                         <span className="bg-linear-to-r from-purple-500 to-pink-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(236,72,153,0.5)]">
                           FREE
@@ -217,10 +210,10 @@ export function Navbar({ user }: NavbarProps) {
                 if ("items" in route && route.items) {
                   const TriggerIcon = route.icon;
                   return (
-                    <NavigationMenuItem key={route.name}>
+                    <NavigationMenuItem key={route.name} className="shrink-0">
                       <NavigationMenuTrigger
                         className={cn(
-                          "relative bg-transparent text-white/80 px-3 py-1.5 rounded-xl font-prompt text-sm font-normal transition-all duration-300 flex items-center gap-1.5 group select-none cursor-pointer border border-transparent data-[state=open]:text-white data-[state=open]:bg-white/5 data-[state=open]:border-white/10 data-open:text-white data-open:bg-white/5 data-open:border-white/10",
+                          "relative w-max whitespace-nowrap shrink-0 bg-transparent text-white/80 px-3 py-1.5 rounded-xl font-prompt text-sm font-normal transition-all duration-300 flex items-center gap-1.5 group select-none cursor-pointer border border-transparent data-[state=open]:text-white data-[state=open]:bg-white/5 data-[state=open]:border-white/10 data-open:text-white data-open:bg-white/5 data-open:border-white/10",
                           isTeal
                             ? "hover:text-teal-400 hover:bg-teal-500/5 hover:border-teal-500/20 data-[state=open]:text-teal-400 data-[state=open]:bg-teal-500/5 data-[state=open]:border-teal-500/20"
                             : isPurple
@@ -298,7 +291,7 @@ export function Navbar({ user }: NavbarProps) {
                                   )}
                                 </div>
                                 {subItem.description && (
-                                  <p className="text-xs text-white/50 group-hover:text-white/70 transition-colors line-clamp-1 font-light mt-0.5">
+                                  <p className="text-xs font-prompt text-white/50 group-hover:text-white/70 transition-colors line-clamp-1 font-light mt-0.5">
                                     {subItem.description}
                                   </p>
                                 )}
@@ -313,10 +306,10 @@ export function Navbar({ user }: NavbarProps) {
 
                 // 3. Regular Top-Level Nav Link
                 return (
-                  <NavigationMenuItem key={route.name}>
+                  <NavigationMenuItem key={route.name} className="shrink-0">
                     <NavigationMenuLink 
                       className={cn(
-                        "relative bg-transparent text-white/75 px-3 py-1.5 rounded-xl font-prompt text-sm font-normal transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-1.5 group overflow-hidden border border-transparent select-none cursor-pointer",
+                        "relative w-max whitespace-nowrap shrink-0 bg-transparent text-white/75 px-3 py-1.5 rounded-xl font-prompt text-sm font-normal transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-1.5 group overflow-hidden border border-transparent select-none cursor-pointer",
                         isTeal
                           ? "hover:text-teal-400 hover:bg-teal-500/5 hover:border-teal-500/20 hover:shadow-[0_0_15px_rgba(20,184,166,0.3)]"
                           : isPurple
@@ -328,7 +321,7 @@ export function Navbar({ user }: NavbarProps) {
                       render={<Link href={route.href || ""} />}
                     >
                       {route.icon && <route.icon className="w-4 h-4 shrink-0 opacity-70 group-hover:opacity-100 transition-opacity" />}
-                      {route.name}
+                      <span>{route.name}</span>
                       {/* Underline glow effect */}
                       <span className={cn(
                         "absolute bottom-0 left-3 right-3 h-[2px] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center",
@@ -348,12 +341,12 @@ export function Navbar({ user }: NavbarProps) {
           </NavigationMenu>
 
           {user ? (
-              <div className="flex items-center gap-2 ml-1">
+              <div className="flex items-center gap-2 ml-1 shrink-0">
                   <Link 
                     href="/dashboard" 
-                    className="relative bg-transparent text-white/80 px-3.5 py-1.5 rounded-xl font-prompt text-sm font-normal transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-1.5 group overflow-hidden hover:text-cyan-400 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.25)]"
+                    className="relative w-max whitespace-nowrap shrink-0 bg-transparent text-white/80 px-3.5 py-1.5 rounded-xl font-prompt text-sm font-normal transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-1.5 group overflow-hidden hover:text-cyan-400 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.25)]"
                   >
-                      <LayoutDashboard className="w-4 h-4" /> แผงควบคุม
+                      <LayoutDashboard className="w-4 h-4 shrink-0" /> <span>แผงควบคุม</span>
                       <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center bg-linear-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
                   </Link>
                   <Button 
@@ -365,10 +358,10 @@ export function Navbar({ user }: NavbarProps) {
                   </Button>
               </div>
           ) : (
-            <Link href="/login" className="ml-1">
+            <Link href="/login" className="ml-1 shrink-0">
               <Button 
                 variant="outline" 
-                className="rounded-full border-white/20 bg-white/5 hover:bg-white/10 text-white shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all font-prompt text-sm font-medium px-4 py-1.5 active:scale-95 h-8.5"
+                className="w-max whitespace-nowrap shrink-0 rounded-full border-white/20 bg-white/5 hover:bg-white/10 text-white shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all font-prompt text-sm font-medium px-4 py-1.5 active:scale-95 h-8.5"
               >
                 เข้าสู่ระบบ
               </Button>
@@ -377,7 +370,7 @@ export function Navbar({ user }: NavbarProps) {
         </div>
 
         {/* Mobile Navigation (Hamburger) */}
-        <div className="flex md:hidden items-center">
+        <div className="flex lg:hidden items-center">
           <Sheet>
             <SheetTrigger className="p-2 text-white hover:bg-white/10 rounded-xl transition-colors flex items-center justify-center">
               <Menu className="h-6 w-6" />
