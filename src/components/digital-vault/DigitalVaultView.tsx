@@ -296,7 +296,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
   });
 
   return (
-    <div className="min-h-screen text-white pt-24 pb-20 relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="min-h-screen text-white pt-8 md:pt-12 pb-20 relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto font-prompt">
       
       {/* Background Orbs */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-purple-500/10 blur-[140px] rounded-full pointer-events-none" />

@@ -53,11 +53,11 @@ export default async function RootLayout({
   return (
     <html
       lang="th"
-      className={cn("dark", "font-sans", geist.variable)}
+      className={cn("dark", prompt.variable, geist.variable)}
       suppressHydrationWarning
     >
       <body
-        className={`${inter.variable} ${prompt.variable} antialiased font-sans flex flex-col min-h-screen relative`}
+        className={`${inter.variable} ${prompt.variable} antialiased font-prompt flex flex-col min-h-screen relative`}
         suppressHydrationWarning
       >
         <BrandThemeProvider>

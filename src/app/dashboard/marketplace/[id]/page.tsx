@@ -291,50 +291,45 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                       </div>
                   ) : (
                       <div className="space-y-3.5 mb-4">
-                        {/* ── 🌟 ULTRA-MAGNETIC HIGH-CONVERTING BUY BUTTON ── */}
+                        {/* ── ✨ SLEEK LUXURY BUY BUTTON ── */}
                         <Link
                             href={`/dashboard/marketplace/checkout/${product.id}`}
                             className={cn(
-                              "w-full py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 shadow-2xl flex flex-col items-center justify-center gap-1.5 group relative overflow-hidden cursor-pointer border",
+                              "w-full py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex flex-col items-center justify-center gap-1 group relative overflow-hidden cursor-pointer",
                               isService
-                                ? "bg-linear-to-r from-blue-600 via-cyan-600 to-teal-500 hover:from-blue-500 hover:to-cyan-500 text-white border-cyan-400/30 shadow-[0_0_35px_rgba(6,182,212,0.4)]"
+                                ? "bg-linear-to-r from-cyan-400 to-teal-400 hover:from-cyan-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(6,182,212,0.3)]"
                                 : isFree
-                                  ? "bg-linear-to-r from-emerald-600 via-teal-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-white border-emerald-400/40 shadow-[0_0_35px_rgba(16,185,129,0.5)]"
-                                  : "bg-linear-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:via-blue-500 hover:to-indigo-500 text-white border-cyan-300/40 hover:border-cyan-300/70 shadow-[0_0_35px_rgba(6,182,212,0.45)] hover:shadow-[0_0_55px_rgba(6,182,212,0.75)] hover:scale-[1.02] active:scale-[0.98]"
+                                  ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.35)]"
+                                  : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 hover:from-cyan-300 hover:via-teal-200 hover:to-cyan-300 text-zinc-950 shadow-[0_0_30px_rgba(6,182,212,0.35)] hover:shadow-[0_0_45px_rgba(6,182,212,0.55)] hover:scale-[1.01] active:scale-[0.98]"
                             )}
                         >
-                            {/* Cyber Laser Shimmer Sweep */}
-                            <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+                            {/* Subtle Light Sweep */}
+                            <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/45 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
 
-                            <div className="flex items-center justify-center gap-2.5 text-base sm:text-lg font-black tracking-wide relative z-10 text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]">
+                            <div className="flex items-center justify-center gap-2 text-base sm:text-lg font-black tracking-tight relative z-10 text-zinc-950 whitespace-nowrap">
                               {isService ? (
                                 <>
-                                  <div className="w-8 h-8 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center shrink-0 shadow-inner">
-                                    <Mail className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
-                                  </div>
+                                  <Mail className="w-5 h-5 shrink-0" />
                                   <span>ติดต่อขอใบเสนอราคา</span>
                                 </>
                               ) : isFree ? (
                                 <>
-                                  <div className="w-8 h-8 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center shrink-0 shadow-inner">
-                                    <Gift className="w-4 h-4 group-hover:scale-110 transition-transform text-white" />
-                                  </div>
-                                  <span>รับระบบและโค้ดฟรีทันที →</span>
+                                  <Gift className="w-5 h-5 shrink-0" />
+                                  <span>รับระบบและโค้ดฟรีทันที</span>
+                                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </>
                               ) : (
                                 <>
-                                  <div className="w-8 h-8 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center shrink-0 shadow-inner">
-                                    <Zap className="w-4.5 h-4.5 text-amber-300 fill-amber-300/60 group-hover:scale-110 transition-transform" />
-                                  </div>
+                                  <Zap className="w-5 h-5 fill-zinc-950/20 shrink-0" />
                                   <span>สั่งซื้อรับระบบทันที</span>
-                                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform text-cyan-200" />
+                                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </>
                               )}
                             </div>
 
                             {!isService && !isFree && (
-                              <span className="text-[11px] font-medium text-cyan-200/90 tracking-wide relative z-10 flex items-center gap-1">
-                                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                              <span className="text-[11px] font-bold text-zinc-900/80 tracking-tight relative z-10 flex items-center gap-1 whitespace-nowrap">
+                                <ShieldCheck className="w-3.5 h-3.5 text-zinc-950" />
                                 ลิขสิทธิ์ตลอดชีพ • ดาวน์โหลดผ่าน OneDrive อัตโนมัติ
                               </span>
                             )}

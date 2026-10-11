@@ -153,22 +153,26 @@ export function Navbar({ user }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      setIsScrolled(scrollTop > 15);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    // Trigger check immediately in case page is already scrolled on mount
+    document.body.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.body.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
     <nav className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-500",
+      "sticky top-0 z-50 w-full transition-all duration-300",
       isScrolled 
         ? "glass-nav py-2" 
-        : "bg-transparent border-b border-transparent py-4"
+        : "bg-[#09090b]/85 backdrop-blur-xl border-b border-white/8 py-3"
     )}>
       <div className="max-w-7xl mx-auto flex h-16 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         

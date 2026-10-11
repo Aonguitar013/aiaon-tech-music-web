@@ -447,10 +447,10 @@ export function ProductCard({ product, index }: ProductCardProps) {
           </span>
         </div>
 
-        {/* Bottom Bar: Mini Tech Feature Pills */}
-        <div className="flex items-center justify-center gap-1.5 relative z-10 flex-wrap">
-          {coverTheme.pills.map((pill, pIdx) => (
-            <span key={pIdx} className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[9px] font-prompt text-white/60">
+        {/* Bottom Bar: Mini Tech Feature Pills (Single line, no clipping) */}
+        <div className="flex items-center justify-center gap-1.5 relative z-10 overflow-hidden">
+          {coverTheme.pills.slice(0, 2).map((pill, pIdx) => (
+            <span key={pIdx} className="px-2.5 py-0.5 rounded-full bg-black/45 border border-white/15 text-[10px] font-prompt text-white/75 whitespace-nowrap backdrop-blur-sm">
               {pill}
             </span>
           ))}
@@ -458,9 +458,9 @@ export function ProductCard({ product, index }: ProductCardProps) {
       </div>
 
       {/* ── CARD BODY ─────────────────────────────────────────── */}
-      <div className="p-6 flex flex-col flex-1 z-10">
+      <div className="p-5 sm:p-6 flex flex-col flex-1 z-10">
         <h3 className={cn(
-          "text-lg font-bold font-prompt text-white mb-2 line-clamp-2 leading-snug transition-colors",
+          "text-base sm:text-lg font-bold font-prompt text-white mb-2 line-clamp-2 leading-snug transition-colors",
           hoverText
         )}>
           {product.title}
@@ -477,40 +477,36 @@ export function ProductCard({ product, index }: ProductCardProps) {
           {rawDesc}
         </p>
 
-        {/* --- FUTURISTIC & FRIENDLY CYBERPUNK NEON PRICE CAPSULE --- */}
-        <div className="mt-auto space-y-3">
+        {/* --- CLEAN SINGLE-LINE PRICE & CTA FOOTER --- */}
+        <div className="mt-auto pt-4 border-t border-white/10 space-y-3">
           
-          <div className="p-3.5 rounded-2xl bg-linear-to-r from-slate-900 via-black to-slate-900 border border-cyan-500/30 shadow-[inset_0_1px_15px_rgba(6,182,212,0.12)] relative overflow-hidden">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[10px] font-prompt text-cyan-300 font-semibold flex items-center gap-1">
-                <Zap className="w-3 h-3 text-cyan-400" />
-                {isFree ? "ของขวัญฟรีสำหรับคุณ" : "ดีลพิเศษสำหรับครู & นักเรียน"}
-              </span>
-              <span className="text-[9px] font-prompt text-white/50 bg-white/10 px-2 py-0.5 rounded-md border border-white/10">
-                {isFree ? "แจกฟรี 100%" : "จ่ายครั้งเดียวตลอดชีพ"}
-              </span>
-            </div>
-
-            <div className="flex items-baseline justify-between pt-0.5">
-              <div className="flex items-baseline gap-2">
+          {/* Price Row — Never wraps */}
+          <div className="flex items-end justify-between gap-2">
+            <div>
+              <div className="text-[10px] font-prompt text-white/50 font-medium whitespace-nowrap mb-0.5">
+                {isFree ? "🎁 ของขวัญพิเศษ" : "⚡ จ่ายครั้งเดียวตลอดชีพ"}
+              </div>
+              <div className="flex items-baseline gap-2 whitespace-nowrap">
                 <span className={cn(
-                  "font-prompt text-2xl font-black tracking-tight",
+                  "font-prompt text-2xl font-black tracking-tight whitespace-nowrap",
                   isFree 
-                    ? "text-emerald-400 drop-shadow-[0_0_12px_rgba(16,185,129,0.5)]" 
-                    : "text-transparent bg-clip-text bg-linear-to-r from-cyan-300 via-white to-amber-200 drop-shadow-[0_0_12px_rgba(6,182,212,0.4)]"
+                    ? "text-emerald-400" 
+                    : "text-white"
                 )}>
-                  {isFree ? "0 ฿" : product.price}
+                  {isFree ? "ฟรี 0 ฿" : product.price.replace(/\s*THB/i, " ฿")}
                 </span>
 
                 {!isFree && numericPrice > 0 && (
-                  <span className="font-prompt text-xs text-white/35 line-through">
+                  <span className="font-prompt text-xs text-white/35 line-through whitespace-nowrap">
                     {originalAnchorPrice} ฿
                   </span>
                 )}
               </div>
+            </div>
 
-              <span className="text-[10px] font-prompt text-emerald-400 flex items-center gap-1 font-medium">
-                <ShieldCheck className="w-3 h-3" />
+            <div className="flex flex-col items-end gap-1 shrink-0">
+              <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-[10px] font-prompt text-emerald-300 flex items-center gap-1 font-semibold whitespace-nowrap">
+                <ShieldCheck className="w-3 h-3 text-emerald-400 shrink-0" />
                 <span>ไม่มีรายเดือน</span>
               </span>
             </div>
@@ -532,50 +528,38 @@ export function ProductCard({ product, index }: ProductCardProps) {
             }
 
             return (
-              <div className="text-[10px] font-prompt text-amber-300/80 text-center flex items-center justify-center gap-1.5 py-0.5">
-                <span>🛠️ ออปชันเสริม: ครูอ้นติดตั้งให้พร้อมใช้ ({vipPrice})</span>
+              <div className="text-[11px] font-prompt text-amber-300/85 bg-amber-500/8 border border-amber-500/20 rounded-lg py-1 px-2.5 text-center whitespace-nowrap truncate">
+                🛠️ ออปชันครูอ้นติดตั้งให้พร้อมใช้ ({vipPrice})
               </div>
             );
           })()}
 
-          {/* ── 🌟 ULTRA-MODERN HIGH-POWER CTA BUTTON ── */}
+          {/* ── ✨ SLEEK SINGLE-LINE LUXURY CTA BUTTON ── */}
           <div className={cn(
-            "w-full py-3.5 px-4 rounded-2xl font-prompt text-sm font-bold flex items-center justify-between transition-all duration-300 group-hover:scale-[1.02] active:scale-[0.98] cursor-pointer relative overflow-hidden border backdrop-blur-md shadow-lg",
+            "w-full h-11 px-4 rounded-xl font-prompt text-sm font-extrabold flex items-center justify-between whitespace-nowrap transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.98] cursor-pointer relative overflow-hidden",
             isValidId 
               ? (isFree 
-                  ? "bg-linear-to-r from-emerald-600 via-teal-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-white border-emerald-400/40 shadow-[0_0_20px_rgba(16,185,129,0.35)] group-hover:shadow-[0_0_35px_rgba(16,185,129,0.6)]" 
-                  : "bg-linear-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:via-blue-500 hover:to-indigo-500 text-white border-cyan-300/30 group-hover:border-cyan-300/60 shadow-[0_0_25px_rgba(6,182,212,0.35)] group-hover:shadow-[0_0_40px_rgba(6,182,212,0.65)]") 
-              : "bg-white/10 text-white/40 cursor-not-allowed border-transparent"
+                  ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.25)] group-hover:shadow-[0_0_30px_rgba(16,185,129,0.45)]" 
+                  : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 hover:from-cyan-300 hover:via-teal-200 hover:to-cyan-300 text-zinc-950 shadow-[0_0_20px_rgba(6,182,212,0.25)] group-hover:shadow-[0_0_32px_rgba(6,182,212,0.5)]") 
+              : "bg-white/10 text-white/40 cursor-not-allowed"
           )}>
-            {/* Cyber Laser Shimmer Sweep Effect */}
-            <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+            {/* Subtle Light Sweep */}
+            <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/45 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
 
-            {isFree ? (
-              <>
-                <div className="flex items-center gap-2.5 relative z-10">
-                  <div className="w-7 h-7 rounded-lg bg-white/20 border border-white/20 flex items-center justify-center shrink-0 shadow-inner">
-                    <Gift className="w-4 h-4 text-white" />
-                  </div>
-                  <span className="font-bold tracking-wide">รับระบบและโค้ดฟรี</span>
-                </div>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 text-white relative z-10" />
-              </>
-            ) : (
-              <>
-                <div className="flex items-center gap-2.5 relative z-10">
-                  <div className="w-7 h-7 rounded-lg bg-white/20 border border-white/30 flex items-center justify-center shrink-0 shadow-inner">
-                    <Zap className="w-4 h-4 text-amber-300 fill-amber-300/60 group-hover:scale-110 transition-transform" />
-                  </div>
-                  <span className="font-extrabold tracking-wide text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
-                    สั่งซื้อรับระบบทันที
-                  </span>
-                </div>
-                <div className="flex items-center gap-1 text-cyan-200 font-bold text-xs relative z-10 group-hover:text-white transition-colors">
-                  <span>ปลดล็อก</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
-                </div>
-              </>
-            )}
+            <div className="flex items-center gap-2 relative z-10 whitespace-nowrap">
+              {isFree ? (
+                <Gift className="w-4 h-4 text-zinc-950 shrink-0" />
+              ) : (
+                <ShoppingCart className="w-4 h-4 text-zinc-950 shrink-0" />
+              )}
+              <span className="tracking-tight">
+                {isFree ? "รับระบบและโค้ดฟรี" : "สั่งซื้อรับระบบทันที"}
+              </span>
+            </div>
+
+            <div className="w-6 h-6 rounded-lg bg-zinc-950/12 group-hover:bg-zinc-950/20 flex items-center justify-center relative z-10 shrink-0 transition-all">
+              <ArrowRight className="w-3.5 h-3.5 text-zinc-950 transition-transform group-hover:translate-x-0.5" />
+            </div>
           </div>
 
         </div>
