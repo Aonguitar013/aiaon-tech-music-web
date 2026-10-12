@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import generatePayload from "promptpay-qr";
 
 const PROMPTPAY_ID = "0835399340";
 const PROMPTPAY_NAME = "นายจิรวัฒน์ เดชเส้ง (ครูอ้น AiAon Tech)";
+
+const DEFAULT_LINE_TOKEN =
+  "h4PDZZ6QCgNd4NhxB7YT8K6Hd2P8MHk3y3Fy7EMTcTbZy8/7xgxmxaF1YbSH9Bl3QMDvaiL9jDfqr21ZSpjYoIk2Czl5sqvSfH0zKztjev3ZQBWpP4QtVgjmxNgA/9Ka/B2+9X/G6ra/70ywdw/o8wdB04t89/1O/w1cDnyilFU=";
 
 interface LineMessage {
   type: "text" | "image";
@@ -11,24 +13,78 @@ interface LineMessage {
   previewImageUrl?: string;
 }
 
+// Keep recent webhook logs in memory for instant diagnostics via GET /api/line-webhook
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const g = globalThis as any;
+if (!g.__lineWebhookLogs) {
+  g.__lineWebhookLogs = [];
+}
+
+function addWebhookLog(entry: Record<string, unknown>) {
+  g.__lineWebhookLogs.unshift({
+    time: new Date().toISOString(),
+    ...entry,
+  });
+  if (g.__lineWebhookLogs.length > 15) {
+    g.__lineWebhookLogs.length = 15;
+  }
+}
+
+/**
+ * Pure TypeScript CRC16-CCITT (0xFFFF, polynomial 0x1021) for Thai PromptPay EMVCo QR
+ */
+function crc16(data: string): string {
+  let crc = 0xffff;
+  for (let i = 0; i < data.length; i++) {
+    crc ^= data.charCodeAt(i) << 8;
+    for (let j = 0; j < 8; j++) {
+      if ((crc & 0x8000) !== 0) {
+        crc = ((crc << 1) ^ 0x1021) & 0xffff;
+      } else {
+        crc = (crc << 1) & 0xffff;
+      }
+    }
+  }
+  return crc.toString(16).toUpperCase().padStart(4, "0");
+}
+
+/**
+ * Pure TypeScript PromptPay EMVCo Payload Generator for 0835399340
+ */
+function generatePromptPayPayload(phone: string, amount?: number): string {
+  const cleanPhone = phone.replace(/[^0-9]/g, "");
+  const formattedPhone = "0066" + cleanPhone.substring(1); // 0066835399340
+  const tag29Value = `0016A0000006770101110113${formattedPhone}`;
+  const tag29 = `29${String(tag29Value.length).padStart(2, "0")}${tag29Value}`;
+
+  const hasAmount = typeof amount === "number" && amount > 0;
+  const poiMethod = hasAmount ? "010212" : "010211";
+  let amountField = "";
+  if (hasAmount) {
+    const amtStr = amount.toFixed(2);
+    amountField = `54${String(amtStr.length).padStart(2, "0")}${amtStr}`;
+  }
+
+  const raw = `000201${poiMethod}${tag29}5802TH5303764${amountField}6304`;
+  return raw + crc16(raw);
+}
+
 /**
  * Generate a scannable PromptPay QR Code HTTPS image URL for a specific amount in THB.
  */
 function getPromptPayQrImageUrl(amount: number): string {
-  let payload = "";
-  try {
-    payload = generatePayload(PROMPTPAY_ID, { amount: amount > 0 ? amount : undefined });
-  } catch {
-    payload = `00020101021129370016A00000067701011101130066${PROMPTPAY_ID.substring(1)}5802TH5303764540${amount}5802TH6304`;
-  }
-  return `https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=20&data=${encodeURIComponent(payload)}`;
+  const payload = generatePromptPayPayload(PROMPTPAY_ID, amount);
+  return `https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=20&format=png&data=${encodeURIComponent(payload)}`;
 }
 
 /**
- * Helper to extract quoted title from preset message, e.g. "📦 \"[AONE01] ...\""
+ * Helper to extract quoted title from preset message
  */
 function extractQuotedTitle(text: string): string | null {
-  const match = text.match(/"([^"]+)"/) || text.match(/'([^']+)'/);
+  const match =
+    text.match(/"([^"]+)"/) ||
+    text.match(/“([^”]+)”/) ||
+    text.match(/'([^']+)'/);
   return match ? match[1].trim() : null;
 }
 
@@ -45,14 +101,13 @@ function parseBahtNumbers(text: string): number[] {
 
 /**
  * Build smart LINE reply messages for website preset texts & common keywords.
- * Returns null if the message is regular human conversation so Kru Aon can chat normally without bot interruption.
  */
 function buildSmartAutoReply(rawText: string): LineMessage[] | null {
   const text = rawText.trim();
   const lower = text.toLowerCase();
 
   // ── 1. FREEBIES: User already unlocked with FREE69 and clicked a specific LINE download item ──
-  if (text.includes("ปลดล็อกรหัสสำเร็จแล้ว") && text.includes("ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี")) {
+  if (text.includes("ปลดล็อกรหัสสำเร็จแล้ว") || text.includes("ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี")) {
     const itemTitle = extractQuotedTitle(text) || "ทรัพยากรแจกฟรีจากคลัง AiAon Tech";
     return [
       {
@@ -74,7 +129,7 @@ function buildSmartAutoReply(rawText: string): LineMessage[] | null {
     text.includes("ขอรับระบบและโค้ดแจกฟรี") ||
     text.includes("ขอสมัครรับอัปเดตโค้ดฟรี") ||
     lower.includes("freebies") ||
-    text === "รหัสปลดล็อก" ||
+    text.includes("รหัสปลดล็อก") ||
     text === "ขอรหัส" ||
     lower === "free69"
   ) {
@@ -98,7 +153,7 @@ function buildSmartAutoReply(rawText: string): LineMessage[] | null {
   }
 
   // ── 3. VIP SETUP PRODUCT ORDER (User clicked the Gold VIP Setup badge on ProductCard) ──
-  if (text.includes("สนใจสั่งซื้อระบบพร้อมบริการให้ครูอ้นติดตั้งให้ (VIP Setup)")) {
+  if (text.includes("VIP Setup") && text.includes("บริการติดตั้งพร้อมใช้")) {
     const itemTitle = extractQuotedTitle(text) || "ระบบอัตโนมัติพร้อมบริการติดตั้ง VIP Setup";
     const amounts = parseBahtNumbers(text);
     const basePrice = amounts[0] || 690;
@@ -162,64 +217,32 @@ function buildSmartAutoReply(rawText: string): LineMessage[] | null {
     ];
   }
 
-  // ── 5. TEACHER PREP (Telegram Exam Bot & SobKru Audio Pass) ──
+  // ── 5. UNIVERSAL CATCH-ALL FOR ANY ORDER / PACKAGE WITH A BAHT AMOUNT ──
+  const detectedAmounts = parseBahtNumbers(text);
   if (
-    text.includes("Exam Bot Pass") ||
-    text.includes("Song & Audio Pass") ||
-    text.includes("All-in-One SobKru Pass") ||
-    text.includes("AiAon Prep") ||
-    text.includes("ติวสอบครูผู้ช่วย")
+    detectedAmounts.length > 0 &&
+    (text.includes("สนใจ") ||
+      text.includes("สั่งซื้อ") ||
+      text.includes("สมัคร") ||
+      text.includes("แพ็กเกจ") ||
+      text.includes("ราคา") ||
+      text.includes("ชำระเงิน"))
   ) {
-    const itemTitle = extractQuotedTitle(text) || "แพ็กเกจติวสอบครูผู้ช่วย AiAon Prep (Telegram VIP)";
-    const amounts = parseBahtNumbers(text);
-    const amount = amounts[0] || 390;
+    const amount = detectedAmounts[0];
+    const itemTitle = extractQuotedTitle(text) || text.split("\n")[0].replace(/^สวัสดีครับครูอ้น\s*/, "");
     const qrUrl = getPromptPayQrImageUrl(amount);
 
     return [
       {
         type: "text",
         text:
-          `🎯 ยินดีต้อนรับว่าที่ข้าราชการครูสู่ "AiAon Prep" ครับ!\n\n` +
-          `📌 แพ็กเกจที่เลือก: ${itemTitle}\n` +
-          `💵 ยอดชำระ: ${amount.toLocaleString()} บาท (สิทธิ์ตลอดชีพ ไม่มีรายเดือน)\n` +
-          `━━━━━━━━━━━━━━━\n` +
-          `🏦 พร้อมเพย์: 083-539-9340\n` +
-          `👤 ชื่อบัญชี: ${PROMPTPAY_NAME}\n\n` +
-          `📲 สแกน QR Code ด้านล่าง (ยอด ${amount.toLocaleString()} บาท) แล้วส่งสลิปพร้อมแจ้ง "วิชาเอกที่สอบ และอีเมล Gmail" ทิ้งไว้ได้เลยครับ ทันทีที่ตรวจสลิปเสร็จ ครูอ้นจะส่งลิงก์เข้ากลุ่มลับ Telegram VIP และคลังเพลงช่วยจำให้ทันทีครับ! 🔥`,
-      },
-      {
-        type: "image",
-        originalContentUrl: qrUrl,
-        previewImageUrl: qrUrl,
-      },
-    ];
-  }
-
-  // ── 6. COMMERCIAL MUSIC STORE (Songs, Backing Tracks, All-Access Audio Pass, Custom Song) ──
-  if (
-    text.includes("สนใจสั่งซื้อเพลงลิขสิทธิ์") ||
-    text.includes("All-Access School Audio Pass") ||
-    text.includes("สนใจสั่งทำเพลงใหม่") ||
-    text.includes("เพลงประจำโรงเรียน")
-  ) {
-    const itemTitle = extractQuotedTitle(text) || "ผลงานเพลงและเสียงลิขสิทธิ์ AiAon Music Studio";
-    const amounts = parseBahtNumbers(text);
-    const amount = amounts[0] || (text.includes("สั่งทำเพลงใหม่") ? 1990 : 990);
-    const qrUrl = getPromptPayQrImageUrl(amount);
-
-    return [
-      {
-        type: "text",
-        text:
-          `🎵 ขอบคุณที่สนใจผลงานเพลงลิขสิทธิ์จาก AiAon Music Studio ครับ!\n\n` +
-          `💿 รายการ: ${itemTitle}\n` +
+          `👑 ระบบรับรายการสั่งซื้อของท่านเรียบร้อยครับ!\n\n` +
+          `📦 รายการ: ${itemTitle}\n` +
           `💵 ยอดชำระ: ${amount.toLocaleString()} บาท\n` +
           `━━━━━━━━━━━━━━━\n` +
           `🏦 พร้อมเพย์: 083-539-9340\n` +
           `👤 ชื่อบัญชี: ${PROMPTPAY_NAME}\n\n` +
-          (text.includes("สั่งทำเพลงใหม่")
-            ? `🎸 สำหรับการสั่งแต่งเพลงใหม่ (Custom Song): ท่านสามารถแจ้ง "ชื่อโรงเรียน/องค์กร, คำขวัญ, แนวเพลง และอารมณ์เพลงที่ต้องการ" ทิ้งไว้ในแชตได้เลยครับ!\n`
-            : `📲 สแกน QR Code ด้านล่างเพื่อชำระเงิน (${amount.toLocaleString()} บาท) แล้วส่งสลิปพร้อมแจ้ง "ชื่อโรงเรียน/ช่อง และอีเมล Gmail" เพื่อรับไฟล์ Master WAV + MP3 และใบอนุญาต Commercial License ได้เลยครับ!`),
+          `📲 สแกน QR Code พร้อมเพย์ด้านล่าง (ระบุยอด ${amount.toLocaleString()} บาทไว้ให้แล้ว) แล้วส่ง "รูปสลิปโอนเงิน" พร้อมแจ้ง "อีเมล Gmail" ในแชตนี้ได้เลยครับ! ⚡`,
       },
       {
         type: "image",
@@ -229,51 +252,8 @@ function buildSmartAutoReply(rawText: string): LineMessage[] | null {
     ];
   }
 
-  // ── 7. VIP BUNDLES, STUDENT HUB & AI CARETAKER PACKAGES WITH PRICE ──
-  if (
-    text.includes("สนใจสั่งซื้อแพ็กเกจ") ||
-    text.includes("สนใจสั่งซื้อ:") ||
-    text.includes("สนใจแพ็กเกจ:") ||
-    text.includes("Student All-in-One")
-  ) {
-    const itemTitle = extractQuotedTitle(text) || text.split("\n")[0];
-    const amounts = parseBahtNumbers(text);
-    const amount = amounts[0] || 0;
-
-    if (amount > 0) {
-      const qrUrl = getPromptPayQrImageUrl(amount);
-      return [
-        {
-          type: "text",
-          text:
-            `👑 ระบบรับรายการสั่งซื้อแพ็กเกจสุดคุ้มเรียบร้อยครับ!\n\n` +
-            `📦 รายการ: ${itemTitle}\n` +
-            `💵 ยอดชำระ: ${amount.toLocaleString()} บาท\n` +
-            `━━━━━━━━━━━━━━━\n` +
-            `🏦 พร้อมเพย์: 083-539-9340\n` +
-            `👤 ชื่อบัญชี: ${PROMPTPAY_NAME}\n\n` +
-            `📲 สแกน QR Code พร้อมเพย์ด้านล่าง (ระบุยอด ${amount.toLocaleString()} บาทอัตโนมัติ) แล้วส่ง "รูปสลิปโอนเงิน" พร้อมแจ้ง "อีเมล Gmail" ในแชตนี้ได้เลยครับ! ⚡`,
-        },
-        {
-          type: "image",
-          originalContentUrl: qrUrl,
-          previewImageUrl: qrUrl,
-        },
-      ];
-    }
-  }
-
-  // ── 8. GENERAL INQUIRIES FROM FLOATING BUTTON / SPEAKER / CUSTOM QUOTE ──
-  if (
-    text.includes("สวัสดีครับครูอ้น") &&
-    (text.includes("สนใจบริการติดตั้งระบบ AI ผู้ช่วยส่วนตัว") ||
-      text.includes("สนใจขอเชิญเป็นวิทยากร") ||
-      text.includes("สนใจจ้างพัฒนาระบบ") ||
-      text.includes("สนใจโปรโมชันมัดรวมระบบ") ||
-      text.includes("กำลังดูคลังระบบอัตโนมัติ") ||
-      text.includes("สนใจระบบในคลังนักเรียน") ||
-      text.includes("เข้ามาชมเว็บไซต์ www.aiaon.tech"))
-  ) {
+  // ── 6. GENERAL INQUIRIES FROM WEBSITE PRESETS ──
+  if (text.includes("สวัสดีครับครูอ้น")) {
     return [
       {
         type: "text",
@@ -281,8 +261,7 @@ function buildSmartAutoReply(rawText: string): LineMessage[] | null {
           `สวัสดีครับ! 🙏 ระบบอัตโนมัติของครูอ้น (AiAon Tech) ได้รับข้อความของท่านเรียบร้อยแล้วครับ\n\n` +
           `📌 ระหว่างรอครูอ้นเข้ามาตอบกลับโดยตรง ท่านสามารถแจ้งรายละเอียดเพิ่มเติมทิ้งไว้ได้เลยครับ เช่น:\n` +
           `• ชื่อระบบ / แพ็กเกจที่สนใจ\n` +
-          `• ชื่อโรงเรียน หรือหน่วยงาน (กรณีขอใบเสนอราคา / เชิญวิทยากร)\n` +
-          `• รุ่นคอมพิวเตอร์ Windows/Mac (กรณีติดตั้ง AI เลขาส่วนตัว)\n\n` +
+          `• ชื่อโรงเรียน หรือหน่วยงาน (กรณีขอใบเสนอราคา / เชิญวิทยากร)\n\n` +
           `🌐 ดูคลัง 20 ระบบทั้งหมด: https://www.aiaon.tech/digital-vault\n` +
           `🎁 คลังของแจกฟรี (รหัส FREE69): https://www.aiaon.tech/freebies\n` +
           `เดี๋ยวครูอ้นรีบเข้ามาดูแลให้เร็วที่สุดครับ! ⚡`,
@@ -360,7 +339,6 @@ async function verifyLineSlipImage(
 
     const result = JSON.parse(rawJson);
     if (!result.isBankSlip) {
-      // Not a bank slip -> stay silent so normal image sharing in chat isn't interrupted
       return null;
     }
 
@@ -386,16 +364,9 @@ export async function GET() {
   return NextResponse.json({
     status: "ok",
     service: "AiAon Tech Smart LINE OA Webhook (@deu6776s)",
-    features: [
-      "Pre-filled Order Auto-Reply with Dynamic PromptPay QR Code Image",
-      "Freebie Passcode (FREE69) Instant Delivery",
-      "Gemini 2.5 Flash Automatic Bank Slip Verification in LINE Chat",
-    ],
+    recentLogs: g.__lineWebhookLogs || [],
   });
 }
-
-const DEFAULT_LINE_TOKEN =
-  "h4PDZZ6QCgNd4NhxB7YT8K6Hd2P8MHk3y3Fy7EMTcTbZy8/7xgxmxaF1YbSH9Bl3QMDvaiL9jDfqr21ZSpjYoIk2Czl5sqvSfH0zKztjev3ZQBWpP4QtVgjmxNgA/9Ka/B2+9X/G6ra/70ywdw/o8wdB04t89/1O/w1cDnyilFU=";
 
 export async function POST(req: NextRequest) {
   try {
@@ -410,13 +381,18 @@ export async function POST(req: NextRequest) {
     const body = await req.json().catch(() => ({}));
     const events = body?.events || [];
 
-    // Fast 200 OK for LINE Webhook "Verify" ping (which sends events: [])
     if (!Array.isArray(events) || events.length === 0) {
+      addWebhookLog({ type: "verify_ping" });
       return NextResponse.json({ success: true, verified: true }, { status: 200 });
     }
 
+    const debugResults = [];
+
     for (const event of events) {
-      if (event.type !== "message" || !event.replyToken) continue;
+      if (event.type !== "message" || !event.replyToken) {
+        addWebhookLog({ type: event.type, skipped: true });
+        continue;
+      }
 
       let replyMessages: LineMessage[] | null = null;
 
@@ -427,7 +403,7 @@ export async function POST(req: NextRequest) {
       }
 
       if (replyMessages && replyMessages.length > 0 && lineAccessToken) {
-        await fetch("https://api.line.me/v2/bot/message/reply", {
+        const lineRes = await fetch("https://api.line.me/v2/bot/message/reply", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -438,13 +414,48 @@ export async function POST(req: NextRequest) {
             messages: replyMessages.slice(0, 5),
           }),
         });
+
+        const lineResText = await lineRes.text().catch(() => "");
+
+        // Fallback: if image URL caused an error on LINE, send text-only reply
+        if (!lineRes.ok && replyMessages.length > 1) {
+          await fetch("https://api.line.me/v2/bot/message/reply", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${lineAccessToken}`,
+            },
+            body: JSON.stringify({
+              replyToken: event.replyToken,
+              messages: [replyMessages[0]],
+            }),
+          });
+        }
+
+        const logEntry = {
+          msgType: event.message?.type,
+          textPreview: event.message?.text?.slice(0, 60),
+          userId: event.source?.userId,
+          matched: true,
+          lineStatus: lineRes.status,
+          lineResText,
+        };
+        addWebhookLog(logEntry);
+        debugResults.push(logEntry);
+      } else {
+        const logEntry = {
+          msgType: event.message?.type,
+          textPreview: event.message?.text?.slice(0, 60),
+          matched: false,
+        };
+        addWebhookLog(logEntry);
+        debugResults.push(logEntry);
       }
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, debug: debugResults });
   } catch (error) {
-    console.error("[LINE Webhook Error]:", error);
-    // Always return 200 OK to LINE platform so webhook verification succeeds
-    return NextResponse.json({ success: true });
+    addWebhookLog({ error: String(error) });
+    return NextResponse.json({ success: true, error: String(error) });
   }
 }
