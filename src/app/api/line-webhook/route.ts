@@ -394,6 +394,9 @@ export async function GET() {
   });
 }
 
+const DEFAULT_LINE_TOKEN =
+  "h4PDZZ6QCgNd4NhxB7YT8K6Hd2P8MHk3y3Fy7EMTcTbZy8/7xgxmxaF1YbSH9Bl3QMDvaiL9jDfqr21ZSpjYoIk2Czl5sqvSfH0zKztjev3ZQBWpP4QtVgjmxNgA/9Ka/B2+9X/G6ra/70ywdw/o8wdB04t89/1O/w1cDnyilFU=";
+
 export async function POST(req: NextRequest) {
   try {
     const url = new URL(req.url);
@@ -401,11 +404,16 @@ export async function POST(req: NextRequest) {
     const lineAccessToken = (
       (rawQueryToken ? rawQueryToken.trim().replace(/ /g, "+") : "") ||
       process.env.LINE_CHANNEL_ACCESS_TOKEN ||
-      ""
+      DEFAULT_LINE_TOKEN
     ).trim();
 
-    const body = await req.json();
+    const body = await req.json().catch(() => ({}));
     const events = body?.events || [];
+
+    // Fast 200 OK for LINE Webhook "Verify" ping (which sends events: [])
+    if (!Array.isArray(events) || events.length === 0) {
+      return NextResponse.json({ success: true, verified: true }, { status: 200 });
+    }
 
     for (const event of events) {
       if (event.type !== "message" || !event.replyToken) continue;
