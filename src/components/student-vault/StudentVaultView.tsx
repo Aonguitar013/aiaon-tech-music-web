@@ -273,7 +273,9 @@ export function StudentVaultView() {
             </div>
 
             <a
-              href="https://line.me/R/oaMessage/@deu6776s/?สวัสดีครับครูอ้น สนใจสั่งซื้อ 'Student All-in-One Super Pack (390 บาท)' ได้ครบทั้ง 3 ระบบครับ รบกวนขอข้อมูลชำระเงินด้วยครับ 🙏"
+              href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+                'สวัสดีครับครูอ้น สนใจสั่งซื้อแพ็กเกจเหมา "Student All-in-One Super Pack (390 บาท)" ได้ครบทั้ง 3 ระบบ (เว็บพอร์ต TCAS 3D + ระบบเช็คการบ้านห้อง + คัมภีร์ AI) ครับ รบกวนขอข้อมูลชำระเงินด้วยครับ 🙏'
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-5 rounded-2xl bg-linear-to-r from-purple-600 via-pink-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white font-prompt font-extrabold text-base flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(236,72,153,0.4)] transition-all hover:scale-105 shrink-0 cursor-pointer"

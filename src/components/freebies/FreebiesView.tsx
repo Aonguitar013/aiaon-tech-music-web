@@ -150,6 +150,8 @@ function LineUnlockModal({
   if (!freebie) return null;
 
   const VALID_PASSCODES = ["FREE69", "AIAON2026", "AIAONTECH"];
+  const freebieLineMsg = `สวัสดีครับครูอ้น ขอรับรหัสปลดล็อกและไฟล์แจกฟรี:\n🎁 "${freebie.title}"\n📌 หมวด: ${freebie.tag}\nขอบคุณครับ 🙏`;
+  const freebieLineUrl = `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(freebieLineMsg)}`;
 
   const handleUnlock = (e: React.FormEvent) => {
     e.preventDefault();
@@ -224,8 +226,9 @@ function LineUnlockModal({
         </h3>
 
         <p className="text-white/80 font-prompt text-sm leading-relaxed mb-4">
-          รับรหัสและลิงก์ปลดล็อกไฟล์ฟรี! เพียงสแกน QR Code หรือกดเพิ่มเพื่อนใน LINE OA{" "}
-          <span className="text-[#06C755] font-bold">@deu6776s (AiAon Tech)</span>
+          รับรหัสและลิงก์ปลดล็อกไฟล์ฟรี! เพียงสแกน QR Code หรือกดปุ่มทักแชต LINE OA{" "}
+          <span className="text-[#06C755] font-bold">@deu6776s (AiAon Tech)</span>{" "}
+          (ระบบพิมพ์ชื่อไฟล์นี้ให้พร้อมส่งอัตโนมัติ)
         </p>
 
         {/* QR Code Card for Desktop & Mobile */}
@@ -233,7 +236,7 @@ function LineUnlockModal({
           <div className="p-2 bg-white rounded-xl shadow-md ring-2 ring-[#06C755]/40">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
-              src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fpage.line.me%2Fdeu6776s" 
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(freebieLineUrl)}`}
               alt="LINE OA @deu6776s QR Code" 
               className="w-32 h-32 md:w-36 md:h-36 block rounded-lg"
             />
@@ -244,20 +247,20 @@ function LineUnlockModal({
               <span className="text-[#06C755] font-bold select-all bg-[#06C755]/15 px-2 py-0.5 rounded-md border border-[#06C755]/30">@deu6776s</span>
             </div>
             <p className="text-[11px] font-prompt text-white/50 mt-1">
-              เปิดกล้องมือถือสแกน เพื่อทักแชตรับรหัสผ่านปลดล็อกได้ทันที
+              เปิดกล้องมือถือสแกน เพื่อทักแชตรับรหัสผ่านปลดล็อกไฟล์นี้ได้ทันที
             </p>
           </div>
         </div>
 
-        {/* Action 1: Add LINE Button (Universal Link: page.line.me) */}
+        {/* Action 1: Pre-filled LINE OA Message Button */}
         <a
-          href="https://page.line.me/deu6776s"
+          href={freebieLineUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="w-full py-3.5 px-6 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-base flex items-center justify-center gap-2.5 shadow-[0_0_25px_rgba(6,199,85,0.35)] hover:shadow-[0_0_35px_rgba(6,199,85,0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-95 mb-6 cursor-pointer"
         >
           <RiLineLine className="w-6 h-6 fill-white shrink-0" />
-          <span>เปิดหน้า LINE OA (@deu6776s)</span>
+          <span>ทัก LINE รับรหัสปลดล็อกไฟล์นี้ (@deu6776s)</span>
         </a>
 
         {/* Divider */}
@@ -583,19 +586,21 @@ export function FreebiesView({ user, initialFreebies }: FreebiesViewProps) {
                 <RiLineLine className="w-8 h-8 text-white" />
               </div>
               <h3 className="font-prompt text-2xl font-bold text-white">
-                แอด LINE OA @poMESoP รับอัปเดตโค้ดฟรีทุกสัปดาห์
+                แอด LINE OA @deu6776s รับอัปเดตโค้ดฟรีทุกสัปดาห์
               </h3>
               <p className="text-white/60 font-prompt text-sm leading-relaxed">
                 รับการแจ้งเตือนสคริปต์ใหม่ บทเรียนการสอนฟรี และรหัสส่วนลดพิเศษเฉพาะใน LINE
               </p>
               <a
-                href="https://lin.ee/poMESoP"
+                href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+                  "สวัสดีครับครูอ้น ขอสมัครรับอัปเดตโค้ดฟรีประจำสัปดาห์ และขอรหัสปลดล็อกคลังของแจกฟรี (Freebies) ครับ 🎁🙏"
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-105 shadow-[0_0_24px_rgba(6,199,85,0.35)]"
               >
                 <RiLineLine className="w-5 h-5 fill-white" />
-                เพิ่มเพื่อน LINE OA @poMESoP
+                เพิ่มเพื่อน LINE OA @deu6776s
               </a>
             </div>
           </motion.div>

@@ -595,7 +595,9 @@ export function ServicesView() {
             </div>
 
             <a
-              href="https://line.me/R/oaMessage/@deu6776s/?สวัสดีครับครูอ้น สนใจขอเชิญเป็นวิทยากรบรรยาย / จัดอบรม AI ให้กับทางโรงเรียนครับ รบกวนขอข้อมูลและคิวว่างด้วยครับ 🙏"
+              href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+                "สวัสดีครับครูอ้น สนใจขอเชิญเป็นวิทยากรบรรยาย / จัดอบรมเชิงปฏิบัติการ AI เพื่อการศึกษาลดภาระครูและ Automation ให้กับทางโรงเรียนครับ รบกวนขอข้อมูลหลักสูตร ใบเสนอราคา และคิวว่างด้วยครับ 🙏"
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-5 rounded-2xl bg-linear-to-r from-amber-500 via-orange-500 to-amber-400 text-zinc-950 font-prompt font-extrabold text-base flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(245,158,11,0.4)] hover:scale-105 transition-all shrink-0 cursor-pointer"

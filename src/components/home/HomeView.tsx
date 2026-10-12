@@ -547,7 +547,9 @@ export function HomeView() {
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="https://lin.ee/poMESoP"
+                href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+                  "สวัสดีครับครูอ้น สนใจปรึกษาระบบอัตโนมัติสำหรับโรงเรียน / ขอรับโค้ดฟรี / สอบถามรายละเอียดการสั่งซื้อจากหน้าแรก www.aiaon.tech ครับ 🙏"
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-10 py-5 rounded-2xl bg-linear-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-400 text-zinc-950 font-prompt font-black text-base sm:text-lg flex items-center justify-center gap-3 shadow-[0_0_40px_rgba(16,185,129,0.5)] transition-all hover:scale-105 cursor-pointer"

@@ -167,12 +167,14 @@ export default async function RootLayout({
                         <FaFacebook className="w-5 h-5" />
                       </a>
                       <a
-                        href="https://lin.ee/poMESoP"
+                        href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+                          "สวัสดีครับครูอ้น ติดต่อสอบถามข้อมูลระบบดิจิทัล / เพลงลิขสิทธิ์ / บริการ AI จากเว็บไซต์ www.aiaon.tech ครับ 🙏"
+                        )}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2.5 glass-card hover:bg-green-500/20 text-white hover:text-green-400 transition-all duration-200 hover:scale-110"
-                        title="LINE"
-                        aria-label="LINE"
+                        title="LINE OA (@deu6776s)"
+                        aria-label="LINE OA (@deu6776s)"
                       >
                         <FaLine className="w-5 h-5" />
                       </a>

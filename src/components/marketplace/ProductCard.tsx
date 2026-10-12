@@ -390,6 +390,45 @@ export function ProductCard({ product, index }: ProductCardProps) {
   const coverTheme = getSystemCoverTheme(product.title, product.category);
   const CoverIcon = coverTheme.icon;
 
+  const cleanPrice = isFree ? "ฟรี 0 ฿" : product.price.replace(/\s*THB/i, " ฿");
+  const upperTitle = product.title.toUpperCase();
+  let vipPrice = "+190 ฿";
+  if (
+    upperTitle.includes("AONE09") ||
+    upperTitle.includes("ห้องเรียนสีขาว") ||
+    upperTitle.includes("AONA02") ||
+    upperTitle.includes("ยานพาหนะ")
+  ) {
+    vipPrice = "+690 ฿";
+  } else if (
+    upperTitle.includes("AONA01") ||
+    upperTitle.includes("AONA03") ||
+    upperTitle.includes("เกียรติบัตร") ||
+    upperTitle.includes("AONE01") ||
+    upperTitle.includes("AONE02") ||
+    upperTitle.includes("AONE05") ||
+    upperTitle.includes("AONE08") ||
+    upperTitle.includes("AONE10") ||
+    upperTitle.includes("3D") ||
+    upperTitle.includes("AONM01") ||
+    upperTitle.includes("AONA06")
+  ) {
+    vipPrice = "+350 ฿";
+  }
+
+  const displayTitle = product.title.includes(coverTheme.code)
+    ? product.title
+    : `[${coverTheme.code}] ${product.title}`;
+
+  const lineOrderMessage = isFree
+    ? `สวัสดีครับครูอ้น ขอรับระบบและโค้ดแจกฟรี:\n🎁 "${displayTitle}"\nรบกวนขอรหัสปลดล็อกและลิงก์ดาวน์โหลดด้วยครับ 🙏`
+    : `สวัสดีครับครูอ้น สนใจสั่งซื้อระบบอัตโนมัติ:\n📦 "${displayTitle}"\n💰 ราคา: ${cleanPrice} (มีออปชันครูอ้นติดตั้งให้พร้อมใช้ ${vipPrice})\nรบกวนขอเลขบัญชี / PromptPay QR Code เพื่อชำระเงินและรับไฟล์ระบบด้วยครับ 🙏`;
+
+  const vipLineOrderMessage = `สวัสดีครับครูอ้น สนใจสั่งซื้อระบบพร้อมบริการให้ครูอ้นติดตั้งให้ (VIP Setup):\n🛠️ "${displayTitle}"\n💰 ราคาตัวระบบ ${cleanPrice} + บริการติดตั้งพร้อมใช้ (${vipPrice})\nรบกวนขอเลขบัญชี / PromptPay QR Code ด้วยครับ 🙏`;
+
+  const lineOrderUrl = `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(lineOrderMessage)}`;
+  const vipLineOrderUrl = `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(vipLineOrderMessage)}`;
+
   const CardInner = (
     <div className={cn(
       "glass-card flex flex-col h-full rounded-3xl border border-white/10 transition-all duration-300 relative overflow-hidden bg-slate-950/70 shadow-xl hover:bg-slate-900/90",
@@ -493,7 +532,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
                     ? "text-emerald-400" 
                     : "text-white"
                 )}>
-                  {isFree ? "ฟรี 0 ฿" : product.price.replace(/\s*THB/i, " ฿")}
+                  {cleanPrice}
                 </span>
 
                 {!isFree && numericPrice > 0 && (
@@ -512,36 +551,27 @@ export function ProductCard({ product, index }: ProductCardProps) {
             </div>
           </div>
 
-          {/* VIP Setup Micro-badge */}
-          {!isFree && (() => {
-            const upper = product.title.toUpperCase();
-            let vipPrice = "+190 ฿";
-            if (upper.includes("AONE09") || upper.includes("ห้องเรียนสีขาว") || upper.includes("AONA02") || upper.includes("ยานพาหนะ")) {
-              vipPrice = "+690 ฿";
-            } else if (
-              upper.includes("AONA01") || upper.includes("AONA03") || upper.includes("เกียรติบัตร") ||
-              upper.includes("AONE01") || upper.includes("AONE02") || upper.includes("AONE05") ||
-              upper.includes("AONE08") || upper.includes("AONE10") || upper.includes("3D") ||
-              upper.includes("AONM01") || upper.includes("AONA06")
-            ) {
-              vipPrice = "+350 ฿";
-            }
-
-            return (
-              <div className="text-[11px] font-prompt text-amber-300/85 bg-amber-500/8 border border-amber-500/20 rounded-lg py-1 px-2.5 text-center whitespace-nowrap truncate">
-                🛠️ ออปชันครูอ้นติดตั้งให้พร้อมใช้ ({vipPrice})
-              </div>
-            );
-          })()}
+          {/* VIP Setup Micro-badge (Clickable for direct VIP Setup preset message) */}
+          {!isFree && (
+            <div
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.open(vipLineOrderUrl, "_blank", "noopener,noreferrer");
+              }}
+              title="คลิกเพื่อสั่งซื้อพร้อมบริการให้ครูอ้นติดตั้งให้พร้อมใช้ (VIP Setup)"
+              className="text-[11px] font-prompt text-amber-300/90 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/25 hover:border-amber-400/50 rounded-lg py-1 px-2.5 text-center whitespace-nowrap truncate transition-all cursor-pointer"
+            >
+              🛠️ ออปชันครูอ้นติดตั้งให้พร้อมใช้ ({vipPrice})
+            </div>
+          )}
 
           {/* ── ✨ SLEEK SINGLE-LINE LUXURY CTA BUTTON ── */}
           <div className={cn(
             "w-full h-11 px-4 rounded-xl font-prompt text-sm font-extrabold flex items-center justify-between whitespace-nowrap transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.98] cursor-pointer relative overflow-hidden",
-            isValidId 
-              ? (isFree 
-                  ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.25)] group-hover:shadow-[0_0_30px_rgba(16,185,129,0.45)]" 
-                  : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 hover:from-cyan-300 hover:via-teal-200 hover:to-cyan-300 text-zinc-950 shadow-[0_0_20px_rgba(6,182,212,0.25)] group-hover:shadow-[0_0_32px_rgba(6,182,212,0.5)]") 
-              : "bg-white/10 text-white/40 cursor-not-allowed"
+            isFree 
+              ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.25)] group-hover:shadow-[0_0_30px_rgba(16,185,129,0.45)]" 
+              : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 hover:from-cyan-300 hover:via-teal-200 hover:to-cyan-300 text-zinc-950 shadow-[0_0_20px_rgba(6,182,212,0.25)] group-hover:shadow-[0_0_32px_rgba(6,182,212,0.5)]"
           )}>
             {/* Subtle Light Sweep */}
             <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/45 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
@@ -553,7 +583,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
                 <ShoppingCart className="w-4 h-4 text-zinc-950 shrink-0" />
               )}
               <span className="tracking-tight">
-                {isFree ? "รับระบบและโค้ดฟรี" : "สั่งซื้อรับระบบทันที"}
+                {isFree ? "รับระบบและโค้ดฟรี (LINE)" : "สั่งซื้อรับระบบทันที (LINE)"}
               </span>
             </div>
 
@@ -567,16 +597,15 @@ export function ProductCard({ product, index }: ProductCardProps) {
     </div>
   );
 
-  return isValidId ? (
-    <Link
-      href={`/dashboard/marketplace/${product.id}`}
+  return (
+    <a
+      href={lineOrderUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       className="block group cursor-pointer h-full"
     >
       {CardInner}
-    </Link>
-  ) : (
-    <div className="opacity-40 cursor-not-allowed h-full">
-      {CardInner}
-    </div>
+    </a>
   );
 }
+

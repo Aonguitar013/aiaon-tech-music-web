@@ -337,13 +337,17 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
                         {/* Secondary LINE Button */}
                         <a
-                          href="https://lin.ee/poMESoP"
+                          href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+                            isFree
+                              ? `สวัสดีครับครูอ้น ขอรับระบบและโค้ดแจกฟรี:\n🎁 "${product.title}"\nรบกวนขอรหัสปลดล็อกและลิงก์ดาวน์โหลดด้วยครับ 🙏`
+                              : `สวัสดีครับครูอ้น สนใจสั่งซื้อระบบ:\n📦 "${product.title}"\n💰 ราคา: ${product.price} (หรือออปชัน VIP Setup ${vipSetup.priceText})\nรบกวนขอเลขบัญชี / PromptPay QR Code ด้วยครับ 🙏`
+                          )}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="w-full py-3 rounded-2xl bg-[#06C755]/10 hover:bg-[#06C755]/20 border border-[#06C755]/40 text-[#06C755] font-prompt font-bold text-xs flex items-center justify-center gap-2 transition-all hover:scale-[1.01] cursor-pointer shadow-sm"
                         >
                           <MessageSquare className="w-4 h-4" />
-                          <span>ปรึกษาหรือสั่งซื้อผ่าน LINE OA (@deu6776s)</span>
+                          <span>สั่งซื้อ / ปรึกษาผ่าน LINE OA (@deu6776s)</span>
                         </a>
                       </div>
                   )}
