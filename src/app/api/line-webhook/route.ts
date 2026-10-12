@@ -397,10 +397,12 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const url = new URL(req.url);
-    const lineAccessToken =
-      url.searchParams.get("token") ||
+    const rawQueryToken = url.searchParams.get("token");
+    const lineAccessToken = (
+      (rawQueryToken ? rawQueryToken.trim().replace(/ /g, "+") : "") ||
       process.env.LINE_CHANNEL_ACCESS_TOKEN ||
-      "";
+      ""
+    ).trim();
 
     const body = await req.json();
     const events = body?.events || [];
