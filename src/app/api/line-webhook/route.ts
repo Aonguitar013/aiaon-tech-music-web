@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { buildSignedDeliveryUrl } from "@/utils/delivery-links";
 
 const PROMPTPAY_ID = "0835399340";
 const PROMPTPAY_NAME = "นายจิรวัฒน์ เดชเส้ง (ครูอ้น AiAon Tech)";
@@ -241,15 +242,20 @@ async function buildSmartAutoReply(
       pendingOrders.set(userId!, existingOrder);
     }
 
+    const isPaid = existingOrder?.status === "verified_paid";
+    const deliveryInfo =
+      isPaid && existingOrder
+        ? buildSignedDeliveryUrl(existingOrder.itemTitle, existingOrder.verifiedRef || "VERIFIED")
+        : null;
+
     await notifyKruAonTelegram(
       `📧 [ลูกค้าแจ้งอีเมลรับระบบใน LINE OA]\n` +
         `👤 ลูกค้า: ${customerName}\n` +
         `✉️ อีเมล: ${email}\n` +
         `📦 รายการ: ${existingOrder?.itemTitle || "รอดูจากแชตล่าสุด"}\n` +
+        `💳 สถานะสลิป: ${isPaid ? `✅ ตรวจสลิปผ่านแล้ว (Ref: ${existingOrder?.verifiedRef?.slice(0, 16)})` : "⏳ ยังไม่ได้ส่งสลิป / รอตรวจสลิป"}\n` +
         `📌 ข้อความเต็ม: ${text}`
     );
-
-    const directLink = existingOrder ? findInstantDownloadLink(existingOrder.itemTitle) : null;
 
     return [
       {
@@ -257,8 +263,10 @@ async function buildSmartAutoReply(
         text:
           `✅ ระบบบันทึกอีเมล "${email}" ของท่านเรียบร้อยแล้วครับ!\n` +
           (existingOrder ? `📦 รายการ: ${existingOrder.itemTitle}\n` : "") +
-          (directLink ? `\n📥 ดาวน์โหลดไฟล์ระบบได้ทันทีที่นี่:\n${directLink}\n` : "") +
-          `\n🔔 ระบบได้ส่งแจ้งเตือนอีเมลและรายการสั่งซื้อของท่านไปยังครูอ้นเรียบร้อยแล้ว เดี๋ยวครูอ้นจัดส่งสิทธิ์เข้าถึงไฟล์ / ดูแลการติดตั้งให้ทันทีครับ ขอบคุณมากครับ 🙏`,
+          (deliveryInfo
+            ? `\n📥 ลิงก์ดาวน์โหลดชุดติดตั้งระบบของคุณ (คลิกโหลดไฟล์ .ZIP ได้ทันที):\n${deliveryInfo.url}\n`
+            : `\n📲 หากท่านโอนชำระเงินแล้ว รบกวนส่ง "รูปสลิปโอนเงิน" เข้ามาในแชตนี้ได้เลยครับ ระบบ AI จะตรวจสอบสลิปและส่งลิงก์ดาวน์โหลดให้ทันทีครับ!\n`) +
+          `\n🔔 ระบบได้ส่งแจ้งเตือนอีเมลของท่านไปยังครูอ้นเรียบร้อยแล้ว ขอบคุณมากครับ 🙏`,
       },
     ];
   }
@@ -899,20 +907,25 @@ async function verifyLineSlipImage(
       pendingOrders.set(userId, pendingOrder);
     }
 
-    // Layer 5: Instant Delivery Link Lookup + Telegram Slip Photo Alert to Kru Aon
-    const directDownloadLink = findInstantDownloadLink(orderTitle);
+    // Layer 5: Instant Encrypted VIP Download Link for ALL 59 Systems & Bundles + Telegram Alert
+    const { url: signedDeliveryUrl, codes: unlockedCodes } = buildSignedDeliveryUrl(
+      orderTitle,
+      transRef
+    );
+    const extraOneDriveLink = findInstantDownloadLink(orderTitle);
 
     await sendSlipPhotoToTelegram(
       arrayBuffer,
       contentType,
-      `💰 [ตรวจสลิปแท้ครบ 5 ชั้นผ่านแล้ว! เงินเข้าบัญชีครูอ้น]\n` +
+      `💰 [ตรวจสลิปแท้ครบ 5 ชั้นผ่านแล้ว! ส่งลิงก์โหลดอัตโนมัติเรียบร้อย]\n` +
         `👤 ลูกค้า: ${customerName}\n` +
         `📦 สินค้า: ${orderTitle}${paidForVipSetup ? " (+ บริการติดตั้ง VIP Setup)" : ""}\n` +
+        `🗂️ รหัสไฟล์ที่ปลดล็อก: ${unlockedCodes.join(", ")}\n` +
         `💵 ยอดเงินในสลิปจริง: ${actualSlipAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท\n` +
         `🎯 ผู้รับเงินในสลิป: ${ocrAnalysis.detectedReceiverName}\n` +
         `🏦 ธนาคารต้นทาง: ${bankName}\n` +
         (transRef ? `🔖 เลขอ้างอิงสลิป (Ref): ${transRef.slice(0, 18)}\n` : "") +
-        `📥 สถานะ: บอทส่งใบรับรอง${directDownloadLink ? " + ลิงก์ดาวน์โหลด OneDrive" : ""} และขอ Gmail ลูกค้าไว้ให้แล้วครับ!`
+        `📥 ลิงก์ที่ส่งให้ลูกค้า: ${signedDeliveryUrl}`
     );
 
     return [
@@ -927,12 +940,12 @@ async function verifyLineSlipImage(
           `🏦 ข้อมูลสลิป: ${bankName}\n` +
           (transRef ? `🔖 เลขที่อ้างอิง: ${transRef.slice(0, 18)}\n` : "") +
           `━━━━━━━━━━━━━━━\n` +
-          (directDownloadLink
-            ? `📥 ลิงก์ดาวน์โหลดโฟลเดอร์ระบบของคุณ (คลิกโหลดได้ทันที):\n${directDownloadLink}\n\n`
-            : "") +
-          `📩 ขั้นตอนสุดท้าย: รบกวนพิมพ์แจ้ง "อีเมล (Gmail)" ของท่าน${
+          `📥 ลิงก์ดาวน์โหลดชุดไฟล์ติดตั้งของคุณ (${unlockedCodes.join(", ")}.ZIP — คลิกโหลดได้ทันที):\n` +
+          `${signedDeliveryUrl}\n` +
+          (extraOneDriveLink ? `\n☁️ ลิงก์สำรอง OneDrive:\n${extraOneDriveLink}\n` : "") +
+          `\n📩 ขั้นตอนเสริม: รบกวนพิมพ์แจ้ง "อีเมล (Gmail)" ของท่าน${
             paidForVipSetup ? " และชื่อโรงเรียน" : ""
-          } ส่งมาในแชตนี้ได้เลยครับ เพื่อรับลิงก์ไฟล์ระบบเข้าอีเมลและสิทธิ์อัปเดตตลอดชีพ (ระบบได้แจ้งเตือนครูอ้นให้ทราบเรียบร้อยแล้วครับ) 🙏⚡`,
+          } ทิ้งไว้ในแชตนี้ได้เลยครับ เพื่อรับสิทธิ์อัปเดตเวอร์ชันใหม่ฟรีตลอดชีพ! 🙏⚡`,
       },
     ];
   } catch (err) {

@@ -2,8 +2,11 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { updateSession } from '@/utils/supabase/proxy'
 
 export async function proxy(request: NextRequest) {
-  // Fast-path for LINE OA Webhook & API routes so they respond in <50ms without Supabase latency
-  if (request.nextUrl.pathname.startsWith('/api/line-webhook')) {
+  // Fast-path for LINE OA Webhook & Signed Download API routes so they respond in <50ms without Supabase latency
+  if (
+    request.nextUrl.pathname.startsWith('/api/line-webhook') ||
+    request.nextUrl.pathname.startsWith('/api/download')
+  ) {
     return NextResponse.next()
   }
 
@@ -25,12 +28,13 @@ export const config = {
     /*
      * Match all request paths except for the ones starting with:
      * - api/line-webhook (LINE OA Webhook fast-path)
+     * - api/download (Signed Instant Product Delivery fast-path)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - _next/data  (RSC / HMR data routes)
      * - favicon.ico (favicon file)
      */
-    '/((?!api/line-webhook|_next/static|_next/image|_next/data|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!api/line-webhook|api/download|_next/static|_next/image|_next/data|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }
 
