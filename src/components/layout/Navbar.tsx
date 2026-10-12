@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText, Sparkles, ShieldCheck, Globe } from "lucide-react";
+import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText, Sparkles, ShieldCheck, Globe, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -67,6 +67,15 @@ const routes: RouteItem[] = [
         badgeColor: "cyan", 
         icon: GraduationCap, 
         hoverColor: "cyan" 
+      },
+      { 
+        name: "ร้านค้าเพลงช่วยจำ & BGM คลิป ว.PA", 
+        href: "/music-store", 
+        description: "เพลงจำกฎหมายครู MP3, เพลงบรรเลง BGM ปลอดลิขสิทธิ์ 100%", 
+        badge: "NEW • 49฿+", 
+        badgeColor: "amber", 
+        icon: Music, 
+        hoverColor: "amber" 
       },
       { 
         name: "คลังนักเรียน & TCAS", 

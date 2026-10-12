@@ -581,6 +581,15 @@ export function TeacherPrepView() {
                 <p className="text-[11px] text-white/45 text-center pt-1">
                   🎧 สมาชิกกลุ่ม VIP สามารถดาวน์โหลดไฟล์ MP3 เต็มเพลงฟังออฟไลน์ใน Telegram ได้เลย
                 </p>
+
+                <Link
+                  href="/music-store"
+                  className="w-full py-2.5 px-4 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/35 text-amber-300 font-bold text-xs flex items-center justify-center gap-2 transition-all mt-2"
+                >
+                  <Music className="w-4 h-4" />
+                  <span>เข้าสู่ร้านค้าเพลงช่วยจำ &amp; BGM คลิป ว.PA ปลอดลิขสิทธิ์</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </div>
 

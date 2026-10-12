@@ -124,6 +124,7 @@ export default async function RootLayout({
                     <ul className="space-y-2 text-white/50 text-sm font-prompt">
                        <li><a href="/about"    className="hover:text-blue-400 transition-colors duration-200">About Me</a></li>
                       <li><a href="/teacher-prep" className="hover:text-cyan-400 text-cyan-300 font-semibold transition-colors duration-200">🎓 กลุ่ม Telegram ติวสอบครูผู้ช่วย (AI Prep)</a></li>
+                      <li><a href="/music-store" className="hover:text-amber-400 text-amber-300 font-semibold transition-colors duration-200">🎵 ร้านค้าเพลงช่วยจำ &amp; BGM คลิป ว.PA</a></li>
                       <li><a href="/student-vault" className="hover:text-pink-400 text-pink-300 font-semibold transition-colors duration-200">🎒 คลังนักเรียน &amp; TCAS</a></li>
                       <li><a href="/bundles"   className="hover:text-purple-400 text-purple-300 font-semibold transition-colors duration-200">✨ แพ็กเกจเหมาสุดคุ้ม (Bundles)</a></li>
                       <li><a href="/digital-vault" className="hover:text-blue-400 transition-colors duration-200">คลัง 20 ระบบ (Digital Vault)</a></li>
