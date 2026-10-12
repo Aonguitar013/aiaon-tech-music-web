@@ -563,8 +563,163 @@ function parseBotSlipMiniQr(qrData: string): {
   return { isPaymentQr: false, isBankSlipQr: false };
 }
 
+interface SlipOcrAnalysis {
+  ocrSucceeded: boolean;
+  looksLikeSlipText: boolean;
+  isBillPayment: boolean;
+  receiverMatchesKruAon: boolean;
+  detectedReceiverName: string;
+  slipAmount: number | null;
+  rawText: string;
+}
+
 /**
- * 5-Layer Bank Slip Verification Pipeline when user sends an image in LINE OA!
+ * Extract Thai + English text from slip image using OCR.space API (fast ~600ms, supports Thai)
+ */
+async function extractSlipOcrText(
+  imageBuffer: ArrayBuffer,
+  contentType: string
+): Promise<string | null> {
+  try {
+    const formData = new FormData();
+    const ext = contentType.includes("png") ? "png" : "jpg";
+    formData.append("file", new Blob([imageBuffer], { type: contentType }), `slip.${ext}`);
+    formData.append("language", "tha");
+    formData.append("isOverlayRequired", "false");
+
+    const res = await fetch("https://api.ocr.space/parse/image", {
+      method: "POST",
+      headers: {
+        apikey: process.env.OCR_SPACE_API_KEY || "helloworld",
+      },
+      body: formData,
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const parsedText = data?.ParsedResults?.[0]?.ParsedText;
+    return typeof parsedText === "string" && parsedText.trim().length > 0
+      ? parsedText
+      : null;
+  } catch (err) {
+    console.error("[Slip OCR Error]:", err);
+    return null;
+  }
+}
+
+/**
+ * Strictly analyze Thai bank slip OCR text:
+ * 1. Separate Sender ("จาก") from Receiver ("ไปยัง" / destination block)
+ * 2. Check if Receiver matches Kru Aon (นายจิรวัฒน์ เดชเส้ง / 083-539-9340)
+ * 3. Extract the exact decimal transfer amount (e.g. 70.00 vs 390.00)
+ */
+function analyzeSlipOcrText(ocrText: string | null): SlipOcrAnalysis {
+  if (!ocrText) {
+    return {
+      ocrSucceeded: false,
+      looksLikeSlipText: false,
+      isBillPayment: false,
+      receiverMatchesKruAon: false,
+      detectedReceiverName: "ไม่สามารถอ่านชื่อผู้รับได้",
+      slipAmount: null,
+      rawText: "",
+    };
+  }
+
+  // Strip out any trailing LINE chat text if user sent a screenshot of the chat
+  const cleanText = ocrText.split(/ตรวจสอบสลิปโอนเงินสำเร็จ|Verified Bank Slip/i)[0] || ocrText;
+  const lines = cleanText
+    .split(/\r?\n/)
+    .map((l) => l.trim())
+    .filter(Boolean);
+
+  const looksLikeSlipText =
+    /โอนเงิน|จ่ายบิล|ทำรายการ|รหัสอ้างอิง|เลขที่รายการ|จำนวนเงิน|ค่าธรรมเนียม|ไปยัง|พร้อมเพย์/i.test(
+      cleanText
+    );
+
+  // Detect if it's a bill payment to a merchant ("จ่ายบิลสำเร็จ" / "รหัสร้านค้า") instead of a transfer to Kru Aon
+  const isBillPayment = /จ่ายบิลสำเร็จ|รหัสร้านค้า|biller\s*id/i.test(cleanText);
+
+  // ── 1. STRICT SENDER ("จาก") VS RECEIVER ("ไปยัง") SEPARATION ──
+  let receiverSection = "";
+  let detectedReceiverName = "ไม่ระบุชื่อผู้รับ";
+
+  const toMarkerIdx = lines.findIndex((line) =>
+    /^(ไปยัง|ไปที่|เข้าบัญชี|ผู้รับเงิน|ผู้รับโอน|ถึง|to\b)/i.test(line)
+  );
+
+  if (toMarkerIdx !== -1) {
+    const afterMarkerSameLine = lines[toMarkerIdx]
+      .replace(/^(ไปยัง|ไปที่|เข้าบัญชี|ผู้รับเงิน|ผู้รับโอน|ถึง|to)\s*:?\s*/i, "")
+      .trim();
+
+    const receiverLines = afterMarkerSameLine
+      ? [afterMarkerSameLine, ...lines.slice(toMarkerIdx + 1, toMarkerIdx + 6)]
+      : lines.slice(toMarkerIdx + 1, toMarkerIdx + 6);
+
+    receiverSection = receiverLines.join("\n");
+
+    const firstNameLine = receiverLines.find(
+      (l) =>
+        l.length >= 2 &&
+        !/^(รหัสร้านค้า|รหัสธุรกรรม|จำนวนเงิน|ค่าธรรมเนียม|วันที่ทำรายการ|เลขที่รายการ)$/i.test(l)
+    );
+    if (firstNameLine) {
+      detectedReceiverName = firstNameLine;
+    }
+  } else {
+    // Fallback for slips without explicit "ไปยัง" (e.g. K PLUS arrow layout):
+    // Remove the Sender block (from "จาก" + next 3 lines, or top 4 lines after header)
+    const fromIdx = lines.findIndex((line) => /^(จาก|ผู้โอน|from\b)/i.test(line));
+    if (fromIdx !== -1) {
+      receiverSection = lines.slice(fromIdx + 4).join("\n");
+    } else {
+      // Take the lower half of the account area
+      receiverSection = lines.slice(Math.min(4, Math.floor(lines.length / 3))).join("\n");
+    }
+
+    const candidateLine = receiverSection
+      .split("\n")
+      .find((l) => /จิรวัฒน์|เดชเส้ง|jirawat|dechseng|นาย|นาง|น\.ส\.|บจก\.|amz|ร้าน/i.test(l));
+    if (candidateLine) {
+      detectedReceiverName = candidateLine;
+    }
+  }
+
+  const receiverNamePattern =
+    /จิรวัฒน์|เดชเส้ง|jirawat|dechseng|083[-\s]*539[-\s]*9340|0835399340|xx9340|-9340/i;
+
+  const receiverMatchesKruAon =
+    !isBillPayment && receiverNamePattern.test(receiverSection);
+
+  // ── 2. STRICT DECIMAL AMOUNT EXTRACTION (e.g. "70.00 บาท" -> 70) ──
+  let slipAmount: number | null = null;
+  const decimalMatches = Array.from(
+    cleanText.matchAll(/(\d{1,3}(?:,\d{3})*\.\d{2}|\d+\.\d{2})/g)
+  );
+
+  for (const match of decimalMatches) {
+    const val = parseFloat(match[1].replace(/,/g, ""));
+    // Ignore 0.00 (which is the bank fee "ค่าธรรมเนียม 0.00 บาท")
+    if (!isNaN(val) && val > 0) {
+      slipAmount = val;
+      break;
+    }
+  }
+
+  return {
+    ocrSucceeded: true,
+    looksLikeSlipText,
+    isBillPayment,
+    receiverMatchesKruAon,
+    detectedReceiverName,
+    slipAmount,
+    rawText: cleanText,
+  };
+}
+
+/**
+ * Strict Fail-Closed 5-Layer Bank Slip Verification Pipeline when user sends an image in LINE OA!
  */
 async function verifyLineSlipImage(
   messageId: string,
@@ -588,11 +743,16 @@ async function verifyLineSlipImage(
     const contentType = imgRes.headers.get("content-type") || "image/jpeg";
     const arrayBuffer = await imgRes.arrayBuffer();
 
-    // 2. Scan image for Bank of Thailand Slip Mini-QR
-    const qrData = await decodeSlipQrFromImage(arrayBuffer, contentType);
-    const qrInfo = qrData ? parseBotSlipMiniQr(qrData) : null;
+    // 2. Run QR Code Decoder AND Thai OCR in parallel (~600ms total)
+    const [qrData, ocrText] = await Promise.all([
+      decodeSlipQrFromImage(arrayBuffer, contentType),
+      extractSlipOcrText(arrayBuffer, contentType),
+    ]);
 
-    // Layer 1A: User accidentally sent back the payment QR code instead of a transfer slip
+    const qrInfo = qrData ? parseBotSlipMiniQr(qrData) : null;
+    const ocrAnalysis = analyzeSlipOcrText(ocrText);
+
+    // Layer 1A: User accidentally sent back our own PromptPay payment QR code instead of a transfer slip
     if (qrInfo?.isPaymentQr) {
       return [
         {
@@ -604,94 +764,115 @@ async function verifyLineSlipImage(
       ];
     }
 
-    // 3. Also run Gemini 2.5 Flash Vision if GEMINI_API_KEY is available and valid
-    let geminiResult: {
-      isBankSlip?: boolean;
-      receiverMatches?: boolean;
-      receiverName?: string;
-      transferredAmount?: number;
-      bankName?: string;
-    } | null = null;
-
-    const geminiKey = process.env.GEMINI_API_KEY;
-    if (geminiKey && geminiKey.startsWith("AIza")) {
-      try {
-        const imageBase64 = Buffer.from(arrayBuffer).toString("base64");
-        const prompt = `ตรวจสอบว่ารูปภาพนี้คือ "สลิปโอนเงินธนาคารไทย" ที่โอนเข้าบัญชี "นายจิรวัฒน์ เดชเส้ง" หรือ "จิรวัฒน์ เดชเส้ง" หรือ "JIRAWAT DECHSENG" หรือพร้อมเพย์ "083-539-9340" / "0835399340" หรือไม่
-- ถ้ารูปนี้ไม่ใช่สลิปโอนเงินธนาคาร ให้ตอบ isBankSlip = false
-- ถ้าเป็นสลิปโอนเงินจริง ให้ดึงชื่อผู้รับ ยอดเงินโอน และตรวจสอบว่าชื่อผู้รับตรงกับ จิรวัฒน์ เดชเส้ง หรือไม่`;
-
-        const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              contents: [
-                {
-                  parts: [
-                    { text: prompt },
-                    { inlineData: { mimeType: contentType, data: imageBase64 } },
-                  ],
-                },
-              ],
-              generationConfig: {
-                responseMimeType: "application/json",
-                responseSchema: {
-                  type: "OBJECT",
-                  properties: {
-                    isBankSlip: { type: "BOOLEAN" },
-                    receiverName: { type: "STRING" },
-                    receiverMatches: { type: "BOOLEAN" },
-                    transferredAmount: { type: "NUMBER" },
-                    bankName: { type: "STRING" },
-                  },
-                  required: ["isBankSlip", "receiverMatches", "transferredAmount"],
-                },
-              },
-            }),
-          }
-        );
-
-        if (geminiRes.ok) {
-          const geminiData = await geminiRes.json();
-          const rawJson = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (rawJson) {
-            geminiResult = JSON.parse(rawJson);
-          }
-        }
-      } catch (gErr) {
-        console.error("[Gemini Slip Check Warning]:", gErr);
-      }
-    }
-
-    const isVerifiedSlip = Boolean(qrInfo?.isBankSlipQr || geminiResult?.isBankSlip);
-
-    // Layer 1B: Not a bank slip (e.g. normal photo or screenshot) -> stay silent
-    if (!isVerifiedSlip) {
+    // Layer 1B: Not a bank slip at all (normal chat photo) -> stay silent so Kru Aon can chat normally
+    if (!qrInfo?.isBankSlipQr && !ocrAnalysis.looksLikeSlipText) {
       return null;
     }
 
-    // Layer 2: If Gemini read receiver name and it clearly doesn't match Kru Aon
-    if (geminiResult && geminiResult.isBankSlip && geminiResult.receiverMatches === false) {
+    const pendingOrder = userId ? pendingOrders.get(userId) : undefined;
+    const customerName = await getLineUserDisplayName(userId, lineAccessToken);
+    const bankName = qrInfo?.bankName || "ธนาคารไทย";
+    const transRef = qrInfo?.transRef || "";
+
+    // Layer 1C: Looks like a slip in text, but missing or unreadable Bank of Thailand Mini-QR
+    if (!qrInfo?.isBankSlipQr) {
+      await sendSlipPhotoToTelegram(
+        arrayBuffer,
+        contentType,
+        `⚠️ [สลิปไม่มี Mini-QR หรืออ่าน QR ไม่ได้ใน LINE OA]\n` +
+          `👤 ลูกค้า: ${customerName}\n` +
+          `📦 รายการ: ${pendingOrder?.itemTitle || "ไม่ระบุ"}`
+      );
       return [
         {
           type: "text",
           text:
-            `⚠️ ระบบตรวจพบว่าชื่อบัญชีผู้รับในสลิป (${geminiResult.receiverName || "ไม่ตรงกับระบบ"}) อาจไม่ตรงกับบัญชี "นายจิรวัฒน์ เดชเส้ง (083-539-9340)" ครับ\n\n` +
-            `รบกวนตรวจสอบรูปสลิปอีกครั้ง หรือรอครูอ้นตรวจสอบด้วยตนเองสักครู่นะครับ 🙏`,
+            `❌ ไม่สามารถยืนยันสลิปได้ครับ เนื่องจากระบบตรวจไม่พบ QR Code มาตรฐานธนาคารแห่งประเทศไทยบนภาพสลิป (หรือภาพถูกตัดทอน/ไม่ชัดเจน)\n\n` +
+            `📲 รบกวนส่งไฟล์ภาพสลิปฉบับเต็มที่บันทึกจากแอปธนาคารโดยตรงอีกครั้งนะครับ 🙏`,
         },
       ];
     }
 
-    // Layer 3: Anti-Duplicate Slip Check using Bank of Thailand Transaction Reference
-    const transRef = qrInfo?.transRef || "";
+    // Layer 1D (FAIL-CLOSED): If OCR could not read text from the slip, NEVER auto-approve!
+    if (!ocrAnalysis.ocrSucceeded || ocrAnalysis.slipAmount === null) {
+      await sendSlipPhotoToTelegram(
+        arrayBuffer,
+        contentType,
+        `⚠️ [สลิปอ่านตัวเลขยอดเงินไม่ชัดเจน รอครูอ้นตรวจ]\n` +
+          `👤 ลูกค้า: ${customerName}\n` +
+          `🏦 ธนาคาร: ${bankName}\n` +
+          `🔖 Ref: ${transRef}`
+      );
+      return [
+        {
+          type: "text",
+          text:
+            `⏳ ระบบได้รับรูปสลิป (${bankName} Ref: ${transRef.slice(0, 16)}) แล้วครับ แต่ภาพตัวอักษรยอดเงินไม่ชัดเจน ระบบจึงได้ส่งต่อให้ครูอ้นตรวจสอบความถูกต้องด้วยตนเองสักครู่นะครับ 🙏`,
+        },
+      ];
+    }
+
+    // ── COLLECT ALL VERIFICATION ERRORS (RECEIVER + AMOUNT + DUPLICATE) ──
+    const failureReasons: string[] = [];
+
+    // Layer 2: Verify Receiver Name & Reject Merchant Bill Payments ("จ่ายบิลสำเร็จ")
+    if (ocrAnalysis.isBillPayment || !ocrAnalysis.receiverMatchesKruAon) {
+      failureReasons.push(
+        `❌ ชื่อบัญชีผู้รับเงินไม่ตรง:\n` +
+          `   • ในสลิปโอนไปยัง: "${ocrAnalysis.detectedReceiverName}"${ocrAnalysis.isBillPayment ? " (รายการจ่ายบิลร้านค้า)" : ""}\n` +
+          `   • บัญชีที่ถูกต้องต้องเป็น: "${PROMPTPAY_NAME}" (พร้อมเพย์ 083-539-9340)`
+      );
+    }
+
+    // Layer 3: Verify Transfer Amount against Pending Order (if customer has an active order)
+    const expectedAmount = pendingOrder?.baseAmount || 0;
+    const actualSlipAmount = ocrAnalysis.slipAmount;
+
+    if (expectedAmount > 0 && actualSlipAmount < expectedAmount) {
+      const diff = expectedAmount - actualSlipAmount;
+      failureReasons.push(
+        `❌ ยอดเงินโอนในสลิปไม่ตรงกับราคาสินค้า:\n` +
+          `   • ยอดเงินในสลิป: ${actualSlipAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท\n` +
+          `   • ยอดที่ต้องชำระ: ${expectedAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท (ขาดอีก ${diff.toLocaleString()} บาท)\n` +
+          `   • รายการที่สั่ง: ${pendingOrder?.itemTitle}`
+      );
+    }
+
+    // If EITHER Receiver OR Amount failed -> REJECT IMMEDIATELY and explain why!
+    if (failureReasons.length > 0) {
+      await sendSlipPhotoToTelegram(
+        arrayBuffer,
+        contentType,
+        `🚨 [ตรวจพบสลิปไม่ถูกต้องใน LINE OA — ระบบปฏิเสธอัตโนมัติ!]\n` +
+          `👤 ลูกค้า: ${customerName}\n` +
+          `📦 รายการที่สั่ง: ${pendingOrder?.itemTitle || "ไม่ได้เลือกไว้"}\n` +
+          `🏦 ธนาคารในสลิป: ${bankName} (Ref: ${transRef.slice(0, 18)})\n` +
+          `💵 ยอดในสลิปจริง: ${actualSlipAmount.toLocaleString()} บาท (ต้องจ่าย ${expectedAmount.toLocaleString()} บาท)\n` +
+          `🎯 ผู้รับในสลิป: ${ocrAnalysis.detectedReceiverName}\n` +
+          `📌 สาเหตุที่ปฏิเสธ:\n${failureReasons.join("\n")}`
+      );
+
+      return [
+        {
+          type: "text",
+          text:
+            `⚠️ ตรวจสอบสลิปไม่ผ่านครับ ระบบพบข้อมูลไม่ตรงกับรายการสั่งซื้อดังนี้:\n` +
+            `━━━━━━━━━━━━━━━\n` +
+            `${failureReasons.join("\n\n")}\n` +
+            `━━━━━━━━━━━━━━━\n` +
+            `📲 กรุณาตรวจสอบและส่งรูปสลิปที่โอนเข้าบัญชี "${PROMPTPAY_NAME} (083-539-9340)" ตามยอดชำระที่ถูกต้องอีกครั้งนะครับ 🙏`,
+        },
+      ];
+    }
+
+    // Layer 4: Anti-Duplicate Slip Check using Bank of Thailand Transaction Reference
+    // (Only mark a slip ref as used AFTER it passes receiver & amount verification!)
     if (transRef && usedSlipRefs.has(transRef)) {
       return [
         {
           type: "text",
           text:
-            `⚠️ สลิปหมายเลขรายการอ้างอิง (${transRef}) นี้เคยถูกใช้ยืนยันในระบบไปแล้วครับ\n` +
+            `⚠️ สลิปหมายเลขรายการอ้างอิง (${transRef.slice(0, 18)}) นี้เคยถูกใช้ยืนยันในระบบไปแล้วครับ\n` +
             `หากท่านสั่งซื้อรายการใหม่ รบกวนส่งรูปสลิปของการโอนเงินครั้งล่าสุดนะครับ 🙏`,
         },
       ];
@@ -700,44 +881,12 @@ async function verifyLineSlipImage(
       usedSlipRefs.add(transRef);
     }
 
-    // Layer 4: Match with Customer's Pending Order Memory
-    const pendingOrder = userId ? pendingOrders.get(userId) : undefined;
-    const customerName = await getLineUserDisplayName(userId, lineAccessToken);
-    const bankName = qrInfo?.bankName || geminiResult?.bankName || "ธนาคารไทย (PromptPay)";
-    const detectedAmount = geminiResult?.transferredAmount || pendingOrder?.baseAmount || 0;
-
-    // Check if amount is short (when both Gemini amount and pendingOrder exist)
-    if (
-      geminiResult?.transferredAmount &&
-      pendingOrder?.baseAmount &&
-      geminiResult.transferredAmount < pendingOrder.baseAmount
-    ) {
-      const diff = pendingOrder.baseAmount - geminiResult.transferredAmount;
-      await sendSlipPhotoToTelegram(
-        arrayBuffer,
-        contentType,
-        `⚠️ [สลิปยอดเงินไม่ครบใน LINE OA]\n` +
-          `👤 ลูกค้า: ${customerName}\n` +
-          `📦 รายการ: ${pendingOrder.itemTitle}\n` +
-          `💵 ยอดในสลิป: ${geminiResult.transferredAmount.toLocaleString()} ฿ (ขาดอีก ${diff.toLocaleString()} ฿)`
-      );
-      return [
-        {
-          type: "text",
-          text:
-            `⚠️ ระบบตรวจพบยอดโอนในสลิป ${geminiResult.transferredAmount.toLocaleString()} บาท ซึ่งยังไม่ครบตามราคา "${pendingOrder.itemTitle}" (${pendingOrder.baseAmount.toLocaleString()} บาท — ขาดอีก ${diff.toLocaleString()} บาท) ครับ\n\n` +
-            `ท่านสามารถโอนส่วนต่างเพิ่มเติมและส่งสลิปเข้ามา หรือรอครูอ้นตรวจสอบได้เลยครับ 🙏`,
-        },
-      ];
-    }
-
     // Check if customer transferred base + VIP Setup amount
     let paidForVipSetup = pendingOrder?.isVipSelected || false;
     if (
-      geminiResult?.transferredAmount &&
       pendingOrder &&
       pendingOrder.vipAmount > 0 &&
-      geminiResult.transferredAmount >= pendingOrder.baseAmount + pendingOrder.vipAmount
+      actualSlipAmount >= pendingOrder.baseAmount + pendingOrder.vipAmount
     ) {
       paidForVipSetup = true;
     }
@@ -756,12 +905,13 @@ async function verifyLineSlipImage(
     await sendSlipPhotoToTelegram(
       arrayBuffer,
       contentType,
-      `💰 [ตรวจสลิปแท้ผ่านแล้ว! เงินเข้า LINE OA]\n` +
+      `💰 [ตรวจสลิปแท้ครบ 5 ชั้นผ่านแล้ว! เงินเข้าบัญชีครูอ้น]\n` +
         `👤 ลูกค้า: ${customerName}\n` +
         `📦 สินค้า: ${orderTitle}${paidForVipSetup ? " (+ บริการติดตั้ง VIP Setup)" : ""}\n` +
-        (detectedAmount > 0 ? `💵 ยอดเงิน: ${detectedAmount.toLocaleString()} บาท\n` : "") +
+        `💵 ยอดเงินในสลิปจริง: ${actualSlipAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท\n` +
+        `🎯 ผู้รับเงินในสลิป: ${ocrAnalysis.detectedReceiverName}\n` +
         `🏦 ธนาคารต้นทาง: ${bankName}\n` +
-        (transRef ? `🔖 เลขอ้างอิงสลิป (Ref): ${transRef}\n` : "") +
+        (transRef ? `🔖 เลขอ้างอิงสลิป (Ref): ${transRef.slice(0, 18)}\n` : "") +
         `📥 สถานะ: บอทส่งใบรับรอง${directDownloadLink ? " + ลิงก์ดาวน์โหลด OneDrive" : ""} และขอ Gmail ลูกค้าไว้ให้แล้วครับ!`
     );
 
@@ -772,7 +922,8 @@ async function verifyLineSlipImage(
           `✅ ตรวจสอบสลิปโอนเงินสำเร็จ! (Verified Bank Slip)\n` +
           `━━━━━━━━━━━━━━━\n` +
           `📦 รายการ: ${orderTitle}${paidForVipSetup ? " (รวมบริการติดตั้ง VIP Setup 🛠️)" : ""}\n` +
-          (detectedAmount > 0 ? `💵 ยอดชำระ: ${detectedAmount.toLocaleString()} บาท\n` : "") +
+          `💵 ยอดโอนจริงในสลิป: ${actualSlipAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท\n` +
+          `👤 ผู้รับเงิน: ${PROMPTPAY_NAME}\n` +
           `🏦 ข้อมูลสลิป: ${bankName}\n` +
           (transRef ? `🔖 เลขที่อ้างอิง: ${transRef.slice(0, 18)}\n` : "") +
           `━━━━━━━━━━━━━━━\n` +
