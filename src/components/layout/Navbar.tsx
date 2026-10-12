@@ -60,6 +60,15 @@ const routes: RouteItem[] = [
         hoverColor: "amber" 
       },
       { 
+        name: "กลุ่ม Telegram ติวสอบครูผู้ช่วย (AI Prep)", 
+        href: "/teacher-prep", 
+        description: "บอทยิงข้อสอบ 3 เวลา + AI เฉลยละเอียด + เพลงช่วยจำ พ.ร.บ.", 
+        badge: "ใหม่! ติวฟรี", 
+        badgeColor: "cyan", 
+        icon: GraduationCap, 
+        hoverColor: "cyan" 
+      },
+      { 
         name: "คลังนักเรียน & TCAS", 
         href: "/student-vault", 
         description: "Web Portfolio 3D, ระบบเช็คการบ้าน, AI Prompts", 
@@ -92,6 +101,15 @@ const routes: RouteItem[] = [
         badgeColor: "teal", 
         icon: ShieldCheck, 
         hoverColor: "teal" 
+      },
+      { 
+        name: "กลุ่ม Telegram ติวสอบครูผู้ช่วย (AI Prep)", 
+        href: "/teacher-prep", 
+        description: "ทดลองทำข้อสอบ Telegram Daily Quiz Bot & ฟังเพลงช่วยจำ", 
+        badge: "HOT", 
+        badgeColor: "cyan", 
+        icon: GraduationCap, 
+        hoverColor: "cyan" 
       },
       { 
         name: "รวมช่องทาง & หน้าร้านไอทีครูอ้น", 

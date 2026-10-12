@@ -271,12 +271,12 @@ export function HomeView() {
                 </p>
                 <ul className="space-y-2 mb-8 text-xs font-prompt text-white/80">
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0" />
-                    <span>20 ระบบ Google Apps Script (390-990 ฿)</span>
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                    <span className="text-cyan-300 font-bold">🎓 กลุ่ม Telegram บอทติวสอบครูผู้ช่วย + เพลงช่วยจำ</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0" />
-                    <span>Classroom Pro &amp; Admin Suite Bundles</span>
+                    <span>20 ระบบ Google Apps Script (390-990 ฿)</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0" />
@@ -285,13 +285,23 @@ export function HomeView() {
                 </ul>
               </div>
 
-              <Link
-                href="/bundles"
-                className="w-full py-4 px-6 rounded-2xl bg-linear-to-r from-purple-600 via-pink-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all group-hover:scale-102"
-              >
-                <span>ดูแพ็กเกจเหมาสุดคุ้ม (Bundles)</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="space-y-2.5">
+                <Link
+                  href="/bundles"
+                  className="w-full py-3.5 px-6 rounded-2xl bg-linear-to-r from-purple-600 via-pink-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all group-hover:scale-102"
+                >
+                  <span>ดูแพ็กเกจเหมาสุดคุ้ม (Bundles)</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/teacher-prep"
+                  className="w-full py-2.5 px-6 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/35 text-cyan-300 font-prompt font-semibold text-xs flex items-center justify-center gap-1.5 transition-all"
+                >
+                  <GraduationCap className="w-4 h-4" />
+                  <span>เข้ากลุ่ม Telegram ติวสอบครูผู้ช่วย (AI Prep)</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
 
             {/* Portal 3: Bespoke Services */}
