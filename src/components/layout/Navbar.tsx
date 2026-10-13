@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText, Sparkles, ShieldCheck, Globe, Music } from "lucide-react";
+import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText, Sparkles, ShieldCheck, Globe, Music, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -50,6 +50,15 @@ const routes: RouteItem[] = [
     icon: ShoppingBag,
     hoverColor: "amber",
     items: [
+      { 
+        name: "คลัง 30 E-Book ครูไทย", 
+        href: "/ebooks", 
+        description: "30 คู่มือ นวัตกรรม ว.PA ผ่านฉลุย, AI Prompts, วิจัย 5 บท", 
+        badge: "Bestseller", 
+        badgeColor: "amber", 
+        icon: BookOpen, 
+        hoverColor: "amber" 
+      },
       { 
         name: "คลังระบบครู & โรงเรียน", 
         href: "/digital-vault", 
