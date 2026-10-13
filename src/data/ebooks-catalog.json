@@ -19,7 +19,8 @@
     "themeColor": "emerald",
     "iconName": "Award",
     "shortCategory": "ว.PA & วิทยฐานะ",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 2,
@@ -41,7 +42,8 @@
     "themeColor": "cyan",
     "iconName": "Sparkles",
     "shortCategory": "AI & Digital Ed",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 3,
@@ -63,7 +65,8 @@
     "themeColor": "purple",
     "iconName": "FileText",
     "shortCategory": "วิจัยในชั้นเรียน (CAR)",
-    "discountPct": 49
+    "discountPct": 49,
+    "coverImage": null
   },
   {
     "rank": 4,
@@ -85,7 +88,8 @@
     "themeColor": "amber",
     "iconName": "Laptop",
     "shortCategory": "Google Sheets & ระบบ",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 5,
@@ -107,7 +111,8 @@
     "themeColor": "blue",
     "iconName": "BookOpen",
     "shortCategory": "Active Learning",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 6,
@@ -129,7 +134,8 @@
     "themeColor": "rose",
     "iconName": "Video",
     "shortCategory": "คลิปสอน 60 นาที",
-    "discountPct": 50
+    "discountPct": 50,
+    "coverImage": null
   },
   {
     "rank": 7,
@@ -151,7 +157,8 @@
     "themeColor": "teal",
     "iconName": "CheckSquare",
     "shortCategory": "คลังข้อสอบ & Blueprint",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 8,
@@ -173,7 +180,8 @@
     "themeColor": "orange",
     "iconName": "HeartHandshake",
     "shortCategory": "บริหารชั้นเรียนเชิงบวก",
-    "discountPct": 47
+    "discountPct": 47,
+    "coverImage": null
   },
   {
     "rank": 9,
@@ -195,7 +203,8 @@
     "themeColor": "pink",
     "iconName": "Palette",
     "shortCategory": "Canva For Education",
-    "discountPct": 49
+    "discountPct": 49,
+    "coverImage": null
   },
   {
     "rank": 10,
@@ -217,7 +226,8 @@
     "themeColor": "indigo",
     "iconName": "Users",
     "shortCategory": "ดูแลช่วยเหลือนักเรียน",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 11,
@@ -239,7 +249,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 49
+    "discountPct": 49,
+    "coverImage": null
   },
   {
     "rank": 12,
@@ -261,7 +272,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 13,
@@ -283,7 +295,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 14,
@@ -305,7 +318,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 15,
@@ -327,7 +341,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 16,
@@ -349,7 +364,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 17,
@@ -371,7 +387,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 18,
@@ -393,7 +410,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 19,
@@ -415,7 +433,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 49
+    "discountPct": 49,
+    "coverImage": null
   },
   {
     "rank": 20,
@@ -437,7 +456,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 50
+    "discountPct": 50,
+    "coverImage": null
   },
   {
     "rank": 21,
@@ -459,7 +479,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 22,
@@ -481,7 +502,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 23,
@@ -503,7 +525,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 49
+    "discountPct": 49,
+    "coverImage": null
   },
   {
     "rank": 24,
@@ -525,7 +548,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 25,
@@ -547,7 +571,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 26,
@@ -569,7 +594,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 27,
@@ -591,7 +617,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 49
+    "discountPct": 49,
+    "coverImage": null
   },
   {
     "rank": 28,
@@ -613,7 +640,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 49
+    "discountPct": 49,
+    "coverImage": null
   },
   {
     "rank": 29,
@@ -635,7 +663,8 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   },
   {
     "rank": 30,
@@ -657,6 +686,7 @@
     "themeColor": "slate",
     "iconName": "Book",
     "shortCategory": "งานวิชาการครู",
-    "discountPct": 51
+    "discountPct": 51,
+    "coverImage": null
   }
 ]

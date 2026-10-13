@@ -10,6 +10,7 @@ import {
   Layers, ChevronDown, CheckCircle2, Zap
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import rawEbooks from "@/data/ebooks-catalog.json";
 
 interface EbookItem {
@@ -28,9 +29,10 @@ interface EbookItem {
   iconName: string;
   shortCategory: string;
   discountPct: number;
+  coverImage?: string | null;
 }
 
-const EBOOKS_DATA: EbookItem[] = rawEbooks as EbookItem[];
+const EBOOKS_DATA: EbookItem[] = (rawEbooks as unknown) as EbookItem[];
 
 // Category Filter Tabs
 const CATEGORIES = [
@@ -310,6 +312,51 @@ export function EbooksCatalogView() {
                     <span className="text-[11px] text-slate-400 font-medium">
                       ประหยัด {book.discountPct}%
                     </span>
+                  </div>
+
+                  {/* ──────────────── 3D Book Mockup Display ──────────────── */}
+                  <div className="relative w-full h-56 mb-5 flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-b from-slate-950 via-slate-900/60 to-slate-950 p-2 border border-slate-800/80 group-hover:border-indigo-500/30 transition-all duration-300">
+                    {/* Background glow behind book */}
+                    <div className="absolute inset-0 bg-radial from-indigo-500/10 via-transparent to-transparent blur-xl" />
+
+                    {book.coverImage ? (
+                      <div className="relative w-full h-full flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-1">
+                        <Image
+                          src={book.coverImage}
+                          alt={book.title}
+                          fill
+                          className="object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] filter transition-all"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          priority={book.rank <= 3}
+                        />
+                      </div>
+                    ) : (
+                      /* Futuristic 3D Book Stylized Fallback with 3D Spine and Pages */
+                      <div className="relative w-36 h-48 rounded-r-xl rounded-l-sm bg-gradient-to-br from-slate-800 via-indigo-950 to-slate-900 border-t border-r border-b border-indigo-400/30 shadow-[10px_15px_30px_rgba(0,0,0,0.7)] flex flex-col justify-between p-3.5 transition-transform duration-500 group-hover:scale-105 group-hover:rotate-1 group-hover:-translate-y-1">
+                        {/* 3D Spine Ridge simulation */}
+                        <div className="absolute left-0 top-0 bottom-0 w-3.5 bg-gradient-to-r from-black/80 via-white/10 to-transparent border-r border-white/10" />
+                        {/* Book Page Lines edge */}
+                        <div className="absolute -right-1 top-1 bottom-1 w-1 bg-slate-200/40 rounded-r-sm blur-[0.5px]" />
+
+                        <div className="pl-3">
+                          <span className="text-[9px] font-black tracking-widest text-indigo-400 uppercase">
+                            {book.code}
+                          </span>
+                          <div className="w-6 h-0.5 bg-indigo-500 my-1 rounded-full" />
+                        </div>
+
+                        <div className="pl-3 my-auto">
+                          <p className="text-[11px] font-black text-white leading-tight line-clamp-3">
+                            {book.title}
+                          </p>
+                        </div>
+
+                        <div className="pl-3 flex items-center justify-between pt-2 border-t border-slate-700/50">
+                          <span className="text-[8px] font-bold text-slate-400">iAonTech 3D</span>
+                          <Sparkles className="w-2.5 h-2.5 text-amber-400" />
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Title */}
