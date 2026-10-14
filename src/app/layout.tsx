@@ -9,6 +9,7 @@ import { FaYoutube, FaTiktok, FaFacebook, FaLine } from "react-icons/fa6";
 import { BrandThemeProvider } from "@/components/providers/BrandThemeProvider";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { FloatingLINEButton } from "@/components/ui/FloatingLINEButton";
+import { LineModalProvider } from "@/components/ui/LineOrderModal";
 import Maintenance from "@/components/Maintenance";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
@@ -93,6 +94,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <BrandThemeProvider>
+          <LineModalProvider>
 
           {/* ถ้าเปิดโหมด Maintenance จะแสดงแค่หน้า Maintenance เท่านั้น */}
           {isMaintenance ? (
@@ -224,6 +226,7 @@ export default function RootLayout({
             </>
           )}
 
+          </LineModalProvider>
         </BrandThemeProvider>
       </body>
     </html>

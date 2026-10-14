@@ -591,6 +591,9 @@ ${listText}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       <a
                         href={getSingleBuyLineUrl(item)}
+                        data-line-title={`เพลงลิขสิทธิ์: ${item.title}`}
+                        data-line-price={item.price}
+                        data-line-code={item.code}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="py-3.5 px-5 rounded-2xl bg-linear-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(6,182,212,0.3)] border border-cyan-300/30 transition-all hover:scale-[1.02] cursor-pointer"
@@ -610,6 +613,9 @@ ${listText}
                       ) : (
                         <a
                           href={getSingleBuyLineUrl(item)}
+                          data-line-title={`สอบถามเพลง: ${item.title}`}
+                          data-line-price={item.price}
+                          data-line-code={item.code}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="py-3.5 px-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-white/80 font-semibold text-xs flex items-center justify-center gap-1.5 transition-all"
@@ -721,6 +727,8 @@ ${listText}
                   </button>
                   <a
                     href={getCartCheckoutLineUrl()}
+                    data-line-title={`สั่งซื้อเพลงลิขสิทธิ์ ${cart.length} รายการ`}
+                    data-line-price={`${totalCartPrice.toLocaleString()} ฿`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-5 py-2.5 rounded-xl bg-linear-to-r from-emerald-400 to-teal-500 text-zinc-950 font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-lg cursor-pointer"

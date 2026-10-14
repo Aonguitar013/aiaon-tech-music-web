@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import rawEbooks from "@/data/ebooks-catalog.json";
+import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 
 interface EbookItem {
   rank: number;
@@ -63,6 +64,8 @@ export function EbooksCatalogView() {
 
   const isInCart = (code: string) => cart.some((c) => c.code === code);
 
+  const { openLineModal } = useLineModal();
+
   const cartTotal = useMemo(
     () => cart.reduce((sum, item) => sum + item.earlyBirdPrice, 0),
     [cart]
@@ -72,6 +75,24 @@ export function EbooksCatalogView() {
     () => cart.reduce((sum, item) => sum + item.regularPrice, 0),
     [cart]
   );
+
+  const cartOrderMessage = useMemo(() => {
+    return `สวัสดีครับครูอ้น ต้องการสั่งซื้อ E-Book รวม ${cart.length} เล่ม:\n${cart
+      .map((c) => `- [${c.code}] ${c.title} (฿${c.earlyBirdPrice})`)
+      .join("\n")}\nยอดรวมทั้งสิ้น ฿${cartTotal} บาท ครับ`;
+  }, [cart, cartTotal]);
+
+  const handleCartCheckoutClick = (e: React.MouseEvent) => {
+    if (!isMobileDevice()) {
+      e.preventDefault();
+      setIsCartOpen(false);
+      openLineModal({
+        title: `สั่งซื้อ E-Book รวม ${cart.length} เล่ม`,
+        price: cartTotal,
+        message: cartOrderMessage,
+      });
+    }
+  };
 
   // Filtered books
   const filteredBooks = useMemo(() => {
@@ -431,6 +452,9 @@ export function EbooksCatalogView() {
                       href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
                         `สวัสดีครับครูอ้น สนใจสั่งซื้อ E-Book [${book.code}] ${book.title} ราคา ${book.earlyBirdPrice} บาท ครับ`
                       )}`}
+                      data-line-title={`E-Book: ${book.title}`}
+                      data-line-price={book.earlyBirdPrice}
+                      data-line-code={book.code}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1 border border-slate-700/60"
@@ -503,6 +527,9 @@ export function EbooksCatalogView() {
                 href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
                   "สวัสดีครับครูอ้น สนใจสั่งซื้อเหมาแพ็กเกจ 30 เล่มจบ The All-in-One Thai Teacher Vault ราคาพิเศษ 2,990 บาท ครับ"
                 )}`}
+                data-line-title="แพ็กเกจเหมา 30 เล่มจบ (Ultimate Master Pack)"
+                data-line-price="2,990"
+                data-line-code="VAULT-30"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-3.5 px-4 bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-400 hover:to-indigo-500 text-white font-extrabold rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm"
@@ -666,12 +693,11 @@ export function EbooksCatalogView() {
 
                   <a
                     href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
-                      `สวัสดีครับครูอ้น ต้องการสั่งซื้อ E-Book รวม ${
-                        cart.length
-                      } เล่ม:\n${cart
-                        .map((c) => `- [${c.code}] ${c.title} (฿${c.earlyBirdPrice})`)
-                        .join("\n")}\nยอดรวมทั้งสิ้น ฿${cartTotal} บาท ครับ`
+                      cartOrderMessage
                     )}`}
+                    onClick={handleCartCheckoutClick}
+                    data-line-title={`สั่งซื้อ E-Book รวม ${cart.length} เล่ม`}
+                    data-line-price={cartTotal}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 text-sm transition shadow-lg shadow-indigo-600/30"

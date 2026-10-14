@@ -8,6 +8,7 @@ import {
   Activity, Star, Layers, ShoppingCart
 } from "lucide-react";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
+import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 import { cn } from "@/lib/utils";
 
 export interface Product {
@@ -350,6 +351,7 @@ function getSystemCoverTheme(title: string, category: string) {
 
 export function ProductCard({ product }: ProductCardProps) {
   const { brandTheme } = useBrandTheme();
+  const { openLineModal } = useLineModal();
 
   let rawDesc = product.description;
   let parsedType = "";
@@ -552,7 +554,16 @@ export function ProductCard({ product }: ProductCardProps) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                window.open(vipLineOrderUrl, "_blank", "noopener,noreferrer");
+                if (isMobileDevice()) {
+                  window.open(vipLineOrderUrl, "_blank", "noopener,noreferrer");
+                } else {
+                  openLineModal({
+                    title: `ระบบ ${displayTitle} (VIP Setup)`,
+                    price: `${cleanPrice} + ${vipPrice}`,
+                    itemCode: coverTheme.code,
+                    message: vipLineOrderMessage,
+                  });
+                }
               }}
               title="คลิกเพื่อสั่งซื้อพร้อมบริการให้ครูอ้นติดตั้งให้พร้อมใช้ (VIP Setup)"
               className="text-[11px] font-prompt text-amber-300/90 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/25 hover:border-amber-400/50 rounded-lg py-1 px-2.5 text-center whitespace-nowrap truncate transition-all cursor-pointer"
@@ -595,6 +606,9 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <a
       href={lineOrderUrl}
+      data-line-title={displayTitle}
+      data-line-price={cleanPrice}
+      data-line-code={coverTheme.code}
       target="_blank"
       rel="noopener noreferrer"
       className="block group cursor-pointer h-full"

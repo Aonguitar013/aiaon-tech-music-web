@@ -137,6 +137,7 @@ export function FloatingLINEButton() {
           {/* Floating Circle Button */}
           <a
             href={lineHref}
+            data-line-title={badge}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={label}
