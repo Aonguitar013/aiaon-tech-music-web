@@ -200,6 +200,18 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
     };
   }, []);
 
+  // Sign out: update the UI immediately, clear the browser session, then run the server action
+  // (clears server cookies + redirects). Without this the client state would stay stale until refresh.
+  const handleLogout = async () => {
+    setUser(null);
+    try {
+      await createBrowserSupabase().auth.signOut();
+    } catch {
+      // ignore – the server action below also signs out
+    }
+    await logout();
+  };
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [openMobileMenus, setOpenMobileMenus] = useState<Record<string, boolean>>({});
 
@@ -414,7 +426,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                   </Link>
                   <Button 
                     variant="outline" 
-                    onClick={() => logout()}
+                    onClick={handleLogout}
                     className="rounded-full border-red-500/20 bg-red-500/10 hover:bg-red-500/20 text-red-400 shadow-[0_0_15px_rgba(239,68,68,0.1)] transition-all flex items-center justify-center p-2 w-8 h-8 active:scale-95 shrink-0"
                   >
                     <LogOut className="w-3.5 h-3.5" />
@@ -578,7 +590,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                         <LayoutDashboard className="w-5 h-5 text-white/70" /> แผงควบคุม
                      </Link>
                      <Button 
-                        onClick={() => logout()}
+                        onClick={handleLogout}
                         className="mt-6 w-full rounded-full bg-red-600/20 text-red-400 hover:bg-red-600/30 border border-red-500/20 flex gap-2 font-prompt text-sm font-medium py-2.5 active:scale-95"
                      >
                         <LogOut className="w-4 h-4" /> ออกจากระบบ
