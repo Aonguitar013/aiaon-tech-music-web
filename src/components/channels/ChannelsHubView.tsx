@@ -217,15 +217,15 @@ const GADGET_STORES = [
 
 const STUDIO_GEAR_ITEMS: GearItem[] = [
   {
-    id: "iphone-14-pm",
-    name: "iPhone 14 Pro Max (คู่ใจครูอ้น)",
+    id: "iphone-17-pm",
+    name: "iPhone 17 Pro Max 256GB (คู่ใจครูอ้น)",
     category: "mobile",
     roleInWorkflow: "ใช้รับแจ้งเตือน Telegram ยามเฝ้าระบบ AI 24 ชม., ถ่ายคลิปมุมโต๊ะทำงาน และรีโมต AnyDesk",
     whyKruAonLovesIt: "กล้องถ่ายคลิปสั้นคมกริบ แบตอึด คุมระบบลูกค้าได้จากทุกที่แม้ตอนสอนดนตรีที่โรงเรียน",
     badge: "ใช้ทุกวัน 24 ชม.",
     tiktokShopUrl: "https://www.tiktok.com/@iaontech",
-    shopeeUrl: "https://shopee.co.th/search?keyword=iphone%20pro%20max",
-    lazadaUrl: "https://www.lazada.co.th/catalog/?q=iphone+pro+max",
+    shopeeUrl: "https://shopee.co.th/search?keyword=iphone%2017%20pro%20max",
+    lazadaUrl: "https://www.lazada.co.th/catalog/?q=iphone+17+pro+max",
   },
   {
     id: "shure-sm27",

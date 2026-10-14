@@ -25,16 +25,49 @@ const prompt = Prompt({
 });
 
 export const metadata: Metadata = {
-  title: "TechxMusic",
+  metadataBase: new URL("https://www.aiaon.tech"),
+  title: {
+    default: "AiAon Tech — คลังระบบ Google Apps Script & สื่อการสอน AI โดย ครูอ้น",
+    template: "%s | AiAon Tech",
+  },
   description:
-    "แพลตฟอร์มการศึกษาและดิจิทัลมาร์เก็ตเพลซระดับพรีเมียม สร้างโดย iAonTechxMusic",
-  keywords: ["iAon", "Tech", "Music", "Academy", "Marketplace", "SaaS", "Thai"],
+    "แพลตฟอร์มคลัง 20 ระบบอัตโนมัติ Google Apps Script ช่วยลดภาระงานครูและโรงเรียนไทย, กลุ่ม Telegram ติวสอบครูผู้ช่วยพร้อมเพลงช่วยจำ Suno, คลังเพลงลิขสิทธิ์ และสื่อการสอน AI พัฒนาโดย ครูจิรวัฒน์ เดชเส้ง (ครูอ้น ค.ศ.2 รร.หาดใหญ่วิทยาลัย)",
+  keywords: [
+    "AiAon Tech",
+    "ไอทีง่ายๆ สไตล์ไอ้อ้น",
+    "ครูอ้น",
+    "จิรวัฒน์ เดชเส้ง",
+    "Google Apps Script",
+    "ระบบเช็คชื่อนักเรียน",
+    "ระบบตรวจเครื่องแต่งกาย",
+    "ระบบบริหารยานพาหนะ",
+    "ระบบเกียรติบัตร QR",
+    "เพลงจำข้อสอบครูผู้ช่วย",
+    "ติวสอบครูผู้ช่วย",
+    "AiAon Prep",
+    "ว.PA 15 ตัวชี้วัด",
+    "เว็บพอร์ต TCAS 3D",
+    "เพลงลิขสิทธิ์",
+    "เสียงตามสายโรงเรียน",
+    "AI เพื่อการศึกษา",
+  ],
+  authors: [{ name: "นายจิรวัฒน์ เดชเส้ง (ครูอ้น)", url: "https://www.aiaon.tech" }],
+  creator: "นายจิรวัฒน์ เดชเส้ง (ครูอ้น ญ.ว.)",
+  publisher: "AiAon Tech Ecosystem",
   openGraph: {
-    title: "TechxMusic",
+    title: "AiAon Tech — คลังระบบ Google Apps Script & สื่อการสอน AI โดย ครูอ้น",
     description:
-      "แพลตฟอร์มการศึกษาและดิจิทัลมาร์เก็ตเพลซระดับพรีเมียม สร้างโดย iAonTechxMusic",
+      "เสกงานเอกสารโรงเรียน & งานเรียนให้เสร็จในคลิกเดียว ด้วย 20 ระบบ Google Apps Script สำเร็จรูป, กลุ่มติวสอบครูผู้ช่วย, คลังเพลงลิขสิทธิ์ และสื่อการสอน AI ไม่มีรายเดือน",
+    url: "https://www.aiaon.tech",
+    siteName: "AiAon Tech Ecosystem",
     locale: "th_TH",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AiAon Tech — คลังระบบ Google Apps Script & สื่อการสอน AI โดย ครูอ้น",
+    description:
+      "เสกงานเอกสารโรงเรียน & งานเรียนให้เสร็จในคลิกเดียว ด้วย 20 ระบบ Google Apps Script สำเร็จรูป, กลุ่มติวสอบครูผู้ช่วย และสื่อการสอน AI",
   },
 };
 
