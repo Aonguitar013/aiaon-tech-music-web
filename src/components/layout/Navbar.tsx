@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, ChevronDown, Info, Wrench, Sparkles, ShieldCheck, Globe, Music, BookOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, LogIn, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, ChevronDown, Info, Wrench, Sparkles, ShieldCheck, Globe, Music, BookOpen } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -424,22 +423,24 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                       <LayoutDashboard className="w-4 h-4 shrink-0" /> <span>แผงควบคุม</span>
                       <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center bg-linear-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
                   </Link>
-                  <Button 
-                    variant="outline" 
+                  <button
+                    type="button"
                     onClick={handleLogout}
-                    className="rounded-full border-red-500/20 bg-red-500/10 hover:bg-red-500/20 text-red-400 shadow-[0_0_15px_rgba(239,68,68,0.1)] transition-all flex items-center justify-center p-2 w-8 h-8 active:scale-95 shrink-0"
+                    aria-label="ออกจากระบบ"
+                    className="group inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 font-prompt text-sm text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-rose-400/40 hover:bg-rose-500/10 hover:text-rose-300 hover:shadow-[0_0_18px_rgba(244,63,94,0.25)] active:scale-95 shrink-0 whitespace-nowrap cursor-pointer"
                   >
-                    <LogOut className="w-3.5 h-3.5" />
-                  </Button>
+                    <LogOut className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <span>ออกจากระบบ</span>
+                  </button>
               </div>
           ) : (
-            <Link href="/login" className="ml-1 shrink-0">
-              <Button 
-                variant="outline" 
-                className="w-max whitespace-nowrap shrink-0 rounded-full border-white/20 bg-white/5 hover:bg-white/10 text-white shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all font-prompt text-sm font-medium px-4 py-1.5 active:scale-95 h-8.5"
-              >
-                เข้าสู่ระบบ
-              </Button>
+            <Link
+              href="/login"
+              className="group relative ml-1 inline-flex shrink-0 items-center gap-2 overflow-hidden whitespace-nowrap rounded-full bg-linear-to-r from-blue-600 via-blue-500 to-cyan-400 px-5 py-2 font-prompt text-sm font-medium text-white shadow-[0_0_20px_rgba(59,130,246,0.45)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(34,211,238,0.6)] active:scale-95"
+            >
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              <LogIn className="relative h-4 w-4 shrink-0" />
+              <span className="relative">เข้าสู่ระบบ</span>
             </Link>
           )}
         </div>
@@ -589,20 +590,20 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                      >
                         <LayoutDashboard className="w-5 h-5 text-white/70" /> แผงควบคุม
                      </Link>
-                     <Button 
+                     <button
+                        type="button"
                         onClick={handleLogout}
-                        className="mt-6 w-full rounded-full bg-red-600/20 text-red-400 hover:bg-red-600/30 border border-red-500/20 flex gap-2 font-prompt text-sm font-medium py-2.5 active:scale-95"
+                        className="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-rose-400/30 bg-rose-500/10 py-2.5 font-prompt text-sm font-medium text-rose-300 transition-all hover:bg-rose-500/20 hover:shadow-[0_0_18px_rgba(244,63,94,0.25)] active:scale-95"
                      >
-                        <LogOut className="w-4 h-4" /> ออกจากระบบ
-                     </Button>
+                        <LogOut className="h-4 w-4" /> ออกจากระบบ
+                     </button>
                    </>
                 ) : (
-                  <Link href="/login" className="w-full mt-4">
-                    <Button 
-                      className="w-full rounded-full bg-blue-600 hover:bg-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] font-prompt text-sm font-medium py-2.5 active:scale-95"
-                    >
-                      เข้าสู่ระบบ
-                    </Button>
+                  <Link
+                    href="/login"
+                    className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-linear-to-r from-blue-600 via-blue-500 to-cyan-400 py-2.5 font-prompt text-sm font-medium text-white shadow-[0_0_20px_rgba(59,130,246,0.45)] transition-all active:scale-95"
+                  >
+                    <LogIn className="h-4 w-4" /> เข้าสู่ระบบ
                   </Link>
                 )}
               </div>
