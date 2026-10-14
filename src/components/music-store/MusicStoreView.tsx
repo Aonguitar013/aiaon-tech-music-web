@@ -680,7 +680,7 @@ ${listText}
                 </button>
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 animate-pulse">
+                    <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 animate-pulse">
                       กำลังเล่นตัวอย่างเสียง 🎵
                     </span>
                     <span className="text-xs font-bold text-white truncate">

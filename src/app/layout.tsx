@@ -123,7 +123,7 @@ export default function RootLayout({
               <FloatingLINEButton />
 
               {/* --- Main Content --- */}
-              <main className="grow pt-28 relative z-10">
+              <main className="grow pt-4 md:pt-8 relative z-10">
                 {children}
               </main>
 

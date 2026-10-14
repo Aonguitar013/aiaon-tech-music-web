@@ -338,7 +338,7 @@ export function EbooksCatalogView() {
                         <div className="absolute -right-1 top-1 bottom-1 w-1 bg-slate-200/40 rounded-r-sm blur-[0.5px]" />
 
                         <div className="pl-3">
-                          <span className="text-[9px] font-black tracking-widest text-indigo-400 uppercase">
+                          <span className="text-[11px] font-black tracking-widest text-indigo-400 uppercase">
                             {book.code}
                           </span>
                           <div className="w-6 h-0.5 bg-indigo-500 my-1 rounded-full" />
@@ -351,7 +351,7 @@ export function EbooksCatalogView() {
                         </div>
 
                         <div className="pl-3 flex items-center justify-between pt-2 border-t border-slate-700/50">
-                          <span className="text-[8px] font-bold text-slate-400">iAonTech 3D</span>
+                          <span className="text-[11px] font-bold text-slate-400">iAonTech 3D</span>
                           <Sparkles className="w-2.5 h-2.5 text-amber-400" />
                         </div>
                       </div>
@@ -398,7 +398,7 @@ export function EbooksCatalogView() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-[10px] text-slate-500">สิทธิ์สถานศึกษา</div>
+                      <div className="text-[11px] text-slate-500">สิทธิ์สถานศึกษา</div>
                       <div className="text-xs font-semibold text-slate-400">
                         ฿{book.schoolPrice}
                       </div>
@@ -633,7 +633,7 @@ export function EbooksCatalogView() {
                         </div>
                         <div className="text-[11px] text-slate-400">
                           ฿{item.earlyBirdPrice}{" "}
-                          <span className="line-through text-slate-600 text-[10px]">
+                          <span className="line-through text-slate-600 text-[11px]">
                             ฿{item.regularPrice}
                           </span>
                         </div>

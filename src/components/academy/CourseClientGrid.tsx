@@ -267,7 +267,7 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
                     {/* Footer: Price and CTA Button */}
                     <div className="flex items-end justify-between pt-4 border-t border-white/10 mt-auto">
                       <div>
-                        <p className="text-[10px] text-white/40 font-prompt uppercase tracking-wider mb-0.5">ราคาคอร์ส</p>
+                        <p className="text-[11px] text-white/40 font-prompt uppercase tracking-wider mb-0.5">ราคาคอร์ส</p>
                         {(() => {
                           const isFree = course.price === "0" || course.price === "0 THB" || course.price === "0 thb" || !course.price || course.price.trim() === "" || course.price.trim() === "-" || course.price.trim() === "—";
                           if (isFree) {

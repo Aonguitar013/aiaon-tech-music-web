@@ -457,14 +457,14 @@ export function ProductCard({ product }: ProductCardProps) {
               {coverTheme.code}
             </span>
             {isFree && (
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500 text-zinc-950 text-[10px] font-prompt font-black animate-pulse shadow-md">
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500 text-zinc-950 text-[11px] font-prompt font-black animate-pulse shadow-md">
                 FREE 🎁
               </span>
             )}
           </div>
 
           <span className={cn(
-            "px-2.5 py-1 rounded-full text-[10px] font-prompt font-bold border backdrop-blur-md shadow-md",
+            "px-2.5 py-1 rounded-full text-[11px] font-prompt font-bold border backdrop-blur-md shadow-md",
             coverTheme.badgeBg
           )}>
             {coverTheme.categoryName}
@@ -476,7 +476,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-black/40 border border-white/20 backdrop-blur-md flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 mb-2">
             <CoverIcon className={cn("w-8 h-8 sm:w-9 sm:h-9", coverTheme.iconColor)} />
           </div>
-          <span className="text-[9px] sm:text-[10px] font-mono uppercase font-black tracking-widest text-white/50 group-hover:text-white/80 transition-colors">
+          <span className="text-[11px] sm:text-[11px] font-mono uppercase font-black tracking-widest text-white/50 group-hover:text-white/80 transition-colors">
             {coverTheme.tagline}
           </span>
         </div>
@@ -484,7 +484,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Bottom Bar: Mini Tech Feature Pills (Single line, no clipping) */}
         <div className="flex items-center justify-center gap-1.5 relative z-10 overflow-hidden">
           {coverTheme.pills.slice(0, 2).map((pill, pIdx) => (
-            <span key={pIdx} className="px-2.5 py-0.5 rounded-full bg-black/45 border border-white/15 text-[10px] font-prompt text-white/75 whitespace-nowrap backdrop-blur-sm">
+            <span key={pIdx} className="px-2.5 py-0.5 rounded-full bg-black/45 border border-white/15 text-[11px] font-prompt text-white/75 whitespace-nowrap backdrop-blur-sm">
               {pill}
             </span>
           ))}
@@ -517,7 +517,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {/* Price Row — Never wraps */}
           <div className="flex items-end justify-between gap-2">
             <div>
-              <div className="text-[10px] font-prompt text-white/50 font-medium whitespace-nowrap mb-0.5">
+              <div className="text-[11px] font-prompt text-white/50 font-medium whitespace-nowrap mb-0.5">
                 {isFree ? "🎁 ของขวัญพิเศษ" : "⚡ จ่ายครั้งเดียวตลอดชีพ"}
               </div>
               <div className="flex items-baseline gap-2 whitespace-nowrap">
@@ -539,7 +539,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
 
             <div className="flex flex-col items-end gap-1 shrink-0">
-              <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-[10px] font-prompt text-emerald-300 flex items-center gap-1 font-semibold whitespace-nowrap">
+              <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-[11px] font-prompt text-emerald-300 flex items-center gap-1 font-semibold whitespace-nowrap">
                 <ShieldCheck className="w-3 h-3 text-emerald-400 shrink-0" />
                 <span>ไม่มีรายเดือน</span>
               </span>

@@ -130,7 +130,7 @@ export function LessonSidebar({
                           {formatDuration(lesson.duration_seconds)}
                         </span>
                         {lesson.is_free_preview && !isCoursePurchased && (
-                          <span className="text-[10px] px-1.5 py-0.5 bg-emerald-500/20 text-emerald-400 rounded border border-emerald-500/20">
+                          <span className="text-[11px] px-1.5 py-0.5 bg-emerald-500/20 text-emerald-400 rounded border border-emerald-500/20">
                             ดูฟรี
                           </span>
                         )}

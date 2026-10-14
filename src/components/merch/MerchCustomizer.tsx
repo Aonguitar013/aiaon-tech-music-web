@@ -1478,7 +1478,7 @@ LINE ID: ${form.lineId}
               )}
 
               {previewMode === "mockup" && (
-                <div className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-cyan-500/20 text-cyan-400 text-[10px] font-prompt uppercase font-semibold tracking-wider">
+                <div className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-cyan-500/20 text-cyan-400 text-[11px] font-prompt uppercase font-semibold tracking-wider">
                   <span>ดีไซน์สินค้าจริงที่จะใช้จัดส่ง</span>
                 </div>
               )}
@@ -1487,15 +1487,15 @@ LINE ID: ${form.lineId}
             {/* Spec Quick Details Badge */}
             <div className="grid grid-cols-3 gap-2.5 text-center">
               <div className="p-3 rounded-2xl glass-card border-white/5 bg-white/2 text-left">
-                <p className="text-[10px] text-white/40 font-prompt">MATERIAL</p>
+                <p className="text-[11px] text-white/40 font-prompt">MATERIAL</p>
                 <p className="text-xs text-white/80 font-prompt font-semibold mt-0.5">{selectedProduct === "cap" ? "Premium Twill" : "Comb #32 Cotton"}</p>
               </div>
               <div className="p-3 rounded-2xl glass-card border-white/5 bg-white/2 text-left">
-                <p className="text-[10px] text-white/40 font-prompt">{selectedProduct === "cap" ? "VISOR" : "THICKNESS"}</p>
+                <p className="text-[11px] text-white/40 font-prompt">{selectedProduct === "cap" ? "VISOR" : "THICKNESS"}</p>
                 <p className="text-xs text-white/80 font-prompt font-semibold mt-0.5">{selectedProduct === "cap" ? "Curved Brim" : "Premium 230gsm"}</p>
               </div>
               <div className="p-3 rounded-2xl glass-card border-white/5 bg-white/2 text-left">
-                <p className="text-[10px] text-white/40 font-prompt">EMB/PRINT</p>
+                <p className="text-[11px] text-white/40 font-prompt">EMB/PRINT</p>
                 <p className="text-xs text-white/80 font-prompt font-semibold mt-0.5">{selectedProduct === "cap" ? "3D Embroidery" : "Digital Screen"}</p>
               </div>
             </div>
@@ -1585,7 +1585,7 @@ LINE ID: ${form.lineId}
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
                             <span className="font-prompt text-base font-bold text-white">{g.name}</span>
-                            <span className="text-[10px] font-prompt px-2 py-0.5 rounded-full border border-white/10 text-white/40 uppercase tracking-wider">
+                            <span className="text-[11px] font-prompt px-2 py-0.5 rounded-full border border-white/10 text-white/40 uppercase tracking-wider">
                               {g.badge}
                             </span>
                           </div>
@@ -1716,7 +1716,7 @@ LINE ID: ${form.lineId}
                     </div>
 
                     <div className="flex flex-wrap gap-1.5">
-                      <span className="text-[10px] text-white/40 font-prompt shrink-0 mt-1 mr-1">แนะนำ:</span>
+                      <span className="text-[11px] text-white/40 font-prompt shrink-0 mt-1 mr-1">แนะนำ:</span>
                       {["ADMIN", "DEV-MASTER", "STUDENT", "GUITARIST", "N8N-GOD", "PRODUCER"].map((word) => (
                         <button
                           key={word}
@@ -1806,7 +1806,7 @@ LINE ID: ${form.lineId}
                           )}
                         >
                           <span className="text-base font-bold">{s.name}</span>
-                          <span className="text-[10px] text-white/40 font-normal mt-0.5">อก {s.chest}</span>
+                          <span className="text-[11px] text-white/40 font-normal mt-0.5">อก {s.chest}</span>
                         </button>
                       ))}
                     </div>
@@ -1950,7 +1950,7 @@ LINE ID: ${form.lineId}
               <div className="pt-8 mt-auto border-t border-white/5 flex items-center justify-between gap-4">
                 {/* Active Info Tag */}
                 <div className="flex flex-col text-left">
-                  <span className="text-[10px] text-white/40 font-prompt leading-none uppercase">
+                  <span className="text-[11px] text-white/40 font-prompt leading-none uppercase">
                     {selectedProduct === "cap" ? "ราคาต่อใบ" : "ราคาต่อตัว"}
                   </span>
                   <span className="font-prompt font-bold text-white text-lg mt-0.5">
@@ -2125,7 +2125,7 @@ LINE ID: ${form.lineId}
                   </div>
                 )}
 
-                <p className="text-[10px] text-gray-400 font-prompt font-bold leading-none mt-1">
+                <p className="text-[11px] text-gray-400 font-prompt font-bold leading-none mt-1">
                   ยอดโอนเงิน: {totalPrice}.00 บาท
                 </p>
               </div>
@@ -2134,7 +2134,7 @@ LINE ID: ${form.lineId}
                 <p className="text-xs text-white/70">
                   สแกนรหัส QR ด้านบนเพื่อโอนเงินผ่านแอปธนาคารของคุณได้ทันที 
                 </p>
-                <p className="text-[10px] text-amber-300/80">
+                <p className="text-[11px] text-amber-300/80">
                   *สแกนเสร็จสิ้นกรุณาบันทึกรูปภาพสลิปชำระเงินไว้เพื่อใช้ยืนยันออเดอร์ในขั้นตอนถัดไป*
                 </p>
               </div>

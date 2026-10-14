@@ -273,7 +273,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                       >
                         <Gift className="w-4 h-4 text-pink-400 group-hover:rotate-12 transition-transform duration-300 shrink-0" />
                         <span>{route.name}</span>
-                        <span className="bg-linear-to-r from-purple-500 to-pink-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(236,72,153,0.5)]">
+                        <span className="bg-linear-to-r from-purple-500 to-pink-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(236,72,153,0.5)]">
                           FREE
                         </span>
                       </NavigationMenuLink>
@@ -354,7 +354,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                                   </span>
                                   {subItem.badge && (
                                     <span className={cn(
-                                      "text-[10px] font-prompt px-2 py-0.5 rounded-full border shrink-0 font-medium",
+                                      "text-[11px] font-prompt px-2 py-0.5 rounded-full border shrink-0 font-medium",
                                       subItem.badgeColor === "amber" && "bg-amber-500/15 text-amber-300 border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.2)]",
                                       subItem.badgeColor === "pink" && "bg-pink-500/15 text-pink-300 border-pink-500/30 shadow-[0_0_8px_rgba(244,63,94,0.2)]",
                                       subItem.badgeColor === "purple" && "bg-purple-500/15 text-purple-300 border-purple-500/30 shadow-[0_0_8px_rgba(168,85,247,0.2)]",
@@ -482,7 +482,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                           <Gift className="w-5 h-5 text-pink-400" />
                           {route.name}
                         </span>
-                        <span className="bg-linear-to-r from-purple-500 to-pink-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-[0_0_8px_rgba(236,72,153,0.5)]">
+                        <span className="bg-linear-to-r from-purple-500 to-pink-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-[0_0_8px_rgba(236,72,153,0.5)]">
                           FREE
                         </span>
                       </Link>
@@ -549,7 +549,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                                     <div className="flex items-center justify-between gap-1">
                                       <span className="text-sm font-medium text-white/90">{subItem.name}</span>
                                       {subItem.badge && (
-                                        <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-white/10 text-white/80 border border-white/15">
+                                        <span className="text-[11px] px-1.5 py-0.5 rounded-full bg-white/10 text-white/80 border border-white/15">
                                           {subItem.badge}
                                         </span>
                                       )}

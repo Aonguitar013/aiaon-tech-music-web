@@ -132,7 +132,7 @@ export function ServicesSection() {
                   {/* Badge */}
                   {service.badge && (
                     <div className="absolute -top-3 left-6">
-                      <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-prompt font-bold tracking-wide text-white bg-linear-to-r ${service.gradientFrom} ${service.gradientTo} shadow-md`}>
+                      <span className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-prompt font-bold tracking-wide text-white bg-linear-to-r ${service.gradientFrom} ${service.gradientTo} shadow-md`}>
                         {service.badge}
                       </span>
                     </div>
@@ -144,7 +144,7 @@ export function ServicesSection() {
                       <Icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <p className={`text-[10px] font-prompt font-semibold uppercase tracking-wider mb-0.5 ${service.accentColor}`}>
+                      <p className={`text-[11px] font-prompt font-semibold uppercase tracking-wider mb-0.5 ${service.accentColor}`}>
                         {service.subtitle}
                       </p>
                       <h3 className="font-prompt text-lg sm:text-xl font-bold text-white group-hover:text-blue-300 transition-colors duration-200">

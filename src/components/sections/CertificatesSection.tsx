@@ -205,7 +205,7 @@ export function CertificatesSection() {
                 {/* Category badge */}
                 <div className="absolute top-3 left-3">
                   <span
-                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-prompt font-semibold backdrop-blur-md bg-black/50 border border-white/15 ${cert.categoryColor}`}
+                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-prompt font-semibold backdrop-blur-md bg-black/50 border border-white/15 ${cert.categoryColor}`}
                   >
                     <BadgeCheck className="w-3 h-3" />
                     {cert.category}

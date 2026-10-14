@@ -175,7 +175,7 @@ export function MusicTemplatesView({ initialProducts, user }: MusicTemplatesView
                 <div className="relative glass-card bg-black/40 border border-white/10 hover:border-amber-500/40 p-6 md:p-8 flex flex-col h-full transition-all duration-300 overflow-hidden">
                   {/* FREE Badge */}
                   {isFree && (
-                    <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-400 text-black text-[10px] font-black font-prompt shadow-[0_0_15px_rgba(52,211,153,0.6)] border border-emerald-300/30 uppercase tracking-wider animate-pulse">
+                    <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-400 text-black text-[11px] font-black font-prompt shadow-[0_0_15px_rgba(52,211,153,0.6)] border border-emerald-300/30 uppercase tracking-wider animate-pulse">
                       <Icons.Gift className="w-3 h-3 shrink-0" />
                       <span>แจกฟรี</span>
                     </div>

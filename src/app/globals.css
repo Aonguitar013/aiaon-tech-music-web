@@ -502,3 +502,18 @@ body {
     display: none !important;
   }
 }
+
+/* tap-target-boost */
+@media (pointer: coarse) {
+  footer ul a,
+  footer a[href] {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+  nav a[href="/"] {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}

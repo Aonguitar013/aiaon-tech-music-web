@@ -313,7 +313,7 @@ export function BundlesView() {
                       <div key={sIdx} className="p-3.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
                         <div className="flex items-center justify-between gap-2 mb-1">
                           <span className="font-prompt text-sm font-bold text-white flex items-center gap-2">
-                            <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                            <span className="px-1.5 py-0.5 rounded text-[11px] font-mono bg-blue-500/20 text-blue-300 border border-blue-500/30">
                               {sys.code}
                             </span>
                             {sys.name}

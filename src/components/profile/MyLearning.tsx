@@ -94,7 +94,7 @@ export function MyLearning({ items }: { items: LearningItem[] }) {
                             {/* Content */}
                             <div className="ml-4 flex-1 min-w-0">
                                 {/* Badge */}
-                                <span className={`inline-block text-[10px] font-prompt font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full border mb-1.5 ${
+                                <span className={`inline-block text-[11px] font-prompt font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full border mb-1.5 ${
                                     isCourse
                                         ? (isMusic ? "text-amber-400 border-amber-500/30 bg-amber-500/10" : "text-blue-400 border-blue-500/30 bg-blue-500/10")
                                         : "text-purple-400 border-purple-500/30 bg-purple-500/10"
@@ -114,7 +114,7 @@ export function MyLearning({ items }: { items: LearningItem[] }) {
                                         <div className="flex-1 bg-white/10 h-1.5 rounded-full overflow-hidden">
                                             <div className={`h-full w-[30%] ${isMusic ? "bg-amber-500" : "bg-emerald-500"}`}></div>
                                         </div>
-                                        <span className={`text-[10px] font-prompt whitespace-nowrap flex items-center gap-1 ${isMusic ? "text-amber-400" : "text-blue-400"}`}>
+                                        <span className={`text-[11px] font-prompt whitespace-nowrap flex items-center gap-1 ${isMusic ? "text-amber-400" : "text-blue-400"}`}>
                                             <BookOpen className="w-3 h-3" /> เริ่มเรียน →
                                         </span>
                                     </div>

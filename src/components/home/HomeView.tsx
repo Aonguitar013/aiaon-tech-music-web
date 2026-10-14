@@ -281,7 +281,7 @@ export function HomeView() {
                       <Bot className="w-3.5 h-3.5" />
                       <span>🤖 AI ออโตเมชัน • สำหรับร้านค้า &amp; SME</span>
                     </span>
-                    <span className="text-[10px] font-mono bg-emerald-500/30 text-emerald-200 px-2 py-0.5 rounded border border-emerald-500/40">
+                    <span className="text-[11px] font-mono bg-emerald-500/30 text-emerald-200 px-2 py-0.5 rounded border border-emerald-500/40">
                       24/7 WATCHDOG
                     </span>
                   </div>
@@ -336,7 +336,7 @@ export function HomeView() {
                       <BookOpen className="w-3.5 h-3.5" />
                       <span>📚 คลังความรู้ • 30 เล่มฉบับสมบูรณ์</span>
                     </span>
-                    <span className="text-[10px] font-bold text-purple-200 bg-purple-500/20 px-2 py-0.5 rounded border border-purple-500/30">
+                    <span className="text-[11px] font-bold text-purple-200 bg-purple-500/20 px-2 py-0.5 rounded border border-purple-500/30">
                       3D COVERS
                     </span>
                   </div>
@@ -391,7 +391,7 @@ export function HomeView() {
                       <GraduationCap className="w-3.5 h-3.5" />
                       <span>🎓 สอบบรรจุครูผู้ช่วย • กลุ่ม Telegram ฟรี</span>
                     </span>
-                    <span className="text-[10px] font-bold text-cyan-200 bg-cyan-500/20 px-2 py-0.5 rounded border border-cyan-500/30">
+                    <span className="text-[11px] font-bold text-cyan-200 bg-cyan-500/20 px-2 py-0.5 rounded border border-cyan-500/30">
                       100 ข้อสอบ AI
                     </span>
                   </div>
@@ -442,7 +442,7 @@ export function HomeView() {
                       <Music className="w-3.5 h-3.5" />
                       <span>🎵 เพลงเพื่อการศึกษา &amp; ลิขสิทธิ์ 100%</span>
                     </span>
-                    <span className="text-[10px] font-bold text-pink-200 bg-pink-500/20 px-2 py-0.5 rounded border border-pink-500/30">
+                    <span className="text-[11px] font-bold text-pink-200 bg-pink-500/20 px-2 py-0.5 rounded border border-pink-500/30">
                       AUDIO VAULT
                     </span>
                   </div>
@@ -493,7 +493,7 @@ export function HomeView() {
                       <Code2 className="w-3.5 h-3.5" />
                       <span>🛠️ สั่งทำระบบ &amp; วิทยากรบรรยาย</span>
                     </span>
-                    <span className="text-[10px] font-bold text-amber-200 bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30">
+                    <span className="text-[11px] font-bold text-amber-200 bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30">
                       BESPOKE DEV
                     </span>
                   </div>
@@ -639,7 +639,7 @@ export function HomeView() {
                     <span className="text-sm font-bold text-cyan-300 flex items-center gap-2">
                       <Cpu className="w-4 h-4" /> แผงควบคุมเช็คชื่อจำลอง
                     </span>
-                    <span className="text-[10px] font-mono bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/30">
+                    <span className="text-[11px] font-mono bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/30">
                       AONE01 ENGINE
                     </span>
                   </div>
@@ -698,7 +698,7 @@ export function HomeView() {
                       <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                       <span>LINE Notify Real-time Feed</span>
                     </div>
-                    <span className="text-[10px] text-white/40">เชื่อมต่อแล้ว</span>
+                    <span className="text-[11px] text-white/40">เชื่อมต่อแล้ว</span>
                   </div>
 
                   <div className="space-y-2 min-h-[160px]">
@@ -731,7 +731,7 @@ export function HomeView() {
                     <span className="text-sm font-bold text-emerald-300 flex items-center gap-2">
                       <Bot className="w-4 h-4" /> AI Slip Verifier จำลอง
                     </span>
-                    <span className="text-[10px] font-mono bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30">
+                    <span className="text-[11px] font-mono bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30">
                       GEMINI 2.5 FLASH
                     </span>
                   </div>
@@ -749,7 +749,7 @@ export function HomeView() {
                         }`}
                       >
                         <div className="font-bold text-xs">✅ สลิปถูกต้อง (490 ฿)</div>
-                        <div className="text-[10px] text-white/40 mt-1">ยอดตรง + Mini-QR แท้</div>
+                        <div className="text-[11px] text-white/40 mt-1">ยอดตรง + Mini-QR แท้</div>
                       </button>
 
                       <button
@@ -762,7 +762,7 @@ export function HomeView() {
                         }`}
                       >
                         <div className="font-bold text-xs">❌ สลิปยอดไม่ตรง (10 ฿)</div>
-                        <div className="text-[10px] text-white/40 mt-1">โอนไม่ครบบิล (ทดสอบบล็อก)</div>
+                        <div className="text-[11px] text-white/40 mt-1">โอนไม่ครบบิล (ทดสอบบล็อก)</div>
                       </button>
                     </div>
                   </div>
@@ -786,7 +786,7 @@ export function HomeView() {
                         <FileCheck2 className="w-4 h-4 text-emerald-400" />
                         ผลการตรวจสอบโดย AI
                       </span>
-                      <span className="text-[10px] text-white/40">BOT Verification API</span>
+                      <span className="text-[11px] text-white/40">BOT Verification API</span>
                     </div>
 
                     <div className="p-4 rounded-xl bg-white/5 border border-white/5 space-y-2">
@@ -945,7 +945,7 @@ export function HomeView() {
                         <Star key={s} className="w-4 h-4 fill-amber-400" />
                       ))}
                     </div>
-                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${review.badgeColor}`}>
+                    <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border ${review.badgeColor}`}>
                       {review.badge}
                     </span>
                   </div>
@@ -959,7 +959,7 @@ export function HomeView() {
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-white">{review.name}</h4>
-                    <p className="text-[10px] text-white/50">{review.role}</p>
+                    <p className="text-[11px] text-white/50">{review.role}</p>
                   </div>
                 </div>
               </div>
@@ -977,7 +977,7 @@ export function HomeView() {
                 <span className="text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-pink-400">
                   iAon
                 </span>
-                <span className="text-[10px] text-white/50 uppercase tracking-widest mt-1">Tech Studio</span>
+                <span className="text-[11px] text-white/50 uppercase tracking-widest mt-1">Tech Studio</span>
               </div>
             </div>
 

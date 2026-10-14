@@ -240,7 +240,7 @@ export function SaaSView() {
                     <p className="text-xs text-white/50 font-prompt">ครู ค.ศ.2 (ชำนาญการ) โรงเรียนหาดใหญ่วิทยาลัย</p>
                   </div>
                 </div>
-                <span className="px-2.5 py-1 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 text-[10px] font-prompt font-bold">
+                <span className="px-2.5 py-1 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 text-[11px] font-prompt font-bold">
                   🎸 Music × AI
                 </span>
               </div>
@@ -334,7 +334,7 @@ export function SaaSView() {
                       <p className="text-sm font-bold text-white flex items-center gap-2">
                         {student.name}
                         {student.status !== "none" && (
-                          <span className="text-[10px] px-2 py-0.5 rounded-full font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                          <span className="text-[11px] px-2 py-0.5 rounded-full font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                             ✓ เช็คแล้ว
                           </span>
                         )}
@@ -422,10 +422,10 @@ export function SaaSView() {
                     </div>
                     <div className="font-prompt text-left">
                       <p className="text-sm font-semibold text-white leading-tight">LINE Notify</p>
-                      <p className="text-[10px] text-white/50">แจ้งเตือนผู้ปกครองอัตโนมัติ</p>
+                      <p className="text-[11px] text-white/50">แจ้งเตือนผู้ปกครองอัตโนมัติ</p>
                     </div>
                   </div>
-                  <span className="text-[9px] text-[#00c300] font-bold border border-[#00c300]/40 px-2 py-0.5 rounded-full bg-[#00c300]/10 select-none">
+                  <span className="text-[11px] text-[#00c300] font-bold border border-[#00c300]/40 px-2 py-0.5 rounded-full bg-[#00c300]/10 select-none">
                     ONLINE
                   </span>
                 </div>
@@ -440,7 +440,7 @@ export function SaaSView() {
                         exit={{ opacity: 0, scale: 0.9 }}
                         className="flex items-start gap-2 max-w-[95%]"
                       >
-                        <div className="w-7 h-7 rounded-full bg-[#00c300] flex items-center justify-center text-[10px] text-white font-bold shrink-0 mt-0.5 shadow-sm">
+                        <div className="w-7 h-7 rounded-full bg-[#00c300] flex items-center justify-center text-[11px] text-white font-bold shrink-0 mt-0.5 shadow-sm">
                           LN
                         </div>
                         
@@ -449,7 +449,7 @@ export function SaaSView() {
                             {msg.body}
                           </div>
                           
-                          <span className="text-[8px] text-white/30 shrink-0 select-none pb-0.5">
+                          <span className="text-[11px] text-white/30 shrink-0 select-none pb-0.5">
                             {msg.time}
                           </span>
                         </div>
@@ -457,12 +457,12 @@ export function SaaSView() {
                     ))}
                   </AnimatePresence>
 
-                  <div className="text-center py-2 text-[9px] text-white/20 font-prompt">
+                  <div className="text-center py-2 text-[11px] text-white/20 font-prompt">
                     -- ฟีดการแจ้งเตือนแบบ Real-time --
                   </div>
                 </div>
 
-                <div className="bg-[#242528] p-2.5 border-t border-black/20 text-center text-[10px] text-white/40 font-prompt">
+                <div className="bg-[#242528] p-2.5 border-t border-black/20 text-center text-[11px] text-white/40 font-prompt">
                   🔒 ข้อมูลส่งตรงจาก Google Apps Script
                 </div>
               </div>

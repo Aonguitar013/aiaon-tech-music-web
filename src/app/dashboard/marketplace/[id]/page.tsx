@@ -172,7 +172,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
                           {/* Option 2: VIP Setup */}
                           <div className="p-4 rounded-xl border border-amber-500/40 bg-amber-950/20 space-y-2 relative overflow-hidden">
-                            <div className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-amber-500 text-zinc-950 text-[10px] font-prompt font-black uppercase">
+                            <div className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-amber-500 text-zinc-950 text-[11px] font-prompt font-black uppercase">
                               {vipSetup.badge}
                             </div>
                             <div className="flex items-center justify-between pr-20">
@@ -237,7 +237,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                           <Wrench className="w-4 h-4 shrink-0" />
                           <span>ออปชัน VIP Setup ({vipSetup.priceText}):</span>
                         </span>
-                        <span className="text-[10px] text-amber-400/70">{vipSetup.badge}</span>
+                        <span className="text-[11px] text-amber-400/70">{vipSetup.badge}</span>
                       </div>
                       <p className="text-white/70 text-[11px] leading-relaxed">
                         {vipSetup.description} แจ้งรับบริการใน LINE ตอนส่งสลิปได้เลยครับ
@@ -247,7 +247,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
                   {parsedType && (
                       <div className="bg-black/30 rounded-lg p-3 mb-6 border border-white/5">
-                          <p className="text-[10px] text-white/40 font-prompt mb-0.5">รูปแบบการส่งมอบ / ประเภท</p>
+                          <p className="text-[11px] text-white/40 font-prompt mb-0.5">รูปแบบการส่งมอบ / ประเภท</p>
                           <p className="text-xs text-white/80 font-prompt font-medium">{parsedType}</p>
                       </div>
                   )}

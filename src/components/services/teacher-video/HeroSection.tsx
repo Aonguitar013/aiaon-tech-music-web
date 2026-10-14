@@ -168,7 +168,7 @@ export function HeroSection() {
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-1.5 p-3 rounded-2xl glass-card bg-white/2 border border-white/5">
               <span className="font-prompt text-lg sm:text-2xl font-bold text-white bg-clip-text bg-linear-to-r from-white to-white/70">{stat.value}</span>
-              <span className="font-prompt text-[10px] sm:text-xs text-white/50 tracking-wide font-light">{stat.label}</span>
+              <span className="font-prompt text-[11px] sm:text-xs text-white/50 tracking-wide font-light">{stat.label}</span>
             </div>
           ))}
         </motion.div>
@@ -176,7 +176,7 @@ export function HeroSection() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1">
-        <span className="font-prompt text-[9px] uppercase tracking-[0.25em] text-white/30 select-none">
+        <span className="font-prompt text-[11px] uppercase tracking-[0.25em] text-white/30 select-none">
           เลื่อนเพื่อดูข้อมูล
         </span>
         <div className="w-5.5 h-8.5 rounded-full border border-white/25 flex items-start justify-center pt-1.5 relative overflow-hidden">

@@ -99,7 +99,7 @@ export default async function EbookReaderPage({ params }: { params: Promise<{ id
                 <span className="text-white/30 text-xs font-prompt">ไม่มีหัวข้อเรื่อง</span>
               )}
             </div>
-            <div className="mt-5 pt-3 border-t border-white/10 flex items-center gap-1.5 text-[10px] text-white/40 font-prompt">
+            <div className="mt-5 pt-3 border-t border-white/10 flex items-center gap-1.5 text-[11px] text-white/40 font-prompt">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> ระบบอ่านแบบปลอดภัย
             </div>
           </div>

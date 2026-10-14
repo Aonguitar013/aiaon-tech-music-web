@@ -142,13 +142,13 @@ export function AutomationShowcase() {
             <div className="mt-10 pt-8 border-t border-white/10 bg-blue-500/5 rounded-2xl p-6 border border-blue-500/10">
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div className="border-r border-white/10 pr-2">
-                  <span className="text-[10px] uppercase font-prompt tracking-wider text-white/40 block mb-1">ประหยัดได้ต่อภาคเรียน</span>
+                  <span className="text-[11px] uppercase font-prompt tracking-wider text-white/40 block mb-1">ประหยัดได้ต่อภาคเรียน</span>
                   <span className="text-3xl md:text-4xl font-bold font-prompt text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-400">
                     {termTimeSavedHours} ชม.
                   </span>
                 </div>
                 <div className="pl-2">
-                  <span className="text-[10px] uppercase font-prompt tracking-wider text-white/40 block mb-1">คืนเวลานอนพักผ่อน</span>
+                  <span className="text-[11px] uppercase font-prompt tracking-wider text-white/40 block mb-1">คืนเวลานอนพักผ่อน</span>
                   <span className="text-3xl md:text-4xl font-bold font-prompt text-transparent bg-clip-text bg-linear-to-r from-teal-400 to-emerald-400">
                     ~ {equivalentSleepDays} วัน
                   </span>
@@ -194,10 +194,10 @@ export function AutomationShowcase() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex justify-between items-center mb-0.5">
-                        <span className="text-[10px] font-bold font-prompt text-white">AiAon Tech OA</span>
-                        <span className="text-[8px] text-white/40">ตอนนี้</span>
+                        <span className="text-[11px] font-bold font-prompt text-white">AiAon Tech OA</span>
+                        <span className="text-[11px] text-white/40">ตอนนี้</span>
                       </div>
-                      <p className="text-[9px] font-prompt text-white/80 leading-normal line-clamp-2">
+                      <p className="text-[11px] font-prompt text-white/80 leading-normal line-clamp-2">
                         สแกนบัตรสำเร็จ! ส่งแจ้งผลแจ้งเตือนเข้าสมาร์ตโฟนผู้ปกครองเรียบร้อยแล้ว
                       </p>
                     </div>
@@ -206,7 +206,7 @@ export function AutomationShowcase() {
               </AnimatePresence>
 
               {/* Phone Status Bar */}
-              <div className="h-5 flex justify-between items-center px-4 text-[9px] text-white/70 font-sans z-10">
+              <div className="h-5 flex justify-between items-center px-4 text-[11px] text-white/70 font-sans z-10">
                 <span>08:02</span>
                 {/* Speaker Notch */}
                 <div className="w-16 h-3 bg-zinc-800 rounded-full absolute left-1/2 -translate-x-1/2 top-1" />
@@ -224,7 +224,7 @@ export function AutomationShowcase() {
                 </div>
 
                 <div className="text-center my-1">
-                  <span className="text-[8px] bg-black/30 text-white/40 px-2 py-0.5 rounded-full font-prompt">วันนี้</span>
+                  <span className="text-[11px] bg-black/30 text-white/40 px-2 py-0.5 rounded-full font-prompt">วันนี้</span>
                 </div>
 
                 <div className="flex flex-col gap-2 relative z-10">
@@ -236,10 +236,10 @@ export function AutomationShowcase() {
                       transition={{ duration: 0.3 }}
                       className="bg-zinc-800 border border-white/5 rounded-2xl p-2.5 max-w-[90%] self-start"
                     >
-                      <p className="text-[10px] font-prompt text-white/90 leading-relaxed">
+                      <p className="text-[11px] font-prompt text-white/90 leading-relaxed">
                         {msg.text}
                       </p>
-                      <span className="text-[8px] text-white/35 block text-right mt-1 font-prompt">
+                      <span className="text-[11px] text-white/35 block text-right mt-1 font-prompt">
                         {msg.time}
                       </span>
                     </motion.div>
@@ -251,7 +251,7 @@ export function AutomationShowcase() {
               <button
                 onClick={triggerScan}
                 disabled={isScanning}
-                className={`w-full py-2.5 rounded-xl font-prompt font-semibold text-[10px] flex items-center justify-center gap-1.5 transition-all z-10 cursor-pointer ${
+                className={`w-full py-2.5 rounded-xl font-prompt font-semibold text-[11px] flex items-center justify-center gap-1.5 transition-all z-10 cursor-pointer ${
                   isScanning 
                     ? "bg-zinc-800 text-white/50 cursor-wait" 
                     : "bg-cyan-500 hover:bg-cyan-400 text-black shadow-[0_0_12px_rgba(6,182,212,0.3)]"

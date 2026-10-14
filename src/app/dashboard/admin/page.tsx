@@ -321,7 +321,7 @@ export default async function AdminPage() {
                     </div>
                     <div className="min-w-0 pr-2">
                       <h4 className="text-white font-prompt font-medium truncate text-sm leading-tight mb-0.5">{item.title}</h4>
-                      <p className="text-[10px] text-white/40 font-prompt">{item.type} • {item.count} orders</p>
+                      <p className="text-[11px] text-white/40 font-prompt">{item.type} • {item.count} orders</p>
                     </div>
                   </div>
                   <div className="text-right shrink-0 bg-white/5 px-2.5 py-1 rounded-lg border border-white/5 group-hover:border-emerald-500/20 transition-colors">
@@ -392,7 +392,7 @@ export default async function AdminPage() {
                           </div>
                           <div>
                             <p className="font-bold text-white text-sm">{cust.name}</p>
-                            <p className="text-[10px] text-white/40 font-mono">{cust.userId.slice(0, 12)}…</p>
+                            <p className="text-[11px] text-white/40 font-mono">{cust.userId.slice(0, 12)}…</p>
                           </div>
                         </div>
                       </td>

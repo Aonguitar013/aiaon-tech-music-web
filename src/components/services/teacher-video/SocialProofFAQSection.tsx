@@ -132,7 +132,7 @@ export function SocialProofFAQSection() {
                     <h4 className="font-prompt text-sm font-bold text-white leading-tight">
                       {testimonial.name}
                     </h4>
-                    <p className="font-prompt text-[10px] sm:text-xs text-white/40 mt-0.5">
+                    <p className="font-prompt text-[11px] sm:text-xs text-white/40 mt-0.5">
                       {testimonial.role} | {testimonial.subject}
                     </p>
                   </div>

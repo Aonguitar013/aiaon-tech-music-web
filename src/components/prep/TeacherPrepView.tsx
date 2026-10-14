@@ -404,7 +404,7 @@ export function TeacherPrepView() {
                   <div>
                     <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
                       AiAon Prep Daily Quiz Bot
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      <span className="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                         ONLINE
                       </span>
                     </h3>
@@ -546,7 +546,7 @@ export function TeacherPrepView() {
                       <div className="text-xs sm:text-sm font-bold truncate">{song.title}</div>
                       <div className="text-[11px] text-white/50 truncate">{song.topic}</div>
                     </div>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0">
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0">
                       {song.examFrequency}
                     </span>
                   </button>
@@ -644,7 +644,7 @@ export function TeacherPrepView() {
                 <div className="space-y-2.5">
                   <div className="flex items-center justify-between">
                     <span className={`text-xs font-extrabold ${step.textColor}`}>{step.stage}</span>
-                    <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-white/10 text-white/80">
+                    <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-white/10 text-white/80">
                       {step.badge}
                     </span>
                   </div>

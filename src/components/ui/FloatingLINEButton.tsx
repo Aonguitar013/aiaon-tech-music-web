@@ -126,7 +126,7 @@ export function FloatingLINEButton() {
                 exit={{ opacity: 0, x: 15 }}
                 className="bg-black/85 backdrop-blur-md text-white border border-green-500/35 px-3.5 py-2 rounded-xl text-xs font-prompt shadow-[0_4px_16px_rgba(0,0,0,0.6)] select-none flex flex-col gap-0.5"
               >
-                <span className="font-bold text-green-400 text-[10px] uppercase tracking-wider">
+                <span className="font-bold text-green-400 text-[11px] uppercase tracking-wider">
                   {badge}
                 </span>
                 <span>{label}</span>

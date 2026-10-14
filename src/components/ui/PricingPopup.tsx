@@ -120,7 +120,7 @@ export function PricingPopup() {
 
                   {/* Header badge */}
                   <div className="flex items-center gap-2 mb-5">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-linear-to-r from-cyan-500 to-blue-600 text-[10px] text-white font-bold tracking-wider uppercase badge-glow-pulse font-prompt">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-linear-to-r from-cyan-500 to-blue-600 text-[11px] text-white font-bold tracking-wider uppercase badge-glow-pulse font-prompt">
                       <Sparkles className="w-3 h-3 animate-pulse" />
                       RECOMMENDED
                     </span>

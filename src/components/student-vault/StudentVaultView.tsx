@@ -181,7 +181,7 @@ export function StudentVaultView() {
                   <span className={`px-3 py-1 rounded-full text-xs font-prompt font-semibold border ${prod.badgeColor}`}>
                     {prod.badge}
                   </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-white/10 text-white/60">
+                  <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-white/10 text-white/60">
                     {prod.code}
                   </span>
                 </div>
@@ -309,7 +309,7 @@ export function StudentVaultView() {
               <div className="text-center sm:text-left space-y-1">
                 <div className="flex items-center justify-center sm:justify-start gap-2">
                   <h4 className="font-prompt text-xl font-extrabold text-white">นายกิตติคุณ นวัตกรรม (น้องคิง)</h4>
-                  <span className="text-[10px] font-prompt bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                  <span className="text-[11px] font-prompt bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">
                     ม.6 สายวิทย์-คอม
                   </span>
                 </div>

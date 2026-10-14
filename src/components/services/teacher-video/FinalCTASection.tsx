@@ -45,7 +45,7 @@ export function FinalCTASection() {
           </a>
 
           {/* Bonus Promo text */}
-          <div className="flex items-center justify-center gap-2 text-white/50 text-[10px] sm:text-xs font-prompt font-light bg-white/3 border border-white/5 px-4 py-2 rounded-xl mt-2 select-none">
+          <div className="flex items-center justify-center gap-2 text-white/50 text-[11px] sm:text-xs font-prompt font-light bg-white/3 border border-white/5 px-4 py-2 rounded-xl mt-2 select-none">
             <Gift className="w-4 h-4 text-amber-400 shrink-0" />
             <span>พิเศษ! ทักวันนี้ รับฟรีตัวอย่างแผนการสอน PA และสคริปต์สอน Active Learning</span>
           </div>

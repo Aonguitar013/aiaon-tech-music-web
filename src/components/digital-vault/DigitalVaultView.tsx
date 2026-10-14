@@ -370,7 +370,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
                 </div>
                 <div>
                   <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-prompt font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                    <span className="px-2 py-0.5 rounded text-[11px] font-prompt font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
                       👑 LIFETIME DEAL
                     </span>
                     <p className="font-prompt text-sm sm:text-base font-extrabold text-white group-hover:text-purple-300 transition-colors">
@@ -410,7 +410,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
                 }`}
               >
                 <span>{cat.label}</span>
-                <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${isActive ? "bg-white/20 text-white" : "bg-white/10 text-white/50"}`}>
+                <span className={`text-[11px] font-mono px-1.5 py-0.2 rounded-full ${isActive ? "bg-white/20 text-white" : "bg-white/10 text-white/50"}`}>
                   {cat.count}
                 </span>
               </button>

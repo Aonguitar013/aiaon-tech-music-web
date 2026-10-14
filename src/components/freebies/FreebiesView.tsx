@@ -347,13 +347,13 @@ function FreebieCard({
 
           {/* Badges */}
           <div className="flex flex-wrap gap-1.5 justify-end">
-            <span className={`text-[10px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border ${freebie.border_color} ${freebie.text_color} bg-white/3`}>
+            <span className={`text-[11px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border ${freebie.border_color} ${freebie.text_color} bg-white/3`}>
               {freebie.file_type}
             </span>
-            <span className="text-[10px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border border-white/10 text-white/40">
+            <span className="text-[11px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border border-white/10 text-white/40">
               {freebie.file_size}
             </span>
-            <span className="text-[10px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+            <span className="text-[11px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
               ฟรี
             </span>
           </div>
