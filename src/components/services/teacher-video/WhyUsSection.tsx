@@ -82,7 +82,7 @@ export function WhyUsSection() {
 
             <div className="pt-4">
               <a
-                href="https://lin.ee/XXLvrKW"
+                href="https://line.me/R/oaMessage/@deu6776s/?%E0%B8%AA%E0%B8%A7%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B5%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%AD%E0%B9%89%E0%B8%99%20%E0%B8%AA%E0%B8%99%E0%B9%83%E0%B8%88%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%9B%E0%B8%A3%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%97%E0%B8%B3%E0%B8%9C%E0%B8%A5%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%A1%E0%B8%B4%E0%B8%99%20%E0%B8%A7.PA%20%E0%B8%82%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%A5%E0%B8%B0%E0%B9%80%E0%B8%AD%E0%B8%B5%E0%B8%A2%E0%B8%94%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A%20%F0%9F%99%8F"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-prompt font-semibold text-sm transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(59,130,246,0.3)]"

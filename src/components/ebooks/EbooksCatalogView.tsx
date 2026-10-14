@@ -428,7 +428,7 @@ export function EbooksCatalogView() {
                     </button>
 
                     <a
-                      href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(
+                      href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
                         `สวัสดีครับครูอ้น สนใจสั่งซื้อ E-Book [${book.code}] ${book.title} ราคา ${book.earlyBirdPrice} บาท ครับ`
                       )}`}
                       target="_blank"
@@ -500,7 +500,7 @@ export function EbooksCatalogView() {
               </div>
 
               <a
-                href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(
+                href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
                   "สวัสดีครับครูอ้น สนใจสั่งซื้อเหมาแพ็กเกจ 30 เล่มจบ The All-in-One Thai Teacher Vault ราคาพิเศษ 2,990 บาท ครับ"
                 )}`}
                 target="_blank"
@@ -575,6 +575,21 @@ export function EbooksCatalogView() {
       {/* ─────────────────────────────────────────────────────────────
           6. FLOATING CART MODAL / DRAWER
       ───────────────────────────────────────────────────────────── */}
+      {/* Sticky cart bar: keeps the cart reachable while scrolling the 30-book list */}
+      {cart.length > 0 && !isCartOpen && (
+        <button
+          type="button"
+          onClick={() => setIsCartOpen(true)}
+          className="fixed bottom-6 left-4 right-24 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 z-40 flex items-center justify-between gap-3 rounded-2xl bg-indigo-600 px-4 py-3 font-semibold text-white shadow-[0_0_25px_rgba(99,102,241,0.55)] ring-1 ring-white/20 transition active:scale-95 hover:bg-indigo-500"
+        >
+          <span className="flex items-center gap-2 text-sm">
+            <ShoppingCart className="h-4 w-4 shrink-0" />
+            ตะกร้า {cart.length} เล่ม · ฿{cartTotal}
+          </span>
+          <span className="whitespace-nowrap rounded-full bg-white/20 px-3 py-1 text-xs">ดูตะกร้า →</span>
+        </button>
+      )}
+
       <AnimatePresence>
         {isCartOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
@@ -650,7 +665,7 @@ export function EbooksCatalogView() {
                   </div>
 
                   <a
-                    href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(
+                    href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
                       `สวัสดีครับครูอ้น ต้องการสั่งซื้อ E-Book รวม ${
                         cart.length
                       } เล่ม:\n${cart

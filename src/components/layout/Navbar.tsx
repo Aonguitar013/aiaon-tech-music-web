@@ -212,6 +212,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
   };
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [openMobileMenus, setOpenMobileMenus] = useState<Record<string, boolean>>({});
 
   const toggleMobileMenu = (name: string) => {
@@ -447,12 +448,19 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
 
         {/* Mobile Navigation (Hamburger) */}
         <div className="flex lg:hidden items-center">
-          <Sheet>
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger className="p-2 text-white hover:bg-white/10 rounded-xl transition-colors flex items-center justify-center">
               <Menu className="h-6 w-6" />
               <span className="sr-only">Open main menu</span>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-black/95 border-l border-white/10 overflow-y-auto">
+            <SheetContent
+              side="right"
+              className="bg-black/95 border-l border-white/10 overflow-y-auto px-5 pt-6 pb-24"
+              onClick={(e) => {
+                // Close the menu after tapping any navigation link
+                if ((e.target as HTMLElement).closest("a")) setMobileOpen(false);
+              }}
+            >
               <SheetTitle className="text-left font-prompt text-xl font-bold text-white mb-6">
                 เมนูหลัก
               </SheetTitle>

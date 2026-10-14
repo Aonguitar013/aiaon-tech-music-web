@@ -925,7 +925,7 @@ LINE ID: ${form.lineId}
 --------------------------------
 *แนบรูปภาพสลิปชำระเงินมาในแชทนี้ได้เลยครับ*`;
 
-    return `https://line.me/R/share?text=${encodeURIComponent(orderDetails)}`;
+    return `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(orderDetails)}`;
   };
 
   // Copy Order summary details

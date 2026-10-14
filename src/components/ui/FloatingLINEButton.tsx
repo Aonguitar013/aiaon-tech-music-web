@@ -113,7 +113,7 @@ export function FloatingLINEButton() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 50 }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          className="fixed bottom-6 right-6 z-[99] flex items-center gap-2 group pointer-events-auto print:hidden"
+          className="fixed bottom-6 right-6 z-40 flex items-center gap-2 group pointer-events-auto print:hidden"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >

@@ -160,7 +160,7 @@ const OFFICIAL_CHANNELS: ChannelCardItem[] = [
     handle: "@deu6776s",
     role: "ช่องทางหลักในการปรึกษาติดตั้งระบบ AI Caretaker รายเดือน, ส่งสลิปโอนเงิน, รับระบบ และติดต่อเชิญเป็นวิทยากร",
     schedule: "💬 ตอบกลับไวทุกวัน • มีระบบ AI ช่วยรับเรื่อง 24 ชม.",
-    url: "https://lin.ee/poMESoP",
+    url: "https://line.me/R/oaMessage/@deu6776s/?%E0%B8%AA%E0%B8%A7%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B5%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%AD%E0%B9%89%E0%B8%99%20%E0%B8%AA%E0%B8%99%E0%B9%83%E0%B8%88%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B2%E0%B8%A1%E0%B8%8A%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%96%E0%B8%B2%E0%B8%A1%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%B9%E0%B8%A5%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A%20%F0%9F%99%8F",
     buttonText: "แอด LINE OA @deu6776s ทันที",
     badge: "OFFICIAL CONTACT",
     colorClass: "text-emerald-400",
@@ -352,7 +352,7 @@ export function ChannelsHubView() {
             className="flex flex-wrap items-center justify-center gap-3.5"
           >
             <a
-              href="https://lin.ee/poMESoP"
+              href="https://line.me/R/oaMessage/@deu6776s/?%E0%B8%AA%E0%B8%A7%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B5%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%AD%E0%B9%89%E0%B8%99%20%E0%B8%AA%E0%B8%99%E0%B9%83%E0%B8%88%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B2%E0%B8%A1%E0%B8%8A%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%96%E0%B8%B2%E0%B8%A1%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%B9%E0%B8%A5%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A%20%F0%9F%99%8F"
               target="_blank"
               rel="noopener noreferrer"
               className="font-prompt inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-linear-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-zinc-950 font-extrabold text-sm sm:text-base shadow-[0_0_25px_rgba(16,185,129,0.35)] transition-all hover:scale-[1.02]"

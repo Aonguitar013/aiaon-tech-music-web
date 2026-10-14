@@ -10,7 +10,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl backdrop-blur-md border transition-all duration-500 overflow-hidden group hover:scale-110"
+      className="fixed bottom-24 right-6 z-40 p-4 rounded-full shadow-2xl backdrop-blur-md border transition-all duration-500 overflow-hidden group hover:scale-110"
       style={{
         background: brandTheme === "music" ? "rgba(245, 158, 11, 0.15)" : "rgba(59, 130, 246, 0.15)",
         borderColor: brandTheme === "music" ? "rgba(245, 158, 11, 0.3)" : "rgba(59, 130, 246, 0.3)",
