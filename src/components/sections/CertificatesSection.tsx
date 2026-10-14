@@ -112,6 +112,7 @@ export function CertificatesSection() {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- handlers are stable enough; re-binding on every render is unnecessary
   }, [selectedCertIndex]);
 
   const activeCert = selectedCertIndex !== null ? certificates[selectedCertIndex] : null;

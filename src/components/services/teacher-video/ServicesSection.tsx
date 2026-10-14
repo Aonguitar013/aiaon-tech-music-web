@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { motion } from "framer-motion";
-import { BookOpen, Video, Award, CheckCircle, ArrowRight, LucideIcon } from "lucide-react";
+import { BookOpen, Video, Award, CheckCircle, LucideIcon } from "lucide-react";
 import { FaLine } from "react-icons/fa6";
 
 interface ServiceItem {
@@ -194,9 +194,9 @@ export function ServicesSection() {
         {/* Extra Note for PA Criteria */}
         <div className="mt-12 p-5 rounded-2xl glass-card border border-white/5 bg-white/1 text-center max-w-4xl mx-auto">
           <p className="font-prompt text-xs sm:text-sm text-white/60 leading-relaxed">
-            <span className="text-amber-400 font-bold">💡 ข้อมูลสำคัญตามเกณฑ์ ก.ค.ศ.:</span> ในส่วนของ <span className="text-white font-semibold">"คลิปการสอน (PA 1)"</span> ต้องเป็นวิดีโอที่บันทึกแบบยาวต่อเนื่อง (Long Take) และห้ามตัดต่อภาพ/เสียงโดยเด็ดขาด 
+            <span className="text-amber-400 font-bold">💡 ข้อมูลสำคัญตามเกณฑ์ ก.ค.ศ.:</span> ในส่วนของ <span className="text-white font-semibold">&quot;คลิปการสอน (PA 1)&quot;</span> ต้องเป็นวิดีโอที่บันทึกแบบยาวต่อเนื่อง (Long Take) และห้ามตัดต่อภาพ/เสียงโดยเด็ดขาด 
             ทางเราจะทำหน้าที่เป็น <span className="text-white font-semibold">ที่ปรึกษาให้คำแนะนำ</span> ในการเซ็ตติ้งอุปกรณ์และสคริปต์ 
-            ส่วน <span className="text-white font-semibold">"คลิปเสนอสภาพปัญหา (PA 2)"</span> สามารถถ่ายทำและตัดต่อเพื่อนำเสนอสื่อประกอบได้ตามปกติครับ
+            ส่วน <span className="text-white font-semibold">&quot;คลิปเสนอสภาพปัญหา (PA 2)&quot;</span> สามารถถ่ายทำและตัดต่อเพื่อนำเสนอสื่อประกอบได้ตามปกติครับ
           </p>
         </div>
 

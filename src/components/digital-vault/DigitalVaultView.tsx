@@ -4,9 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { 
   Search, ShoppingBag, Mic, Sliders, Keyboard, Headphones, 
-  ExternalLink, Sparkles, CheckCircle2, Cpu, ArrowRight, Crown 
-} from "lucide-react";
-import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
+  ExternalLink, Sparkles, CheckCircle2, Cpu, ArrowRight, } from "lucide-react";
 import { motion } from "framer-motion";
 import { ProductCard } from "@/components/marketplace/ProductCard";
 import { cn } from "@/lib/utils";

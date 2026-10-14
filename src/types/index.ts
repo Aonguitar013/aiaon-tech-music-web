@@ -68,9 +68,16 @@ export interface Order {
 }
 
 /**
+ * Loosely-typed database row (Supabase tables are not code-generated in this project).
+ * Centralised here so the `any` is documented in a single place.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type DbRow = Record<string, any>
+
+/**
  * API Response types
  */
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   data?: T
   error?: string
   success: boolean
@@ -88,7 +95,7 @@ export interface PaginatedResponse<T> {
 /**
  * Form submission results
  */
-export interface FormResult<T = any> {
+export interface FormResult<T = unknown> {
   success: boolean
   data?: T
   error?: string

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cpu, Clock, Smartphone, Bell, HelpCircle, Check, ArrowRight } from "lucide-react";
+import { Cpu, Clock, Smartphone, Bell, ArrowRight } from "lucide-react";
 
 export function AutomationShowcase() {
   // ROI Calculator States
@@ -228,7 +228,7 @@ export function AutomationShowcase() {
                 </div>
 
                 <div className="flex flex-col gap-2 relative z-10">
-                  {chatMessages.map((msg, index) => (
+                  {chatMessages.map((msg) => (
                     <motion.div
                       key={msg.id}
                       initial={{ opacity: 0, y: 10, scale: 0.95 }}

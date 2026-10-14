@@ -1,7 +1,7 @@
 ﻿"use client";
 
-import { motion, useAnimation, Variants } from "framer-motion";
-import { ArrowRight, MessageSquare, ChevronDown, CheckCircle, Video, GraduationCap } from "lucide-react";
+import { motion, Variants } from "framer-motion";
+import { ArrowRight, ChevronDown, } from "lucide-react";
 import { FaLine } from "react-icons/fa6";
 
 const containerVariants: Variants = {

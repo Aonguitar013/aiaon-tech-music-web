@@ -52,9 +52,11 @@ export function getEnv(): Env {
       validatedEnv = envSchema.parse(process.env)
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const issues = (error as any).issues || (error as any).errors || []
+        type EnvIssue = { path?: PropertyKey[]; message: string }
+        const zodError = error as unknown as { issues?: EnvIssue[]; errors?: EnvIssue[] }
+        const issues: EnvIssue[] = zodError.issues || zodError.errors || []
         const missingVars = issues
-          .map((e: any) => `${e.path?.join('.') || 'env'}: ${e.message}`)
+          .map((e) => `${e.path?.join('.') || 'env'}: ${e.message}`)
           .join('\n')
 
         throw new Error(`Invalid environment configuration:\n${missingVars}`)

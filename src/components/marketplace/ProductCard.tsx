@@ -2,13 +2,11 @@
 
 import React from "react";
 import {
-  Tag, Gift, Download, Sparkles, ShieldCheck, Zap, ArrowRight, Check,
+  Tag, Gift, ShieldCheck, Zap, ArrowRight, 
   QrCode, Award, Truck, FileText, CheckSquare, Users, BookOpen, Clock,
-  Music, Compass, Smartphone, Cpu, GraduationCap, Flame, Bot, Calendar,
-  Activity, Star, Layers, CheckCircle2, ShoppingCart
+  Music, Compass, Smartphone, Cpu, GraduationCap, Bot, 
+  Activity, Star, Layers, ShoppingCart
 } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
 import { cn } from "@/lib/utils";
 
@@ -350,7 +348,7 @@ function getSystemCoverTheme(title: string, category: string) {
   };
 }
 
-export function ProductCard({ product, index }: ProductCardProps) {
+export function ProductCard({ product }: ProductCardProps) {
   const { brandTheme } = useBrandTheme();
 
   let rawDesc = product.description;
@@ -382,9 +380,6 @@ export function ProductCard({ product, index }: ProductCardProps) {
 
   const numericPrice = parseInt(priceStr.replace(/[^0-9]/g, ""), 10) || 0;
   const originalAnchorPrice = numericPrice > 0 ? Math.round(numericPrice * 1.6 + 100) : 590;
-
-  const isValidId =
-    product.id && typeof product.id === "string" && product.id.length > 8;
 
   // Generate dynamic bespoke theme
   const coverTheme = getSystemCoverTheme(product.title, product.category);

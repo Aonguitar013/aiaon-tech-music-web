@@ -1,17 +1,16 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   Gift, Download, Music, Code2, X, LogIn,
-  FileJson, FileSpreadsheet, Music2, Mic2,
-  CheckCircle2, Star, Sparkles, Filter,
-  ArrowRight, Share2,
+  
+  CheckCircle2, Sparkles, Filter,
+  ArrowRight, 
 } from "lucide-react";
 import * as Icons from "lucide-react";
 import { RiLineLine } from "react-icons/ri";
-import { createClient } from "@/utils/supabase/client";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -41,23 +40,11 @@ export interface Freebie {
    DOWNLOAD STATE MACHINE
 ───────────────────────────────────────────────────────────── */
 
-type DlState = "idle" | "preparing" | "done";
-
 /* ─────────────────────────────────────────────────────────────
    AUTH MODAL
 ───────────────────────────────────────────────────────────── */
 
 function AuthModal({ onClose }: { onClose: () => void }) {
-  const handleLineLogin = async () => {
-    const supabase = createClient();
-    await supabase.auth.signInWithOAuth({
-      provider: 'custom:line' as any,
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=/freebies`
-      }
-    });
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -332,7 +319,7 @@ function FreebieCard({
   freebie: Freebie;
   onUnlockPrompt: (freebie: Freebie) => void;
 }) {
-  const Icon = (Icons as any)[freebie.icon_name || "Gift"] || Icons.Gift;
+  const Icon = (Icons as unknown as Record<string, React.ElementType>)[freebie.icon_name || "Gift"] || Icons.Gift;
 
   return (
     <motion.div
@@ -415,8 +402,6 @@ function FreebieCard({
 ───────────────────────────────────────────────────────────── */
 
 interface FreebiesViewProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  user: any;
   initialFreebies: Freebie[];
 }
 
@@ -426,11 +411,10 @@ const TABS: { label: string; value: Category; icon: React.ElementType }[] = [
   { label: "ดนตรี",        value: "music", icon: Music },
 ];
 
-export function FreebiesView({ user, initialFreebies }: FreebiesViewProps) {
+export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
   const [activeTab, setActiveTab] = useState<Category>("all");
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedFreebieForUnlock, setSelectedFreebieForUnlock] = useState<Freebie | null>(null);
-  const isLoggedIn = !!user;
 
   const filtered = initialFreebies.filter(
     (f) => activeTab === "all" || f.category === activeTab

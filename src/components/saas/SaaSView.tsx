@@ -2,19 +2,12 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { 
-  Users, Bell, Sparkles, BarChart3, FileText, Check, 
+  Bell, FileText, 
   ChevronDown, MessageSquare, ArrowRight, Zap, CheckCircle2, 
-  ShieldCheck, Play, Volume2, VolumeX, Plus, Music, 
-  Heart, Coffee, Laptop, Award, Flame, Gift
-} from "lucide-react";
-
-interface SaaSViewProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  user?: any;
-}
+  ShieldCheck, Play, Volume2, VolumeX, Music, 
+  Heart, Coffee, Laptop, Award, } from "lucide-react";
 
 interface Student {
   id: number;
@@ -32,7 +25,7 @@ interface LineMessage {
   time: string;
 }
 
-export function SaaSView({ user }: SaaSViewProps) {
+export function SaaSView() {
   // Audio state
   const [soundEnabled, setSoundEnabled] = useState(true);
 
@@ -114,7 +107,7 @@ export function SaaSView({ user }: SaaSViewProps) {
     if (status === "absent") statusLabel = "ขาดเรียน (แจ้งเตือนด่วน!)";
 
     const newMsg: LineMessage = {
-      id: String(Date.now()),
+      id: crypto.randomUUID(),
       title: "ระบบเช็คชื่ออัตโนมัติ",
       body: `📢 [แจ้งเตือนผู้ปกครอง]\nนักเรียน: ${student.name} (เลขที่ ${student.no})\nสถานะ: ${statusLabel}\nบันทึกเมื่อ: ${timeStr} น. ซิงค์ลง Google Sheets สำเร็จ!`,
       time: timeStr,
@@ -146,7 +139,7 @@ export function SaaSView({ user }: SaaSViewProps) {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 font-prompt text-xs sm:text-sm font-semibold tracking-wide shadow-[0_0_20px_rgba(6,182,212,0.2)]"
             >
               <Music className="w-4 h-4 text-cyan-400 animate-pulse" />
-              <span>เรื่องราวของ "ครูดนตรี" ผู้หลงใหลในระบบออโตเมชัน</span>
+              <span>เรื่องราวของ &quot;ครูดนตรี&quot; ผู้หลงใหลในระบบออโตเมชัน</span>
             </motion.div>
 
             {/* Headline */}
@@ -158,7 +151,7 @@ export function SaaSView({ user }: SaaSViewProps) {
             >
               iAon <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-purple-400 to-pink-400 drop-shadow-[0_0_30px_rgba(6,182,212,0.4)]">IT ง่ายๆ</span> <br />
               <span className="text-2xl sm:text-4xl font-normal text-white/80">
-                เมื่อ "คนขี้เกียจทำงานเอกสาร" เสกโค้ดให้คอมทำงานแทน!
+                เมื่อ &quot;คนขี้เกียจทำงานเอกสาร&quot; เสกโค้ดให้คอมทำงานแทน!
               </span>
             </motion.h1>
 
@@ -169,7 +162,7 @@ export function SaaSView({ user }: SaaSViewProps) {
               transition={{ delay: 0.2 }}
               className="font-prompt text-base sm:text-lg font-light text-white/75 max-w-2xl leading-relaxed"
             >
-              "ผมเป็นครูดนตรีที่ชอบเทคโนโลยี... แต่ <strong className="text-cyan-300">ผมขี้เกียจทำงานเอกสารซ้ำซากมากๆ!</strong> ผมเชื่อว่าคอมพิวเตอร์เกิดมาเพื่อทำงานแทนมนุษย์ ถ้างานไหนต้องทำซ้ำเกิน 2 ครั้ง ผมจะเขียนโค้ดให้มันทำงานเองทันที!"
+              &quot;ผมเป็นครูดนตรีที่ชอบเทคโนโลยี... แต่ <strong className="text-cyan-300">ผมขี้เกียจทำงานเอกสารซ้ำซากมากๆ!</strong> ผมเชื่อว่าคอมพิวเตอร์เกิดมาเพื่อทำงานแทนมนุษย์ ถ้างานไหนต้องทำซ้ำเกิน 2 ครั้ง ผมจะเขียนโค้ดให้มันทำงานเองทันที!&quot;
             </motion.p>
 
             {/* Philosophy quote */}

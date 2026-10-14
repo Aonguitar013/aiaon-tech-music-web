@@ -4,8 +4,10 @@ import { useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { Camera, Save, User as UserIcon } from "lucide-react";
 import Image from "next/image";
+import type { DbRow } from "@/types";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
-export function ProfileManager({ user, initialProfile }: { user: any, initialProfile: any }) {
+export function ProfileManager({ user, initialProfile }: { user: SupabaseUser, initialProfile: DbRow | null }) {
     const supabase = createClient();
     const [displayName, setDisplayName] = useState(initialProfile?.display_name || "");
     const [avatarUrl, setAvatarUrl] = useState(initialProfile?.avatar_url || "");

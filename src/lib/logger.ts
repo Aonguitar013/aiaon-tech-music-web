@@ -10,14 +10,14 @@ interface LogEntry {
   level: LogLevel
   message: string
   timestamp: string
-  context?: Record<string, any>
+  context?: Record<string, unknown>
   error?: Error
 }
 
 class Logger {
   private isDevelopment = process.env.NODE_ENV === 'development'
 
-  private formatMessage(level: LogLevel, message: string, context?: Record<string, any>): string {
+  private formatMessage(level: LogLevel, message: string, context?: Record<string, unknown>): string {
     const timestamp = new Date().toISOString()
     const contextStr = context ? ` | ${JSON.stringify(context)}` : ''
     return `[${timestamp}] [${level.toUpperCase()}] ${message}${contextStr}`
@@ -26,7 +26,7 @@ class Logger {
   private createLogEntry(
     level: LogLevel,
     message: string,
-    context?: Record<string, any>,
+    context?: Record<string, unknown>,
     error?: Error
   ): LogEntry {
     return {
@@ -41,10 +41,8 @@ class Logger {
   /**
    * Log error - use for exceptions and critical issues
    */
-  error(message: string, error?: Error | unknown, context?: Record<string, any>) {
+  error(message: string, error?: Error | unknown, context?: Record<string, unknown>) {
     const err = error instanceof Error ? error : new Error(String(error))
-    const logEntry = this.createLogEntry('error', message, context, err)
-
     console.error(this.formatMessage('error', message, context))
     if (error) {
       console.error(err)
@@ -57,9 +55,7 @@ class Logger {
   /**
    * Log warning - use for potentially problematic situations
    */
-  warn(message: string, context?: Record<string, any>) {
-    const logEntry = this.createLogEntry('warn', message, context)
-
+  warn(message: string, context?: Record<string, unknown>) {
     console.warn(this.formatMessage('warn', message, context))
 
     // TODO: Send to monitoring service if critical
@@ -69,9 +65,7 @@ class Logger {
   /**
    * Log info - use for important application events
    */
-  info(message: string, context?: Record<string, any>) {
-    const logEntry = this.createLogEntry('info', message, context)
-
+  info(message: string, context?: Record<string, unknown>) {
     console.log(this.formatMessage('info', message, context))
 
     // TODO: Send to logging service for analytics
@@ -81,17 +75,16 @@ class Logger {
   /**
    * Log debug - use for detailed diagnostic information (dev only)
    */
-  debug(message: string, context?: Record<string, any>) {
+  debug(message: string, context?: Record<string, unknown>) {
     if (!this.isDevelopment) return
 
-    const logEntry = this.createLogEntry('debug', message, context)
     console.debug(this.formatMessage('debug', message, context))
   }
 
   /**
    * Log authentication event
    */
-  logAuthEvent(action: string, userId?: string, success: boolean = true, context?: Record<string, any>) {
+  logAuthEvent(action: string, userId?: string, success: boolean = true, context?: Record<string, unknown>) {
     const level = success ? 'info' : 'warn'
     const status = success ? 'success' : 'failed'
     const message = `Auth: ${action} - ${status}`
@@ -108,7 +101,6 @@ class Logger {
    * Log database operation
    */
   logDbOperation(operation: string, table: string, success: boolean = true, error?: Error) {
-    const level = success ? 'debug' : 'error'
     const message = `DB: ${operation} on ${table}`
 
     if (success) {
@@ -122,7 +114,6 @@ class Logger {
    * Log file upload
    */
   logFileUpload(fileName: string, fileSize: number, success: boolean = true, userId?: string, error?: Error) {
-    const level = success ? 'info' : 'error'
     const message = `File upload: ${fileName}`
 
     if (success) {
@@ -158,7 +149,7 @@ class Logger {
   /**
    * Log security event
    */
-  logSecurityEvent(event: string, severity: 'low' | 'medium' | 'high' | 'critical', context?: Record<string, any>) {
+  logSecurityEvent(event: string, severity: 'low' | 'medium' | 'high' | 'critical', context?: Record<string, unknown>) {
     const level = severity === 'critical' ? 'error' : severity === 'high' ? 'warn' : 'info'
     const message = `SECURITY: ${event} [${severity.toUpperCase()}]`
 

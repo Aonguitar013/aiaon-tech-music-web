@@ -1,8 +1,9 @@
 "use client";
 
 import { CheckCircle2, Clock } from "lucide-react";
+import type { DbRow } from "@/types";
 
-export function OrderHistory({ orders }: { orders: any[] }) {
+export function OrderHistory({ orders }: { orders: DbRow[] }) {
     if (!orders || orders.length === 0) {
         return (
             <div className="glass-card p-8 border-white/5 bg-white/5 text-center">

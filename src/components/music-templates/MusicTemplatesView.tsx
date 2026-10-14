@@ -21,7 +21,7 @@ interface Product {
 
 interface MusicTemplatesViewProps {
   initialProducts: Product[];
-  user: any;
+  user: unknown;
 }
 
 export function MusicTemplatesView({ initialProducts, user }: MusicTemplatesViewProps) {

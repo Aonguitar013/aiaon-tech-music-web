@@ -4,8 +4,7 @@ import { useState, useMemo } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import generatePayload from "promptpay-qr";
 import { createClient } from "@/utils/supabase/client";
-import { Upload, CheckCircle, Smartphone, Info, Wrench, Sparkles, ShieldCheck, MessageSquare, ArrowRight, Download } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Upload, CheckCircle, Smartphone, Info, Wrench, ShieldCheck, MessageSquare, ArrowRight, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -35,7 +34,6 @@ export function SlipUploader({
     const [success, setSuccess] = useState(false);
     const [aiApproved, setAiApproved] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const router = useRouter();
     const supabase = createClient();
 
     // Compute total dynamic amount

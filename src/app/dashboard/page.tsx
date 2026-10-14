@@ -1,8 +1,8 @@
 ﻿import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { DashboardChart } from "@/components/dashboard/DashboardChart";
 import { Users, Zap, BookOpen, Clock, PlayCircle, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import type { DbRow } from "@/types";
 
 export default async function DashboardPage() {
     const supabase = await createClient();
@@ -137,7 +137,7 @@ export default async function DashboardPage() {
 
                     <div className="space-y-4 flex-1 overflow-y-auto pr-2 custom-scrollbar">
                         {purchasedCourses && purchasedCourses.length > 0 ? (
-                            purchasedCourses.map((course: any, idx: number) => {
+                            purchasedCourses.map((course: DbRow) => {
                                 // Add some initial progression (default to 0 if we don't track it yet)
                                 const progress = 0;
                                 return (

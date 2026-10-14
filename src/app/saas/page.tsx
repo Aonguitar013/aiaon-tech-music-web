@@ -1,5 +1,4 @@
 import { SaaSView } from "@/components/saas/SaaSView";
-import { createClient } from "@/utils/supabase/server";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,9 +16,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function SaaSPage() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  return <SaaSView user={user} />;
+export default function SaaSPage() {
+  return <SaaSView />;
 }

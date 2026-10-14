@@ -91,7 +91,7 @@ export function ClassroomView() {
               <strong>สาเหตุหลัก:</strong> เกิดจากความปลอดภัยของ Google (X-Frame-Options) หรือเนื่องจากเบราว์เซอร์ของคุณมีการล็อกอินบัญชี Google หลายบัญชีพร้อมกัน (Multi-login) ทำให้ Google บล็อกการแสดงผลใน iframe
             </li>
             <li>
-              <strong>วิธีแก้ไขที่ 1:</strong> คลิกปุ่ม <strong>"เปิดในหน้าต่างใหม่"</strong> ด้านบนเพื่อใช้งานโดยตรง (แนะนำ ใช้งานได้ 100%)
+              <strong>วิธีแก้ไขที่ 1:</strong> คลิกปุ่ม <strong>&quot;เปิดในหน้าต่างใหม่&quot;</strong> ด้านบนเพื่อใช้งานโดยตรง (แนะนำ ใช้งานได้ 100%)
             </li>
             <li>
               <strong>วิธีแก้ไขที่ 2:</strong> สำหรับผู้พัฒนาสคริปต์ ให้ใส่โค้ด <code>.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)</code> ในฟังก์ชัน <code>doGet()</code> ของ Apps Script แล้วสั่ง Deploy เวอร์ชันใหม่

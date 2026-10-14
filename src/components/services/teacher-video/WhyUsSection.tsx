@@ -1,8 +1,7 @@
 ﻿"use client";
 
 import { motion } from "framer-motion";
-import { Users, Cpu, ShieldCheck, Flame, Check, HelpCircle } from "lucide-react";
-import { FaLine } from "react-icons/fa6";
+import { Users, Cpu, ShieldCheck, Check, } from "lucide-react";
 
 interface PillarItem {
   icon: React.ElementType;
@@ -59,7 +58,7 @@ export function WhyUsSection() {
             </h2>
             <p className="font-prompt text-sm sm:text-base text-white/70 leading-relaxed">
               เราไม่ใช่แค่โปรดักชั่นเฮาส์ทั่วไปที่รับจ้างถ่ายรูปวิดีโอ 
-              แต่เราคือ **"เพื่อนร่วมวิชาชีพ"** ที่มีพื้นฐานด้านการจัดการเรียนรู้ 
+              แต่เราคือ **&quot;เพื่อนร่วมวิชาชีพ&quot;** ที่มีพื้นฐานด้านการจัดการเรียนรู้ 
               และมีความเชี่ยวชาญด้านเทคโนโลยีสื่อสมัยใหม่ 
               พร้อมประยุกต์ใช้เพื่อลดภาระงานครูอย่างแท้จริง
             </p>

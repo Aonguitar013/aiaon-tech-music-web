@@ -167,10 +167,6 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
 
 export default async function FreebiesPage() {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
   // Fetch optional database freebies
   const { data: dbFreebies } = await supabase
     .from('freebies')
@@ -180,5 +176,5 @@ export default async function FreebiesPage() {
   // Merge built-in real systems with any database freebies
   const combinedFreebies = [...REAL_BUILTIN_FREEBIES, ...(dbFreebies || [])];
 
-  return <FreebiesView user={user} initialFreebies={combinedFreebies} />;
+  return <FreebiesView initialFreebies={combinedFreebies} />;
 }

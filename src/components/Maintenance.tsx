@@ -41,8 +41,8 @@ export default function Maintenance() {
                 <div className="h-[2px] w-32 bg-linear-to-r from-transparent via-white/10 to-transparent mx-auto mb-10" />
 
                 <p className="font-prompt text-xl md:text-2xl text-white/70 font-light leading-relaxed max-w-xl mx-auto mb-12">
-                    " Coming Soon! <strong className="text-white font-medium"> เรากำลังอัปเดตคอร์สเรียนและเพิ่มสินค้าดิจิทัลใหม่ให้ครบครันยิ่งขึ้น </strong>.
-                    เพื่อยกระดับประสบการณ์การใช้งานของสมาชิกทุกท่าน ขออภัยในความไม่สะดวกในช่วงเวลานี้ แล้วพบกันเร็วๆ นี้นะครับ"
+                    &quot; Coming Soon! <strong className="text-white font-medium"> เรากำลังอัปเดตคอร์สเรียนและเพิ่มสินค้าดิจิทัลใหม่ให้ครบครันยิ่งขึ้น </strong>.
+                    เพื่อยกระดับประสบการณ์การใช้งานของสมาชิกทุกท่าน ขออภัยในความไม่สะดวกในช่วงเวลานี้ แล้วพบกันเร็วๆ นี้นะครับ&quot;
                 </p>
 
                 {/* Status Badge */}

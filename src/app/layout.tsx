@@ -5,7 +5,6 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/layout/Navbar";
 import { MouseGlowGrid } from "@/components/layout/MouseGlowGrid";
-import { createClient } from "@/utils/supabase/server";
 import { FaYoutube, FaTiktok, FaFacebook, FaLine } from "react-icons/fa6";
 import { BrandThemeProvider } from "@/components/providers/BrandThemeProvider";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
@@ -39,13 +38,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = await createClient();
-  const { data } = await supabase.auth.getUser();
+  // NOTE: Auth state is resolved client-side inside <Navbar /> so this layout
+  // never reads cookies and public pages can be statically cached on the CDN.
 
   // --- สวิตช์ไฟควบคุมโหมดปิดปรับปรุง ---
   const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
@@ -86,7 +85,7 @@ export default async function RootLayout({
               </div>
 
               {/* --- Navbar --- */}
-              <Navbar user={data?.user} />
+              <Navbar />
               <ThemeToggle />
               <FloatingLINEButton />
 

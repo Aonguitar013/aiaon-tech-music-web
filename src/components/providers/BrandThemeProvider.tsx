@@ -20,6 +20,7 @@ export function BrandThemeProvider({ children }: { children: React.ReactNode }) 
     // Load from local storage
     const saved = localStorage.getItem("aiaon-brand-theme") as BrandTheme;
     if (saved === "tech" || saved === "music") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: read localStorage after mount to avoid hydration mismatch
       setBrandThemeState(saved);
       document.documentElement.setAttribute("data-brand-theme", saved);
     }

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, ChevronDown, CheckCircle2, ShieldQuestion, Quote } from "lucide-react";
+import { Star, ChevronDown, Quote } from "lucide-react";
 
 interface Testimonial {
   name: string;
@@ -99,7 +99,7 @@ export function SocialProofFAQSection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((testimonial, idx) => (
+            {TESTIMONIALS.map((testimonial) => (
               <div 
                 key={testimonial.name}
                 className="relative glass-card border border-white/5 p-6.5 sm:p-8 flex flex-col justify-between hover:border-white/10 transition-colors duration-300 rounded-2xl"
@@ -119,7 +119,7 @@ export function SocialProofFAQSection() {
 
                   {/* Review Text */}
                   <p className="font-prompt text-xs sm:text-sm text-white/80 leading-relaxed font-light italic">
-                    "{testimonial.text}"
+                    &quot;{testimonial.text}&quot;
                   </p>
                 </div>
 

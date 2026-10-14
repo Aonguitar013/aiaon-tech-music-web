@@ -4,9 +4,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   GraduationCap, Bot, Music, Sparkles, Send, CheckCircle2,
-  XCircle, HelpCircle, Clock, Award, BookOpen, Volume2,
-  ArrowRight, ShieldCheck, Zap, Star, Users, Flame,
-  Headphones, FileCheck2, MessageCircle, Lightbulb, Play, Pause
+  XCircle, Clock, 
+  ArrowRight, Zap, 
+  Headphones, MessageCircle, Lightbulb, Play, Pause
 } from "lucide-react";
 import Link from "next/link";
 

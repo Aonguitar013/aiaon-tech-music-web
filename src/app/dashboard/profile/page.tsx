@@ -4,6 +4,7 @@ import { ProfileManager } from "@/components/profile/ProfileManager";
 import { MyLearning } from "@/components/profile/MyLearning";
 import { OrderHistory } from "@/components/profile/OrderHistory";
 import { User } from "lucide-react";
+import type { LearningItem } from "@/components/profile/MyLearning";
 
 export const metadata = {
   title: "Profile & Learning | AiAon Tech",
@@ -40,7 +41,7 @@ export default async function ProfilePage() {
   const learningItems = (orders || [])
         .filter(order => order.status === 'completed')
         .flatMap(order => {
-            const items: any[] = [];
+            const items: LearningItem[] = [];
             // Items from the courses table are always 'course'
             if (order.courses) {
                 items.push({ ...order.courses, itemType: 'course' as const });

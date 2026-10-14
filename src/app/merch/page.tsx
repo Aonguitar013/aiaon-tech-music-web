@@ -1,4 +1,3 @@
-import { createClient } from "@/utils/supabase/server";
 import { MerchCustomizer } from "@/components/merch/MerchCustomizer";
 import type { Metadata } from "next";
 
@@ -14,11 +13,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function MerchPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  return <MerchCustomizer user={user} />;
+export default function MerchPage() {
+  return <MerchCustomizer />;
 }

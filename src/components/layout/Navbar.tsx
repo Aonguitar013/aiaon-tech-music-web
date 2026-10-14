@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, Shirt, ChevronDown, Info, Wrench, FileText, Sparkles, ShieldCheck, Globe, Music } from "lucide-react";
+import { Menu, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, ChevronDown, Info, Wrench, Sparkles, ShieldCheck, Globe, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -20,6 +20,8 @@ import {
 } from "@/components/ui/sheet";
 import { logout } from "@/app/login/actions";
 import { cn } from "@/lib/utils";
+import { createClient as createBrowserSupabase } from "@/utils/supabase/client";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 interface SubRouteItem {
   name: string;
@@ -163,11 +165,32 @@ const routes: RouteItem[] = [
 ];
 
 interface NavbarProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  user?: any;
+  /** Optional initial user (e.g. from a server component). Normally resolved client-side. */
+  user?: SupabaseUser | null;
 }
 
-export function Navbar({ user }: NavbarProps) {
+export function Navbar({ user: initialUser = null }: NavbarProps) {
+  const [user, setUser] = useState<SupabaseUser | null>(initialUser);
+
+  // Resolve auth state in the browser so the root layout stays static/cacheable
+  useEffect(() => {
+    const supabase = createBrowserSupabase();
+    let active = true;
+
+    supabase.auth.getUser().then(({ data }) => {
+      if (active) setUser(data.user ?? null);
+    });
+
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (active) setUser(session?.user ?? null);
+    });
+
+    return () => {
+      active = false;
+      sub.subscription.unsubscribe();
+    };
+  }, []);
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [openMobileMenus, setOpenMobileMenus] = useState<Record<string, boolean>>({});
 

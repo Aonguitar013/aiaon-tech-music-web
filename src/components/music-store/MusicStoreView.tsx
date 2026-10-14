@@ -5,9 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Music, Headphones, Play, Pause, ShoppingBag, Sparkles,
   CheckCircle2, ShieldCheck, FileAudio, Disc, Mic2, Sliders,
-  Volume2, ArrowRight, MessageCircle, GraduationCap, Film,
-  Guitar, Award, Plus, Check, X
-} from "lucide-react";
+  ArrowRight, MessageCircle, GraduationCap, Film,
+  Guitar, Plus, Check, } from "lucide-react";
 import Link from "next/link";
 
 /* ─────────────────────────────────────────────────────────────

@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
 
       const arrayBuffer = await imgRes.arrayBuffer();
       imageBase64 = Buffer.from(arrayBuffer).toString("base64");
-    } catch (fetchErr: any) {
+    } catch (fetchErr) {
       console.error("[AI Verification] Error fetching slip image:", fetchErr);
       return NextResponse.json({
         success: true,
@@ -141,7 +141,7 @@ export async function POST(req: NextRequest) {
         : "สลิปถูกบันทึกเรียบร้อย กำลังส่งให้ผู้ดูแลระบบตรวจสอบ"
     });
 
-  } catch (err: any) {
+  } catch (err) {
     console.error("[AI Verification Route Error]:", err);
     return NextResponse.json({
       success: true,

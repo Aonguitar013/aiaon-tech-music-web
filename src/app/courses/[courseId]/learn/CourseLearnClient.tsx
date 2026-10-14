@@ -38,7 +38,7 @@ export function CourseLearnClient({
   );
   
   // Minimal state for demonstration (in real app, use Supabase mutations)
-  const [completedLessonIds, setCompletedLessonIds] = useState<string[]>(initialCompleted);
+  const [completedLessonIds] = useState<string[]>(initialCompleted);
 
   const currentLesson = lessons.find(l => l.id === currentLessonId);
   const isLocked = currentLesson && !isCoursePurchased && !currentLesson.is_free_preview;

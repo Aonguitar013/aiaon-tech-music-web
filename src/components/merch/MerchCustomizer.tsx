@@ -1,14 +1,13 @@
 ﻿"use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Shirt, Sparkles, Code2, Sliders, User, Info, 
+  Shirt, Sparkles, Sliders, User, Info, 
   CreditCard, Plus, Minus, RefreshCw, Check, Copy, 
   ExternalLink, ChevronRight, CheckCircle2, ShoppingBag, 
-  FileText, Truck, HelpCircle
-} from "lucide-react";
+  } from "lucide-react";
 import { RiLineLine } from "react-icons/ri";
 import { QRCodeSVG } from "qrcode.react";
 import generatePayload from "promptpay-qr";
@@ -290,7 +289,6 @@ interface TShirtSVGProps {
 function TShirtSVG({ color, graphic, customText, isBack }: TShirtSVGProps) {
   // SVG viewBox is 0 0 500 500
   const isWhite = color.id === "tech-white";
-  const glowColor = isWhite ? "rgba(0, 0, 0, 0.15)" : "rgba(34, 211, 238, 0.4)";
   
   return (
     <svg 
@@ -675,12 +673,12 @@ function TShirtSVG({ color, graphic, customText, isBack }: TShirtSVGProps) {
 
                 <text x="32" y="66" fill="#E5E7EB" fontFamily="monospace" fontSize="8">tempo: </text>
                 <text x="67" y="66" fill="#FBBF24" fontFamily="monospace" fontSize="8">120</text>
-                <text x="82" y="66" fill="#A855F7" fontFamily="monospace" fontSize="8">/* bpm */</text>
+                <text x="82" y="66" fill="#A855F7" fontFamily="monospace" fontSize="8">{"/* bpm */"}</text>
                 <text x="122" y="66" fill="#9CA3AF" fontFamily="monospace" fontSize="8">,</text>
 
                 <text x="32" y="80" fill="#F472B6" fontFamily="monospace" fontSize="8">output</text>
                 <text x="62" y="80" fill="#E5E7EB" fontFamily="monospace" fontSize="8">: () =&gt; </text>
-                <text x="97" y="80" fill="#34D399" fontFamily="monospace" fontSize="8">"MUSIC_AUTOMATION"</text>
+                <text x="97" y="80" fill="#34D399" fontFamily="monospace" fontSize="8">&quot;MUSIC_AUTOMATION&quot;</text>
 
                 <text x="20" y="94" fill="#E5E7EB" fontFamily="monospace" fontSize="8">{`};`}</text>
                 <text x="12" y="108" fill="#9CA3AF" fontFamily="monospace" fontSize="7.5">&lt;/script&gt;</text>
@@ -749,11 +747,7 @@ function TShirtSVG({ color, graphic, customText, isBack }: TShirtSVGProps) {
 }
 
 // --- MAIN COMPONENT ---
-interface MerchCustomizerProps {
-  user: any; // eslint-disable-next-line @typescript-eslint/no-explicit-any
-}
-
-export function MerchCustomizer({ user }: MerchCustomizerProps) {
+export function MerchCustomizer() {
   const { brandTheme } = useBrandTheme();
 
   // Customizer States
@@ -771,6 +765,7 @@ export function MerchCustomizer({ user }: MerchCustomizerProps) {
   // Reset preview mode if minimalist is chosen (since we only generated mockups for blueprint/waveform)
   useEffect(() => {
     if (selectedGraphic.id === "minimalist-dev") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: sync derived preview mode when graphic changes
       setPreviewMode("svg");
     }
   }, [selectedGraphic]);
@@ -779,6 +774,7 @@ export function MerchCustomizer({ user }: MerchCustomizerProps) {
   useEffect(() => {
     if (selectedProduct === "cap") {
       if (activeTab === "style") {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: caps have no "style" tab
         setActiveTab("color");
       }
     }
@@ -830,6 +826,7 @@ export function MerchCustomizer({ user }: MerchCustomizerProps) {
 
   // Auto set theme defaults
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: reset defaults when brand theme changes
     setSelectedColor(COLORS[0]); // Primary default to Cyber Black
     setSelectedGraphic(GRAPHICS[0]); // Default to flagship unified tech/music design
   }, [brandTheme]);
@@ -1540,7 +1537,7 @@ LINE ID: ${form.lineId}
                 return (
                   <button
                     key={t.id}
-                    onClick={() => setActiveTab(t.id as any)}
+                    onClick={() => setActiveTab(t.id as typeof activeTab)}
                     className={cn(
                       "flex items-center gap-1.5 px-4 py-3 border-b-2 font-prompt text-sm font-medium transition-all duration-200 shrink-0 whitespace-nowrap -mb-px",
                       isActive 

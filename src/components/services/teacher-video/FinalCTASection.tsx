@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { MessageSquare, Sparkles, Gift } from "lucide-react";
+import { Sparkles, Gift } from "lucide-react";
 import { FaLine } from "react-icons/fa6";
 
 export function FinalCTASection() {

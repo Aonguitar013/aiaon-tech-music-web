@@ -3,11 +3,10 @@
 import { motion } from "framer-motion";
 import { 
   Sparkles, CheckCircle2, Crown, Zap, ShieldCheck, 
-  ArrowRight, MessageCircle, Gift, Star, Award, Layers, HelpCircle, 
+  ArrowRight, MessageCircle, Award, 
   ExternalLink
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
 
 interface BundlePackage {
   id: string;
@@ -194,8 +193,6 @@ const BUNDLE_PACKAGES: BundlePackage[] = [
 ];
 
 export function BundlesView() {
-  const [selectedBundle, setSelectedBundle] = useState<string>("all-in-one-lifetime");
-
   const generateLineOrderUrl = (bundleTitle: string, price: number) => {
     const text = encodeURIComponent(`สวัสดีครับครูอ้น สนใจสั่งซื้อแพ็กเกจเหมา: "${bundleTitle}" (ราคา ${price.toLocaleString()} บาท) ครับ รบกวนขอข้อมูลการชำระเงินและไฟล์ระบบด้วยครับ 🙏`);
     return `https://line.me/R/oaMessage/@deu6776s/?${text}`;
@@ -250,8 +247,6 @@ export function BundlesView() {
         {/* --- BUNDLES GRID --- */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
           {BUNDLE_PACKAGES.map((bundle, idx) => {
-            const isSelected = selectedBundle === bundle.id;
-
             return (
               <motion.div
                 key={bundle.id}

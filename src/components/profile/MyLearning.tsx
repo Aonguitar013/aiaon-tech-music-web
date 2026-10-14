@@ -7,7 +7,7 @@ import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
 
 type ItemType = "course" | "digital_product";
 
-type LearningItem = {
+export type LearningItem = {
     id: string;
     title: string;
     description?: string;
@@ -51,7 +51,7 @@ export function MyLearning({ items }: { items: LearningItem[] }) {
 
                 // Resolve lucide icon for products
                 const ProductIcon = !isCourse
-                    ? ((Icons as any)[item.icon_name || "Package"] || Icons.Package)
+                    ? ((Icons as unknown as Record<string, React.ElementType>)[item.icon_name || "Package"] || Icons.Package)
                     : null;
 
                 // Strip color_classes into parts for product icon box

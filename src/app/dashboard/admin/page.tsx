@@ -4,7 +4,7 @@ import Link from "next/link";
 import {
   ArrowLeft,
   CheckCircle2,
-  XCircle,
+  
   Clock,
   Receipt,
   Users,
@@ -13,13 +13,12 @@ import {
   ShieldAlert,
   DollarSign,
   Trophy,
-  TrendingUp,
+  
   Crown,
-  Sparkles,
-  Gift,
-  HeartHandshake,
-  Layers
-} from "lucide-react";
+  
+  
+  
+  } from "lucide-react";
 import { approveOrder, rejectOrder } from "./actions";
 import { DashboardChart } from "@/components/dashboard/DashboardChart";
 
@@ -196,10 +195,6 @@ export default async function AdminPage() {
     .map(([title, data]) => ({ title, ...data }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 5);
-
-  // Pre-bind server actions
-  const approveWithId = approveOrder.bind(null);
-  const rejectWithId = rejectOrder.bind(null);
 
   return (
     <div className="w-full max-w-7xl mx-auto pb-20">

@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, ShieldCheck, Mail, ShoppingCart, Download, BadgeCheck, BookOpen, Wrench, Sparkles, MessageSquare, ArrowRight, Gift, Zap } from "lucide-react";
+import { ArrowLeft, CheckCircle2, ShieldCheck, Mail, Download, BadgeCheck, BookOpen, Wrench, Sparkles, MessageSquare, ArrowRight, Gift, Zap } from "lucide-react";
 import * as Icons from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -90,7 +90,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     rawDesc = rawDesc.replace(matchType[0], "").trim();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const PRODUCT_DOWNLOAD_LINKS: Record<string, string> = {
     'AONE02': 'https://1drv.ms/f/c/ce3ad5ba004eb0c7/IgATR6et6O-BS61MuoKMqj_GAYU-TtWQfIJanJqGekSkGbk?e=AaoHOh',
   };
@@ -98,10 +97,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const matchedLink = Object.entries(PRODUCT_DOWNLOAD_LINKS).find(([k]) => product.title?.includes(k))?.[1];
   const finalDownloadUrl = product.file_url || matchedLink || "/dashboard/profile";
 
-  const IconComponent = (Icons as any)[product.icon_name || "Package"] || Icons.Package;
+  const IconComponent = (Icons as unknown as Record<string, React.ElementType>)[product.icon_name || "Package"] || Icons.Package;
   const isService = product.category === "Service" || product.category === "Creative";
   const colorClass = product.color_classes || "text-amber-400 bg-amber-500/10 border-amber-500/20";
-  const buttonClass = product.button_classes || "bg-amber-600 hover:bg-amber-500 shadow-amber-600/10 hover:shadow-[0_0_15px_rgba(245,158,11,0.35)]";
 
   const priceStr = (product.price || "").trim().toLowerCase();
   const isFree =

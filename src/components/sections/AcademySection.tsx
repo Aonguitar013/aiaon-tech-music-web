@@ -1,12 +1,11 @@
 ﻿"use client";
 
 import { motion } from "framer-motion";
-import { BookOpen, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import * as Icons from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
-import { cn } from "@/lib/utils";
 
 interface Course {
   id: string;
@@ -17,10 +16,6 @@ interface Course {
   color_gradient?: string;
   image_url?: string;
   category?: string;
-}
-
-function getIconComponent(name?: string) {
-  return name ? ((Icons as any)[name] || Icons.BookOpen) : Icons.BookOpen;
 }
 
 interface AcademySectionProps {

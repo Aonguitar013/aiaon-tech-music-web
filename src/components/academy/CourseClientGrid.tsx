@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { Search, BookOpen, Clock, Signal, Filter, Music, Star, LayoutGrid } from "lucide-react";
+import { Search, BookOpen, Clock, Signal, Filter, Music, Star, } from "lucide-react";
 import Link from "next/link";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
 
@@ -29,6 +29,7 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
     const categoryParam = searchParams.get('category');
     if (categoryParam) {
       if (categoryParam === 'Technology') {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: sync filter from URL param
         setFilterCategory('Technology');
       } else if (categoryParam === 'Music') {
         setFilterCategory('Music');

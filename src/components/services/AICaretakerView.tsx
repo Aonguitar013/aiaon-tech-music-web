@@ -4,9 +4,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ShieldCheck, Bot, Sparkles, MessageCircle, ArrowRight,
-  CheckCircle2, AlertTriangle, RefreshCw, FileSpreadsheet,
-  Receipt, CalendarCheck, BarChart3, BellRing, Lock,
-  Store, Scissors, Utensils, Zap, HelpCircle, Check, UserCheck
+  CheckCircle2, AlertTriangle, RefreshCw, 
+  Receipt, CalendarCheck, BarChart3, 
+  Zap, HelpCircle, UserCheck
 } from "lucide-react";
 import Link from "next/link";
 

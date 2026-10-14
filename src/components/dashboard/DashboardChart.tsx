@@ -14,6 +14,7 @@ export function DashboardChart({ data = [] }: { data?: ChartData[] }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: mount flag to avoid recharts SSR mismatch
     setIsMounted(true);
   }, []);
 

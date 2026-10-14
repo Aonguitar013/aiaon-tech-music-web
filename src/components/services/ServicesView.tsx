@@ -1,15 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, } from "framer-motion";
 import {
-  Briefcase, Code2, CheckCircle2, ArrowRight,
-  MessageCircle, Cpu, Workflow, Bot, Sparkles, Send,
-  Presentation, GraduationCap, Building2, Calendar, Users,
-  School, Phone, Award, ShieldCheck, Zap, Layers,
+  CheckCircle2, ArrowRight,
+  MessageCircle, Cpu, Sparkles, 
+  Presentation, Building2, Users,
+  Award, ShieldCheck, Zap, 
   Calculator, Check, FileSpreadsheet, QrCode, BellRing, Video
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 /* ─────────────────────────────────────────────────────────────
@@ -161,7 +160,6 @@ export function ServicesView() {
   const [selectedType, setSelectedType] = useState<string>("attendance");
   const [selectedAddons, setSelectedAddons] = useState<string[]>(["line-notify"]);
   const [isUrgent, setIsUrgent] = useState<boolean>(false);
-  const [isSpeakerModalOpen, setIsSpeakerModalOpen] = useState<boolean>(false);
 
   // Calculate live estimate price
   const baseTypeObj = SYSTEM_TYPES.find((t) => t.id === selectedType) || SYSTEM_TYPES[0];

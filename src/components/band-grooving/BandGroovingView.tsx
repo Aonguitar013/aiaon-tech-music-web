@@ -19,11 +19,11 @@ import {
   CartesianGrid,
 } from "recharts";
 import {
-  Clock,
+  
   Sparkles,
-  Music,
-  CheckCircle2,
-  AlertCircle,
+  
+  
+  
   Award,
   Zap,
 } from "lucide-react";
@@ -54,12 +54,17 @@ const dynamicData = [
 ];
 
 // Helper components for custom recharts tooltips to match dark aesthetic
-const CustomTooltip = ({ active, payload, label }: any) => {
+interface TooltipProps {
+  active?: boolean;
+  label?: string | number;
+  payload?: Array<{ name?: string; value?: number | string; color?: string; fill?: string }>;
+}
+const CustomTooltip = ({ active, payload, label }: TooltipProps) => {
   if (active && payload && payload.length) {
     return (
       <div className="glass-card p-3 border-white/10 bg-black/80 shadow-xl rounded-lg text-xs font-prompt">
         <p className="text-white/60 mb-1.5 font-medium">{label}</p>
-        {payload.map((entry: any, index: number) => (
+        {payload.map((entry, index) => (
           <div key={index} className="flex items-center gap-2 my-0.5">
             <span
               className="w-2.5 h-2.5 rounded-full"

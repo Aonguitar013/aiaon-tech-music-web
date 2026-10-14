@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, Code, Rocket, Music, Guitar } from "lucide-react";
+import { GraduationCap, Rocket, Music, Guitar } from "lucide-react";
 import Image from "next/image";
 
 export function AboutSection() {

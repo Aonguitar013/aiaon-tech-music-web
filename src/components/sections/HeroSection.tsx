@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useAnimation, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { ArrowRight, Sparkles, Gift, GraduationCap, Package, CheckCircle2, ShieldCheck, Zap, Users, School } from "lucide-react";
 import Link from "next/link";
 

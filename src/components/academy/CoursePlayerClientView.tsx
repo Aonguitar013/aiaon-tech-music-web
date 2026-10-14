@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { ArrowLeft, PlayCircle, CheckCircle, Clock, BadgeCheck, ShoppingCart } from "lucide-react";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
+import type { DbRow } from "@/types";
 
-export function CoursePlayerClientView({ course, isPurchased, lessons }: { course: any, isPurchased: boolean, lessons: any[] }) {
+export function CoursePlayerClientView({ course, isPurchased, lessons }: { course: DbRow, isPurchased: boolean, lessons: DbRow[] }) {
 
   const { brandTheme } = useBrandTheme();
 

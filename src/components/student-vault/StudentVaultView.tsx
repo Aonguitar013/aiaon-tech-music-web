@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Sparkles, GraduationCap, CheckCircle2, ArrowRight,
-  MessageCircle, QrCode, BookOpen, Clock, Zap, Bot,
-  Award, FileText, Share2, Star, Users, ExternalLink,
-  Laptop, Check, Copy, Flame, Gift
+  Sparkles, CheckCircle2, ArrowRight,
+  MessageCircle, Bot,
+  Star, 
+  Check, Copy, Flame, Gift
 } from "lucide-react";
 import Link from "next/link";
 

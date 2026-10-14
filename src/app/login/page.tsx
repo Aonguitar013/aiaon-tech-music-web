@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Lock, User, ArrowRight } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
-import { RiLineLine } from "react-icons/ri";
 import { login, signup } from "./actions";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
@@ -35,16 +34,6 @@ export default function LoginPage() {
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`
-      }
-    });
-  };
-
-  const handleLineLogin = async () => {
-    const supabase = createClient();
-    await supabase.auth.signInWithOAuth({
-      provider: 'custom:line' as any,
       options: {
         redirectTo: `${window.location.origin}/auth/callback`
       }
