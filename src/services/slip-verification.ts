@@ -1,9 +1,17 @@
 /**
  * =========================================================================
- * 🛡️ 5-Layer Bank Slip Verification Engine (Omnichannel Shared Core)
+ * 🛡️ 5-Layer Bulletproof Bank Slip Verification Engine
  * รองรับทั้ง LINE OA (@deu6776s) และ Facebook Messenger เพจ AiAon Tech
  * โดย ครูจิรวัฒน์ เดชเส้ง (ครูอ้น) — AiAon Tech
  * =========================================================================
+ * 
+ * มาตรการความปลอดภัยสูงสุด (Fail-Closed Zero-Trust Security):
+ * 1. ตรวจสอบ Pending Order (ต้องมีออเดอร์ที่ลูกค้าสั่งซื้อจริงเท่านั้น ห้ามรับสลิปลอยเด็ดขาด)
+ * 2. ตรวจสอบยอดเงินตรงเป๊ะ 100% (ห้ามรับยอดขาด หรือยอดเกินผิดปกติ)
+ * 3. ตรวจสอบวันที่ทำรายการ (ต้องเป็นสลิปของ "วันนี้" เท่านั้น ป้องกันสลิปเก่าวนซ้ำ)
+ * 4. สแกน Mini-QR ธปท. (BOT Standard Slip QR) + ป้องกัน Ref ซ้ำข้ามแพลตฟอร์ม
+ * 5. Gemini 2.5 Flash Vision Multimodal Audit (สแกนจับสลิปปลอม / สลิปตัดต่อ / สลิป AI)
+ * 6. Safety Lock: หากยอดเงินเกินเกณฑ์ หรือภาพน่าสงสัย ให้เปลี่ยนเป็น MANUAL_REVIEW ทันที
  */
 
 import { buildSignedDeliveryUrl } from "@/utils/delivery-links";
@@ -198,146 +206,125 @@ export function parseBotSlipMiniQr(qrData: string): {
   return { isPaymentQr: false, isBankSlipQr: false };
 }
 
-export interface SlipOcrAnalysis {
-  ocrSucceeded: boolean;
-  looksLikeSlipText: boolean;
-  isBillPayment: boolean;
+/**
+ * Multimodal AI Slip Auditor powered by Gemini 2.5 Flash
+ * ตรวจจับสลิปปลอม, สลิปตัดต่อ, วันที่ทำรายการ, ชื่อผู้รับ, และยอดเงิน
+ */
+interface GeminiSlipAudit {
+  isAuthenticSlip: boolean;
+  isFakeOrEdited: boolean;
   receiverMatchesKruAon: boolean;
   detectedReceiverName: string;
-  slipAmount: number | null;
-  rawText: string;
+  transferredAmount: number | null;
+  transactionDateText: string;
+  isToday: boolean;
+  decision: "APPROVED" | "REJECTED" | "MANUAL_REVIEW";
+  reason: string;
 }
 
-export async function extractSlipOcrText(
+async function auditSlipWithGeminiVision(
   imageBuffer: ArrayBuffer,
-  contentType: string
-): Promise<string | null> {
-  try {
-    const formData = new FormData();
-    const ext = contentType.includes("png") ? "png" : "jpg";
-    formData.append("file", new Blob([imageBuffer], { type: contentType }), `slip.${ext}`);
-    formData.append("language", "tha");
-    formData.append("isOverlayRequired", "false");
+  contentType: string,
+  expectedAmount: number
+): Promise<GeminiSlipAudit | null> {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) return null;
 
-    const res = await fetch("https://api.ocr.space/parse/image", {
-      method: "POST",
-      headers: {
-        apikey: process.env.OCR_SPACE_API_KEY || "helloworld",
-      },
-      body: formData,
+  try {
+    const base64Data = Buffer.from(imageBuffer).toString("base64");
+    const todayBangkok = new Date().toLocaleDateString("th-TH", {
+      timeZone: "Asia/Bangkok",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
-    if (!res.ok) return null;
-    const data = await res.json();
-    const parsedText = data?.ParsedResults?.[0]?.ParsedText;
-    return typeof parsedText === "string" && parsedText.trim().length > 0
-      ? parsedText
-      : null;
+
+    const prompt = `คุณคือผู้เชี่ยวชาญการตรวจสอบสลิปโอนเงินธนาคารไทย (Bank Slip Fraud Auditor)
+หน้าที่ของคุณคือตรวจสอบรูปสลิปนี้อย่างเข้มงวดที่สุด เพื่อป้องกันการโกงและสลิปปลอม:
+- บัญชีผู้รับที่ถูกต้อง: "นายจิรวัฒน์ เดชเส้ง" หรือ "จิรวัฒน์ เดชเส้ง" หรือ "JIRAWAT DECHSENG" หรือ พร้อมเพย์ "083-539-9340"
+- ยอดเงินที่คาดหวัง: ${expectedAmount} บาท
+- วันที่ปัจจุบัน: ${todayBangkok}
+
+กฎการตัดสิน (Strict Rules):
+1. ตรวจสอบว่าภาพนี้เป็นสลิปจริง หรือสลิปที่สร้างจากเว็บปลอม/แอปตัดต่อตัวเลข/Photoshop
+2. ตรวจสอบ "วันที่ทำรายการ" (Transaction Date): ต้องเป็นรายการของ "วันนี้" เท่านั้น หากเป็นสลิปเก่าข้ามวัน/ย้อนหลัง ให้ตัดสิน REJECTED
+3. ตรวจสอบ "ชื่อผู้รับเงิน" (Receiver): ต้องเป็น นายจิรวัฒน์ เดชเส้ง เท่านั้น หากเป็นชื่อคนอื่น หรือเป็นรายการจ่ายบิลร้านค้า ให้ตัดสิน REJECTED
+4. ตรวจสอบ "ยอดเงินโอน" (Amount): ต้องตรงกับ ${expectedAmount} บาทเป๊ะๆ (อนุโลมเฉพาะ ${expectedAmount + 350} บาทถ้ามีค่าติดตั้ง VIP) หากยอดเงินไม่ตรง เช่น 23,000 หรือยอดอื่น ให้ตัดสิน REJECTED
+5. ถ้าสลิปแท้ 100% ชื่อผู้รับตรง ยอดตรง วันที่คือวันนี้ ให้ตัดสิน APPROVED
+6. ถ้าภาพตัดทอน ไม่ชัด มีพิรุธ หรือน่าสงสัย ให้ตัดสิน MANUAL_REVIEW หรือ REJECTED`;
+
+    const payload = {
+      contents: [
+        {
+          parts: [
+            { text: prompt },
+            {
+              inlineData: {
+                mimeType: contentType || "image/jpeg",
+                data: base64Data,
+              },
+            },
+          ],
+        },
+      ],
+      generationConfig: {
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: "OBJECT",
+          properties: {
+            isAuthenticSlip: { type: "BOOLEAN" },
+            isFakeOrEdited: { type: "BOOLEAN" },
+            receiverMatchesKruAon: { type: "BOOLEAN" },
+            detectedReceiverName: { type: "STRING" },
+            transferredAmount: { type: "NUMBER" },
+            transactionDateText: { type: "STRING" },
+            isToday: { type: "BOOLEAN" },
+            decision: { type: "STRING", enum: ["APPROVED", "REJECTED", "MANUAL_REVIEW"] },
+            reason: { type: "STRING" },
+          },
+          required: [
+            "isAuthenticSlip",
+            "isFakeOrEdited",
+            "receiverMatchesKruAon",
+            "detectedReceiverName",
+            "transferredAmount",
+            "transactionDateText",
+            "isToday",
+            "decision",
+            "reason",
+          ],
+        },
+        temperature: 0.1,
+      },
+    };
+
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    if (!res.ok) {
+      console.error("[Gemini Slip Audit] API error:", await res.text());
+      return null;
+    }
+
+    const json = await res.json();
+    const textResult = json?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!textResult) return null;
+
+    return JSON.parse(textResult) as GeminiSlipAudit;
   } catch (err) {
-    console.error("[Slip OCR Error]:", err);
+    console.error("[Gemini Slip Audit] Exception:", err);
     return null;
   }
 }
 
-export function analyzeSlipOcrText(ocrText: string | null): SlipOcrAnalysis {
-  if (!ocrText) {
-    return {
-      ocrSucceeded: false,
-      looksLikeSlipText: false,
-      isBillPayment: false,
-      receiverMatchesKruAon: false,
-      detectedReceiverName: "ไม่สามารถอ่านชื่อผู้รับได้",
-      slipAmount: null,
-      rawText: "",
-    };
-  }
-
-  const cleanText = ocrText.split(/ตรวจสอบสลิปโอนเงินสำเร็จ|Verified Bank Slip/i)[0] || ocrText;
-  const lines = cleanText
-    .split(/\r?\n/)
-    .map((l) => l.trim())
-    .filter(Boolean);
-
-  const looksLikeSlipText =
-    /โอนเงิน|จ่ายบิล|ทำรายการ|รหัสอ้างอิง|เลขที่รายการ|จำนวนเงิน|ค่าธรรมเนียม|ไปยัง|พร้อมเพย์/i.test(
-      cleanText
-    );
-
-  const isBillPayment = /จ่ายบิลสำเร็จ|รหัสร้านค้า|biller\s*id/i.test(cleanText);
-
-  let receiverSection = "";
-  let detectedReceiverName = "ไม่ระบุชื่อผู้รับ";
-
-  const toMarkerIdx = lines.findIndex((line) =>
-    /^(ไปยัง|ไปที่|เข้าบัญชี|ผู้รับเงิน|ผู้รับโอน|ถึง|to\b)/i.test(line)
-  );
-
-  if (toMarkerIdx !== -1) {
-    const afterMarkerSameLine = lines[toMarkerIdx]
-      .replace(/^(ไปยัง|ไปที่|เข้าบัญชี|ผู้รับเงิน|ผู้รับโอน|ถึง|to)\s*:?\s*/i, "")
-      .trim();
-
-    const receiverLines = afterMarkerSameLine
-      ? [afterMarkerSameLine, ...lines.slice(toMarkerIdx + 1, toMarkerIdx + 6)]
-      : lines.slice(toMarkerIdx + 1, toMarkerIdx + 6);
-
-    receiverSection = receiverLines.join("\n");
-
-    const firstNameLine = receiverLines.find(
-      (l) =>
-        l.length >= 2 &&
-        !/^(รหัสร้านค้า|รหัสธุรกรรม|จำนวนเงิน|ค่าธรรมเนียม|วันที่ทำรายการ|เลขที่รายการ)$/i.test(l)
-    );
-    if (firstNameLine) {
-      detectedReceiverName = firstNameLine;
-    }
-  } else {
-    const fromIdx = lines.findIndex((line) => /^(จาก|ผู้โอน|from\b)/i.test(line));
-    if (fromIdx !== -1) {
-      receiverSection = lines.slice(fromIdx + 4).join("\n");
-    } else {
-      receiverSection = lines.slice(Math.min(4, Math.floor(lines.length / 3))).join("\n");
-    }
-
-    const candidateLine = receiverSection
-      .split("\n")
-      .find((l) => /จิรวัฒน์|เดชเส้ง|jirawat|dechseng|นาย|นาง|น\.ส\.|บจก\.|amz|ร้าน/i.test(l));
-    if (candidateLine) {
-      detectedReceiverName = candidateLine;
-    }
-  }
-
-  const receiverNamePattern =
-    /จิรวัฒน์|เดชเส้ง|jirawat|dechseng|083[-\s]*539[-\s]*9340|0835399340|xx9340|-9340/i;
-
-  const receiverMatchesKruAon =
-    !isBillPayment && receiverNamePattern.test(receiverSection);
-
-  let slipAmount: number | null = null;
-  const decimalMatches = Array.from(
-    cleanText.matchAll(/(\d{1,3}(?:,\d{3})*\.\d{2}|\d+\.\d{2})/g)
-  );
-
-  for (const match of decimalMatches) {
-    const val = parseFloat(match[1].replace(/,/g, ""));
-    if (!isNaN(val) && val > 0) {
-      slipAmount = val;
-      break;
-    }
-  }
-
-  return {
-    ocrSucceeded: true,
-    looksLikeSlipText,
-    isBillPayment,
-    receiverMatchesKruAon,
-    detectedReceiverName,
-    slipAmount,
-    rawText: cleanText,
-  };
-}
-
 export interface VerificationResult {
-  status: "approved" | "rejected" | "payment_qr" | "not_a_slip";
+  status: "approved" | "rejected" | "payment_qr" | "not_a_slip" | "manual_review";
   replyText: string;
   orderTitle?: string;
   actualSlipAmount?: number;
@@ -360,16 +347,32 @@ export async function executeSlipVerification(params: {
 }): Promise<VerificationResult> {
   const { imageBuffer, contentType, userId, customerName, channel } = params;
 
-  // 1. Run QR Code Decoder AND Thai OCR in parallel
-  const [qrData, ocrText] = await Promise.all([
-    decodeSlipQrFromImage(imageBuffer, contentType),
-    extractSlipOcrText(imageBuffer, contentType),
-  ]);
+  // ── LAYER 1: STRICT PENDING ORDER CHECK (ห้ามรับสลิปลอยเด็ดขาด!) ──
+  const pendingOrder = pendingOrders.get(userId);
+  if (!pendingOrder || pendingOrder.status !== "pending_slip") {
+    console.warn(`[SlipSecurity] REJECTED: User ${userId} sent a slip without an active order.`);
+    await sendSlipPhotoToTelegram(
+      imageBuffer,
+      contentType,
+      `🚨 [ตรวจพบการส่งสลิปโดยไม่มีรายการสั่งซื้อใน ${channel}]\n` +
+        `👤 ลูกค้า: ${customerName} (ID: ${userId})\n` +
+        `⚠️ ผลลัพธ์: ระบบปฏิเสธการส่งมอบไฟล์อัตโนมัติ (ไม่มีออเดอร์ค้างในระบบ)`
+    );
 
+    return {
+      status: "rejected",
+      replyText:
+        `⚠️ ขออภัยครับ ระบบไม่พบรายการสั่งซื้อที่รอชำระเงินของท่านในขณะนี้\n\n` +
+        `📦 หากท่านต้องการสั่งซื้อระบบหรือแพ็กเกจใด รบกวนพิมพ์แจ้งชื่อสินค้าหรือเลือกรายการในแชตก่อน เพื่อให้ระบบเปิดใบสั่งซื้อและออกยอดชำระที่ถูกต้องให้นะครับ 🙏\n\n` +
+        `หากท่านโอนเงินแล้วแต่ไม่มีออเดอร์ โปรดรอสักครู่ ครูอ้นจะเข้ามาตรวจสอบให้โดยตรงครับ ✨`,
+    };
+  }
+
+  // ── LAYER 2: DECODE BOT SLIP MINI-QR ──
+  const qrData = await decodeSlipQrFromImage(imageBuffer, contentType);
   const qrInfo = qrData ? parseBotSlipMiniQr(qrData) : null;
-  const ocrAnalysis = analyzeSlipOcrText(ocrText);
 
-  // Layer 1A: Payment QR Code sent back by accident
+  // Layer 2A: Payment QR Code sent back by accident
   if (qrInfo?.isPaymentQr) {
     return {
       status: "payment_qr",
@@ -379,26 +382,15 @@ export async function executeSlipVerification(params: {
     };
   }
 
-  // Layer 1B: Not a bank slip
-  if (!qrInfo?.isBankSlipQr && !ocrAnalysis.looksLikeSlipText) {
-    return {
-      status: "not_a_slip",
-      replyText: "",
-    };
-  }
-
-  const pendingOrder = pendingOrders.get(userId);
-  const bankName = qrInfo?.bankName || "ธนาคารไทย";
-  const transRef = qrInfo?.transRef || "";
-
-  // Layer 1C: Missing or unreadable Mini-QR
+  // Layer 2B: Missing or unreadable Mini-QR
   if (!qrInfo?.isBankSlipQr) {
     await sendSlipPhotoToTelegram(
       imageBuffer,
       contentType,
       `⚠️ [สลิปไม่มี Mini-QR หรืออ่าน QR ไม่ได้ใน ${channel}]\n` +
         `👤 ลูกค้า: ${customerName}\n` +
-        `📦 รายการ: ${pendingOrder?.itemTitle || "ไม่ระบุ"}`
+        `📦 รายการที่สั่ง: ${pendingOrder.itemTitle} (ยอด ${pendingOrder.baseAmount} บาท)\n` +
+        `🛑 ปฏิเสธอัตโนมัติ: สลิปขาด Mini-QR มาตรฐาน ธปท.`
     );
     return {
       status: "rejected",
@@ -408,74 +400,19 @@ export async function executeSlipVerification(params: {
     };
   }
 
-  // Layer 1D: OCR failed
-  if (!ocrAnalysis.ocrSucceeded || ocrAnalysis.slipAmount === null) {
-    await sendSlipPhotoToTelegram(
-      imageBuffer,
-      contentType,
-      `⚠️ [สลิปอ่านตัวเลขยอดเงินไม่ชัดเจน รอครูอ้นตรวจใน ${channel}]\n` +
-        `👤 ลูกค้า: ${customerName}\n` +
-        `📦 รายการ: ${pendingOrder?.itemTitle || "ไม่ระบุ"}\n` +
-        `🏦 ธนาคาร: ${bankName} (Ref: ${transRef.slice(0, 18)})`
-    );
-    return {
-      status: "rejected",
-      replyText:
-        `⚠️ ภาพสลิปตัวหนังสือหรือยอดเงินไม่ชัดเจนครับ ระบบขออนุญาตส่งให้ครูอ้นตรวจสอบยอดเงินโดยตรง หรือรบกวนส่งไฟล์สลิปใหม่อีกครั้งนะครับ 🙏`,
-    };
-  }
+  const bankName = qrInfo.bankName || "ธนาคารไทย";
+  const transRef = qrInfo.transRef || "";
 
-  const failureReasons: string[] = [];
-
-  // Layer 2: Receiver Check
-  if (ocrAnalysis.isBillPayment || !ocrAnalysis.receiverMatchesKruAon) {
-    failureReasons.push(
-      `❌ ชื่อบัญชีผู้รับเงินไม่ตรง:\n` +
-        `   • ในสลิปโอนไปยัง: "${ocrAnalysis.detectedReceiverName}"${ocrAnalysis.isBillPayment ? " (รายการจ่ายบิลร้านค้า)" : ""}\n` +
-        `   • บัญชีที่ถูกต้องต้องเป็น: "${PROMPTPAY_NAME}" (พร้อมเพย์ 083-539-9340)`
-    );
-  }
-
-  // Layer 3: Amount Check
-  const expectedAmount = pendingOrder?.baseAmount || 0;
-  const actualSlipAmount = ocrAnalysis.slipAmount;
-
-  if (expectedAmount > 0 && actualSlipAmount < expectedAmount) {
-    const diff = expectedAmount - actualSlipAmount;
-    failureReasons.push(
-      `❌ ยอดเงินโอนในสลิปไม่ตรงกับราคาสินค้า:\n` +
-        `   • ยอดเงินในสลิป: ${actualSlipAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท\n` +
-        `   • ยอดที่ต้องชำระ: ${expectedAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท (ขาดอีก ${diff.toLocaleString()} บาท)\n` +
-        `   • รายการที่สั่ง: ${pendingOrder?.itemTitle}`
-    );
-  }
-
-  if (failureReasons.length > 0) {
-    await sendSlipPhotoToTelegram(
-      imageBuffer,
-      contentType,
-      `🚨 [ตรวจพบสลิปไม่ถูกต้องใน ${channel} — ระบบปฏิเสธอัตโนมัติ!]\n` +
-        `👤 ลูกค้า: ${customerName}\n` +
-        `📦 รายการที่สั่ง: ${pendingOrder?.itemTitle || "ไม่ได้เลือกไว้"}\n` +
-        `🏦 ธนาคารในสลิป: ${bankName} (Ref: ${transRef.slice(0, 18)})\n` +
-        `💵 ยอดในสลิปจริง: ${actualSlipAmount.toLocaleString()} บาท (ต้องจ่าย ${expectedAmount.toLocaleString()} บาท)\n` +
-        `🎯 ผู้รับในสลิป: ${ocrAnalysis.detectedReceiverName}\n` +
-        `📌 สาเหตุที่ปฏิเสธ:\n${failureReasons.join("\n")}`
-    );
-
-    return {
-      status: "rejected",
-      replyText:
-        `⚠️ ตรวจสอบสลิปไม่ผ่านครับ ระบบพบข้อมูลไม่ตรงกับรายการสั่งซื้อดังนี้:\n` +
-        `━━━━━━━━━━━━━━━\n` +
-        `${failureReasons.join("\n\n")}\n` +
-        `━━━━━━━━━━━━━━━\n` +
-        `📲 กรุณาตรวจสอบและส่งรูปสลิปที่โอนเข้าบัญชี "${PROMPTPAY_NAME} (083-539-9340)" ตามยอดชำระที่ถูกต้องอีกครั้งนะครับ 🙏`,
-    };
-  }
-
-  // Layer 4: Anti-Duplicate Ref
+  // ── LAYER 3: ANTI-DUPLICATE REF (กันสลิปซ้ำข้ามแพลตฟอร์ม) ──
   if (transRef && usedSlipRefs.has(transRef)) {
+    await sendSlipPhotoToTelegram(
+      imageBuffer,
+      contentType,
+      `🚨 [ตรวจพบการใช้สลิปซ้ำ (Duplicate Ref) ใน ${channel}]\n` +
+        `👤 ลูกค้า: ${customerName}\n` +
+        `🔖 Ref ที่ซ้ำ: ${transRef}\n` +
+        `🛑 ปฏิเสธอัตโนมัติ: สลิปนี้เคยถูกใช้เคลมไฟล์ไปแล้ว!`
+    );
     return {
       status: "rejected",
       replyText:
@@ -483,37 +420,166 @@ export async function executeSlipVerification(params: {
         `หากท่านสั่งซื้อรายการใหม่ รบกวนส่งรูปสลิปของการโอนเงินครั้งล่าสุดนะครับ 🙏`,
     };
   }
+
+  // ── LAYER 4: GEMINI 2.5 FLASH MULTIMODAL AUDIT (ตรวจสลิปปลอม + วันที่ + ชื่อ + ยอดเงิน) ──
+  const expectedAmount = pendingOrder.baseAmount;
+  const geminiAudit = await auditSlipWithGeminiVision(
+    imageBuffer,
+    contentType,
+    expectedAmount
+  );
+
+  if (geminiAudit) {
+    console.log(`[Gemini Slip Audit]:`, geminiAudit);
+
+    // 4A. ตรวจจับสลิปปลอม / ตัดต่อ
+    if (geminiAudit.isFakeOrEdited || !geminiAudit.isAuthenticSlip) {
+      await sendSlipPhotoToTelegram(
+        imageBuffer,
+        contentType,
+        `🚨🚨 [AI ตรวจพบสลิปปลอม/ตัดต่อ/น่าสงสัย ใน ${channel}!]\n` +
+          `👤 ลูกค้า: ${customerName}\n` +
+          `📦 รายการที่สั่ง: ${pendingOrder.itemTitle}\n` +
+          `📌 เหตุผล: ${geminiAudit.reason}\n` +
+          `🛑 ระบบปฏิเสธและล็อคดาวน์โหลดทันที!`
+      );
+      return {
+        status: "rejected",
+        replyText:
+          `❌ ระบบไม่สามารถยืนยันสลิปนี้ได้ เนื่องจากตรวจพบความไม่ถูกต้องของข้อมูลสลิป\n\n` +
+          `หากท่านโอนเงินจริง รบกวนติดต่อครูอ้นโดยตรงเพื่อตรวจสอบรายการเดินบัญชีนะครับ 🙏`,
+      };
+    }
+
+    // 4B. ตรวจสอบวันที่ทำรายการ (ต้องเป็นวันนี้เท่านั้น!)
+    if (!geminiAudit.isToday) {
+      await sendSlipPhotoToTelegram(
+        imageBuffer,
+        contentType,
+        `⚠️ [สลิปเก่าข้ามวัน / สลิปย้อนหลัง ใน ${channel}]\n` +
+          `👤 ลูกค้า: ${customerName}\n` +
+          `📅 วันที่ในสลิป: ${geminiAudit.transactionDateText}\n` +
+          `🛑 ปฏิเสธอัตโนมัติ: วันที่ไม่ใช่วันที่ปัจจุบัน`
+      );
+      return {
+        status: "rejected",
+        replyText:
+          `❌ วันที่ทำรายการในสลิป (${geminiAudit.transactionDateText}) ไม่ใช่วันที่ทำรายการปัจจุบันของวันนี้ครับ\n\n` +
+          `📲 รบกวนส่งรูปสลิปการโอนเงินที่ทำรายการล่าสุดของวันนี้นะครับ 🙏`,
+      };
+    }
+
+    // 4C. ตรวจสอบชื่อบัญชีผู้รับเงิน
+    if (!geminiAudit.receiverMatchesKruAon) {
+      await sendSlipPhotoToTelegram(
+        imageBuffer,
+        contentType,
+        `⚠️ [ชื่อผู้รับในสลิปไม่ตรงกับครูอ้น ใน ${channel}]\n` +
+          `👤 ลูกค้า: ${customerName}\n` +
+          `🎯 ผู้รับในสลิป: ${geminiAudit.detectedReceiverName}\n` +
+          `🛑 ปฏิเสธอัตโนมัติ: ผู้รับไม่ใช่ นายจิรวัฒน์ เดชเส้ง`
+      );
+      return {
+        status: "rejected",
+        replyText:
+          `❌ ชื่อบัญชีผู้รับเงินในสลิปไม่ตรงกับบัญชีของครูอ้นครับ\n` +
+          `• ในสลิปโอนไปยัง: "${geminiAudit.detectedReceiverName}"\n` +
+          `• บัญชีที่ถูกต้อง: "${PROMPTPAY_NAME}" (พร้อมเพย์ 083-539-9340)\n\n` +
+          `กรุณาตรวจสอบบัญชีปลายทางและทำรายการโอนใหม่อีกครั้งนะครับ 🙏`,
+      };
+    }
+
+    // 4D. ตรวจสอบยอดเงิน (ต้องตรงกับราคาออเดอร์เป๊ะๆ)
+    const actualSlipAmount = geminiAudit.transferredAmount || 0;
+    const expectedVipAmount = expectedAmount + (pendingOrder.vipAmount || 350);
+    const amountMatches =
+      Math.abs(actualSlipAmount - expectedAmount) < 0.01 ||
+      Math.abs(actualSlipAmount - expectedVipAmount) < 0.01;
+
+    if (!amountMatches) {
+      await sendSlipPhotoToTelegram(
+        imageBuffer,
+        contentType,
+        `🚨 [ยอดเงินในสลิปไม่ตรงกับยอดที่สั่งซื้อ ใน ${channel}]\n` +
+          `👤 ลูกค้า: ${customerName}\n` +
+          `📦 รายการที่สั่ง: ${pendingOrder.itemTitle}\n` +
+          `💵 ยอดที่ต้องจ่าย: ${expectedAmount.toLocaleString()} บาท\n` +
+          `💵 ยอดจริงในสลิป: ${actualSlipAmount.toLocaleString()} บาท\n` +
+          `🛑 ปฏิเสธอัตโนมัติ: ยอดเงินไม่ตรงกับสินค้า!`
+      );
+      return {
+        status: "rejected",
+        replyText:
+          `❌ ยอดเงินโอนในสลิป (${actualSlipAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท) ไม่ตรงกับยอดที่ต้องชำระของรายการสั่งซื้อ (${expectedAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท) ครับ\n\n` +
+          `📦 รายการที่สั่ง: ${pendingOrder.itemTitle}\n` +
+          `📲 กรุณาตรวจสอบยอดเงิน หรือหากประสงค์จะสั่งซื้อแพ็กเกจอื่น รบกวนแจ้งครูอ้นในแชตได้เลยนะครับ 🙏`,
+      };
+    }
+
+    // 4E. หาก AI ตัดสินใจเป็น MANUAL_REVIEW หรือยอดเงินสูงผิดปกติ (> 3,000 ฿) ให้รอครูอ้นตรวจ
+    if (geminiAudit.decision === "MANUAL_REVIEW" || actualSlipAmount > 3000) {
+      await sendSlipPhotoToTelegram(
+        imageBuffer,
+        contentType,
+        `⏳ [สลิปยอดสูง/ต้องรอครูอ้นอนุมัติ ใน ${channel}]\n` +
+          `👤 ลูกค้า: ${customerName}\n` +
+          `📦 สินค้า: ${pendingOrder.itemTitle}\n` +
+          `💵 ยอดเงิน: ${actualSlipAmount.toLocaleString()} บาท\n` +
+          `📌 เหตุผล: ${geminiAudit.reason}\n` +
+          `⚠️ ระบบยังไม่ส่งลิงก์ดาวน์โหลด เพื่อรอครูอ้นเช็กเงินเข้าบัญชีจริงก่อน!`
+      );
+
+      return {
+        status: "manual_review",
+        replyText:
+          `⏳ ระบบได้รับสลิปโอนเงินเรียบร้อยแล้วครับ!\n\n` +
+          `📦 รายการ: ${pendingOrder.itemTitle}\n` +
+          `💵 ยอดเงิน: ${actualSlipAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท\n` +
+          `━━━━━━━━━━━━━━━\n` +
+          `เนื่องจากเป็นรายการที่มีมูลค่าสูง ระบบได้ส่งภาพสลิปให้ครูอ้นตรวจสอบยอดเงินในบัญชีธนาคารโดยตรงแล้วครับ เมื่อครูอ้นยืนยันยอดเงินเข้าเรียบร้อย จะส่งมอบลิงก์ดาวน์โหลดให้ทันทีในแชตนี้ครับผม ขอบคุณมากครับ 🙏✨`,
+      };
+    }
+  } else {
+    // If Gemini Vision was unavailable, fail-closed for safety!
+    console.warn(`[SlipSecurity] Gemini Vision unavailable, falling back to manual review.`);
+    await sendSlipPhotoToTelegram(
+      imageBuffer,
+      contentType,
+      `⚠️ [ไม่สามารถรัน Gemini AI Vision ได้ ส่งให้ครูอ้นตรวจด้วยตัวเอง ใน ${channel}]\n` +
+        `👤 ลูกค้า: ${customerName}\n` +
+        `📦 สินค้า: ${pendingOrder.itemTitle}`
+    );
+    return {
+      status: "manual_review",
+      replyText:
+        `⏳ ระบบได้รับสลิปเรียบร้อยแล้วครับ ขณะนี้กำลังส่งให้ครูอ้นตรวจสอบยอดเงินในบัญชี เมื่อยืนยันเรียบร้อยแล้วจะส่งลิงก์ดาวน์โหลดให้ทันทีครับ 🙏`,
+    };
+  }
+
+  // ── LAYER 5: APPROVE & INSTANT ENCRYPTED DELIVERY ──
+  const actualAmount = geminiAudit.transferredAmount || expectedAmount;
+  const paidForVipSetup = actualAmount >= expectedAmount + (pendingOrder.vipAmount || 350);
+  const orderTitle = pendingOrder.itemTitle;
+
+  // Mark slip ref as used to prevent replay
   if (transRef) {
     usedSlipRefs.add(transRef);
   }
 
-  let paidForVipSetup = pendingOrder?.isVipSelected || false;
-  if (
-    pendingOrder &&
-    pendingOrder.vipAmount > 0 &&
-    actualSlipAmount >= pendingOrder.baseAmount + pendingOrder.vipAmount
-  ) {
-    paidForVipSetup = true;
-  }
+  pendingOrder.status = "verified_paid";
+  pendingOrder.verifiedRef = transRef;
+  pendingOrder.verifiedBank = bankName;
+  pendingOrders.set(userId, pendingOrder);
 
-  const orderTitle = pendingOrder?.itemTitle || "รายการสั่งซื้อระบบ/แพ็กเกจ AiAon Tech";
-  if (pendingOrder) {
-    pendingOrder.status = "verified_paid";
-    pendingOrder.verifiedRef = transRef;
-    pendingOrder.verifiedBank = bankName;
-    pendingOrders.set(userId, pendingOrder);
-  }
-
-  markLeadAsPaid(userId, transRef, actualSlipAmount, orderTitle);
+  markLeadAsPaid(userId, transRef, actualAmount, orderTitle);
   flagConversationAsGolden({
     userId,
     displayName: customerName,
     product: orderTitle,
-    amount: actualSlipAmount,
+    amount: actualAmount,
     transRef,
   });
 
-  // Layer 5: Delivery URL + Telegram Alert
   const { url: signedDeliveryUrl, codes: unlockedCodes } = buildSignedDeliveryUrl(
     orderTitle,
     transRef
@@ -523,12 +589,12 @@ export async function executeSlipVerification(params: {
   await sendSlipPhotoToTelegram(
     imageBuffer,
     contentType,
-    `💰 [ตรวจสลิปแท้ครบ 5 ชั้นผ่านแล้วใน ${channel}! ส่งลิงก์โหลดอัตโนมัติเรียบร้อย]\n` +
+    `💰 [ตรวจสลิปแท้ครบ 5 ชั้นผ่านฉลุยใน ${channel}! ส่งลิงก์โหลดอัตโนมัติเรียบร้อย]\n` +
       `👤 ลูกค้า: ${customerName}\n` +
       `📦 สินค้า: ${orderTitle}${paidForVipSetup ? " (+ บริการติดตั้ง VIP Setup)" : ""}\n` +
       `🗂️ รหัสไฟล์ที่ปลดล็อก: ${unlockedCodes.join(", ")}\n` +
-      `💵 ยอดเงินในสลิปจริง: ${actualSlipAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท\n` +
-      `🎯 ผู้รับเงินในสลิป: ${ocrAnalysis.detectedReceiverName}\n` +
+      `💵 ยอดเงินในสลิปจริง: ${actualAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท\n` +
+      `🎯 ผู้รับเงินในสลิป: ${geminiAudit.detectedReceiverName}\n` +
       `🏦 ธนาคารต้นทาง: ${bankName}\n` +
       (transRef ? `🔖 เลขอ้างอิงสลิป (Ref): ${transRef.slice(0, 18)}\n` : "") +
       `📥 ลิงก์ที่ส่งให้ลูกค้า: ${signedDeliveryUrl}`
@@ -538,7 +604,7 @@ export async function executeSlipVerification(params: {
     `✅ ตรวจสอบสลิปโอนเงินสำเร็จ! (Verified Bank Slip)\n` +
     `━━━━━━━━━━━━━━━\n` +
     `📦 รายการ: ${orderTitle}${paidForVipSetup ? " (รวมบริการติดตั้ง VIP Setup 🛠️)" : ""}\n` +
-    `💵 ยอดโอนจริงในสลิป: ${actualSlipAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท\n` +
+    `💵 ยอดโอนจริงในสลิป: ${actualAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท\n` +
     `👤 ผู้รับเงิน: ${PROMPTPAY_NAME}\n` +
     `🏦 ข้อมูลสลิป: ${bankName}\n` +
     (transRef ? `🔖 เลขที่อ้างอิง: ${transRef.slice(0, 18)}\n` : "") +
@@ -554,7 +620,7 @@ export async function executeSlipVerification(params: {
     status: "approved",
     replyText,
     orderTitle,
-    actualSlipAmount,
+    actualSlipAmount: actualAmount,
     transRef,
     bankName,
     deliveryUrl: signedDeliveryUrl,
