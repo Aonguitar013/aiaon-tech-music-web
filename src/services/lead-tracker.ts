@@ -25,7 +25,16 @@ export interface LeadRecord {
   notes?: string;
 }
 
-const LEADS_FILE_PATH = path.join(process.cwd(), ".leads_vault.json");
+import os from "os";
+
+function getLeadsFilePath(): string {
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    return path.join(os.tmpdir(), ".leads_vault.json");
+  }
+  return path.join(process.cwd(), ".leads_vault.json");
+}
+
+const LEADS_FILE_PATH = getLeadsFilePath();
 
 // Persistent in-memory map across Next.js API reloads
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
