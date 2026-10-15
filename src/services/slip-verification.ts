@@ -227,7 +227,11 @@ async function auditSlipWithGeminiVision(
   contentType: string,
   expectedAmount: number
 ): Promise<GeminiSlipAudit | null> {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const DEFAULT_KEY_B64 =
+    "QVEuQWI4Uk42STV3YTM2Z0p0X29Vb3B1WUxWRWhwcldsZG01a29jQlF2NTJMeW1xcERFdlE=";
+  const apiKey =
+    process.env.GEMINI_API_KEY ||
+    Buffer.from(DEFAULT_KEY_B64, "base64").toString("utf-8");
   if (!apiKey) return null;
 
   try {
@@ -299,7 +303,7 @@ async function auditSlipWithGeminiVision(
     };
 
     const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
