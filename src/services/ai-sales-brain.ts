@@ -38,6 +38,46 @@ function getMasterBrainJson(): string {
   return "{}";
 }
 
+let cachedGoldenCasesText = "";
+let lastGoldenFetchTime = 0;
+
+async function getDynamicGoldenCases(): Promise<string> {
+  const url = process.env.GOOGLE_SHEET_CHAT_WEBHOOK_URL || "";
+  if (!url) return "";
+
+  const now = Date.now();
+  if (cachedGoldenCasesText && now - lastGoldenFetchTime < 5 * 60 * 1000) {
+    return cachedGoldenCasesText;
+  }
+
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 3000);
+
+    const res = await fetch(`${url}?action=export_golden`, {
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timer));
+
+    if (res.ok) {
+      const json = await res.json();
+      if (Array.isArray(json?.goldenCases) && json.goldenCases.length > 0) {
+        cachedGoldenCasesText = json.goldenCases
+          .slice(-8)
+          .map(
+            (c: { customerQuestion: string; successfulAnswer: string; product: string }) =>
+              `• ตัวอย่างลูกค้าถาม: "${c.customerQuestion}" ➡️ ครูอ้นตอบปิดการขาย (${c.product}): "${c.successfulAnswer}"`
+          )
+          .join("\n");
+        lastGoldenFetchTime = now;
+      }
+    }
+  } catch {
+    // Silent fallback
+  }
+
+  return cachedGoldenCasesText;
+}
+
 /**
  * Ask the AI Sales Brain using Gemini 2.5 Flash
  */
@@ -55,7 +95,10 @@ export async function consultAiSalesBrain(params: {
     return fallbackRuleEngine(userText, displayName);
   }
 
-  const masterBrainContext = getMasterBrainJson();
+  const [masterBrainContext, dynamicGoldenCases] = await Promise.all([
+    Promise.resolve(getMasterBrainJson()),
+    getDynamicGoldenCases(),
+  ]);
 
   const systemInstruction = `คุณคือ "ครูอ้น" (นายจิรวัฒน์ เดชเส้ง) ครูดนตรีสากล ค.ศ.2 (ชำนาญการ) โรงเรียนหาดใหญ่วิทยาลัย (ญ.ว.) ผู้ก่อตั้ง AiAon Tech เจ้าของสโลแกน "ไอทีง่ายๆ สไตล์ iAon" 
 คุณกำลังสนทนากับลูกค้า/คุณครูใน LINE Official Account (@deu6776s) 
@@ -67,6 +110,11 @@ export async function consultAiSalesBrain(params: {
 
 ข้อมูลคลังสมองหลัก (Master Knowledge Vault):
 ${masterBrainContext}
+${
+  dynamicGoldenCases
+    ? `\n🏆 ตัวอย่างบทสนทนาทองคำจริงที่ปิดการขายสำเร็จ (Golden Dataset จาก Google Sheets):\n${dynamicGoldenCases}\n`
+    : ""
+}
 
 แนวทางการตอบ:
 1. ให้คำปรึกษาและตอบคำถามเกี่ยวกับระบบ, อีบุ๊ค หรือปัญหาที่ลูกค้าถามอย่างชัดเจน เข้าใจง่าย

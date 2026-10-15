@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { buildSignedDeliveryUrl } from "@/utils/delivery-links";
 import { consultAiSalesBrain } from "@/services/ai-sales-brain";
 import { getLead, recordLeadInteraction, markLeadAsPaid } from "@/services/lead-tracker";
+import { harvestChatMessage, flagConversationAsGolden } from "@/services/chat-harvester";
 
 const PROMPTPAY_ID = "0835399340";
 const PROMPTPAY_NAME = "นายจิรวัฒน์ เดชเส้ง (ครูอ้น AiAon Tech)";
@@ -586,6 +587,29 @@ async function buildSmartAutoReply(
     );
   }
 
+  // Harvest customer message to Google Sheets
+  harvestChatMessage({
+    userId: userId || "guest",
+    displayName: customerName,
+    sender: "customer",
+    message: text,
+    status: aiResult.shouldAttachPromptPayQr ? "quoted" : "inquiry",
+    intent: aiResult.detectedIntent,
+    product: aiResult.suggestedItem,
+  });
+
+  // Harvest AI reply to Google Sheets
+  harvestChatMessage({
+    userId: userId || "guest",
+    displayName: customerName,
+    sender: "ai_brain",
+    message: aiResult.replyText,
+    status: aiResult.shouldAttachPromptPayQr ? "quoted" : "inquiry",
+    intent: aiResult.detectedIntent,
+    product: aiResult.suggestedItem,
+    amount: aiResult.suggestedAmount,
+  });
+
   return replyMessages;
 }
 
@@ -995,6 +1019,13 @@ async function verifyLineSlipImage(
     }
     if (userId) {
       markLeadAsPaid(userId, transRef, actualSlipAmount, orderTitle);
+      flagConversationAsGolden({
+        userId,
+        displayName: customerName,
+        product: orderTitle,
+        amount: actualSlipAmount,
+        transRef,
+      });
     }
 
     // Layer 5: Instant Encrypted VIP Download Link for ALL 59 Systems & Bundles + Telegram Alert
