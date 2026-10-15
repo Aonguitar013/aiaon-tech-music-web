@@ -1,0 +1,243 @@
+import { NextRequest, NextResponse } from "next/server";
+import { consultAiSalesBrain } from "@/services/ai-sales-brain";
+import { getLead, recordLeadInteraction } from "@/services/lead-tracker";
+import { harvestChatMessage } from "@/services/chat-harvester";
+import {
+  sendFacebookMessage,
+  sendFacebookCommentReply,
+  sendFacebookPrivateReply,
+  getFacebookUserProfile,
+} from "@/services/facebook-messenger";
+
+// Webhook Verification Token (Configure in Meta for Developers)
+const FB_VERIFY_TOKEN =
+  process.env.FB_VERIFY_TOKEN ||
+  process.env.FACEBOOK_VERIFY_TOKEN ||
+  "aiaon_fb_secret_2026";
+
+// Telegram Bot Alert
+const TELEGRAM_BOT_TOKEN =
+  process.env.TELEGRAM_BOT_TOKEN || "8529471786:AAHI33E48vL4ic1J8tyszNAp7SwzkADaYKE";
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "7731447826";
+
+async function notifyTelegram(message: string): Promise<void> {
+  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
+  try {
+    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: message,
+        parse_mode: "HTML",
+      }),
+    });
+  } catch (err) {
+    console.error("[FacebookWebhook] Telegram alert error:", err);
+  }
+}
+
+/**
+ * 1. GET: Verification Challenge from Meta for Developers
+ */
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const mode = searchParams.get("hub.mode");
+  const token = searchParams.get("hub.verify_token");
+  const challenge = searchParams.get("hub.challenge");
+
+  if (mode === "subscribe" && token === FB_VERIFY_TOKEN) {
+    console.log("[FacebookWebhook] Meta Webhook verified successfully! 🚀");
+    return new Response(challenge || "", {
+      status: 200,
+      headers: { "Content-Type": "text/plain" },
+    });
+  }
+
+  console.warn("[FacebookWebhook] Meta Webhook verification failed. Token mismatch.");
+  return new Response("Forbidden", { status: 403 });
+}
+
+/**
+ * 2. POST: Ingest Messenger & Feed/Comment Events from Facebook Page
+ */
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+
+    // Verify object type is "page"
+    if (body.object !== "page") {
+      return NextResponse.json({ status: "not_a_page_event" }, { status: 404 });
+    }
+
+    // Process entries asynchronously to guarantee immediate 200 OK to Meta
+    if (Array.isArray(body.entry)) {
+      for (const entry of body.entry) {
+        const pageId = entry.id;
+
+        // A. Handle Direct Messenger Events (entry.messaging)
+        if (Array.isArray(entry.messaging)) {
+          for (const event of entry.messaging) {
+            await handleMessengerEvent(event, pageId);
+          }
+        }
+
+        // B. Handle Post Comment / Feed Events (entry.changes) -> Comment-to-Inbox!
+        if (Array.isArray(entry.changes)) {
+          for (const change of entry.changes) {
+            if (change.field === "feed") {
+              await handleFeedCommentEvent(change.value, pageId);
+            }
+          }
+        }
+      }
+    }
+
+    return NextResponse.json({ status: "EVENT_RECEIVED" });
+  } catch (err) {
+    console.error("[FacebookWebhook] Error handling event:", err);
+    return NextResponse.json({ status: "error", message: String(err) }, { status: 200 });
+  }
+}
+
+/**
+ * Process Facebook Messenger Message
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function handleMessengerEvent(event: any, pageId: string) {
+  const senderId = event.sender?.id;
+  if (!senderId || senderId === pageId) return;
+
+  // Skip echo messages (messages sent by page admin or bot itself)
+  if (event.message?.is_echo) return;
+
+  // Handle incoming text message
+  const userText = event.message?.text?.trim();
+  if (!userText) return;
+
+  const userProfile = await getFacebookUserProfile(senderId);
+  const displayName = userProfile.name || "ลูกค้า Facebook";
+  const userId = `fb_${senderId}`;
+
+  // 1. Harvest customer chat to Google Sheets
+  harvestChatMessage({
+    userId,
+    displayName: `[FB] ${displayName}`,
+    sender: "customer",
+    message: userText,
+    status: "inquiry",
+  });
+
+  // 2. Consult AI Sales Brain (Gemini 2.5 Flash + Master Knowledge)
+  const currentLead = getLead(userId);
+  const brainResult = await consultAiSalesBrain({
+    userText,
+    userId,
+    displayName,
+    recentHistory: currentLead?.conversationHistory,
+  });
+
+  // 3. Send AI reply back to Facebook Messenger
+  await sendFacebookMessage(senderId, { text: brainResult.replyText });
+
+  // If promptpay QR is suggested, send QR image
+  if (brainResult.shouldAttachPromptPayQr && brainResult.suggestedAmount) {
+    const qrUrl = `https://promptpay.io/0835399340/${brainResult.suggestedAmount}.png`;
+    await sendFacebookMessage(senderId, {
+      attachment: {
+        type: "image",
+        payload: { url: qrUrl, is_reusable: true },
+      },
+    });
+  }
+
+  // 4. Harvest AI response to Google Sheets
+  harvestChatMessage({
+    userId,
+    displayName: `[FB] ${displayName}`,
+    sender: "ai_brain",
+    message: brainResult.replyText,
+    intent: brainResult.detectedIntent,
+    status: currentLead?.status || "inquiry",
+    product: brainResult.suggestedItem,
+    amount: brainResult.suggestedAmount,
+  });
+
+  // 5. Record both user turn and AI reply in lead tracker
+  recordLeadInteraction({
+    userId,
+    displayName,
+    userText,
+    assistantReply: brainResult.replyText,
+    status: currentLead?.status || "inquiry",
+    item: brainResult.suggestedItem,
+    amount: brainResult.suggestedAmount,
+    isEscalated: brainResult.shouldEscalateTelegram,
+  });
+
+  // 6. Telegram Copilot Alert if human escalation is needed
+  if (brainResult.shouldEscalateTelegram) {
+    await notifyTelegram(
+      `🚨 <b>[AiAon Facebook Copilot Alert]</b>\n` +
+      `👤 ลูกค้า: <b>${displayName}</b> (ID: <code>${senderId}</code>)\n` +
+      `💬 ข้อความ: "${userText}"\n` +
+      `🤖 AI ประเมิน: ต้องการให้ครูอ้นช่วยตอบโดยตรง\n` +
+      `🔗 <a href="https://business.facebook.com/latest/inbox">เปิดกล่องข้อความเพจ Facebook</a>`
+    );
+  }
+}
+
+/**
+ * Process Post Comment & Auto Comment-to-Inbox Private Reply
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function handleFeedCommentEvent(value: any, pageId: string) {
+  if (value.item !== "comment" || value.verb !== "add") return;
+
+  const commentId = value.comment_id;
+  const commenterId = value.from?.id;
+  const commenterName = value.from?.name || "คุณลูกค้า";
+  const commentText = value.message?.trim();
+
+  // Don't reply to our own page comments
+  if (!commentId || !commentText || commenterId === pageId) return;
+
+  console.log(`[FacebookWebhook] Received new post comment from ${commenterName}: "${commentText}"`);
+
+  // 1. Reply to comment publicly on page post
+  const publicReply = `สวัสดีครับคุณ ${commenterName} 😊 ครูอ้นส่งรายละเอียดสินค้า/โปรโมชั่นและตัวอย่างระบบให้ในกล่องข้อความ Inbox เรียบร้อยแล้วนะครับผม แวะเช็คดูได้เลยครับ ✨`;
+  await sendFacebookCommentReply(commentId, publicReply);
+
+  // 2. Consult AI Sales Brain for private inbox reply
+  const brainResult = await consultAiSalesBrain({
+    userText: commentText,
+    userId: `fb_${commenterId}`,
+    displayName: commenterName,
+  });
+
+  // 3. Send Private Reply directly into their Messenger Inbox!
+  const privateGreeting =
+    `สวัสดีครับคุณ ${commenterName} (จากที่คอมเมนต์ใต้โพสต์เพจ AiAon Tech ครับ) 🙏\n\n` +
+    brainResult.replyText;
+
+  await sendFacebookPrivateReply(commentId, privateGreeting);
+
+  // 4. Harvest to Google Sheet
+  harvestChatMessage({
+    userId: `fb_${commenterId}`,
+    displayName: `[FB Comment] ${commenterName}`,
+    sender: "customer",
+    message: `[Comment ใต้โพสต์] ${commentText}`,
+    intent: "FB_COMMENT_TO_INBOX",
+    status: "inquiry",
+    product: brainResult.suggestedItem,
+  });
+
+  // 5. Notify Telegram
+  await notifyTelegram(
+    `📢 <b>[AiAon Facebook Post Comment-to-Inbox]</b>\n` +
+    `👤 <b>${commenterName}</b> คอมเมนต์ใต้โพสต์:\n` +
+    `💬 "${commentText}"\n` +
+    `⚡ บอท AI เม้นต์ตอบหน้าโพสต์ + ทัก Inbox ส่งรายละเอียดให้เรียบร้อยแล้ว!`
+  );
+}
