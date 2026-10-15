@@ -347,7 +347,7 @@ export async function executeSlipVerification(params: {
   contentType: string;
   userId: string;
   customerName: string;
-  channel: "LINE OA" | "Facebook Messenger";
+  channel: "LINE OA" | "Facebook Messenger" | "Instagram Direct";
 }): Promise<VerificationResult> {
   const { imageBuffer, contentType, userId, customerName, channel } = params;
 
