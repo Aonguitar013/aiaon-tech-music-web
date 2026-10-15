@@ -41,9 +41,13 @@ function getMasterBrainJson(): string {
 let cachedGoldenCasesText = "";
 let lastGoldenFetchTime = 0;
 
+const DEFAULT_SHEET_WEBHOOK_URL =
+  "https://script.google.com/macros/s/AKfycbyPRw7GjvTv24XFfCsX73QMvPh4e9AFxxc6bfZZubdck7d1MIILECDHMudDAkhE7bj4TQ/exec";
+
 async function getDynamicGoldenCases(): Promise<string> {
-  const url = process.env.GOOGLE_SHEET_CHAT_WEBHOOK_URL || "";
+  const url = process.env.GOOGLE_SHEET_CHAT_WEBHOOK_URL || DEFAULT_SHEET_WEBHOOK_URL;
   if (!url) return "";
+
 
   const now = Date.now();
   if (cachedGoldenCasesText && now - lastGoldenFetchTime < 5 * 60 * 1000) {
