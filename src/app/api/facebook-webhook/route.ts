@@ -8,6 +8,11 @@ import {
   sendFacebookPrivateReply,
   getFacebookUserProfile,
 } from "@/services/facebook-messenger";
+import {
+  executeSlipVerification,
+  pendingOrders,
+  getPromptPayQrImageUrl,
+} from "@/services/slip-verification";
 
 // Webhook Verification Token (Configure in Meta for Developers)
 const FB_VERIFY_TOKEN =
@@ -101,7 +106,7 @@ export async function POST(req: NextRequest) {
 }
 
 /**
- * Process Facebook Messenger Message
+ * Process Facebook Messenger Message (Text & Slip Images)
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleMessengerEvent(event: any, pageId: string) {
@@ -111,13 +116,64 @@ async function handleMessengerEvent(event: any, pageId: string) {
   // Skip echo messages (messages sent by page admin or bot itself)
   if (event.message?.is_echo) return;
 
-  // Handle incoming text message
-  const userText = event.message?.text?.trim();
-  if (!userText) return;
-
   const userProfile = await getFacebookUserProfile(senderId);
   const displayName = userProfile.name || "ลูกค้า Facebook";
   const userId = `fb_${senderId}`;
+
+  // ── A. HANDLE INCOMING IMAGE ATTACHMENTS (5-LAYER BANK SLIP VERIFICATION) ──
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const imageAttachment = event.message?.attachments?.find((att: any) => att.type === "image");
+  if (imageAttachment?.payload?.url) {
+    try {
+      const imgRes = await fetch(imageAttachment.payload.url);
+      if (imgRes.ok) {
+        const contentType = imgRes.headers.get("content-type") || "image/jpeg";
+        const arrayBuffer = await imgRes.arrayBuffer();
+
+        const verification = await executeSlipVerification({
+          imageBuffer: arrayBuffer,
+          contentType,
+          userId,
+          customerName: displayName,
+          channel: "Facebook Messenger",
+        });
+
+        // If it's a bank slip (approved or rejected or payment qr), reply directly
+        if (verification.status !== "not_a_slip" && verification.replyText) {
+          await sendFacebookMessage(senderId, { text: verification.replyText });
+          return;
+        }
+      }
+    } catch (err) {
+      console.error("[FacebookWebhook] Slip image processing error:", err);
+    }
+  }
+
+  // ── B. HANDLE INCOMING TEXT MESSAGE ──
+  const userText = event.message?.text?.trim();
+  if (!userText) return;
+
+  // Check if user is sending their email after slip approval
+  const emailMatch = userText.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+  if (emailMatch && userText.length < 180) {
+    const existingOrder = pendingOrders.get(userId);
+    if (existingOrder && existingOrder.status === "verified_paid") {
+      existingOrder.customerEmail = emailMatch[0].toLowerCase();
+      pendingOrders.set(userId, existingOrder);
+
+      await notifyTelegram(
+        `📧 <b>[บันทึกอีเมลลูกค้า Facebook สำเร็จ]</b>\n` +
+        `👤 ลูกค้า: <b>${displayName}</b>\n` +
+        `📦 สินค้า: ${existingOrder.itemTitle}\n` +
+        `📬 อีเมล: <code>${existingOrder.customerEmail}</code>`
+      );
+
+      await sendFacebookMessage(senderId, {
+        text: `ได้รับข้อมูลอีเมล (${existingOrder.customerEmail}) บันทึกเข้าระบบสิทธิ์อัปเดตตลอดชีพเรียบร้อยครับ! หากต้องการสอบถามหรือติดปัญหาตรงไหน ทักมาหาครูอ้นได้ตลอดเวลานะครับผม ขอบคุณมากครับ 🙏✨`,
+      });
+      return;
+    }
+  }
 
   // 1. Harvest customer chat to Google Sheets
   harvestChatMessage({
@@ -140,15 +196,35 @@ async function handleMessengerEvent(event: any, pageId: string) {
   // 3. Send AI reply back to Facebook Messenger
   await sendFacebookMessage(senderId, { text: brainResult.replyText });
 
-  // If promptpay QR is suggested, send QR image
+  // If promptpay QR is suggested, record pending order & send QR image
   if (brainResult.shouldAttachPromptPayQr && brainResult.suggestedAmount) {
-    const qrUrl = `https://promptpay.io/0835399340/${brainResult.suggestedAmount}.png`;
+    const amount = brainResult.suggestedAmount;
+    const itemTitle = brainResult.suggestedItem || "ระบบนวัตกรรมจาก AiAon Tech";
+    const qrUrl = getPromptPayQrImageUrl(amount);
+
+    pendingOrders.set(userId, {
+      userId,
+      itemTitle,
+      baseAmount: amount,
+      vipAmount: 0,
+      isVipSelected: false,
+      orderedAt: new Date().toISOString(),
+      status: "pending_slip",
+    });
+
     await sendFacebookMessage(senderId, {
       attachment: {
         type: "image",
         payload: { url: qrUrl, is_reusable: true },
       },
     });
+
+    await notifyTelegram(
+      `🔔 <b>[AI Brain ปิดการขาย & ส่ง QR พร้อมเพย์ใน Facebook Messenger]</b>\n` +
+      `👤 ลูกค้า: <b>${displayName}</b>\n` +
+      `📦 สินค้า: ${itemTitle}\n` +
+      `💵 ยอดชำระ: ${amount.toLocaleString()} บาท (รอรับสลิป)`
+    );
   }
 
   // 4. Harvest AI response to Google Sheets
