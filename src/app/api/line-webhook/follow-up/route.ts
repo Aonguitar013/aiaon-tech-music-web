@@ -44,7 +44,21 @@ async function sendLinePushMessage(userId: string, text: string): Promise<boolea
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
-  const isExecute = url.searchParams.get("run") === "true";
+  const isVercelCron =
+    req.headers.get("x-vercel-cron") === "1" ||
+    req.headers.get("user-agent")?.includes("vercel-cron") ||
+    false;
+
+  // Optional CRON_SECRET verification if configured on Vercel
+  const cronSecret = process.env.CRON_SECRET;
+  if (cronSecret && isVercelCron) {
+    const authHeader = req.headers.get("authorization");
+    if (authHeader !== `Bearer ${cronSecret}`) {
+      return NextResponse.json({ error: "Unauthorized cron trigger" }, { status: 401 });
+    }
+  }
+
+  const isExecute = url.searchParams.get("run") === "true" || isVercelCron;
 
   const candidates = getFollowUpCandidates();
   const allLeads = getAllLeads();

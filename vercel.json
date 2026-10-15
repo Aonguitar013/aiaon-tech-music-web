@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/line-webhook/follow-up?run=true",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/line-webhook/follow-up?run=true",
+      "schedule": "0 12 * * *"
+    }
+  ]
+}
