@@ -7,6 +7,7 @@ import {
   sendFacebookCommentReply,
   sendFacebookPrivateReply,
   getFacebookUserProfile,
+  getFacebookConversationHistory,
 } from "@/services/facebook-messenger";
 import {
   executeSlipVerification,
@@ -130,6 +131,36 @@ async function handleMessengerEvent(event: any, pageId: string) {
         const contentType = imgRes.headers.get("content-type") || "image/jpeg";
         const arrayBuffer = await imgRes.arrayBuffer();
 
+        // If in-memory pending order was lost due to Vercel serverless cold start / redeploy,
+        // reconstitute the order from recent Facebook conversation history!
+        if (!pendingOrders.has(userId)) {
+          const fbHistory = await getFacebookConversationHistory(senderId, 25);
+          for (let i = fbHistory.length - 1; i >= 0; i--) {
+            const msg = fbHistory[i];
+            if (msg.role === "assistant") {
+              const priceMatch = msg.text.match(/(?:ราคา|ยอด|เป็น|อยู่ที่|โอน)\s*(?:อยู่ที่)?\s*([0-9,]+)\s*(?:บาท|฿)/);
+              if (priceMatch) {
+                const parsedAmount = parseInt(priceMatch[1].replace(/,/g, ""), 10);
+                if (parsedAmount > 0 && parsedAmount < 10000) {
+                  const codeMatch = msg.text.match(/\(([A-Z0-9]+)\)/);
+                  const itemTitle = codeMatch ? `ระบบ ${codeMatch[1]}` : "ระบบ/แพ็กเกจที่เลือกไว้ในแชต";
+                  pendingOrders.set(userId, {
+                    userId,
+                    itemTitle,
+                    baseAmount: parsedAmount,
+                    vipAmount: 0,
+                    isVipSelected: false,
+                    orderedAt: new Date().toISOString(),
+                    status: "pending_slip",
+                  });
+                  console.log(`[FacebookWebhook] Reconstituted pending order from Meta history: ${itemTitle} (${parsedAmount} ฿)`);
+                  break;
+                }
+              }
+            }
+          }
+        }
+
         const verification = await executeSlipVerification({
           imageBuffer: arrayBuffer,
           contentType,
@@ -184,16 +215,20 @@ async function handleMessengerEvent(event: any, pageId: string) {
     status: "inquiry",
   });
 
-  // 2. Consult AI Sales Brain (Gemini 2.5 Flash + Master Knowledge)
+  // 2. Fetch persistent conversation history directly from Meta Graph API
+  const fbHistory = await getFacebookConversationHistory(senderId, 25);
   const currentLead = getLead(userId);
+  const recentHistory = fbHistory.length > 0 ? fbHistory : currentLead?.conversationHistory;
+
+  // 3. Consult AI Sales Brain (Gemini 2.5 Flash + Master Knowledge)
   const brainResult = await consultAiSalesBrain({
     userText,
     userId,
     displayName,
-    recentHistory: currentLead?.conversationHistory,
+    recentHistory,
   });
 
-  // 3. Send AI reply back to Facebook Messenger
+  // 4. Send AI reply back to Facebook Messenger
   await sendFacebookMessage(senderId, { text: brainResult.replyText });
 
   // If promptpay QR is suggested, record pending order & send QR image

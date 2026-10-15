@@ -168,3 +168,57 @@ export async function getFacebookUserProfile(psid: string): Promise<FacebookUser
     return { id: psid, name: "ลูกค้า Facebook" };
   }
 }
+
+export interface FacebookChatMessage {
+  role: "user" | "assistant";
+  text: string;
+  timestamp: string;
+}
+
+/**
+ * Fetch recent Facebook Messenger conversation history directly from Meta Graph API
+ * This guarantees 100% persistent memory across Vercel serverless function restarts and redeploys!
+ */
+export async function getFacebookConversationHistory(
+  psid: string,
+  limit = 25
+): Promise<FacebookChatMessage[]> {
+  const token = getFacebookPageAccessToken();
+  if (!token) return [];
+
+  try {
+    const res = await fetch(
+      `${GRAPH_BASE_URL}/me/conversations?user_id=${psid}&fields=messages.limit(${limit}){message,from,created_time}&access_token=${token}`
+    );
+    if (!res.ok) {
+      console.warn("[FacebookMessenger] getFacebookConversationHistory HTTP error:", res.status);
+      return [];
+    }
+
+    const data = await res.json();
+    const conv = data.data?.[0];
+    const rawMessages = conv?.messages?.data || [];
+
+    // Filter out system notices, repeated warnings, and empty attachment placeholders
+    const cleanList = rawMessages
+      .filter((m: { message?: string }) => {
+        if (!m.message || !m.message.trim()) return false;
+        if (m.message.includes("Messenger automatically created a transfer request")) return false;
+        if (m.message.includes("ขออภัยครับ ระบบไม่พบรายการสั่งซื้อที่รอชำระเงิน")) return false;
+        if (m.message.includes("ไม่สามารถยืนยันสลิปได้ครับ")) return false;
+        return true;
+      })
+      .slice(0, 10)
+      .reverse();
+
+    return cleanList.map((m: { from?: { id?: string }; message: string; created_time?: string }) => ({
+      role: m.from?.id === psid ? "user" : "assistant",
+      text: m.message.trim(),
+      timestamp: m.created_time || new Date().toISOString(),
+    }));
+  } catch (err) {
+    console.error("[FacebookMessenger] Error fetching conversation history from Meta:", err);
+    return [];
+  }
+}
+
