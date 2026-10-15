@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { buildSignedDeliveryUrl } from "@/utils/delivery-links";
+import { consultAiSalesBrain } from "@/services/ai-sales-brain";
+import { getLead, recordLeadInteraction, markLeadAsPaid } from "@/services/lead-tracker";
 
 const PROMPTPAY_ID = "0835399340";
 const PROMPTPAY_NAME = "นายจิรวัฒน์ เดชเส้ง (ครูอ้น AiAon Tech)";
@@ -339,6 +341,18 @@ async function buildSmartAutoReply(
     }
 
     const customerName = await getLineUserDisplayName(userId, lineAccessToken);
+    if (userId) {
+      recordLeadInteraction({
+        userId,
+        displayName: customerName,
+        userText: text,
+        assistantReply: `สั่งซื้อ ${itemTitle} (รวม VIP Setup) ยอด ${totalAmount} บาท`,
+        status: "quoted",
+        item: `${itemTitle} (รวม VIP Setup)`,
+        amount: totalAmount,
+      });
+    }
+
     notifyKruAonTelegram(
       `🔔 [มีลูกค้ากดสั่งซื้อ + VIP Setup ใน LINE OA]\n` +
         `👤 ลูกค้า: ${customerName}\n` +
@@ -391,6 +405,18 @@ async function buildSmartAutoReply(
     }
 
     const customerName = await getLineUserDisplayName(userId, lineAccessToken);
+    if (userId) {
+      recordLeadInteraction({
+        userId,
+        displayName: customerName,
+        userText: text,
+        assistantReply: `สั่งซื้อ ${itemTitle} (${basePrice} บาท)`,
+        status: "quoted",
+        item: itemTitle,
+        amount: basePrice,
+      });
+    }
+
     notifyKruAonTelegram(
       `🔔 [มีลูกค้ากดสั่งซื้อระบบใน LINE OA]\n` +
         `👤 ลูกค้า: ${customerName}\n` +
@@ -455,6 +481,18 @@ async function buildSmartAutoReply(
     }
 
     const customerName = await getLineUserDisplayName(userId, lineAccessToken);
+    if (userId) {
+      recordLeadInteraction({
+        userId,
+        displayName: customerName,
+        userText: text,
+        assistantReply: `สั่งซื้อ ${itemTitle} (${amount} บาท)`,
+        status: "quoted",
+        item: itemTitle,
+        amount,
+      });
+    }
+
     notifyKruAonTelegram(
       `🔔 [มีลูกค้ากดสั่งซื้อแพ็กเกจใน LINE OA]\n` +
         `👤 ลูกค้า: ${customerName}\n` +
@@ -482,24 +520,73 @@ async function buildSmartAutoReply(
     ];
   }
 
-  // ── 6. GENERAL INQUIRIES FROM WEBSITE PRESETS ──
-  if (text.includes("สวัสดีครับครูอ้น")) {
-    return [
-      {
-        type: "text",
-        text:
-          `สวัสดีครับ! 🙏 ระบบอัตโนมัติของครูอ้น (AiAon Tech) ได้รับข้อความของท่านเรียบร้อยแล้วครับ\n\n` +
-          `📌 ระหว่างรอครูอ้นเข้ามาตอบกลับโดยตรง ท่านสามารถแจ้งรายละเอียดเพิ่มเติมทิ้งไว้ได้เลยครับ เช่น:\n` +
-          `• ชื่อระบบ / แพ็กเกจที่สนใจ\n` +
-          `• ชื่อโรงเรียน หรือหน่วยงาน (กรณีขอใบเสนอราคา / เชิญวิทยากร)\n\n` +
-          `🌐 ดูคลัง 20 ระบบทั้งหมด: https://www.aiaon.tech/digital-vault\n` +
-          `🎁 คลังของแจกฟรี (รหัส FREE69): https://www.aiaon.tech/freebies\n` +
-          `เดี๋ยวครูอ้นรีบเข้ามาดูแลให้เร็วที่สุดครับ! ⚡`,
-      },
-    ];
+  // ── 6. AI SALES & CONSULTATION BRAIN (Gemini 2.5 Flash + Master Knowledge Vault) ──
+  const customerName = await getLineUserDisplayName(userId, lineAccessToken);
+  const existingLead = userId ? getLead(userId) : null;
+  const recentHistory = existingLead?.conversationHistory || [];
+
+  const aiResult = await consultAiSalesBrain({
+    userText: text,
+    userId: userId || "guest",
+    displayName: customerName,
+    recentHistory,
+  });
+
+  const replyMessages: LineMessage[] = [
+    {
+      type: "text",
+      text: aiResult.replyText,
+    },
+  ];
+
+  // If customer intended to buy / asked for payment, dynamic QR is attached & pending order is set!
+  if (
+    aiResult.shouldAttachPromptPayQr &&
+    aiResult.suggestedAmount &&
+    aiResult.suggestedAmount > 0
+  ) {
+    const amount = aiResult.suggestedAmount;
+    const itemTitle = aiResult.suggestedItem || "ระบบนวัตกรรมจาก AiAon Tech";
+    const qrUrl = getPromptPayQrImageUrl(amount);
+
+    if (userId) {
+      pendingOrders.set(userId, {
+        userId,
+        itemTitle,
+        baseAmount: amount,
+        vipAmount: 0,
+        isVipSelected: false,
+        orderedAt: new Date().toISOString(),
+        status: "pending_slip",
+      });
+    }
+
+    replyMessages.push({
+      type: "image",
+      originalContentUrl: qrUrl,
+      previewImageUrl: qrUrl,
+    });
+
+    await notifyKruAonTelegram(
+      `🔔 [AI Brain ปิดการขาย & ส่ง QR พร้อมเพย์ใน LINE OA]\n` +
+        `👤 ลูกค้า: ${customerName}\n` +
+        `📦 สินค้า: ${itemTitle}\n` +
+        `💵 ยอดชำระ: ${amount.toLocaleString()} บาท\n` +
+        `💬 ข้อความลูกค้า: ${text}`
+    );
   }
 
-  return null;
+  // If AI flagged for human escalation
+  if (aiResult.shouldEscalateTelegram) {
+    await notifyKruAonTelegram(
+      `🚨 [AI Brain แจ้งเตือน: ลูกค้าต้องการติดต่อครูอ้นโดยตรง]\n` +
+        `👤 ลูกค้า: ${customerName}\n` +
+        `📌 เหตุผล: ${aiResult.escalateReason || "ลูกค้ามีคำถามเฉพาะทางหรือขอเอกสารพิเศษ"}\n` +
+        `💬 ข้อความลูกค้า: ${text}`
+    );
+  }
+
+  return replyMessages;
 }
 
 /**
@@ -906,6 +993,9 @@ async function verifyLineSlipImage(
       pendingOrder.verifiedBank = bankName;
       pendingOrders.set(userId, pendingOrder);
     }
+    if (userId) {
+      markLeadAsPaid(userId, transRef, actualSlipAmount, orderTitle);
+    }
 
     // Layer 5: Instant Encrypted VIP Download Link for ALL 59 Systems & Bundles + Telegram Alert
     const { url: signedDeliveryUrl, codes: unlockedCodes } = buildSignedDeliveryUrl(
@@ -959,10 +1049,12 @@ export async function GET() {
     status: "ok",
     service: "AiAon Tech Smart LINE OA Webhook (@deu6776s)",
     features: [
-      "1. Smart Order Memory per Customer",
-      "2. 5-Layer Bank Slip Verification (Bank of Thailand Mini-QR + Gemini Vision + Anti-Duplicate Ref)",
-      "3. Instant Product Download Link Delivery in LINE OA",
-      "4. Real-Time Slip Photo & Order Alert to Kru Aon's Telegram (@AiAonhub_bot)",
+      "1. Autonomous AI Sales & Consultation Brain (Gemini 2.5 Flash + Master Knowledge Vault)",
+      "2. Smart Lead Tracker & Automated 3-Stage Follow-up Engine",
+      "3. Smart Order Memory & Dynamic PromptPay QR Generation per Customer",
+      "4. 5-Layer Bank Slip Verification (Bank of Thailand Mini-QR + Gemini Vision + Anti-Duplicate Ref)",
+      "5. Instant Encrypted Product Download Link Delivery in LINE OA",
+      "6. Real-Time Slip Photo & Lead Alert to Kru Aon's Telegram (@AiAonhub_bot)",
     ],
     activePendingOrders: Array.from(pendingOrders.values()).slice(0, 10),
     recentLogs: g.__lineWebhookLogs || [],
