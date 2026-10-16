@@ -51,11 +51,15 @@ if (!g.__usedSlipRefs) {
 }
 if (!g.__leadTrackerMap) {
   g.__leadTrackerMap = new Map<string, LeadRecord>();
-  loadLeadsFromFile();
 }
 
 const leadMap: Map<string, LeadRecord> = g.__leadTrackerMap;
 const sharedUsedSlipRefs: Set<string> = g.__usedSlipRefs;
+
+// Load initial leads from disk if memory cache is empty
+if (leadMap.size === 0) {
+  loadLeadsFromFile();
+}
 
 function loadLeadsFromFile() {
   try {
