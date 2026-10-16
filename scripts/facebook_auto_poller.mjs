@@ -74,7 +74,11 @@ function getThaiTime() {
   return new Date().toLocaleTimeString('th-TH', { timeZone: 'Asia/Bangkok' });
 }
 
+let isPolling = false;
+
 async function pollConversations() {
+  if (isPolling) return;
+  isPolling = true;
   try {
     const url = `https://graph.facebook.com/${GRAPH_API_VERSION}/me/conversations?fields=id,snippet,updated_time,participants,messages.limit(1){id,message,from,created_time,attachments}&access_token=${PAGE_TOKEN}`;
     const res = await fetch(url);
@@ -169,6 +173,8 @@ async function pollConversations() {
     }
   } catch (err) {
     console.error(`[AutoPoller] [${getThaiTime()}] Loop Exception:`, err.message);
+  } finally {
+    isPolling = false;
   }
 }
 
