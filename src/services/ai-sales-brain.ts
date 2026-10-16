@@ -100,8 +100,9 @@ export async function consultAiSalesBrain(params: {
   userId: string;
   displayName: string;
   recentHistory?: ChatMessage[];
+  channel?: "facebook" | "instagram" | "line" | "youtube" | "tiktok";
 }): Promise<AiSalesResponse> {
-  const { userText, userId, displayName, recentHistory = [] } = params;
+  const { userText, userId, displayName, recentHistory = [], channel = "line" } = params;
   const apiKey = getGeminiApiKey();
 
   if (!apiKey) {
@@ -114,8 +115,26 @@ export async function consultAiSalesBrain(params: {
     getDynamicGoldenCases(),
   ]);
 
+  const channelContextDesc =
+    channel === "youtube"
+      ? "คุณกำลังตอบกลับคอมเมนต์ใต้คลิปวิดีโอ/YouTube Shorts บนช่อง YouTube ของคุณ (@aiaontech)"
+      : channel === "tiktok"
+      ? "คุณกำลังตอบคอมเมนต์หรือข้อความ DM บนช่อง TikTok ของคุณ (@iaontech)"
+      : channel === "instagram"
+      ? "คุณกำลังสนทนากับลูกค้าใน Instagram Direct (@aiaontech)"
+      : "คุณกำลังสนทนากับลูกค้า/คุณครูใน Facebook Messenger / LINE Official Account (@deu6776s)";
+
+  const channelGuidelines =
+    channel === "youtube"
+      ? `8. กฎพิเศษสำหรับการตอบคอมเมนต์ YouTube:
+   - ตอบอย่างกระชับ สุภาพ ให้ความรู้ 2-4 ประโยค (อ่านง่ายบนมือถือ)
+   - ไม่ต้องส่งเลขบัญชี/พร้อมเพย์หรือ PromptPay QR ในคอมเมนต์สาธารณะ (ตั้ง shouldAttachPromptPayQr = false เสมอ)
+   - แนะนำให้ทัก LINE OA @deu6776s (https://lin.ee/poMESoP) หรือทัก DM IG @aiaontech หรือดูที่เว็บ https://www.aiaon.tech เพื่อขอรับไฟล์/สอบถามเพิ่มเติม
+   - ถ้าถามของแจกฟรี แนะนำรหัส "FREE69" ไปกดรับที่ https://www.aiaon.tech/freebies ได้เลย`
+      : "";
+
   const systemInstruction = `คุณคือ "ครูอ้น" (นายจิรวัฒน์ เดชเส้ง) ครูดนตรีสากล ค.ศ.2 (ชำนาญการ) โรงเรียนหาดใหญ่วิทยาลัย (ญ.ว.) ผู้ก่อตั้ง AiAon Tech เจ้าของสโลแกน "ไอทีง่ายๆ สไตล์ iAon" 
-คุณกำลังสนทนากับลูกค้า/คุณครูใน Facebook Messenger / LINE Official Account
+${channelContextDesc}
 บุคลิกภาพ:
 - อบอุ่น สุภาพ เป็นกันเอง จริงใจ ไม่ฮาร์ดเซลล์ ไม่ตื๊อจนน่ารำคาญ
 - ใช้สรรพนามแทนตัวเองว่า "ผม" หรือ "ครูอ้น"
@@ -151,7 +170,8 @@ ${
      ━━━━━━━━━━━━━━━
      🏦 บัญชีพร้อมเพย์: 083-539-9340
      👤 ชื่อบัญชี: นายจิรวัฒน์ เดชเส้ง (ครูอ้น AiAon Tech)
-7. ส่งผลลัพธ์กลับมาเป็น JSON ตามรูปแบบที่กำหนดเท่านั้น ห้ามมี markdown ครอบ JSON (output pure JSON object)`;
+7. ส่งผลลัพธ์กลับมาเป็น JSON ตามรูปแบบที่กำหนดเท่านั้น ห้ามมี markdown ครอบ JSON (output pure JSON object)
+${channelGuidelines}`;
 
   const historyContext = recentHistory
     .map((h) => `${h.role === "user" ? "ลูกค้า" : "ครูอ้น"}: ${h.text}`)

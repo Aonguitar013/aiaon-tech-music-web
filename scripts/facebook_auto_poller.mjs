@@ -27,8 +27,17 @@ const FB_WEBHOOK_URL =
   process.env.FB_WEBHOOK_URL || process.env.WEBHOOK_URL || 'https://www.aiaon.tech/api/facebook-webhook';
 const IG_WEBHOOK_URL =
   process.env.IG_WEBHOOK_URL || 'https://www.aiaon.tech/api/instagram-webhook';
+const YT_WEBHOOK_URL =
+  process.env.YT_WEBHOOK_URL || 'https://www.aiaon.tech/api/youtube-webhook';
 
-const POLL_INTERVAL_MS = 3500; // เช็คทุก 3.5 วินาที
+const YOUTUBE_CHANNEL_ID = process.env.YOUTUBE_CHANNEL_ID || 'UCGodApXmVP-_BicC4xHhc-Q';
+const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || process.env.GEMINI_API_KEY || '';
+const YOUTUBE_CLIENT_ID = process.env.YOUTUBE_CLIENT_ID || '';
+const YOUTUBE_CLIENT_SECRET = process.env.YOUTUBE_CLIENT_SECRET || '';
+const YOUTUBE_REFRESH_TOKEN = process.env.YOUTUBE_REFRESH_TOKEN || '';
+
+const POLL_INTERVAL_MS = 3500; // เช็ค FB & IG ทุก 3.5 วินาที
+const YT_POLL_INTERVAL_MS = 60000; // เช็ค YouTube ทุก 60 วินาที (ประหยัดโควตา 10,000 units/วัน)
 const STATE_FILE = path.join(__dirname, '.poller_state.json');
 const PORT = process.env.PORT || 8080;
 
@@ -49,9 +58,11 @@ const server = http.createServer((req, res) => {
   res.end(
     JSON.stringify({
       status: 'active',
-      service: 'AiAon Tech Omnichannel 24/7 AI Sales Brain Poller (Facebook + Instagram)',
+      service: 'AiAon Tech Omnichannel 24/7 AI Sales Brain Poller (Facebook + Instagram + YouTube)',
       pageId: PAGE_ID,
       igBusinessId: IG_BUSINESS_ID,
+      youtubeChannelId: YOUTUBE_CHANNEL_ID,
+      youtubePollingActive: Boolean(YOUTUBE_REFRESH_TOKEN || YOUTUBE_API_KEY),
       processedCount: processedIds.size,
       time: new Date().toISOString(),
     })
@@ -216,18 +227,163 @@ async function pollAllChannels() {
   }
 }
 
+// -----------------------------------------------------------------------------
+// 🔴 3. YouTube Comments AI Polling Engine (ตรวจสอบทุก 60 วินาที)
+// -----------------------------------------------------------------------------
+let cachedYtAccessToken = '';
+let ytTokenExpiresAt = 0;
+
+async function getFreshYtToken() {
+  if (cachedYtAccessToken && Date.now() < ytTokenExpiresAt - 60000) {
+    return cachedYtAccessToken;
+  }
+  if (!YOUTUBE_REFRESH_TOKEN || !YOUTUBE_CLIENT_ID || !YOUTUBE_CLIENT_SECRET) {
+    return null;
+  }
+  try {
+    const res = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        client_id: YOUTUBE_CLIENT_ID,
+        client_secret: YOUTUBE_CLIENT_SECRET,
+        refresh_token: YOUTUBE_REFRESH_TOKEN,
+        grant_type: 'refresh_token',
+      }),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      cachedYtAccessToken = data.access_token;
+      ytTokenExpiresAt = Date.now() + (data.expires_in || 3600) * 1000;
+      return cachedYtAccessToken;
+    }
+  } catch (err) {
+    console.error(`[AutoPoller] [YouTube] Refresh token error:`, err.message);
+  }
+  return null;
+}
+
+let isYtPolling = false;
+
+async function pollYouTubeComments() {
+  if (isYtPolling) return;
+  isYtPolling = true;
+
+  try {
+    const token = await getFreshYtToken();
+    const queryParams = new URLSearchParams({
+      part: 'snippet',
+      allThreadsRelatedToChannelId: YOUTUBE_CHANNEL_ID,
+      order: 'time',
+      maxResults: '15',
+    });
+
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    } else if (YOUTUBE_API_KEY) {
+      queryParams.append('key', YOUTUBE_API_KEY);
+    } else {
+      // ยังไม่ได้ตั้งค่ากุญแจ YouTube -> ข้ามอย่างเงียบๆ
+      return;
+    }
+
+    const url = `https://www.googleapis.com/youtube/v3/commentThreads?${queryParams.toString()}`;
+    const res = await fetch(url, { headers });
+    if (!res.ok) {
+      if (res.status !== 403 && res.status !== 400) {
+        console.warn(`[AutoPoller] [${getThaiTime()}] YouTube Data API status: ${res.status}`);
+      }
+      return;
+    }
+
+    const data = await res.json();
+    const items = data.items || [];
+
+    for (const item of items) {
+      const topLevel = item.snippet?.topLevelComment;
+      if (!topLevel) continue;
+
+      const commentId = topLevel.id;
+      const stateKey = `yt_${commentId}`;
+      if (processedIds.has(stateKey)) continue;
+
+      const snippet = topLevel.snippet || {};
+      const authorName = snippet.authorDisplayName || 'ผู้ชม YouTube';
+      const authorChannelId = snippet.authorChannelId?.value || '';
+      const text = snippet.textOriginal || snippet.textDisplay || '';
+
+      // กรองคอมเมนต์ของช่องครูอ้นเอง
+      const lowerName = authorName.toLowerCase();
+      if (
+        authorChannelId === YOUTUBE_CHANNEL_ID ||
+        lowerName.includes('aiaon') ||
+        lowerName.includes('iaon') ||
+        lowerName.includes('ครูอ้น')
+      ) {
+        processedIds.add(stateKey);
+        saveState();
+        continue;
+      }
+
+      console.log(`\n⚡ [${getThaiTime()}] [YouTube] ตรวจพบคอมเมนต์ใหม่จาก: ${authorName}`);
+      console.log(`💬 คอมเมนต์: "${text}"`);
+
+      // มาร์กไว้ก่อนเพื่อกันการยิงซ้ำ
+      processedIds.add(stateKey);
+      saveState();
+
+      // ยิงเข้า YouTube Webhook
+      try {
+        const whRes = await fetch(YT_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            commentId,
+            threadId: item.id,
+            videoId: item.snippet?.videoId,
+            authorDisplayName: authorName,
+            authorChannelId,
+            text,
+          }),
+        });
+
+        if (whRes.ok) {
+          const resJson = await whRes.json();
+          console.log(`✅ [${getThaiTime()}] [YouTube] AI Sales Brain ตอบกลับและโพสต์คอมเมนต์สำเร็จ! 🚀`);
+          if (resJson.replyText) {
+            console.log(`📝 คำตอบ: "${resJson.replyText.substring(0, 80)}..."`);
+          }
+        } else {
+          console.error(`❌ [${getThaiTime()}] [YouTube] Webhook ตอบกลับ code: ${whRes.status}`);
+        }
+      } catch (err) {
+        console.error(`❌ [${getThaiTime()}] [YouTube] ยิง Webhook ล้มเหลว:`, err.message);
+      }
+    }
+  } catch (err) {
+    console.error(`[AutoPoller] [${getThaiTime()}] YouTube Loop Exception:`, err.message);
+  } finally {
+    isYtPolling = false;
+  }
+}
+
 console.log('================================================================');
 console.log('🤖 AiAon Tech — Omnichannel 24/7 AI Sales Brain Auto-Poller');
 console.log(`📡 ตรวจสอบกล่องข้อความ Facebook เพจ: ${PAGE_ID}`);
 console.log(`📸 ตรวจสอบกล่องข้อความ Instagram: ${IG_BUSINESS_ID} (@aiaontech)`);
-console.log(`⏱️ ความถี่: ตรวจสอบทุกๆ ${POLL_INTERVAL_MS / 1000} วินาที`);
+console.log(`🔴 ตรวจสอบคอมเมนต์ YouTube ช่อง: ${YOUTUBE_CHANNEL_ID} (@aiaontech)`);
+console.log(`⏱️ ความถี่: FB & IG ทุกๆ ${POLL_INTERVAL_MS / 1000} วิ | YouTube ทุกๆ ${YT_POLL_INTERVAL_MS / 1000} วิ`);
 console.log(`🌐 Facebook Webhook: ${FB_WEBHOOK_URL}`);
 console.log(`🌐 Instagram Webhook: ${IG_WEBHOOK_URL}`);
-console.log('🚀 พร้อมรับลูกค้าทั้ง Facebook + Instagram ตลอด 24 ชม. 100%!');
+console.log(`🌐 YouTube Webhook: ${YT_WEBHOOK_URL}`);
+console.log('🚀 พร้อมรับลูกค้าทั้ง Facebook + Instagram + YouTube ตลอด 24 ชม. 100%!');
 console.log('================================================================\n');
 
 // รันครั้งแรกทันที
 pollAllChannels();
+pollYouTubeComments();
 
-// ลูปตรวจทุก 3.5 วินาที
+// ลูปตรวจตามความถี่ที่กำหนดแยกกันอย่างอิสระ
 setInterval(pollAllChannels, POLL_INTERVAL_MS);
+setInterval(pollYouTubeComments, YT_POLL_INTERVAL_MS);

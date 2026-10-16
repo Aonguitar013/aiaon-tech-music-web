@@ -40,5 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# leads store
+# leads & poller store
 .leads_vault.json
+.poller_state.json
+*.log
