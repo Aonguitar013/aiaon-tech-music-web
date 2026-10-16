@@ -29,6 +29,8 @@ const IG_WEBHOOK_URL =
   process.env.IG_WEBHOOK_URL || 'https://www.aiaon.tech/api/instagram-webhook';
 const YT_WEBHOOK_URL =
   process.env.YT_WEBHOOK_URL || 'https://www.aiaon.tech/api/youtube-webhook';
+const TIKTOK_WEBHOOK_URL =
+  process.env.TIKTOK_WEBHOOK_URL || 'https://www.aiaon.tech/api/tiktok-webhook';
 
 const YOUTUBE_CHANNEL_ID = process.env.YOUTUBE_CHANNEL_ID || 'UCGodApXmVP-_BicC4xHhc-Q';
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || process.env.GEMINI_API_KEY || '';
@@ -58,11 +60,12 @@ const server = http.createServer((req, res) => {
   res.end(
     JSON.stringify({
       status: 'active',
-      service: 'AiAon Tech Omnichannel 24/7 AI Sales Brain Poller (Facebook + Instagram + YouTube)',
+      service: 'AiAon Tech Omnichannel 24/7 AI Sales Brain Poller (Facebook + Instagram + YouTube + TikTok)',
       pageId: PAGE_ID,
       igBusinessId: IG_BUSINESS_ID,
       youtubeChannelId: YOUTUBE_CHANNEL_ID,
       youtubePollingActive: Boolean(YOUTUBE_REFRESH_TOKEN || YOUTUBE_API_KEY),
+      tiktokWebhookActive: true,
       processedCount: processedIds.size,
       time: new Date().toISOString(),
     })
@@ -377,7 +380,8 @@ console.log(`⏱️ ความถี่: FB & IG ทุกๆ ${POLL_INTERVAL_
 console.log(`🌐 Facebook Webhook: ${FB_WEBHOOK_URL}`);
 console.log(`🌐 Instagram Webhook: ${IG_WEBHOOK_URL}`);
 console.log(`🌐 YouTube Webhook: ${YT_WEBHOOK_URL}`);
-console.log('🚀 พร้อมรับลูกค้าทั้ง Facebook + Instagram + YouTube ตลอด 24 ชม. 100%!');
+console.log(`🌐 TikTok Webhook: ${TIKTOK_WEBHOOK_URL}`);
+console.log('🚀 พร้อมรับลูกค้าครบทั้ง Facebook + Instagram + YouTube + TikTok ตลอด 24 ชม. 100%!');
 console.log('================================================================\n');
 
 // รันครั้งแรกทันที
