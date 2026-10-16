@@ -15,6 +15,9 @@ export interface InstagramUserProfile {
   profile_pic?: string;
 }
 
+const DEFAULT_IG_PAGE_ACCESS_TOKEN =
+  "EAAOPtSM4dCkBSrOO9AR3ZC31ZB9qwzngFrD7kTV2vJP2ZAFZCzZAfZAmfJcabvfSQ4UK4lo7ldq7BwtjT7UnUqsmVIw12dCFdTo8LPf0ZA12wpxENaggPBZAf5n5q2th2ehdFSMFSdLcBb7drzipuXiEHMvuoSY1QNuob6vz6cqSxKeI8fqKW3i5Pw83mC1gOqzzobqQwBKK1O2EJ1NOReze8mKMYaUFBZCZAxLrin6PUl";
+
 /**
  * Get Page/Instagram Access Token from environment (shared with Facebook Page Token)
  */
@@ -24,7 +27,7 @@ export function getInstagramAccessToken(): string {
     process.env.INSTAGRAM_ACCESS_TOKEN ||
     process.env.FB_PAGE_ACCESS_TOKEN ||
     process.env.FACEBOOK_PAGE_ACCESS_TOKEN ||
-    ""
+    DEFAULT_IG_PAGE_ACCESS_TOKEN
   );
 }
 

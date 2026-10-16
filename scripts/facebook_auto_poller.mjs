@@ -1,8 +1,8 @@
 /**
  * =========================================================================
- * 🤖 AiAon Tech — Facebook Messenger Auto-Polling Engine
- * เอนจินเฝ้ากล่องข้อความเพจ AiAon Tech ตลอด 24 ชม.
- * ตอบกลับลูกค้าทุกคนบนโลกอัตโนมัติ โดยไม่ต้องรอการอนุมัติสิทธิ์จาก Meta!
+ * 🤖 AiAon Tech — Omnichannel 24/7 AI Sales Brain Auto-Polling Engine
+ * เอนจินเฝ้ากล่องข้อความ Facebook Messenger & Instagram Direct ตลอด 24 ชม.
+ * ตอบกลับลูกค้าทุกคนบนโลกอัตโนมัติ โดยไม่ต้องรอการอนุมัติสิทธิ์ Meta App Review!
  * =========================================================================
  */
 
@@ -15,14 +15,33 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PAGE_ID = process.env.FB_PAGE_ID || '1083641784827447';
+const IG_BUSINESS_ID = process.env.IG_BUSINESS_ACCOUNT_ID || '17841425761151400';
 const GRAPH_API_VERSION = 'v21.0';
+
 const PAGE_TOKEN =
   process.env.FB_PAGE_ACCESS_TOKEN ||
-  'EAAOPtSM4dCkBSqw6ZAIAcrZBz08kDQiUpBLZAsBaC5ZAMC9xSsgM7SgJPVQMGjRQefKzCkkZCAOxF7fLO6DhMbZCW6Rit9hsM1cYaaQHBhWHIrK3gOGZAQdds9sriI9DJliD9uQyL3Ej45OHJQJp9QGZBj3Sz1bK24w4KbGepJIu74Vy6s1GBekqb6koqarZBNI6ATuSTfgZDZD';
-const WEBHOOK_URL = process.env.WEBHOOK_URL || 'https://www.aiaon.tech/api/facebook-webhook';
+  process.env.IG_ACCESS_TOKEN ||
+  'EAAOPtSM4dCkBSrOO9AR3ZC31ZB9qwzngFrD7kTV2vJP2ZAFZCzZAfZAmfJcabvfSQ4UK4lo7ldq7BwtjT7UnUqsmVIw12dCFdTo8LPf0ZA12wpxENaggPBZAf5n5q2th2ehdFSMFSdLcBb7drzipuXiEHMvuoSY1QNuob6vz6cqSxKeI8fqKW3i5Pw83mC1gOqzzobqQwBKK1O2EJ1NOReze8mKMYaUFBZCZAxLrin6PUl';
+
+const FB_WEBHOOK_URL =
+  process.env.FB_WEBHOOK_URL || process.env.WEBHOOK_URL || 'https://www.aiaon.tech/api/facebook-webhook';
+const IG_WEBHOOK_URL =
+  process.env.IG_WEBHOOK_URL || 'https://www.aiaon.tech/api/instagram-webhook';
+
 const POLL_INTERVAL_MS = 3500; // เช็คทุก 3.5 วินาที
 const STATE_FILE = path.join(__dirname, '.poller_state.json');
 const PORT = process.env.PORT || 8080;
+
+// เก็บประวัติ ID ข้อความที่เคยประมวลผลแล้ว
+let processedIds = new Set();
+try {
+  if (fs.existsSync(STATE_FILE)) {
+    const raw = fs.readFileSync(STATE_FILE, 'utf8');
+    processedIds = new Set(JSON.parse(raw));
+  }
+} catch {
+  processedIds = new Set();
+}
 
 // สร้าง HTTP Healthcheck Endpoint สำหรับ Cloud Container (Render, Koyeb, Railway)
 const server = http.createServer((req, res) => {
@@ -30,8 +49,9 @@ const server = http.createServer((req, res) => {
   res.end(
     JSON.stringify({
       status: 'active',
-      service: 'AiAon Tech Facebook 24/7 AI Sales Brain Poller',
+      service: 'AiAon Tech Omnichannel 24/7 AI Sales Brain Poller (Facebook + Instagram)',
       pageId: PAGE_ID,
+      igBusinessId: IG_BUSINESS_ID,
       processedCount: processedIds.size,
       time: new Date().toISOString(),
     })
@@ -50,17 +70,6 @@ setInterval(() => {
     .catch(() => {});
 }, 10 * 60 * 1000);
 
-// เก็บประวัติ ID ข้อความที่เคยประมวลผลแล้ว
-let processedIds = new Set();
-try {
-  if (fs.existsSync(STATE_FILE)) {
-    const raw = fs.readFileSync(STATE_FILE, 'utf8');
-    processedIds = new Set(JSON.parse(raw));
-  }
-} catch {
-  processedIds = new Set();
-}
-
 function saveState() {
   try {
     const arr = Array.from(processedIds).slice(-500); // เก็บ 500 รายการล่าสุด
@@ -76,101 +85,130 @@ function getThaiTime() {
 
 let isPolling = false;
 
-async function pollConversations() {
+async function pollChannel({ name, platformParam, webhookUrl, defaultRecipientId }) {
+  const platformQuery = platformParam ? `&platform=${platformParam}` : '';
+  const url = `https://graph.facebook.com/${GRAPH_API_VERSION}/me/conversations?fields=id,snippet,updated_time,participants,messages.limit(1){id,message,from,created_time,attachments}${platformQuery}&access_token=${PAGE_TOKEN}`;
+
+  const res = await fetch(url);
+  if (!res.ok) {
+    if (res.status !== 500 && res.status !== 502) {
+      console.warn(`[AutoPoller] [${getThaiTime()}] ${name} Graph API เตือน status: ${res.status}`);
+    }
+    return;
+  }
+
+  const data = await res.json();
+  const convs = data.data || [];
+
+  for (const conv of convs) {
+    const latestMsg = conv.messages?.data?.[0];
+    if (!latestMsg) continue;
+
+    const msgId = latestMsg.id;
+    const senderId = latestMsg.from?.id;
+    const senderName = latestMsg.from?.name || (name === 'Instagram' ? 'ลูกค้า Instagram' : 'ลูกค้า Facebook');
+
+    // 1. ถ้าข้อความส่งมาจาก "เพจ/บัญชี IG ของเราเอง" แปลว่าตอบไปแล้ว -> ข้ามได้เลย
+    if (
+      senderId === PAGE_ID ||
+      senderId === IG_BUSINESS_ID ||
+      senderName === 'AiAon Tech' ||
+      senderName === 'aiaontech'
+    ) {
+      continue;
+    }
+
+    // 2. ถ้าข้อความนี้เคยส่งเข้า AI ประมวลผลไปแล้ว -> ข้าม
+    if (processedIds.has(msgId)) continue;
+
+    console.log(`\n⚡ [${getThaiTime()}] [${name}] ตรวจพบข้อความใหม่จาก: ${senderName} (${senderId})`);
+
+    // มาร์กไว้ก่อนเพื่อป้องกันการยิงซ้ำ
+    processedIds.add(msgId);
+    saveState();
+
+    // สกัดข้อความและรูปภาพแนบ (สลิป/สติกเกอร์)
+    let textContent = latestMsg.message?.trim();
+    const attachments = [];
+
+    if (latestMsg.attachments?.data) {
+      for (const att of latestMsg.attachments.data) {
+        if (att.image_data?.url) {
+          attachments.push({
+            type: 'image',
+            payload: { url: att.image_data.url },
+          });
+        }
+      }
+    }
+
+    // ถ้าเป็นสติกเกอร์ (ไม่มีข้อความตัวอักษรและไม่ใช่รูปสลิป)
+    if (!textContent && attachments.length === 0) {
+      textContent = '👍 (ส่งสติกเกอร์ทักทาย)';
+    }
+
+    console.log(`💬 ข้อความ [${name}]: "${textContent || '[รูปภาพสลิป/ไฟล์แนบ]'}"`);
+
+    // 3. จำลอง Webhook Event ส่งเข้า Production ของ aiaon.tech
+    const webhookPayload = {
+      object: name === 'Instagram' ? 'instagram' : 'page',
+      entry: [
+        {
+          id: defaultRecipientId,
+          time: Date.now(),
+          messaging: [
+            {
+              sender: { id: senderId },
+              recipient: { id: defaultRecipientId },
+              timestamp: new Date(latestMsg.created_time).getTime(),
+              message: {
+                mid: msgId,
+                text: textContent,
+                attachments: attachments.length > 0 ? attachments : undefined,
+              },
+            },
+          ],
+        },
+      ],
+    };
+
+    try {
+      const whRes = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(webhookPayload),
+      });
+
+      if (whRes.ok) {
+        console.log(`✅ [${getThaiTime()}] [${name}] AI Sales Brain ตอบกลับและส่งเข้าแชตสำเร็จ! 🚀`);
+      } else {
+        console.error(`❌ [${getThaiTime()}] [${name}] Webhook ตอบกลับ code: ${whRes.status}`);
+      }
+    } catch (postErr) {
+      console.error(`❌ [${getThaiTime()}] [${name}] ข้อผิดพลาดในการยิง Webhook:`, postErr.message);
+    }
+  }
+}
+
+async function pollAllChannels() {
   if (isPolling) return;
   isPolling = true;
   try {
-    const url = `https://graph.facebook.com/${GRAPH_API_VERSION}/me/conversations?fields=id,snippet,updated_time,participants,messages.limit(1){id,message,from,created_time,attachments}&access_token=${PAGE_TOKEN}`;
-    const res = await fetch(url);
-    if (!res.ok) {
-      console.warn(`[AutoPoller] [${getThaiTime()}] Graph API เตือน status: ${res.status}`);
-      return;
-    }
+    // 1. ตรวจกล่องข้อความ Facebook Messenger
+    await pollChannel({
+      name: 'Facebook',
+      platformParam: null,
+      webhookUrl: FB_WEBHOOK_URL,
+      defaultRecipientId: PAGE_ID,
+    });
 
-    const data = await res.json();
-    const convs = data.data || [];
-
-    for (const conv of convs) {
-      const latestMsg = conv.messages?.data?.[0];
-      if (!latestMsg) continue;
-
-      const msgId = latestMsg.id;
-      const senderId = latestMsg.from?.id;
-      const senderName = latestMsg.from?.name || 'ลูกค้า Facebook';
-
-      // 1. ถ้าข้อความล่าสุดส่งมาจาก "เพจของเราเอง" แปลว่าตอบไปแล้ว -> ข้ามได้เลย
-      if (senderId === PAGE_ID) continue;
-
-      // 2. ถ้าข้อความนี้เคยส่งเข้า AI ประมวลผลไปแล้ว -> ข้าม
-      if (processedIds.has(msgId)) continue;
-
-      console.log(`\n⚡ [${getThaiTime()}] ตรวจพบข้อความใหม่จาก: ${senderName} (${senderId})`);
-
-      // มาร์กไว้ก่อนเพื่อป้องกันการยิงซ้ำ
-      processedIds.add(msgId);
-      saveState();
-
-      // สกัดข้อความและรูปภาพแนบ (สลิป/สติกเกอร์)
-      let textContent = latestMsg.message?.trim();
-      const attachments = [];
-
-      if (latestMsg.attachments?.data) {
-        for (const att of latestMsg.attachments.data) {
-          if (att.image_data?.url) {
-            attachments.push({
-              type: 'image',
-              payload: { url: att.image_data.url },
-            });
-          }
-        }
-      }
-
-      // ถ้าเป็นสติกเกอร์ (ไม่มีข้อความตัวอักษรและไม่ใช่รูปสลิป)
-      if (!textContent && attachments.length === 0) {
-        textContent = '👍 (ส่งสติกเกอร์ทักทาย)';
-      }
-
-      console.log(`💬 ข้อความ: "${textContent || '[รูปภาพสลิป/ไฟล์แนบ]'}"`);
-
-      // 3. จำลอง Event ส่งเข้า Webhook Production ของ aiaon.tech
-      const webhookPayload = {
-        object: 'page',
-        entry: [
-          {
-            id: PAGE_ID,
-            time: Date.now(),
-            messaging: [
-              {
-                sender: { id: senderId },
-                recipient: { id: PAGE_ID },
-                timestamp: new Date(latestMsg.created_time).getTime(),
-                message: {
-                  mid: msgId,
-                  text: textContent,
-                  attachments: attachments.length > 0 ? attachments : undefined,
-                },
-              },
-            ],
-          },
-        ],
-      };
-
-      try {
-        const whRes = await fetch(WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(webhookPayload),
-        });
-
-        if (whRes.ok) {
-          console.log(`✅ [${getThaiTime()}] AI Sales Brain ตอบกลับและส่งเข้าแชตสำเร็จ! 🚀`);
-        } else {
-          console.error(`❌ [${getThaiTime()}] Webhook ตอบกลับ code: ${whRes.status}`);
-        }
-      } catch (postErr) {
-        console.error(`❌ [${getThaiTime()}] ข้อผิดพลาดในการยิง Webhook:`, postErr.message);
-      }
-    }
+    // 2. ตรวจกล่องข้อความ Instagram Direct
+    await pollChannel({
+      name: 'Instagram',
+      platformParam: 'instagram',
+      webhookUrl: IG_WEBHOOK_URL,
+      defaultRecipientId: IG_BUSINESS_ID,
+    });
   } catch (err) {
     console.error(`[AutoPoller] [${getThaiTime()}] Loop Exception:`, err.message);
   } finally {
@@ -179,14 +217,17 @@ async function pollConversations() {
 }
 
 console.log('================================================================');
-console.log('🤖 AiAon Tech — Facebook 24/7 AI Sales Brain Auto-Poller');
-console.log(`📡 ตรวจสอบกล่องข้อความเพจ: ${PAGE_ID} ทุกๆ ${POLL_INTERVAL_MS / 1000} วินาที`);
-console.log(`🌐 เชื่อมต่อสมอง AI สด: ${WEBHOOK_URL}`);
-console.log('🚀 พร้อมรับลูกค้าทุกคนบนโลก 100% (ไม่ต้องรออนุมัติ Meta App)');
+console.log('🤖 AiAon Tech — Omnichannel 24/7 AI Sales Brain Auto-Poller');
+console.log(`📡 ตรวจสอบกล่องข้อความ Facebook เพจ: ${PAGE_ID}`);
+console.log(`📸 ตรวจสอบกล่องข้อความ Instagram: ${IG_BUSINESS_ID} (@aiaontech)`);
+console.log(`⏱️ ความถี่: ตรวจสอบทุกๆ ${POLL_INTERVAL_MS / 1000} วินาที`);
+console.log(`🌐 Facebook Webhook: ${FB_WEBHOOK_URL}`);
+console.log(`🌐 Instagram Webhook: ${IG_WEBHOOK_URL}`);
+console.log('🚀 พร้อมรับลูกค้าทั้ง Facebook + Instagram ตลอด 24 ชม. 100%!');
 console.log('================================================================\n');
 
 // รันครั้งแรกทันที
-pollConversations();
+pollAllChannels();
 
 // ลูปตรวจทุก 3.5 วินาที
-setInterval(pollConversations, POLL_INTERVAL_MS);
+setInterval(pollAllChannels, POLL_INTERVAL_MS);
