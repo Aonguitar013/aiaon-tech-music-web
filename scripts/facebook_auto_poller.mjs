@@ -42,6 +42,14 @@ server.listen(PORT, () => {
   console.log(`🌐 Cloud Healthcheck Server กำลังทำงานที่ Port ${PORT}`);
 });
 
+// Self-Ping Keep-Alive ป้องกัน Render Free Tier หลับ ทุกๆ 10 นาที
+const KEEPALIVE_URL = process.env.RENDER_EXTERNAL_URL || 'https://aiaon-tech-music-web.onrender.com';
+setInterval(() => {
+  fetch(KEEPALIVE_URL)
+    .then(() => console.log(`[KeepAlive] [${getThaiTime()}] ปิงตัวเองเพื่อคงสถานะตื่นตลอด 24 ชม. สำเร็จ 🟢`))
+    .catch(() => {});
+}, 10 * 60 * 1000);
+
 // เก็บประวัติ ID ข้อความที่เคยประมวลผลแล้ว
 let processedIds = new Set();
 try {
