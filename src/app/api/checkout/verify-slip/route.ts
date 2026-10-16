@@ -1,152 +1,231 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import {
+  executeSlipVerification,
+  pendingOrders,
+} from "@/services/slip-verification";
+import { buildSignedDeliveryUrl } from "@/utils/delivery-links";
+
+function parseServerPrice(priceStr?: string | number | null): number {
+  if (typeof priceStr === "number") return priceStr;
+  if (!priceStr) return 0;
+  const clean = String(priceStr).replace(/[^0-9.]/g, "");
+  const num = parseFloat(clean);
+  return isNaN(num) ? 0 : num;
+}
+
+function getServerVipSetupPrice(title: string): number {
+  const upper = (title || "").toUpperCase();
+  if (
+    upper.includes("AONE09") ||
+    upper.includes("ห้องเรียนสีขาว") ||
+    upper.includes("AONA02") ||
+    upper.includes("ยานพาหนะ")
+  ) {
+    return 690;
+  }
+  if (
+    upper.includes("AONA01") ||
+    upper.includes("AONA03") ||
+    upper.includes("เกียรติบัตร") ||
+    upper.includes("AONE01") ||
+    upper.includes("AONE02") ||
+    upper.includes("AONE05") ||
+    upper.includes("AONE08") ||
+    upper.includes("AONE10") ||
+    upper.includes("3D") ||
+    upper.includes("AONM01") ||
+    upper.includes("AONA06")
+  ) {
+    return 350;
+  }
+  return 190;
+}
 
 export async function POST(req: NextRequest) {
   try {
-    const { orderId, slipUrl, expectedAmount } = await req.json();
+    const body = await req.json();
+    const { orderId, slipUrl } = body;
 
-    if (!slipUrl) {
-      return NextResponse.json({ success: false, error: "Missing slip URL" }, { status: 400 });
+    if (!orderId || !slipUrl) {
+      return NextResponse.json(
+        { success: false, verified: false, error: "ข้อมูลคำสั่งซื้อหรือลิงก์สลิปไม่ครบถ้วน" },
+        { status: 400 }
+      );
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      console.warn("[AI Verification] No GEMINI_API_KEY found, fallback to pending status");
-      return NextResponse.json({
-        success: true,
-        verified: false,
-        message: "สลิปถูกบันทึกเรียบร้อย (รอแอดมินตรวจสอบ)"
-      });
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    // 1. Fetch Order & True Product/Course Price from Supabase Server-Side (Never trust client expectedAmount alone)
+    const { data: order, error: orderErr } = await supabase
+      .from("orders")
+      .select("id, user_id, product_id, course_id, amount, status")
+      .eq("id", orderId)
+      .maybeSingle();
+
+    if (orderErr || !order) {
+      return NextResponse.json(
+        { success: false, verified: false, error: "ไม่พบรายการสั่งซื้อนี้ในระบบฐานข้อมูล" },
+        { status: 404 }
+      );
     }
 
-    // 1. Fetch image data from slipUrl
-    let imageBase64 = "";
-    let mimeType = "image/jpeg";
+    if (user && order.user_id && order.user_id !== user.id) {
+      return NextResponse.json(
+        { success: false, verified: false, error: "คุณไม่มีสิทธิ์ตรวจสอบรายการสั่งซื้อนี้" },
+        { status: 403 }
+      );
+    }
+
+    let itemTitle = "รายการสั่งซื้อเว็บไซต์ AiAon Tech";
+    let baseAmount = 0;
+    let itemFileUrl: string | null = null;
+
+    if (order.product_id) {
+      const { data: product } = await supabase
+        .from("products")
+        .select("id, title, price, file_url")
+        .eq("id", order.product_id)
+        .maybeSingle();
+
+      if (product) {
+        itemTitle = product.title || itemTitle;
+        baseAmount = parseServerPrice(product.price);
+        itemFileUrl = product.file_url || null;
+      }
+    } else if (order.course_id) {
+      const { data: course } = await supabase
+        .from("courses")
+        .select("id, title, price")
+        .eq("id", order.course_id)
+        .maybeSingle();
+
+      if (course) {
+        itemTitle = course.title || itemTitle;
+        baseAmount = parseServerPrice(course.price);
+      }
+    }
+
+    if (baseAmount <= 0) {
+      baseAmount = parseServerPrice(order.amount);
+    }
+
+    const vipAmount = getServerVipSetupPrice(itemTitle);
+    const isVipSelected = String(order.amount || "").includes("VIP Setup");
+
+    // 2. Fetch Slip Image Binary
+    let imageBuffer: ArrayBuffer;
+    let contentType = "image/jpeg";
 
     try {
       const imgRes = await fetch(slipUrl);
-      if (!imgRes.ok) throw new Error("Cannot fetch slip image");
-      
-      const contentType = imgRes.headers.get("content-type");
-      if (contentType) mimeType = contentType;
-
-      const arrayBuffer = await imgRes.arrayBuffer();
-      imageBase64 = Buffer.from(arrayBuffer).toString("base64");
+      if (!imgRes.ok) throw new Error(`HTTP ${imgRes.status} fetching slip image`);
+      const headerType = imgRes.headers.get("content-type");
+      if (headerType) contentType = headerType;
+      imageBuffer = await imgRes.arrayBuffer();
     } catch (fetchErr) {
-      console.error("[AI Verification] Error fetching slip image:", fetchErr);
+      console.error("[Checkout Verify-Slip] Error fetching slip image:", fetchErr);
       return NextResponse.json({
         success: true,
         verified: false,
-        message: "บันทึกสลิปสำเร็จ รอแอดมินตรวจสอบ"
+        status: "manual_review",
+        message: "บันทึกสลิปสำเร็จ กำลังส่งให้ผู้ดูแลระบบตรวจสอบ",
       });
     }
 
-    // 2. Prepare Prompt & Schema for Gemini 2.5 Flash
-    const prompt = `คุณคือผู้เชี่ยวชาญการตรวจสอบสลิปโอนเงินธนาคารไทย (Thai Bank Transfer Slip Auditor)
-หน้าที่ของคุณคือตรวจสอบรูปสลิปนี้อย่างละเอียด โดยมีข้อมูลอ้างอิงของร้านค้าดังนี้:
-- ชื่อบัญชีผู้รับที่ถูกต้อง: "นายจิรวัฒน์ เดชเส้ง" หรือ "จิรวัฒน์ เดชเส้ง" หรือ "JIRAWAT DECHSENG" หรือ "จิรวัฒน์ ด." หรือ พร้อมเพย์ 083-539-9340 / 0835399340
-- ยอดเงินที่คาดหวัง: ${expectedAmount || "ตามยอดในสลิป"} บาท
+    // 3. Register Server-Verified Pending Order & Execute 5-Layer Slip Verification Engine
+    const verifyUserId = `web_${order.user_id || user?.id || orderId}`;
+    const customerName = user?.email || `WebUser-${String(order.user_id || orderId).slice(0, 8)}`;
 
-เกณฑ์การตัดสิน (Decision Criteria):
-1. ตรวจสอบว่าภาพนี้คือสลิปโอนเงินของธนาคารไทยจริง (KBank, SCB, Krungthai, Bangkok Bank, GSB, TTB, PromptPay ฯลฯ)
-2. ตรวจสอบว่าชื่อผู้รับตรงกับ จิรวัฒน์ เดชเส้ง หรือเบอร์ 083-539-9340
-3. ตรวจสอบยอดเงินโอน
-4. ถ้าชื่อผู้รับถูกต้อง และยอดเงินโอนสอดคล้อง ให้ตัดสิน 'APPROVED'
-5. ถ้าภาพไม่ชัด, ชื่อไม่ตรง, ยอดไม่ตรง หรือไม่ใช่สลิป ให้ตัดสิน 'MANUAL_REVIEW'`;
-
-    const payload = {
-      contents: [
-        {
-          parts: [
-            { text: prompt },
-            {
-              inlineData: {
-                mimeType: mimeType,
-                data: imageBase64
-              }
-            }
-          ]
-        }
-      ],
-      generationConfig: {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: "OBJECT",
-          properties: {
-            isBankSlip: { type: "BOOLEAN" },
-            receiverName: { type: "STRING" },
-            receiverMatches: { type: "BOOLEAN" },
-            transferredAmount: { type: "NUMBER" },
-            bankName: { type: "STRING" },
-            transactionDate: { type: "STRING" },
-            decision: { type: "STRING", enum: ["APPROVED", "MANUAL_REVIEW"] },
-            reason: { type: "STRING" }
-          },
-          required: ["isBankSlip", "receiverName", "receiverMatches", "transferredAmount", "decision", "reason"]
-        }
-      }
-    };
-
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-    
-    const aiResponse = await fetch(geminiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+    pendingOrders.set(verifyUserId, {
+      userId: verifyUserId,
+      itemTitle,
+      baseAmount,
+      vipAmount,
+      isVipSelected,
+      orderedAt: new Date().toISOString(),
+      status: "pending_slip",
+      customerEmail: user?.email,
     });
 
-    if (!aiResponse.ok) {
-      console.error("[AI Verification] Gemini API error:", await aiResponse.text());
-      return NextResponse.json({
-        success: true,
-        verified: false,
-        message: "บันทึกสลิปสำเร็จ รอแอดมินตรวจสอบ"
-      });
-    }
+    const verification = await executeSlipVerification({
+      imageBuffer,
+      contentType,
+      userId: verifyUserId,
+      customerName,
+      channel: "Website Checkout",
+    });
 
-    const aiData = await aiResponse.json();
-    const resultText = aiData?.candidates?.[0]?.content?.parts?.[0]?.text;
-    
-    if (!resultText) {
-      return NextResponse.json({ success: true, verified: false, message: "บันทึกสลิปสำเร็จ รอแอดมินตรวจสอบ" });
-    }
-
-    const verificationResult = JSON.parse(resultText);
-    console.log("[AI Verification Result]:", verificationResult);
-
-    const isApproved = verificationResult.decision === "APPROVED" && verificationResult.receiverMatches;
-
-    // 3. Update Supabase Order if approved
-    const supabase = await createClient();
-    
-    if (orderId && isApproved) {
+    // 4. Handle Approved -> Update Order to 'completed' & Return Signed Instant Delivery URL
+    if (verification.status === "approved") {
       const { error: updateError } = await supabase
         .from("orders")
-        .update({
-          status: "completed"
-        })
+        .update({ status: "completed" })
         .eq("id", orderId);
 
       if (updateError) {
-        console.error("[AI Verification] Supabase update error:", updateError);
+        console.error("[Checkout Verify-Slip] Supabase update error:", updateError);
       }
+
+      const fallbackSigned = buildSignedDeliveryUrl(
+        itemTitle,
+        verification.transRef || String(orderId)
+      );
+      const signedDeliveryUrl =
+        verification.deliveryUrl ||
+        (isVipSelected ? `${fallbackSigned.url}&vip=1` : fallbackSigned.url);
+
+      return NextResponse.json({
+        success: true,
+        verified: true,
+        status: "approved",
+        deliveryUrl: signedDeliveryUrl,
+        extraOneDriveLink: verification.extraOneDriveLink || itemFileUrl || null,
+        unlockedCodes: verification.unlockedCodes || fallbackSigned.codes,
+        transRef: verification.transRef || "",
+        bankName: verification.bankName || "",
+        actualSlipAmount: verification.actualSlipAmount || baseAmount,
+        message:
+          "✅ ตรวจสอบสลิป 5 ชั้นสำเร็จ! อนุมัติคำสั่งซื้อและปลดล็อกลิงก์ดาวน์โหลดชุดไฟล์ (.ZIP) ทันที",
+      });
     }
 
-    return NextResponse.json({
-      success: true,
-      verified: isApproved,
-      data: verificationResult,
-      message: isApproved 
-        ? "✅ AI ตรวจสอบยอดเงินและบัญชีถูกต้อง อนุมัติคำสั่งซื้อเรียบร้อยทันที!"
-        : "สลิปถูกบันทึกเรียบร้อย กำลังส่งให้ผู้ดูแลระบบตรวจสอบ"
-    });
+    // 5. Handle Manual Review -> Keep Order as 'pending'
+    if (verification.status === "manual_review") {
+      return NextResponse.json({
+        success: true,
+        verified: false,
+        status: "manual_review",
+        message: verification.replyText,
+      });
+    }
 
+    // 6. Handle Rejected / Payment QR / Invalid Slip -> Mark Order 'rejected' & Return Error
+    await supabase
+      .from("orders")
+      .update({ status: "rejected" })
+      .eq("id", orderId);
+
+    return NextResponse.json(
+      {
+        success: false,
+        verified: false,
+        status: verification.status,
+        error: verification.replyText,
+        message: verification.replyText,
+      },
+      { status: 400 }
+    );
   } catch (err) {
-    console.error("[AI Verification Route Error]:", err);
+    console.error("[Checkout Verify-Slip Route Error]:", err);
     return NextResponse.json({
       success: true,
       verified: false,
-      message: "บันทึกสลิปสำเร็จ รอแอดมินตรวจสอบ"
+      status: "manual_review",
+      message: "บันทึกสลิปสำเร็จ รอแอดมินตรวจสอบ",
     });
   }
 }

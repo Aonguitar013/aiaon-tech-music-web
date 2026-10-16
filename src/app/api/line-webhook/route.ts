@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { buildSignedDeliveryUrl } from "@/utils/delivery-links";
 import { consultAiSalesBrain } from "@/services/ai-sales-brain";
@@ -11,13 +12,9 @@ import {
   PROMPTPAY_NAME,
 } from "@/services/slip-verification";
 
-const DEFAULT_LINE_TOKEN =
-  "h4PDZZ6QCgNd4NhxB7YT8K6Hd2P8MHk3y3Fy7EMTcTbZy8/7xgxmxaF1YbSH9Bl3QMDvaiL9jDfqr21ZSpjYoIk2Czl5sqvSfH0zKztjev3ZQBWpP4QtVgjmxNgA/9Ka/B2+9X/G6ra/70ywdw/o8wdB04t89/1O/w1cDnyilFU=";
-
 // Telegram Copilot Notification Bridge (@AiAonhub_bot -> Kru Aon)
-const TELEGRAM_BOT_TOKEN =
-  process.env.TELEGRAM_BOT_TOKEN || "8529471786:AAHI33E48vL4ic1J8tyszNAp7SwzkADaYKE";
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "7731447826";
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "";
 
 interface LineMessage {
   type: "text" | "image";
@@ -639,17 +636,7 @@ async function verifyLineSlipImage(
 export async function GET() {
   return NextResponse.json({
     status: "ok",
-    service: "AiAon Tech Smart LINE OA Webhook (@deu6776s)",
-    features: [
-      "1. Autonomous AI Sales & Consultation Brain (Gemini 3.5 Flash-Lite + Master Knowledge Vault)",
-      "2. Smart Lead Tracker & Automated 3-Stage Follow-up Engine",
-      "3. Smart Order Memory & Dynamic PromptPay QR Generation per Customer",
-      "4. 5-Layer Bank Slip Verification (Bank of Thailand Mini-QR + Gemini Vision + Anti-Duplicate Ref)",
-      "5. Instant Encrypted Product Download Link Delivery in LINE OA",
-      "6. Real-Time Slip Photo & Lead Alert to Kru Aon's Telegram (@AiAonhub_bot)",
-    ],
-    activePendingOrders: Array.from(pendingOrders.values()).slice(0, 10),
-    recentLogs: g.__lineWebhookLogs || [],
+    service: "AiAon Tech Smart LINE OA Webhook",
   });
 }
 
@@ -660,10 +647,26 @@ export async function POST(req: NextRequest) {
     const lineAccessToken = (
       (rawQueryToken ? rawQueryToken.trim().replace(/ /g, "+") : "") ||
       process.env.LINE_CHANNEL_ACCESS_TOKEN ||
-      DEFAULT_LINE_TOKEN
+      ""
     ).trim();
 
-    const body = await req.json().catch(() => ({}));
+    const rawBody = await req.text();
+
+    // Verify x-line-signature if LINE_CHANNEL_SECRET is configured in environment
+    const channelSecret = (process.env.LINE_CHANNEL_SECRET || "").trim();
+    if (channelSecret) {
+      const signature = req.headers.get("x-line-signature") || "";
+      const expectedSig = crypto
+        .createHmac("sha256", channelSecret)
+        .update(rawBody)
+        .digest("base64");
+      if (!signature || signature !== expectedSig) {
+        console.warn("[LineWebhook] Invalid x-line-signature rejected.");
+        return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
+      }
+    }
+
+    const body = rawBody ? JSON.parse(rawBody) : {};
     const events = body?.events || [];
 
     if (!Array.isArray(events) || events.length === 0) {

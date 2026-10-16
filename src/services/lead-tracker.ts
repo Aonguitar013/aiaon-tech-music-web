@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 
 export type LeadStatus = "inquiry" | "quoted" | "paid";
 
@@ -25,7 +26,10 @@ export interface LeadRecord {
   notes?: string;
 }
 
-import os from "os";
+const GOOGLE_SHEET_WEBHOOK_URL =
+  process.env.GOOGLE_SHEET_CHAT_WEBHOOK_URL ||
+  process.env.NEXT_PUBLIC_GOOGLE_SHEET_CHAT_WEBHOOK_URL ||
+  "";
 
 function getLeadsFilePath(): string {
   if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
@@ -36,15 +40,19 @@ function getLeadsFilePath(): string {
 
 const LEADS_FILE_PATH = getLeadsFilePath();
 
-// Persistent in-memory map across Next.js API reloads
+// Persistent L1 Fast In-Memory Cache across Next.js API reloads
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const g = globalThis as any;
+if (!g.__usedSlipRefs) {
+  g.__usedSlipRefs = new Set<string>();
+}
 if (!g.__leadTrackerMap) {
   g.__leadTrackerMap = new Map<string, LeadRecord>();
   loadLeadsFromFile();
 }
 
 const leadMap: Map<string, LeadRecord> = g.__leadTrackerMap;
+const sharedUsedSlipRefs: Set<string> = g.__usedSlipRefs;
 
 function loadLeadsFromFile() {
   try {
@@ -55,6 +63,9 @@ function loadLeadsFromFile() {
         for (const rec of records) {
           if (rec?.userId) {
             leadMap.set(rec.userId, rec);
+            if (rec.verifiedRef) {
+              sharedUsedSlipRefs.add(rec.verifiedRef);
+            }
           }
         }
       }
@@ -71,6 +82,194 @@ function persistLeadsToFile() {
   } catch (err) {
     console.error("[LeadTracker] Failed to persist leads to disk:", err);
   }
+}
+
+/**
+ * Non-blocking push of LeadRecord (and optional usedSlipRef) to Google Sheets L2 Cloud Storage
+ */
+export async function pushLeadStateToCloud(
+  lead: LeadRecord,
+  usedSlipRef?: string
+): Promise<void> {
+  if (!GOOGLE_SHEET_WEBHOOK_URL) return;
+
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 3000);
+
+    await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "upsert_lead",
+        lead,
+        usedSlipRef: usedSlipRef || lead.verifiedRef || undefined,
+      }),
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timer));
+  } catch (err) {
+    console.error("[LeadTracker] Non-blocking cloud sync error:", err);
+  }
+}
+
+/**
+ * Non-blocking push of a used slip reference to Google Sheets Used_Slips tab
+ */
+export async function recordUsedSlipToCloud(params: {
+  transRef: string;
+  userId: string;
+  amount: number;
+  product: string;
+}): Promise<void> {
+  if (!GOOGLE_SHEET_WEBHOOK_URL || !params.transRef) return;
+
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 3000);
+
+    await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "record_slip",
+        transRef: params.transRef,
+        userId: params.userId,
+        amount: params.amount,
+        product: params.product,
+        timestamp: new Date().toISOString(),
+      }),
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timer));
+  } catch (err) {
+    console.error("[LeadTracker] Non-blocking record_slip error:", err);
+  }
+}
+
+/**
+ * Check if a slip transRef was already used in Google Sheets Used_Slips tab (3s timeout, safe fallback)
+ */
+export async function checkSlipUsedInCloud(
+  transRef: string,
+  timeoutMs = 2200
+): Promise<boolean> {
+  if (!transRef) return false;
+  if (sharedUsedSlipRefs.has(transRef)) return true;
+  if (!GOOGLE_SHEET_WEBHOOK_URL) return false;
+
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    const sep = GOOGLE_SHEET_WEBHOOK_URL.includes("?") ? "&" : "?";
+    const url = `${GOOGLE_SHEET_WEBHOOK_URL}${sep}action=check_slip&ref=${encodeURIComponent(
+      transRef
+    )}`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      signal: controller.signal,
+      cache: "no-store",
+    }).finally(() => clearTimeout(timer));
+
+    if (!res.ok) return false;
+    const data = await res.json();
+    if (data?.used === true) {
+      sharedUsedSlipRefs.add(transRef);
+      return true;
+    }
+    return false;
+  } catch {
+    // Safe fallback if network hiccups so chat doesn't crash
+    return false;
+  }
+}
+
+/**
+ * Hydrate L1 in-memory caches (leadMap & usedSlipRefs) from Google Sheets on Cold Start or before Cron
+ */
+export async function hydrateCloudStateFromSheets(options?: {
+  force?: boolean;
+  timeoutMs?: number;
+}): Promise<{ hydratedLeads: number; hydratedSlips: number }> {
+  const force = options?.force ?? false;
+  const timeoutMs = options?.timeoutMs ?? 3000;
+
+  if (!GOOGLE_SHEET_WEBHOOK_URL) {
+    return { hydratedLeads: 0, hydratedSlips: 0 };
+  }
+
+  const now = Date.now();
+  const lastHydratedAt: number = g.__lastCloudHydratedAt || 0;
+
+  // Skip if already hydrated recently (within 60s) unless forced or L1 cache is completely empty
+  if (
+    !force &&
+    leadMap.size > 0 &&
+    sharedUsedSlipRefs.size > 0 &&
+    now - lastHydratedAt < 60_000
+  ) {
+    return { hydratedLeads: leadMap.size, hydratedSlips: sharedUsedSlipRefs.size };
+  }
+
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    const sep = GOOGLE_SHEET_WEBHOOK_URL.includes("?") ? "&" : "?";
+    const url = `${GOOGLE_SHEET_WEBHOOK_URL}${sep}action=export_leads`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      signal: controller.signal,
+      cache: "no-store",
+    }).finally(() => clearTimeout(timer));
+
+    if (!res.ok) {
+      return { hydratedLeads: leadMap.size, hydratedSlips: sharedUsedSlipRefs.size };
+    }
+
+    const data = await res.json();
+    let hydratedLeadsCount = 0;
+    let hydratedSlipsCount = 0;
+
+    if (Array.isArray(data?.leads)) {
+      for (const cloudLead of data.leads as LeadRecord[]) {
+        if (!cloudLead?.userId) continue;
+        const localLead = leadMap.get(cloudLead.userId);
+        const cloudTime = new Date(cloudLead.lastSeenAt || 0).getTime();
+        const localTime = localLead ? new Date(localLead.lastSeenAt || 0).getTime() : 0;
+
+        if (!localLead || cloudTime >= localTime) {
+          leadMap.set(cloudLead.userId, cloudLead);
+          hydratedLeadsCount++;
+        }
+        if (cloudLead.verifiedRef) {
+          sharedUsedSlipRefs.add(cloudLead.verifiedRef);
+        }
+      }
+      if (hydratedLeadsCount > 0) {
+        persistLeadsToFile();
+      }
+    }
+
+    if (Array.isArray(data?.usedSlipRefs)) {
+      for (const ref of data.usedSlipRefs) {
+        if (typeof ref === "string" && ref.trim()) {
+          sharedUsedSlipRefs.add(ref.trim());
+          hydratedSlipsCount++;
+        }
+      }
+    }
+
+    g.__lastCloudHydratedAt = now;
+    return { hydratedLeads: hydratedLeadsCount, hydratedSlips: hydratedSlipsCount };
+  } catch (err) {
+    console.warn("[LeadTracker] Cloud hydration skipped/timed out safely:", err);
+    return { hydratedLeads: leadMap.size, hydratedSlips: sharedUsedSlipRefs.size };
+  }
+}
+
+// Trigger non-blocking background hydration on module Cold Start if L1 cache is empty
+if (leadMap.size === 0 && GOOGLE_SHEET_WEBHOOK_URL) {
+  hydrateCloudStateFromSheets({ timeoutMs: 3000 }).catch(() => {});
 }
 
 /**
@@ -134,6 +333,9 @@ export function recordLeadInteraction(params: {
   leadMap.set(userId, lead);
   persistLeadsToFile();
 
+  // Non-blocking sync to Google Sheets Leads_State
+  pushLeadStateToCloud(lead).catch(() => {});
+
   return lead;
 }
 
@@ -141,10 +343,26 @@ export function recordLeadInteraction(params: {
  * Mark a lead as paid after 5-layer slip verification
  */
 export function markLeadAsPaid(userId: string, ref: string, amount: number, itemTitle: string) {
-  const lead = leadMap.get(userId);
   const now = new Date().toISOString();
+  if (ref) {
+    sharedUsedSlipRefs.add(ref);
+  }
 
-  if (lead) {
+  let lead = leadMap.get(userId);
+  if (!lead) {
+    lead = {
+      userId,
+      displayName: `ลูกค้า (${userId.slice(0, 8)})`,
+      status: "paid",
+      lastItem: itemTitle,
+      lastAmount: amount,
+      firstSeenAt: now,
+      lastSeenAt: now,
+      followUpCount: 0,
+      conversationHistory: [],
+      verifiedRef: ref,
+    };
+  } else {
     lead.status = "paid";
     lead.verifiedRef = ref;
     lead.lastAmount = amount;
@@ -152,8 +370,20 @@ export function markLeadAsPaid(userId: string, ref: string, amount: number, item
     lead.lastSeenAt = now;
     // Reset follow-up counter so after-sale drip (Drip 3) can trigger later
     lead.followUpCount = 0;
-    leadMap.set(userId, lead);
-    persistLeadsToFile();
+  }
+
+  leadMap.set(userId, lead);
+  persistLeadsToFile();
+
+  // Non-blocking sync to Google Sheets Leads_State & Used_Slips
+  pushLeadStateToCloud(lead, ref).catch(() => {});
+  if (ref) {
+    recordUsedSlipToCloud({
+      transRef: ref,
+      userId,
+      amount,
+      product: itemTitle,
+    }).catch(() => {});
   }
 }
 
@@ -254,6 +484,9 @@ export function recordFollowUpSent(userId: string, sentMessage: string) {
     });
     leadMap.set(userId, lead);
     persistLeadsToFile();
+
+    // Non-blocking sync to Google Sheets Leads_State
+    pushLeadStateToCloud(lead).catch(() => {});
   }
 }
 

@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getFollowUpCandidates, recordFollowUpSent, getAllLeads } from "@/services/lead-tracker";
+import {
+  getFollowUpCandidates,
+  recordFollowUpSent,
+  getAllLeads,
+  hydrateCloudStateFromSheets,
+} from "@/services/lead-tracker";
 
-const DEFAULT_LINE_TOKEN =
-  process.env.LINE_CHANNEL_ACCESS_TOKEN ||
-  "h4PDZZ6QCgNd4NhxB7YT8K6Hd2P8MHk3y3Fy7EMTcTbZy8/7xgxmxaF1YbSH9Bl3QMDvaiL9jDfqr21ZSpjYoIk2Czl5sqvSfH0zKztjev3ZQBWpP4QtVgjmxNgA/9Ka/B2+9X/G6ra/70ywdw/o8wdB04t89/1O/w1cDnyilFU=";
-
-const TELEGRAM_BOT_TOKEN =
-  process.env.TELEGRAM_BOT_TOKEN || "8529471786:AAHI33E48vL4ic1J8tyszNAp7SwzkADaYKE";
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "7731447826";
+const LINE_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN || "";
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "";
 
 async function notifyKruAonTelegram(text: string) {
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
@@ -23,12 +24,13 @@ async function notifyKruAonTelegram(text: string) {
 }
 
 async function sendLinePushMessage(userId: string, text: string): Promise<boolean> {
+  if (!LINE_ACCESS_TOKEN) return false;
   try {
     const res = await fetch("https://api.line.me/v2/bot/message/push", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${DEFAULT_LINE_TOKEN}`,
+        Authorization: `Bearer ${LINE_ACCESS_TOKEN}`,
       },
       body: JSON.stringify({
         to: userId,
@@ -49,16 +51,20 @@ export async function GET(req: NextRequest) {
     req.headers.get("user-agent")?.includes("vercel-cron") ||
     false;
 
-  // Optional CRON_SECRET verification if configured on Vercel
+  const isExecute = url.searchParams.get("run") === "true" || isVercelCron;
+
+  // Enforce CRON_SECRET verification whenever execution is triggered (via cron or ?run=true or POST)
   const cronSecret = process.env.CRON_SECRET;
-  if (cronSecret && isVercelCron) {
+  if (isExecute && cronSecret) {
     const authHeader = req.headers.get("authorization");
-    if (authHeader !== `Bearer ${cronSecret}`) {
+    const secretParam = url.searchParams.get("secret");
+    if (authHeader !== `Bearer ${cronSecret}` && secretParam !== cronSecret) {
       return NextResponse.json({ error: "Unauthorized cron trigger" }, { status: 401 });
     }
   }
 
-  const isExecute = url.searchParams.get("run") === "true" || isVercelCron;
+  // Hydrate latest Leads_State & Used_Slips from Google Sheets (3s timeout, safe fallback)
+  await hydrateCloudStateFromSheets({ force: true, timeoutMs: 3000 });
 
   const candidates = getFollowUpCandidates();
   const allLeads = getAllLeads();
@@ -66,19 +72,9 @@ export async function GET(req: NextRequest) {
   if (!isExecute) {
     return NextResponse.json({
       status: "ready",
-      message: "Automated Follow-up Engine is active. Add ?run=true to execute pending follow-ups.",
+      message: "Automated Follow-up Engine is active.",
       totalTrackedLeads: allLeads.length,
       pendingCandidatesCount: candidates.length,
-      candidates: candidates.map((c) => ({
-        userId: c.lead.userId,
-        displayName: c.lead.displayName,
-        status: c.lead.status,
-        lastItem: c.lead.lastItem,
-        followUpCount: c.lead.followUpCount,
-        dripType: c.dripType,
-        previewText: c.suggestedMessage.slice(0, 100) + "...",
-      })),
-      allLeads: allLeads.slice(0, 20),
     });
   }
 
@@ -125,6 +121,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  // Same execution logic for cron webhook triggers
-  return GET(new NextRequest(`${req.url}?run=true`));
+  // Same execution logic for cron webhook triggers, preserving auth headers
+  const targetUrl = req.url.includes("?") ? `${req.url}&run=true` : `${req.url}?run=true`;
+  return GET(new NextRequest(targetUrl, { headers: req.headers }));
 }

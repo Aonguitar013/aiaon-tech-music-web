@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, CheckCircle2, ShieldCheck, Mail, Download, BadgeCheck, BookOpen, Wrench, Sparkles, MessageSquare, ArrowRight, Gift, Zap } from "lucide-react";
 import * as Icons from "lucide-react";
 import { cn } from "@/lib/utils";
+import { buildSignedDeliveryUrl } from "@/utils/delivery-links";
 
 export function getVipSetupDetails(title: string) {
   const upper = title.toUpperCase();
@@ -92,10 +93,15 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   const PRODUCT_DOWNLOAD_LINKS: Record<string, string> = {
     'AONE02': 'https://1drv.ms/f/c/ce3ad5ba004eb0c7/IgATR6et6O-BS61MuoKMqj_GAYU-TtWQfIJanJqGekSkGbk?e=AaoHOh',
+    'AONA07': 'https://1drv.ms/f/c/ce3ad5ba004eb0c7/IgDJlCMMPrrsT41Ts0p0_mG3ARQDzg2jFhgxYKp8p5n6gNA?e=X8Nj74',
+    'AONE12': 'https://1drv.ms/f/c/ce3ad5ba004eb0c7/IgD_Jr6rfSsxSpAKzMlvYwa0AUZTGXnV_mi0Q5WW4ra9jKI?e=6afyzo',
   };
 
   const matchedLink = Object.entries(PRODUCT_DOWNLOAD_LINKS).find(([k]) => product.title?.includes(k))?.[1];
-  const finalDownloadUrl = product.file_url || matchedLink || "/dashboard/profile";
+  const signedPortalUrl = isPurchased
+    ? buildSignedDeliveryUrl(product.title || "", existingOrder?.id || "SUPABASE_VERIFIED").url
+    : null;
+  const finalDownloadUrl = product.file_url || signedPortalUrl || matchedLink || "/dashboard/profile";
 
   const IconComponent = (Icons as unknown as Record<string, React.ElementType>)[product.icon_name || "Package"] || Icons.Package;
   const isService = product.category === "Service" || product.category === "Creative";

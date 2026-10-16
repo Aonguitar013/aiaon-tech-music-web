@@ -33,6 +33,10 @@ export function SlipUploader({
     const [uploading, setUploading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [aiApproved, setAiApproved] = useState(false);
+    const [signedDeliveryUrl, setSignedDeliveryUrl] = useState<string | null>(null);
+    const [backupOneDriveUrl, setBackupOneDriveUrl] = useState<string | null>(null);
+    const [unlockedCodes, setUnlockedCodes] = useState<string[]>([]);
+    const [statusMessage, setStatusMessage] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const supabase = createClient();
 
@@ -58,6 +62,7 @@ export function SlipUploader({
         if (!e.target.files || e.target.files.length === 0) return;
         
         setError(null);
+        setStatusMessage(null);
         setUploading(true);
         const file = e.target.files[0];
         
@@ -99,7 +104,7 @@ export function SlipUploader({
 
             if (insertError) throw insertError;
 
-            // 4. Trigger Gemini AI Slip Verification
+            // 4. Trigger 5-Layer Server-Side Slip Verification
             let isAiVerified = false;
             try {
                 const verifyRes = await fetch("/api/checkout/verify-slip", {
@@ -111,11 +116,35 @@ export function SlipUploader({
                         expectedAmount: totalAmount
                     })
                 });
-                if (verifyRes.ok) {
-                    const verifyData = await verifyRes.json();
-                    if (verifyData.verified) {
-                        isAiVerified = true;
+                const verifyData = await verifyRes.json().catch(() => ({}));
+
+                if (
+                    !verifyRes.ok ||
+                    verifyData.status === "rejected" ||
+                    verifyData.status === "payment_qr" ||
+                    verifyData.status === "not_a_slip"
+                ) {
+                    setError(
+                        verifyData.error ||
+                        verifyData.message ||
+                        "ไม่ผ่านการตรวจสอบสลิป กรุณาตรวจสอบยอดโอนและอัปโหลดภาพสลิปฉบับเต็มที่มี QR Code ชัดเจนอีกครั้งครับ"
+                    );
+                    return;
+                }
+
+                if (verifyData.verified) {
+                    isAiVerified = true;
+                    if (verifyData.deliveryUrl) {
+                        setSignedDeliveryUrl(verifyData.deliveryUrl);
                     }
+                    if (verifyData.extraOneDriveLink) {
+                        setBackupOneDriveUrl(verifyData.extraOneDriveLink);
+                    }
+                    if (Array.isArray(verifyData.unlockedCodes)) {
+                        setUnlockedCodes(verifyData.unlockedCodes);
+                    }
+                } else if (verifyData.message) {
+                    setStatusMessage(verifyData.message);
                 }
             } catch (vErr) {
                 console.warn("AI Verification call failed, fallback to manual approval:", vErr);
@@ -137,9 +166,12 @@ export function SlipUploader({
 
     const PRODUCT_DOWNLOAD_LINKS: Record<string, string> = {
         'AONE02': 'https://1drv.ms/f/c/ce3ad5ba004eb0c7/IgATR6et6O-BS61MuoKMqj_GAYU-TtWQfIJanJqGekSkGbk?e=AaoHOh',
+        'AONA07': 'https://1drv.ms/f/c/ce3ad5ba004eb0c7/IgDJlCMMPrrsT41Ts0p0_mG3ARQDzg2jFhgxYKp8p5n6gNA?e=X8Nj74',
+        'AONE12': 'https://1drv.ms/f/c/ce3ad5ba004eb0c7/IgD_Jr6rfSsxSpAKzMlvYwa0AUZTGXnV_mi0Q5WW4ra9jKI?e=6afyzo',
     };
     const matchedDownloadUrl = Object.entries(PRODUCT_DOWNLOAD_LINKS).find(([k]) => productTitle.includes(k))?.[1];
-    const directDownloadUrl = matchedDownloadUrl || (itemType === "course" ? `/dashboard/academy/${itemId}` : `/dashboard/marketplace/${itemId}`);
+    const directDownloadUrl = signedDeliveryUrl || matchedDownloadUrl || (itemType === "course" ? `/dashboard/academy/${itemId}` : `/dashboard/marketplace/${itemId}`);
+    const secondaryOneDriveUrl = backupOneDriveUrl || matchedDownloadUrl || null;
 
     if (success) {
         return (
@@ -148,19 +180,56 @@ export function SlipUploader({
                 
                 <div className="space-y-2">
                     <h2 className="text-3xl sm:text-4xl font-extrabold font-prompt text-white">
-                        {aiApproved ? "⚡ AI อนุมัติการสั่งซื้อสำเร็จ!" : "ส่งหลักฐานการชำระเงินสำเร็จ!"}
+                        {aiApproved ? "⚡ ตรวจสอบสลิป 5 ชั้นสำเร็จ! อนุมัติทันที" : "ส่งหลักฐานการชำระเงินสำเร็จ!"}
                     </h2>
-                    <p className="text-white/80 font-prompt text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+                    <p className="text-white/80 font-prompt text-sm sm:text-base max-w-lg mx-auto leading-relaxed whitespace-pre-line">
                         {aiApproved ? (
-                            <>ระบบ AI ตรวจสอบยอดเงิน <strong className="text-emerald-400">{totalAmount} ฿</strong> และบัญชีถูกต้องเรียบร้อยแล้ว ปลดล็อกสิทธิ์การเข้าใช้งาน <span className="text-emerald-400 font-bold">{productTitle}</span> ให้คุณทันที!</>
+                            <>ระบบ AI & Mini-QR ตรวจสอบยอดเงิน <strong className="text-emerald-400">{totalAmount} ฿</strong> และบัญชีถูกต้องเรียบร้อยแล้ว ปลดล็อกสิทธิ์การดาวน์โหลด <span className="text-emerald-400 font-bold">{productTitle}</span> ให้คุณทันที!</>
+                        ) : statusMessage ? (
+                            statusMessage
                         ) : (
                             <>ขอบคุณสำหรับการสั่งซื้อ ระบบได้บันทึกคำสั่งซื้อยอด <strong className="text-emerald-400">{totalAmount} ฿</strong> เรียบร้อยแล้ว กรุณารอการตรวจสอบและอนุมัติภายใน 24 ชั่วโมง</>
                         )}
                     </p>
                 </div>
 
+                {/* Instant Encrypted ZIP Download Box when AI Approved */}
+                {aiApproved && (
+                    <div className="w-full max-w-lg space-y-3 pt-2">
+                        <a
+                            href={directDownloadUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full py-4 px-6 rounded-2xl bg-linear-to-r from-emerald-400 via-teal-400 to-emerald-300 hover:from-emerald-300 hover:to-teal-200 text-zinc-950 font-prompt font-extrabold text-base flex items-center justify-center gap-2 shadow-[0_0_35px_rgba(16,185,129,0.5)] transition-all hover:scale-102 cursor-pointer"
+                        >
+                            <Download className="w-5 h-5" />
+                            <span>
+                                📥 ดาวน์โหลดชุดไฟล์ติดตั้งทันที ({unlockedCodes.length > 0 ? `${unlockedCodes.join(", ")}.ZIP` : ".ZIP"})
+                            </span>
+                        </a>
+                        {secondaryOneDriveUrl && secondaryOneDriveUrl !== directDownloadUrl && (
+                            <a
+                                href={secondaryOneDriveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/30 text-cyan-300 font-prompt text-xs font-semibold transition-all"
+                            >
+                                <span>☁️ ลิงก์สำรอง OneDrive</span>
+                                <ArrowRight className="w-4 h-4" />
+                            </a>
+                        )}
+                        <Link
+                            href={itemType === "course" ? `/dashboard/academy/${itemId}` : `/dashboard/marketplace/${itemId}`}
+                            className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-prompt text-xs font-semibold transition-all"
+                        >
+                            <span>หน้ารายละเอียดและคู่มือ</span>
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </div>
+                )}
+
                 {/* VIP Setup Action Box */}
-                {includeVipSetup ? (
+                {includeVipSetup && (
                     <div className="w-full max-w-lg p-6 rounded-2xl bg-amber-950/30 border border-amber-500/40 text-left space-y-4 shadow-[0_0_30px_rgba(245,158,11,0.2)]">
                         <div className="flex items-center gap-2">
                             <span className="px-3 py-1 rounded-full bg-amber-500 text-zinc-950 text-xs font-prompt font-black uppercase">
@@ -182,26 +251,9 @@ export function SlipUploader({
                             <span>📲 ส่งรายชื่อ &amp; Gmail ให้ครูอ้นใน LINE OA ทันที</span>
                         </a>
                     </div>
-                ) : aiApproved ? (
-                    <div className="w-full max-w-md space-y-3 pt-2">
-                        <a
-                            href={directDownloadUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full py-4 px-6 rounded-2xl bg-linear-to-r from-emerald-400 via-teal-400 to-emerald-300 hover:from-emerald-300 hover:to-teal-200 text-zinc-950 font-prompt font-extrabold text-base flex items-center justify-center gap-2 shadow-[0_0_35px_rgba(16,185,129,0.5)] transition-all hover:scale-102 cursor-pointer"
-                        >
-                            <Download className="w-5 h-5" />
-                            <span>📥 ดาวน์โหลด / เข้าถึงไฟล์ใน OneDrive ทันที</span>
-                        </a>
-                        <Link
-                            href={itemType === "course" ? `/dashboard/academy/${itemId}` : `/dashboard/marketplace/${itemId}`}
-                            className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-prompt text-xs font-semibold transition-all"
-                        >
-                            <span>หน้ารายละเอียดและคู่มือ</span>
-                            <ArrowRight className="w-4 h-4" />
-                        </Link>
-                    </div>
-                ) : (
+                )}
+
+                {!aiApproved && !includeVipSetup && (
                     <div className="space-y-3">
                         <p className="text-xs text-white/50 font-prompt">
                             แอดมินจะทำการตรวจสอบสลิปและปลดล็อกปุ่มดาวน์โหลดในคลังสินค้าของคุณโดยเร็วที่สุดครับ

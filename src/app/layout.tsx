@@ -11,6 +11,7 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { FloatingLINEButton } from "@/components/ui/FloatingLINEButton";
 import { LineModalProvider } from "@/components/ui/LineOrderModal";
 import Maintenance from "@/components/Maintenance";
+import { MarketingPixels } from "@/components/analytics/MarketingPixels";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -95,6 +96,7 @@ export default function RootLayout({
       >
         <BrandThemeProvider>
           <LineModalProvider>
+          <MarketingPixels />
 
           {/* ถ้าเปิดโหมด Maintenance จะแสดงแค่หน้า Maintenance เท่านั้น */}
           {isMaintenance ? (
@@ -166,6 +168,28 @@ export default function RootLayout({
                     </ul>
                   </div>
 
+                  {/* Legal & Policies */}
+                  <div className="space-y-4">
+                    <h3 className="text-white font-bold font-prompt text-lg">นโยบายและความปลอดภัย</h3>
+                    <ul className="space-y-2 text-white/50 text-sm font-prompt">
+                      <li>
+                        <a href="/terms" className="hover:text-cyan-400 transition-colors duration-200">
+                          เงื่อนไขการใช้งาน (Terms)
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/privacy" className="hover:text-cyan-400 transition-colors duration-200">
+                          นโยบายความเป็นส่วนตัว (PDPA)
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/refund" className="hover:text-cyan-400 transition-colors duration-200">
+                          นโยบายการคืนเงิน (Refund)
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
                   {/* Social */}
                   <div className="space-y-4">
                     <h3 className="text-white font-bold font-prompt text-lg">Connect With Me</h3>
@@ -216,11 +240,18 @@ export default function RootLayout({
                   </div>
                 </div>
 
-                {/* Copyright */}
-                <div className="border-t border-white/10 mt-12 pt-8 text-center text-white/30 font-prompt text-xs relative z-10">
+                {/* Copyright & Legal Links Bar */}
+                <div className="border-t border-white/10 mt-12 pt-8 text-center text-white/40 font-prompt text-xs relative z-10 flex flex-col md:flex-row items-center justify-between gap-4 max-w-7xl mx-auto px-4">
                   <p suppressHydrationWarning>
                     © {new Date().getFullYear()} AiAon Tech Ecosystem. All Rights Reserved.
                   </p>
+                  <div className="flex items-center gap-6 text-white/50">
+                    <a href="/terms" className="hover:text-cyan-400 transition-colors">เงื่อนไขการใช้งาน</a>
+                    <span>•</span>
+                    <a href="/privacy" className="hover:text-cyan-400 transition-colors">นโยบายความเป็นส่วนตัว (PDPA)</a>
+                    <span>•</span>
+                    <a href="/refund" className="hover:text-cyan-400 transition-colors">นโยบายการคืนเงิน</a>
+                  </div>
                 </div>
               </footer>
             </>

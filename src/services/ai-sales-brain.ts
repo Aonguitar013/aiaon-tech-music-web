@@ -41,11 +41,11 @@ function getMasterBrainJson(): string {
 let cachedGoldenCasesText = "";
 let lastGoldenFetchTime = 0;
 
-const DEFAULT_SHEET_WEBHOOK_URL =
-  "https://script.google.com/macros/s/AKfycbyPRw7GjvTv24XFfCsX73QMvPh4e9AFxxc6bfZZubdck7d1MIILECDHMudDAkhE7bj4TQ/exec";
-
 async function getDynamicGoldenCases(): Promise<string> {
-  const url = process.env.GOOGLE_SHEET_CHAT_WEBHOOK_URL || DEFAULT_SHEET_WEBHOOK_URL;
+  const url =
+    process.env.GOOGLE_SHEET_CHAT_WEBHOOK_URL ||
+    process.env.NEXT_PUBLIC_GOOGLE_SHEET_CHAT_WEBHOOK_URL ||
+    "";
   if (!url) return "";
 
 
@@ -82,14 +82,8 @@ async function getDynamicGoldenCases(): Promise<string> {
   return cachedGoldenCasesText;
 }
 
-const DEFAULT_KEY_B64 =
-  "QVEuQWI4Uk42STV3YTM2Z0p0X29Vb3B1WUxWRWhwcldsZG01a29jQlF2NTJMeW1xcERFdlE=";
-
 function getGeminiApiKey(): string {
-  return (
-    process.env.GEMINI_API_KEY ||
-    Buffer.from(DEFAULT_KEY_B64, "base64").toString("utf-8")
-  );
+  return process.env.GEMINI_API_KEY || "";
 }
 
 /**
@@ -135,11 +129,11 @@ ${
 2. ถ้าลูกค้าถามเรื่องแจกฟรี หรืออยากทดลองใช้ ให้แนะนำรหัส "FREE69" ไปปลดล็อกที่ https://www.aiaon.tech/freebies (แจกฟรี AONA07 SAR&ว.PA และ AONE12 เช็กชื่อเผชิญเหตุฉุกเฉิน)
 3. ถ้าลูกค้าพร้อมสั่งซื้อ, ถามว่าต้องโอนกี่บาท, หรือขอเลขบัญชี/พร้อมเพย์/วิธีชำระเงิน:
    - ตรวจสอบประวัติการสนทนาล่าสุด (historyContext) ว่าคุยเรื่องระบบหรือสินค้าตัวไหนไว้ ให้ดึงชื่อสินค้านั้นและยอดชำระมาตอบทันที ห้ามถามซ้ำว่าสนใจตัวไหนถ้าในประวัติมีการคุยสินค้าหรือบริการเจาะจงไว้แล้ว
-   - ระบุชื่อระบบและยอดชำระที่ถูกต้อง (ระบบเดี่ยว 390-690฿, เหมาคลัง 2,990฿, Prep 399฿, E-Book เล่มละ 290-390฿)
-   - แนะนำออปชันเสริม: หากไม่สะดวกติดตั้งเอง มีบริการ "VIP Setup (+350 ฿)" ครูอ้นช่วยติดตั้งให้พร้อมใช้
-   - ตั้งค่า shouldAttachPromptPayQr = true, suggestedAmount = <ยอดเงินตัวเลข เช่น 590 หรือ 690>, suggestedItem = "<ชื่อสินค้าที่ลูกค้าเลือก>"
+   - ระบุชื่อระบบและยอดชำระที่ถูกต้อง (ระบบเดี่ยว 390-990฿ เช่น AONE01 490฿ / AONA02 990฿ / AONA03 690฿, เหมาคลัง 20 ระบบ 4,990฿, Prep 390฿, E-Book เล่มละ 290-390฿)
+   - แนะนำออปชันเสริม: หากไม่สะดวกติดตั้งเอง มีบริการ "VIP Setup" (Tier 1 ติดตั้งด่วน +190 ฿, Tier 2 มาตรฐาน +350 ฿, Tier 3 ระบบใหญ่ +690 ฿) ครูอ้นช่วยติดตั้งให้พร้อมใช้
+   - ตั้งค่า shouldAttachPromptPayQr = true, suggestedAmount = <ยอดเงินตัวเลข เช่น 490, 690, 990 หรือ 4990>, suggestedItem = "<ชื่อสินค้าที่ลูกค้าเลือก>"
 4. ถ้าลูกค้ากังวลเรื่องติดตั้งไม่เป็น: ให้ความมั่นใจว่ามีคลิปสอน 2 นาที หรือเลือก VIP Setup ได้
-5. ถ้าลูกค้าขอใบเสนอราคาทางการที่มีตราประทับ, ขอหักภาษี ณ ที่จ่าย WHT 3%, หรืองานสั่งทำระบบเฉพาะ: ให้ตอบสุภาพว่าจะประสานครูอ้นให้โดยตรง และตั้ง shouldEscalateTelegram = true, escalateReason = "<ระบุเหตุผล>"
+5. ถ้าลูกค้าขอใบเสนอราคาทางการที่มีตราประทับ, ขอหักภาษี ณ ที่จ่าย WHT 3%, หรืองานสั่งทำระบบเฉพาะ หรือต้องการคุยกับครูอ้นโดยตรง: ให้ตอบสุภาพว่าจะประสานครูอ้นให้โดยตรง โดยระบุรอบเวลาทำการชัดเจนเสมอว่า "ครูอ้นจะตรวจสอบและตอบกลับโดยตรงในรอบเวลาพักเที่ยง (12:00–13:00 น.) หรือหลังเลิกเรียน (16:30–22:00 น.) ครับ" และตั้ง shouldEscalateTelegram = true, escalateReason = "<ระบุเหตุผล>"
 6. กฎเหล็กเรื่องการจัดฟอร์แมตข้อความ (Visual Layout & Formatting สไตล์ LINE/แชตสวยงาม):
    - ห้ามพิมพ์ข้อความยาวติดต่อกันเป็นพรืดเด็ดขาด!
    - เว้นวรรคตอนและขึ้นบรรทัดใหม่ (\\n\\n) ระหว่างย่อหน้าเสมอ เพื่อให้อ่านสบายตาบนมือถือ
@@ -281,10 +275,10 @@ function fallbackRuleEngine(
       replyText:
         `สวัสดีครับคุณ${displayName}! มีระบบเช็คชื่อนักเรียนครับ เป็นระบบยอดนิยมของครูไทยเลย คือ "ระบบเช็คชื่อนักเรียน Smart Attendance & LINE แจ้งเตือน V2" (รหัส AONE01) ครับ 📱✨\n\n` +
         `จุดเด่นคือเช็คชื่อผ่านมือถือได้ใน 2 วินาที แจ้งเตือนเข้า LINE ผู้ปกครองอัตโนมัติ และสรุปสถิติลง Google Sheets ให้ครบถ้วนครับ\n\n` +
-        `ราคาเพียง 590 บาท (ซื้อขาดตลอดชีพ อัปเดตฟรี ไร้รายเดือน) หากต้องการให้ครูอ้นช่วยติดตั้งให้พร้อมใช้ มีบริการ VIP Setup (+350 บาท) ให้ด้วยครับผม 😊`,
+        `ราคาเพียง 490 บาท (ซื้อขาดตลอดชีพ อัปเดตฟรี ไร้รายเดือน) หากต้องการให้ครูอ้นช่วยติดตั้งให้พร้อมใช้ มีบริการ VIP Setup (Tier 1: +190฿, Tier 2 มาตรฐาน: +350฿, Tier 3: +690฿) ให้ด้วยครับผม 😊`,
       detectedIntent: "CONSULTATION",
       suggestedItem: "ระบบเช็คชื่อนักเรียน Smart Attendance & LINE แจ้งเตือน V2 (AONE01)",
-      suggestedAmount: 590,
+      suggestedAmount: 490,
       shouldAttachPromptPayQr: false,
       shouldEscalateTelegram: false,
     };
@@ -296,7 +290,7 @@ function fallbackRuleEngine(
       replyText:
         `สวัสดีครับคุณ${displayName}! มีระบบเกียรติบัตรครับ เป็น "ระบบเกียรติบัตร QR Code Verify" (รหัส AONA03) ครับ 🎓✨\n\n` +
         `ระบบนี้ช่วยสร้างเกียรติบัตร PDF จาก Google Slides ได้อัตโนมัติ มี QR Code สแกนตรวจสอบความถูกต้องได้จริง และส่งเข้าอีเมลผู้รับได้ทันทีครับ\n\n` +
-        `ราคา 690 บาท (ซื้อขาดตลอดชีพ อัปเดตฟรี) หรือหากต้องการบริการติดตั้งพร้อมใช้ VIP Setup ก็มีดูแลให้ครับ (+350 บาท) 😊`,
+        `ราคา 690 บาท (ซื้อขาดตลอดชีพ อัปเดตฟรี) หรือหากต้องการบริการติดตั้งพร้อมใช้ VIP Setup ก็มีดูแลให้ครับ (เริ่มต้น +190฿, มาตรฐาน +350฿) 😊`,
       detectedIntent: "CONSULTATION",
       suggestedItem: "ระบบเกียรติบัตร QR Code Verify (AONA03)",
       suggestedAmount: 690,
@@ -319,7 +313,7 @@ function fallbackRuleEngine(
     lower.includes("สนใจ")
   ) {
     let matchedItem = "ระบบนวัตกรรมจาก AiAon Tech";
-    let matchedAmount = 590;
+    let matchedAmount = 490;
 
     // Scan recent history to detect which system was discussed
     for (let i = recentHistory.length - 1; i >= 0; i--) {
@@ -331,12 +325,12 @@ function fallbackRuleEngine(
       }
       if (h.text.includes("AONE01") || h.text.includes("เช็คชื่อ") || h.text.includes("เชคชื่อ")) {
         matchedItem = "ระบบเช็คชื่อนักเรียน Smart Attendance & LINE แจ้งเตือน V2 (AONE01)";
-        matchedAmount = 590;
+        matchedAmount = 490;
         break;
       }
-      if (h.text.includes("2,990") || h.text.includes("เหมา")) {
-        matchedItem = "แพ็กเกจเหมาคลัง 20 ระบบ Google Apps Script";
-        matchedAmount = 2990;
+      if (h.text.includes("4,990") || h.text.includes("2,990") || h.text.includes("เหมา")) {
+        matchedItem = "แพ็กเกจเหมาคลัง 20 ระบบ Google Apps Script ตลอดชีพ";
+        matchedAmount = 4990;
         break;
       }
     }
@@ -353,6 +347,27 @@ function fallbackRuleEngine(
       suggestedAmount: matchedAmount,
       shouldAttachPromptPayQr: true,
       shouldEscalateTelegram: false,
+    };
+  }
+
+  // Escalation / Official Quotes / Custom request
+  if (
+    lower.includes("ใบเสนอราคา") ||
+    lower.includes("หักภาษี") ||
+    lower.includes("สั่งทำ") ||
+    lower.includes("คุยกับครูอ้น") ||
+    lower.includes("ติดต่อครูอ้น")
+  ) {
+    return {
+      replyText:
+        `ยินดีครับคุณ${displayName}! สำหรับการขอใบเสนอราคาทางการ งานสั่งทำระบบเฉพาะ หรือต้องการปรึกษาครูอ้นโดยตรง ผมได้ส่งเรื่องแจ้งเตือนไปยังครูอ้นเรียบร้อยแล้วครับ 🔔\n\n` +
+        `⏰ รอบเวลาทำการของครูอ้น:\n` +
+        `• ครูอ้นจะตรวจสอบและตอบกลับโดยตรงในรอบเวลาพักเที่ยง (12:00–13:00 น.) หรือหลังเลิกเรียน (16:30–22:00 น.) ครับผม\n\n` +
+        `คุณครูสามารถพิมพ์รายละเอียดเพิ่มเติมหรือทิ้งเบอร์ติดต่อไว้ในแชตนี้ได้เลยนะครับ ขอบคุณมากครับ 🙏✨`,
+      detectedIntent: "ESCALATION",
+      shouldAttachPromptPayQr: false,
+      shouldEscalateTelegram: true,
+      escalateReason: "ลูกค้าขอดำเนินการเรื่องใบเสนอราคา / งานสั่งทำ / ติดต่อครูอ้น",
     };
   }
 

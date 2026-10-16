@@ -8,9 +8,6 @@
 const GRAPH_API_VERSION = "v21.0";
 const GRAPH_BASE_URL = `https://graph.facebook.com/${GRAPH_API_VERSION}`;
 
-const DEFAULT_PAGE_ACCESS_TOKEN =
-  "EAAOPtSM4dCkBSqw6ZAIAcrZBz08kDQiUpBLZAsBaC5ZAMC9xSsgM7SgJPVQMGjRQefKzCkkZCAOxF7fLO6DhMbZCW6Rit9hsM1cYaaQHBhWHIrK3gOGZAQdds9sriI9DJliD9uQyL3Ej45OHJQJp9QGZBj3Sz1bK24w4KbGepJIu74Vy6s1GBekqb6koqarZBNI6ATuSTfgZDZD";
-
 export interface InstagramUserProfile {
   id: string;
   name?: string;
@@ -27,7 +24,7 @@ export function getInstagramAccessToken(): string {
     process.env.INSTAGRAM_ACCESS_TOKEN ||
     process.env.FB_PAGE_ACCESS_TOKEN ||
     process.env.FACEBOOK_PAGE_ACCESS_TOKEN ||
-    DEFAULT_PAGE_ACCESS_TOKEN
+    ""
   );
 }
 

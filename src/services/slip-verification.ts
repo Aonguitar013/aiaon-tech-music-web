@@ -15,16 +15,20 @@
  */
 
 import { buildSignedDeliveryUrl } from "@/utils/delivery-links";
-import { markLeadAsPaid } from "@/services/lead-tracker";
+import {
+  markLeadAsPaid,
+  getLead,
+  hydrateCloudStateFromSheets,
+  checkSlipUsedInCloud,
+} from "@/services/lead-tracker";
 import { flagConversationAsGolden } from "@/services/chat-harvester";
 
 export const PROMPTPAY_ID = "0835399340";
 export const PROMPTPAY_NAME = "นายจิรวัฒน์ เดชเส้ง (ครูอ้น AiAon Tech)";
 
 // Telegram Copilot Notification Bridge (@AiAonhub_bot -> Kru Aon)
-const TELEGRAM_BOT_TOKEN =
-  process.env.TELEGRAM_BOT_TOKEN || "8529471786:AAHI33E48vL4ic1J8tyszNAp7SwzkADaYKE";
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "7731447826";
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "";
 
 export interface PendingOrder {
   userId: string;
@@ -227,11 +231,7 @@ async function auditSlipWithGeminiVision(
   contentType: string,
   expectedAmount: number
 ): Promise<GeminiSlipAudit | null> {
-  const DEFAULT_KEY_B64 =
-    "QVEuQWI4Uk42STV3YTM2Z0p0X29Vb3B1WUxWRWhwcldsZG01a29jQlF2NTJMeW1xcERFdlE=";
-  const apiKey =
-    process.env.GEMINI_API_KEY ||
-    Buffer.from(DEFAULT_KEY_B64, "base64").toString("utf-8");
+  const apiKey = process.env.GEMINI_API_KEY || "";
   if (!apiKey) return null;
 
   try {
@@ -246,14 +246,14 @@ async function auditSlipWithGeminiVision(
     const prompt = `คุณคือผู้เชี่ยวชาญการตรวจสอบสลิปโอนเงินธนาคารไทย (Bank Slip Fraud Auditor)
 หน้าที่ของคุณคือตรวจสอบรูปสลิปนี้อย่างเข้มงวดที่สุด เพื่อป้องกันการโกงและสลิปปลอม:
 - บัญชีผู้รับที่ถูกต้อง: "นายจิรวัฒน์ เดชเส้ง" หรือ "จิรวัฒน์ เดชเส้ง" หรือ "JIRAWAT DECHSENG" หรือ พร้อมเพย์ "083-539-9340"
-- ยอดเงินที่คาดหวัง: ${expectedAmount} บาท
+- ยอดเงินที่คาดหวัง: ${expectedAmount} บาท (หรือยอดรวมค่าบริการติดตั้ง VIP Setup: ${expectedAmount + 190}, ${expectedAmount + 350}, หรือ ${expectedAmount + 690} บาท)
 - วันที่ปัจจุบัน: ${todayBangkok}
 
 กฎการตัดสิน (Strict Rules):
 1. ตรวจสอบว่าภาพนี้เป็นสลิปจริง หรือสลิปที่สร้างจากเว็บปลอม/แอปตัดต่อตัวเลข/Photoshop
 2. ตรวจสอบ "วันที่ทำรายการ" (Transaction Date): ต้องเป็นรายการของ "วันนี้" เท่านั้น หากเป็นสลิปเก่าข้ามวัน/ย้อนหลัง ให้ตัดสิน REJECTED
 3. ตรวจสอบ "ชื่อผู้รับเงิน" (Receiver): ต้องเป็น นายจิรวัฒน์ เดชเส้ง เท่านั้น หากเป็นชื่อคนอื่น หรือเป็นรายการจ่ายบิลร้านค้า ให้ตัดสิน REJECTED
-4. ตรวจสอบ "ยอดเงินโอน" (Amount): ต้องตรงกับ ${expectedAmount} บาทเป๊ะๆ (อนุโลมเฉพาะ ${expectedAmount + 350} บาทถ้ามีค่าติดตั้ง VIP) หากยอดเงินไม่ตรง เช่น 23,000 หรือยอดอื่น ให้ตัดสิน REJECTED
+4. ตรวจสอบ "ยอดเงินโอน" (Amount): ต้องตรงกับยอดสินค้า ${expectedAmount} บาท หรือยอดรวมค่าบริการติดตั้ง VIP Setup ได้แก่ ${expectedAmount + 190}, ${expectedAmount + 350}, หรือ ${expectedAmount + 690} บาท หากยอดเงินไม่ตรง เช่น 23,000 หรือยอดอื่น ให้ตัดสิน REJECTED
 5. ถ้าสลิปแท้ 100% ชื่อผู้รับตรง ยอดตรง วันที่คือวันนี้ ให้ตัดสิน APPROVED
 6. ถ้าภาพตัดทอน ไม่ชัด มีพิรุธ หรือน่าสงสัย ให้ตัดสิน MANUAL_REVIEW หรือ REJECTED`;
 
@@ -347,9 +347,29 @@ export async function executeSlipVerification(params: {
   contentType: string;
   userId: string;
   customerName: string;
-  channel: "LINE OA" | "Facebook Messenger" | "Instagram Direct";
+  channel: "LINE OA" | "Facebook Messenger" | "Instagram Direct" | "Website Checkout";
 }): Promise<VerificationResult> {
   const { imageBuffer, contentType, userId, customerName, channel } = params;
+
+  // ── COLD START HYDRATION (L1 Fast Cache + L2 Google Sheets Sync) ──
+  if (!pendingOrders.has(userId) || usedSlipRefs.size === 0) {
+    await hydrateCloudStateFromSheets({ timeoutMs: 2200 });
+
+    if (!pendingOrders.has(userId)) {
+      const cloudLead = getLead(userId);
+      if (cloudLead && cloudLead.lastAmount && cloudLead.lastAmount > 0) {
+        pendingOrders.set(userId, {
+          userId,
+          itemTitle: cloudLead.lastItem || "ระบบ/แพ็กเกจที่เลือกไว้ในแชต",
+          baseAmount: cloudLead.lastAmount,
+          vipAmount: 0,
+          isVipSelected: false,
+          orderedAt: cloudLead.lastSeenAt || new Date().toISOString(),
+          status: "pending_slip",
+        });
+      }
+    }
+  }
 
   // ── LAYER 1: STRICT PENDING ORDER CHECK (ห้ามรับสลิปลอยเด็ดขาด!) ──
   const pendingOrder = pendingOrders.get(userId);
@@ -407,8 +427,12 @@ export async function executeSlipVerification(params: {
   const bankName = qrInfo.bankName || "ธนาคารไทย";
   const transRef = qrInfo.transRef || "";
 
-  // ── LAYER 3: ANTI-DUPLICATE REF (กันสลิปซ้ำข้ามแพลตฟอร์ม) ──
-  if (transRef && usedSlipRefs.has(transRef)) {
+  // ── LAYER 3: ANTI-DUPLICATE REF (กันสลิปซ้ำข้ามแพลตฟอร์ม & ข้าม Cold Start) ──
+  const isDuplicateSlip =
+    Boolean(transRef) &&
+    (usedSlipRefs.has(transRef) || (await checkSlipUsedInCloud(transRef, 2000)));
+
+  if (isDuplicateSlip) {
     await sendSlipPhotoToTelegram(
       imageBuffer,
       contentType,
@@ -493,12 +517,19 @@ export async function executeSlipVerification(params: {
       };
     }
 
-    // 4D. ตรวจสอบยอดเงิน (ต้องตรงกับราคาออเดอร์เป๊ะๆ)
+    // 4D. ตรวจสอบยอดเงิน (ต้องตรงกับราคาออเดอร์ หรือยอดบวกค่าบริการติดตั้ง VIP Setup Tier 1: +190, Tier 2: +350, Tier 3: +690)
     const actualSlipAmount = geminiAudit.transferredAmount || 0;
-    const expectedVipAmount = expectedAmount + (pendingOrder.vipAmount || 350);
-    const amountMatches =
-      Math.abs(actualSlipAmount - expectedAmount) < 0.01 ||
-      Math.abs(actualSlipAmount - expectedVipAmount) < 0.01;
+    const vipTiers = [190, 350, 690];
+    if (pendingOrder.vipAmount && !vipTiers.includes(pendingOrder.vipAmount)) {
+      vipTiers.push(pendingOrder.vipAmount);
+    }
+    const validExpectedAmounts = [
+      expectedAmount,
+      ...vipTiers.map((tier) => expectedAmount + tier),
+    ];
+    const amountMatches = validExpectedAmounts.some(
+      (validAmt) => Math.abs(actualSlipAmount - validAmt) < 0.01
+    );
 
     if (!amountMatches) {
       await sendSlipPhotoToTelegram(
@@ -540,7 +571,7 @@ export async function executeSlipVerification(params: {
           `📦 รายการ: ${pendingOrder.itemTitle}\n` +
           `💵 ยอดเงิน: ${actualSlipAmount.toLocaleString("th-TH", { minimumFractionDigits: 2 })} บาท\n` +
           `━━━━━━━━━━━━━━━\n` +
-          `เนื่องจากเป็นรายการที่มีมูลค่าสูง ระบบได้ส่งภาพสลิปให้ครูอ้นตรวจสอบยอดเงินในบัญชีธนาคารโดยตรงแล้วครับ เมื่อครูอ้นยืนยันยอดเงินเข้าเรียบร้อย จะส่งมอบลิงก์ดาวน์โหลดให้ทันทีในแชตนี้ครับผม ขอบคุณมากครับ 🙏✨`,
+          `เนื่องจากเป็นรายการที่มีมูลค่าสูง ระบบได้ส่งภาพสลิปให้ครูอ้นตรวจสอบยอดเงินในบัญชีธนาคารโดยตรงแล้วครับ โดยครูอ้นจะตรวจสอบและตอบกลับโดยตรงในรอบเวลาพักเที่ยง (12:00–13:00 น.) หรือหลังเลิกเรียน (16:30–22:00 น.) ครับ เมื่อยืนยันยอดเงินเรียบร้อย จะส่งมอบลิงก์ดาวน์โหลดให้ทันทีในแชตนี้ครับผม ขอบคุณมากครับ 🙏✨`,
       };
     }
   } else {
@@ -556,13 +587,14 @@ export async function executeSlipVerification(params: {
     return {
       status: "manual_review",
       replyText:
-        `⏳ ระบบได้รับสลิปเรียบร้อยแล้วครับ ขณะนี้กำลังส่งให้ครูอ้นตรวจสอบยอดเงินในบัญชี เมื่อยืนยันเรียบร้อยแล้วจะส่งลิงก์ดาวน์โหลดให้ทันทีครับ 🙏`,
+        `⏳ ระบบได้รับสลิปเรียบร้อยแล้วครับ ขณะนี้ระบบได้ส่งภาพสลิปให้ครูอ้นตรวจสอบยอดเงินในบัญชีโดยตรง โดยครูอ้นจะตรวจสอบและตอบกลับโดยตรงในรอบเวลาพักเที่ยง (12:00–13:00 น.) หรือหลังเลิกเรียน (16:30–22:00 น.) ครับ เมื่อยืนยันเรียบร้อยแล้วจะส่งลิงก์ดาวน์โหลดให้ทันทีครับผม ขอบคุณมากครับ 🙏✨`,
     };
   }
 
   // ── LAYER 5: APPROVE & INSTANT ENCRYPTED DELIVERY ──
   const actualAmount = geminiAudit.transferredAmount || expectedAmount;
-  const paidForVipSetup = actualAmount >= expectedAmount + (pendingOrder.vipAmount || 350);
+  const minVipTier = pendingOrder.vipAmount ? Math.min(190, pendingOrder.vipAmount) : 190;
+  const paidForVipSetup = actualAmount >= expectedAmount + minVipTier - 0.01;
   const orderTitle = pendingOrder.itemTitle;
 
   // Mark slip ref as used to prevent replay
@@ -584,11 +616,39 @@ export async function executeSlipVerification(params: {
     transRef,
   });
 
-  const { url: signedDeliveryUrl, codes: unlockedCodes } = buildSignedDeliveryUrl(
+  const { url: baseSignedDeliveryUrl, codes: unlockedCodes } = buildSignedDeliveryUrl(
     orderTitle,
     transRef
   );
+  const signedDeliveryUrl = paidForVipSetup
+    ? `${baseSignedDeliveryUrl}&vip=1`
+    : baseSignedDeliveryUrl;
   const extraOneDriveLink = findInstantDownloadLink(orderTitle);
+
+  const hasPrep = unlockedCodes.includes("PREP01");
+  const hasAiCaretaker = unlockedCodes.includes("AIC01") || unlockedCodes.includes("AIC02");
+  const isEbookOrder = unlockedCodes.some((c) => /^EB\d{2}$/.test(c));
+  const isMusicOrder = unlockedCodes.some((c) => /^(?:MUS|BGM|CUS)-/.test(c) || /^STU-0[12]$/.test(c));
+
+  const deliveryLabel = isEbookOrder
+    ? "📚 ลิงก์เปิดอ่าน E-Book ออนไลน์ (พิมพ์ PDF A4) & ดาวน์โหลดชุดไฟล์"
+    : isMusicOrder
+    ? "🎵 ลิงก์ดาวน์โหลดแพ็กเกจเพลง & ใบรับรองลิขสิทธิ์ (Commercial License)"
+    : "📥 ลิงก์ดาวน์โหลดชุดไฟล์ติดตั้งของคุณ";
+
+  const prepSection = hasPrep
+    ? `\n👑 สิทธิ์เข้ากลุ่มติวสอบครูผู้ช่วย VIP & บอทข้อสอบ Telegram:\n` +
+      `• กดปุ่มสีทองในลิงก์พอร์ทัลด้านบน หรือแจ้งรหัสอ้างอิงสลิป (${transRef.slice(0, 12)}) ในแชตนี้เพื่อรับลิงก์เข้ากลุ่มลับ Telegram VIP ทันทีครับ!\n`
+    : "";
+
+  const onboardingSection =
+    hasAiCaretaker || paidForVipSetup
+      ? `\n🛠️ แบบฟอร์มส่งข้อมูลบรีฟติดตั้งระบบ (VIP Setup / AI Caretaker):\n` +
+        `• กรุณาแจ้งข้อมูลในแชตนี้ หรือกดปุ่มส่งบรีฟในลิงก์ด้านบน:\n` +
+        `  1) ชื่อโรงเรียน / ชื่อร้านค้า หรือหน่วยงาน + โลโก้\n` +
+        `  2) อีเมล (Gmail) สำหรับรับสิทธิ์เจ้าของระบบ\n` +
+        `  3) ชื่อเพจ Facebook / LINE OA (กรณีติดตั้ง AI Caretaker)\n`
+      : `\n📩 ขั้นตอนเสริม: รบกวนพิมพ์แจ้ง "อีเมล (Gmail)" ของท่านทิ้งไว้ในแชตนี้ได้เลยครับ เพื่อรับสิทธิ์อัปเดตเวอร์ชันใหม่ฟรีตลอดชีพ! 🙏⚡`;
 
   await sendSlipPhotoToTelegram(
     imageBuffer,
@@ -613,12 +673,11 @@ export async function executeSlipVerification(params: {
     `🏦 ข้อมูลสลิป: ${bankName}\n` +
     (transRef ? `🔖 เลขที่อ้างอิง: ${transRef.slice(0, 18)}\n` : "") +
     `━━━━━━━━━━━━━━━\n` +
-    `📥 ลิงก์ดาวน์โหลดชุดไฟล์ติดตั้งของคุณ (${unlockedCodes.join(", ")}.ZIP — คลิกโหลดได้ทันที):\n` +
+    `${deliveryLabel} (${unlockedCodes.join(", ")} — คลิกเปิดได้ทันที):\n` +
     `${signedDeliveryUrl}\n` +
     (extraOneDriveLink ? `\n☁️ ลิงก์สำรอง OneDrive:\n${extraOneDriveLink}\n` : "") +
-    `\n📩 ขั้นตอนเสริม: รบกวนพิมพ์แจ้ง "อีเมล (Gmail)" ของท่าน${
-      paidForVipSetup ? " และชื่อโรงเรียน" : ""
-    } ทิ้งไว้ในแชตนี้ได้เลยครับ เพื่อรับสิทธิ์อัปเดตเวอร์ชันใหม่ฟรีตลอดชีพ! 🙏⚡`;
+    prepSection +
+    onboardingSection;
 
   return {
     status: "approved",

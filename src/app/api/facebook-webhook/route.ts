@@ -19,12 +19,11 @@ import {
 const FB_VERIFY_TOKEN =
   process.env.FB_VERIFY_TOKEN ||
   process.env.FACEBOOK_VERIFY_TOKEN ||
-  "aiaon_fb_secret_2026";
+  "";
 
 // Telegram Bot Alert
-const TELEGRAM_BOT_TOKEN =
-  process.env.TELEGRAM_BOT_TOKEN || "8529471786:AAHI33E48vL4ic1J8tyszNAp7SwzkADaYKE";
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "7731447826";
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "";
 
 async function notifyTelegram(message: string): Promise<void> {
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
