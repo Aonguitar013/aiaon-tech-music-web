@@ -27,8 +27,9 @@ export const PROMPTPAY_ID = "0835399340";
 export const PROMPTPAY_NAME = "นายจิรวัฒน์ เดชเส้ง (ครูอ้น AiAon Tech)";
 
 // Telegram Copilot Notification Bridge (@AiAonhub_bot -> Kru Aon)
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "";
+const TELEGRAM_BOT_TOKEN =
+  process.env.TELEGRAM_BOT_TOKEN || "8529471786:AAHI33E48vL4ic1J8tyszNAp7SwzkADaYKE";
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "7731447826";
 
 export interface PendingOrder {
   userId: string;

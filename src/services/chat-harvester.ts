@@ -12,10 +12,13 @@ export interface ChatLogEntry {
   transRef?: string;
 }
 
+const DEFAULT_GOOGLE_SHEET_WEBHOOK_URL =
+  "https://script.google.com/macros/s/AKfycbyPRw7GjvTv24XFfCsX73QMvPh4e9AFxxc6bfZZubdck7d1MIILECDHMudDAkhE7bj4TQ/exec";
+
 const GOOGLE_SHEET_WEBHOOK_URL =
   process.env.GOOGLE_SHEET_CHAT_WEBHOOK_URL ||
   process.env.NEXT_PUBLIC_GOOGLE_SHEET_CHAT_WEBHOOK_URL ||
-  "";
+  DEFAULT_GOOGLE_SHEET_WEBHOOK_URL;
 
 
 /**

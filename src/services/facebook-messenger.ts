@@ -16,6 +16,9 @@ export interface FacebookUserProfile {
   profile_pic?: string;
 }
 
+const DEFAULT_FB_PAGE_ACCESS_TOKEN =
+  "EAAOPtSM4dCkBSqw6ZAIAcrZBz08kDQiUpBLZAsBaC5ZAMC9xSsgM7SgJPVQMGjRQefKzCkkZCAOxF7fLO6DhMbZCW6Rit9hsM1cYaaQHBhWHIrK3gOGZAQdds9sriI9DJliD9uQyL3Ej45OHJQJp9QGZBj3Sz1bK24w4KbGepJIu74Vy6s1GBekqb6koqarZBNI6ATuSTfgZDZD";
+
 /**
  * Get Page Access Token from environment
  */
@@ -23,7 +26,7 @@ export function getFacebookPageAccessToken(): string {
   return (
     process.env.FB_PAGE_ACCESS_TOKEN ||
     process.env.FACEBOOK_PAGE_ACCESS_TOKEN ||
-    ""
+    DEFAULT_FB_PAGE_ACCESS_TOKEN
   );
 }
 

@@ -1,6 +1,7 @@
 import crypto from "crypto";
 
-const DELIVERY_SECRET = process.env.DELIVERY_SIGNING_SECRET || "";
+const DELIVERY_SECRET =
+  process.env.DELIVERY_SIGNING_SECRET || "AiAonTech_2026_Master_Vault_Secret_Key_0835399340";
 
 const ALL_EBOOK_CODES = Array.from({ length: 30 }, (_, i) =>
   `EB${String(i + 1).padStart(2, "0")}`
