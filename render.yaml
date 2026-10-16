@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: aiaon-facebook-poller
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: ""
+    startCommand: node scripts/facebook_auto_poller.mjs
+    envVars:
+      - key: FB_PAGE_ID
+        value: "1083641784827447"
+      - key: WEBHOOK_URL
+        value: "https://www.aiaon.tech/api/facebook-webhook"
