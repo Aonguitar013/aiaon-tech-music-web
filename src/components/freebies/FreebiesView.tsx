@@ -5,12 +5,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   Gift, Download, Music, Code2, X, LogIn,
-  
   CheckCircle2, Sparkles, Filter,
-  ArrowRight, 
+  ArrowRight, Eye, ShieldCheck, Zap
 } from "lucide-react";
 import * as Icons from "lucide-react";
 import { RiLineLine } from "react-icons/ri";
+
+// 3D Custom Mockup Components matching each specific category character
+import { DvdCaseMockup } from "@/components/marketplace/DvdCaseMockup";
+import { Book3DMockup } from "@/components/ebooks/Book3DMockup";
+import { StudentCardMockup } from "@/components/student-vault/StudentCardMockup";
+import { VinylRecordMockup } from "@/components/music-store/VinylRecordMockup";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -312,6 +317,87 @@ function LineUnlockModal({
    FREEBIE CARD
 ───────────────────────────────────────────────────────────── */
 
+function renderFreebie3DMockup(freebie: Freebie) {
+  // 1. Music Category -> 3D Vinyl Record Mockup
+  if (freebie.category === "music" || freebie.id.includes("music") || freebie.id.includes("guitar")) {
+    return (
+      <div className="flex items-center justify-center py-2 overflow-hidden">
+        <VinylRecordMockup
+          code="FREE-MUS"
+          title={freebie.title}
+          categoryLabel="Lo-Fi & Acoustic Backing Tracks"
+          bpm="85-110 BPM"
+          duration="10 แทร็คสตูดิโอ"
+          accentColor="purple"
+          isPlaying={false}
+          size="sm"
+          isInteractive={true}
+        />
+      </div>
+    );
+  }
+
+  // 2. Student AI Prompts -> 3D Student Cyber Collector Pass
+  if (freebie.id.includes("student")) {
+    return (
+      <div className="flex items-center justify-center py-2 overflow-hidden">
+        <StudentCardMockup
+          code="STU03"
+          title="Student AI Secret Kit"
+          tagline="GEN Z SECRET REPORT PROMPTS"
+          themeColor="pink"
+          badgeText="STUDENT AI PASS"
+          serialNo="FREE-2026-STU-KIT"
+          isInteractive={true}
+        />
+      </div>
+    );
+  }
+
+  // 3. Teacher AI Prompts -> 3D Futuristic Hardcover Book Mockup
+  if (freebie.id.includes("teacher-ai-prompts")) {
+    return (
+      <div className="flex items-center justify-center py-2 overflow-hidden">
+        <Book3DMockup
+          code="EB-AI"
+          title="คัมภีร์ 20 AI Prompts ครูไทย"
+          category="AI Teacher Mastery"
+          themeColor="amber"
+          rank={1}
+          size="sm"
+          isInteractive={true}
+        />
+      </div>
+    );
+  }
+
+  // 4. Teacher Systems & Google Apps Script / Sheets -> 3D Cyberpunk Acrylic DVD Case Mockup
+  // Map specific system presets
+  let dvdCode = "AIAON";
+  if (freebie.id.includes("sar-aona07") || freebie.tag.includes("AONA07")) {
+    dvdCode = "AONA07";
+  } else if (freebie.id.includes("active-shooter") || freebie.tag.includes("AONE12")) {
+    dvdCode = "AONE12";
+  } else if (freebie.id.includes("3d-flashcard") || freebie.tag.includes("AONE10")) {
+    dvdCode = "AONE10";
+  } else if (freebie.id.includes("asset-qr") || freebie.tag.includes("AONA04")) {
+    dvdCode = "AONA04";
+  } else if (freebie.id.includes("grade-tracker") || freebie.tag.includes("Google Sheets")) {
+    dvdCode = "AONE13";
+  }
+
+  return (
+    <div className="flex items-center justify-center py-2 overflow-hidden">
+      <DvdCaseMockup
+        code={dvdCode}
+        title={freebie.title}
+        tagline={freebie.tag}
+        isInteractive={true}
+      />
+    </div>
+  );
+}
+
 function FreebieCard({
   freebie,
   onUnlockPrompt,
@@ -331,63 +417,80 @@ function FreebieCard({
     >
       {/* Outer glow on hover */}
       <div
-        className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md pointer-events-none"
+        className="absolute -inset-0.5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md pointer-events-none"
         style={{ background: `radial-gradient(ellipse at center, ${freebie.glow_color}, transparent 70%)` }}
       />
 
-      <div className="relative glass-card border-white/8 group-hover:border-white/15 p-6 flex flex-col gap-5 h-full transition-all duration-300">
+      <div className="relative glass-card border-white/8 group-hover:border-white/20 p-6 sm:p-7 rounded-3xl flex flex-col gap-5 h-full transition-all duration-300 bg-slate-900/80 backdrop-blur-md">
 
-        {/* Header row */}
+        {/* Header row with badges */}
         <div className="flex items-start justify-between gap-3">
-          {/* Icon */}
-          <div className={`w-13 h-13 rounded-xl flex items-center justify-center bg-linear-to-br ${freebie.color_from} ${freebie.color_to} shadow-lg group-hover:scale-105 transition-transform duration-300 shrink-0`}
-            style={{ width: 52, height: 52 }}>
-            <Icon className="w-6 h-6 text-white" />
+          {/* Icon Badge */}
+          <div 
+            className={`w-12 h-12 rounded-xl flex items-center justify-center bg-linear-to-br ${freebie.color_from} ${freebie.color_to} shadow-lg group-hover:scale-105 transition-transform duration-300 shrink-0`}
+          >
+            <Icon className="w-5 h-5 text-white" />
           </div>
 
           {/* Badges */}
           <div className="flex flex-wrap gap-1.5 justify-end">
-            <span className={`text-[11px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border ${freebie.border_color} ${freebie.text_color} bg-white/3`}>
+            <span className={`text-[11px] font-prompt font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${freebie.border_color} ${freebie.text_color} bg-white/5`}>
               {freebie.file_type}
             </span>
-            <span className="text-[11px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border border-white/10 text-white/40">
+            <span className="text-[11px] font-prompt font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-white/10 text-white/50 bg-black/30">
               {freebie.file_size}
             </span>
-            <span className="text-[11px] font-prompt font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-              ฟรี
+            <span className="text-[11px] font-prompt font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.25)]">
+              🎁 ฟรี 100%
             </span>
           </div>
         </div>
 
+        {/* 3D Bespoke Character Mockup Stage */}
+        <div 
+          onClick={() => onUnlockPrompt(freebie)}
+          className="cursor-pointer transition-transform duration-300 group-hover:scale-[1.02]"
+          title="คลิกเพื่อปลดล็อกและดาวน์โหลดฟรี"
+        >
+          {renderFreebie3DMockup(freebie)}
+        </div>
+
         {/* Content */}
-        <div className="flex-1">
-          <h3 className={`font-prompt text-lg font-bold text-white mb-2 group-hover:${freebie.text_color} transition-colors duration-300 leading-snug`}>
+        <div className="flex-1 space-y-2">
+          <h3 
+            onClick={() => onUnlockPrompt(freebie)}
+            className={`font-prompt text-lg sm:text-xl font-bold text-white group-hover:${freebie.text_color} transition-colors duration-300 leading-snug cursor-pointer`}
+          >
             {freebie.title}
           </h3>
-          <p className="font-prompt text-base text-white/70 leading-relaxed">
+          <p className="font-prompt text-xs sm:text-sm text-white/70 leading-relaxed">
             {freebie.description}
           </p>
         </div>
 
-        {/* Tag */}
-        <div className="flex items-center gap-1.5">
-          <span className={`text-xs font-prompt ${freebie.text_color} opacity-70`}>{freebie.tag}</span>
+        {/* Tag & Category Metadata */}
+        <div className="flex items-center justify-between pt-2 border-t border-white/5 text-xs font-prompt">
+          <span className={`${freebie.text_color} font-semibold flex items-center gap-1.5`}>
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>{freebie.tag}</span>
+          </span>
+          <span className="text-white/40 font-mono text-[11px]">
+            FREE RESOURCE
+          </span>
         </div>
 
-        {/* Download button */}
-        <div className="mt-auto">
+        {/* Download action button */}
+        <div className="mt-auto pt-2">
           <button
             onClick={() => onUnlockPrompt(freebie)}
-            className={`group/btn w-full py-3 px-4 rounded-xl border flex items-center justify-between text-sm font-semibold font-prompt tracking-wide transition-all duration-300 cursor-pointer
+            className={`group/btn w-full py-3.5 px-5 rounded-2xl border flex items-center justify-between text-xs sm:text-sm font-bold font-prompt tracking-wide transition-all duration-300 cursor-pointer shadow-lg active:scale-95
               ${freebie.border_color} ${freebie.text_color} ${freebie.bg_color}
-              hover:brightness-125 hover:shadow-lg active:scale-95`}
-            style={{ boxShadow: `0 0 0px ${freebie.glow_color}` }}
-            onMouseEnter={e => (e.currentTarget.style.boxShadow = `0 0 20px ${freebie.glow_color}`)}
-            onMouseLeave={e => (e.currentTarget.style.boxShadow = "none")}
+              hover:brightness-125`}
+            style={{ boxShadow: `0 0 10px ${freebie.glow_color}` }}
           >
             <div className="flex items-center gap-2">
-              <Download className="w-4 h-4 group-hover/btn:animate-bounce" />
-              <span>ดาวน์โหลดโค้ดฟรี</span>
+              <Download className="w-4 h-4 group-hover/btn:animate-bounce text-current" />
+              <span>ปลดล็อก &amp; ดาวน์โหลดไฟล์ฟรี</span>
             </div>
             <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
           </button>

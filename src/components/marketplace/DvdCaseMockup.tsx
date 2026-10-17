@@ -108,6 +108,14 @@ export const AONE_SYSTEM_META: Record<string, {
     docSpec: "Emergency A4",
     glow: "rgba(239, 68, 68, 0.45)",
   },
+  AONE13: {
+    shortName: "คำนวณคะแนน & ตัดเกรด",
+    emoji: "📊",
+    badge: "ตัดเกรด 8 สาระออโต้",
+    tagline: "SMART GRADE TRACKER & STATS",
+    docSpec: "Auto GPA & Chart",
+    glow: "rgba(16, 185, 129, 0.45)",
+  },
 
   // ── AONA Series (Administration & School Ops) ──
   AONA01: {
@@ -159,12 +167,12 @@ export const AONE_SYSTEM_META: Record<string, {
     glow: "rgba(59, 130, 246, 0.45)",
   },
   AONA07: {
-    shortName: "สมุดติดต่อ & ประชาสัมพันธ์",
-    emoji: "📢",
-    badge: "ประชาสัมพันธ์องค์กร",
-    tagline: "SMART COMMUNICATION HUB",
-    docSpec: "Broadcast Center",
-    glow: "rgba(168, 85, 247, 0.45)",
+    shortName: "จัดการ SAR & ว.PA 15 ตัวชี้วัด",
+    emoji: "📑",
+    badge: "SAR ว.PA 15 ตัวชี้วัด",
+    tagline: "SAR & PA 15-INDICATOR AUTO HUB",
+    docSpec: "Google Docs/PDF Auto",
+    glow: "rgba(16, 185, 129, 0.45)",
   },
 
   // ── AONM Series (Activities, Scouts & Music) ──
