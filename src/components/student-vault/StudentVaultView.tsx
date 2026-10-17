@@ -1,101 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles, CheckCircle2, ArrowRight,
   MessageCircle, Bot,
   Star, 
-  Check, Copy, Flame, Gift
+  Check, Copy, Flame, Gift, BookOpen
 } from "lucide-react";
 import Link from "next/link";
-
-interface StudentProduct {
-  id: string;
-  code: string;
-  badge: string;
-  badgeColor: string;
-  title: string;
-  tagline: string;
-  price: number;
-  originalPrice: number;
-  perPersonNote?: string;
-  borderGlow: string;
-  btnGradient: string;
-  description: string;
-  features: string[];
-  lineOrderMsg: string;
-}
-
-const STUDENT_PRODUCTS: StudentProduct[] = [
-  {
-    id: "web-portfolio-tcas",
-    code: "STU01",
-    badge: "🔥 ฮิตสุดสำหรับ ม.ปลาย ยื่น TCAS รอบ 1",
-    badgeColor: "text-pink-300 border-pink-500/30 bg-pink-500/10",
-    title: "เว็บ Portfolio ดิจิทัล TCAS 3D",
-    tagline: "หน้าเว็บโปรไฟล์ส่วนตัวสุดเท่ แปะ QR Code หน้าปกพอร์ต",
-    price: 129,
-    originalPrice: 290,
-    borderGlow: "border-pink-500/40 hover:border-pink-400 hover:shadow-[0_0_35px_rgba(236,72,153,0.3)]",
-    btnGradient: "from-pink-500 via-purple-600 to-cyan-500 hover:from-pink-400 hover:to-cyan-400",
-    description: "เปลี่ยนพอร์ตธรรมดาให้กลายเป็นหน้าเว็บ Interactive สไตล์ Cyberpunk แสดงผลงาน เกียรติบัตร และวิดีโอคลิป แก้ข้อมูลผ่าน Google Sheets ของตัวเองได้ทันทีใน 1 นาที",
-    features: [
-      "มี QR Code ประจำตัว นำไปแปะหน้าปกพอร์ตโฟลิโอ TCAS รอบ 1 ได้เลย",
-      "หมวดแสดงผลงาน (Activities) + รางวัลเกียรติบัตร (Certificates Showcase)",
-      "หมวดคลิปวิดีโอแสดงทักษะ (Skill Demo / Music / Project)",
-      "แก้ไขข้อมูลและรูปภาพใน Google Sheets ของตัวเองได้ตลอดชีพ",
-      "มีคู่มือสอนเปิดใช้งานภายใน 2 นาที (ไม่ต้องมีความรู้โค้ดก็ทำได้)",
-    ],
-    lineOrderMsg: "สวัสดีครับครูอ้น สนใจสั่งซื้อ 'เว็บ Portfolio TCAS 3D (129 บาท)' ครับ รบกวนขอข้อมูลชำระเงินและไฟล์ระบบด้วยครับ 🙏",
-  },
-  {
-    id: "homework-tracker-hub",
-    code: "STU02",
-    badge: "👥 ซื้อครั้งเดียวใช้ได้ทั้งห้อง (หารคนละ 7 ฿)",
-    badgeColor: "text-cyan-300 border-cyan-500/30 bg-cyan-500/10",
-    title: "ระบบเช็คการบ้าน & งานค้างประจำห้อง",
-    tagline: "Classroom Homework Hub ศูนย์รวมงานทุกวิชาบนมือถือ",
-    price: 290,
-    originalPrice: 590,
-    perPersonNote: "หารกัน 40 คนในห้อง ตกคนละ 7 บาทเท่านั้น!",
-    borderGlow: "border-cyan-500/40 hover:border-cyan-400 hover:shadow-[0_0_35px_rgba(6,182,212,0.3)]",
-    btnGradient: "from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500",
-    description: "เว็บแอปประจำห้องเรียน ให้หัวหน้าห้องหรือตัวแทนคอยอัปเดตงาน เพื่อนทุกคนเปิดดูบนมือถือได้ตลอด 24 ชม. มีเวลานับถอยหลัง (Countdown) เตือนก่อนถึงวันส่ง",
-    features: [
-      "แสดงรายการการบ้านแยกตามรายวิชา และครูผู้สอน",
-      "ระบบนับถอยหลังวันส่ง (Countdown Timer) เตือนงานด่วน",
-      "แปะลิงก์ Google Form หรือ Google Drive สำหรับส่งงานได้ในตัว",
-      "เพื่อนในห้องทุกคนเปิดดูได้ผ่านมือถือ ไม่ต้องโหลดแอปเพิ่ม",
-      "สิทธิ์ใช้งานถาวรประจำห้องเรียนตลอดปีการศึกษา",
-    ],
-    lineOrderMsg: "สวัสดีครับครูอ้น สนใจสั่งซื้อ 'ระบบเช็คการบ้านประจำห้อง (290 บาท)' ครับ รบกวนขอข้อมูลชำระเงินและไฟล์ระบบด้วยครับ 🙏",
-  },
-  {
-    id: "student-ai-secret-kit",
-    code: "STU03",
-    badge: "⚡ ราคาเท่าชานมไข่มุก 1 แก้ว",
-    badgeColor: "text-amber-300 border-amber-500/30 bg-amber-500/10",
-    title: "คัมภีร์ AI Prompts ลับสำหรับนักเรียน",
-    tagline: "Student AI Secret Kit เสกรายงาน & สไลด์ Canva ใน 3 นาที",
-    price: 69,
-    originalPrice: 159,
-    borderGlow: "border-amber-500/40 hover:border-amber-400 hover:shadow-[0_0_35px_rgba(245,158,11,0.3)]",
-    btnGradient: "from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500",
-    description: "รวมชุดคำสั่ง AI Prompts ภาษาไทยแบบพร้อมใช้ ช่วยทำการบ้าน เสกโครงร่างรายงาน 5 บท สรุปเนื้อหาเตรียมสอบ และสร้างเนื้อหาสไลด์พรีเซนต์ Canva ใน 3 นาที",
-    features: [
-      "Prompt เสกโครงร่างรายงาน 5 บท + บทนำ + แหล่งอ้างอิง",
-      "Prompt สรุปบทเรียนเป็นตารางเปรียบเทียบ & ข้อสอบกากบาทเตรียมสอบ",
-      "Prompt เจนเนื้อหาสไลด์ Canva 10 หน้าใน 1 นาที (พร้อมใช้ Bulk Create)",
-      "Prompt ช่วยคิดไอเดียโครงงานวิทยาศาสตร์ / โครงงานนวัตกรรม",
-      "ก๊อปปี้ไปวางใน ChatGPT / Gemini ใช้งานได้ทันที 100%",
-    ],
-    lineOrderMsg: "สวัสดีครับครูอ้น สนใจสั่งซื้อ 'คัมภีร์ AI Prompts สำหรับนักเรียน (69 บาท)' ครับ รบกวนขอข้อมูลชำระเงินและไฟล์ระบบด้วยครับ 🙏",
-  },
-];
+import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { STUDENT_PRODUCTS_DATA, StudentProductItem } from "@/components/student-vault/studentDataHelper";
+import { StudentCardMockup } from "@/components/student-vault/StudentCardMockup";
+import { StudentDetailSection } from "@/components/student-vault/StudentDetailSection";
+const STUDENT_PRODUCTS = STUDENT_PRODUCTS_DATA;
 
 export function StudentVaultView() {
   const [copiedPrompt, setCopiedPrompt] = useState<boolean>(false);
+  const [selectedProd, setSelectedProd] = useState<StudentProductItem | null>(null);
+  const { openLineModal } = useLineModal();
 
   const samplePrompt = "จงเป็นผู้เชี่ยวชาญด้าน [วิชา...] ช่วยเขียนโครงร่างรายงานเรื่อง [หัวข้อ...] แบ่งเป็น 5 บท พร้อมแนวคิดบทนำ ประเด็นสำคัญ และรายการอ้างอิง";
 
@@ -186,8 +109,28 @@ export function StudentVaultView() {
                   </span>
                 </div>
 
+                {/* ──────────────── 3D Holographic Cyber Pass Mockup ──────────────── */}
+                <div
+                  onClick={() => setSelectedProd(prod)}
+                  className="relative w-full mb-6 cursor-pointer"
+                  title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของไอเทมนี้"
+                >
+                  <StudentCardMockup
+                    code={prod.code}
+                    title={prod.title}
+                    tagline={prod.tagline}
+                    themeColor={prod.themeColor}
+                    badgeText={prod.code}
+                    serialNo={prod.serialNo}
+                    isInteractive={true}
+                  />
+                </div>
+
                 {/* Title & Tagline */}
-                <h3 className="font-prompt text-2xl font-extrabold text-white mb-2">
+                <h3
+                  onClick={() => setSelectedProd(prod)}
+                  className="font-prompt text-2xl font-extrabold text-white mb-2 cursor-pointer hover:text-pink-300 transition-colors"
+                >
                   {prod.title}
                 </h3>
                 <p className="font-prompt text-xs text-white/60 mb-6 leading-relaxed">
@@ -233,17 +176,39 @@ export function StudentVaultView() {
                 </div>
               </div>
 
-              {/* Order Button */}
-              <div className="pt-4 border-t border-white/10 space-y-2">
+              {/* Order & Detail Buttons */}
+              <div className="pt-4 border-t border-white/10 grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setSelectedProd(prod)}
+                  className="w-full py-3.5 px-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition border border-white/15"
+                >
+                  <BookOpen className="w-4 h-4 text-pink-400" />
+                  <span>เจาะลึก 7 ข้อ</span>
+                </button>
+
                 <a
                   href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(prod.lineOrderMsg)}`}
+                  onClick={(e) => {
+                    if (!isMobileDevice()) {
+                      e.preventDefault();
+                      openLineModal({
+                        title: `ไอเทม: [${prod.code}] ${prod.title}`,
+                        price: prod.price,
+                        message: prod.lineOrderMsg,
+                      });
+                    }
+                  }}
+                  data-line-title={`ไอเทม: ${prod.title}`}
+                  data-line-price={prod.price}
+                  data-line-code={prod.code}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-full py-3.5 px-6 rounded-2xl text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] shadow-lg cursor-pointer bg-linear-to-r ${prod.btnGradient}`}
+                  className={`w-full py-3.5 px-3 rounded-2xl text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all duration-300 hover:scale-[1.02] shadow-lg cursor-pointer bg-linear-to-r ${prod.btnGradient}`}
                 >
                   <MessageCircle className="w-4 h-4 fill-white/20" />
-                  <span>สั่งซื้อผ่าน LINE OA ({prod.price} ฿)</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>สั่งซื้อ LINE</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>
             </motion.div>
@@ -407,6 +372,39 @@ export function StudentVaultView() {
         </div>
 
       </div>
+
+      {/* ─────────────────────────────────────────────────────────────
+          7-PILLARS STUDENT DETAIL MODAL
+      ───────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {selectedProd && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-slate-950 border border-pink-500/30 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
+            >
+              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-slate-950/90 backdrop-blur-sm border-b border-white/10 mb-6">
+                <span className="text-xs sm:text-sm font-bold text-pink-300">
+                  [{selectedProd.code}] เจาะลึก 7 องค์ประกอบหลัก • {selectedProd.title}
+                </span>
+                <button
+                  onClick={() => setSelectedProd(null)}
+                  className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white text-xs font-bold transition flex items-center gap-1.5"
+                >
+                  ✕ ปิดหน้าต่าง
+                </button>
+              </div>
+
+              <StudentDetailSection
+                product={selectedProd}
+                onClose={() => setSelectedProd(null)}
+              />
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
