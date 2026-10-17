@@ -31,7 +31,7 @@ interface ProductCardProps {
 }
 
 /** Helper to detect system code and metadata for bespoke cover art */
-function getSystemCoverTheme(title: string, category: string) {
+export function getSystemCoverTheme(title: string, category: string) {
   const upper = title.toUpperCase();
 
   // 1. AONA Series (Administration & School Ops)
@@ -435,15 +435,14 @@ export function ProductCard({ product }: ProductCardProps) {
     )}>
       
       {/* ── BESPOKE 3D HOLOGRAPHIC COVER ART / 3D DVD MOCKUP ── */}
-      {coverTheme.code === "AONE09" ? (
+      {coverTheme.code.startsWith("AONE") ? (
         <div className="relative w-full border-b border-white/10 overflow-hidden bg-gradient-to-br from-cyan-950/50 via-slate-950 to-indigo-950/50 flex flex-col justify-center">
           <DvdCaseMockup
-            code="AONE09"
+            code={coverTheme.code}
             title={product.title}
             categoryName={coverTheme.categoryName}
             tagline={coverTheme.tagline}
             glowColor={coverTheme.glowColor}
-            heroBadge="⭐ HERO SYSTEM"
           />
         </div>
       ) : (
