@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import {
   Tag, Gift, ShieldCheck, Zap, ArrowRight, 
   QrCode, Award, Truck, FileText, CheckSquare, Users, BookOpen, Clock,
@@ -587,12 +588,30 @@ export function ProductCard({ product }: ProductCardProps) {
           )}
 
           {/* ── ✨ SLEEK SINGLE-LINE LUXURY CTA BUTTON ── */}
-          <div className={cn(
-            "w-full h-11 px-4 rounded-xl font-prompt text-sm font-extrabold flex items-center justify-between whitespace-nowrap transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.98] cursor-pointer relative overflow-hidden",
-            isFree 
-              ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.25)] group-hover:shadow-[0_0_30px_rgba(16,185,129,0.45)]" 
-              : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 hover:from-cyan-300 hover:via-teal-200 hover:to-cyan-300 text-zinc-950 shadow-[0_0_20px_rgba(6,182,212,0.25)] group-hover:shadow-[0_0_32px_rgba(6,182,212,0.5)]"
-          )}>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (isMobileDevice()) {
+                window.open(lineOrderUrl, "_blank", "noopener,noreferrer");
+              } else {
+                openLineModal({
+                  title: displayTitle,
+                  price: cleanPrice,
+                  itemCode: coverTheme.code,
+                  message: lineOrderMessage,
+                });
+              }
+            }}
+            title="คลิกเพื่อสั่งซื้อผ่าน LINE OA ทันที"
+            className={cn(
+              "w-full h-11 px-4 rounded-xl font-prompt text-sm font-extrabold flex items-center justify-between whitespace-nowrap transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.98] cursor-pointer relative overflow-hidden",
+              isFree 
+                ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.25)] group-hover:shadow-[0_0_30px_rgba(16,185,129,0.45)]" 
+                : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 hover:from-cyan-300 hover:via-teal-200 hover:to-cyan-300 text-zinc-950 shadow-[0_0_20px_rgba(6,182,212,0.25)] group-hover:shadow-[0_0_32px_rgba(6,182,212,0.5)]"
+            )}
+          >
             {/* Subtle Light Sweep */}
             <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/45 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
 
@@ -610,25 +629,24 @@ export function ProductCard({ product }: ProductCardProps) {
             <div className="w-6 h-6 rounded-lg bg-zinc-950/12 group-hover:bg-zinc-950/20 flex items-center justify-center relative z-10 shrink-0 transition-all">
               <ArrowRight className="w-3.5 h-3.5 text-zinc-950 transition-transform group-hover:translate-x-0.5" />
             </div>
-          </div>
+          </button>
 
         </div>
       </div>
     </div>
   );
 
+  const detailHref = product.id 
+    ? `/dashboard/marketplace/${product.id}` 
+    : `/dashboard/marketplace`;
+
   return (
-    <a
-      href={lineOrderUrl}
-      data-line-title={displayTitle}
-      data-line-price={cleanPrice}
-      data-line-code={coverTheme.code}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={detailHref}
       className="block group cursor-pointer h-full"
     >
       {CardInner}
-    </a>
+    </Link>
   );
 }
 

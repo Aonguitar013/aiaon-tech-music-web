@@ -5,6 +5,7 @@ import { ArrowLeft, CheckCircle2, ShieldCheck, Mail, Download, BadgeCheck, BookO
 import * as Icons from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buildSignedDeliveryUrl } from "@/utils/delivery-links";
+import { DvdCaseMockup } from "@/components/marketplace/DvdCaseMockup";
 
 export function getVipSetupDetails(title: string) {
   const upper = title.toUpperCase();
@@ -48,20 +49,19 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect('/login');
-  }
-
-  // Fetch product (including file_url) and check purchase status concurrently
-  const [{ data: product, error }, { data: existingOrder }] = await Promise.all([
+  // Fetch product (including file_url) and check purchase status concurrently (auth is optional for guests)
+  const [{ data: product, error }, existingOrder] = await Promise.all([
     supabase.from('products').select('*, file_url').eq('id', id).single(),
-    supabase
-      .from('orders')
-      .select('id, status')
-      .eq('user_id', user.id)
-      .eq('product_id', id)
-      .eq('status', 'completed')
-      .maybeSingle(),
+    user
+      ? supabase
+          .from('orders')
+          .select('id, status')
+          .eq('user_id', user.id)
+          .eq('product_id', id)
+          .eq('status', 'completed')
+          .maybeSingle()
+          .then((res) => res.data)
+      : Promise.resolve(null),
   ]);
 
   const isPurchased = !!existingOrder;
@@ -152,6 +152,18 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                  <h1 className="text-3xl md:text-5xl font-bold font-prompt text-white mb-6 leading-tight">
                      {product.title}
                  </h1>
+
+                 {product.title?.toUpperCase().includes("AONE09") && (
+                   <div className="mb-8 p-4 rounded-3xl bg-slate-900/60 border border-cyan-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+                     <DvdCaseMockup
+                       code="AONE09"
+                       title={product.title}
+                       categoryName={product.category}
+                       tagline="WHITE CLASSROOM 37-PAGE AUTO REPORT"
+                       heroBadge="⭐ HERO SYSTEM"
+                     />
+                   </div>
+                 )}
                  
                  <div className="prose prose-invert max-w-none font-prompt text-white/70 leading-relaxed text-base sm:text-lg">
                     <p>{rawDesc}</p>
