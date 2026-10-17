@@ -6,7 +6,7 @@ import Link from "next/link";
 import {
   Gift, Download, Music, Code2, X, LogIn,
   CheckCircle2, Sparkles, Filter,
-  ArrowRight, Eye, ShieldCheck, Zap
+  ArrowRight, Eye, ShieldCheck, Zap, Tag
 } from "lucide-react";
 import * as Icons from "lucide-react";
 import { RiLineLine } from "react-icons/ri";
@@ -17,6 +17,8 @@ import { Book3DMockup } from "@/components/ebooks/Book3DMockup";
 import { StudentCardMockup } from "@/components/student-vault/StudentCardMockup";
 import { VinylRecordMockup } from "@/components/music-store/VinylRecordMockup";
 import { getLineOrderUrl } from "@/lib/line";
+import { FreebieDetailSection } from "./FreebieDetailSection";
+import { getFreebieDetail } from "./freebieDataHelper";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -402,11 +404,14 @@ function renderFreebie3DMockup(freebie: Freebie) {
 function FreebieCard({
   freebie,
   onUnlockPrompt,
+  onViewDetails,
 }: {
   freebie: Freebie;
   onUnlockPrompt: (freebie: Freebie) => void;
+  onViewDetails: (freebie: Freebie) => void;
 }) {
   const Icon = (Icons as unknown as Record<string, React.ElementType>)[freebie.icon_name || "Gift"] || Icons.Gift;
+  const freebieDetail = getFreebieDetail(freebie);
 
   return (
     <motion.div
@@ -447,22 +452,26 @@ function FreebieCard({
           </div>
         </div>
 
-        {/* 3D Bespoke Character Mockup Stage */}
+        {/* 3D Bespoke Character Mockup Stage - Click opens details */}
         <div 
-          onClick={() => onUnlockPrompt(freebie)}
+          onClick={() => onViewDetails(freebie)}
           className="cursor-pointer transition-transform duration-300 group-hover:scale-[1.02]"
-          title="คลิกเพื่อปลดล็อกและดาวน์โหลดฟรี"
+          title="คลิกเพื่อดูรายละเอียดและข้อมูลเชิงลึกทั้งหมด"
         >
           {renderFreebie3DMockup(freebie)}
         </div>
 
-        {/* Content */}
+        {/* Content - Click opens details */}
         <div className="flex-1 space-y-2">
           <h3 
-            onClick={() => onUnlockPrompt(freebie)}
-            className={`font-prompt text-lg sm:text-xl font-bold text-white group-hover:${freebie.text_color} transition-colors duration-300 leading-snug cursor-pointer`}
+            onClick={() => onViewDetails(freebie)}
+            className={`font-prompt text-lg sm:text-xl font-bold text-white group-hover:${freebie.text_color} transition-colors duration-300 leading-snug cursor-pointer flex items-center justify-between gap-2`}
           >
-            {freebie.title}
+            <span>{freebie.title}</span>
+            <span className="shrink-0 text-white/40 group-hover:text-cyan-400 transition-colors text-xs font-normal font-prompt flex items-center gap-1">
+              <Eye className="w-3.5 h-3.5" />
+              <span>ดูข้อมูล</span>
+            </span>
           </h3>
           <p className="font-prompt text-xs sm:text-sm text-white/70 leading-relaxed">
             {freebie.description}
@@ -480,20 +489,51 @@ function FreebieCard({
           </span>
         </div>
 
-        {/* Download action button */}
-        <div className="mt-auto pt-2">
+        {/* Prominent Price Tag: 0 บาท */}
+        <div className="flex items-center justify-between pt-3 pb-1 px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/10 shadow-inner">
+          <div>
+            <div className="text-[11px] font-prompt text-white/40 line-through">
+              ราคาปกติ ฿{freebieDetail.originalPrice.toLocaleString()}
+            </div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-2xl sm:text-3xl font-black font-prompt text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 drop-shadow-[0_0_15px_rgba(52,211,153,0.35)]">
+                0 บาท
+              </span>
+              <span className="text-xs font-bold font-prompt text-emerald-400">
+                (แจกฟรี)
+              </span>
+            </div>
+          </div>
+          <div className="text-right">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-prompt text-xs font-extrabold shadow-[0_0_14px_rgba(16,185,129,0.3)]">
+              <Tag className="w-3.5 h-3.5 text-emerald-400" />
+              <span>ราคา 0 บาท</span>
+            </span>
+          </div>
+        </div>
+
+        {/* Action buttons: ดูรายละเอียด & ปลดล็อก/ดาวน์โหลดฟรี */}
+        <div className="mt-auto pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           <button
+            type="button"
+            onClick={() => onViewDetails(freebie)}
+            className="py-3 px-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 hover:border-white/30 text-white font-bold font-prompt text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer hover:scale-[1.02] active:scale-95 shadow-md"
+          >
+            <Eye className="w-4 h-4 text-cyan-400" />
+            <span>ดูรายละเอียด</span>
+          </button>
+          
+          <button
+            type="button"
             onClick={() => onUnlockPrompt(freebie)}
-            className={`group/btn w-full py-3.5 px-5 rounded-2xl border flex items-center justify-between text-xs sm:text-sm font-bold font-prompt tracking-wide transition-all duration-300 cursor-pointer shadow-lg active:scale-95
+            className={`py-3 px-3.5 rounded-2xl border flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold font-prompt tracking-wide transition-all duration-300 cursor-pointer shadow-lg active:scale-95
               ${freebie.border_color} ${freebie.text_color} ${freebie.bg_color}
               hover:brightness-125`}
             style={{ boxShadow: `0 0 10px ${freebie.glow_color}` }}
           >
-            <div className="flex items-center gap-2">
-              <Download className="w-4 h-4 group-hover/btn:animate-bounce text-current" />
-              <span>ปลดล็อก &amp; ดาวน์โหลดไฟล์ฟรี</span>
-            </div>
-            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+            <Download className="w-4 h-4" />
+            <span>ดาวน์โหลดฟรี (0 ฿)</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
@@ -519,6 +559,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
   const [activeTab, setActiveTab] = useState<Category>("all");
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedFreebieForUnlock, setSelectedFreebieForUnlock] = useState<Freebie | null>(null);
+  const [selectedFreebieForDetails, setSelectedFreebieForDetails] = useState<Freebie | null>(null);
 
   const filtered = initialFreebies.filter(
     (f) => activeTab === "all" || f.category === activeTab
@@ -547,6 +588,42 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
               a.click();
             }}
           />
+        )}
+      </AnimatePresence>
+
+      {/* Freebie Detail Section Modal */}
+      <AnimatePresence>
+        {selectedFreebieForDetails && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[990] flex items-center justify-center p-2 sm:p-4 overflow-y-auto"
+            onClick={() => setSelectedFreebieForDetails(null)}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/85 backdrop-blur-md" />
+
+            {/* Modal Body Container */}
+            <motion.div
+              initial={{ scale: 0.92, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative z-10 w-full max-w-5xl my-6 bg-slate-950/95 border border-white/10 rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] max-h-[92vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <FreebieDetailSection
+                freebie={getFreebieDetail(selectedFreebieForDetails)}
+                onClose={() => setSelectedFreebieForDetails(null)}
+                onOpenUnlockModal={() => {
+                  const targetFreebie = selectedFreebieForDetails;
+                  setSelectedFreebieForDetails(null);
+                  setSelectedFreebieForUnlock(targetFreebie);
+                }}
+              />
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -655,6 +732,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
                   key={freebie.id}
                   freebie={freebie}
                   onUnlockPrompt={(item) => setSelectedFreebieForUnlock(item)}
+                  onViewDetails={(item) => setSelectedFreebieForDetails(item)}
                 />
               ))}
             </motion.div>
