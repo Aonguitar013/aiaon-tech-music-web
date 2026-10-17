@@ -11,6 +11,7 @@ import {
 import { CustomDevTierItem } from "@/components/services/customDevDataHelper";
 import { CyberBlueprintMockup } from "@/components/services/CyberBlueprintMockup";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { getLineOrderUrl } from "@/lib/line";
 
 interface CustomDevDetailSectionProps {
   tier: CustomDevTierItem;
@@ -332,7 +333,7 @@ export function CustomDevDetailSection({
               )}
 
               <a
-                href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(tier.lineOrderMsg)}`}
+                href={getLineOrderUrl(tier.lineOrderMsg)}
                 onClick={handleLineOrderClick}
                 target="_blank"
                 rel="noopener noreferrer"

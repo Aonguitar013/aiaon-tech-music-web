@@ -11,6 +11,7 @@ import {
 import { PrepVipProduct } from "@/components/prep/prepDataHelper";
 import { GoldenTicketMockup } from "@/components/prep/GoldenTicketMockup";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { getLineOrderUrl } from "@/lib/line";
 
 interface TeacherPrepDetailSectionProps {
   product: PrepVipProduct;
@@ -104,10 +105,13 @@ export function TeacherPrepDetailSection({
 
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <a
-              href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(product.lineOrderMsg)}`}
+              href={getLineOrderUrl(product.lineOrderMsg)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLineOrderClick}
+              data-line-title={product.title}
+              data-line-price={product.price}
+              data-line-code={product.id}
               className={`px-8 py-4 rounded-xl bg-gradient-to-r ${product.btnGradient} font-black text-base shadow-lg transition-all flex items-center justify-center gap-2 group cursor-pointer`}
             >
               <MessageSquare className="w-5 h-5 fill-current" />
@@ -364,10 +368,13 @@ export function TeacherPrepDetailSection({
             )}
 
             <a
-              href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(product.lineOrderMsg)}`}
+              href={getLineOrderUrl(product.lineOrderMsg)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLineOrderClick}
+              data-line-title={product.title}
+              data-line-price={product.price}
+              data-line-code={product.id}
               className={`flex-1 sm:flex-initial px-8 py-4 rounded-xl bg-gradient-to-r ${product.btnGradient} font-black text-base shadow-xl transition-all flex items-center justify-center gap-2 group cursor-pointer`}
             >
               <MessageSquare className="w-5 h-5 fill-current" />

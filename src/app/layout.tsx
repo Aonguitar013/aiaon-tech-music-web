@@ -12,6 +12,7 @@ import { FloatingLINEButton } from "@/components/ui/FloatingLINEButton";
 import { LineModalProvider } from "@/components/ui/LineOrderModal";
 import Maintenance from "@/components/Maintenance";
 import { MarketingPixels } from "@/components/analytics/MarketingPixels";
+import { getLineOrderUrl } from "@/lib/line";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -225,9 +226,9 @@ export default function RootLayout({
                         <FaFacebook className="w-5 h-5" />
                       </a>
                       <a
-                        href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+                        href={getLineOrderUrl(
                           "สวัสดีครับครูอ้น ติดต่อสอบถามข้อมูลระบบดิจิทัล / เพลงลิขสิทธิ์ / บริการ AI จากเว็บไซต์ www.aiaon.tech ครับ 🙏"
-                        )}`}
+                        )}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2.5 glass-card hover:bg-green-500/20 text-white hover:text-green-400 transition-all duration-200 hover:scale-110"

@@ -13,6 +13,7 @@ import { CyberSentinelOrbMockup } from "./CyberSentinelOrbMockup";
 import { AICaretakerDetailSection } from "./AICaretakerDetailSection";
 import { AI_CARETAKER_PACKAGES_DATA, AICaretakerPackageItem } from "./aiCaretakerDataHelper";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { getLineOrderUrl } from "@/lib/line";
 
 /* ─────────────────────────────────────────────────────────────
    DATA: 2 STARTER KITS ("บ้านหลังเล็ก" มาตรฐานเดียวกัน)
@@ -127,7 +128,7 @@ export function AICaretakerView() {
 🎯 ระบบที่สนใจ: ${selectedKit}
 
 รบกวนขอคำปรึกษาและรายละเอียดการเริ่มต้นใช้งานด้วยครับ 🙏`;
-    return `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(msg)}`;
+    return getLineOrderUrl(msg);
   };
 
   return (

@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
   <div class="card">
     <h2 style="color:#f87171;margin-top:0;">🔒 ลิงก์นี้ต้องผ่านการตรวจสอบสลิปก่อนครับ</h2>
     <p style="color:#94a3b8;font-size:14px;line-height:1.6;">กรุณาส่งรูปสลิปโอนเงินในแชต LINE Official Account ของครูอ้น (AiAon Tech) เพื่อรับลิงก์ดาวน์โหลดส่วนบุคคลที่เข้ารหัสถูกต้องครับ</p>
-    <a class="btn" href="https://line.me/R/ti/p/@deu6776s">💬 เปิดแชต LINE OA ครูอ้น</a>
+    <a class="btn" href="https://line.me/R/ti/p/%40deu6776s">💬 เปิดแชต LINE OA ครูอ้น</a>
   </div>
 </body>
 </html>`,
@@ -110,7 +110,7 @@ export async function GET(req: NextRequest) {
       <div class="special-desc">
         นอกจากไฟล์คลังข้อสอบและแผนอ่านหนังสือด้านล่างแล้ว ท่านได้รับสิทธิ์เข้า <b>กลุ่มติวสอบครูผู้ช่วย VIP (Telegram)</b> เพื่อฝึกทำข้อสอบเสมือนจริงและรับอัปเดตเก็งข้อสอบกฎหมายการศึกษาปี 2569 ตลอดชีพครับ
       </div>
-      <a class="special-btn prep-btn" href="https://line.me/R/oaMessage/@deu6776s/?%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B8%A3%E0%B8%AB%E0%B8%B1%E0%B8%AA%E0%B8%AA%E0%B8%A5%E0%B8%B4%E0%B8%9B%20PREP01%20(${encodeURIComponent(
+      <a class="special-btn prep-btn" href="https://line.me/R/oaMessage/%40deu6776s/?%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B8%A3%E0%B8%AB%E0%B8%B1%E0%B8%AA%E0%B8%AA%E0%B8%A5%E0%B8%B4%E0%B8%9B%20PREP01%20(${encodeURIComponent(
         ref
       )})%20%E0%B8%82%E0%B8%AD%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%A5%E0%B8%B4%E0%B8%87%E0%B8%81%E0%B9%8C%E0%B9%80%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%81%E0%B8%A5%E0%B8%B8%E0%B9%88%E0%B8%A1%20Telegram%20VIP%20%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A" target="_blank" rel="noopener noreferrer">
         🚀 กดรับลิงก์เข้ากลุ่มลับ Telegram VIP & บอทติวข้อสอบทันที
@@ -131,7 +131,7 @@ export async function GET(req: NextRequest) {
           <li>ลิงก์หรือชื่อเพจ Facebook / LINE OA (กรณีติดตั้ง AI Caretaker)</li>
         </ul>
       </div>
-      <a class="special-btn vip-btn" href="https://line.me/R/oaMessage/@deu6776s/?%E0%B8%AA%E0%B9%88%E0%B8%87%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%B9%E0%B8%A5%E0%B8%9A%E0%B8%A3%E0%B8%B5%E0%B8%9F%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B1%E0%B9%89%E0%B8%87%20VIP%20Setup%20%E0%B8%A3%E0%B8%AB%E0%B8%B1%E0%B8%AA%E0%B8%AA%E0%B8%A5%E0%B8%B4%E0%B8%9B%20(${encodeURIComponent(
+      <a class="special-btn vip-btn" href="https://line.me/R/oaMessage/%40deu6776s/?%E0%B8%AA%E0%B9%88%E0%B8%87%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%B9%E0%B8%A5%E0%B8%9A%E0%B8%A3%E0%B8%B5%E0%B8%9F%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B1%E0%B9%89%E0%B8%87%20VIP%20Setup%20%E0%B8%A3%E0%B8%AB%E0%B8%B1%E0%B8%AA%E0%B8%AA%E0%B8%A5%E0%B8%B4%E0%B8%9B%20(${encodeURIComponent(
         ref
       )})%20%E0%B8%8A%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%AB%E0%B8%99%E0%B9%88%E0%B8%A7%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99/%E0%B8%AD%E0%B8%B5%E0%B9%80%E0%B8%A1%E0%B8%A5%3A%20" target="_blank" rel="noopener noreferrer">
         📋 กดส่งข้อมูลบรีฟติดตั้งระบบ (VIP Setup / AI Caretaker)

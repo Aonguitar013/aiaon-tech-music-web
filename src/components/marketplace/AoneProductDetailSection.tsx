@@ -10,6 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import { DvdCaseMockup, AONE_SYSTEM_META } from "@/components/marketplace/DvdCaseMockup";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { getLineOrderUrl } from "@/lib/line";
 
 interface AoneDetailData {
   code: string;
@@ -256,8 +257,32 @@ export function AoneProductDetailSection({
 
   const vipLineOrderMessage = `สวัสดีครับครูอ้น สนใจสั่งซื้อระบบพร้อมบริการให้ครูอ้นติดตั้งให้ (VIP Setup):\n🛠️ "[${data.code}] ${title}"\n💰 ราคาตัวระบบ ${cleanPrice} + บริการติดตั้งพร้อมใช้ (${vipPrice})\nรบกวนขอเลขบัญชี / PromptPay QR Code ด้วยครับ 🙏`;
 
-  const lineOrderUrl = `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(lineOrderMessage)}`;
-  const vipLineOrderUrl = `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(vipLineOrderMessage)}`;
+  const lineOrderUrl = getLineOrderUrl(lineOrderMessage);
+  const vipLineOrderUrl = getLineOrderUrl(vipLineOrderMessage);
+
+  const handleOrderClick = (e: React.MouseEvent) => {
+    if (!isMobileDevice()) {
+      e.preventDefault();
+      openLineModal({
+        title: `[${data.code}] ${title}`,
+        price: cleanPrice,
+        itemCode: data.code,
+        message: lineOrderMessage,
+      });
+    }
+  };
+
+  const handleVipClick = (e: React.MouseEvent) => {
+    if (!isMobileDevice()) {
+      e.preventDefault();
+      openLineModal({
+        title: `[${data.code}] ${title} (VIP Setup)`,
+        price: `${cleanPrice} + ${vipPrice}`,
+        itemCode: data.code,
+        message: vipLineOrderMessage,
+      });
+    }
+  };
 
   return (
     <div className="w-full flex flex-col gap-10 font-prompt">
@@ -324,20 +349,14 @@ export function AoneProductDetailSection({
 
             {/* Instant Action CTA */}
             <div className="flex flex-col sm:flex-row items-center gap-3">
-              <button
-                type="button"
-                onClick={() => {
-                  if (isMobileDevice()) {
-                    window.open(lineOrderUrl, "_blank", "noopener,noreferrer");
-                  } else {
-                    openLineModal({
-                      title: `[${data.code}] ${title}`,
-                      price: cleanPrice,
-                      itemCode: data.code,
-                      message: lineOrderMessage,
-                    });
-                  }
-                }}
+              <a
+                href={lineOrderUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleOrderClick}
+                data-line-title={`[${data.code}] ${title}`}
+                data-line-price={cleanPrice}
+                data-line-code={data.code}
                 className={cn(
                   "w-full sm:flex-1 py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex items-center justify-center gap-2 group shadow-xl cursor-pointer",
                   isFree
@@ -348,27 +367,21 @@ export function AoneProductDetailSection({
                 {isFree ? <Gift className="w-5 h-5 text-zinc-950" /> : <ShoppingCart className="w-5 h-5 text-zinc-950" />}
                 <span>{isFree ? "รับระบบและโค้ดฟรีทาง LINE ทันที" : `สั่งซื้อรับระบบทันที ${cleanPrice} (LINE)`}</span>
                 <ArrowRight className="w-4 h-4 text-zinc-950 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
 
               {!isFree && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (isMobileDevice()) {
-                      window.open(vipLineOrderUrl, "_blank", "noopener,noreferrer");
-                    } else {
-                      openLineModal({
-                        title: `[${data.code}] ${title} (VIP Setup)`,
-                        price: `${cleanPrice} + ${vipPrice}`,
-                        itemCode: data.code,
-                        message: vipLineOrderMessage,
-                      });
-                    }
-                  }}
+                <a
+                  href={vipLineOrderUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleVipClick}
+                  data-line-title={`[${data.code}] ${title} (VIP Setup)`}
+                  data-line-price={`${cleanPrice} + ${vipPrice}`}
+                  data-line-code={data.code}
                   className="w-full sm:w-auto py-4 px-5 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold text-sm transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer shadow-sm hover:scale-[1.01]"
                 >
                   <span>🛠️ ครูอ้นติดตั้งให้ ({vipPrice})</span>
-                </button>
+                </a>
               )}
             </div>
           </div>
@@ -578,20 +591,14 @@ export function AoneProductDetailSection({
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-md">
-          <button
-            type="button"
-            onClick={() => {
-              if (isMobileDevice()) {
-                window.open(lineOrderUrl, "_blank", "noopener,noreferrer");
-              } else {
-                openLineModal({
-                  title: `[${data.code}] ${title}`,
-                  price: cleanPrice,
-                  itemCode: data.code,
-                  message: lineOrderMessage,
-                });
-              }
-            }}
+          <a
+            href={lineOrderUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleOrderClick}
+            data-line-title={`[${data.code}] ${title}`}
+            data-line-price={cleanPrice}
+            data-line-code={data.code}
             className={cn(
               "w-full py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex items-center justify-center gap-2 group shadow-xl cursor-pointer",
               isFree
@@ -600,9 +607,9 @@ export function AoneProductDetailSection({
             )}
           >
             <MessageSquare className="w-5 h-5 text-zinc-950" />
-            <span>{isFree ? "รับระบบฟรีผ่าน LINE" : `สั่งซื้อทันที ${cleanPrice}`}</span>
+            <span>{isFree ? "รับระบบฟรีผ่าน LINE" : `สั่งซื้อทันที ${cleanPrice} (LINE)`}</span>
             <ArrowRight className="w-4 h-4 text-zinc-950 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </a>
         </div>
       </div>
 

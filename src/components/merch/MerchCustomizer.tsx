@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, } from "react";
 import Image from "next/image";
@@ -13,6 +13,7 @@ import { QRCodeSVG } from "qrcode.react";
 import generatePayload from "promptpay-qr";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
 import { cn } from "@/lib/utils";
+import { getLineOrderUrl } from "@/lib/line";
 
 // --- INTERFACES & TYPES ---
 type TShirtColor = {
@@ -925,7 +926,7 @@ LINE ID: ${form.lineId}
 --------------------------------
 *แนบรูปภาพสลิปชำระเงินมาในแชทนี้ได้เลยครับ*`;
 
-    return `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(orderDetails)}`;
+    return getLineOrderUrl(orderDetails);
   };
 
   // Copy Order summary details

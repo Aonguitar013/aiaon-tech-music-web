@@ -15,6 +15,7 @@ import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 import { Book3DMockup } from "@/components/ebooks/Book3DMockup";
 import { findEbookByCode, EbookMetadata } from "@/components/ebooks/ebookDataHelper";
 import { EbookDetailSection } from "@/components/ebooks/EbookDetailSection";
+import { getLineOrderUrl } from "@/lib/line";
 
 interface EbookItem {
   rank: number;
@@ -451,9 +452,9 @@ export function EbooksCatalogView() {
 
                     {/* Action 3: Order Instant via LINE */}
                     <a
-                      href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+                      href={getLineOrderUrl(
                         `สวัสดีครับครูอ้น สนใจสั่งซื้อ E-Book [${book.code}] ${book.title} ราคา ${book.earlyBirdPrice} บาท ครับ`
-                      )}`}
+                      )}
                       data-line-title={`E-Book: ${book.title}`}
                       data-line-price={book.earlyBirdPrice}
                       data-line-code={book.code}
@@ -526,9 +527,9 @@ export function EbooksCatalogView() {
               </div>
 
               <a
-                href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+                href={getLineOrderUrl(
                   "สวัสดีครับครูอ้น สนใจสั่งซื้อเหมาแพ็กเกจ 30 เล่มจบ The All-in-One Thai Teacher Vault ราคาพิเศษ 2,990 บาท ครับ"
-                )}`}
+                )}
                 data-line-title="แพ็กเกจเหมา 30 เล่มจบ (Ultimate Master Pack)"
                 data-line-price="2,990"
                 data-line-code="VAULT-30"
@@ -694,9 +695,7 @@ export function EbooksCatalogView() {
                   </div>
 
                   <a
-                    href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
-                      cartOrderMessage
-                    )}`}
+                    href={getLineOrderUrl(cartOrderMessage)}
                     onClick={handleCartCheckoutClick}
                     data-line-title={`สั่งซื้อ E-Book รวม ${cart.length} เล่ม`}
                     data-line-price={cartTotal}

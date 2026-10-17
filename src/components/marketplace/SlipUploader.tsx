@@ -7,6 +7,7 @@ import { createClient } from "@/utils/supabase/client";
 import { Upload, CheckCircle, Smartphone, Info, Wrench, ShieldCheck, MessageSquare, ArrowRight, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { getLineOrderUrl } from "@/lib/line";
 
 interface SlipUploaderProps {
     itemId: string;
@@ -242,7 +243,7 @@ export function SlipUploader({
                         </p>
                         
                         <a
-                            href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(lineSetupMessage)}`}
+                            href={getLineOrderUrl(lineSetupMessage)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-full py-4 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-102 cursor-pointer"

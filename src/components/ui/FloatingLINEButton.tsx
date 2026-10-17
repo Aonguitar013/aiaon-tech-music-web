@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaLine } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { getLineOrderUrl } from "@/lib/line";
 
 function getContextLineConfig(pathname: string): {
   badge: string;
@@ -103,7 +104,7 @@ export function FloatingLINEButton() {
   }, []);
 
   const { badge, label, message } = getContextLineConfig(pathname);
-  const lineHref = `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(message)}`;
+  const lineHref = getLineOrderUrl(message);
 
   return (
     <AnimatePresence>

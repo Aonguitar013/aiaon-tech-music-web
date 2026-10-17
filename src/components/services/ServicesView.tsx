@@ -15,6 +15,7 @@ import { CyberBlueprintMockup } from "./CyberBlueprintMockup";
 import { CustomDevDetailSection } from "./CustomDevDetailSection";
 import { CUSTOM_DEV_TIERS_DATA, CustomDevTierItem } from "./customDevDataHelper";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { getLineOrderUrl } from "@/lib/line";
 
 /* ─────────────────────────────────────────────────────────────
    TYPES & DATA
@@ -197,7 +198,7 @@ export function ServicesView() {
 
 รบกวนขอคำปรึกษาและรายละเอียดเพิ่มเติมด้วยครับ 🙏`;
 
-    return `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(message)}`;
+    return getLineOrderUrl(message);
   };
 
   const [selectedTier, setSelectedTier] = useState<CustomDevTierItem | null>(null);
@@ -216,7 +217,7 @@ export function ServicesView() {
 
   const generateLineTierUrl = (tierName: string, price: string) => {
     const message = `สวัสดีครับครูอ้น สนใจบริการสั่งทำระบบแพ็กเกจ "${tierName}" (ราคา ${price}) ครับ รบกวนขอปรึกษารายละเอียดและขั้นตอนการดำเนินการด้วยครับ 🙏`;
-    return `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(message)}`;
+    return getLineOrderUrl(message);
   };
 
   return (
@@ -271,7 +272,9 @@ export function ServicesView() {
             className="flex flex-wrap items-center justify-center gap-4 pt-2"
           >
             <a
-              href="https://line.me/R/oaMessage/@deu6776s/?%E0%B8%AA%E0%B8%A7%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B5%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%AD%E0%B9%89%E0%B8%99%20%E0%B8%AA%E0%B8%99%E0%B9%83%E0%B8%88%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%9E%E0%B8%B1%E0%B8%92%E0%B8%99%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%95%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B8%B1%E0%B9%88%E0%B8%87%20%E0%B8%82%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%A5%E0%B8%B0%E0%B9%80%E0%B8%AD%E0%B8%B5%E0%B8%A2%E0%B8%94%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A%20%F0%9F%99%8F"
+              href={getLineOrderUrl(
+                "สวัสดีครับครูอ้น สนใจบริการรับพัฒนาระบบตามสั่ง ขอรายละเอียดและราคาครับ 🙏"
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 rounded-2xl bg-linear-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-prompt font-bold text-base flex items-center gap-2.5 shadow-[0_0_30px_rgba(16,185,129,0.35)] transition-all duration-300 hover:scale-105"
@@ -670,9 +673,9 @@ export function ServicesView() {
             </div>
 
             <a
-              href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+              href={getLineOrderUrl(
                 "สวัสดีครับครูอ้น สนใจขอเชิญเป็นวิทยากรบรรยาย / จัดอบรมเชิงปฏิบัติการ AI เพื่อการศึกษาลดภาระครูและ Automation ให้กับทางโรงเรียนครับ รบกวนขอข้อมูลหลักสูตร ใบเสนอราคา และคิวว่างด้วยครับ 🙏"
-              )}`}
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-5 rounded-2xl bg-linear-to-r from-amber-500 via-orange-500 to-amber-400 text-zinc-950 font-prompt font-extrabold text-base flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(245,158,11,0.4)] hover:scale-105 transition-all shrink-0 cursor-pointer"

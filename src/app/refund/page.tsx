@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { RefreshCw, CheckCircle2, XCircle, ArrowLeft, ExternalLink, HelpCircle, Clock } from "lucide-react";
+import { getLineOrderUrl } from "@/lib/line";
 
 export const metadata: Metadata = {
   title: "นโยบายการคืนเงิน (Refund Policy) | AiAon Tech",
@@ -163,7 +164,7 @@ export default function RefundPage() {
               ทีมงานยินดีรับฟังและช่วยเหลือแก้ไขปัญหาทางเทคนิคอย่างเต็มที่
             </p>
             <a
-              href="https://line.me/R/oaMessage/@deu6776s/?สวัสดีครับครูอ้น ต้องการปรึกษาปัญหาการใช้งานระบบ / การขอคืนเงินครับ"
+              href={getLineOrderUrl("สวัสดีครับครูอ้น ต้องการปรึกษาปัญหาการใช้งานระบบ / การขอคืนเงินครับ")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-500 hover:to-blue-400 text-white font-medium text-sm transition-all duration-200 shadow-lg shadow-purple-500/20"

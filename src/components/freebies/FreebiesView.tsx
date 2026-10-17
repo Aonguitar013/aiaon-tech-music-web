@@ -16,6 +16,7 @@ import { DvdCaseMockup } from "@/components/marketplace/DvdCaseMockup";
 import { Book3DMockup } from "@/components/ebooks/Book3DMockup";
 import { StudentCardMockup } from "@/components/student-vault/StudentCardMockup";
 import { VinylRecordMockup } from "@/components/music-store/VinylRecordMockup";
+import { getLineOrderUrl } from "@/lib/line";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -143,7 +144,7 @@ function LineUnlockModal({
 
   const VALID_PASSCODES = ["FREE69", "AIAON2026", "AIAONTECH"];
   const freebieLineMsg = `สวัสดีครับครูอ้น ขอรับรหัสปลดล็อกและไฟล์แจกฟรี:\n🎁 "${freebie.title}"\n📌 หมวด: ${freebie.tag}\nขอบคุณครับ 🙏`;
-  const freebieLineUrl = `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(freebieLineMsg)}`;
+  const freebieLineUrl = getLineOrderUrl(freebieLineMsg);
 
   const handleUnlock = (e: React.FormEvent) => {
     e.preventDefault();
@@ -679,9 +680,9 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
                 รับการแจ้งเตือนสคริปต์ใหม่ บทเรียนการสอนฟรี และรหัสส่วนลดพิเศษเฉพาะใน LINE
               </p>
               <a
-                href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+                href={getLineOrderUrl(
                   "สวัสดีครับครูอ้น ขอสมัครรับอัปเดตโค้ดฟรีประจำสัปดาห์ และขอรหัสปลดล็อกคลังของแจกฟรี (Freebies) ครับ 🎁🙏"
-                )}`}
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-105 shadow-[0_0_24px_rgba(6,199,85,0.35)]"

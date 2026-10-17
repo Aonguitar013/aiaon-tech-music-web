@@ -12,6 +12,7 @@ import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 import { BUNDLE_PACKAGES_DATA, BundleItem } from "@/components/bundles/bundleDataHelper";
 import { CyberVaultCrateMockup } from "@/components/bundles/CyberVaultCrateMockup";
 import { BundleDetailSection } from "@/components/bundles/BundleDetailSection";
+import { getLineOrderUrl } from "@/lib/line";
 
 const BUNDLE_PACKAGES = BUNDLE_PACKAGES_DATA;
 
@@ -210,10 +211,13 @@ export function BundlesView() {
                     </button>
 
                     <a
-                      href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(bundle.lineOrderMsg)}`}
+                      href={getLineOrderUrl(bundle.lineOrderMsg)}
                       onClick={(e) => handleLineOrderClick(e, bundle)}
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-line-title={`แพ็กเกจเหมา: ${bundle.title}`}
+                      data-line-price={bundle.bundlePrice}
+                      data-line-code={bundle.id}
                       className={`w-full py-3.5 px-4 rounded-2xl text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] shadow-lg cursor-pointer bg-gradient-to-r ${bundle.btnGradient}`}
                     >
                       <MessageCircle className="w-4 h-4 fill-white/20 text-white" />

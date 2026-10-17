@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { getLineOrderUrl } from "@/lib/line";
 import {
   MUSIC_STORE_PRODUCTS_DATA,
   MusicStoreProductItem,
@@ -418,7 +419,7 @@ export function MusicStoreView() {
                       </button>
 
                       <a
-                        href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(item.lineOrderMsg)}`}
+                        href={getLineOrderUrl(item.lineOrderMsg)}
                         onClick={(e) => handleSingleBuyClick(e, item)}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -451,9 +452,9 @@ export function MusicStoreView() {
             </p>
             <div className="pt-2">
               <a
-                href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(
+                href={getLineOrderUrl(
                   "สวัสดีครับครูอ้น สนใจโปรโมชันเหมา '🎵 Super Audio Bundle (เพลงช่วยจำ 10 เพลง + BGM ปลอดลิขสิทธิ์ 27 แทร็ก + Backing Track)' ราคาพิเศษ 590 บาทครับ รบกวนขอ QR พร้อมเพย์ด้วยครับ 🙏"
-                )}`}
+                )}
                 onClick={handleBundleBuyClick}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -530,7 +531,11 @@ export function MusicStoreView() {
                     ล้างตะกร้า
                   </button>
                   <a
-                    href={`https://line.me/R/ti/p/@aiaon`}
+                    href={getLineOrderUrl(
+                      `สวัสดีครับครูอ้น สนใจสั่งซื้อแพ็กเกจเพลง/สื่อเสียงรวม ${cart.length} รายการครับ 🎵\n` +
+                      cart.map((item, idx) => `${idx + 1}. [${item.code}] ${item.title} (${item.price.toLocaleString()} ฿)`).join("\n") +
+                      `\n\n💵 ยอดรวมทั้งหมด: ${totalCartPrice.toLocaleString()} บาท\nรบกวนขอ QR พร้อมเพย์สำหรับชำระเงินด้วยครับ 🙏`
+                    )}
                     onClick={handleCartCheckoutClick}
                     target="_blank"
                     rel="noopener noreferrer"

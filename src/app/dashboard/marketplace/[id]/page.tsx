@@ -8,6 +8,7 @@ import { buildSignedDeliveryUrl } from "@/utils/delivery-links";
 import { DvdCaseMockup } from "@/components/marketplace/DvdCaseMockup";
 import { AoneProductDetailSection } from "@/components/marketplace/AoneProductDetailSection";
 import { getSystemCoverTheme } from "@/components/marketplace/systemCoverTheme";
+import { getLineOrderUrl, buildSystemOrderMessage } from "@/lib/line";
 
 export function getVipSetupDetails(title: string) {
   const upper = title.toUpperCase();
@@ -346,18 +347,31 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                           )}
                       </div>
                   ) : (
-                      <div className="space-y-3.5 mb-4">
-                        {/* ── ✨ SLEEK LUXURY BUY BUTTON ── */}
-                        <Link
-                            href={`/dashboard/marketplace/checkout/${product.id}`}
-                            className={cn(
-                              "w-full py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex flex-col items-center justify-center gap-1 group relative overflow-hidden cursor-pointer",
-                              isService
-                                ? "bg-linear-to-r from-cyan-400 to-teal-400 hover:from-cyan-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(6,182,212,0.3)]"
-                                : isFree
-                                  ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.35)]"
-                                  : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 hover:from-cyan-300 hover:via-teal-200 hover:to-cyan-300 text-zinc-950 shadow-[0_0_30px_rgba(6,182,212,0.35)] hover:shadow-[0_0_45px_rgba(6,182,212,0.55)] hover:scale-[1.01] active:scale-[0.98]"
-                            )}
+                      <div className="space-y-3 mb-4">
+                        {/* ── ✨ PRIMARY LINE ORDER BUTTON (Matching Image 2 Standard) ── */}
+                        <a
+                          href={getLineOrderUrl(
+                            buildSystemOrderMessage({
+                              title: product.title,
+                              code: coverTheme.code,
+                              price: product.price || "0 บาท",
+                              vipPrice: vipSetup.priceText,
+                              isFree: isFree,
+                            })
+                          )}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          data-line-title={product.title}
+                          data-line-price={product.price}
+                          data-line-code={coverTheme.code}
+                          className={cn(
+                            "w-full py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex flex-col items-center justify-center gap-1 group relative overflow-hidden cursor-pointer",
+                            isService
+                              ? "bg-linear-to-r from-cyan-400 to-teal-400 hover:from-cyan-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(6,182,212,0.3)]"
+                              : isFree
+                                ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.35)]"
+                                : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 hover:from-cyan-300 hover:via-teal-200 hover:to-cyan-300 text-zinc-950 shadow-[0_0_30px_rgba(6,182,212,0.35)] hover:shadow-[0_0_45px_rgba(6,182,212,0.55)] hover:scale-[1.01] active:scale-[0.98]"
+                          )}
                         >
                             {/* Subtle Light Sweep */}
                             <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/45 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
@@ -366,18 +380,18 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                               {isService ? (
                                 <>
                                   <Mail className="w-5 h-5 shrink-0" />
-                                  <span>ติดต่อขอใบเสนอราคา</span>
+                                  <span>ติดต่อขอใบเสนอราคาทาง LINE</span>
                                 </>
                               ) : isFree ? (
                                 <>
                                   <Gift className="w-5 h-5 shrink-0" />
-                                  <span>รับระบบและโค้ดฟรีทันที</span>
+                                  <span>รับระบบและโค้ดฟรีทาง LINE</span>
                                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </>
                               ) : (
                                 <>
-                                  <Zap className="w-5 h-5 fill-zinc-950/20 shrink-0" />
-                                  <span>สั่งซื้อรับระบบทันที</span>
+                                  <MessageSquare className="w-5 h-5 fill-zinc-950/20 shrink-0" />
+                                  <span>สั่งซื้อรับระบบทันที (LINE)</span>
                                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </>
                               )}
@@ -386,25 +400,18 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                             {!isService && !isFree && (
                               <span className="text-[11px] font-bold text-zinc-900/80 tracking-tight relative z-10 flex items-center gap-1 whitespace-nowrap">
                                 <ShieldCheck className="w-3.5 h-3.5 text-zinc-950" />
-                                ลิขสิทธิ์ตลอดชีพ • ดาวน์โหลดผ่าน OneDrive อัตโนมัติ
+                                ตอบกลับโดยครูอ้น • รับไฟล์ระบบทันที • ปลอดภัย 100%
                               </span>
                             )}
-                        </Link>
-
-                        {/* Secondary LINE Button */}
-                        <a
-                          href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
-                            isFree
-                              ? `สวัสดีครับครูอ้น ขอรับระบบและโค้ดแจกฟรี:\n🎁 "${product.title}"\nรบกวนขอรหัสปลดล็อกและลิงก์ดาวน์โหลดด้วยครับ 🙏`
-                              : `สวัสดีครับครูอ้น สนใจสั่งซื้อระบบ:\n📦 "${product.title}"\n💰 ราคา: ${product.price} (หรือออปชัน VIP Setup ${vipSetup.priceText})\nรบกวนขอเลขบัญชี / PromptPay QR Code ด้วยครับ 🙏`
-                          )}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full py-3 rounded-2xl bg-[#06C755]/10 hover:bg-[#06C755]/20 border border-[#06C755]/40 text-[#06C755] font-prompt font-bold text-xs flex items-center justify-center gap-2 transition-all hover:scale-[1.01] cursor-pointer shadow-sm"
-                        >
-                          <MessageSquare className="w-4 h-4" />
-                          <span>สั่งซื้อ / ปรึกษาผ่าน LINE OA (@deu6776s)</span>
                         </a>
+
+                        {/* Secondary Web Checkout Option */}
+                        <Link
+                          href={`/dashboard/marketplace/checkout/${product.id}`}
+                          className="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white font-prompt text-xs flex items-center justify-center gap-2 transition"
+                        >
+                          <span>หรือชำระผ่านระบบหน้าเว็บ / บัตรเครดิต</span>
+                        </Link>
                       </div>
                   )}
 

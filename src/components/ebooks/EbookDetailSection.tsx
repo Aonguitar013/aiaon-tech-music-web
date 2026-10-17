@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { Book3DMockup } from "@/components/ebooks/Book3DMockup";
 import { EbookMetadata } from "@/components/ebooks/ebookDataHelper";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { getLineOrderUrl } from "@/lib/line";
 
 interface EbookDetailSectionProps {
   ebook: EbookMetadata;
@@ -154,7 +155,7 @@ export function EbookDetailSection({
             )}
 
             <a
-              href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(orderMessage)}`}
+              href={getLineOrderUrl(orderMessage)}
               onClick={handleLineOrderClick}
               data-line-title={`E-Book: ${ebook.title}`}
               data-line-price={ebook.earlyBirdPrice}
@@ -489,7 +490,7 @@ export function EbookDetailSection({
             </Link>
 
             <a
-              href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(orderMessage)}`}
+              href={getLineOrderUrl(orderMessage)}
               onClick={handleLineOrderClick}
               data-line-title={`E-Book: ${ebook.title}`}
               data-line-price={ebook.earlyBirdPrice}

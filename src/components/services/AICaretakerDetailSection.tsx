@@ -11,6 +11,7 @@ import {
 import { AICaretakerPackageItem } from "@/components/services/aiCaretakerDataHelper";
 import { CyberSentinelOrbMockup } from "@/components/services/CyberSentinelOrbMockup";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { getLineOrderUrl } from "@/lib/line";
 
 interface AICaretakerDetailSectionProps {
   packageItem: AICaretakerPackageItem;
@@ -129,7 +130,7 @@ export function AICaretakerDetailSection({
 
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <a
-              href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(packageItem.lineOrderMsg)}`}
+              href={getLineOrderUrl(packageItem.lineOrderMsg)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLineOrderClick}
@@ -389,7 +390,7 @@ export function AICaretakerDetailSection({
             )}
 
             <a
-              href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(packageItem.lineOrderMsg)}`}
+              href={getLineOrderUrl(packageItem.lineOrderMsg)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLineOrderClick}

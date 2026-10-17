@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { FreebiesView, Freebie } from "@/components/freebies/FreebiesView";
 import type { Metadata } from "next";
+import { getLineOrderUrl } from "@/lib/line";
 
 export const metadata: Metadata = {
   title: "คลังของแจกฟรี — โค้ด Google Apps Script, เทมเพลต และ AI Prompts | AiAon Tech",
@@ -64,9 +65,9 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
     tag: "AONE10 (Google Apps Script)",
     file_size: "1.2 MB",
     file_type: "GAS Web App",
-    download_url: `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+    download_url: getLineOrderUrl(
       'สวัสดีครับครูอ้น ปลดล็อกรหัสสำเร็จแล้ว ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี:\n🎁 "[AONE10] ระบบฝึกจำหน้านักเรียน & คำศัพท์ 3D Flashcard" ครับ 🙏'
-    )}`,
+    ),
   },
   {
     id: "freebie-gas-asset-qr",
@@ -83,9 +84,9 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
     tag: "AONA04 (ระบบบริหารงานครู)",
     file_size: "850 KB",
     file_type: "GAS & Sheet",
-    download_url: `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+    download_url: getLineOrderUrl(
       'สวัสดีครับครูอ้น ปลดล็อกรหัสสำเร็จแล้ว ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี:\n🎁 "[AONA04] ระบบบัตรติดทรัพย์สิน & สร้าง QR Code ครุภัณฑ์" ครับ 🙏'
-    )}`,
+    ),
   },
   {
     id: "freebie-smart-grade-tracker",
@@ -95,16 +96,16 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
     icon_name: "FileSpreadsheet",
     color_from: "from-emerald-500",
     color_to: "to-teal-600",
-    glow_color: "rgba(16,185,129,0.3)",
+    glow_color: "rgba(168,85,247,0.3)",
     border_color: "border-emerald-500/30",
     text_color: "text-emerald-400",
     bg_color: "bg-emerald-500/10",
     tag: "Google Sheets Template",
     file_size: "450 KB",
     file_type: "Google Sheet",
-    download_url: `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+    download_url: getLineOrderUrl(
       'สวัสดีครับครูอ้น ปลดล็อกรหัสสำเร็จแล้ว ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี:\n🎁 "เทมเพลต Google Sheets คำนวณคะแนน & ตัดเกรดอัตโนมัติ" ครับ 🙏'
-    )}`,
+    ),
   },
   {
     id: "freebie-teacher-ai-prompts",
@@ -121,9 +122,9 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
     tag: "AI Teacher Mastery",
     file_size: "2.4 MB",
     file_type: "PDF & Prompts",
-    download_url: `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+    download_url: getLineOrderUrl(
       'สวัสดีครับครูอ้น ปลดล็อกรหัสสำเร็จแล้ว ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี:\n🎁 "คัมภีร์ 20 AI Prompts สำหรับครูไทย ยุคใหม่" ครับ 🙏'
-    )}`,
+    ),
   },
   {
     id: "freebie-student-ai-starter",
@@ -140,9 +141,9 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
     tag: "สำหรับนักเรียน Gen Z",
     file_size: "1.8 MB",
     file_type: "Digital PDF",
-    download_url: `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+    download_url: getLineOrderUrl(
       'สวัสดีครับครูอ้น ปลดล็อกรหัสสำเร็จแล้ว ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี:\n🎁 "Student AI Prompts Starter Pack (สำหรับนักเรียน)" ครับ 🙏'
-    )}`,
+    ),
   },
   {
     id: "freebie-guitar-backing-pack",
@@ -159,9 +160,9 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
     tag: "Studio Music Assets",
     file_size: "68 MB",
     file_type: "ZIP Audio (WAV/MP3)",
-    download_url: `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
+    download_url: getLineOrderUrl(
       'สวัสดีครับครูอ้น ปลดล็อกรหัสสำเร็จแล้ว ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี:\n🎁 "Lo-Fi & Acoustic Guitar Backing Track Pack (10 แทร็ค)" ครับ 🎸🙏'
-    )}`,
+    ),
   },
 ];
 

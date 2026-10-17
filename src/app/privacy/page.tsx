@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck, Lock, ArrowLeft, ExternalLink, Database, CheckCircle2 } from "lucide-react";
+import { getLineOrderUrl } from "@/lib/line";
 
 export const metadata: Metadata = {
   title: "นโยบายความเป็นส่วนตัว (PDPA) | AiAon Tech",
@@ -224,7 +225,7 @@ export default function PrivacyPage() {
               ติดต่อสอบถามทีมงานหรือเจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคลของ AiAon Tech ได้โดยตรง
             </p>
             <a
-              href="https://line.me/R/oaMessage/@deu6776s/?สวัสดีครับครูอ้น มีข้อสอบถามเกี่ยวกับนโยบายความเป็นส่วนตัวและ PDPA ครับ"
+              href={getLineOrderUrl("สวัสดีครับครูอ้น มีข้อสอบถามเกี่ยวกับนโยบายความเป็นส่วนตัวและ PDPA ครับ")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-cyan-500 hover:from-emerald-500 hover:to-cyan-400 text-white font-medium text-sm transition-all duration-200 shadow-lg shadow-cyan-500/20"

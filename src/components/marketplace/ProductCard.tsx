@@ -31,6 +31,7 @@ interface ProductCardProps {
 }
 
 import { getSystemCoverTheme } from "./systemCoverTheme";
+import { getLineOrderUrl, buildSystemOrderMessage, buildVipSetupOrderMessage } from "@/lib/line";
 
 export function ProductCard({ product }: ProductCardProps) {
   const { brandTheme } = useBrandTheme();
@@ -68,7 +69,6 @@ export function ProductCard({ product }: ProductCardProps) {
 
   // Generate dynamic bespoke theme
   const coverTheme = getSystemCoverTheme(product.title, product.category);
-  const CoverIcon = coverTheme.icon;
 
   const cleanPrice = isFree ? "ฟรี 0 ฿" : product.price.replace(/\s*THB/i, " ฿");
   const upperTitle = product.title.toUpperCase();
@@ -100,23 +100,60 @@ export function ProductCard({ product }: ProductCardProps) {
     ? product.title
     : `[${coverTheme.code}] ${product.title}`;
 
-  const lineOrderMessage = isFree
-    ? `สวัสดีครับครูอ้น ขอรับระบบและโค้ดแจกฟรี:\n🎁 "${displayTitle}"\nรบกวนขอรหัสปลดล็อกและลิงก์ดาวน์โหลดด้วยครับ 🙏`
-    : `สวัสดีครับครูอ้น สนใจสั่งซื้อระบบอัตโนมัติ:\n📦 "${displayTitle}"\n💰 ราคา: ${cleanPrice} (มีออปชันครูอ้นติดตั้งให้พร้อมใช้ ${vipPrice})\nรบกวนขอเลขบัญชี / PromptPay QR Code เพื่อชำระเงินและรับไฟล์ระบบด้วยครับ 🙏`;
+  const lineOrderMessage = buildSystemOrderMessage({
+    title: product.title,
+    code: coverTheme.code,
+    price: cleanPrice,
+    vipPrice: vipPrice,
+    isFree: isFree,
+  });
 
-  const vipLineOrderMessage = `สวัสดีครับครูอ้น สนใจสั่งซื้อระบบพร้อมบริการให้ครูอ้นติดตั้งให้ (VIP Setup):\n🛠️ "${displayTitle}"\n💰 ราคาตัวระบบ ${cleanPrice} + บริการติดตั้งพร้อมใช้ (${vipPrice})\nรบกวนขอเลขบัญชี / PromptPay QR Code ด้วยครับ 🙏`;
+  const vipLineOrderMessage = buildVipSetupOrderMessage({
+    title: product.title,
+    code: coverTheme.code,
+    price: cleanPrice,
+    vipPrice: vipPrice,
+  });
 
-  const lineOrderUrl = `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(lineOrderMessage)}`;
-  const vipLineOrderUrl = `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(vipLineOrderMessage)}`;
+  const lineOrderUrl = getLineOrderUrl(lineOrderMessage);
+  const vipLineOrderUrl = getLineOrderUrl(vipLineOrderMessage);
 
-  const CardInner = (
+  const detailHref = product.id 
+    ? `/dashboard/marketplace/${product.id}` 
+    : `/dashboard/marketplace`;
+
+  const handleVipClick = (e: React.MouseEvent) => {
+    if (!isMobileDevice()) {
+      e.preventDefault();
+      openLineModal({
+        title: `ระบบ ${displayTitle} (VIP Setup)`,
+        price: `${cleanPrice} + ${vipPrice}`,
+        itemCode: coverTheme.code,
+        message: vipLineOrderMessage,
+      });
+    }
+  };
+
+  const handleOrderClick = (e: React.MouseEvent) => {
+    if (!isMobileDevice()) {
+      e.preventDefault();
+      openLineModal({
+        title: displayTitle,
+        price: cleanPrice,
+        itemCode: coverTheme.code,
+        message: lineOrderMessage,
+      });
+    }
+  };
+
+  return (
     <div className={cn(
-      "glass-card flex flex-col h-full rounded-3xl border border-white/10 transition-all duration-300 relative overflow-hidden bg-slate-950/70 shadow-xl hover:bg-slate-900/90",
+      "glass-card flex flex-col h-full rounded-3xl border border-white/10 transition-all duration-300 relative overflow-hidden bg-slate-950/70 shadow-xl hover:bg-slate-900/90 group",
       hoverBorder
     )}>
       
-      {/* ── BESPOKE 3D HOLOGRAPHIC COVER ART / 3D DVD MOCKUP ── */}
-      <div className="relative w-full border-b border-white/10 overflow-hidden bg-gradient-to-br from-cyan-950/40 via-slate-950 to-indigo-950/40 flex flex-col justify-center">
+      {/* ── BESPOKE 3D HOLOGRAPHIC COVER ART / 3D DVD MOCKUP (Clickable to detail) ── */}
+      <Link href={detailHref} className="block relative w-full border-b border-white/10 overflow-hidden bg-gradient-to-br from-cyan-950/40 via-slate-950 to-indigo-950/40 flex flex-col justify-center cursor-pointer">
         <DvdCaseMockup
           code={coverTheme.code}
           title={product.title}
@@ -124,16 +161,18 @@ export function ProductCard({ product }: ProductCardProps) {
           tagline={coverTheme.tagline}
           glowColor={coverTheme.glowColor}
         />
-      </div>
+      </Link>
 
       {/* ── CARD BODY ─────────────────────────────────────────── */}
       <div className="p-5 sm:p-6 flex flex-col flex-1 z-10">
-        <h3 className={cn(
-          "text-base sm:text-lg font-bold font-prompt text-white mb-2 line-clamp-2 leading-snug transition-colors",
-          hoverText
-        )}>
-          {product.title}
-        </h3>
+        <Link href={detailHref} className="block group/title cursor-pointer mb-2">
+          <h3 className={cn(
+            "text-base sm:text-lg font-bold font-prompt text-white line-clamp-2 leading-snug transition-colors",
+            hoverText
+          )}>
+            {product.title}
+          </h3>
+        </Link>
 
         {parsedType && (
           <div className="flex items-center gap-1.5 mb-2.5 text-xs font-prompt text-cyan-400">
@@ -142,9 +181,11 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         )}
 
-        <p className="text-xs font-prompt text-white/60 mb-5 flex-1 line-clamp-3 leading-relaxed">
-          {rawDesc}
-        </p>
+        <Link href={detailHref} className="block flex-1 cursor-pointer mb-5">
+          <p className="text-xs font-prompt text-white/60 line-clamp-3 leading-relaxed hover:text-white/80 transition-colors">
+            {rawDesc}
+          </p>
+        </Link>
 
         {/* --- CLEAN SINGLE-LINE PRICE & CTA FOOTER --- */}
         <div className="mt-auto pt-4 border-t border-white/10 space-y-3">
@@ -181,47 +222,32 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
           </div>
 
-          {/* VIP Setup Micro-badge (Clickable for direct VIP Setup preset message) */}
+          {/* VIP Setup Micro-badge (Direct LINE link with VIP preset message) */}
           {!isFree && (
-            <div
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (isMobileDevice()) {
-                  window.open(vipLineOrderUrl, "_blank", "noopener,noreferrer");
-                } else {
-                  openLineModal({
-                    title: `ระบบ ${displayTitle} (VIP Setup)`,
-                    price: `${cleanPrice} + ${vipPrice}`,
-                    itemCode: coverTheme.code,
-                    message: vipLineOrderMessage,
-                  });
-                }
-              }}
+            <a
+              href={vipLineOrderUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleVipClick}
+              data-line-title={`ระบบ ${displayTitle} (VIP Setup)`}
+              data-line-price={`${cleanPrice} + ${vipPrice}`}
+              data-line-code={coverTheme.code}
               title="คลิกเพื่อสั่งซื้อพร้อมบริการให้ครูอ้นติดตั้งให้พร้อมใช้ (VIP Setup)"
-              className="text-[11px] font-prompt text-amber-300/90 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/25 hover:border-amber-400/50 rounded-lg py-1 px-2.5 text-center whitespace-nowrap truncate transition-all cursor-pointer"
+              className="block text-[11px] font-prompt text-amber-300/90 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/25 hover:border-amber-400/50 rounded-lg py-1 px-2.5 text-center whitespace-nowrap truncate transition-all cursor-pointer"
             >
               🛠️ ออปชันครูอ้นติดตั้งให้พร้อมใช้ ({vipPrice})
-            </div>
+            </a>
           )}
 
-          {/* ── ✨ SLEEK SINGLE-LINE LUXURY CTA BUTTON ── */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              if (isMobileDevice()) {
-                window.open(lineOrderUrl, "_blank", "noopener,noreferrer");
-              } else {
-                openLineModal({
-                  title: displayTitle,
-                  price: cleanPrice,
-                  itemCode: coverTheme.code,
-                  message: lineOrderMessage,
-                });
-              }
-            }}
+          {/* ── ✨ SLEEK SINGLE-LINE LUXURY CTA BUTTON (Direct LINE link) ── */}
+          <a
+            href={lineOrderUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleOrderClick}
+            data-line-title={displayTitle}
+            data-line-price={cleanPrice}
+            data-line-code={coverTheme.code}
             title="คลิกเพื่อสั่งซื้อผ่าน LINE OA ทันที"
             className={cn(
               "w-full h-11 px-4 rounded-xl font-prompt text-sm font-extrabold flex items-center justify-between whitespace-nowrap transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.98] cursor-pointer relative overflow-hidden",
@@ -247,24 +273,11 @@ export function ProductCard({ product }: ProductCardProps) {
             <div className="w-6 h-6 rounded-lg bg-zinc-950/12 group-hover:bg-zinc-950/20 flex items-center justify-center relative z-10 shrink-0 transition-all">
               <ArrowRight className="w-3.5 h-3.5 text-zinc-950 transition-transform group-hover:translate-x-0.5" />
             </div>
-          </button>
+          </a>
 
         </div>
       </div>
     </div>
-  );
-
-  const detailHref = product.id 
-    ? `/dashboard/marketplace/${product.id}` 
-    : `/dashboard/marketplace`;
-
-  return (
-    <Link
-      href={detailHref}
-      className="block group cursor-pointer h-full"
-    >
-      {CardInner}
-    </Link>
   );
 }
 

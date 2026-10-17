@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck, FileText, ArrowLeft, ExternalLink, HelpCircle, AlertCircle } from "lucide-react";
+import { getLineOrderUrl } from "@/lib/line";
 
 export const metadata: Metadata = {
   title: "เงื่อนไขการใช้งาน (Terms of Use) | AiAon Tech",
@@ -250,7 +251,7 @@ export default function TermsPage() {
               ติดต่อปรึกษาหรือสอบถามรายละเอียดเพิ่มเติมกับครูอ้นได้โดยตรง
             </p>
             <a
-              href="https://line.me/R/oaMessage/@deu6776s/?สวัสดีครับครูอ้น สอบถามเงื่อนไขการใช้งานระบบครับ"
+              href={getLineOrderUrl("สวัสดีครับครูอ้น สอบถามเงื่อนไขการใช้งานระบบครับ")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-medium text-sm transition-all duration-200 shadow-lg shadow-cyan-500/20"

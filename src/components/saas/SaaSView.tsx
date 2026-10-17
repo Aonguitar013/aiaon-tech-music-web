@@ -8,6 +8,7 @@ import {
   ChevronDown, MessageSquare, ArrowRight, Zap, CheckCircle2, 
   ShieldCheck, Play, Volume2, VolumeX, Music, 
   Heart, Coffee, Laptop, Award, } from "lucide-react";
+import { getLineOrderUrl } from "@/lib/line";
 
 interface Student {
   id: number;
@@ -594,7 +595,9 @@ export function SaaSView() {
             </Link>
 
             <a
-              href="https://line.me/R/oaMessage/@deu6776s/?%E0%B8%AA%E0%B8%A7%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B5%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%AD%E0%B9%89%E0%B8%99%20%E0%B8%AA%E0%B8%99%E0%B9%83%E0%B8%88%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%A3%E0%B8%B9%20(%E0%B9%80%E0%B8%8A%E0%B9%87%E0%B8%84%E0%B8%8A%E0%B8%B7%E0%B9%88%E0%B8%AD%2F%E0%B9%81%E0%B8%88%E0%B9%89%E0%B8%87%E0%B9%80%E0%B8%95%E0%B8%B7%E0%B8%AD%E0%B8%99%20LINE%20%E0%B8%AD%E0%B8%B1%E0%B8%95%E0%B9%82%E0%B8%99%E0%B8%A1%E0%B8%B1%E0%B8%95%E0%B8%B4)%20%E0%B8%82%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%A5%E0%B8%B0%E0%B9%80%E0%B8%AD%E0%B8%B5%E0%B8%A2%E0%B8%94%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%9A%20%F0%9F%99%8F"
+              href={getLineOrderUrl(
+                "สวัสดีครับครูอ้น สนใจระบบจัดการงานครู (เช็คชื่อ/แจ้งเตือน LINE อัตโนมัติ) ขอรายละเอียดครับ 🙏"
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-base flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-105 cursor-pointer"

@@ -11,6 +11,7 @@ import {
 import { BundleItem } from "@/components/bundles/bundleDataHelper";
 import { CyberVaultCrateMockup } from "@/components/bundles/CyberVaultCrateMockup";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { getLineOrderUrl } from "@/lib/line";
 
 interface BundleDetailSectionProps {
   bundle: BundleItem;
@@ -160,10 +161,13 @@ export function BundleDetailSection({
 
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <a
-              href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(bundle.lineOrderMsg)}`}
+              href={getLineOrderUrl(bundle.lineOrderMsg)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLineOrderClick}
+              data-line-title={`แพ็กเกจเหมา: ${bundle.title}`}
+              data-line-price={bundle.bundlePrice}
+              data-line-code={bundle.id}
               className={`px-8 py-4 rounded-xl bg-gradient-to-r ${accentStyles.btn} font-black text-base shadow-lg transition-all flex items-center justify-center gap-2 group cursor-pointer`}
             >
               <MessageSquare className="w-5 h-5 fill-current" />
@@ -420,10 +424,13 @@ export function BundleDetailSection({
             )}
 
             <a
-              href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(bundle.lineOrderMsg)}`}
+              href={getLineOrderUrl(bundle.lineOrderMsg)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLineOrderClick}
+              data-line-title={`แพ็กเกจเหมา: ${bundle.title}`}
+              data-line-price={bundle.bundlePrice}
+              data-line-code={bundle.id}
               className={`flex-1 sm:flex-initial px-8 py-4 rounded-xl bg-gradient-to-r ${accentStyles.btn} font-black text-base shadow-xl transition-all flex items-center justify-center gap-2 group cursor-pointer`}
             >
               <MessageSquare className="w-5 h-5 fill-current" />

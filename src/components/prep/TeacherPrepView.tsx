@@ -14,6 +14,7 @@ import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 import { GoldenTicketMockup } from "@/components/prep/GoldenTicketMockup";
 import { PREP_VIP_DATA } from "@/components/prep/prepDataHelper";
 import { TeacherPrepDetailSection } from "@/components/prep/TeacherPrepDetailSection";
+import { getLineOrderUrl } from "@/lib/line";
 
 /* ─────────────────────────────────────────────────────────────
    DATA: INTERACTIVE DAILY QUIZ SIMULATOR (3 วิชาหลัก)
@@ -283,7 +284,7 @@ export function TeacherPrepView() {
     const msg = isVip
       ? `สวัสดีครับครูอ้น สนใจสมัคร "👑 AiAon Prep VIP Exam Pass (390 ฿)" เข้ากลุ่ม Telegram บอทติวสอบครูผู้ช่วย + คลังเพลงช่วยจำครับ รบกวนขอเลขบัญชี/QR พร้อมเพย์ด้วยครับ 🙏`
       : `สวัสดีครับครูอ้น ขอรับลิงก์เข้ากลุ่ม "🟢 Telegram ติวสอบครูผู้ช่วยฟรี (AiAon Prep)" ครับ 🙏`;
-    return `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(msg)}`;
+    return getLineOrderUrl(msg);
   };
 
   const handleVipOrderClick = (e: React.MouseEvent) => {
@@ -761,10 +762,13 @@ export function TeacherPrepView() {
                     </button>
 
                     <a
-                      href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(PREP_VIP_DATA.lineOrderMsg)}`}
+                      href={getLineOrderUrl(PREP_VIP_DATA.lineOrderMsg)}
                       onClick={handleVipOrderClick}
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-line-title={PREP_VIP_DATA.title}
+                      data-line-price={PREP_VIP_DATA.price}
+                      data-line-code={PREP_VIP_DATA.id}
                       className="w-full py-4 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 shadow-[0_0_30px_rgba(245,158,11,0.35)]"
                     >
                       <MessageCircle className="w-4 h-4 fill-slate-950" />

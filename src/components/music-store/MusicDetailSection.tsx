@@ -11,6 +11,7 @@ import {
 import { MusicStoreProductItem } from "@/components/music-store/musicDataHelper";
 import { VinylRecordMockup } from "@/components/music-store/VinylRecordMockup";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { getLineOrderUrl } from "@/lib/line";
 
 interface MusicDetailSectionProps {
   product: MusicStoreProductItem;
@@ -185,7 +186,7 @@ export function MusicDetailSection({
 
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <a
-              href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(product.lineOrderMsg)}`}
+              href={getLineOrderUrl(product.lineOrderMsg)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLineOrderClick}
@@ -446,7 +447,7 @@ export function MusicDetailSection({
             )}
 
             <a
-              href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(product.lineOrderMsg)}`}
+              href={getLineOrderUrl(product.lineOrderMsg)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLineOrderClick}

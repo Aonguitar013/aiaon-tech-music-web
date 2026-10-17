@@ -87,7 +87,7 @@ async function copyToClipboard(text: string): Promise<boolean> {
 }
 
 const LINE_ACCOUNT_ID = "@deu6776s";
-const LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/@deu6776s";
+const LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40deu6776s";
 
 export function LineModalProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -233,7 +233,7 @@ export function LineOrderModal({
     }
   };
 
-  const linePcHref = `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(message)}`;
+  const linePcHref = `https://line.me/R/oaMessage/%40deu6776s/?${encodeURIComponent(message)}`;
 
   return (
     <AnimatePresence>

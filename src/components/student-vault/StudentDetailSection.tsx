@@ -10,6 +10,7 @@ import {
 import { StudentProductItem } from "@/components/student-vault/studentDataHelper";
 import { StudentCardMockup } from "@/components/student-vault/StudentCardMockup";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { getLineOrderUrl } from "@/lib/line";
 
 interface StudentDetailSectionProps {
   product: StudentProductItem;
@@ -127,7 +128,7 @@ export function StudentDetailSection({
 
           <div className="flex items-center gap-3 w-full sm:w-auto">
             <a
-              href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(product.lineOrderMsg)}`}
+              href={getLineOrderUrl(product.lineOrderMsg)}
               onClick={handleLineOrderClick}
               data-line-title={`ไอเทม: ${product.title}`}
               data-line-price={product.price}
@@ -404,7 +405,7 @@ export function StudentDetailSection({
             )}
 
             <a
-              href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(product.lineOrderMsg)}`}
+              href={getLineOrderUrl(product.lineOrderMsg)}
               onClick={handleLineOrderClick}
               data-line-title={`ไอเทม: ${product.title}`}
               data-line-price={product.price}
