@@ -29,19 +29,19 @@ export default async function DashboardLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) redirect("/login");
-
   // Check admin status once at layout level
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
+  const { data: profile } = user
+    ? await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single()
+    : { data: null };
 
   const isAdmin =
-    profile?.role === "admin" || user.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+    profile?.role === "admin" || user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 
-  const userInitial = user.email?.charAt(0).toUpperCase() ?? "U";
+  const userInitial = user?.email?.charAt(0).toUpperCase() ?? "U";
 
   return (
     <div className="flex min-h-screen bg-black">
@@ -99,19 +99,28 @@ export default async function DashboardLayout({
             </div>
             <div className="min-w-0">
               <p className="text-sm font-medium text-white truncate font-prompt">
-                ผู้ใช้งานระบบ
+                {user ? "ผู้ใช้งานระบบ" : "ผู้เยี่ยมชม"}
               </p>
-              <p className="text-xs text-white/40 truncate">{user.email}</p>
+              <p className="text-xs text-white/40 truncate">{user?.email || "guest@aiaon.tech"}</p>
             </div>
           </div>
-          <form action={logout}>
-            <button
-              type="submit"
-              className="w-full flex items-center gap-2 justify-center px-4 py-2.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20 transition-all font-prompt text-sm cursor-pointer"
+          {user ? (
+            <form action={logout}>
+              <button
+                type="submit"
+                className="w-full flex items-center gap-2 justify-center px-4 py-2.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20 transition-all font-prompt text-sm cursor-pointer"
+              >
+                <LogOut className="w-4 h-4" /> ออกจากระบบ
+              </button>
+            </form>
+          ) : (
+            <Link
+              href="/login"
+              className="w-full flex items-center gap-2 justify-center px-4 py-2.5 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 border border-cyan-500/20 transition-all font-prompt text-sm"
             >
-              <LogOut className="w-4 h-4" /> ออกจากระบบ
-            </button>
-          </form>
+              เข้าสู่ระบบ
+            </Link>
+          )}
         </div>
       </aside>
 
@@ -126,7 +135,7 @@ export default async function DashboardLayout({
           <div className="flex items-center gap-3">
             {/* MobileSidebar only receives serializable primitives */}
             <MobileSidebar
-              userEmail={user.email ?? ""}
+              userEmail={user?.email ?? ""}
               userInitial={userInitial}
               isAdmin={isAdmin}
             />

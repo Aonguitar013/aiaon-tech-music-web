@@ -32,8 +32,11 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Protect /academy and /dashboard paths
-  const isProtectedPath = request.nextUrl.pathname.startsWith('/academy') || request.nextUrl.pathname.startsWith('/dashboard')
+  // Protect /academy and /dashboard paths (except /dashboard/marketplace which is public catalog)
+  const isPublicMarketplace = request.nextUrl.pathname.startsWith('/dashboard/marketplace')
+  const isProtectedPath = !isPublicMarketplace && (
+    request.nextUrl.pathname.startsWith('/academy') || request.nextUrl.pathname.startsWith('/dashboard')
+  )
 
   if (!user && isProtectedPath) {
     // Redirect unauthenticated users to login

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { buildSignedDeliveryUrl } from "@/utils/delivery-links";
 import { DvdCaseMockup } from "@/components/marketplace/DvdCaseMockup";
 import { AoneProductDetailSection } from "@/components/marketplace/AoneProductDetailSection";
-import { getSystemCoverTheme } from "@/components/marketplace/ProductCard";
+import { getSystemCoverTheme } from "@/components/marketplace/systemCoverTheme";
 
 export function getVipSetupDetails(title: string) {
   const upper = title.toUpperCase();
@@ -80,7 +80,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   }
   
   // Extract clean description and format tag
-  let rawDesc = product.description;
+  let rawDesc = product.description || "";
   let parsedType = "";
   const matchFormat = rawDesc.match(/\(Format:\s*(.+?)\)/);
   const matchType = rawDesc.match(/\(Type:\s*(.+?)\)/);
