@@ -9,9 +9,12 @@ import {
   MessageCircle, Star, 
   ChevronDown, CheckCircle2, Zap
 } from "lucide-react";
-import Image from "next/image";
+import Link from "next/link";
 import rawEbooks from "@/data/ebooks-catalog.json";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { Book3DMockup } from "@/components/ebooks/Book3DMockup";
+import { findEbookByCode, EbookMetadata } from "@/components/ebooks/ebookDataHelper";
+import { EbookDetailSection } from "@/components/ebooks/EbookDetailSection";
 
 interface EbookItem {
   rank: number;
@@ -50,6 +53,7 @@ export function EbooksCatalogView() {
   const [cart, setCart] = useState<EbookItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [detailEbook, setDetailEbook] = useState<EbookMetadata | null>(null);
 
   // Cart operations
   const addToCart = (item: EbookItem) => {
@@ -335,52 +339,33 @@ export function EbooksCatalogView() {
                   </div>
 
                   {/* ──────────────── 3D Book Mockup Display ──────────────── */}
-                  <div className="relative w-full h-56 mb-5 flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-b from-slate-950 via-slate-900/60 to-slate-950 p-2 border border-slate-800/80 group-hover:border-indigo-500/30 transition-all duration-300">
-                    {/* Background glow behind book */}
-                    <div className="absolute inset-0 bg-radial from-indigo-500/10 via-transparent to-transparent blur-xl" />
-
-                    {book.coverImage ? (
-                      <div className="relative w-full h-full flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-1">
-                        <Image
-                          src={book.coverImage}
-                          alt={book.title}
-                          fill
-                          className="object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] filter transition-all"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          priority={book.rank <= 3}
-                        />
-                      </div>
-                    ) : (
-                      /* Futuristic 3D Book Stylized Fallback with 3D Spine and Pages */
-                      <div className="relative w-36 h-48 rounded-r-xl rounded-l-sm bg-gradient-to-br from-slate-800 via-indigo-950 to-slate-900 border-t border-r border-b border-indigo-400/30 shadow-[10px_15px_30px_rgba(0,0,0,0.7)] flex flex-col justify-between p-3.5 transition-transform duration-500 group-hover:scale-105 group-hover:rotate-1 group-hover:-translate-y-1">
-                        {/* 3D Spine Ridge simulation */}
-                        <div className="absolute left-0 top-0 bottom-0 w-3.5 bg-gradient-to-r from-black/80 via-white/10 to-transparent border-r border-white/10" />
-                        {/* Book Page Lines edge */}
-                        <div className="absolute -right-1 top-1 bottom-1 w-1 bg-slate-200/40 rounded-r-sm blur-[0.5px]" />
-
-                        <div className="pl-3">
-                          <span className="text-[11px] font-black tracking-widest text-indigo-400 uppercase">
-                            {book.code}
-                          </span>
-                          <div className="w-6 h-0.5 bg-indigo-500 my-1 rounded-full" />
-                        </div>
-
-                        <div className="pl-3 my-auto">
-                          <p className="text-[11px] font-black text-white leading-tight line-clamp-3">
-                            {book.title}
-                          </p>
-                        </div>
-
-                        <div className="pl-3 flex items-center justify-between pt-2 border-t border-slate-700/50">
-                          <span className="text-[11px] font-bold text-slate-400">iAonTech 3D</span>
-                          <Sparkles className="w-2.5 h-2.5 text-amber-400" />
-                        </div>
-                      </div>
-                    )}
+                  <div
+                    onClick={() => {
+                      const meta = findEbookByCode(book.code);
+                      if (meta) setDetailEbook(meta);
+                    }}
+                    className="relative w-full mb-4 cursor-pointer"
+                    title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของ E-Book เล่มนี้"
+                  >
+                    <Book3DMockup
+                      code={book.code}
+                      title={book.title}
+                      category={book.shortCategory || book.category}
+                      themeColor={book.themeColor}
+                      rank={book.rank}
+                      size="md"
+                      isInteractive={true}
+                    />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-bold text-white group-hover:text-indigo-300 transition leading-snug mb-2 line-clamp-2">
+                  <h3
+                    onClick={() => {
+                      const meta = findEbookByCode(book.code);
+                      if (meta) setDetailEbook(meta);
+                    }}
+                    className="text-base sm:text-lg font-bold text-white group-hover:text-indigo-300 transition leading-snug mb-2 line-clamp-2 cursor-pointer"
+                  >
                     {book.title}
                   </h3>
 
@@ -410,7 +395,7 @@ export function EbooksCatalogView() {
                     <div>
                       <div className="text-[11px] text-slate-500 font-medium">ราคาพิเศษเปิดตัว</div>
                       <div className="flex items-baseline gap-2">
-                        <span className="text-2xl font-black text-white">
+                        <span className="text-2xl font-black text-amber-400">
                           ฿{book.earlyBirdPrice}
                         </span>
                         <span className="text-xs text-slate-500 line-through">
@@ -426,28 +411,45 @@ export function EbooksCatalogView() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-3 gap-1.5">
+                    {/* Action 1: 7 Pillars Detail */}
                     <button
+                      type="button"
+                      onClick={() => {
+                        const meta = findEbookByCode(book.code);
+                        if (meta) setDetailEbook(meta);
+                      }}
+                      className="py-2.5 px-2 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 border border-indigo-500/30"
+                      title="ดูเจาะลึก 7 องค์ประกอบ"
+                    >
+                      <BookOpen className="w-3.5 h-3.5" />
+                      <span className="truncate">เจาะลึก</span>
+                    </button>
+
+                    {/* Action 2: Add to Cart */}
+                    <button
+                      type="button"
                       onClick={() => (inCart ? removeFromCart(book.code) : addToCart(book))}
-                      className={`py-2.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${
+                      className={`py-2.5 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 ${
                         inCart
                           ? "bg-emerald-600/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-600/30"
-                          : "bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/30"
+                          : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
                       }`}
                     >
                       {inCart ? (
                         <>
-                          <Check className="w-4 h-4" />
-                          <span>เลือกแล้ว</span>
+                          <Check className="w-3.5 h-3.5" />
+                          <span className="truncate">เลือกแล้ว</span>
                         </>
                       ) : (
                         <>
-                          <ShoppingCart className="w-4 h-4" />
-                          <span>ใส่ตะกร้า</span>
+                          <ShoppingCart className="w-3.5 h-3.5" />
+                          <span className="truncate">ใส่ตะกร้า</span>
                         </>
                       )}
                     </button>
 
+                    {/* Action 3: Order Instant via LINE */}
                     <a
                       href={`https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(
                         `สวัสดีครับครูอ้น สนใจสั่งซื้อ E-Book [${book.code}] ${book.title} ราคา ${book.earlyBirdPrice} บาท ครับ`
@@ -457,10 +459,10 @@ export function EbooksCatalogView() {
                       data-line-code={book.code}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1 border border-slate-700/60"
+                      className="py-2.5 px-2 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-1 shadow-md shadow-emerald-500/20"
                     >
-                      <span>สั่งซื้อทันที</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <span className="truncate">สั่งซื้อ</span>
+                      <ArrowRight className="w-3 h-3" />
                     </a>
                   </div>
                 </div>
@@ -707,6 +709,42 @@ export function EbooksCatalogView() {
                   </a>
                 </div>
               )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ─────────────────────────────────────────────────────────────
+          7. E-BOOK 7-PILLARS DETAIL MODAL / DRAWER
+      ───────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {detailEbook && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-slate-950 border border-indigo-500/30 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
+            >
+              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-slate-950/90 backdrop-blur-sm border-b border-slate-800/80 mb-6">
+                <span className="text-xs sm:text-sm font-bold text-indigo-300">
+                  [{detailEbook.code}] เจาะลึก 7 องค์ประกอบหลัก E-Book
+                </span>
+                <button
+                  onClick={() => setDetailEbook(null)}
+                  className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white text-xs font-bold transition flex items-center gap-1.5"
+                >
+                  ✕ ปิดหน้าต่าง
+                </button>
+              </div>
+
+              <EbookDetailSection
+                ebook={detailEbook}
+                onAddToCart={(eb) => {
+                  addToCart(eb as unknown as EbookItem);
+                }}
+                isInCart={isInCart(detailEbook.code)}
+              />
             </motion.div>
           </div>
         )}
