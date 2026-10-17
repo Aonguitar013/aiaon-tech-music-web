@@ -116,77 +116,15 @@ export function ProductCard({ product }: ProductCardProps) {
     )}>
       
       {/* ── BESPOKE 3D HOLOGRAPHIC COVER ART / 3D DVD MOCKUP ── */}
-      {coverTheme.code.startsWith("AONE") ? (
-        <div className="relative w-full border-b border-white/10 overflow-hidden bg-gradient-to-br from-cyan-950/50 via-slate-950 to-indigo-950/50 flex flex-col justify-center">
-          <DvdCaseMockup
-            code={coverTheme.code}
-            title={product.title}
-            categoryName={coverTheme.categoryName}
-            tagline={coverTheme.tagline}
-            glowColor={coverTheme.glowColor}
-          />
-        </div>
-      ) : (
-        <div className={cn(
-          "relative w-full aspect-[16/10] shrink-0 border-b border-white/10 overflow-hidden flex flex-col justify-between p-4 sm:p-5 bg-linear-to-br",
-          coverTheme.gradient
-        )}>
-          {/* Background Grid Accent */}
-          <div 
-            className="absolute inset-0 opacity-20 pointer-events-none"
-            style={{
-              backgroundImage: "linear-gradient(to right,#ffffff15 1px,transparent 1px), linear-gradient(to bottom,#ffffff15 1px,transparent 1px)",
-              backgroundSize: "20px 20px"
-            }}
-          />
-
-          {/* Ambient Neon Orb */}
-          <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 blur-[50px] rounded-full pointer-events-none opacity-40 group-hover:opacity-75 transition-opacity"
-            style={{ backgroundColor: coverTheme.glowColor }}
-          />
-
-          {/* Top Bar: System Code & Category Badge */}
-          <div className="flex items-center justify-between relative z-10">
-            <div className="flex items-center gap-1.5">
-              <span className="px-2.5 py-1 rounded-lg bg-black/60 border border-white/20 text-white font-mono font-black text-xs tracking-wider shadow-md">
-                {coverTheme.code}
-              </span>
-              {isFree && (
-                <span className="px-2 py-0.5 rounded-full bg-emerald-500 text-zinc-950 text-[11px] font-prompt font-black animate-pulse shadow-md">
-                  FREE 🎁
-                </span>
-              )}
-            </div>
-
-            <span className={cn(
-              "px-2.5 py-1 rounded-full text-[11px] font-prompt font-bold border backdrop-blur-md shadow-md",
-              coverTheme.badgeBg
-            )}>
-              {coverTheme.categoryName}
-            </span>
-          </div>
-
-          {/* Center: Hologram 3D Icon & Tagline */}
-          <div className="my-auto flex flex-col items-center justify-center text-center relative z-10 py-1">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-black/40 border border-white/20 backdrop-blur-md flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 mb-2">
-              <CoverIcon className={cn("w-8 h-8 sm:w-9 sm:h-9", coverTheme.iconColor)} />
-            </div>
-            <span className="text-[11px] sm:text-[11px] font-mono uppercase font-black tracking-widest text-white/50 group-hover:text-white/80 transition-colors">
-              {coverTheme.tagline}
-            </span>
-          </div>
-
-          {/* Bottom Bar: Mini Tech Feature Pills (Single line, no clipping) */}
-          <div className="flex items-center justify-center gap-1.5 relative z-10 overflow-hidden">
-            {coverTheme.pills.slice(0, 2).map((pill, pIdx) => (
-              <span key={pIdx} className="px-2.5 py-0.5 rounded-full bg-black/45 border border-white/15 text-[11px] font-prompt text-white/75 whitespace-nowrap backdrop-blur-sm">
-                {pill}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
+      <div className="relative w-full border-b border-white/10 overflow-hidden bg-gradient-to-br from-cyan-950/40 via-slate-950 to-indigo-950/40 flex flex-col justify-center">
+        <DvdCaseMockup
+          code={coverTheme.code}
+          title={product.title}
+          categoryName={coverTheme.categoryName}
+          tagline={coverTheme.tagline}
+          glowColor={coverTheme.glowColor}
+        />
+      </div>
 
       {/* ── CARD BODY ─────────────────────────────────────────── */}
       <div className="p-5 sm:p-6 flex flex-col flex-1 z-10">

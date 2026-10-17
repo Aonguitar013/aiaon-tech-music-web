@@ -193,6 +193,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                    <h1 className="text-3xl md:text-5xl font-bold font-prompt text-white mb-6 leading-tight">
                        {product.title}
                    </h1>
+
+                   <div className="mb-8 p-4 rounded-3xl bg-slate-900/60 border border-cyan-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+                     <DvdCaseMockup
+                       code={coverTheme.code}
+                       title={product.title}
+                       categoryName={coverTheme.categoryName}
+                       tagline={coverTheme.tagline}
+                       glowColor={coverTheme.glowColor}
+                     />
+                   </div>
                    
                    <div className="prose prose-invert max-w-none font-prompt text-white/70 leading-relaxed text-base sm:text-lg">
                       <p>{rawDesc}</p>

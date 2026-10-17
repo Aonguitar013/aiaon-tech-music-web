@@ -11,6 +11,7 @@ export const AONE_SYSTEM_META: Record<string, {
   docSpec: string;
   glow: string;
 }> = {
+  // ── AONE Series (Classroom & Academic Education) ──
   AONE01: {
     shortName: "เช็คชื่อ & พฤติกรรม V2",
     emoji: "📋",
@@ -106,6 +107,152 @@ export const AONE_SYSTEM_META: Record<string, {
     tagline: "ACTIVE SHOOTER SAFE ZONE TRACKER",
     docSpec: "Emergency A4",
     glow: "rgba(239, 68, 68, 0.45)",
+  },
+
+  // ── AONA Series (Administration & School Ops) ──
+  AONA01: {
+    shortName: "ทะเบียนรับ-ส่งหนังสือ",
+    emoji: "📁",
+    badge: "สารบรรณ 1 คลิก",
+    tagline: "SMART DOCUMENT ROUTING",
+    docSpec: "Auto Numbering",
+    glow: "rgba(59, 130, 246, 0.45)",
+  },
+  AONA02: {
+    shortName: "บริหารยานพาหนะ",
+    emoji: "🚐",
+    badge: "คำนวณน้ำมันออโต้",
+    tagline: "SMART VEHICLE LOG & QUEUE",
+    docSpec: "Fuel & Mileage Log",
+    glow: "rgba(14, 165, 233, 0.45)",
+  },
+  AONA03: {
+    shortName: "สร้างเกียรติบัตร & QR",
+    emoji: "🎖️",
+    badge: "QR Verify ปลอมไม่ได้",
+    tagline: "AUTO-CERTIFICATE QR VERIFY",
+    docSpec: "Slides & PDF Auto",
+    glow: "rgba(245, 158, 11, 0.45)",
+  },
+  AONA04: {
+    shortName: "บริหารพัสดุ & ครุภัณฑ์",
+    emoji: "🏷️",
+    badge: "QR พัสดุสแกนติด",
+    tagline: "ASSET TAG QR GENERATOR",
+    docSpec: "Asset Tag Barcode",
+    glow: "rgba(99, 102, 241, 0.45)",
+  },
+  AONA05: {
+    shortName: "ยืม-คืนอุปกรณ์วิทย์/คอม",
+    emoji: "🔄",
+    badge: "แจ้งเตือนคืนทันที",
+    tagline: "LAB LOAN & RETURN HUB",
+    docSpec: "Inventory Sync",
+    glow: "rgba(20, 184, 166, 0.45)",
+  },
+  AONA06: {
+    shortName: "บันทึกข้อความ & อนุมัติ",
+    emoji: "📜",
+    badge: "เซ็นอนุมัติ ไทม์ไลน์สด",
+    tagline: "MEMO ROUTING & TIMELINE",
+    docSpec: "Digital Approval",
+    glow: "rgba(59, 130, 246, 0.45)",
+  },
+  AONA07: {
+    shortName: "สมุดติดต่อ & ประชาสัมพันธ์",
+    emoji: "📢",
+    badge: "ประชาสัมพันธ์องค์กร",
+    tagline: "SMART COMMUNICATION HUB",
+    docSpec: "Broadcast Center",
+    glow: "rgba(168, 85, 247, 0.45)",
+  },
+
+  // ── AONM Series (Activities, Scouts & Music) ──
+  AONM01: {
+    shortName: "ตรวจประเมินลูกเสือ",
+    emoji: "🏕️",
+    badge: "เช็คฐานลูกเสือออโต้",
+    tagline: "SCOUT ACTIVITY & EXPEDITION",
+    docSpec: "Base Scoring Sheet",
+    glow: "rgba(245, 158, 11, 0.45)",
+  },
+  AONM02: {
+    shortName: "บันทึกวิชาพิเศษลูกเสือ",
+    emoji: "🧭",
+    badge: "เกณฑ์วิชาพิเศษ สพฐ.",
+    tagline: "SCOUT BADGE & SKILLS HUB",
+    docSpec: "Badge Certification",
+    glow: "rgba(16, 185, 129, 0.45)",
+  },
+  AONM03: {
+    shortName: "จองห้องซ้อมดนตรี",
+    emoji: "🎸",
+    badge: "ปฏิทินซ้อมสด Realtime",
+    tagline: "BAND REHEARSAL & STUDIO BOOKING",
+    docSpec: "Live Studio Calendar",
+    glow: "rgba(236, 72, 153, 0.45)",
+  },
+
+  // ── Student Gen Z Series (STU01, STU02, STU03) ──
+  STU01: {
+    shortName: "เว็บพอร์ต 3D TCAS",
+    emoji: "🎓",
+    badge: "พอร์ต 3D TCAS รอบ 1",
+    tagline: "WEB PORTFOLIO TCAS 3D",
+    docSpec: "Personal 3D Link",
+    glow: "rgba(236, 72, 153, 0.45)",
+  },
+  STU02: {
+    shortName: "รวมการบ้านห้องเรียน",
+    emoji: "⏰",
+    badge: "นับถอยหลังส่งการบ้าน",
+    tagline: "CLASSROOM HOMEWORK HUB",
+    docSpec: "Every Subject Log",
+    glow: "rgba(6, 182, 212, 0.45)",
+  },
+  STU03: {
+    shortName: "AI Prompt Kit นักเรียน",
+    emoji: "🤖",
+    badge: "เสกรายงาน 5 บท",
+    tagline: "STUDENT AI SECRET KIT",
+    docSpec: "Canva & Docs Prompts",
+    glow: "rgba(245, 158, 11, 0.45)",
+  },
+
+  // ── AI Services & Specials ──
+  AIC01: {
+    shortName: "AI Caretaker ผู้ช่วยครู",
+    emoji: "⚡",
+    badge: "ดูแลตอบแทน 24 ชม.",
+    tagline: "AI CARETAKER 24/7 ASSISTANT",
+    docSpec: "Gemini 3.5 Engine",
+    glow: "rgba(6, 182, 212, 0.5)",
+  },
+  AIC02: {
+    shortName: "AI Sales Brain 24 ชม.",
+    emoji: "💎",
+    badge: "ตรวจสลิป ปิดการขาย",
+    tagline: "OMNICHANNEL AI SALES BRAIN",
+    docSpec: "5-Layer Slip Verify",
+    glow: "rgba(168, 85, 247, 0.5)",
+  },
+  PREP01: {
+    shortName: "คอร์สติวครูดนตรี",
+    emoji: "🎻",
+    badge: "คลังข้อสอบดนตรี 500+",
+    tagline: "TEACHER PREP MASTERCLASS",
+    docSpec: "VIP Secret Telegram",
+    glow: "rgba(245, 158, 11, 0.45)",
+  },
+
+  // ── Fallback Generic Engine ──
+  AIAON: {
+    shortName: "ระบบอัตโนมัติ iAon",
+    emoji: "⚡",
+    badge: "Apps Script ตลอดชีพ",
+    tagline: "GOOGLE APPS SCRIPT WEB APP",
+    docSpec: "Google Sheets Web App",
+    glow: "rgba(6, 182, 212, 0.4)",
   },
 };
 
