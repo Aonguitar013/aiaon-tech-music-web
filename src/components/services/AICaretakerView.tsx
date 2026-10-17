@@ -6,9 +6,13 @@ import {
   ShieldCheck, Bot, Sparkles, MessageCircle, ArrowRight,
   CheckCircle2, AlertTriangle, RefreshCw, 
   Receipt, CalendarCheck, BarChart3, 
-  Zap, HelpCircle, UserCheck
+  Zap, HelpCircle, UserCheck, Eye, Shield
 } from "lucide-react";
 import Link from "next/link";
+import { CyberSentinelOrbMockup } from "./CyberSentinelOrbMockup";
+import { AICaretakerDetailSection } from "./AICaretakerDetailSection";
+import { AI_CARETAKER_PACKAGES_DATA, AICaretakerPackageItem } from "./aiCaretakerDataHelper";
+import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 
 /* ─────────────────────────────────────────────────────────────
    DATA: 2 STARTER KITS ("บ้านหลังเล็ก" มาตรฐานเดียวกัน)
@@ -102,6 +106,20 @@ export function AICaretakerView() {
   // Interactive Simulator State
   const [simScenario, setSimScenario] = useState<"slip" | "handoff" | "watchdog" | "report">("slip");
   const [selectedKit, setSelectedKit] = useState<string>("ชุดที่ 1: แอดมิน AI ขายของ & ตรวจสลิป");
+  const [selectedPackage, setSelectedPackage] = useState<AICaretakerPackageItem | null>(null);
+
+  const { openLineModal } = useLineModal();
+
+  const handleLineClick = (e: React.MouseEvent, pkg: AICaretakerPackageItem) => {
+    if (!isMobileDevice()) {
+      e.preventDefault();
+      openLineModal({
+        title: `บริการ: ${pkg.name}`,
+        price: `${pkg.setupFeeText} + ${pkg.monthlyFeeText}`,
+        message: `สวัสดีครับครูอ้น สนใจบริการ "🛡️ รับติดตั้ง & เฝ้าดูแลระบบ AI รายเดือน (AI Caretaker)" ครับ\n📦 แพ็กเกจ: ${pkg.name} (ค่าติดตั้ง ${pkg.setupFeeText} | ดูแลรายเดือน ${pkg.monthlyFeeText})\n🎯 ระบบที่สนใจ: ${selectedKit}\n\nรบกวนขอคำปรึกษาและรายละเอียดการเริ่มต้นใช้งานด้วยครับ 🙏`,
+      });
+    }
+  };
 
   const getLineUrl = (pkgName: string, setup: string, monthly: string) => {
     const msg = `สวัสดีครับครูอ้น สนใจบริการ "🛡️ รับติดตั้ง & เฝ้าดูแลระบบ AI รายเดือน (AI Caretaker)" ครับ
@@ -445,65 +463,132 @@ export function AICaretakerView() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
-            {CARE_PACKAGES.map((pkg) => (
-              <div
-                key={pkg.id}
-                className={`relative rounded-3xl p-8 bg-slate-900/75 border flex flex-col justify-between transition-all ${pkg.borderClass}`}
-              >
-                <div className={` -top-3.5 left-6 absolute px-4 py-1 rounded-full text-xs font-prompt font-bold border shadow-md ${pkg.badgeClass}`}>
-                  {pkg.badge}
-                </div>
+            {AI_CARETAKER_PACKAGES_DATA.map((pkg) => {
+              const isPro = pkg.id === "sme-pro";
+              const borderClass = isPro
+                ? "border-amber-500/60 shadow-[0_0_45px_rgba(245,158,11,0.2)] ring-1 ring-amber-400/40 lg:scale-105"
+                : "border-emerald-500/30 hover:border-emerald-400";
+              const btnClass = isPro
+                ? "from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-zinc-950 font-black"
+                : "from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-zinc-950 font-black";
 
-                <div>
-                  <h3 className="font-prompt text-2xl font-extrabold text-white mt-2">{pkg.name}</h3>
-                  <p className="font-prompt text-xs text-white/60 mt-1 mb-6">{pkg.tagline}</p>
-
-                  <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-black/50 border border-white/10 mb-3">
-                    <div>
-                      <span className="block font-prompt text-[11px] text-white/50">ค่าติดตั้งระบบแรกเข้า (ครั้งเดียว)</span>
-                      <span className="font-prompt text-2xl sm:text-3xl font-black text-white">{pkg.setupFee}</span>
-                    </div>
-                    <div className="border-l border-white/10 pl-4">
-                      <span className="block font-prompt text-[11px] text-emerald-300">ค่าเฝ้าดูแลระบบรายเดือน</span>
-                      <span className="font-prompt text-2xl sm:text-3xl font-black text-emerald-400">{pkg.monthlyFee}</span>
-                      <span className="font-prompt text-[11px] text-white/50"> / เดือน</span>
-                    </div>
+              return (
+                <div
+                  key={pkg.id}
+                  className={`relative rounded-3xl p-8 bg-slate-900/80 border flex flex-col justify-between transition-all backdrop-blur-sm ${borderClass}`}
+                >
+                  <div className={` -top-3.5 left-6 absolute px-4 py-1 rounded-full text-xs font-prompt font-bold border shadow-md ${pkg.badgeClass}`}>
+                    {pkg.badge}
                   </div>
 
-                  <p className="font-prompt text-xs font-bold text-amber-300 mb-6 flex items-center gap-1.5">
-                    <Zap className="w-4 h-4" /> {pkg.dailyCost}
-                  </p>
+                  <div>
+                    {/* 3D Cyber Sentinel AI Core Mockup */}
+                    <div 
+                      onClick={() => setSelectedPackage(pkg)}
+                      className="cursor-pointer mb-2 transform transition-transform hover:scale-105"
+                      title="คลิกเพื่อดูเจาะลึก 7 ข้อก่อนตัดสินใจ"
+                    >
+                      <CyberSentinelOrbMockup
+                        packageId={pkg.id}
+                        title={pkg.name}
+                        themeColor={pkg.accentColor}
+                        isFeatured={pkg.isPopular}
+                        size="md"
+                        isInteractive={true}
+                      />
+                    </div>
 
-                  <div className="space-y-3 border-t border-white/10 pt-6 mb-8">
-                    <p className="font-prompt text-xs font-bold text-white/50 uppercase tracking-wider">สิ่งที่คุณได้รับทุกเดือน:</p>
-                    {pkg.includes.map((inc, i) => (
-                      <div key={i} className="flex items-start gap-2.5 font-prompt text-xs sm:text-sm text-white/85">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                        <span>{inc}</span>
+                    <h3 
+                      onClick={() => setSelectedPackage(pkg)}
+                      className="font-prompt text-2xl font-extrabold text-white mt-1 cursor-pointer hover:text-emerald-300 transition-colors"
+                    >
+                      {pkg.name}
+                    </h3>
+                    <p className="font-prompt text-xs text-white/60 mt-1 mb-6">{pkg.tagline}</p>
+
+                    <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-black/50 border border-white/10 mb-3">
+                      <div>
+                        <span className="block font-prompt text-[11px] text-white/50">ค่าติดตั้งระบบแรกเข้า (ครั้งเดียว)</span>
+                        <span className="font-prompt text-2xl sm:text-3xl font-black text-white">{pkg.setupFeeText}</span>
                       </div>
-                    ))}
+                      <div className="border-l border-white/10 pl-4">
+                        <span className="block font-prompt text-[11px] text-emerald-300">ค่าเฝ้าดูแลระบบรายเดือน</span>
+                        <span className="font-prompt text-2xl sm:text-3xl font-black text-emerald-400">{pkg.monthlyFeeText}</span>
+                      </div>
+                    </div>
+
+                    <p className="font-prompt text-xs font-bold text-amber-300 mb-6 flex items-center gap-1.5">
+                      <Zap className="w-4 h-4" /> {pkg.dailyCost}
+                    </p>
+
+                    <div className="space-y-3 border-t border-white/10 pt-6 mb-8">
+                      <p className="font-prompt text-xs font-bold text-white/50 uppercase tracking-wider">สิ่งที่คุณได้รับทุกเดือน:</p>
+                      {pkg.includes.map((inc, i) => (
+                        <div key={i} className="flex items-start gap-2.5 font-prompt text-xs sm:text-sm text-white/85">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                          <span>{inc}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 pt-4 border-t border-white/10">
+                    {/* Dual Action Buttons: Deep Dive 7 Pillars + LINE Order */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedPackage(pkg)}
+                        className="w-full py-3 px-4 rounded-xl font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all shadow-md active:scale-95"
+                      >
+                        <Eye className="w-4 h-4 text-cyan-300" />
+                        <span>เจาะลึก 7 ข้อ</span>
+                      </button>
+
+                      <a
+                        href={getLineUrl(pkg.name, pkg.setupFeeText, pkg.monthlyFeeText)}
+                        onClick={(e) => handleLineClick(e, pkg)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`w-full py-3 px-4 rounded-xl font-prompt font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] active:scale-95 bg-linear-to-r ${btnClass}`}
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        <span>จองคิวทาง LINE</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </div>
+
+                    <p className="text-[11px] font-prompt text-center text-white/40">
+                      *ไม่มีสัญญาผูกมัดรายปี ยกเลิกเมื่อไหร่ก็ได้ โค้ดและตาราง Google Sheets เป็นสิทธิ์ของร้านคุณ 100%
+                    </p>
                   </div>
                 </div>
-
-                <div className="space-y-3 pt-4 border-t border-white/10">
-                  <a
-                    href={getLineUrl(pkg.name, pkg.setupFee, pkg.monthlyFee)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-full py-4 px-6 rounded-2xl font-prompt font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] bg-linear-to-r ${pkg.btnClass}`}
-                  >
-                    <MessageCircle className="w-5 h-5" />
-                    <span>สมัครแพ็กเกจนี้ / ปรึกษาครูอ้นทาง LINE</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                  <p className="text-[11px] font-prompt text-center text-white/40">
-                    *ไม่มีสัญญาผูกมัดรายปี ยกเลิกเมื่อไหร่ก็ได้ โค้ดและตาราง Google Sheets เป็นสิทธิ์ของร้านคุณ 100%
-                  </p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
+
+        {/* Modal: 7 Pillars Deep Dive Section */}
+        <AnimatePresence>
+          {selectedPackage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+              onClick={() => setSelectedPackage(null)}
+            >
+              <div 
+                className="w-full max-w-5xl my-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <AICaretakerDetailSection
+                  packageItem={selectedPackage}
+                  onClose={() => setSelectedPackage(null)}
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* ── 6. DIY VS AI CARETAKER LINK ──────────────────────────── */}
         <div className="max-w-4xl mx-auto rounded-3xl p-8 border border-white/10 bg-white/5 text-center space-y-4">
