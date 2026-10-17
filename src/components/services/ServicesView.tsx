@@ -1,15 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { motion, } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   CheckCircle2, ArrowRight,
   MessageCircle, Cpu, Sparkles, 
   Presentation, Building2, Users,
   Award, ShieldCheck, Zap, 
-  Calculator, Check, FileSpreadsheet, QrCode, BellRing, Video
+  Calculator, Check, FileSpreadsheet, QrCode, BellRing, Video,
+  Eye, Compass
 } from "lucide-react";
 import Link from "next/link";
+import { CyberBlueprintMockup } from "./CyberBlueprintMockup";
+import { CustomDevDetailSection } from "./CustomDevDetailSection";
+import { CUSTOM_DEV_TIERS_DATA, CustomDevTierItem } from "./customDevDataHelper";
+import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 
 /* ─────────────────────────────────────────────────────────────
    TYPES & DATA
@@ -193,6 +198,20 @@ export function ServicesView() {
 รบกวนขอคำปรึกษาและรายละเอียดเพิ่มเติมด้วยครับ 🙏`;
 
     return `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(message)}`;
+  };
+
+  const [selectedTier, setSelectedTier] = useState<CustomDevTierItem | null>(null);
+  const { openLineModal } = useLineModal();
+
+  const handleTierLineClick = (e: React.MouseEvent, tier: CustomDevTierItem) => {
+    if (!isMobileDevice()) {
+      e.preventDefault();
+      openLineModal({
+        title: `บริการ: ${tier.name}`,
+        price: tier.price,
+        message: tier.lineOrderMsg,
+      });
+    }
   };
 
   const generateLineTierUrl = (tierName: string, price: string) => {
@@ -518,10 +537,10 @@ export function ServicesView() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-            {CUSTOM_TIERS.map((tier) => (
+            {CUSTOM_DEV_TIERS_DATA.map((tier) => (
               <div
                 key={tier.id}
-                className={`relative rounded-3xl p-8 border bg-slate-900/60 flex flex-col justify-between transition-all duration-300 ${tier.borderClass}`}
+                className={`relative rounded-3xl p-8 border bg-slate-900/75 flex flex-col justify-between transition-all duration-300 backdrop-blur-sm ${tier.borderClass}`}
               >
                 {tier.badge && (
                   <div className={`absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-prompt font-bold shadow-md border ${tier.badgeColor}`}>
@@ -530,7 +549,28 @@ export function ServicesView() {
                 )}
 
                 <div>
-                  <h4 className="font-prompt text-2xl font-extrabold text-white mb-1">{tier.name}</h4>
+                  {/* 3D Holographic Cyber Blueprint Tablet Mockup */}
+                  <div
+                    onClick={() => setSelectedTier(tier)}
+                    className="cursor-pointer mb-2 transform transition-transform hover:scale-105"
+                    title="คลิกเพื่อดูเจาะลึก 7 ข้อก่อนตัดสินใจ"
+                  >
+                    <CyberBlueprintMockup
+                      tierId={tier.id}
+                      title={tier.name}
+                      themeColor={tier.themeColor}
+                      isFeatured={tier.isPopular}
+                      size="md"
+                      isInteractive={true}
+                    />
+                  </div>
+
+                  <h4 
+                    onClick={() => setSelectedTier(tier)}
+                    className="font-prompt text-2xl font-extrabold text-white mb-1 cursor-pointer hover:text-cyan-300 transition-colors"
+                  >
+                    {tier.name}
+                  </h4>
                   <p className="font-prompt text-xs text-white/60 mb-6">{tier.tagline}</p>
 
                   <div className="p-4 rounded-2xl bg-white/5 border border-white/10 mb-6">
@@ -554,15 +594,29 @@ export function ServicesView() {
                 </div>
 
                 <div className="space-y-3 pt-4 border-t border-white/10">
-                  <a
-                    href={generateLineTierUrl(tier.name, tier.price)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-full py-3.5 px-6 rounded-2xl font-prompt font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all duration-300 hover:scale-[1.02] cursor-pointer bg-linear-to-r ${tier.btnGradient}`}
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>จองคิวทำแพ็กเกจนี้ผ่าน LINE</span>
-                  </a>
+                  {/* Dual Action Buttons: Deep Dive 7 Pillars + LINE Order */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedTier(tier)}
+                      className="w-full py-3 px-3 rounded-xl font-prompt font-bold text-xs flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all shadow-md active:scale-95"
+                    >
+                      <Eye className="w-4 h-4 text-cyan-300" />
+                      <span>เจาะลึก 7 ข้อ</span>
+                    </button>
+
+                    <a
+                      href={generateLineTierUrl(tier.name, tier.price)}
+                      onClick={(e) => handleTierLineClick(e, tier)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-full py-3 px-3 rounded-xl font-prompt font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-lg transition-all hover:scale-[1.02] active:scale-95 bg-linear-to-r ${tier.btnGradient}`}
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      <span>จองคิว LINE</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
                   <p className="text-[11px] font-prompt text-center text-white/40">{tier.recommendedFor}</p>
                 </div>
 
@@ -570,6 +624,29 @@ export function ServicesView() {
             ))}
           </div>
         </div>
+
+        {/* Modal: 7 Pillars Deep Dive Section */}
+        <AnimatePresence>
+          {selectedTier && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+              onClick={() => setSelectedTier(null)}
+            >
+              <div 
+                className="w-full max-w-5xl my-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <CustomDevDetailSection
+                  tier={selectedTier}
+                  onClose={() => setSelectedTier(null)}
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* --- SPEAKER & WORKSHOP BANNER --- */}
         <div className="mb-20 rounded-3xl p-8 sm:p-12 border border-amber-500/30 bg-linear-to-br from-amber-500/10 via-slate-900 to-purple-950/30 relative overflow-hidden shadow-[0_0_50px_rgba(245,158,11,0.15)]">
