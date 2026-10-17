@@ -11,6 +11,7 @@ import {
   } from "lucide-react";
 import Link from "next/link";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { MultiVaultCarousel } from "@/components/home/MultiVaultCarousel";
 
 type SolutionFilter = "ALL" | "TEACHER" | "BUSINESS" | "EXAM_PREP" | "MUSIC" | "STUDENT" | "CUSTOM";
 
@@ -150,7 +151,10 @@ export function HomeView() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 sm:space-y-32 relative z-10">
 
-        {/* ── 2. INTERACTIVE ROLE NAVIGATOR (ค้นหาตามโจทย์ของคุณ) ─── */}
+        {/* ── 2. 3D MULTI-VAULT ECOSYSTEM CAROUSEL (ศูนย์รวม 8 มหาคลัง) ── */}
+        <MultiVaultCarousel />
+
+        {/* ── 3. INTERACTIVE ROLE NAVIGATOR (ค้นหาตามโจทย์ของคุณ) ─── */}
         <section id="everything-i-can-do" className="scroll-mt-28">
           <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">
