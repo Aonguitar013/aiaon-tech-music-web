@@ -1,201 +1,33 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Sparkles, CheckCircle2, Crown, Zap, ShieldCheck, 
   ArrowRight, MessageCircle, Award, 
-  ExternalLink
+  ExternalLink, BookOpen, Layers
 } from "lucide-react";
 import Link from "next/link";
+import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { BUNDLE_PACKAGES_DATA, BundleItem } from "@/components/bundles/bundleDataHelper";
+import { CyberVaultCrateMockup } from "@/components/bundles/CyberVaultCrateMockup";
+import { BundleDetailSection } from "@/components/bundles/BundleDetailSection";
 
-interface BundlePackage {
-  id: string;
-  badge: string;
-  badgeColor: string;
-  title: string;
-  tagline: string;
-  originalPrice: number;
-  bundlePrice: number;
-  discountText: string;
-  isFeatured?: boolean;
-  borderGlow: string;
-  bgGradient: string;
-  btnGradient: string;
-  systems: {
-    code: string;
-    name: string;
-    originalPrice: number;
-    description: string;
-  }[];
-  bonuses: string[];
-  targetAudience: string;
-}
-
-const BUNDLE_PACKAGES: BundlePackage[] = [
-  {
-    id: "classroom-pro",
-    badge: "🌟 ยอดนิยมสำหรับครูประจำชั้น",
-    badgeColor: "text-cyan-300 border-cyan-500/30 bg-cyan-500/10",
-    title: "Classroom Master Pro Pack",
-    tagline: "ชุด 3 ระบบบริหารชั้นเรียน & สร้างเล่มเอกสารครบวงจร",
-    originalPrice: 1870,
-    bundlePrice: 1490,
-    discountText: "ประหยัดทันที 380 ฿",
-    borderGlow: "hover:border-cyan-500/50 hover:shadow-[0_0_35px_rgba(6,182,212,0.25)]",
-    bgGradient: "from-cyan-950/20 via-slate-900/40 to-blue-950/20",
-    btnGradient: "from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500",
-    targetAudience: "เหมาะสำหรับ: คุณครูประจำชั้น / หัวหน้าระดับชั้น / ครูฝ่ายปกครอง",
-    systems: [
-      {
-        code: "AONE01",
-        name: "ระบบเช็คชื่อและพฤติกรรมนักเรียน ม.3 V2",
-        originalPrice: 490,
-        description: "เช็คชื่อเข้าแถว ตรวจเครื่องแต่งกาย บันทึกพฤติกรรม และแจ้งเตือน LINE Notify",
-      },
-      {
-        code: "AONE03",
-        name: "ระบบตรวจติดตามเครื่องแต่งกาย ม.3",
-        originalPrice: 390,
-        description: "บันทึกตรวจระเบียบ ออกรายงานสถิติ และระบบปลดสถานะแก้ตัวอัตโนมัติ",
-      },
-      {
-        code: "AONE09",
-        name: "ระบบแกนนำห้องเรียนสีขาว & Auto-Report",
-        originalPrice: 990,
-        description: "ผัง Tree Chart 4 ฝ่าย 25 ตำแหน่ง + ออกเล่มรายงาน 37 หน้า PDF ในคลิกเดียว",
-      },
-    ],
-    bonuses: [
-      "สคริปต์ Google Apps Script ปลดล็อก Source Code 100%",
-      "คู่มือการนำไปติดตั้งบน Google Drive ตัวเองใน 3 นาที",
-      "อัปเดตระบบฟรีเมื่อ Google มีการปรับเวอร์ชัน",
-    ],
-  },
-  {
-    id: "admin-suite",
-    badge: "🏢 ครบเครื่องงานบริหารโรงเรียน",
-    badgeColor: "text-amber-300 border-amber-500/30 bg-amber-500/10",
-    title: "School Admin & Office Suite",
-    tagline: "ชุด 3 ระบบงานบริหาร ยานพาหนะ พัสดุ และเกียรติบัตร QR",
-    originalPrice: 2270,
-    bundlePrice: 1990,
-    discountText: "ประหยัดทันที 280 ฿",
-    borderGlow: "hover:border-amber-500/50 hover:shadow-[0_0_35px_rgba(245,158,11,0.25)]",
-    bgGradient: "from-amber-950/20 via-slate-900/40 to-orange-950/20",
-    btnGradient: "from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500",
-    targetAudience: "เหมาะสำหรับ: หัวหน้าฝ่ายบริหาร / งานพัสดุ / งานยานพาหนะ / งานวิชาการ",
-    systems: [
-      {
-        code: "AONA02",
-        name: "ระบบสารสนเทศยานพาหนะ Smart Vehicle",
-        originalPrice: 990,
-        description: "ขออนุมัติใช้รถ บันทึกเติมน้ำมันแนบรูปบิล สรุปประวัติซ่อมบำรุง ออกรายงาน PDF",
-      },
-      {
-        code: "AONA03",
-        name: "ระบบออกเกียรติบัตรอัตโนมัติ + QR Verify",
-        originalPrice: 690,
-        description: "สร้างเกียรติบัตรจาก Slides ส่งอีเมลอัตโนมัติ พร้อมเว็บตรวจ QR ป้องกันปลอม",
-      },
-      {
-        code: "AONA05",
-        name: "ระบบยืม-คืนพัสดุและเครื่องดนตรีส่วนกลาง",
-        originalPrice: 590,
-        description: "ออกป้าย QR Tag ติดอุปกรณ์ บันทึกยืม-คืน คำนวณวันเตือน Overdue อัตโนมัติ",
-      },
-    ],
-    bonuses: [
-      "ระบบฐานข้อมูล Google Sheets แยกอิสระปลอดภัย 100%",
-      "หน้าเว็บ Web App รองรับมือถือและคอมพิวเตอร์",
-      "สิทธิ์ปรึกษาการตั้งค่าระบบผ่าน LINE กับครูอ้น",
-    ],
-  },
-  {
-    id: "all-in-one-lifetime",
-    badge: "👑 คุ้มค่าที่สุด (ALL-IN-ONE LIFETIME VIP)",
-    badgeColor: "text-purple-300 border-purple-500/40 bg-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.4)]",
-    title: "All-in-One 20 Systems Lifetime",
-    tagline: "เหมาคลังครบทุกระบบทั้ง 20 ระบบ + สิทธิ์เข้าถึงทุกระบบใหม่ตลอดชีพ",
-    originalPrice: 10200,
-    bundlePrice: 4990,
-    discountText: "ประหยัดกว่า 5,200 ฿ (ลด 51%)",
-    isFeatured: true,
-    borderGlow: "border-purple-500/60 shadow-[0_0_50px_rgba(168,85,247,0.35)]",
-    bgGradient: "from-purple-950/40 via-indigo-950/30 to-pink-950/30",
-    btnGradient: "from-purple-600 via-pink-600 to-amber-500 hover:from-purple-500 hover:to-amber-400",
-    targetAudience: "เหมาะสำหรับ: โรงเรียน, สถานศึกษา, หรือคุณครูที่ต้องการชุดเครื่องมือดิจิทัลระดับมือโปรแบบครบวงจร",
-    systems: [
-      {
-        code: "หมวด E",
-        name: "11 ระบบงานนักเรียน & วิชาการ (AONE01 - AONE11)",
-        originalPrice: 4890,
-        description: "เช็คชื่อ V1/V2, ตรวจเครื่องแต่งกาย, พฤติกรรม, คะแนนดนตรี ม.3/ม.4, ใบขออนุญาต, เล่มสีขาว 37 หน้า, จำหน้า 3D, จองคิวสอบ",
-      },
-      {
-        code: "หมวด A",
-        name: "6 ระบบงานบริหาร & สำนักงาน (AONA01 - AONA06)",
-        originalPrice: 3940,
-        description: "ผังทำเนียบครู, Smart Vehicle คุมรถ, เกียรติบัตร QR Verify, สมุดโทรศัพท์, ยืม-คืนพัสดุ, ระบบบันทึกการลาและฝากสอน",
-      },
-      {
-        code: "หมวด M",
-        name: "3 ระบบกิจกรรม & ลูกเสือ (AONM01 - AONM03)",
-        originalPrice: 1270,
-        description: "ทำเนียบกองลูกเสือ, ตรวจเครื่องแบบลูกเสือ ม.1, ระบบลงเวลาห้องซ้อมดนตรี High-Speed I/O",
-      },
-    ],
-    bonuses: [
-      "🎁 ได้รับครบทั้ง 20 ระบบ (Google Apps Script Web Apps)",
-      "🚀 สิทธิ์รับทุกระบบใหม่ที่ครูอ้นพัฒนาเพิ่มในอนาคตฟรีตลอดชีพ (Lifetime Updates)",
-      "💬 สิทธิ์เข้ากลุ่ม VIP Support ให้คำปรึกษาและแก้ไขปัญหาโดยครูอ้นโดยตรง",
-      "🎥 วิดีโอสอนปรับแต่งและติดตั้งแบบ Step-by-step",
-    ],
-  },
-  {
-    id: "scout-activity",
-    badge: "🎪 กิจกรรม & ลูกเสือสุดคุ้ม",
-    badgeColor: "text-emerald-300 border-emerald-500/30 bg-emerald-500/10",
-    title: "Activity & Scout Master Pack",
-    tagline: "ชุด 3 ระบบบริหารงานลูกเสือ เช็คเครื่องแบบ และห้องกิจกรรม",
-    originalPrice: 1270,
-    bundlePrice: 990,
-    discountText: "ประหยัดทันที 280 ฿",
-    borderGlow: "hover:border-emerald-500/50 hover:shadow-[0_0_35px_rgba(16,185,129,0.25)]",
-    bgGradient: "from-emerald-950/20 via-slate-900/40 to-teal-950/20",
-    btnGradient: "from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500",
-    targetAudience: "เหมาะสำหรับ: ผู้กำกับลูกเสือ / ครูผู้ดูแลกิจกรรมพัฒนาผู้เรียน / ครูดูแลห้องซ้อมดนตรี",
-    systems: [
-      {
-        code: "AONM01",
-        name: "ระบบทำเนียบและเลือกตำแหน่งลูกเสือ ม.1",
-        originalPrice: 390,
-        description: "ผัง Tree Chart นายหมู่/รองนายหมู่ อัปโหลดรูปชุดลูกเสือ และยืนยันด้วย PIN",
-      },
-      {
-        code: "AONM02",
-        name: "ระบบตรวจเช็คเครื่องแบบลูกเสือ ม.1",
-        originalPrice: 390,
-        description: "เช็คชื่อประจำฐาน ตรวจระเบียบเครื่องแบบ ติดตามตรวจซ่อม สถิติสรุปภาพรวม",
-      },
-      {
-        code: "AONM03",
-        name: "ระบบลงเวลาซ้อมดนตรี ส่วนกลาง",
-        originalPrice: 490,
-        description: "ระบบลงเวลาเข้า-ออกด้วย PIN คำนวณชั่วโมงสะสม Real-time โครงสร้าง High-Speed",
-      },
-    ],
-    bonuses: [
-      "ไฟล์สคริปต์พร้อมใช้งาน ติดตั้งรวดเร็วใน 3 นาที",
-      "ระบบค้นหาข้อมูลผ่านเบอร์โทรและรหัสประจำตัว",
-      "รองรับการใช้งานบนสมาร์ทโฟนครูทุกระบบ",
-    ],
-  },
-];
+const BUNDLE_PACKAGES = BUNDLE_PACKAGES_DATA;
 
 export function BundlesView() {
-  const generateLineOrderUrl = (bundleTitle: string, price: number) => {
-    const text = encodeURIComponent(`สวัสดีครับครูอ้น สนใจสั่งซื้อแพ็กเกจเหมา: "${bundleTitle}" (ราคา ${price.toLocaleString()} บาท) ครับ รบกวนขอข้อมูลการชำระเงินและไฟล์ระบบด้วยครับ 🙏`);
-    return `https://line.me/R/oaMessage/@deu6776s/?${text}`;
+  const [selectedBundle, setSelectedBundle] = useState<BundleItem | null>(null);
+  const { openLineModal } = useLineModal();
+
+  const handleLineOrderClick = (e: React.MouseEvent, bundle: BundleItem) => {
+    if (!isMobileDevice()) {
+      e.preventDefault();
+      openLineModal({
+        title: `แพ็กเกจเหมา: ${bundle.title}`,
+        price: bundle.bundlePrice,
+        message: bundle.lineOrderMsg,
+      });
+    }
   };
 
   return (
@@ -228,8 +60,8 @@ export function BundlesView() {
             transition={{ delay: 0.1 }}
             className="font-prompt text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight"
           >
-            แพ็กเกจเหมาสุดคุ้ม{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-400 to-amber-300 drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+            แพ็กเกจเหมาหีบสมบัติ{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]">
               ลดภาระงานครู
             </span>
           </motion.h1>
@@ -255,13 +87,13 @@ export function BundlesView() {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className={`relative rounded-3xl p-8 transition-all duration-300 border flex flex-col justify-between ${
                   bundle.isFeatured 
-                    ? "border-purple-500/60 bg-linear-to-b from-purple-950/30 via-slate-900/90 to-indigo-950/40 shadow-[0_0_50px_rgba(168,85,247,0.25)] ring-1 ring-purple-400/40 lg:scale-[1.02]" 
+                    ? "border-purple-500/60 bg-gradient-to-b from-purple-950/30 via-slate-900/90 to-indigo-950/40 shadow-[0_0_50px_rgba(168,85,247,0.25)] ring-1 ring-purple-400/40 lg:scale-[1.02]" 
                     : "border-white/10 bg-slate-900/60 hover:border-white/20 " + bundle.borderGlow
                 }`}
               >
                 {/* Featured Glow Highlight */}
                 {bundle.isFeatured && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-linear-to-r from-purple-600 via-pink-600 to-amber-500 text-white font-prompt text-xs font-bold shadow-[0_0_20px_rgba(236,72,153,0.5)] flex items-center gap-1.5 uppercase tracking-wider">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white font-prompt text-xs font-bold shadow-[0_0_20px_rgba(236,72,153,0.5)] flex items-center gap-1.5 uppercase tracking-wider">
                     <Crown className="w-3.5 h-3.5 fill-white text-white" />
                     <span>👑 แนะนำมากที่สุด — ประหยัดกว่า 5,200 ฿</span>
                   </div>
@@ -278,8 +110,29 @@ export function BundlesView() {
                     </span>
                   </div>
 
+                  {/* ──────────────── 3D Cyber Vault Crate Mockup ──────────────── */}
+                  <div
+                    onClick={() => setSelectedBundle(bundle)}
+                    className="relative w-full my-4 cursor-pointer flex justify-center py-2"
+                    title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของหีบสมบัตินี้"
+                  >
+                    <CyberVaultCrateMockup
+                      bundleId={bundle.id}
+                      title={bundle.title}
+                      tagline={bundle.tagline}
+                      systemCount={bundle.id === "all-in-one-lifetime" ? 20 : bundle.systems.length}
+                      themeColor={bundle.themeColor}
+                      isFeatured={bundle.isFeatured}
+                      size="md"
+                      isInteractive={true}
+                    />
+                  </div>
+
                   {/* Title & Tagline */}
-                  <h3 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white mb-2">
+                  <h3
+                    onClick={() => setSelectedBundle(bundle)}
+                    className="font-prompt text-2xl sm:text-3xl font-extrabold text-white mb-2 cursor-pointer hover:text-amber-300 transition-colors"
+                  >
                     {bundle.title}
                   </h3>
                   <p className="font-prompt text-sm text-white/60 mb-6">
@@ -288,7 +141,7 @@ export function BundlesView() {
 
                   {/* Pricing Display */}
                   <div className="flex items-baseline gap-3 mb-6 p-4 rounded-2xl bg-white/5 border border-white/10">
-                    <span className="font-prompt text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-linear-to-r from-white via-white to-amber-200">
+                    <span className="font-prompt text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-amber-200">
                       {bundle.bundlePrice.toLocaleString()} ฿
                     </span>
                     <span className="font-prompt text-lg text-white/40 line-through">
@@ -306,8 +159,9 @@ export function BundlesView() {
 
                   {/* Included Systems List */}
                   <div className="space-y-3 mb-8">
-                    <h4 className="font-prompt text-xs font-bold text-white/50 uppercase tracking-wider">
-                      ระบบที่รวมในแพ็กเกจนี้:
+                    <h4 className="font-prompt text-xs font-bold text-white/50 uppercase tracking-wider flex items-center gap-1.5">
+                      <Layers className="w-3.5 h-3.5 text-amber-400" />
+                      <span>ระบบที่รวมในหีบนี้:</span>
                     </h4>
                     {bundle.systems.map((sys, sIdx) => (
                       <div key={sIdx} className="p-3.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
@@ -343,20 +197,32 @@ export function BundlesView() {
                   </div>
                 </div>
 
-                {/* Call To Action Buttons */}
+                {/* Call To Action Buttons: เจาะลึก 7 ข้อ & สั่งซื้อทาง LINE */}
                 <div className="space-y-3 pt-4 border-t border-white/10">
-                  <a
-                    href={generateLineOrderUrl(bundle.title, bundle.bundlePrice)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-full py-4 px-6 rounded-2xl text-white font-prompt font-bold text-base flex items-center justify-center gap-2.5 transition-all duration-300 hover:scale-[1.02] active:scale-98 shadow-lg cursor-pointer bg-linear-to-r ${bundle.btnGradient}`}
-                  >
-                    <MessageCircle className="w-5 h-5 fill-white/20 text-white" />
-                    <span>สั่งซื้อแพ็กเกจนี้ผ่าน LINE OA ทันที</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedBundle(bundle)}
+                      className="w-full py-3.5 px-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition border border-white/15 cursor-pointer"
+                    >
+                      <BookOpen className="w-4 h-4 text-amber-400" />
+                      <span>เจาะลึก 7 ข้อ</span>
+                    </button>
 
-                  <div className="text-center">
+                    <a
+                      href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(bundle.lineOrderMsg)}`}
+                      onClick={(e) => handleLineOrderClick(e, bundle)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-full py-3.5 px-4 rounded-2xl text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] shadow-lg cursor-pointer bg-gradient-to-r ${bundle.btnGradient}`}
+                    >
+                      <MessageCircle className="w-4 h-4 fill-white/20 text-white" />
+                      <span>สั่งซื้อทาง LINE</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
+
+                  <div className="text-center pt-1">
                     <Link 
                       href="/digital-vault" 
                       className="text-xs font-prompt text-white/50 hover:text-white transition-colors hover:underline inline-flex items-center gap-1"
@@ -441,7 +307,7 @@ export function BundlesView() {
 
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
             <h3 className="font-prompt text-2xl sm:text-4xl font-extrabold text-white">
-              ทำไมถึงควรเลือกซื้อแบบ <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-blue-400">แพ็กเกจ Bundle?</span>
+              ทำไมถึงควรเลือกซื้อแบบ <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">แพ็กเกจ Bundle?</span>
             </h3>
             <p className="font-prompt text-sm text-white/60">
               ทุกระบบเชื่อมต่อข้อมูลกันได้อย่างลื่นไหล รันบน Google Account ของคุณครูเอง 100%
@@ -482,6 +348,40 @@ export function BundlesView() {
         </div>
 
       </div>
+
+      {/* ─────────────────────────────────────────────────────────────
+          7-PILLARS BUNDLE DETAIL MODAL
+      ───────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {selectedBundle && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-slate-950 border border-purple-500/40 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
+            >
+              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-slate-950/90 backdrop-blur-sm border-b border-white/10 mb-6">
+                <span className="text-xs sm:text-sm font-bold text-purple-300 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  <span>เจาะลึก 7 องค์ประกอบหลัก • {selectedBundle.title}</span>
+                </span>
+                <button
+                  onClick={() => setSelectedBundle(null)}
+                  className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                >
+                  ✕ ปิดหน้าต่าง
+                </button>
+              </div>
+
+              <BundleDetailSection
+                bundle={selectedBundle}
+                onClose={() => setSelectedBundle(null)}
+              />
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
