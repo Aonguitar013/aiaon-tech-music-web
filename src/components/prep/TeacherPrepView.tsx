@@ -6,9 +6,14 @@ import {
   GraduationCap, Bot, Music, Sparkles, Send, CheckCircle2,
   XCircle, Clock, 
   ArrowRight, Zap, 
-  Headphones, MessageCircle, Lightbulb, Play, Pause
+  Headphones, MessageCircle, Lightbulb, Play, Pause,
+  Crown, BookOpen
 } from "lucide-react";
 import Link from "next/link";
+import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { GoldenTicketMockup } from "@/components/prep/GoldenTicketMockup";
+import { PREP_VIP_DATA } from "@/components/prep/prepDataHelper";
+import { TeacherPrepDetailSection } from "@/components/prep/TeacherPrepDetailSection";
 
 /* ─────────────────────────────────────────────────────────────
    DATA: INTERACTIVE DAILY QUIZ SIMULATOR (3 วิชาหลัก)
@@ -61,72 +66,79 @@ const SAMPLE_QUIZZES: QuizItem[] = [
     ],
     correctIndex: 1,
     aiExplanation:
-      "💡 วิเคราะห์โดย AI ครูอ้น: Backward Design ของ Wiggins & McTighe มี 3 ขั้นตอนเรียงลำดับเหล็กคือ: ขั้นที่ 1 กำหนดผลลัพธ์ที่ต้องการ (Identify Desired Results) ➡️ ขั้นที่ 2 กำหนดหลักฐานการวัดผล (Determine Acceptable Evidence) ➡️ ขั้นที่ 3 จึงค่อยออกแบบกิจกรรมการเรียนรู้ (Plan Learning Experiences) ข้อสอบชอบหลอกให้ตอบ 'สร้างเครื่องมือวัดผล' เป็นขั้นแรก ต้องระวังครับ!",
+      "💡 วิเคราะห์โดย AI ครูอ้น: Backward Design มี 3 ขั้นตอนหลักเสมอ: 1. กำหนดเป้าหมายการเรียนรู้ที่ต้องการ (Identify Desired Results) 2. กำหนดหลักฐานการเรียนรู้และการประเมินผล (Determine Acceptable Evidence) 3. วางแผนจัดประสบการณ์และกิจกรรมการเรียนรู้ (Plan Learning Experiences) ข้อสอบชอบหลอกให้ครูเลือกทำกิจกรรมก่อน!",
     mnemonicTip:
-      "🎵 ท่อนฮุกเพลงจำ: 'Backward ย้อนกลับ तीनก้าวเดิน... หนึ่งเป้าชัด-สองวัดผล-สามค่อยคิดกิจกรรม!'",
+      "🎵 ท่อนฮุกเพลงจำ: 'Backward Design ย้อนศรสามขั้น... หนึ่งตั้งเป้าหมาย สองสร้างเกณฑ์วัด สามจัดกิจกรรม!'",
   },
   {
     id: "q-night",
-    timeSlot: "🌙 รอบค่ำ 20:00 น. • จิตวิทยาและมาตรฐานวิชาชีพครู",
-    category: "ภาค ข & ค • จิตวิทยาและการจัดการชั้นเรียน",
+    timeSlot: "🌙 รอบค่ำ 20:00 น. • มาตรฐานวิชาชีพครู & จรรยาบรรณ",
+    category: "ภาค ข • วินัยและจรรยาบรรณ",
     badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30",
     question:
-      "เมื่อนักเรียนส่งงานครบตรงเวลาทุกครั้ง ครูจึง 'ยกเลิกการบ้านช่วงวันหยุดสุดสัปดาห์' เพื่อให้นักเรียนได้พักผ่อน ตรงกับหลักการเสริมแรงใดของ Skinner?",
+      "ครูนำผลงานของนักเรียนไปตีพิมพ์เผยแพร่เป็นผลงานของตนเองเพื่อขอเลื่อนวิทยฐานะ เป็นการกระทำที่ผิดจรรยาบรรณต่อสิ่งใดโดยตรงที่สุด?",
     options: [
-      "ก. การเสริมแรงทางบวก (Positive Reinforcement)",
-      "ข. การเสริมแรงทางลบ (Negative Reinforcement)",
-      "ค. การลงโทษทางบวก (Positive Punishment)",
-      "ง. การลงโทษทางลบ (Negative Punishment)",
+      "ก. จรรยาบรรณต่อตนเอง",
+      "ข. จรรยาบรรณต่อวิชาชีพ",
+      "ค. จรรยาบรรณต่อผู้รับบริการ",
+      "ง. จรรยาบรรณต่อสังคม",
     ],
-    correctIndex: 1,
+    correctIndex: 2,
     aiExplanation:
-      "💡 วิเคราะห์โดย AI ครูอ้น: คำว่า 'ทางลบ (Negative)' ในทฤษฎีของ Skinner ไม่ได้แปลว่าไม่ดี แต่แปลว่า 'การเอาออก/ถอนสิ่งเร้าที่เด็กไม่ชอบออกไป' เพื่อเพิ่มพฤติกรรมดี! การยกเลิกการบ้านวันหยุด (เอาสิ่งที่เด็กไม่อยากทำออก) เพื่อให้เด็กส่งงานตรงเวลาต่อไป จึงเป็น 'การเสริมแรงทางลบ (Negative Reinforcement)' ออกสอบเกือบทุกปี!",
+      "💡 วิเคราะห์โดย AI ครูอ้น: นักเรียนถือเป็น 'ผู้รับบริการ' โดยตรงของครู การแสวงหาประโยชน์ส่วนตนโดยมิชอบจากผลงานผู้เรียน ถือเป็นการละเมิดจรรยาบรรณต่อผู้รับบริการ และยังอาจเข้าข่ายผิดวินัยร้ายแรงเรื่องการลอกเลียนผลงานทางวิชาการอีกด้วย!",
     mnemonicTip:
-      "🎵 ท่อนฮุกเพลงจำ: 'เสริมแรงคืออยากให้ทำซ้ำ... บวกคือให้รางวัลนำ ลบคือถอนภาระออก!'",
+      "🎵 ท่อนฮุกเพลงจำ: 'จรรยาบรรณห้าด้านท่องไว้... ตนเอง วิชาชีพ ผู้รับบริการ ร่วมวิชาชีพ และ สังคมไทย!'",
   },
 ];
 
 /* ─────────────────────────────────────────────────────────────
-   DATA: MNEMONIC SONGS (เพลงช่วยจำสไตล์ครูดนตรีสากล ญ.ว.)
+   DATA: SAMPLE MNEMONIC SONGS
 ───────────────────────────────────────────────────────────── */
 
-const MNEMONIC_SONGS = [
+interface MnemonicSong {
+  id: string;
+  title: string;
+  topic: string;
+  genre: string;
+  lyrics: string[];
+  examFrequency: string;
+}
+
+const MNEMONIC_SONGS: MnemonicSong[] = [
   {
-    id: "song-1",
-    title: "เพลง 'วินัยครู 5 สถาน & ทางสายกลาง'",
-    genre: "Acoustic Pop • 110 BPM (ฟังสบายตอนขับรถ)",
-    topic: "พ.ร.บ.ระเบียบข้าราชการครูฯ (หมวดวินัยและการรักษาวินัย)",
+    id: "s1",
+    title: "เพลง: โทษวินัย 5 สถาน (ไม่ร้ายแรง 3 • ร้ายแรง 2)",
+    topic: "พ.ร.บ.ระเบียบข้าราชการครูฯ มาตรา 96",
+    genre: "Acoustic Pop สดใส 110 BPM",
     lyrics: [
-      "🎤 (Verse) โทษวินัยครูไทยมีอยู่ 5 สถาน จำให้ขึ้นใจไม่ต้องอ่านจนตาลาย...",
-      "🎶 (Chorus) ไม่ร้ายแรงมี 3 คือ ภาคทัณฑ์ - ตัดเงินเดือน - ลดเงินเดือน!",
-      "🔥 (Hook) ถ้าร้ายแรงมี 2 เตือนไว้... ปลดออกได้บำเหน็จบำนาญ ส่วนไล่ออกไม่ได้สักบาทเดียว!",
-      "💡 (Bridge) โทษวินัยล้างไม่ได้ด้วย พ.ร.บ.ล้างมลทิน... เว้นแต่คำสั่งตักเตือน!",
+      "วินัยครูมีห้าสถาน... จำให้ขึ้นใจในห้องสอบหนา",
+      "ไม่ร้ายแรงสามงาน คือ ภาคทัณฑ์ - ตัดเงินเดือน - ลดเงินเดือน!",
+      "ถ้าร้ายแรงสองข้อเตือน... ปลดออกได้บำนาญ ไล่ออกไม่เหลือสักบาทเดียว!",
     ],
-    examFrequency: "ออกสอบทุกปี 100%",
+    examFrequency: "🔥 ออกสอบทุกสนาม 100%",
   },
   {
-    id: "song-2",
-    title: "เพลง 'Backward Design & Bloom's Taxonomy 6 ขั้น'",
-    genre: "Lo-Fi Groove • 95 BPM (ฟังก่อนนอนจำแม่น)",
-    topic: "มาตรฐานวิชาการศึกษา (หลักสูตรและการวัดผล)",
+    id: "s2",
+    title: "เพลง: คุรุสภา & มาตรฐานวิชาชีพ 3 ด้าน",
+    topic: "พ.ร.บ.สภาครูและบุคลากรทางการศึกษา 2546",
+    genre: "Bright Indie Folk 120 BPM",
     lyrics: [
-      "🎤 (Verse) บลูมยุคใหม่ปรับคำเป็น Verb... จำ-เข้าใจ-ประยุกต์ใช้ ให้ครบครัน",
-      "🎶 (Chorus) วิเคราะห์-ประเมินค่า แล้วก้าวสู่ขั้นสูงสุดคือ 'คิดสร้างสรรค์ (Creating)'!",
-      "🔥 (Hook) ย้อนกลับ Backward Design 3 ขั้น: 1. เป้าหมาย ➔ 2. หลักฐานวัดผล ➔ 3. กิจกรรม!",
+      "มาตรฐานวิชาชีพมีสามประการ... ความรู้และประสบการณ์วิชาชีพหนึ่ง",
+      "การปฏิบัติงานข้อสองต้องซึ้ง... การปฏิบัติตนนั้นหึ่ง คือ จรรยาบรรณ!",
+      "ใบอนุญาตประกอบวิชาชีพมีอายุห้าปี... ต่อล่วงหน้าดีๆ ร้อยแปดสิบวัน!",
     ],
-    examFrequency: "จุดเก็บคะแนน 3-5 ข้อ",
+    examFrequency: "⭐ ออกสอบซ้ำกว่า 8 รอบ",
   },
   {
-    id: "song-3",
-    title: "เพลง 'พ.ร.บ.การศึกษาแห่งชาติ & สภาครู'",
-    genre: "Synth-Pop Cyber • 120 BPM (ปลุกพลังตอนเช้า)",
-    topic: "กฎหมายการศึกษา & มาตรฐานวิชาชีพ (คุรุสภา)",
+    id: "s3",
+    title: "เพลง: Bloom's Taxonomy 6 ขั้นบันไดการเรียนรู้",
+    topic: "วิชาการศึกษา • การวัดและประเมินผล",
+    genre: "Groove R&B Chill 95 BPM",
     lyrics: [
-      "🎤 (Verse) ใบอนุญาตประกอบวิชาชีพครู อายุ 5 ปี... ต่อได้ภายใน 180 วันก่อนหมด!",
-      "🎶 (Chorus) คณะกรรมการคุรุสภามี 39 คน... ก.ค.ศ. มี 31 คน จำเลขให้แม่นยำ!",
-      "🔥 (Hook) การศึกษาขั้นพื้นฐาน 15 ปี... อนุบาล 3 - ประถม 6 - ม.ต้น 3 - ม.ปลาย 3!",
+      "จำ - เข้าใจ - ประยุกต์ใช้... สามขั้นแรกก้าวไปในระดับฐาน",
+      "วิเคราะห์ - ประเมินค่า - สร้างสรรค์ตระการ... ขั้นสูงสุดของงานสร้างนวัตกรรม!",
     ],
-    examFrequency: "ออกสอบภาค ข ทุกสนาม",
+    examFrequency: "🎯 จุดตัดคะแนน ภาค ข",
   },
 ];
 
@@ -159,7 +171,7 @@ const PREP_TIERS = [
     price: "390 ฿",
     period: "จ่ายครั้งเดียว • ดูแลยาวจนกว่าจะสอบบรรจุติด!",
     badge: "👑 แนะนำ • คุ้มที่สุดสำหรับคนจะสอบติดรอบนี้",
-    badgeClass: "bg-linear-to-r from-amber-400 to-orange-500 text-zinc-950 border-amber-400",
+    badgeClass: "bg-gradient-to-r from-amber-400 to-orange-500 text-zinc-950 border-amber-400",
     borderClass: "border-amber-500/60 shadow-[0_0_45px_rgba(245,158,11,0.2)] ring-1 ring-amber-400/40 lg:scale-105",
     isPopular: true,
     features: [
@@ -182,6 +194,10 @@ export function TeacherPrepView() {
   // Mnemonic Song Player State
   const [activeSongIdx, setActiveSongIdx] = useState<number>(0);
   const [isPlayingPreview, setIsPlayingPreview] = useState<boolean>(false);
+
+  // 7-Pillars Detail Modal State
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState<boolean>(false);
+  const { openLineModal } = useLineModal();
 
   const currentQuiz = SAMPLE_QUIZZES[activeQuizIdx];
   const currentSong = MNEMONIC_SONGS[activeSongIdx];
@@ -270,6 +286,17 @@ export function TeacherPrepView() {
     return `https://line.me/R/oaMessage/@deu6776s/?${encodeURIComponent(msg)}`;
   };
 
+  const handleVipOrderClick = (e: React.MouseEvent) => {
+    if (!isMobileDevice()) {
+      e.preventDefault();
+      openLineModal({
+        title: "AiAon Prep VIP Exam Pass (390 ฿)",
+        price: 390,
+        message: PREP_VIP_DATA.lineOrderMsg,
+      });
+    }
+  };
+
   return (
     <div className="w-full relative overflow-hidden min-h-screen pt-8 md:pt-12 pb-28 text-white font-prompt">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 relative z-10">
@@ -292,7 +319,7 @@ export function TeacherPrepView() {
             className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight"
           >
             เปลี่ยนการอ่านหนังสือสอบที่แสนสาหัส{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-blue-400 to-purple-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400">
               ให้สอบติดในรอบเดียวด้วยบอท Telegram &amp; เพลงช่วยจำ
             </span>
           </motion.h1>
@@ -313,16 +340,15 @@ export function TeacherPrepView() {
             transition={{ delay: 0.15 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2"
           >
-            <a
-              href={getLinePrepUrl(true)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-linear-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(6,182,212,0.4)] border border-cyan-300/40 transition-all hover:scale-105 cursor-pointer"
+            <button
+              type="button"
+              onClick={() => setIsDetailModalOpen(true)}
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 font-black text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(245,158,11,0.4)] transition-all hover:scale-105 cursor-pointer border border-amber-300"
             >
-              <Sparkles className="w-5 h-5" />
-              <span>สมัครเข้ากลุ่ม VIP Exam Pass (390 ฿ ตลอดชีพ)</span>
+              <Crown className="w-5 h-5 fill-slate-950" />
+              <span>เปิดตั๋วทองคำ VIP (เจาะลึก 7 ข้อ • 390 ฿)</span>
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
 
             <a
               href={getLinePrepUrl(false)}
@@ -359,7 +385,7 @@ export function TeacherPrepView() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className={`rounded-2xl p-4 border glass-card ${item.color} flex items-start gap-3.5`}
+                className={`rounded-2xl p-4 border ${item.color} flex items-start gap-3.5 backdrop-blur-md`}
               >
                 <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 shrink-0">
                   <item.icon className="w-5 h-5" />
@@ -373,16 +399,16 @@ export function TeacherPrepView() {
           </div>
         </section>
 
-        {/* ── 2. INTERACTIVE TELEGRAM QUIZ & MNEMONIC SIMULATOR ────── */}
-        <section className="space-y-10">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-300 text-xs font-semibold">
+        {/* ── 2. LIVE INTERACTIVE TELEGRAM BOT SIMULATOR & AUDIO PREVIEWS ── */}
+        <section className="space-y-8" id="simulator">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold border border-purple-500/30">
               <Zap className="w-3.5 h-3.5 text-purple-400" />
               <span>LIVE TELEGRAM BOT SIMULATOR • ทดลองทำข้อสอบจริง</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-extrabold">
               สัมผัสประสบการณ์ในกลุ่ม{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
                 Telegram AiAon Prep
               </span>
             </h2>
@@ -398,7 +424,7 @@ export function TeacherPrepView() {
               {/* Header Bar */}
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg">
+                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg">
                     <Send className="w-5 h-5 text-white" />
                   </div>
                   <div>
@@ -451,16 +477,17 @@ export function TeacherPrepView() {
                   {currentQuiz.options.map((opt, oIdx) => {
                     const isSelected = selectedOption === oIdx;
                     const isCorrect = oIdx === currentQuiz.correctIndex;
-                    const showResult = selectedOption !== null;
+                    const isAnswered = selectedOption !== null;
 
-                    let btnStyle = "bg-white/5 border-white/10 text-white/85 hover:bg-white/10 hover:border-cyan-500/40";
-                    if (showResult) {
+                    let btnStyle = "bg-white/5 border-white/10 hover:border-cyan-400 hover:bg-white/10 text-white/85";
+
+                    if (isAnswered) {
                       if (isCorrect) {
-                        btnStyle = "bg-emerald-500/20 border-emerald-400 text-emerald-200 shadow-[0_0_20px_rgba(16,185,129,0.2)]";
+                        btnStyle = "bg-emerald-500/20 border-emerald-400 text-emerald-200 font-bold shadow-[0_0_20px_rgba(16,185,129,0.3)]";
                       } else if (isSelected && !isCorrect) {
-                        btnStyle = "bg-rose-500/20 border-rose-400 text-rose-200";
+                        btnStyle = "bg-rose-500/20 border-rose-400 text-rose-200 font-bold";
                       } else {
-                        btnStyle = "bg-white/[0.02] border-white/5 text-white/40";
+                        btnStyle = "bg-white/5 border-white/5 text-white/40 opacity-60";
                       }
                     }
 
@@ -468,44 +495,40 @@ export function TeacherPrepView() {
                       <button
                         key={oIdx}
                         type="button"
-                        onClick={() => handleSelectOption(oIdx)}
-                        className={`w-full text-left p-3.5 rounded-xl border text-xs sm:text-sm font-medium transition-all flex items-center justify-between gap-3 cursor-pointer ${btnStyle}`}
+                        onClick={() => !isAnswered && handleSelectOption(oIdx)}
+                        disabled={isAnswered}
+                        className={`w-full text-left p-3.5 sm:p-4 rounded-2xl border transition-all flex items-center justify-between gap-3 text-xs sm:text-sm cursor-pointer ${btnStyle}`}
                       >
                         <span>{opt}</span>
-                        {showResult && isCorrect && (
-                          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
-                        )}
-                        {showResult && isSelected && !isCorrect && (
-                          <XCircle className="w-5 h-5 text-rose-400 shrink-0" />
+                        {isAnswered && (
+                          <span className="shrink-0">
+                            {isCorrect ? (
+                              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                            ) : isSelected ? (
+                              <XCircle className="w-5 h-5 text-rose-400" />
+                            ) : null}
+                          </span>
                         )}
                       </button>
                     );
                   })}
                 </div>
 
-                {/* AI Explanation Box (Appears after clicking an option) */}
-                <AnimatePresence mode="wait">
+                {/* AI Explanation Box (Reveals when answered) */}
+                <AnimatePresence>
                   {selectedOption !== null && (
                     <motion.div
-                      key={currentQuiz.id + "-exp"}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="rounded-2xl p-4 sm:p-5 bg-linear-to-br from-cyan-950/60 via-slate-900 to-purple-950/50 border border-cyan-500/40 space-y-2.5"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="rounded-2xl bg-cyan-950/40 border border-cyan-500/35 p-4 sm:p-5 space-y-3"
                     >
-                      <div className="flex items-center gap-2 text-xs font-bold text-cyan-300">
-                        <Lightbulb className="w-4 h-4 text-amber-400" />
-                        <span>
-                          {selectedOption === currentQuiz.correctIndex
-                            ? "🎉 ตอบถูกต้องครับ! มาดูทริคจำแม่นๆ จาก AI ครูอ้น:"
-                            : "💪 ไม่เป็นไรครับ! นี่คือจุดหลอกที่คนมักพลาด มาดูเฉลยกัน:"}
-                        </span>
-                      </div>
-                      <p className="text-xs sm:text-sm text-white/85 leading-relaxed">
+                      <div className="text-xs sm:text-sm text-cyan-100 leading-relaxed">
                         {currentQuiz.aiExplanation}
-                      </p>
-                      <div className="pt-2 border-t border-white/10 text-xs font-semibold text-purple-300">
-                        {currentQuiz.mnemonicTip}
+                      </div>
+                      <div className="text-xs text-amber-300 bg-amber-500/10 p-2.5 rounded-xl border border-amber-500/20 flex items-center gap-2">
+                        <Lightbulb className="w-4 h-4 text-amber-400 shrink-0" />
+                        <span>{currentQuiz.mnemonicTip}</span>
                       </div>
                     </motion.div>
                   )}
@@ -513,11 +536,11 @@ export function TeacherPrepView() {
               </div>
             </div>
 
-            {/* Right 5 Cols: Mnemonic Songs Studio Box */}
-            <div className="lg:col-span-5 rounded-3xl border border-purple-500/30 bg-slate-900/75 backdrop-blur-xl p-6 sm:p-8 shadow-[0_0_50px_rgba(168,85,247,0.12)] space-y-6">
+            {/* Right 5 Cols: Mnemonic Audio Preview Lab */}
+            <div className="lg:col-span-5 rounded-3xl border border-purple-500/30 bg-slate-900/75 backdrop-blur-xl p-6 sm:p-8 shadow-[0_0_50px_rgba(168,85,247,0.12)] space-y-5">
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-linear-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
+                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
                     <Headphones className="w-5 h-5 text-white" />
                   </div>
                   <div>
@@ -560,7 +583,7 @@ export function TeacherPrepView() {
                   <button
                     type="button"
                     onClick={handleToggleSongPreview}
-                    className="px-3 py-1.5 rounded-xl bg-linear-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
+                    className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
                   >
                     {isPlayingPreview ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                     <span>{isPlayingPreview ? "กำลังเล่นโน้ตตัวอย่าง..." : "ฟังเมโลดี้ตัวอย่าง 🎵"}</span>
@@ -661,7 +684,7 @@ export function TeacherPrepView() {
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
               เลือกกลุ่ม{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-300 to-orange-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400">
                 Telegram เตรียมสอบครูผู้ช่วย
               </span>{" "}
               ที่เหมาะกับคุณ
@@ -684,10 +707,32 @@ export function TeacherPrepView() {
                     </span>
                   </div>
 
+                  {/* ──────────────── 3D Golden Ticket Mockup for VIP Tier ──────────────── */}
+                  {tier.isVip && (
+                    <div
+                      onClick={() => setIsDetailModalOpen(true)}
+                      className="relative w-full my-3 cursor-pointer flex justify-center py-2"
+                      title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของตั๋วทองคำนี้"
+                    >
+                      <GoldenTicketMockup
+                        serialNo="VIP-2026-TEACHER-PASS"
+                        size="md"
+                        isInteractive={true}
+                      />
+                    </div>
+                  )}
+
                   <div>
-                    <h3 className="text-2xl font-extrabold text-white">{tier.name}</h3>
+                    <h3
+                      onClick={() => tier.isVip && setIsDetailModalOpen(true)}
+                      className={`text-2xl font-extrabold text-white ${
+                        tier.isVip ? "cursor-pointer hover:text-amber-300 transition-colors" : ""
+                      }`}
+                    >
+                      {tier.name}
+                    </h3>
                     <div className="flex items-baseline gap-2 mt-2">
-                      <span className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-white via-cyan-200 to-amber-300">
+                      <span className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-amber-300">
                         {tier.price}
                       </span>
                       <span className="text-xs text-white/60">{tier.period}</span>
@@ -704,26 +749,81 @@ export function TeacherPrepView() {
                   </ul>
                 </div>
 
-                <a
-                  href={getLinePrepUrl(tier.isVip)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-full py-4 px-6 rounded-2xl font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-lg transition-all hover:scale-[1.02] cursor-pointer ${
-                    tier.isVip
-                      ? "bg-linear-to-r from-amber-400 via-orange-500 to-amber-500 text-zinc-950 shadow-[0_0_30px_rgba(245,158,11,0.35)]"
-                      : "bg-linear-to-r from-emerald-500 to-teal-600 text-zinc-950"
-                  }`}
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  <span>{tier.ctaText}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
+                {tier.isVip ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                    <button
+                      type="button"
+                      onClick={() => setIsDetailModalOpen(true)}
+                      className="w-full py-4 px-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-white/20 transition-all cursor-pointer"
+                    >
+                      <BookOpen className="w-4 h-4 text-amber-400" />
+                      <span>เจาะลึก 7 ข้อ</span>
+                    </button>
+
+                    <a
+                      href={`https://line.me/R/ti/p/@aiaon?text=${encodeURIComponent(PREP_VIP_DATA.lineOrderMsg)}`}
+                      onClick={handleVipOrderClick}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-4 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 shadow-[0_0_30px_rgba(245,158,11,0.35)]"
+                    >
+                      <MessageCircle className="w-4 h-4 fill-slate-950" />
+                      <span>สมัครเข้ากลุ่ม VIP</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
+                ) : (
+                  <a
+                    href={getLinePrepUrl(false)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-4 px-6 rounded-2xl font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-lg transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-emerald-500 to-teal-600 text-zinc-950"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>{tier.ctaText}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                )}
               </div>
             ))}
           </div>
         </section>
 
       </div>
+
+      {/* ─────────────────────────────────────────────────────────────
+          7-PILLARS TEACHER PREP DETAIL MODAL
+      ───────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {isDetailModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-slate-950 border border-amber-500/40 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
+            >
+              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-slate-950/90 backdrop-blur-sm border-b border-white/10 mb-6">
+                <span className="text-xs sm:text-sm font-bold text-amber-300 flex items-center gap-2">
+                  <Crown className="w-4 h-4 text-amber-400" />
+                  <span>เจาะลึก 7 องค์ประกอบหลัก • AiAon Prep VIP Exam Pass</span>
+                </span>
+                <button
+                  onClick={() => setIsDetailModalOpen(false)}
+                  className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                >
+                  ✕ ปิดหน้าต่าง
+                </button>
+              </div>
+
+              <TeacherPrepDetailSection
+                product={PREP_VIP_DATA}
+                onClose={() => setIsDetailModalOpen(false)}
+              />
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
