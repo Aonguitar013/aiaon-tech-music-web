@@ -1,20 +1,31 @@
-import { HeroSection } from "@/components/sections/HeroSection";
-import { AboutSection } from "@/components/sections/AboutSection";
-import { CertificatesSection } from "@/components/sections/CertificatesSection";
-import { AutomationShowcase } from "@/components/sections/AutomationShowcase";
+import { AboutMasterView } from "@/components/about/AboutMasterView";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "เกี่ยวกับเรา - TechxMusic",
-  description: "ประวัติ ความเป็นมา และนวัตกรรม Smart School Automation โดย ครูอ้น AiAon Tech & Music Studio",
+export const metadata: Metadata = {
+  title: "เกี่ยวกับเรา & รวมช่องทางทางการ | AiAon Tech x Music (ครูอ้น)",
+  description:
+    "ประวัติ นวัตกรรม Smart School Automation, AI Caretaker และศูนย์รวมทุกช่องทางโซเชียลมีเดีย พร้อมหน้าร้านอุปกรณ์ไอทีของแท้ 3 แพลตฟอร์ม โดย ครูอ้น (จิรวัฒน์ เดชเส้ง) โรงเรียนหาดใหญ่วิทยาลัย",
+  keywords: [
+    "เกี่ยวกับเรา",
+    "ครูอ้น",
+    "จิรวัฒน์ เดชเส้ง",
+    "โรงเรียนหาดใหญ่วิทยาลัย",
+    "ไอทีง่ายๆ สไตล์ iAon",
+    "iAonTech",
+    "AI Caretaker",
+    "Smart School Automation",
+    "TikTok Shop iAonTech",
+    "Shopee iAonTech",
+    "Lazada iAonTech",
+  ],
+  openGraph: {
+    title: "เกี่ยวกับเรา & รวมช่องทางทางการ | AiAon Tech x Music (ครูอ้น)",
+    description:
+      "เมื่อคนขี้เกียจทำงานเอกสาร เสกโค้ดให้คอมทำงานแทน! รวมประวัติ ช่องทางทางการ 7 ช่องทาง และหน้าร้านอุปกรณ์ไอทีครูอ้นในหน้าเดียว",
+    type: "website",
+  },
 };
 
 export default function AboutPage() {
-  return (
-    <div className="flex flex-col gap-24 pb-24">
-      <HeroSection />
-      <AboutSection />
-      <CertificatesSection />
-      <AutomationShowcase />
-    </div>
-  );
+  return <AboutMasterView />;
 }

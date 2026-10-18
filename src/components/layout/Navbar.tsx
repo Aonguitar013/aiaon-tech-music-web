@@ -141,7 +141,7 @@ const routes: RouteItem[] = [
       },
       { 
         name: "รวมช่องทาง & หน้าร้านไอทีครูอ้น", 
-        href: "/channels", 
+        href: "/about#channels", 
         description: "ครบทุกแพลตฟอร์ม + พิกัดอุปกรณ์ไอทีของแท้ TikTok Shop, Shopee, Lazada", 
         badge: "HUB", 
         badgeColor: "amber", 
@@ -166,7 +166,7 @@ const routes: RouteItem[] = [
   },
   { 
     name: "ช่องทาง & ร้านไอที", 
-    href: "/channels", 
+    href: "/about#channels", 
     icon: Globe, 
     hoverColor: "amber"
   },
