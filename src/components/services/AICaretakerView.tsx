@@ -469,9 +469,7 @@ export function AICaretakerView() {
               const borderClass = isPro
                 ? "border-amber-500/60 shadow-[0_0_45px_rgba(245,158,11,0.2)] ring-1 ring-amber-400/40 lg:scale-105"
                 : "border-emerald-500/30 hover:border-emerald-400";
-              const btnClass = isPro
-                ? "from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-zinc-950 font-black"
-                : "from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-zinc-950 font-black";
+              const btnClass = "from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white font-black shadow-[0_0_20px_rgba(6,199,85,0.35)]";
 
               return (
                 <div

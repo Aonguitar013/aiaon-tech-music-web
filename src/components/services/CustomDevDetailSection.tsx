@@ -337,7 +337,7 @@ export function CustomDevDetailSection({
                 onClick={handleLineOrderClick}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`w-full sm:w-auto px-6 py-3.5 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xl hover:scale-105 transition-all bg-gradient-to-r ${accentStyles.btn}`}
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(6,199,85,0.35)] hover:scale-105 transition-all bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white font-bold cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>ส่งบรีฟงาน &amp; จองคิวผ่าน LINE</span>

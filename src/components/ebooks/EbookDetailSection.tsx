@@ -162,7 +162,7 @@ export function EbookDetailSection({
               data-line-code={ebook.code}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-zinc-950 font-black rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+              className="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white font-black rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-[#06C755]/30 cursor-pointer"
             >
               <MessageSquare className="w-4 h-4" />
               <span>สั่งซื้อทาง LINE OA</span>
@@ -497,7 +497,7 @@ export function EbookDetailSection({
               data-line-code={ebook.code}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-zinc-950 font-black rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30"
+              className="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white font-black rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-[#06C755]/30 cursor-pointer"
             >
               <MessageSquare className="w-4 h-4" />
               <span>สั่งซื้อทาง LINE OA ทันที</span>

@@ -135,7 +135,7 @@ export function StudentDetailSection({
               data-line-code={product.code}
               target="_blank"
               rel="noopener noreferrer"
-              className={`w-full sm:w-auto px-8 py-3.5 rounded-xl text-white font-black text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg bg-gradient-to-r ${product.btnGradient}`}
+              className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-white font-black text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(6,199,85,0.35)] bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] cursor-pointer"
             >
               <MessageSquare className="w-4 h-4" />
               <span>สั่งซื้อผ่าน LINE OA ({product.price} ฿)</span>
@@ -412,7 +412,7 @@ export function StudentDetailSection({
               data-line-code={product.code}
               target="_blank"
               rel="noopener noreferrer"
-              className={`w-full sm:w-auto px-8 py-3.5 rounded-xl text-white font-black text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-lg bg-gradient-to-r ${product.btnGradient}`}
+              className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-white font-black text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(6,199,85,0.35)] bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] cursor-pointer"
             >
               <MessageSquare className="w-4 h-4" />
               <span>สั่งซื้อทาง LINE OA ({product.price} ฿)</span>

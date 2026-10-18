@@ -205,7 +205,7 @@ export function StudentVaultView() {
                   data-line-code={prod.code}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-full py-3.5 px-3 rounded-2xl text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all duration-300 hover:scale-[1.02] shadow-lg cursor-pointer bg-linear-to-r ${prod.btnGradient}`}
+                  className="w-full py-3.5 px-3 rounded-2xl text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all duration-300 hover:scale-[1.02] shadow-[0_0_25px_rgba(6,199,85,0.35)] cursor-pointer bg-linear-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42]"
                 >
                   <MessageCircle className="w-4 h-4 fill-white/20" />
                   <span>สั่งซื้อ LINE</span>
@@ -244,7 +244,7 @@ export function StudentVaultView() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-5 rounded-2xl bg-linear-to-r from-purple-600 via-pink-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white font-prompt font-extrabold text-base flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(236,72,153,0.4)] transition-all hover:scale-105 shrink-0 cursor-pointer"
+              className="px-8 py-5 rounded-2xl bg-linear-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white font-prompt font-extrabold text-base flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(6,199,85,0.4)] transition-all hover:scale-105 shrink-0 cursor-pointer"
             >
               <Sparkles className="w-5 h-5 fill-white" />
               <span>สั่งซื้อ Super Pack 390 ฿</span>

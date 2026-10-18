@@ -218,7 +218,7 @@ export function BundlesView() {
                       data-line-title={`แพ็กเกจเหมา: ${bundle.title}`}
                       data-line-price={bundle.bundlePrice}
                       data-line-code={bundle.id}
-                      className={`w-full py-3.5 px-4 rounded-2xl text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] shadow-lg cursor-pointer bg-gradient-to-r ${bundle.btnGradient}`}
+                      className="w-full py-3.5 px-4 rounded-2xl text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] shadow-[0_0_25px_rgba(6,199,85,0.35)] cursor-pointer bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42]"
                     >
                       <MessageCircle className="w-4 h-4 fill-white/20 text-white" />
                       <span>สั่งซื้อทาง LINE</span>

@@ -361,12 +361,12 @@ export function AoneProductDetailSection({
                   "w-full sm:flex-1 py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex items-center justify-center gap-2 group shadow-xl cursor-pointer",
                   isFree
                     ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.35)]"
-                    : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 hover:from-cyan-300 hover:via-teal-200 hover:to-cyan-300 text-zinc-950 shadow-[0_0_30px_rgba(6,182,212,0.35)] hover:scale-[1.01]"
+                    : "bg-linear-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:via-[#049b42] hover:to-[#05b34c] text-white shadow-[0_0_30px_rgba(6,199,85,0.4)] hover:shadow-[0_0_40px_rgba(6,199,85,0.6)] hover:scale-[1.01]"
                 )}
               >
-                {isFree ? <Gift className="w-5 h-5 text-zinc-950" /> : <ShoppingCart className="w-5 h-5 text-zinc-950" />}
+                {isFree ? <Gift className="w-5 h-5 text-zinc-950" /> : <ShoppingCart className="w-5 h-5 text-white" />}
                 <span>{isFree ? "รับระบบและโค้ดฟรีทาง LINE ทันที" : `สั่งซื้อรับระบบทันที ${cleanPrice} (LINE)`}</span>
-                <ArrowRight className="w-4 h-4 text-zinc-950 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className={cn("w-4 h-4 group-hover:translate-x-1 transition-transform", isFree ? "text-zinc-950" : "text-white")} />
               </a>
 
               {!isFree && (
@@ -603,12 +603,12 @@ export function AoneProductDetailSection({
               "w-full py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex items-center justify-center gap-2 group shadow-xl cursor-pointer",
               isFree
                 ? "bg-linear-to-r from-emerald-400 to-teal-400 text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.4)]"
-                : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 text-zinc-950 shadow-[0_0_30px_rgba(6,182,212,0.4)]"
+                : "bg-linear-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:via-[#049b42] hover:to-[#05b34c] text-white shadow-[0_0_30px_rgba(6,199,85,0.4)]"
             )}
           >
-            <MessageSquare className="w-5 h-5 text-zinc-950" />
+            <MessageSquare className={cn("w-5 h-5", isFree ? "text-zinc-950" : "text-white")} />
             <span>{isFree ? "รับระบบฟรีผ่าน LINE" : `สั่งซื้อทันที ${cleanPrice} (LINE)`}</span>
-            <ArrowRight className="w-4 h-4 text-zinc-950 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className={cn("w-4 h-4 group-hover:translate-x-1 transition-transform", isFree ? "text-zinc-950" : "text-white")} />
           </a>
         </div>
       </div>

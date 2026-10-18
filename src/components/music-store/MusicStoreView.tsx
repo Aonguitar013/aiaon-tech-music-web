@@ -438,7 +438,7 @@ export function MusicStoreView() {
                         onClick={(e) => handleSingleBuyClick(e, item)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="py-3 px-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(6,182,212,0.3)] border border-cyan-300/30 transition-all hover:scale-[1.02] cursor-pointer"
+                        className="py-3 px-4 rounded-2xl bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:via-[#049b42] hover:to-[#05b34c] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(6,199,85,0.35)] border border-[#06C755]/30 transition-all hover:scale-[1.02] cursor-pointer"
                       >
                         <ShoppingBag className="w-4 h-4" />
                         <span>สั่งซื้อรับไฟล์ทันที ({item.price.toLocaleString()} ฿)</span>
@@ -554,7 +554,7 @@ export function MusicStoreView() {
                     onClick={handleCartCheckoutClick}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-500 text-zinc-950 font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-lg cursor-pointer"
+                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#06C755] to-[#05b34c] hover:from-[#05b34c] hover:to-[#049b42] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-[0_0_20px_rgba(6,199,85,0.35)] cursor-pointer"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>สั่งซื้อ {cart.length} เพลงที่เลือก ({totalCartPrice.toLocaleString()} ฿)</span>

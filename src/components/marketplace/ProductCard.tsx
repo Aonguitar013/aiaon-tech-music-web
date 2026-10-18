@@ -253,7 +253,7 @@ export function ProductCard({ product }: ProductCardProps) {
               "w-full h-11 px-4 rounded-xl font-prompt text-sm font-extrabold flex items-center justify-between whitespace-nowrap transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.98] cursor-pointer relative overflow-hidden",
               isFree 
                 ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.25)] group-hover:shadow-[0_0_30px_rgba(16,185,129,0.45)]" 
-                : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 hover:from-cyan-300 hover:via-teal-200 hover:to-cyan-300 text-zinc-950 shadow-[0_0_20px_rgba(6,182,212,0.25)] group-hover:shadow-[0_0_32px_rgba(6,182,212,0.5)]"
+                : "bg-linear-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:via-[#049b42] hover:to-[#05b34c] text-white shadow-[0_0_20px_rgba(6,199,85,0.35)] group-hover:shadow-[0_0_32px_rgba(6,199,85,0.55)] border border-[#06C755]/30"
             )}
           >
             {/* Subtle Light Sweep */}
@@ -263,15 +263,18 @@ export function ProductCard({ product }: ProductCardProps) {
               {isFree ? (
                 <Gift className="w-4 h-4 text-zinc-950 shrink-0" />
               ) : (
-                <ShoppingCart className="w-4 h-4 text-zinc-950 shrink-0" />
+                <ShoppingCart className="w-4 h-4 text-white shrink-0" />
               )}
               <span className="tracking-tight">
                 {isFree ? "รับระบบและโค้ดฟรี (LINE)" : "สั่งซื้อรับระบบทันที (LINE)"}
               </span>
             </div>
 
-            <div className="w-6 h-6 rounded-lg bg-zinc-950/12 group-hover:bg-zinc-950/20 flex items-center justify-center relative z-10 shrink-0 transition-all">
-              <ArrowRight className="w-3.5 h-3.5 text-zinc-950 transition-transform group-hover:translate-x-0.5" />
+            <div className={cn(
+              "w-6 h-6 rounded-lg flex items-center justify-center relative z-10 shrink-0 transition-all",
+              isFree ? "bg-zinc-950/12 group-hover:bg-zinc-950/20" : "bg-black/20 group-hover:bg-black/30"
+            )}>
+              <ArrowRight className={cn("w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5", isFree ? "text-zinc-950" : "text-white")} />
             </div>
           </a>
 

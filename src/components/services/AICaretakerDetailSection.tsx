@@ -134,7 +134,7 @@ export function AICaretakerDetailSection({
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLineOrderClick}
-              className={`px-8 py-4 rounded-xl bg-gradient-to-r ${accentStyles.btn} font-black text-base shadow-lg transition-all flex items-center justify-center gap-2 group cursor-pointer`}
+              className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white font-black text-base shadow-[0_0_25px_rgba(6,199,85,0.35)] transition-all flex items-center justify-center gap-2 group cursor-pointer"
             >
               <MessageSquare className="w-5 h-5 fill-current" />
               <span>ปรึกษา &amp; จองคิวติดตั้งทาง LINE</span>
@@ -394,7 +394,7 @@ export function AICaretakerDetailSection({
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLineOrderClick}
-              className={`flex-1 sm:flex-initial px-8 py-4 rounded-xl bg-gradient-to-r ${accentStyles.btn} font-black text-base shadow-xl transition-all flex items-center justify-center gap-2 group cursor-pointer`}
+              className="flex-1 sm:flex-initial px-8 py-4 rounded-xl bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white font-black text-base shadow-[0_0_25px_rgba(6,199,85,0.35)] transition-all flex items-center justify-center gap-2 group cursor-pointer"
             >
               <MessageSquare className="w-5 h-5 fill-current" />
               <span>ทัก LINE ปรึกษาครูอ้น</span>

@@ -367,16 +367,19 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                           className={cn(
                             "w-full py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex flex-col items-center justify-center gap-1 group relative overflow-hidden cursor-pointer",
                             isService
-                              ? "bg-linear-to-r from-cyan-400 to-teal-400 hover:from-cyan-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(6,182,212,0.3)]"
+                              ? "bg-linear-to-r from-[#06C755] to-emerald-600 hover:from-[#05b34c] hover:to-emerald-500 text-white shadow-[0_0_25px_rgba(6,199,85,0.35)]"
                               : isFree
                                 ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.35)]"
-                                : "bg-linear-to-r from-cyan-400 via-teal-300 to-cyan-400 hover:from-cyan-300 hover:via-teal-200 hover:to-cyan-300 text-zinc-950 shadow-[0_0_30px_rgba(6,182,212,0.35)] hover:shadow-[0_0_45px_rgba(6,182,212,0.55)] hover:scale-[1.01] active:scale-[0.98]"
+                                : "bg-linear-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:via-[#049b42] hover:to-[#05b34c] text-white shadow-[0_0_30px_rgba(6,199,85,0.4)] hover:shadow-[0_0_45px_rgba(6,199,85,0.6)] hover:scale-[1.01] active:scale-[0.98]"
                           )}
                         >
                             {/* Subtle Light Sweep */}
                             <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/45 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
 
-                            <div className="flex items-center justify-center gap-2 text-base sm:text-lg font-black tracking-tight relative z-10 text-zinc-950 whitespace-nowrap">
+                            <div className={cn(
+                              "flex items-center justify-center gap-2 text-base sm:text-lg font-black tracking-tight relative z-10 whitespace-nowrap",
+                              isFree ? "text-zinc-950" : "text-white"
+                            )}>
                               {isService ? (
                                 <>
                                   <Mail className="w-5 h-5 shrink-0" />
@@ -390,7 +393,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                 </>
                               ) : (
                                 <>
-                                  <MessageSquare className="w-5 h-5 fill-zinc-950/20 shrink-0" />
+                                  <MessageSquare className="w-5 h-5 fill-white/20 shrink-0" />
                                   <span>สั่งซื้อรับระบบทันที (LINE)</span>
                                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </>
@@ -398,8 +401,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                             </div>
 
                             {!isService && !isFree && (
-                              <span className="text-[11px] font-bold text-zinc-900/80 tracking-tight relative z-10 flex items-center gap-1 whitespace-nowrap">
-                                <ShieldCheck className="w-3.5 h-3.5 text-zinc-950" />
+                              <span className="text-[11px] font-bold text-white/90 tracking-tight relative z-10 flex items-center gap-1 whitespace-nowrap">
+                                <ShieldCheck className="w-3.5 h-3.5 text-white" />
                                 ตอบกลับโดยครูอ้น • รับไฟล์ระบบทันที • ปลอดภัย 100%
                               </span>
                             )}

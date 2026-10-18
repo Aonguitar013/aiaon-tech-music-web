@@ -277,7 +277,7 @@ export function ServicesView() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-2xl bg-linear-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-prompt font-bold text-base flex items-center gap-2.5 shadow-[0_0_30px_rgba(16,185,129,0.35)] transition-all duration-300 hover:scale-105"
+              className="px-8 py-4 rounded-2xl bg-linear-to-r from-[#06C755] to-[#05b34c] hover:from-[#05b34c] hover:to-[#049b42] text-white font-prompt font-bold text-base flex items-center gap-2.5 shadow-[0_0_30px_rgba(6,199,85,0.35)] transition-all duration-300 hover:scale-105"
             >
               <MessageCircle className="w-5 h-5 fill-white/20" />
               <span>ทักคุย Requirement &amp; ประเมินราคาฟรีผ่าน LINE</span>

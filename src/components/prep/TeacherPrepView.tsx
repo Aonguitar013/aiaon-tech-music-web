@@ -804,13 +804,9 @@ export function TeacherPrepView() {
                       data-line-title={tier.productData.title}
                       data-line-price={tier.productData.price}
                       data-line-code={tier.productData.id}
-                      className={`w-full py-3.5 px-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg transition-all hover:scale-[1.02] cursor-pointer ${
-                        tier.id === "bot-only-pass"
-                          ? "bg-gradient-to-r from-cyan-400 to-teal-500 text-slate-950 shadow-[0_0_25px_rgba(6,182,212,0.3)]"
-                          : "bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 shadow-[0_0_30px_rgba(245,158,11,0.35)]"
-                      }`}
+                      className="w-full py-3.5 px-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-[0_0_25px_rgba(6,199,85,0.35)] transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white"
                     >
-                      <MessageCircle className="w-3.5 h-3.5 fill-slate-950" />
+                      <MessageCircle className="w-3.5 h-3.5 fill-white" />
                       <span>{tier.id === "bot-only-pass" ? "สมัครเฉพาะบอท" : "สมัครบันเดิลคุ้มสุด"}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </a>
@@ -820,7 +816,7 @@ export function TeacherPrepView() {
                     href={getLinePrepUrl(false)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-emerald-500 to-teal-600 text-zinc-950"
+                    className="w-full py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(6,199,85,0.35)] transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-[#06C755] to-[#05b34c] hover:from-[#05b34c] hover:to-[#049b42] text-white"
                   >
                     <Send className="w-3.5 h-3.5" />
                     <span>{tier.ctaText}</span>

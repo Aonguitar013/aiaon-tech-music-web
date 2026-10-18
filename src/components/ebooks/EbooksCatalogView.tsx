@@ -460,7 +460,7 @@ export function EbooksCatalogView() {
                       data-line-code={book.code}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="py-2.5 px-2 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-1 shadow-md shadow-emerald-500/20"
+                      className="py-2.5 px-2 bg-[#06C755] hover:bg-[#05b34c] text-white rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-1 shadow-md shadow-[#06C755]/25"
                     >
                       <span className="truncate">สั่งซื้อ</span>
                       <ArrowRight className="w-3 h-3" />
@@ -535,7 +535,7 @@ export function EbooksCatalogView() {
                 data-line-code="VAULT-30"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3.5 px-4 bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-400 hover:to-indigo-500 text-white font-extrabold rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm"
+                className="w-full py-3.5 px-4 bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white font-extrabold rounded-xl shadow-[0_0_25px_rgba(6,199,85,0.35)] transition flex items-center justify-center gap-2 text-sm"
               >
                 <span>สั่งซื้อแพ็กเหมา 30 เล่ม</span>
                 <ArrowRight className="w-4 h-4" />
@@ -701,7 +701,7 @@ export function EbooksCatalogView() {
                     data-line-price={cartTotal}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 text-sm transition shadow-lg shadow-indigo-600/30"
+                    className="w-full py-3 bg-[#06C755] hover:bg-[#05b34c] text-white font-bold rounded-xl flex items-center justify-center gap-2 text-sm transition shadow-lg shadow-[#06C755]/30"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>ยืนยันคำสั่งซื้อทาง LINE OA</span>
