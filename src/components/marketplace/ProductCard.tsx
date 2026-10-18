@@ -23,6 +23,7 @@ export interface Product {
   color_classes?: string;
   button_classes?: string;
   image_url?: string;
+  setupTier?: "zero-tech" | "easy-setup" | "vip-enterprise";
 }
 
 interface ProductCardProps {
@@ -31,6 +32,7 @@ interface ProductCardProps {
 }
 
 import { getSystemCoverTheme } from "./systemCoverTheme";
+import { getProductSetupTier, getSetupTierInfo } from "./setupTierHelper";
 import { getLineOrderUrl, buildSystemOrderMessage, buildVipSetupOrderMessage } from "@/lib/line";
 
 export function ProductCard({ product }: ProductCardProps) {
@@ -69,6 +71,8 @@ export function ProductCard({ product }: ProductCardProps) {
 
   // Generate dynamic bespoke theme
   const coverTheme = getSystemCoverTheme(product.title, product.category);
+  const setupTier = product.setupTier || getProductSetupTier(product.id, product.title);
+  const tierInfo = getSetupTierInfo(setupTier);
 
   const cleanPrice = isFree ? "ฟรี 0 ฿" : product.price.replace(/\s*THB/i, " ฿");
   const upperTitle = product.title.toUpperCase();
@@ -165,6 +169,17 @@ export function ProductCard({ product }: ProductCardProps) {
 
       {/* ── CARD BODY ─────────────────────────────────────────── */}
       <div className="p-5 sm:p-6 flex flex-col flex-1 z-10">
+        
+        {/* Setup Tier Badge */}
+        <div className="mb-2.5">
+          <span className={cn(
+            "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-prompt font-extrabold border transition-all",
+            tierInfo.badgeStyle
+          )}>
+            <span>{tierInfo.badgeText}</span>
+          </span>
+        </div>
+
         <Link href={detailHref} className="block group/title cursor-pointer mb-2">
           <h3 className={cn(
             "text-base sm:text-lg font-bold font-prompt text-white line-clamp-2 leading-snug transition-colors",

@@ -384,6 +384,22 @@ export function AoneProductDetailSection({
                 </a>
               )}
             </div>
+
+            {/* Frictionless Trust Badges */}
+            <div className="pt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-400 font-prompt">
+              <span className="flex items-center gap-1.5 text-amber-300/90">
+                <span>⚡</span>
+                <span>ส่งมอบลิงก์อัตโนมัติใน 10 วินาทีหลังส่งสลิป (AI Slip Verification)</span>
+              </span>
+              <span className="flex items-center gap-1.5 text-emerald-300/90">
+                <span>🛡️</span>
+                <span>ระบบมาตรฐานพร้อมใช้ ไม่ต้องเขียนโค้ดเอง</span>
+              </span>
+              <span className="flex items-center gap-1.5 text-cyan-300/90">
+                <span>♾️</span>
+                <span>ชำระครั้งเดียว ใช้งานได้ตลอดชีพ ไม่มีค่ารายเดือน</span>
+              </span>
+            </div>
           </div>
 
         </div>
@@ -610,6 +626,22 @@ export function AoneProductDetailSection({
             <span>{isFree ? "รับระบบฟรีผ่าน LINE" : `สั่งซื้อทันที ${cleanPrice} (LINE)`}</span>
             <ArrowRight className={cn("w-4 h-4 group-hover:translate-x-1 transition-transform", isFree ? "text-zinc-950" : "text-white")} />
           </a>
+
+          {/* Frictionless Trust Badges */}
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-400 font-prompt text-center">
+            <span className="flex items-center gap-1.5 text-amber-300/90">
+              <span>⚡</span>
+              <span>ส่งลิงก์ใน 10 วินาทีหลังส่งสลิป</span>
+            </span>
+            <span className="flex items-center gap-1.5 text-emerald-300/90">
+              <span>🛡️</span>
+              <span>พร้อมใช้ ไม่ต้องแก้โค้ด</span>
+            </span>
+            <span className="flex items-center gap-1.5 text-cyan-300/90">
+              <span>♾️</span>
+              <span>จ่ายครั้งเดียว ตลอดชีพ</span>
+            </span>
+          </div>
         </div>
       </div>
 

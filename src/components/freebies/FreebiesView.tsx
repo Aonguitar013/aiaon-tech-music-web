@@ -19,6 +19,7 @@ import { VinylRecordMockup } from "@/components/music-store/VinylRecordMockup";
 import { getLineOrderUrl } from "@/lib/line";
 import { FreebieDetailSection } from "./FreebieDetailSection";
 import { getFreebieDetail } from "./freebieDataHelper";
+import { FreebieUpsellSection, InstantUpsellModal } from "./FreebieUpsellSection";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -560,6 +561,8 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedFreebieForUnlock, setSelectedFreebieForUnlock] = useState<Freebie | null>(null);
   const [selectedFreebieForDetails, setSelectedFreebieForDetails] = useState<Freebie | null>(null);
+  const [showUpsellModal, setShowUpsellModal] = useState(false);
+  const [downloadedFreebieTitle, setDownloadedFreebieTitle] = useState("");
 
   const filtered = initialFreebies.filter(
     (f) => activeTab === "all" || f.category === activeTab
@@ -586,10 +589,22 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
               a.download = freebieToDownload.title;
               a.target = "_blank";
               a.click();
+
+              setDownloadedFreebieTitle(freebieToDownload.title);
+              setTimeout(() => {
+                setShowUpsellModal(true);
+              }, 400);
             }}
           />
         )}
       </AnimatePresence>
+
+      {/* Instant Upsell Modal */}
+      <InstantUpsellModal
+        isOpen={showUpsellModal}
+        onClose={() => setShowUpsellModal(false)}
+        downloadedTitle={downloadedFreebieTitle}
+      />
 
       {/* Freebie Detail Section Modal */}
       <AnimatePresence>
@@ -737,6 +752,9 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
               ))}
             </motion.div>
           </AnimatePresence>
+
+          {/* ── Permanent Bottom Impulse Upgrade Section ───── */}
+          <FreebieUpsellSection className="mt-16 sm:mt-24" />
 
           {/* ── CTA for LINE Community ─────────────────────── */}
           <motion.div

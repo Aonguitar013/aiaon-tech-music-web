@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { MultiVaultCarousel } from "@/components/home/MultiVaultCarousel";
+import { NoBrainerBundles } from "@/components/marketplace/NoBrainerBundles";
 import { VinylRecordMockup } from "@/components/music-store/VinylRecordMockup";
 import { getLineOrderUrl } from "@/lib/line";
 
@@ -250,6 +251,9 @@ export function HomeView() {
 
         {/* ── 2. 3D MULTI-VAULT ECOSYSTEM CAROUSEL (ศูนย์รวม 8 มหาคลัง) ── */}
         <MultiVaultCarousel />
+
+        {/* ── 2.5 ZERO-TECH NO-BRAINER BUNDLES (3 มหาบันเดิลสุดคุ้ม) ── */}
+        <NoBrainerBundles />
 
         {/* ── 3. INTERACTIVE ROLE NAVIGATOR (ค้นหาตามโจทย์ของคุณ) ─── */}
         <section id="everything-i-can-do" className="scroll-mt-28">

@@ -4,9 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { 
   Search, ShoppingBag, Mic, Sliders, Keyboard, Headphones, 
-  ExternalLink, Sparkles, CheckCircle2, Cpu, ArrowRight, } from "lucide-react";
+  ExternalLink, Sparkles, CheckCircle2, Cpu, ArrowRight, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { ProductCard } from "@/components/marketplace/ProductCard";
+import { NoBrainerBundles } from "@/components/marketplace/NoBrainerBundles";
+import { getProductSetupTier, getSetupTierInfo, SetupTier } from "@/components/marketplace/setupTierHelper";
 import { cn } from "@/lib/utils";
 
 interface Product {
@@ -19,6 +21,7 @@ interface Product {
   color_classes?: string;
   button_classes?: string;
   image_url?: string;
+  setupTier?: "zero-tech" | "easy-setup" | "vip-enterprise";
 }
 
 interface HardwareGadget {
@@ -248,6 +251,44 @@ function HardwareGadgetsSection() {
 export function DigitalVaultView({ initialProducts }: { initialProducts: Product[] }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState<string>("All");
+  const [setupTierFilter, setSetupTierFilter] = useState<"all" | SetupTier>("all");
+
+  const zeroTechCount = initialProducts.filter(
+    (p) => (p.setupTier || getProductSetupTier(p.id, p.title)) === "zero-tech"
+  ).length;
+  const easySetupCount = initialProducts.filter(
+    (p) => (p.setupTier || getProductSetupTier(p.id, p.title)) === "easy-setup"
+  ).length;
+  const vipEnterpriseCount = initialProducts.filter(
+    (p) => (p.setupTier || getProductSetupTier(p.id, p.title)) === "vip-enterprise"
+  ).length;
+
+  const setupTiers: { id: "all" | SetupTier; label: string; count: number; activeClass: string }[] = [
+    {
+      id: "all",
+      label: "✨ ทั้งหมด",
+      count: initialProducts.length || 20,
+      activeClass: "bg-linear-to-r from-purple-600 to-indigo-600 text-white border-purple-400 shadow-[0_0_20px_rgba(168,85,247,0.4)] scale-105",
+    },
+    {
+      id: "zero-tech",
+      label: "🟢 ก๊อปปี้ใช้ได้ทันที (Zero-Tech)",
+      count: zeroTechCount,
+      activeClass: "bg-linear-to-r from-emerald-500 via-teal-500 to-emerald-600 text-white border-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.55)] scale-105",
+    },
+    {
+      id: "easy-setup",
+      label: "🟡 ตั้งค่าใน 3 นาที",
+      count: easySetupCount,
+      activeClass: "bg-linear-to-r from-amber-500 to-yellow-600 text-white border-amber-300 shadow-[0_0_20px_rgba(245,158,11,0.4)] scale-105",
+    },
+    {
+      id: "vip-enterprise",
+      label: "🔴 ระบบระดับโรงเรียน / VIP",
+      count: vipEnterpriseCount,
+      activeClass: "bg-linear-to-r from-purple-600 via-pink-600 to-rose-600 text-white border-pink-400 shadow-[0_0_20px_rgba(236,72,153,0.4)] scale-105",
+    },
+  ];
 
   const categories = [
     { id: "All", label: "ทั้งหมด", count: initialProducts.length || 20 },
@@ -289,8 +330,14 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
     } else {
       matchesFilter = product.category === filterCategory;
     }
+
+    const productTier = product.setupTier || getProductSetupTier(product.id, product.title);
+    let matchesTier = true;
+    if (setupTierFilter !== "all") {
+      matchesTier = productTier === setupTierFilter;
+    }
     
-    return matchesSearch && matchesFilter;
+    return matchesSearch && matchesFilter && matchesTier;
   });
 
   return (
@@ -390,6 +437,55 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
           </Link>
         </motion.div>
 
+        {/* --- ZERO-TECH NO-BRAINER BUNDLES (3 มหาบันเดิลสุดคุ้ม) --- */}
+        <NoBrainerBundles className="py-4 sm:py-6 mb-4" />
+
+        {/* --- SETUP DIFFICULTY TIER FILTER --- */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.28 }}
+          className="mb-8 max-w-4xl mx-auto px-2"
+        >
+          <div className="flex flex-col items-center gap-3">
+            <div className="text-xs font-prompt font-bold text-white/70 uppercase tracking-wider flex items-center gap-1.5 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full shadow-inner">
+              <Zap className="w-3.5 h-3.5 text-emerald-400" />
+              <span>เลือกระดับความง่ายในการติดตั้ง &amp; ใช้งาน (Setup Difficulty Tier)</span>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+              {setupTiers.map((tier) => {
+                const isActive = setupTierFilter === tier.id;
+                const isZeroTech = tier.id === "zero-tech";
+
+                return (
+                  <button
+                    key={tier.id}
+                    onClick={() => setSetupTierFilter(tier.id)}
+                    className={cn(
+                      "py-2.5 px-4 sm:px-5 rounded-2xl font-prompt text-xs sm:text-sm font-bold transition-all duration-300 active:scale-95 cursor-pointer flex items-center gap-2 border",
+                      isZeroTech && !isActive && "border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.25)] hover:border-emerald-400 hover:scale-[1.02]",
+                      isActive
+                        ? tier.activeClass
+                        : !isZeroTech && "bg-white/5 border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20"
+                    )}
+                  >
+                    <span>{tier.label}</span>
+                    <span
+                      className={cn(
+                        "text-[10px] font-mono px-1.5 py-0.2 rounded-full",
+                        isActive ? "bg-white/20 text-white" : isZeroTech ? "bg-emerald-500/20 text-emerald-300" : "bg-white/10 text-white/50"
+                      )}
+                    >
+                      {tier.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </motion.div>
+
         {/* Categories Pills - Responsive Flex Wrap */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -461,7 +557,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
               <ShoppingBag className="w-16 h-16 mb-4 opacity-20" />
               <p className="font-prompt text-lg">ไม่พบระบบที่ตรงกับคำค้นหา</p>
               <button
-                onClick={() => { setSearchTerm(""); setFilterCategory("All"); }}
+                onClick={() => { setSearchTerm(""); setFilterCategory("All"); setSetupTierFilter("all"); }}
                 className="mt-4 px-5 py-2.5 bg-purple-600/30 border border-purple-500/40 text-purple-300 rounded-xl hover:bg-purple-600/50 font-prompt text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-lg"
               >
                 ดูระบบทั้งหมด (20 ระบบ)

@@ -328,6 +328,22 @@ export function LineOrderModal({
                 <p className="text-[11px] text-slate-400 mt-2 leading-relaxed">
                   เปิดกล้องมือถือหรือแอป LINE สแกน QR เพื่อเริ่มแชตกับครูอ้นได้ทันที
                 </p>
+
+                {/* Frictionless Trust Badges below QR */}
+                <div className="mt-3.5 pt-3 border-t border-slate-800/80 w-full text-left space-y-2 text-[11px] font-prompt">
+                  <div className="flex items-start gap-1.5 text-amber-300/95 leading-snug">
+                    <span className="text-xs shrink-0 mt-0.5">⚡</span>
+                    <span>ส่งมอบลิงก์อัตโนมัติใน 10 วินาทีหลังส่งสลิป (AI Slip Verification)</span>
+                  </div>
+                  <div className="flex items-start gap-1.5 text-emerald-300/95 leading-snug">
+                    <span className="text-xs shrink-0 mt-0.5">🛡️</span>
+                    <span>ระบบมาตรฐานพร้อมใช้ ไม่ต้องเขียนโค้ดเอง</span>
+                  </div>
+                  <div className="flex items-start gap-1.5 text-cyan-300/95 leading-snug">
+                    <span className="text-xs shrink-0 mt-0.5">♾️</span>
+                    <span>ชำระครั้งเดียว ใช้งานได้ตลอดชีพ ไม่มีค่ารายเดือน</span>
+                  </div>
+                </div>
               </div>
 
               {/* Right Column: Order Message & Desktop Options (3 of 5 cols) */}
