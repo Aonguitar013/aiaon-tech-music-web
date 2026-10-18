@@ -417,10 +417,12 @@ export function DvdCaseMockup({
 
           {/* ── 3. DVD FRONT COVER (CYBERPUNK GLASS ACRYLIC) ── */}
           <div
-            className="absolute inset-0 rounded-[4px_10px_10px_4px] overflow-hidden flex flex-col justify-between p-3 text-white border border-white/30 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.8),inset_0_0_15px_rgba(255,255,255,0.15)]"
+            className="absolute inset-0 rounded-[4px_10px_10px_4px] overflow-hidden flex flex-col justify-between p-3 text-white border border-white/30 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.8),inset_0_0_15px_rgba(255,255,255,0.15)] pointer-events-none"
             style={{
-              transform: "translateZ(8px)",
-              background: "linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(10,20,38,0.75) 45%, rgba(6,182,212,0.15) 100%)",
+              transform: "translateZ(10px)",
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              background: "linear-gradient(135deg, rgba(13,26,48,0.92) 0%, rgba(10,20,38,0.95) 45%, rgba(6,182,212,0.25) 100%)",
             }}
           >
             {/* Top Bar on Front Cover */}
@@ -476,8 +478,12 @@ export function DvdCaseMockup({
 
           {/* ── 4. DVD BACK COVER ── */}
           <div
-            className="absolute inset-0 rounded-[10px_4px_4px_10px] bg-slate-950 border border-white/15 p-2 flex flex-col justify-between text-[7px] text-slate-400"
-            style={{ transform: "translateZ(-8px) rotateY(180deg)" }}
+            className="absolute inset-0 rounded-[10px_4px_4px_10px] bg-slate-950 border border-white/15 p-2 flex flex-col justify-between text-[7px] text-slate-400 pointer-events-none"
+            style={{
+              transform: "translateZ(-10px) rotateY(180deg)",
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+            }}
           >
             <div>
               <div className="font-mono text-cyan-400 font-bold text-[8px] mb-1">[{matchedKey}] SPECS</div>
