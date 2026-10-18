@@ -1,17 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight, CheckCircle2, MessageCircle,
   GraduationCap, Package, Zap, ShieldCheck,
   Volume2, Cpu,
   Award, Star, BookOpen, Music, Bot,
-  Code2, FileCheck2, Layers,
-  } from "lucide-react";
+  Code2, FileCheck2, Layers, Disc, Play, Pause, Radio, RefreshCw
+} from "lucide-react";
 import Link from "next/link";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { MultiVaultCarousel } from "@/components/home/MultiVaultCarousel";
+import { VinylRecordMockup } from "@/components/music-store/VinylRecordMockup";
 import { getLineOrderUrl } from "@/lib/line";
 
 type SolutionFilter = "ALL" | "TEACHER" | "BUSINESS" | "EXAM_PREP" | "MUSIC" | "STUDENT" | "CUSTOM";
@@ -45,8 +46,33 @@ export function HomeView() {
     message: "กดปุ่มด้านล่างเพื่อทดสอบส่งสลิปให้ AI ตรวจสอบแบบ Real-time",
   });
 
-  // Simulator Active Tab (Check-in vs Slip Verifier)
-  const [playgroundTab, setPlaygroundTab] = useState<"attendance" | "slip">("attendance");
+  // Simulator State 3: 3D Vinyl Audio Player Simulator
+  const [selectedVinylTrack, setSelectedVinylTrack] = useState<{
+    id: string;
+    code: string;
+    title: string;
+    category: string;
+    bpm: string;
+    chordProgression: number[][];
+    accentColor: "purple" | "amber" | "cyan";
+  }>({
+    id: "mus-01",
+    code: "MUS-01",
+    title: "เพลงช่วยจำ พ.ร.บ.การศึกษาแห่งชาติ 2542 (ท่อนฮุก 9 หมวด)",
+    category: "เพลงช่วยจำสอบครูผู้ช่วย",
+    bpm: "118 BPM",
+    accentColor: "amber",
+    chordProgression: [
+      [261.63, 329.63, 392.0, 523.25], // C major
+      [220.0, 261.63, 329.63, 440.0],  // A minor
+      [174.61, 220.0, 261.63, 349.23], // F major
+      [196.0, 246.94, 293.66, 392.0],  // G major
+    ],
+  });
+  const [isVinylPlaying, setIsVinylPlaying] = useState<boolean>(false);
+
+  // Simulator Active Tab (Check-in vs Slip Verifier vs Vinyl Player)
+  const [playgroundTab, setPlaygroundTab] = useState<"attendance" | "slip" | "vinyl">("attendance");
 
   // Web Audio Synth for sound feedback
   const playWebAudioSound = (type: "beep" | "success" | "alert") => {
@@ -142,6 +168,76 @@ export function HomeView() {
         });
       }
     }, 1200);
+  };
+
+  // Vinyl Simulator Audio Synthesizer
+  const vinylIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const vinylAudioCtxRef = useRef<AudioContext | null>(null);
+
+  const stopVinylPreview = () => {
+    if (vinylIntervalRef.current) {
+      clearInterval(vinylIntervalRef.current);
+      vinylIntervalRef.current = null;
+    }
+    setIsVinylPlaying(false);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (vinylIntervalRef.current) clearInterval(vinylIntervalRef.current);
+    };
+  }, []);
+
+  const handleToggleVinylPreview = () => {
+    if (isVinylPlaying) {
+      stopVinylPreview();
+      return;
+    }
+
+    stopVinylPreview();
+    setIsVinylPlaying(true);
+
+    try {
+      const AudioContextClass =
+        window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      if (!vinylAudioCtxRef.current) {
+        vinylAudioCtxRef.current = new AudioContextClass();
+      }
+      const ctx = vinylAudioCtxRef.current;
+      if (ctx.state === "suspended") {
+        ctx.resume();
+      }
+
+      let step = 0;
+      const playStep = () => {
+        const chordIdx = Math.floor(step / 4) % selectedVinylTrack.chordProgression.length;
+        const noteIdx = step % 4;
+        const freq = selectedVinylTrack.chordProgression[chordIdx][noteIdx];
+
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(freq, now);
+
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.38);
+
+        step++;
+      };
+
+      playStep();
+      vinylIntervalRef.current = setInterval(playStep, 260);
+    } catch {
+      setIsVinylPlaying(false);
+    }
   };
 
   return (
@@ -602,15 +698,18 @@ export function HomeView() {
               </span>
             </h2>
             <p className="text-xs sm:text-sm text-white/60">
-              ทดสอบ 2 เอนจินยอดนิยม: ระบบเช็คชื่อส่ง LINE อัตโนมัติ หรือ AI ตรวจสลิปโอนเงินแม่นยำ 100%
+              ทดสอบ 3 เอนจินยอดนิยม: ระบบเช็คชื่อส่ง LINE อัตโนมัติ, AI ตรวจสลิปโอนเงิน หรือแผ่นเสียง 3D ฟังเพลงช่วยจำสดๆ
             </p>
 
             {/* Switch Tabs */}
-            <div className="inline-flex p-1 rounded-2xl bg-slate-900 border border-white/10 mt-3">
+            <div className="inline-flex p-1 rounded-2xl bg-slate-900 border border-white/10 mt-3 flex-wrap justify-center gap-1">
               <button
                 type="button"
-                onClick={() => setPlaygroundTab("attendance")}
-                className={`px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                onClick={() => {
+                  stopVinylPreview();
+                  setPlaygroundTab("attendance");
+                }}
+                className={`px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                   playgroundTab === "attendance"
                     ? "bg-cyan-500 text-slate-950 font-bold shadow-md"
                     : "text-white/60 hover:text-white"
@@ -620,14 +719,28 @@ export function HomeView() {
               </button>
               <button
                 type="button"
-                onClick={() => setPlaygroundTab("slip")}
-                className={`px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                onClick={() => {
+                  stopVinylPreview();
+                  setPlaygroundTab("slip");
+                }}
+                className={`px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                   playgroundTab === "slip"
                     ? "bg-emerald-500 text-slate-950 font-bold shadow-md"
                     : "text-white/60 hover:text-white"
                 }`}
               >
                 🤖 จำลอง AI ตรวจสลิป (Gemini)
+              </button>
+              <button
+                type="button"
+                onClick={() => setPlaygroundTab("vinyl")}
+                className={`px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                  playgroundTab === "vinyl"
+                    ? "bg-amber-500 text-slate-950 font-bold shadow-md"
+                    : "text-white/60 hover:text-white"
+                }`}
+              >
+                🎵 หมุนแผ่นเสียง 3D (ฟังเพลงสด)
               </button>
             </div>
           </div>
@@ -728,7 +841,7 @@ export function HomeView() {
                   </p>
                 </div>
               </div>
-            ) : (
+            ) : playgroundTab === "slip" ? (
               /* MODE 2: AI SLIP VERIFICATION */
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="space-y-5">
@@ -815,6 +928,161 @@ export function HomeView() {
                   <p className="text-[11px] text-center text-white/40">
                     💡 ระบบจริงเชื่อมต่อเว็บฮุก LINE OA + ส่งมอบไฟล์ .ZIP อัตโนมัติ 24 ชม.
                   </p>
+                </div>
+              </div>
+            ) : (
+              /* MODE 3: 3D VINYL AUDIO PLAYER SIMULATOR */
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                {/* Left: 3D Interactive Vinyl Stage */}
+                <div className="flex flex-col items-center justify-center p-4 bg-black/40 rounded-2xl border border-amber-500/30 relative overflow-hidden group">
+                  <div className="absolute top-3 left-3 flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
+                    <span className="text-[11px] font-mono font-bold text-amber-300">
+                      3D TURNTABLE STAGE
+                    </span>
+                  </div>
+
+                  <div className="py-2 scale-90 sm:scale-100 transition-transform">
+                    <VinylRecordMockup
+                      code={selectedVinylTrack.code}
+                      title={selectedVinylTrack.title}
+                      categoryLabel={selectedVinylTrack.category}
+                      bpm={selectedVinylTrack.bpm}
+                      duration="ท่อนฮุก 30 วิ"
+                      accentColor={selectedVinylTrack.accentColor}
+                      isPlaying={isVinylPlaying}
+                      size="md"
+                      isInteractive={true}
+                      onPlayClick={handleToggleVinylPreview}
+                    />
+                  </div>
+
+                  <p className="text-[11px] font-prompt text-white/50 text-center mt-2">
+                    {isVinylPlaying
+                      ? "🔊 กำลังเล่นตัวอย่างเสียงสดผ่าน Web Audio Synth... (คลิกเพื่อหยุด)"
+                      : "👆 คลิกที่แผ่นเสียง หรือปุ่มด้านขวา เพื่อหมุนแผ่นและฟังเสียงดนตรีสด"}
+                  </p>
+                </div>
+
+                {/* Right: Audio Control & Track Selector */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                    <span className="text-sm font-bold text-amber-300 flex items-center gap-2">
+                      <Music className="w-4 h-4 text-amber-400" />
+                      <span>เครื่องเล่นแผ่นเสียงจำลอง &amp; เพลงช่วยจำ</span>
+                    </span>
+                    <span className="text-[11px] font-mono bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/30">
+                      WEB AUDIO SYNTH
+                    </span>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs text-white/60 mb-2">เลือกเพลงที่ต้องการฟังตัวอย่าง:</label>
+                    <div className="space-y-2">
+                      {[
+                        {
+                          id: "mus-01",
+                          code: "MUS-01",
+                          title: "เพลงช่วยจำ พ.ร.บ.การศึกษาแห่งชาติ 2542",
+                          category: "เพลงช่วยจำสอบครูผู้ช่วย",
+                          bpm: "118 BPM",
+                          accentColor: "amber" as const,
+                          desc: "ท่อนฮุก 9 หมวดการศึกษา จำแม่นไม่ลืม",
+                          chordProgression: [
+                            [261.63, 329.63, 392.0, 523.25], // C
+                            [220.0, 261.63, 329.63, 440.0],  // Am
+                            [174.61, 220.0, 261.63, 349.23], // F
+                            [196.0, 246.94, 293.66, 392.0],  // G
+                          ],
+                        },
+                        {
+                          id: "bgm-01",
+                          code: "BGM-01",
+                          title: "Acoustic Warmth BGM (คลิปสอน ว.PA)",
+                          category: "เพลง BGM คลิป ว.PA",
+                          bpm: "92 BPM",
+                          accentColor: "cyan" as const,
+                          desc: "กีตาร์โปร่งอบอุ่น ปลอดลิขสิทธิ์ 100%",
+                          chordProgression: [
+                            [329.63, 392.0, 493.88, 659.25], // Em
+                            [261.63, 329.63, 392.0, 523.25], // C
+                            [293.66, 369.99, 440.0, 587.33], // D
+                            [196.0, 246.94, 293.66, 392.0],  // G
+                          ],
+                        },
+                        {
+                          id: "mus-02",
+                          code: "MUS-02",
+                          title: "เพลงสรุป พ.ร.บ.ระเบียบข้าราชการครู 2547",
+                          category: "เพลงช่วยจำสอบครูผู้ช่วย",
+                          bpm: "124 BPM",
+                          accentColor: "purple" as const,
+                          desc: "เจาะลึก 6 วินัยและการออกจากราชการ",
+                          chordProgression: [
+                            [220.0, 261.63, 329.63, 440.0],  // Am
+                            [174.61, 220.0, 261.63, 349.23], // F
+                            [261.63, 329.63, 392.0, 523.25], // C
+                            [329.63, 392.0, 493.88, 659.25], // Em
+                          ],
+                        },
+                      ].map((track) => (
+                        <button
+                          key={track.id}
+                          type="button"
+                          onClick={() => {
+                            stopVinylPreview();
+                            setSelectedVinylTrack(track);
+                          }}
+                          className={`w-full p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
+                            selectedVinylTrack.id === track.id
+                              ? "bg-amber-500/20 border-amber-400 text-amber-200 ring-1"
+                              : "bg-white/5 border-white/10 text-white/70 hover:bg-white/10"
+                          }`}
+                        >
+                          <div className="truncate mr-2">
+                            <div className="text-xs font-bold truncate">{track.title}</div>
+                            <div className="text-[11px] text-white/40 truncate">{track.desc} • {track.bpm}</div>
+                          </div>
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/40 border border-white/10 shrink-0">
+                            {track.code}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Play / Stop Button */}
+                  <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
+                    <button
+                      type="button"
+                      onClick={handleToggleVinylPreview}
+                      className={`flex-1 py-3.5 px-5 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 shadow-lg cursor-pointer ${
+                        isVinylPlaying
+                          ? "bg-rose-500 hover:bg-rose-600 text-white shadow-rose-900/40 animate-pulse"
+                          : "bg-linear-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-zinc-950 font-black shadow-amber-900/30 hover:scale-[1.02]"
+                      }`}
+                    >
+                      {isVinylPlaying ? (
+                        <>
+                          <Pause className="w-4 h-4 fill-white" />
+                          <span>หยุดเล่นเสียงตัวอย่าง</span>
+                        </>
+                      ) : (
+                        <>
+                          <Play className="w-4 h-4 fill-zinc-950" />
+                          <span>กดเพื่อหมุนแผ่น &amp; ฟังตัวอย่างสด 🎵</span>
+                        </>
+                      )}
+                    </button>
+
+                    <Link
+                      href="/music-store"
+                      className="py-3.5 px-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-prompt font-semibold flex items-center justify-center gap-1.5 transition-all text-center"
+                    >
+                      <span>ดูคลังเพลงเต็ม</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             )}
