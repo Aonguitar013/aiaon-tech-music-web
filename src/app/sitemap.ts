@@ -18,8 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/student-vault", priority: 0.8, changeFrequency: "weekly" },
     { path: "/ai-caretaker", priority: 0.8, changeFrequency: "weekly" },
     { path: "/services", priority: 0.7, changeFrequency: "weekly" },
-    { path: "/channels", priority: 0.7, changeFrequency: "weekly" },
-    { path: "/about", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/about", priority: 0.7, changeFrequency: "weekly" },
     { path: "/saas", priority: 0.6, changeFrequency: "monthly" },
   ];
 

@@ -440,7 +440,7 @@ export function AboutMasterView() {
 
   const handleCopyBioUrl = () => {
     if (typeof window !== "undefined") {
-      navigator.clipboard.writeText("https://www.aiaon.tech/about#channels");
+      navigator.clipboard.writeText("https://www.aiaon.tech/about");
       setCopiedBioLink(true);
       setTimeout(() => setCopiedBioLink(false), 2500);
     }
