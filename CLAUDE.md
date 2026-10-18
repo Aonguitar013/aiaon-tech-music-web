@@ -1,1 +1,3 @@
 @AGENTS.md
+@docs/strategy/IAON_CORE_STRATEGY_MEMORY.md
+@docs/strategy/IAON_ACTION_CALENDAR_2026.md
