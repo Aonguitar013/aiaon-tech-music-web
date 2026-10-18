@@ -407,6 +407,21 @@ export function MusicStoreView() {
                       </button>
                     </div>
 
+                    {/* Cross-sell banner for MUS-01 */}
+                    {item.id === "album-mnemonic-vol1" && (
+                      <div className="rounded-xl p-2.5 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-transparent border border-amber-500/30 flex items-center justify-between gap-2">
+                        <span className="text-[11px] text-amber-200">
+                          👑 <strong>คุ้มกว่าเมื่อซื้อคู่:</strong> รับเพลงนี้ฟรีทันทีเมื่อสมัครกลุ่ม Telegram ติวสอบบอท AI (390 ฿)
+                        </span>
+                        <Link
+                          href="/teacher-prep#join-telegram"
+                          className="shrink-0 text-[11px] font-bold text-amber-300 hover:text-white underline"
+                        >
+                          ดูบันเดิล 390 ฿ ➔
+                        </Link>
+                      </div>
+                    )}
+
                     {/* Dual Action Buttons: เจาะลึก 7 ข้อ & สั่งซื้อรับไฟล์ทันที */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       <button

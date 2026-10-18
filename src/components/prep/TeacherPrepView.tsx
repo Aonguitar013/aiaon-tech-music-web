@@ -12,7 +12,7 @@ import {
 import Link from "next/link";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 import { GoldenTicketMockup } from "@/components/prep/GoldenTicketMockup";
-import { PREP_VIP_DATA } from "@/components/prep/prepDataHelper";
+import { PREP_VIP_DATA, PREP_BOT_ONLY_DATA, PrepVipProduct } from "@/components/prep/prepDataHelper";
 import { TeacherPrepDetailSection } from "@/components/prep/TeacherPrepDetailSection";
 import { getLineOrderUrl } from "@/lib/line";
 
@@ -157,6 +157,7 @@ const PREP_TIERS = [
     badgeClass: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
     borderClass: "border-emerald-500/30 hover:border-emerald-400",
     isPopular: false,
+    productData: null,
     features: [
       "รับโจทย์ Daily Quiz ส่งตรงเข้า Telegram วันละ 1 ข้อ (กดทำ Poll เช็กคำตอบได้ทันที)",
       "สรุปเก็งจุดออกสอบซ้ำ (High-Yield One-Page Summary) รายสัปดาห์",
@@ -167,22 +168,43 @@ const PREP_TIERS = [
     isVip: false,
   },
   {
-    id: "vip-pass",
-    name: "AiAon Prep VIP Exam Pass",
-    price: "390 ฿",
+    id: "bot-only-pass",
+    name: "AiAon Prep VIP Bot Pass (เฉพาะกลุ่ม & บอท AI)",
+    price: "290 ฿",
     period: "จ่ายครั้งเดียว • ดูแลยาวจนกว่าจะสอบบรรจุติด!",
-    badge: "👑 แนะนำ • คุ้มที่สุดสำหรับคนจะสอบติดรอบนี้",
-    badgeClass: "bg-gradient-to-r from-amber-400 to-orange-500 text-zinc-950 border-amber-400",
-    borderClass: "border-amber-500/60 shadow-[0_0_45px_rgba(245,158,11,0.2)] ring-1 ring-amber-400/40 lg:scale-105",
-    isPopular: true,
+    badge: "🎯 สั่งซื้อแยก • เน้นฝึกทำข้อสอบ",
+    badgeClass: "bg-cyan-500/20 text-cyan-300 border-cyan-400 font-bold",
+    borderClass: "border-cyan-500/40 hover:border-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.15)]",
+    isPopular: false,
+    productData: PREP_BOT_ONLY_DATA,
     features: [
       "🤖 บอทส่งข้อสอบ Telegram Daily Quiz ครบ 3 รอบทุกวัน (07:30 / 12:15 / 20:00 น.) พร้อม AI อธิบายเฉลยละเอียดทุกตัวเลือก",
-      "📚 คลังข้อสอบคู่ขนาน (Original High-Yield Simulated Exam) สังเคราะห์จากจุดออกสอบจริง ปลอดลิขสิทธิ์ 100%",
-      "🎵 คลังเพลงช่วยจำกฎหมายครู & วิชาการศึกษา (Full MP3 + เนื้อร้องไฮไลต์) ฟังจำง่ายไม่ต้องท่องจำแบบเครียดๆ",
+      "📚 คลังข้อสอบคู่ขนานจำลองกว่า 1,500 ข้อ สังเคราะห์จากจุดออกสอบจริง ปลอดลิขสิทธิ์ 100%",
       "🎙️ ระบบ AI ซ้อมสัมภาษณ์ ภาค ค: เก็งคำถามกรรมการ + วิเคราะห์จุดแข็งในการตอบรายบุคคล",
       "🎁 โบนัสเมื่อสอบติด: รับฟรี E-Book [EB30] คู่มือครูบรรจุใหม่ + ส่วนลด 50% ระบบแฟ้มประเมินครูผู้ช่วย [AONA08]!",
+      "💡 ข้อสังเกต: แพ็กเกจนี้ไม่รวมเพลงช่วยจำ หากต้องการฟังเพลงสามารถซื้อแยกได้ที่ Music Store หรือเลือกบันเดิลด้านขวา",
     ],
-    ctaText: "สมัครเข้ากลุ่ม VIP Exam Pass (390 ฿)",
+    ctaText: "สมัครเฉพาะกลุ่ม VIP บอท AI (290 ฿)",
+    isVip: true,
+  },
+  {
+    id: "vip-bundle-pass",
+    name: "All-in-One VIP + Music Bundle (สุดคุ้ม)",
+    price: "390 ฿",
+    period: "จ่ายครั้งเดียว • กลุ่มติว + เพลง MP3 ตลอดชีพ",
+    badge: "👑 แนะนำอันดับ 1 • ประหยัด 99 ฿",
+    badgeClass: "bg-gradient-to-r from-amber-400 to-orange-500 text-zinc-950 border-amber-400 font-black",
+    borderClass: "border-amber-500/70 shadow-[0_0_45px_rgba(245,158,11,0.25)] ring-2 ring-amber-400/40 lg:scale-105",
+    isPopular: true,
+    productData: PREP_VIP_DATA,
+    features: [
+      "🤖 รวมสิทธิ์กลุ่ม Telegram บอท AI ติวสอบ Daily Quiz 3 เวลา + เฉลยละเอียดทุกข้อตลอดชีพ",
+      "🎵 แถมฟรีทันที! อัลบั้มเพลงช่วยจำกฎหมายครู Vol.1 รวม 10 เพลงเต็ม MP3 + สมุดเนื้อร้อง PDF (มูลค่า 199 ฿)",
+      "📚 คลังข้อสอบคู่ขนาน 1,500 ข้อ + ไฟล์ข้อสอบย้อนหลัง 5 ปีครบทุกวิชา",
+      "🎙️ ระบบ AI ซ้อมสัมภาษณ์ ภาค ค รายบุคคล",
+      "🎁 ฟรี E-Book [EB30] คู่มือครูบรรจุใหม่ + ส่วนลด 50% ระบบแฟ้ม [AONA08]",
+    ],
+    ctaText: "สมัคร All-in-One Bundle (390 ฿)",
     isVip: true,
   },
 ];
@@ -198,6 +220,7 @@ export function TeacherPrepView() {
 
   // 7-Pillars Detail Modal State
   const [isDetailModalOpen, setIsDetailModalOpen] = useState<boolean>(false);
+  const [selectedDetailProduct, setSelectedDetailProduct] = useState<PrepVipProduct>(PREP_VIP_DATA);
   const { openLineModal } = useLineModal();
 
   const currentQuiz = SAMPLE_QUIZZES[activeQuizIdx];
@@ -287,13 +310,14 @@ export function TeacherPrepView() {
     return getLineOrderUrl(msg);
   };
 
-  const handleVipOrderClick = (e: React.MouseEvent) => {
+  const handleVipOrderClick = (e: React.MouseEvent, product?: PrepVipProduct) => {
+    const targetProduct = product || PREP_VIP_DATA;
     if (!isMobileDevice()) {
       e.preventDefault();
       openLineModal({
-        title: "AiAon Prep VIP Exam Pass (390 ฿)",
-        price: 390,
-        message: PREP_VIP_DATA.lineOrderMsg,
+        title: targetProduct.title,
+        price: targetProduct.price,
+        message: targetProduct.lineOrderMsg,
       });
     }
   };
@@ -695,28 +719,31 @@ export function TeacherPrepView() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
             {PREP_TIERS.map((tier) => (
               <div
                 key={tier.id}
-                className={`rounded-3xl p-7 sm:p-9 bg-slate-900/80 backdrop-blur-xl border ${tier.borderClass} flex flex-col justify-between space-y-6 transition-all`}
+                className={`rounded-3xl p-6 sm:p-8 bg-slate-900/80 backdrop-blur-xl border ${tier.borderClass} flex flex-col justify-between space-y-6 transition-all`}
               >
-                <div className="space-y-5">
+                <div className="space-y-4">
                   <div className="flex items-center justify-between gap-2">
                     <span className={`text-xs font-bold px-3 py-1 rounded-full border ${tier.badgeClass}`}>
                       {tier.badge}
                     </span>
                   </div>
 
-                  {/* ──────────────── 3D Golden Ticket Mockup for VIP Tier ──────────────── */}
+                  {/* ──────────────── 3D Golden Ticket Mockup for VIP Tiers ──────────────── */}
                   {tier.isVip && (
                     <div
-                      onClick={() => setIsDetailModalOpen(true)}
-                      className="relative w-full my-3 cursor-pointer flex justify-center py-2"
+                      onClick={() => {
+                        if (tier.productData) setSelectedDetailProduct(tier.productData);
+                        setIsDetailModalOpen(true);
+                      }}
+                      className="relative w-full my-2 cursor-pointer flex justify-center py-2"
                       title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของตั๋วทองคำนี้"
                     >
                       <GoldenTicketMockup
-                        serialNo="VIP-2026-TEACHER-PASS"
+                        serialNo={tier.id === "bot-only-pass" ? "VIP-BOT-ONLY-PASS" : "VIP-2026-TEACHER-PASS"}
                         size="md"
                         isInteractive={true}
                       />
@@ -725,8 +752,13 @@ export function TeacherPrepView() {
 
                   <div>
                     <h3
-                      onClick={() => tier.isVip && setIsDetailModalOpen(true)}
-                      className={`text-2xl font-extrabold text-white ${
+                      onClick={() => {
+                        if (tier.productData) {
+                          setSelectedDetailProduct(tier.productData);
+                          setIsDetailModalOpen(true);
+                        }
+                      }}
+                      className={`text-xl sm:text-2xl font-extrabold text-white ${
                         tier.isVip ? "cursor-pointer hover:text-amber-300 transition-colors" : ""
                       }`}
                     >
@@ -740,9 +772,9 @@ export function TeacherPrepView() {
                     </div>
                   </div>
 
-                  <ul className="space-y-3 pt-2 border-t border-white/10">
+                  <ul className="space-y-2.5 pt-2 border-t border-white/10">
                     {tier.features.map((feat, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-white/85 leading-relaxed">
+                      <li key={fIdx} className="flex items-start gap-2.5 text-xs text-white/85 leading-relaxed">
                         <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </li>
@@ -750,30 +782,37 @@ export function TeacherPrepView() {
                   </ul>
                 </div>
 
-                {tier.isVip ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                {tier.isVip && tier.productData ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
                     <button
                       type="button"
-                      onClick={() => setIsDetailModalOpen(true)}
-                      className="w-full py-4 px-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-white/20 transition-all cursor-pointer"
+                      onClick={() => {
+                        if (tier.productData) setSelectedDetailProduct(tier.productData);
+                        setIsDetailModalOpen(true);
+                      }}
+                      className="w-full py-3.5 px-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs flex items-center justify-center gap-1.5 border border-white/20 transition-all cursor-pointer"
                     >
-                      <BookOpen className="w-4 h-4 text-amber-400" />
+                      <BookOpen className="w-3.5 h-3.5 text-amber-400" />
                       <span>เจาะลึก 7 ข้อ</span>
                     </button>
 
                     <a
-                      href={getLineOrderUrl(PREP_VIP_DATA.lineOrderMsg)}
-                      onClick={handleVipOrderClick}
+                      href={getLineOrderUrl(tier.productData.lineOrderMsg)}
+                      onClick={(e) => handleVipOrderClick(e, tier.productData!)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      data-line-title={PREP_VIP_DATA.title}
-                      data-line-price={PREP_VIP_DATA.price}
-                      data-line-code={PREP_VIP_DATA.id}
-                      className="w-full py-4 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 shadow-[0_0_30px_rgba(245,158,11,0.35)]"
+                      data-line-title={tier.productData.title}
+                      data-line-price={tier.productData.price}
+                      data-line-code={tier.productData.id}
+                      className={`w-full py-3.5 px-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg transition-all hover:scale-[1.02] cursor-pointer ${
+                        tier.id === "bot-only-pass"
+                          ? "bg-gradient-to-r from-cyan-400 to-teal-500 text-slate-950 shadow-[0_0_25px_rgba(6,182,212,0.3)]"
+                          : "bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 shadow-[0_0_30px_rgba(245,158,11,0.35)]"
+                      }`}
                     >
-                      <MessageCircle className="w-4 h-4 fill-slate-950" />
-                      <span>สมัครเข้ากลุ่ม VIP</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <MessageCircle className="w-3.5 h-3.5 fill-slate-950" />
+                      <span>{tier.id === "bot-only-pass" ? "สมัครเฉพาะบอท" : "สมัครบันเดิลคุ้มสุด"}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </a>
                   </div>
                 ) : (
@@ -781,11 +820,11 @@ export function TeacherPrepView() {
                     href={getLinePrepUrl(false)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-4 px-6 rounded-2xl font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-lg transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-emerald-500 to-teal-600 text-zinc-950"
+                    className="w-full py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-emerald-500 to-teal-600 text-zinc-950"
                   >
-                    <Send className="w-4 h-4" />
+                    <Send className="w-3.5 h-3.5" />
                     <span>{tier.ctaText}</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                 )}
               </div>
@@ -810,7 +849,7 @@ export function TeacherPrepView() {
               <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-slate-950/90 backdrop-blur-sm border-b border-white/10 mb-6">
                 <span className="text-xs sm:text-sm font-bold text-amber-300 flex items-center gap-2">
                   <Crown className="w-4 h-4 text-amber-400" />
-                  <span>เจาะลึก 7 องค์ประกอบหลัก • AiAon Prep VIP Exam Pass</span>
+                  <span>เจาะลึก 7 องค์ประกอบหลัก • {selectedDetailProduct.title}</span>
                 </span>
                 <button
                   onClick={() => setIsDetailModalOpen(false)}
@@ -821,7 +860,7 @@ export function TeacherPrepView() {
               </div>
 
               <TeacherPrepDetailSection
-                product={PREP_VIP_DATA}
+                product={selectedDetailProduct}
                 onClose={() => setIsDetailModalOpen(false)}
               />
             </motion.div>
