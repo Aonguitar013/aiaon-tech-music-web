@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>AiAon Tech - Official LINE OA Rich Menu (2500x1686)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700;800&family=Prompt:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    width: 2500px;
+    height: 1686px;
+    background: #060913;
+    font-family: 'Prompt', sans-serif;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Deep Space Cyber Matrix Background */
+  .bg-canvas {
+    position: absolute;
+    inset: 0;
+    width: 2500px;
+    height: 1686px;
+    background: 
+      radial-gradient(circle at 18% 22%, rgba(6, 199, 85, 0.14) 0%, transparent 40%),
+      radial-gradient(circle at 50% 15%, rgba(0, 240, 255, 0.16) 0%, transparent 45%),
+      radial-gradient(circle at 82% 22%, rgba(245, 158, 11, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 18% 78%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 50% 85%, rgba(56, 189, 248, 0.15) 0%, transparent 42%),
+      radial-gradient(circle at 82% 78%, rgba(244, 63, 94, 0.16) 0%, transparent 40%),
+      linear-gradient(180deg, #040711 0%, #080d1e 50%, #03050c 100%);
+    z-index: 1;
+  }
+
+  /* Cyber Grid & Circuit Overlay */
+  .grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Subdued Circuit lines and audio waveform */
+  .circuit-svg {
+    position: absolute;
+    inset: 0;
+    width: 2500px;
+    height: 1686px;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.35;
+  }
+
+  /* Top & Bottom Ambient Tech Bar */
+  .top-branding-bar {
+    position: absolute;
+    top: 14px;
+    left: 45px;
+    right: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+    font-family: 'Chakra Petch', monospace;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+  }
+
+  .brand-logo-tag {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #00F0FF;
+    font-weight: 800;
+  }
+
+  /* Main 6-Tile Grid (2 rows x 3 columns) */
+  .rich-grid {
+    position: relative;
+    z-index: 5;
+    width: 2420px;
+    height: 1606px;
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 24px;
+    padding: 10px;
+  }
+
+  /* Individual Cyber Glass Card */
+  .card {
+    position: relative;
+    border-radius: 42px;
+    background: linear-gradient(135deg, rgba(13, 22, 42, 0.82) 0%, rgba(7, 12, 24, 0.94) 100%);
+    border: 3px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 30px;
+    text-align: center;
+    overflow: hidden;
+    backdrop-filter: blur(25px);
+    transition: all 0.3s ease;
+  }
+
+  /* Inner Glass Sheen Reflection */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 48%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 39px 39px 100px 100px;
+    pointer-events: none;
+  }
+
+  /* Corner Tech Accents */
+  .card .corner-tl {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 18px;
+    height: 18px;
+    border-top: 3px solid;
+    border-left: 3px solid;
+    border-radius: 4px 0 0 0;
+    opacity: 0.7;
+  }
+  .card .corner-br {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    width: 18px;
+    height: 18px;
+    border-bottom: 3px solid;
+    border-right: 3px solid;
+    border-radius: 0 0 4px 0;
+    opacity: 0.7;
+  }
+
+  /* Micro Tech Grid watermark inside card */
+  .card .card-circuits {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  /* Card Themes */
+  /* 1. FREEBIES - Emerald Green */
+  .card-freebies {
+    border-color: rgba(6, 199, 85, 0.75);
+    box-shadow: 
+      0 0 45px rgba(6, 199, 85, 0.25),
+      inset 0 0 35px rgba(6, 199, 85, 0.12);
+  }
+  .card-freebies .corner-tl, .card-freebies .corner-br { border-color: #06C755; }
+  .card-freebies .icon-glow { filter: drop-shadow(0 0 24px rgba(6, 199, 85, 0.75)); }
+  .card-freebies .pill {
+    background: rgba(6, 199, 85, 0.15);
+    border: 2px solid rgba(6, 199, 85, 0.5);
+    color: #4ade80;
+    box-shadow: 0 0 16px rgba(6, 199, 85, 0.3);
+  }
+  .card-freebies .title { color: #ffffff; text-shadow: 0 0 20px rgba(6, 199, 85, 0.6); }
+
+  /* 2. VAULT - Cyan */
+  .card-vault {
+    border-color: rgba(0, 240, 255, 0.75);
+    box-shadow: 
+      0 0 45px rgba(0, 240, 255, 0.25),
+      inset 0 0 35px rgba(0, 240, 255, 0.12);
+  }
+  .card-vault .corner-tl, .card-vault .corner-br { border-color: #00F0FF; }
+  .card-vault .icon-glow { filter: drop-shadow(0 0 24px rgba(0, 240, 255, 0.8)); }
+  .card-vault .pill {
+    background: rgba(0, 240, 255, 0.15);
+    border: 2px solid rgba(0, 240, 255, 0.5);
+    color: #67e8f9;
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.3);
+  }
+  .card-vault .title { color: #ffffff; text-shadow: 0 0 20px rgba(0, 240, 255, 0.6); }
+
+  /* 3. PREP & MUSIC - Amber Gold */
+  .card-prep {
+    border-color: rgba(245, 158, 11, 0.8);
+    box-shadow: 
+      0 0 45px rgba(245, 158, 11, 0.28),
+      inset 0 0 35px rgba(245, 158, 11, 0.12);
+  }
+  .card-prep .corner-tl, .card-prep .corner-br { border-color: #F59E0B; }
+  .card-prep .icon-glow { filter: drop-shadow(0 0 24px rgba(245, 158, 11, 0.85)); }
+  .card-prep .pill {
+    background: rgba(245, 158, 11, 0.18);
+    border: 2px solid rgba(245, 158, 11, 0.55);
+    color: #fcd34d;
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.35);
+  }
+  .card-prep .title { color: #ffffff; text-shadow: 0 0 20px rgba(245, 158, 11, 0.6); }
+
+  /* 4. ACADEMY - Electric Purple */
+  .card-academy {
+    border-color: rgba(168, 85, 247, 0.8);
+    box-shadow: 
+      0 0 45px rgba(168, 85, 247, 0.28),
+      inset 0 0 35px rgba(168, 85, 247, 0.12);
+  }
+  .card-academy .corner-tl, .card-academy .corner-br { border-color: #A855F7; }
+  .card-academy .icon-glow { filter: drop-shadow(0 0 24px rgba(168, 85, 247, 0.85)); }
+  .card-academy .pill {
+    background: rgba(168, 85, 247, 0.18);
+    border: 2px solid rgba(168, 85, 247, 0.55);
+    color: #d8b4fe;
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.35);
+  }
+  .card-academy .title { color: #ffffff; text-shadow: 0 0 20px rgba(168, 85, 247, 0.6); }
+
+  /* 5. SERVICES - Sapphire Blue */
+  .card-services {
+    border-color: rgba(56, 189, 248, 0.8);
+    box-shadow: 
+      0 0 45px rgba(56, 189, 248, 0.28),
+      inset 0 0 35px rgba(56, 189, 248, 0.12);
+  }
+  .card-services .corner-tl, .card-services .corner-br { border-color: #38BDF8; }
+  .card-services .icon-glow { filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.85)); }
+  .card-services .pill {
+    background: rgba(56, 189, 248, 0.18);
+    border: 2px solid rgba(56, 189, 248, 0.55);
+    color: #7dd3fc;
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+  }
+  .card-services .title { color: #ffffff; text-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
+
+  /* 6. CONTACT - Neon Pink */
+  .card-contact {
+    border-color: rgba(244, 63, 94, 0.85);
+    box-shadow: 
+      0 0 45px rgba(244, 63, 94, 0.28),
+      inset 0 0 35px rgba(244, 63, 94, 0.12);
+  }
+  .card-contact .corner-tl, .card-contact .corner-br { border-color: #F43F5E; }
+  .card-contact .icon-glow { filter: drop-shadow(0 0 24px rgba(244, 63, 94, 0.85)); }
+  .card-contact .pill {
+    background: rgba(244, 63, 94, 0.18);
+    border: 2px solid rgba(244, 63, 94, 0.55);
+    color: #fda4af;
+    box-shadow: 0 0 16px rgba(244, 63, 94, 0.35);
+  }
+  .card-contact .title { color: #ffffff; text-shadow: 0 0 20px rgba(244, 63, 94, 0.6); }
+
+  /* Icon Container */
+  .icon-wrapper {
+    width: 220px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 4;
+  }
+
+  .icon-wrapper svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Titles & Typography */
+  .title {
+    font-family: 'Chakra Petch', 'Prompt', sans-serif;
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 4;
+  }
+
+  .subtitle {
+    font-size: 38px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 22px;
+    line-height: 1.25;
+    position: relative;
+    z-index: 4;
+  }
+
+  /* Micro Tag / Pill */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 26px;
+    border-radius: 999px;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 4;
+  }
+
+  .pill-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: currentColor;
+    box-shadow: 0 0 8px currentColor;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Background Ambience -->
+  <div class="bg-canvas"></div>
+  <div class="grid-pattern"></div>
+
+  <!-- Decorative Cyber Circuit Overlay SVG -->
+  <svg class="circuit-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2500 1686">
+    <defs>
+      <linearGradient id="cyanLine" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#00F0FF" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#00F0FF" stop-opacity="0.05"/>
+      </linearGradient>
+      <linearGradient id="greenLine" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#06C755" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#06C755" stop-opacity="0.05"/>
+      </linearGradient>
+      <linearGradient id="purpleLine" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#A855F7" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#A855F7" stop-opacity="0.05"/>
+      </linearGradient>
+    </defs>
+    
+    <!-- Outer Border Glow Lines -->
+    <path d="M 40 40 L 2460 40 L 2460 1646 L 40 1646 Z" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+    <path d="M 20 843 L 2480 843" fill="none" stroke="rgba(255,255,255,0.04)" stroke-dasharray="10 15" stroke-width="2"/>
+    <path d="M 833 20 L 833 1666" fill="none" stroke="rgba(255,255,255,0.04)" stroke-dasharray="10 15" stroke-width="2"/>
+    <path d="M 1667 20 L 1667 1666" fill="none" stroke="rgba(255,255,255,0.04)" stroke-dasharray="10 15" stroke-width="2"/>
+
+    <!-- Subtle Tech Nodes -->
+    <circle cx="833" cy="843" r="6" fill="#00F0FF" opacity="0.6"/>
+    <circle cx="1667" cy="843" r="6" fill="#A855F7" opacity="0.6"/>
+  </svg>
+
+  <!-- Top Branding Bar -->
+  <div class="top-branding-bar">
+    <div class="brand-logo-tag">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="2.5">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+        <polyline points="2 17 12 22 22 17"></polyline>
+        <polyline points="2 12 12 17 22 12"></polyline>
+      </svg>
+      <span>AIAON TECH &bull; OFFICIAL HUB</span>
+    </div>
+    <div>WWW.AIAON.TECH &bull; @DEU6776S</div>
+  </div>
+
+  <!-- 6-Tile Master Grid -->
+  <div class="rich-grid">
+
+    <!-- ── TILE 1: FREEBIES (แจกฟรี / โค้ดชีต) ── -->
+    <div class="card card-freebies">
+      <div class="corner-tl"></div>
+      <div class="corner-br"></div>
+      <div class="card-circuits"></div>
+
+      <div class="icon-wrapper icon-glow">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Neon 3D Gift Box -->
+          <rect x="20" y="42" width="60" height="46" rx="8" fill="rgba(6,199,85,0.15)" stroke="#06C755" stroke-width="4"/>
+          <!-- Lid -->
+          <rect x="15" y="32" width="70" height="15" rx="5" fill="rgba(6,199,85,0.25)" stroke="#34D399" stroke-width="4"/>
+          <!-- Vertical Ribbon -->
+          <rect x="44" y="32" width="12" height="56" fill="#34D399"/>
+          <!-- Horizontal Ribbon -->
+          <rect x="20" y="60" width="60" height="8" fill="#059669"/>
+          <!-- Bow Loops -->
+          <path d="M 50 32 C 40 16, 22 18, 32 32 Z" fill="rgba(52,211,153,0.3)" stroke="#34D399" stroke-width="3.5"/>
+          <path d="M 50 32 C 60 16, 78 18, 68 32 Z" fill="rgba(52,211,153,0.3)" stroke="#34D399" stroke-width="3.5"/>
+          <!-- Sparkles -->
+          <polygon points="18,22 21,14 24,22 32,25 24,28 21,36 18,28 10,25" fill="#FDE047"/>
+          <polygon points="82,24 84,18 86,24 92,26 86,28 84,34 82,28 76,26" fill="#4ADE80"/>
+        </svg>
+      </div>
+
+      <h2 class="title">FREEBIES</h2>
+      <p class="subtitle">แจกฟรี &bull; โค้ดชีต</p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        <span>ดาวน์โหลดฟรี 0 บาท</span>
+      </div>
+    </div>
+
+    <!-- ── TILE 2: DIGITAL VAULT (คลังระบบสำเร็จรูป) ── -->
+    <div class="card card-vault">
+      <div class="corner-tl"></div>
+      <div class="corner-br"></div>
+      <div class="card-circuits"></div>
+
+      <div class="icon-wrapper icon-glow">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cyber Safe / Storefront Vault -->
+          <rect x="16" y="24" width="68" height="64" rx="10" fill="rgba(0,240,255,0.12)" stroke="#00F0FF" stroke-width="4"/>
+          <!-- Vault Door Circle -->
+          <circle cx="50" cy="56" r="22" stroke="#38BDF8" stroke-width="4" fill="rgba(2,132,199,0.2)"/>
+          <circle cx="50" cy="56" r="14" stroke="#00F0FF" stroke-width="3" stroke-dasharray="6 4"/>
+          <!-- Vault Handle / Wheel -->
+          <circle cx="50" cy="56" r="5" fill="#00F0FF"/>
+          <line x1="50" y1="36" x2="50" y2="44" stroke="#00F0FF" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="50" y1="68" x2="50" y2="76" stroke="#00F0FF" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="30" y1="56" x2="38" y2="56" stroke="#00F0FF" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="62" y1="56" x2="70" y2="56" stroke="#00F0FF" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Storefront Roof Awning -->
+          <path d="M 12 24 L 20 12 L 80 12 L 88 24 Z" fill="rgba(0,240,255,0.25)" stroke="#00F0FF" stroke-width="3.5"/>
+          <line x1="35" y1="12" x2="31" y2="24" stroke="#38BDF8" stroke-width="2.5"/>
+          <line x1="50" y1="12" x2="50" y2="24" stroke="#38BDF8" stroke-width="2.5"/>
+          <line x1="65" y1="12" x2="69" y2="24" stroke="#38BDF8" stroke-width="2.5"/>
+        </svg>
+      </div>
+
+      <h2 class="title">DIGITAL VAULT</h2>
+      <p class="subtitle">คลัง 20+ ระบบงาน</p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        <span>ระบบโรงเรียน &bull; SMEs</span>
+      </div>
+    </div>
+
+    <!-- ── TILE 3: PREP & MUSIC (บอทติวสอบ & เพลงช่วยจำ) ── -->
+    <div class="card card-prep">
+      <div class="corner-tl"></div>
+      <div class="corner-br"></div>
+      <div class="card-circuits"></div>
+
+      <div class="icon-wrapper icon-glow">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- AI Robot Head with Golden Headphones & Music Note -->
+          <rect x="26" y="32" width="48" height="42" rx="12" fill="rgba(245,158,11,0.18)" stroke="#F59E0B" stroke-width="4"/>
+          <!-- Robot Eyes (Glowing LED) -->
+          <circle cx="40" cy="50" r="5" fill="#FDE047"/>
+          <circle cx="60" cy="50" r="5" fill="#FDE047"/>
+          <!-- Robot Mouth / Waveform Line -->
+          <path d="M 38 63 Q 50 68 62 63" stroke="#F59E0B" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Antenna -->
+          <line x1="50" y1="32" x2="50" y2="20" stroke="#F59E0B" stroke-width="3.5"/>
+          <circle cx="50" cy="18" r="4.5" fill="#FDE047"/>
+          <!-- Headphones -->
+          <path d="M 22 52 C 22 26, 78 26, 78 52" fill="none" stroke="#F59E0B" stroke-width="4.5" stroke-linecap="round"/>
+          <rect x="18" y="44" width="8" height="18" rx="4" fill="#F59E0B"/>
+          <rect x="74" y="44" width="8" height="18" rx="4" fill="#F59E0B"/>
+          <!-- Floating Music Note -->
+          <path d="M 76 22 L 86 18 L 86 32 M 76 22 L 76 36 M 76 36 A 4 4 0 1 1 70 34 M 86 32 A 4 4 0 1 1 80 30" stroke="#FDE047" stroke-width="3" fill="#FDE047" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <h2 class="title">PREP & MUSIC</h2>
+      <p class="subtitle">บอทติวสอบ &bull; เพลงจำ</p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        <span>VIP Telegram 290 ฿</span>
+      </div>
+    </div>
+
+    <!-- ── TILE 4: ACADEMY (คอร์สเรียนออนไลน์) ── -->
+    <div class="card card-academy">
+      <div class="corner-tl"></div>
+      <div class="corner-br"></div>
+      <div class="card-circuits"></div>
+
+      <div class="icon-wrapper icon-glow">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cyber Graduation Cap & Hologram Screen -->
+          <polygon points="50,16 88,32 50,48 12,32" fill="rgba(168,85,247,0.25)" stroke="#A855F7" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M 26 40 L 26 62 C 26 72, 74 72, 74 62 L 74 40" fill="none" stroke="#C084FC" stroke-width="4" stroke-linecap="round"/>
+          <!-- Tassel -->
+          <path d="M 82 35 L 82 58 A 3 3 0 1 1 78 58 L 78 37" fill="#E879F9" stroke="#E879F9" stroke-width="1.5"/>
+          <!-- Laptop / Tablet Base -->
+          <rect x="18" y="74" width="64" height="6" rx="3" fill="#A855F7"/>
+          <!-- Video Play Icon Floating -->
+          <circle cx="50" cy="55" r="11" fill="rgba(168,85,247,0.4)" stroke="#E879F9" stroke-width="2.5"/>
+          <polygon points="47,50 56,55 47,60" fill="#ffffff"/>
+        </svg>
+      </div>
+
+      <h2 class="title">ACADEMY</h2>
+      <p class="subtitle">คอร์สเรียนออนไลน์</p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        <span>27 คอร์ส Tech & AI</span>
+      </div>
+    </div>
+
+    <!-- ── TILE 5: SERVICES (รับทำระบบ & ดูแล AI) ── -->
+    <div class="card card-services">
+      <div class="corner-tl"></div>
+      <div class="corner-br"></div>
+      <div class="card-circuits"></div>
+
+      <div class="icon-wrapper icon-glow">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cyber Shield & Automation Gears -->
+          <path d="M 50 14 Q 78 20 78 44 Q 78 74 50 86 Q 22 74 22 44 Q 22 20 50 14 Z" fill="rgba(56,189,248,0.18)" stroke="#38BDF8" stroke-width="4" stroke-linejoin="round"/>
+          <!-- Center AI Code Sentinel / Gear -->
+          <circle cx="50" cy="48" r="16" stroke="#60A5FA" stroke-width="3" stroke-dasharray="5 3"/>
+          <circle cx="50" cy="48" r="7" fill="#38BDF8"/>
+          <!-- Code Brackets inside -->
+          <path d="M 38 42 L 34 48 L 38 54" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 62 42 L 66 48 L 62 54" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="53" y1="40" x2="47" y2="56" stroke="#93C5FD" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Radiating Nodes -->
+          <circle cx="50" cy="24" r="3" fill="#38BDF8"/>
+          <circle cx="70" cy="46" r="3" fill="#38BDF8"/>
+          <circle cx="30" cy="46" r="3" fill="#38BDF8"/>
+        </svg>
+      </div>
+
+      <h2 class="title">SERVICES</h2>
+      <p class="subtitle">รับทำระบบ &bull; ดูแล AI</p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        <span>ปรับแต่งตามบริบท 100%</span>
+      </div>
+    </div>
+
+    <!-- ── TILE 6: CONTACT (คุยกับครูอ้น / ปรึกษา) ── -->
+    <div class="card card-contact">
+      <div class="corner-tl"></div>
+      <div class="corner-br"></div>
+      <div class="card-circuits"></div>
+
+      <div class="icon-wrapper icon-glow">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Kru Aon Support Avatar with Headset & Speech Bubble -->
+          <!-- Head / Hair -->
+          <circle cx="50" cy="38" r="16" fill="rgba(244,63,94,0.25)" stroke="#F43F5E" stroke-width="3.5"/>
+          <!-- Body / Shoulders -->
+          <path d="M 28 80 C 28 64, 38 58, 50 58 C 62 58, 72 64, 72 80 Z" fill="rgba(244,63,94,0.2)" stroke="#FB7185" stroke-width="3.5"/>
+          <!-- Tie / Collar -->
+          <polygon points="50,60 46,74 50,78 54,74" fill="#F43F5E"/>
+          <!-- Headset -->
+          <path d="M 32 40 C 32 24, 68 24, 68 40" fill="none" stroke="#F43F5E" stroke-width="4" stroke-linecap="round"/>
+          <rect x="29" y="34" width="6" height="12" rx="3" fill="#FB7185"/>
+          <rect x="65" y="34" width="6" height="12" rx="3" fill="#FB7185"/>
+          <path d="M 68 44 L 62 50 L 54 50" fill="none" stroke="#F43F5E" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="53" cy="50" r="2.5" fill="#FDA4AF"/>
+          <!-- Speech Bubble with Heart / Check -->
+          <path d="M 72 16 L 86 16 C 90 16, 92 18, 92 22 L 92 32 C 92 36, 90 38, 86 38 L 80 38 L 76 44 L 76 38 L 72 38 C 68 38, 66 36, 66 32 L 66 22 C 66 18, 68 16, 72 16 Z" fill="#F43F5E" stroke="#ffffff" stroke-width="2"/>
+          <path d="M 75 27 L 78 30 L 85 23" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <h2 class="title">CONTACT</h2>
+      <p class="subtitle">คุยกับครูอ้น &bull; แจ้งสลิป</p>
+      <div class="pill">
+        <span class="pill-dot"></span>
+        <span>สอบถามด่วน &bull; ดูแลเอง</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
