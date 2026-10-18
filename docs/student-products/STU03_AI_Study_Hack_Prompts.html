@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STU03: คัมภีร์ 50+ AI Prompts ลับสำหรับนักเรียน & นักศึกษา | iAon Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Prompt:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            prompt: ['Prompt', 'sans-serif'],
+            mono: ['Fira Code', 'monospace']
+          },
+          colors: {
+            cyber: {
+              bg: '#050814',
+              card: '#0b1226',
+              cyan: '#00f2fe',
+              purple: '#9d4edd',
+              pink: '#ff007f',
+              amber: '#ffb703',
+              emerald: '#10b981'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #111827 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-card {
+        background: #f9fafb !important;
+        border: 1px solid #e5e7eb !important;
+        color: #111827 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      .print-code {
+        background: #f3f4f6 !important;
+        color: #111827 !important;
+        border: 1px solid #d1d5db !important;
+      }
+      .print-title {
+        color: #1e3a8a !important;
+        -webkit-text-fill-color: initial !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-cyber-bg text-slate-100 font-prompt min-h-screen selection:bg-cyan-500/30 selection:text-cyan-300">
+
+  <!-- Top Action Bar -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-cyber-bg/85 border-b border-cyan-500/20 px-4 py-3 no-print">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40 font-mono font-bold text-xs">
+          STU03
+        </span>
+        <h1 class="text-sm sm:text-base font-extrabold text-white truncate">
+          คัมภีร์ 50+ AI Prompts ลับสำหรับนักเรียน & นักศึกษา
+        </h1>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-[0_0_15px_rgba(0,242,254,0.2)]">
+          🖨️ <span>สั่งพิมพ์ / บันทึกเป็น PDF</span>
+        </button>
+        <a href="https://www.aiaon.tech" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/40 text-xs font-bold transition-all flex items-center gap-1.5">
+          🌐 <span>aiaon.tech</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="max-w-5xl mx-auto px-4 py-10 sm:py-14 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold mb-4 shadow-[0_0_20px_rgba(0,242,254,0.25)]">
+      ⚡ AI Study Secret Vault • Updated 2026
+    </div>
+    <h2 class="print-title text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 mb-4 leading-tight">
+      คัมภีร์ 50+ AI Prompts ลับ<br class="hidden sm:block"/>ช่วยปั่นงาน สรุปสอบ & แปลเปเปอร์วิจัย
+    </h2>
+    <p class="text-white/70 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+      ชุดคำสั่งภาษาไทยระดับมืออาชีพที่ออกแบบมาสำหรับ <span class="text-cyan-400 font-semibold">ChatGPT, Google Gemini และ Claude</span> ก๊อปปี้ไปวางแล้วแทนที่คำในวงเล็บ <code class="text-amber-300 font-mono">[...]</code> ใช้งานได้ทันทีใน 3 วินาที!
+    </p>
+
+    <!-- Navigation Pills -->
+    <div class="flex flex-wrap justify-center gap-2 mt-8 no-print">
+      <a href="#cat-1" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/80 border border-white/10 text-xs font-medium transition-all">📚 สรุปชีท & เก็งสอบ</a>
+      <a href="#cat-2" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/80 border border-white/10 text-xs font-medium transition-all">📝 ปั่นรายงาน 5 บท</a>
+      <a href="#cat-3" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/80 border border-white/10 text-xs font-medium transition-all">🎓 สรุปวิจัย ป.ตรี</a>
+      <a href="#cat-4" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/80 border border-white/10 text-xs font-medium transition-all">🏆 TCAS & สัมภาษณ์</a>
+      <a href="#cat-5" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-white/80 border border-white/10 text-xs font-medium transition-all">💻 วิทย์-คณิต & โค้ด</a>
+    </div>
+  </div>
+
+  <!-- Content Container -->
+  <main class="max-w-5xl mx-auto px-4 pb-20 space-y-12">
+
+    <!-- CATEGORY 1 -->
+    <section id="cat-1" class="space-y-5">
+      <div class="border-l-4 border-cyan-400 pl-4 py-1">
+        <span class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">MODULE 01</span>
+        <h3 class="text-xl sm:text-2xl font-black text-white">📚 สรุปชีทเรียน ย่อยเนื้อหา และเก็งข้อสอบ (Exam Prep)</h3>
+      </div>
+
+      <div class="grid gap-4">
+        <!-- Prompt Card 01 -->
+        <div class="print-card bg-cyber-card/90 border border-cyan-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-cyan-400 font-bold">#PROMPT-01 • ย่อชีทเรียน 50 หน้าให้เหลือสรุปหน้าเดียว</span>
+            <button onclick="copyPrompt('p1', this)" class="no-print px-2.5 py-1 rounded bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <p class="text-xs text-white/60 mb-3">ใช้เมื่ออาจารย์แจกสไลด์หรือเอกสารยาวเป็นตับ แต่อ่านไม่ทันต้องการสรุปกระชับจับใจความ</p>
+          <pre id="p1" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-cyan-200/90 whitespace-pre-wrap overflow-x-auto">ทำหน้าที่เป็นติวเตอร์ระดับประเทศ ช่วยสรุปเนื้อหาจากเอกสารด้านล่างนี้ให้กระชับ ครอบคลุม และจำง่ายที่สุด:
+1. แก่นสำคัญ (Core Concept) ไม่เกิน 5 บรรทัด
+2. ประเด็นหลัก 5 หัวข้อ พร้อมคำอธิบายแบบ bullet point สั้นๆ
+3. คำศัพท์เฉพาะทาง (Keywords) ที่ต้องจำเข้าห้องสอบ พร้อมคำแปลเข้าใจง่าย
+4. จุดที่นักเรียนมักเข้าใจผิดหรือข้อควรระวัง (Common Pitfalls)
+[แนบเนื้อหาหรือแปะไฟล์ชีทเรียนที่นี่]</pre>
+        </div>
+
+        <!-- Prompt Card 02 -->
+        <div class="print-card bg-cyber-card/90 border border-cyan-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-cyan-400 font-bold">#PROMPT-02 • Feynman Technique อธิบายให้เด็ก 10 ขวบเข้าใจ</span>
+            <button onclick="copyPrompt('p2', this)" class="no-print px-2.5 py-1 rounded bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <p class="text-xs text-white/60 mb-3">ใช้เมื่อเจอทฤษฎียากๆ ที่อ่านยังไงก็ไม่เข้าใจ ให้ AI อธิบายด้วยการเปรียบเทียบชีวิตจริง</p>
+          <pre id="p2" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-cyan-200/90 whitespace-pre-wrap overflow-x-auto">ทำหน้าที่เป็นนักสื่อสารวิทยาศาสตร์ชั้นยอด ช่วยอธิบายหัวข้อ "[ระบุหัวข้อ เช่น กลไก Photosynthesis / กฎหมายนิติกรรม / การทำงานของ Neural Network]" ให้เข้าใจง่ายที่สุดโดยใช้หลัก Feynman Technique:
+- ห้ามใช้ศัพท์เทคนิคยากๆ โดยไม่อธิบาย
+- ใช้การเปรียบเทียบกับชีวิตประจำวัน (Analogy) ที่เห็นภาพชัดเจน
+- สรุปให้จบภายใน 3 ย่อหน้า</pre>
+        </div>
+
+        <!-- Prompt Card 03 -->
+        <div class="print-card bg-cyber-card/90 border border-cyan-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-cyan-400 font-bold">#PROMPT-03 • แปลงเนื้อหาเป็นตารางเปรียบเทียบ (Matrix Table)</span>
+            <button onclick="copyPrompt('p3', this)" class="no-print px-2.5 py-1 rounded bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <pre id="p3" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-cyan-200/90 whitespace-pre-wrap overflow-x-auto">จากเนื้อหาต่อไปนี้ ช่วยดึงแนวคิด/ทฤษฎี/ตัวละคร/สารเคมี ออกมาเปรียบเทียบในรูปแบบตาราง (Markdown Table):
+- คอลัมน์: [ประเด็นเปรียบเทียบ], [กลุ่ม A], [กลุ่ม B], [ข้อดี], [ข้อจำกัด]
+- เน้นจุดแตกต่างที่มักถูกนำมาออกข้อสอบหลอก
+[แนบเนื้อหาที่นี่]</pre>
+        </div>
+
+        <!-- Prompt Card 04 -->
+        <div class="print-card bg-cyber-card/90 border border-cyan-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-cyan-400 font-bold">#PROMPT-04 • เก็งข้อสอบปรนัย 4 ตัวเลือก พร้อมวิเคราะห์ตัวลวง</span>
+            <button onclick="copyPrompt('p4', this)" class="no-print px-2.5 py-1 rounded bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <pre id="p4" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-cyan-200/90 whitespace-pre-wrap overflow-x-auto">ทำหน้าที่เป็นอาจารย์ผู้ออกข้อสอบระดับประเทศ จากเนื้อหาเรื่อง "[ระบุเนื้อหา/บทเรียน]":
+- สร้างข้อสอบแบบปรนัย (4 ตัวเลือก ก, ข, ค, ง) จำนวน 5 ข้อ
+- มีระดับความยาก: ง่าย 1 ข้อ, ปานกลาง 2 ข้อ, วิเคราะห์ประยุกต์ 2 ข้อ
+- พร้อมเฉลยละเอียด และอธิบายว่าทำไมตัวเลือกที่ผิดถึงผิด (วิเคราะห์ตัวลวง)</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORY 2 -->
+    <section id="cat-2" class="space-y-5">
+      <div class="border-l-4 border-purple-400 pl-4 py-1">
+        <span class="text-xs font-mono text-purple-400 font-bold uppercase tracking-wider">MODULE 02</span>
+        <h3 class="text-xl sm:text-2xl font-black text-white">📝 ช่วยปั่นรายงาน โครงงาน และเรียงความ (Academic Reports)</h3>
+      </div>
+
+      <div class="grid gap-4">
+        <!-- Prompt Card 11 -->
+        <div class="print-card bg-cyber-card/90 border border-purple-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-purple-400 font-bold">#PROMPT-11 • วางโครงร่างรายงาน 5 บทระดับส่งประกวด</span>
+            <button onclick="copyPrompt('p11', this)" class="no-print px-2.5 py-1 rounded bg-purple-500/20 hover:bg-purple-500/40 text-purple-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <pre id="p11" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-purple-200/90 whitespace-pre-wrap overflow-x-auto">ทำหน้าที่เป็นที่ปรึกษาโครงงานวิชาการ ช่วยวางโครงร่างรายงาน 5 บท สำหรับหัวข้อ: "[ระบุชื่อหัวข้อรายงาน/โครงงาน]"
+- บทที่ 1: บทนำ (ความเป็นมา, วัตถุประสงค์ 3 ข้อ, ขอบเขต, ประโยชน์ที่คาดว่าจะได้รับ)
+- บทที่ 2: เอกสารและงานวิจัยที่เกี่ยวข้อง (หัวข้อทฤษฎีที่ต้องค้นคว้า 4 หัวข้อย่อย)
+- บทที่ 3: วิธีการดำเนินงาน (ขั้นตอนการเก็บข้อมูล / เครื่องมือ)
+- บทที่ 4: ผลการดำเนินงาน (หัวข้อที่ควรนำเสนอและแผนผัง/ตาราง)
+- บทที่ 5: สรุปผล อภิปรายผล และข้อเสนอแนะ</pre>
+        </div>
+
+        <!-- Prompt Card 12 -->
+        <div class="print-card bg-cyber-card/90 border border-purple-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-purple-400 font-bold">#PROMPT-12 • ร่างบทนำ (Introduction) ที่น่าติดตามและมีน้ำหนัก</span>
+            <button onclick="copyPrompt('p12', this)" class="no-print px-2.5 py-1 rounded bg-purple-500/20 hover:bg-purple-500/40 text-purple-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <pre id="p12" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-purple-200/90 whitespace-pre-wrap overflow-x-auto">ช่วยเขียน "บทนำ (ความเป็นมาและความสำคัญของปัญหา)" สำหรับรายงานเรื่อง "[ระบุหัวข้อ]":
+- ความยาวประมาณ 1-2 หน้ากระดาษ A4 (3-4 ย่อหน้า)
+- ย่อหน้าที่ 1: กล่าวถึงภาพรวมและบริบทของปัญหาในระดับสากลหรือระดับชาติ
+- ย่อหน้าที่ 2: เจาะจงปัญหาที่เกิดขึ้นจริงและผลกระทบหากไม่ได้รับการแก้ไข
+- ย่อหน้าที่ 3: บทบาทและความสำคัญของรายงานเล่มนี้ในการศึกษาแนวทางแก้ไข
+- ใช้น้ำเสียงเป็นทางการ เชิงวิชาการ ไม่ใช้คำสรรพนามบุรุษที่ 1</pre>
+        </div>
+
+        <!-- Prompt Card 14 -->
+        <div class="print-card bg-cyber-card/90 border border-purple-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-purple-400 font-bold">#PROMPT-14 • ปรับภาษาปากให้เป็นภาษาวิชาการ</span>
+            <button onclick="copyPrompt('p14', this)" class="no-print px-2.5 py-1 rounded bg-purple-500/20 hover:bg-purple-500/40 text-purple-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <pre id="p14" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-purple-200/90 whitespace-pre-wrap overflow-x-auto">ช่วยเกลาข้อความด้านล่างนี้ ให้กลายเป็นภาษาวิชาการ (Academic Tone) ที่สุภาพ ถูกหลักไวยากรณ์ ตัดภาษาพูด คำสแลง และคำซ้ำซากออก โดยยังคงใจความเดิมไว้ครบถ้วน:
+"[แปะข้อความที่เขียนไว้คร่าวๆ]"</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORY 3 -->
+    <section id="cat-3" class="space-y-5">
+      <div class="border-l-4 border-pink-400 pl-4 py-1">
+        <span class="text-xs font-mono text-pink-400 font-bold uppercase tracking-wider">MODULE 03</span>
+        <h3 class="text-xl sm:text-2xl font-black text-white">🎓 ตัวช่วยนักศึกษา ป.ตรี & เปเปอร์วิจัย (University & Research)</h3>
+      </div>
+
+      <div class="grid gap-4">
+        <!-- Prompt Card 21 -->
+        <div class="print-card bg-cyber-card/90 border border-pink-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-pink-400 font-bold">#PROMPT-21 • สรุป Paper วิจัยภาษาอังกฤษ 20 หน้าใน 5 ประเด็น</span>
+            <button onclick="copyPrompt('p21', this)" class="no-print px-2.5 py-1 rounded bg-pink-500/20 hover:bg-pink-500/40 text-pink-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <pre id="p21" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-pink-200/90 whitespace-pre-wrap overflow-x-auto">ทำหน้าที่เป็นนักวิจัยผู้เชี่ยวชาญ สรุปวิเคราะห์ Paper วิจัยฉบับนี้เป็นภาษาไทย:
+1. Research Question: ผู้วิจัยต้องการตอบคำถามอะไร?
+2. Methodology: วิธีการวิจัย กลุ่มตัวอย่าง และเครื่องมือที่ใช้คืออะไร?
+3. Key Findings: ผลลัพธ์สำคัญ 3 ประการคืออะไร?
+4. Contributions & Implications: งานวิจัยนี้มีประโยชน์ต่อวงการอย่างไร?
+5. Limitations: ข้อจำกัดที่ผู้วิจัยระบุไว้คืออะไร?
+[แนบเนื้อหา Paper หรือบทคัดย่อ]</pre>
+        </div>
+
+        <!-- Prompt Card 23 -->
+        <div class="print-card bg-cyber-card/90 border border-pink-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-pink-400 font-bold">#PROMPT-23 • เขียนบทคัดย่อ (Abstract) ไทย-อังกฤษ</span>
+            <button onclick="copyPrompt('p23', this)" class="no-print px-2.5 py-1 rounded bg-pink-500/20 hover:bg-pink-500/40 text-pink-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <pre id="p23" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-pink-200/90 whitespace-pre-wrap overflow-x-auto">จากเนื้อหางานวิจัยสรุปด้านล่างนี้ ช่วยเขียน "บทคัดย่อ (Abstract)" ความยาวไม่เกิน 250-300 คำ:
+- โครงสร้าง: ที่มาปัญหา (1 ประโยค) -> วัตถุประสงค์ -> ระเบียบวิธีวิจัย -> ผลการวิจัยสำคัญ -> ประโยชน์/ข้อเสนอแนะ
+- ทำทั้งเวอร์ชันภาษาไทย และภาษาอังกฤษแบบ Academic English สละสลวย
+[แนบสรุปงานวิจัย]</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORY 4 -->
+    <section id="cat-4" class="space-y-5">
+      <div class="border-l-4 border-amber-400 pl-4 py-1">
+        <span class="text-xs font-mono text-amber-400 font-bold uppercase tracking-wider">MODULE 04</span>
+        <h3 class="text-xl sm:text-2xl font-black text-white">🏆 ตัวช่วย TCAS ยื่นพอร์ต & ซ้อมสัมภาษณ์ (TCAS & Interview)</h3>
+      </div>
+
+      <div class="grid gap-4">
+        <!-- Prompt Card 31 -->
+        <div class="print-card bg-cyber-card/90 border border-amber-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-amber-400 font-bold">#PROMPT-31 • ร่าง SOP / เรียงความแรงบันดาลใจยื่น TCAS รอบ 1</span>
+            <button onclick="copyPrompt('p31', this)" class="no-print px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <pre id="p31" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-amber-200/90 whitespace-pre-wrap overflow-x-auto">ทำหน้าที่เป็นผู้เชี่ยวชาญการตรวจพอร์ต TCAS ช่วยร่าง "เรียงความแสดงแรงบันดาลใจ (Statement of Purpose)" ความยาว 1 หน้า A4 สำหรับยื่นคณะ "[ระบุคณะและมหาวิทยาลัย เช่น วิศวกรรมชีวการแพทย์ จุฬาฯ]":
+- ข้อมูลของฉัน:
+  - ความสนใจและจุดเริ่มต้น: [เล่าเหตุการณ์ที่จุดประกาย]
+  - กิจกรรม/ผลงานเด่น: [ระบุผลงาน 2-3 อย่าง]
+  - เป้าหมายในอนาคต: [อยากเป็นอะไร อยากแก้อะไรในสังคม]
+- ร้อยเรียงให้น่าประทับใจ มี Passion จริงใจ ไม่โอ้อวดเกินจริง</pre>
+        </div>
+
+        <!-- Prompt Card 32 -->
+        <div class="print-card bg-cyber-card/90 border border-amber-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-amber-400 font-bold">#PROMPT-32 • เขียนคำบรรยายกิจกรรมใต้ภาพพอร์ตโฟลิโอด้วย STAR</span>
+            <button onclick="copyPrompt('p32', this)" class="no-print px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <pre id="p32" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-amber-200/90 whitespace-pre-wrap overflow-x-auto">ช่วยนำข้อมูลกิจกรรมต่อไปนี้ มาเขียนคำบรรยายผลงานใต้ภาพใน Portfolio ให้กระชับ ทรงพลัง ความยาว 3-4 บรรทัด โดยใช้เทคนิค STAR Method (Situation, Task, Action, Result):
+- กิจกรรม: [ระบุ เช่น เป็นหัวหน้าฝ่ายสวัสดิการจัดค่ายอาสาพัฒนาชนบท 3 วัน 2 คืน]
+- สิ่งที่ฉันทำ: [ระบุสิ่งที่ลงมือทำ]
+- ผลลัพธ์ที่ได้: [ระบุตัวเลข หรือความสำเร็จที่เกิดขึ้น]</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORY 5 -->
+    <section id="cat-5" class="space-y-5">
+      <div class="border-l-4 border-emerald-400 pl-4 py-1">
+        <span class="text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider">MODULE 05</span>
+        <h3 class="text-xl sm:text-2xl font-black text-white">💻 แก้โจทย์ วิทย์-คณิต & เขียนโค้ดเบื้องต้น (Math & Coding)</h3>
+      </div>
+
+      <div class="grid gap-4">
+        <!-- Prompt Card 41 -->
+        <div class="print-card bg-cyber-card/90 border border-emerald-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-emerald-400 font-bold">#PROMPT-41 • อธิบายโจทย์คณิตศาสตร์ทีละสเต็ปพร้อมที่มาสูตร</span>
+            <button onclick="copyPrompt('p41', this)" class="no-print px-2.5 py-1 rounded bg-emerald-500/20 hover:bg-emerald-500/40 text-emerald-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <pre id="p41" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-emerald-200/90 whitespace-pre-wrap overflow-x-auto">ทำหน้าที่เป็นครูสอนคณิตศาสตร์ใจดี ช่วยอธิบายโจทย์ข้อนี้ทีละบรรทัด:
+- โจทย์: "[พิมพ์โจทย์คณิตศาสตร์ที่นี่]"
+- อย่าเพิ่งบอกแค่คำตอบสุดท้าย ให้แสดง:
+  1. ทฤษฎีหรือสูตรที่นำมาใช้ และเหตุผลที่เลือกสูตรนี้
+  2. วิธีทำและกระบวนการคำนวณทีละขั้นตอนอย่างละเอียด
+  3. เทคนิคทางลัดในการเช็กคำตอบว่าถูกต้องหรือไม่</pre>
+        </div>
+
+        <!-- Prompt Card 44 -->
+        <div class="print-card bg-cyber-card/90 border border-emerald-500/20 rounded-2xl p-5 shadow-lg relative group">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-emerald-400 font-bold">#PROMPT-44 • ตรวจจับบักและดีบั๊กโค้ด (Bug Hunter)</span>
+            <button onclick="copyPrompt('p44', this)" class="no-print px-2.5 py-1 rounded bg-emerald-500/20 hover:bg-emerald-500/40 text-emerald-300 text-xs font-bold transition-all flex items-center gap-1 cursor-pointer">
+              📋 <span>คัดลอก</span>
+            </button>
+          </div>
+          <pre id="p44" class="print-code bg-black/60 border border-white/10 rounded-xl p-3.5 text-xs font-mono text-emerald-200/90 whitespace-pre-wrap overflow-x-auto">โค้ดด้านล่างนี้รันแล้วเกิด Error ดังนี้: "[แปะข้อความ Error]"
+ช่วยตรวจสอบว่า:
+1. สาเหตุที่ทำให้เกิด Error นี้คืออะไร?
+2. แก้ไขโค้ดให้ถูกต้องสมบูรณ์
+3. แนะนำ Best Practice เพื่อไม่ให้เกิด Error ลักษณะนี้อีก
+[แปะโค้ดที่มีปัญหา]</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Note -->
+    <div class="text-center pt-10 border-t border-white/10 text-white/50 text-xs">
+      <p>© 2026 iAon Tech (<a href="https://www.aiaon.tech" class="text-cyan-400 underline">aiaon.tech</a>) • พัฒนาโดย ครูอ้น (จิรวัฒน์ เดชเส้ง) รร.หาดใหญ่วิทยาลัย</p>
+      <p class="mt-1">ได้รับสิทธิ์ใช้งานสำหรับผู้สั่งซื้อ Student Vault โดยเฉพาะ</p>
+    </div>
+
+  </main>
+
+  <script>
+    function copyPrompt(id, btn) {
+      const code = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✅ <span>คัดลอกแล้ว!</span>';
+        btn.classList.add('bg-emerald-500/40', 'text-emerald-300');
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('bg-emerald-500/40', 'text-emerald-300');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

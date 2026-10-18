@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { getLineOrderUrl } from "@/lib/line";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
+import { StudentVaultPromotionSection } from "@/components/student-vault/StudentVaultPromotionSection";
 import { cn } from "@/lib/utils";
 
 export interface UpsellOffer {
@@ -50,7 +51,7 @@ export const UPSELL_OFFERS: UpsellOffer[] = [
     glowColor: "rgba(16,185,129,0.15)",
     borderColor: "border-emerald-500/40 hover:border-emerald-400",
     message:
-      "สวัสดีครับ ได้ลองโหลดไฟล์ฟรีแล้ว สนใจรับสิทธิ์อัปเกรดเป็น [SYS02] ระบบคำนวณ ปพ.5 & ตัดเกรดอัตโนมัติตัวเต็ม ราคาพิเศษ 199 บาทครับ",
+      "สวัสดีครับ ได้ลองโหลดไฟล์ฟรีแล้ว สนใจรับสิทธิ์อัปเกรดเป็น [SYS02] ระบบคำนวณ ปพ.5 & ตัดเกรดอัตโนมัติตัวเต็ม ราคาพิเศษ 199 บาทครับ [#TEACHER]",
     features: [
       "ผูกสูตรตัดเกรดอัตโนมัติครบ 8 ระดับ (0 - 4)",
       "คำนวณ GPAX และร้อยละคะแนนเก็บแบบเรียลไทม์",
@@ -72,7 +73,7 @@ export const UPSELL_OFFERS: UpsellOffer[] = [
     borderColor: "border-amber-500/40 hover:border-amber-300",
     isPopular: true,
     message:
-      "สวัสดีครับ ได้ลองโหลดไฟล์ฟรีแล้ว สนใจรับสิทธิ์อัปเกรดเป็น [BUNDLE-01] ชุดเอาตัวรอดครูประจำชั้น (4 ระบบ) ราคาพิเศษ 249 บาทครับ",
+      "สวัสดีครับ ได้ลองโหลดไฟล์ฟรีแล้ว สนใจรับสิทธิ์อัปเกรดเป็น [BUNDLE-01] ชุดเอาตัวรอดครูประจำชั้น (4 ระบบ) ราคาพิเศษ 249 บาทครับ [#TEACHER]",
     features: [
       "SYS09: ระบบคัดกรอง SDQ และดูแลช่วยเหลือนักเรียน",
       "AONE09: ระบบรายงานห้องเรียนสีขาว & คะแนนเก็บ",
@@ -253,6 +254,9 @@ export function FreebieUpsellSection({ className }: { className?: string }) {
             <UpsellCard key={offer.itemCode} offer={offer} />
           ))}
         </div>
+
+        {/* ── Student Vault Highlight Section (อาวุธลับวัยเรียน ม.ปลาย & ป.ตรี) ───── */}
+        <StudentVaultPromotionSection className="mt-14 sm:mt-20 border-t border-white/10 pt-10" />
       </div>
     </section>
   );

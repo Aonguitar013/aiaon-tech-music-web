@@ -8,6 +8,7 @@ import {
 import { motion } from "framer-motion";
 import { ProductCard } from "@/components/marketplace/ProductCard";
 import { NoBrainerBundles } from "@/components/marketplace/NoBrainerBundles";
+import { StudentVaultPromotionSection } from "@/components/student-vault/StudentVaultPromotionSection";
 import { getProductSetupTier, getSetupTierInfo, SetupTier } from "@/components/marketplace/setupTierHelper";
 import { cn } from "@/lib/utils";
 
@@ -439,6 +440,9 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
 
         {/* --- ZERO-TECH NO-BRAINER BUNDLES (3 มหาบันเดิลสุดคุ้ม) --- */}
         <NoBrainerBundles className="py-4 sm:py-6 mb-4" />
+
+        {/* --- STUDENT VAULT PROMOTION (อาวุธลับวัยเรียน ม.ปลาย & ป.ตรี) --- */}
+        <StudentVaultPromotionSection className="py-2 sm:py-4 mb-6" />
 
         {/* --- SETUP DIFFICULTY TIER FILTER --- */}
         <motion.div

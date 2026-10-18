@@ -31,6 +31,10 @@ export const ZERO_TECH_CODES = [
   "AONM01",
   "STU02",
   "STU03",
+  "STU04",
+  "STU05",
+  "STU06",
+  "BUNDLE-STU",
   "MUS-01",
   "BGM-01",
 ];
