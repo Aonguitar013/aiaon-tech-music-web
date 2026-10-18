@@ -8,20 +8,19 @@ export default async function CoursePlayerPage({ params }: { params: Promise<{ i
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect('/login');
-  }
-
-  // Fetch course, purchase status, and lessons concurrently
-  const [{ data: course, error }, { data: existingOrder }, { data: lessons }] = await Promise.all([
+  // Fetch course, purchase status (if logged in), and lessons concurrently
+  const [{ data: course, error }, existingOrder, { data: lessons }] = await Promise.all([
     supabase.from('courses').select('*').eq('id', id).single(),
-    supabase
-      .from('orders')
-      .select('id')
-      .eq('user_id', user.id)
-      .eq('course_id', id)
-      .eq('status', 'completed')
-      .maybeSingle(),
+    user
+      ? supabase
+          .from('orders')
+          .select('id')
+          .eq('user_id', user.id)
+          .eq('course_id', id)
+          .eq('status', 'completed')
+          .maybeSingle()
+          .then((res) => res.data)
+      : Promise.resolve(null),
     supabase
       .from('lessons')
       .select('*')

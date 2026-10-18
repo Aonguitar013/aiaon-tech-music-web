@@ -52,6 +52,15 @@ const routes: RouteItem[] = [
     hoverColor: "amber",
     items: [
       { 
+        name: "คอร์สเรียนออนไลน์ (Academy)", 
+        href: "/academy", 
+        description: "27+ คอร์ส AI, Google Apps Script, Web Development, ดนตรี", 
+        badge: "เปิดใหม่", 
+        badgeColor: "cyan", 
+        icon: GraduationCap, 
+        hoverColor: "cyan" 
+      },
+      { 
         name: "คลัง 30 E-Book ครูไทย", 
         href: "/ebooks", 
         description: "30 คู่มือ นวัตกรรม ว.PA ผ่านฉลุย, AI Prompts, วิจัย 5 บท", 

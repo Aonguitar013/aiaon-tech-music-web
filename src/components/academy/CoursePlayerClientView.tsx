@@ -1,8 +1,10 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
-import { ArrowLeft, PlayCircle, CheckCircle, Clock, BadgeCheck, ShoppingCart } from "lucide-react";
+import { ArrowLeft, PlayCircle, CheckCircle, Clock, BadgeCheck, ShoppingCart, LogIn, MessageSquare } from "lucide-react";
+import { RiLineLine } from "react-icons/ri";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
+import { getLineOrderUrl } from "@/lib/line";
 import type { DbRow } from "@/types";
 
 export function CoursePlayerClientView({ course, isPurchased, lessons }: { course: DbRow, isPurchased: boolean, lessons: DbRow[] }) {
@@ -12,12 +14,25 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
   const isCourseActuallyMusic = course?.category === 'Music';
   const isMusic = isCourseActuallyMusic || brandTheme === "music";
 
+  const courseTitle = course?.title || "คอร์สเรียนออนไลน์";
+  const coursePrice = course?.price || "1,990 ฿";
+  const lineCourseMsg = `สวัสดีครับครูอ้น สนใจสมัครเรียนคอร์สออนไลน์:\n🎓 "${courseTitle}"\n💰 ราคา: ${coursePrice}\nรบกวนขอรายละเอียดการชำระเงินและเข้าห้องเรียนด้วยครับ 🙏`;
+  const lineCourseUrl = getLineOrderUrl(lineCourseMsg);
+
   return (
     <div className="w-full max-w-[1600px] mx-auto min-h-screen flex flex-col">
-      <div className="mb-6">
-          <Link href="/dashboard/academy" className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors font-prompt text-sm">
-             <ArrowLeft className="w-4 h-4" /> กลับสู่หน้าคอร์สเรียน
+      <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">
+          <Link href="/academy" className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors font-prompt text-sm bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl border border-white/10">
+             <ArrowLeft className="w-4 h-4" /> กลับสู่คลังคอร์สเรียน (Academy)
           </Link>
+          <a
+            href={lineCourseUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[#06C755] hover:text-white hover:bg-[#06C755] transition-all font-prompt text-sm px-4 py-2 rounded-xl border border-[#06C755]/30 bg-[#06C755]/10 shadow-[0_0_15px_rgba(6,199,85,0.15)]"
+          >
+            <RiLineLine className="w-4 h-4" /> ปรึกษาครูอ้นเรื่องคอร์สนี้ทาง LINE
+          </a>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 flex-1">
@@ -118,14 +133,25 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
                       </button>
                     </div>
                   ) : (
-                    <Link
-                      href={`/dashboard/marketplace/checkout/${course.id}`}
-                      className={`w-full py-2.5 rounded-xl text-white text-sm font-prompt font-bold flex items-center justify-center gap-2 transition-colors shadow-lg ${
-                          isMusic ? "bg-amber-600 hover:bg-amber-500 shadow-amber-900/30" : "bg-blue-600 hover:bg-blue-500 shadow-blue-900/30"
-                      }`}
-                    >
-                      <ShoppingCart className="w-4 h-4" /> ซื้อคอร์สนี้
-                    </Link>
+                    <div className="flex flex-col gap-2.5">
+                      <Link
+                        href={`/dashboard/marketplace/checkout/${course.id}`}
+                        className={`w-full py-3 rounded-xl text-white text-sm font-prompt font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:scale-[1.02] active:scale-95 ${
+                            isMusic ? "bg-amber-600 hover:bg-amber-500 shadow-amber-900/30" : "bg-blue-600 hover:bg-blue-500 shadow-blue-900/30"
+                        }`}
+                      >
+                        <ShoppingCart className="w-4 h-4" /> สมัครเรียนคอร์สนี้ ({coursePrice})
+                      </Link>
+
+                      <a
+                        href={lineCourseUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-2.5 px-3 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-prompt font-bold flex items-center justify-center gap-2 transition-all shadow-md hover:scale-[1.01] active:scale-95"
+                      >
+                        <RiLineLine className="w-4 h-4" /> สมัครผ่าน LINE OA @deu6776s
+                      </a>
+                    </div>
                   )}
               </div>
 
