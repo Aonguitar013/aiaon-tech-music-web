@@ -880,7 +880,7 @@ export function MerchCustomizer() {
 
     // Generate PromptPay Payload
     // PromptPay account phone number (default mock for user to test, normally set in env)
-    const promptpayNumber = process.env.NEXT_PUBLIC_PROMPTPAY_NUMBER || "0864070000"; 
+    const promptpayNumber = process.env.NEXT_PUBLIC_PROMPTPAY_NUMBER || "0835399340"; 
     const payload = generatePayload(promptpayNumber, { amount: totalPrice });
     setQrCodePayload(payload);
     

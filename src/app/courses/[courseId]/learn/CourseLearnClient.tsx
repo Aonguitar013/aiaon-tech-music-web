@@ -44,7 +44,7 @@ export function CourseLearnClient({
   const isLocked = currentLesson && !isCoursePurchased && !currentLesson.is_free_preview;
 
   // Configuration for PromptPay
-  const PROMPTPAY_ID = '0123456789'; // Replace with real PromptPay ID or Phone Number
+  const PROMPTPAY_ID = '0835399340'; // Kru Aon Official PromptPay
   const amountStr = course.price.replace(/[^0-9.]/g, '');
   const amount = parseFloat(amountStr) || 0;
   const qrPayload = generatePayload(PROMPTPAY_ID, { amount });

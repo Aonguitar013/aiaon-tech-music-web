@@ -16,7 +16,8 @@ import { DvdCaseMockup } from "@/components/marketplace/DvdCaseMockup";
 import { Book3DMockup } from "@/components/ebooks/Book3DMockup";
 import { StudentCardMockup } from "@/components/student-vault/StudentCardMockup";
 import { VinylRecordMockup } from "@/components/music-store/VinylRecordMockup";
-import { getLineOrderUrl } from "@/lib/line";
+import { getLineOrderUrl, LINE_ADD_FRIEND_URL } from "@/lib/line";
+import { QRCodeSVG } from "qrcode.react";
 import { FreebieDetailSection } from "./FreebieDetailSection";
 import { getFreebieDetail } from "./freebieDataHelper";
 import { FreebieUpsellSection, InstantUpsellModal } from "./FreebieUpsellSection";
@@ -229,12 +230,13 @@ function LineUnlockModal({
 
         {/* QR Code Card for Desktop & Mobile */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-4 mb-4 flex flex-col items-center gap-2.5 shadow-inner">
-          <div className="p-2 bg-white rounded-xl shadow-md ring-2 ring-[#06C755]/40">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(freebieLineUrl)}`}
-              alt="LINE OA @deu6776s QR Code" 
-              className="w-32 h-32 md:w-36 md:h-36 block rounded-lg"
+          <div className="p-3 bg-white rounded-2xl shadow-md ring-2 ring-[#06C755]/40 inline-flex items-center justify-center">
+            <QRCodeSVG 
+              value={LINE_ADD_FRIEND_URL}
+              size={150}
+              level="M"
+              includeMargin={false}
+              className="block rounded-lg"
             />
           </div>
           <div className="text-center">
