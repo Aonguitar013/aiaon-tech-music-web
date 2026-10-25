@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogIn, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, ChevronDown, Info, Wrench, Sparkles, ShieldCheck, Globe, Music, BookOpen } from "lucide-react";
+import { Menu, LogIn, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, ChevronDown, Info, Wrench, Sparkles, ShieldCheck, Globe, Music, BookOpen, Search } from "lucide-react";
+import { useCommandMenu } from "@/components/command-menu/CommandMenuProvider";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -205,6 +206,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
     await logout();
   };
 
+  const { open: openCommandMenu } = useCommandMenu();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMobileMenus, setOpenMobileMenus] = useState<Record<string, boolean>>({});
@@ -409,6 +411,21 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
             </NavigationMenuList>
           </NavigationMenu>
 
+          {/* Quick Search (Ctrl+K) Trigger */}
+          <button
+            type="button"
+            onClick={openCommandMenu}
+            aria-label="ค้นหาด่วน (Ctrl+K)"
+            className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-500/40 text-white/60 hover:text-white text-xs font-prompt transition-all duration-300 group cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] ml-1 shrink-0 select-none"
+          >
+            <Search className="w-3.5 h-3.5 text-cyan-400 group-hover:scale-110 transition-transform" />
+            <span className="hidden xl:inline text-white/70 group-hover:text-white">ค้นหาระบบ, E-Book...</span>
+            <span className="xl:hidden">ค้นหา</span>
+            <kbd className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono text-white/40 group-hover:text-cyan-300 bg-white/5 border border-white/10 rounded-md">
+              ⌘K
+            </kbd>
+          </button>
+
           {user ? (
               <div className="flex items-center gap-2 ml-1 shrink-0">
                   <Link 
@@ -440,8 +457,17 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
           )}
         </div>
 
-        {/* Mobile Navigation (Hamburger) */}
-        <div className="flex lg:hidden items-center">
+        {/* Mobile Navigation (Search & Hamburger) */}
+        <div className="flex lg:hidden items-center gap-1">
+          <button
+            type="button"
+            onClick={openCommandMenu}
+            aria-label="ค้นหาด่วน (Ctrl+K)"
+            className="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors flex items-center justify-center cursor-pointer"
+          >
+            <Search className="h-5 w-5 text-cyan-400" />
+            <span className="sr-only">ค้นหาด่วน</span>
+          </button>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger className="p-2 text-white hover:bg-white/10 rounded-xl transition-colors flex items-center justify-center">
               <Menu className="h-6 w-6" />

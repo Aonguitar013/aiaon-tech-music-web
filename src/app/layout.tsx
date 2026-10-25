@@ -9,6 +9,8 @@ import { FaYoutube, FaTiktok, FaFacebook, FaLine } from "react-icons/fa6";
 import { BrandThemeProvider } from "@/components/providers/BrandThemeProvider";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { FloatingLINEButton } from "@/components/ui/FloatingLINEButton";
+import { CommandMenuProvider } from "@/components/command-menu/CommandMenuProvider";
+import { MobileStickyActionBar } from "@/components/layout/MobileStickyActionBar";
 import { LineModalProvider } from "@/components/ui/LineOrderModal";
 import Maintenance from "@/components/Maintenance";
 import { MarketingPixels } from "@/components/analytics/MarketingPixels";
@@ -106,6 +108,7 @@ export default function RootLayout({
       >
         <BrandThemeProvider>
           <LineModalProvider>
+          <CommandMenuProvider>
           <MarketingPixels />
 
           {/* ถ้าเปิดโหมด Maintenance จะแสดงแค่หน้า Maintenance เท่านั้น */}
@@ -135,9 +138,10 @@ export default function RootLayout({
               <Navbar />
               <ThemeToggle />
               <FloatingLINEButton />
+              <MobileStickyActionBar />
 
               {/* --- Main Content --- */}
-              <main className="grow pt-4 md:pt-8 relative z-10">
+              <main className="grow pt-4 md:pt-8 pb-20 lg:pb-0 relative z-10">
                 {children}
               </main>
 
@@ -267,6 +271,7 @@ export default function RootLayout({
             </>
           )}
 
+          </CommandMenuProvider>
           </LineModalProvider>
         </BrandThemeProvider>
       </body>
