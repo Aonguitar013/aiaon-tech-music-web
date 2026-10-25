@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ShieldCheck, CheckCircle2, Zap, ArrowRight, Gift, ShoppingCart,
   Clock, AlertTriangle, Sparkles, UserCheck, HelpCircle, FileText,
@@ -534,8 +535,14 @@ export function AoneProductDetailSection({
           ══════════════════════════════════════════════════════════ */}
       <div className="glass-card p-6 md:p-8 rounded-3xl border border-cyan-500/30 bg-gradient-to-r from-slate-950 via-cyan-950/30 to-slate-950 flex flex-col sm:flex-row items-center gap-6 shadow-[0_0_30px_rgba(6,182,212,0.15)]">
         <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-cyan-400 to-indigo-600 p-1 shrink-0 shadow-lg">
-          <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center text-2xl font-bold text-cyan-300">
-            ครูอ้น
+          <div className="w-full h-full rounded-full bg-slate-900 overflow-hidden relative shadow-inner">
+            <Image
+              src="/images/kru_aon_profile.png"
+              alt="ครูจิรวัฒน์ เดชเส้ง (ครูอ้น)"
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 640px) 80px, 96px"
+            />
           </div>
         </div>
 

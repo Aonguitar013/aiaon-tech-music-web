@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ShieldCheck, CheckCircle2, Zap, ArrowRight, Gift, ShoppingCart,
   Clock, AlertTriangle, Sparkles, UserCheck, HelpCircle, FileText,
@@ -394,13 +395,17 @@ export function EbookDetailSection({
         {/* Creator Avatar & Seal */}
         <div className="relative shrink-0">
           <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-tr from-indigo-600 via-cyan-500 to-amber-400 p-1 shadow-2xl">
-            <div className="w-full h-full rounded-[22px] bg-slate-950 flex flex-col items-center justify-center text-center p-3">
-              <UserCheck className="w-10 h-10 text-cyan-400 mb-1" />
-              <span className="text-xs font-bold text-white">ครูอ้น</span>
-              <span className="text-[10px] text-slate-400">iAon Tech</span>
+            <div className="w-full h-full rounded-[22px] bg-slate-950 overflow-hidden relative shadow-inner">
+              <Image
+                src="/images/kru_aon_profile.png"
+                alt="ครูจิรวัฒน์ เดชเส้ง (ครูอ้น)"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 640px) 112px, 128px"
+              />
             </div>
           </div>
-          <div className="absolute -bottom-2 -right-2 px-2.5 py-0.5 rounded-full bg-amber-500 text-zinc-950 text-[10px] font-black uppercase shadow-md">
+          <div className="absolute -bottom-2 -right-2 px-2.5 py-0.5 rounded-full bg-amber-500 text-zinc-950 text-[10px] font-black uppercase shadow-md z-10">
             ค.ศ. 2
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ShieldCheck, CheckCircle2, Zap, ArrowRight, Gift,
   Clock, AlertTriangle, Sparkles, UserCheck, HelpCircle,
@@ -289,11 +290,14 @@ export function AICaretakerDetailSection({
       ───────────────────────────────────────────────────────────── */}
       <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-emerald-500/30 p-6 sm:p-10">
         <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-emerald-400/50 shadow-[0_0_30px_rgba(16,185,129,0.3)] flex-shrink-0 bg-slate-800 flex items-center justify-center">
-            <div className="text-center p-2">
-              <Bot className="w-12 h-12 text-emerald-400 mx-auto mb-1" />
-              <span className="text-[10px] font-mono font-bold text-emerald-300 uppercase">iAon Caretaker</span>
-            </div>
+          <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-emerald-400/50 shadow-[0_0_30px_rgba(16,185,129,0.3)] flex-shrink-0 bg-slate-900">
+            <Image
+              src="/images/kru_aon_profile.png"
+              alt="ครูจิรวัฒน์ เดชเส้ง (ครูอ้น)"
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 640px) 112px, 144px"
+            />
           </div>
 
           <div className="flex-1 text-center md:text-left">
