@@ -72,6 +72,15 @@ export const metadata: Metadata = {
     description:
       "เสกงานเอกสารโรงเรียน & งานเรียนให้เสร็จในคลิกเดียว ด้วย 20 ระบบ Google Apps Script สำเร็จรูป, กลุ่มติวสอบครูผู้ช่วย และสื่อการสอน AI",
   },
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({
