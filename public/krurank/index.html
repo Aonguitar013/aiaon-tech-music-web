@@ -1936,23 +1936,55 @@
 
       const btn = document.getElementById('btnSubmitAi');
       btn.disabled = true;
-      btn.innerText = 'กำลังประมวลผลกับครูอ้น AI...';
+      btn.innerText = '🤖 กำลังประมวลผลกับครูอ้น AI...';
 
       const q = activeQuestions[currentQuestionIndex];
-      const apiKey = localStorage.getItem('gemini_api_key');
-
       let reply = "";
 
-      if (apiKey) {
-        try {
-          reply = await callGeminiApi(userQuery, q, apiKey);
-        } catch (e) {
-          console.error(e);
+      // 1. Try Next.js Server-Side Gemini API Route (/api/krurank/ask-ai)
+      try {
+        const res = await fetch('/api/krurank/ask-ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt: userQuery,
+            questionContext: {
+              question: q.question,
+              options: q.options,
+              answerIndex: q.answerIndex,
+              legalRef: q.legalRef,
+              trapCaught: q.aiExplanation ? q.aiExplanation.trapCaught : '',
+              tutorTrick: q.aiExplanation ? q.aiExplanation.tutorTrick : '',
+              keyConcept: q.aiExplanation ? q.aiExplanation.keyConcept : '',
+              subtopic: q.subtopic,
+            }
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.reply) {
+            reply = data.reply;
+          }
+        }
+      } catch (err) {
+        console.warn('Backend Ask-AI route error, falling back...', err);
+      }
+
+      // 2. If backend route not available, check custom apiKey or Smart Fallback
+      if (!reply) {
+        const apiKey = localStorage.getItem('gemini_api_key');
+        if (apiKey) {
+          try {
+            reply = await callGeminiApi(userQuery, q, apiKey);
+          } catch (e) {
+            console.error(e);
+            reply = fallbackAiAnswer(userQuery, q);
+          }
+        } else {
+          await new Promise(r => setTimeout(r, 600));
           reply = fallbackAiAnswer(userQuery, q);
         }
-      } else {
-        await new Promise(r => setTimeout(r, 900));
-        reply = fallbackAiAnswer(userQuery, q);
       }
 
       document.getElementById('modalAiResponseText').innerText = reply;
@@ -1966,7 +1998,7 @@
     }
 
     // --- TUTOR AI CHAT TAB ---
-    function sendChatMessage() {
+    async function sendChatMessage() {
       const input = document.getElementById('chatInput');
       const text = input.value.trim();
       if (!text) return;
@@ -1982,23 +2014,63 @@
       `;
       history.appendChild(userDiv);
       input.value = '';
-
       history.scrollTop = history.scrollHeight;
 
-      setTimeout(() => {
-        const tutorDiv = document.createElement('div');
-        tutorDiv.className = 'flex items-start space-x-2';
-        tutorDiv.innerHTML = `
-          <div class="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0 border border-cyan-500/30">
-            <img src="assets/me.png" alt="ครูอ้น" class="w-full h-full object-cover">
-          </div>
-          <div class="bg-slate-800/90 text-slate-100 p-3 rounded-2xl rounded-tl-none max-w-[85%] leading-relaxed border border-slate-700/60">
-            เรื่องที่คุณครูถามมาออกข้อสอบครูผู้ช่วยบ่อยมากครับ! จำคีย์เวิร์ดสั้นๆ เข้าห้องสอบได้เลย:\n\n• วินัยไม่ร้ายแรง: ภาคทัณฑ์ ตัดเงินเดือน ลดเงินเดือน\n• วินัยร้ายแรง: ปลดออก (ได้เงินบำเหน็จบำนาญ) vs ไล่ออก (ไม่ได้เงินเลย)\n\nมีจุดไหนในวิชาเอกหรือวิชากฎหมายที่ยังไม่มั่นใจ บอกครูอ้นได้เลยนะครับ!
-          </div>
-        `;
-        history.appendChild(tutorDiv);
-        history.scrollTop = history.scrollHeight;
-      }, 700);
+      // Typing indicator
+      const typingDiv = document.createElement('div');
+      typingDiv.id = 'tutorTypingIndicator';
+      typingDiv.className = 'flex items-start space-x-2';
+      typingDiv.innerHTML = `
+        <div class="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0 border border-cyan-500/30">
+          <img src="assets/me.png" alt="ครูอ้น" class="w-full h-full object-cover">
+        </div>
+        <div class="bg-slate-800/90 text-cyan-300 text-xs p-3 rounded-2xl rounded-tl-none border border-slate-700/60 flex items-center space-x-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+          <span>ครูอ้น AI กำลังพิมพ์คำตอบ...</span>
+        </div>
+      `;
+      history.appendChild(typingDiv);
+      history.scrollTop = history.scrollHeight;
+
+      let tutorReply = "";
+      try {
+        const res = await fetch('/api/krurank/ask-ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: text })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.reply) tutorReply = data.reply;
+        }
+      } catch (e) {
+        console.warn('Chat API error:', e);
+      }
+
+      if (!tutorReply) {
+        tutorReply = `เรื่องที่คุณครูถามมาออกข้อสอบครูผู้ช่วยบ่อยมากครับ! จำคีย์เวิร์ดสั้นๆ เข้าห้องสอบได้เลย:
+
+• วินัยไม่ร้ายแรง: ภาคทัณฑ์ ตัดเงินเดือน ลดเงินเดือน
+• วินัยร้ายแรง: ปลดออก (ได้เงินบำเหน็จบำนาญ) vs ไล่ออก (ไม่ได้เงินเลย)
+
+มีจุดไหนในวิชาเอกหรือวิชากฎหมายที่ยังไม่มั่นใจ บอกครูอ้นได้เลยนะครับ!`;
+      }
+
+      const indicator = document.getElementById('tutorTypingIndicator');
+      if (indicator) indicator.remove();
+
+      const tutorDiv = document.createElement('div');
+      tutorDiv.className = 'flex items-start space-x-2';
+      tutorDiv.innerHTML = `
+        <div class="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0 border border-cyan-500/30">
+          <img src="assets/me.png" alt="ครูอ้น" class="w-full h-full object-cover">
+        </div>
+        <div class="bg-slate-800/90 text-slate-100 p-3 rounded-2xl rounded-tl-none max-w-[85%] leading-relaxed border border-slate-700/60 whitespace-pre-line">
+          ${tutorReply}
+        </div>
+      `;
+      history.appendChild(tutorDiv);
+      history.scrollTop = history.scrollHeight;
     }
 
     // --- GEMINI API INTEGRATION ---
