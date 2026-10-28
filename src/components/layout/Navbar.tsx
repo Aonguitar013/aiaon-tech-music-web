@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, LogIn, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, ChevronDown, Info, Wrench, Sparkles, ShieldCheck, Globe, Music, BookOpen, Search } from "lucide-react";
+import { Menu, LogIn, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, ChevronDown, Info, Wrench, Sparkles, ShieldCheck, Globe, Music, BookOpen, Search, Crown } from "lucide-react";
 import { useCommandMenu } from "@/components/command-menu/CommandMenuProvider";
 import {
   NavigationMenu,
@@ -132,12 +132,12 @@ const routes: RouteItem[] = [
         hoverColor: "teal" 
       },
       { 
-        name: "กลุ่ม Telegram ติวสอบครูผู้ช่วย (AI Prep)", 
-        href: "/teacher-prep", 
-        description: "ทดลองทำข้อสอบ Telegram Daily Quiz Bot & ฟังเพลงช่วยจำ", 
-        badge: "HOT", 
+        name: "ทำเนียบว่าที่ครูผู้ช่วย (KruRank AI)", 
+        href: "/krurank", 
+        description: "ซ้อมสอบ AI วิเคราะห์จุดหลอก + ชิงอันดับทำเนียบประเทศ", 
+        badge: "AI APP 👑", 
         badgeColor: "cyan", 
-        icon: GraduationCap, 
+        icon: Crown, 
         hoverColor: "cyan" 
       },
       { 

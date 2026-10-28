@@ -12,7 +12,7 @@ import {
 import Link from "next/link";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 import { GoldenTicketMockup } from "@/components/prep/GoldenTicketMockup";
-import { PREP_VIP_DATA, PREP_BOT_ONLY_DATA, PrepVipProduct } from "@/components/prep/prepDataHelper";
+import { PREP_VIP_DATA, PREP_BOT_ONLY_DATA, KRURANK_AI_PRO_DATA, PrepVipProduct } from "@/components/prep/prepDataHelper";
 import { TeacherPrepDetailSection } from "@/components/prep/TeacherPrepDetailSection";
 import { getLineOrderUrl } from "@/lib/line";
 
@@ -205,6 +205,26 @@ const PREP_TIERS = [
       "🎁 ฟรี E-Book [EB30] คู่มือครูบรรจุใหม่ + ส่วนลด 50% ระบบแฟ้ม [AONA08]",
     ],
     ctaText: "สมัคร All-in-One Bundle (390 ฿)",
+    isVip: true,
+  },
+  {
+    id: "krurank-ai-pass",
+    name: "ทำเนียบว่าที่ครูผู้ช่วย (KruRank AI PRO)",
+    price: "499 ฿",
+    period: "จบฤดูกาลสอบ (ตลอดชีพ) • เว็บแอปซ้อมสอบสด",
+    badge: "🔥 ใหม่! ซ้อมสอบ AI บนเว็บ",
+    badgeClass: "bg-gradient-to-r from-cyan-400 to-teal-400 text-zinc-950 border-cyan-400 font-black",
+    borderClass: "border-cyan-400/70 shadow-[0_0_45px_rgba(6,182,212,0.25)] ring-2 ring-cyan-400/40 hover:border-cyan-300",
+    isPopular: false,
+    productData: KRURANK_AI_PRO_DATA,
+    features: [
+      "🎮 Web Application ซ้อมสอบ Gamified สไตล์ Cyberpunk เปิดผ่านมือถือได้ทันที ไม่ต้องโหลดแอป",
+      "🤖 ครูอ้น AI ติวเตอร์ ชี้จุดดักหลอก 24 ชม. พร้อมสูตรจำด่วนฟันธง 1 ประโยค (ทำข้อสอบไม่อั้นตลอดชีพ)",
+      "📜 ครอบคลุม ภาค ก (กฎหมาย วินัย จรรยาบรรณ) และ ภาค ข ครบ 5 วิชาเอกยอดนิยม (ดนตรี, ปฐมวัย, ไทย, คณิต, คอมฯ)",
+      "🏆 ทำเนียบจัดอันดับระดับประเทศ (National Leaderboard) เทียบความแม่นยำรายวิชาเอก & เขตพื้นที่การศึกษา",
+      "📸 การ์ดคะแนน Cyberpunk 1080x1920 พร้อมปุ่มแชร์สถิติจริงลง TikTok / Reels / Instagram Story ใน 1 วินาที",
+    ],
+    ctaText: "เปิดสิทธิ์ KruRank PRO (499 ฿)",
     isVip: true,
   },
 ];
@@ -719,7 +739,7 @@ export function TeacherPrepView() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 max-w-7xl mx-auto items-stretch">
             {PREP_TIERS.map((tier) => (
               <div
                 key={tier.id}
@@ -743,7 +763,7 @@ export function TeacherPrepView() {
                       title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของตั๋วทองคำนี้"
                     >
                       <GoldenTicketMockup
-                        serialNo={tier.id === "bot-only-pass" ? "VIP-BOT-ONLY-PASS" : "VIP-2026-TEACHER-PASS"}
+                        serialNo={tier.id === "bot-only-pass" ? "VIP-BOT-ONLY-PASS" : tier.id === "krurank-ai-pass" ? "KRURANK-PRO-2026" : "VIP-2026-TEACHER-PASS"}
                         size="md"
                         isInteractive={true}
                       />
@@ -783,33 +803,44 @@ export function TeacherPrepView() {
                 </div>
 
                 {tier.isVip && tier.productData ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (tier.productData) setSelectedDetailProduct(tier.productData);
-                        setIsDetailModalOpen(true);
-                      }}
-                      className="w-full py-3.5 px-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs flex items-center justify-center gap-1.5 border border-white/20 transition-all cursor-pointer"
-                    >
-                      <BookOpen className="w-3.5 h-3.5 text-amber-400" />
-                      <span>เจาะลึก 7 ข้อ</span>
-                    </button>
+                  <div className="space-y-2.5 pt-2">
+                    {tier.id === "krurank-ai-pass" && (
+                      <Link
+                        href="/krurank"
+                        className="w-full py-3 px-3 rounded-2xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 font-bold text-xs flex items-center justify-center gap-1.5 border border-cyan-400/40 transition-all hover:scale-[1.02] cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+                      >
+                        <span>🎮 เข้าสู่สนามสอบสด /krurank</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    )}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (tier.productData) setSelectedDetailProduct(tier.productData);
+                          setIsDetailModalOpen(true);
+                        }}
+                        className="w-full py-3.5 px-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs flex items-center justify-center gap-1.5 border border-white/20 transition-all cursor-pointer"
+                      >
+                        <BookOpen className="w-3.5 h-3.5 text-amber-400" />
+                        <span>เจาะลึก 7 ข้อ</span>
+                      </button>
 
-                    <a
-                      href={getLineOrderUrl(tier.productData.lineOrderMsg)}
-                      onClick={(e) => handleVipOrderClick(e, tier.productData!)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-line-title={tier.productData.title}
-                      data-line-price={tier.productData.price}
-                      data-line-code={tier.productData.id}
-                      className="w-full py-3.5 px-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-[0_0_25px_rgba(6,199,85,0.35)] transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white"
-                    >
-                      <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                      <span>{tier.id === "bot-only-pass" ? "สมัครเฉพาะบอท" : "สมัครบันเดิลคุ้มสุด"}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </a>
+                      <a
+                        href={getLineOrderUrl(tier.productData.lineOrderMsg)}
+                        onClick={(e) => handleVipOrderClick(e, tier.productData!)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-line-title={tier.productData.title}
+                        data-line-price={tier.productData.price}
+                        data-line-code={tier.productData.id}
+                        className="w-full py-3.5 px-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-[0_0_25px_rgba(6,199,85,0.35)] transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                        <span>{tier.id === "bot-only-pass" ? "สมัครเฉพาะบอท" : tier.id === "krurank-ai-pass" ? "สั่งซื้อสิทธิ์ PRO" : "สมัครบันเดิลคุ้มสุด"}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   </div>
                 ) : (
                   <a
