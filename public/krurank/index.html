@@ -1,0 +1,2586 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+  <base href="/krurank/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>KruRank AI | ซ้อมสอบครูผู้ช่วย & ทำเนียบจัดอันดับ • iAonTech</title>
+  
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="apple-touch-icon" href="assets/icon.png">
+
+  <!-- Google Fonts: Prompt & Kanit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Kanit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'sans-serif'],
+            display: ['Kanit', 'sans-serif']
+          },
+          colors: {
+            obsidian: '#09090b',
+            surface: '#111625',
+            surfaceLight: '#182032',
+            cyberBlue: '#3b82f6',
+            neonCyan: '#06b6d4',
+            neonPurple: '#8b5cf6',
+            gold: '#f59e0b',
+            cardBorder: 'rgba(51, 65, 85, 0.7)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    input, textarea {
+      user-select: text;
+    }
+    body {
+      background-color: #09090b;
+      color: #F8FAFC;
+      font-family: 'Prompt', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 95px;
+    }
+
+    /* === iAonTech Signature Cyber Grid === */
+    .hero-grid {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-grid::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        500px circle at var(--mouse-x, 50%) var(--mouse-y, 30%),
+        rgba(59, 130, 246, 0.12) 0%,
+        rgba(6, 182, 212, 0.07) 35%,
+        rgba(139, 92, 246, 0.04) 55%,
+        transparent 75%
+      );
+      transition: background 0.15s ease-out;
+    }
+    .hero-grid::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 90% 60% at 50% 0%, transparent 60%, #09090b 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Interactive button press */
+    .touch-btn {
+      transition: transform 0.08s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+    }
+    .touch-btn:active {
+      transform: scale(0.975);
+    }
+    .cyber-card {
+      background: rgba(17, 22, 37, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(51, 65, 85, 0.6);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    .cyber-card:hover {
+      border-color: rgba(6, 182, 212, 0.4);
+    }
+
+    .glow-cyan {
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.35);
+    }
+    .glow-gold {
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+    }
+    .glow-green {
+      box-shadow: 0 0 25px rgba(34, 197, 94, 0.35);
+    }
+    .glow-red {
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.35);
+    }
+    
+    /* Cyberpunk Laser Scanner for Bank Slip */
+    @keyframes laserScan {
+      0% { top: 0%; opacity: 0.7; }
+      50% { top: 94%; opacity: 1; }
+      100% { top: 0%; opacity: 0.7; }
+    }
+    .laser-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #06b6d4, #3b82f6, #a855f7, transparent);
+      box-shadow: 0 0 14px #06b6d4, 0 0 6px #3b82f6;
+      animation: laserScan 2s infinite ease-in-out;
+      pointer-events: none;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body class="bg-[#09090b] text-slate-100 antialiased relative">
+
+  <!-- Interactive Background Grid -->
+  <div id="gridBg" class="hero-grid" aria-hidden="true"></div>
+
+  <!-- TOP BAR: iAonTech Ecosystem Branding -->
+  <div class="relative z-40 bg-[#09090b]/90 border-b border-slate-800/80 px-4 py-1.5 backdrop-blur-md">
+    <div class="max-w-md mx-auto flex items-center justify-between text-[11px]">
+      <div class="flex items-center space-x-1.5 text-slate-400">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 inline-block animate-pulse"></span>
+        <span class="font-medium text-slate-300">iAonTech Ecosystem</span>
+        <span class="text-slate-600">•</span>
+        <span class="text-cyan-400 font-mono">SYS-PREP01</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button onclick="openBackendModal()" class="flex items-center space-x-1 text-slate-400 hover:text-emerald-400 transition-colors">
+          <span id="backendStatusDot" class="w-1.5 h-1.5 rounded-full bg-slate-500 inline-block"></span>
+          <span id="backendStatusText">Google Sheets</span>
+        </button>
+        <span class="text-slate-600">•</span>
+        <a href="https://www.aiaon.tech" target="_blank" class="flex items-center space-x-1 text-slate-400 hover:text-cyan-400 transition-colors">
+          <span>aiaon.tech</span>
+          <span class="text-[10px]">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER (Official iAonTech Logo + Creator + Streak + PRO Button) -->
+  <header class="sticky top-0 z-40 bg-[#09090b]/90 backdrop-blur-xl border-b border-slate-800/80 px-4 py-3">
+    <div class="max-w-md mx-auto flex items-center justify-between">
+      
+      <!-- Brand & Title with Official Cyber Logo -->
+      <div class="flex items-center space-x-2.5">
+        <div class="relative w-10 h-10 rounded-xl p-0.5 bg-gradient-to-tr from-cyan-500 via-blue-500 to-amber-400 shadow-lg shadow-cyan-500/20 flex-shrink-0">
+          <img src="assets/icon.png" alt="iAonTech Cyber Logo" class="w-full h-full object-cover rounded-[10px] bg-slate-950" onerror="this.src='https://www.aiaon.tech/icon.png'">
+          <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-slate-950 flex items-center justify-center text-[9px] font-bold">
+            ✓
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center space-x-1.5">
+            <span class="font-display font-extrabold text-base tracking-tight text-white flex items-center">
+              iAonTech<span class="text-cyan-400 font-mono text-sm ml-0.5">.krurank</span>
+            </span>
+            <span id="vipBadgeHeader" class="hidden text-[9px] bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-500/40 px-1.5 py-0.5 rounded-full font-bold">
+              👑 PRO VIP
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-400 flex items-center gap-1.5">
+            <span class="text-amber-400 font-medium">KruRank AI</span>
+            <span>•</span>
+            <span class="text-slate-300">โดย ครูอ้น (iAon)</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Streak, Profile & PRO Button -->
+      <div class="flex items-center space-x-1.5">
+        <!-- Candidate Profile Pill -->
+        <button onclick="openProfileModal()" class="touch-btn flex items-center space-x-1 bg-slate-900/90 border border-slate-700/80 hover:border-cyan-400 px-2 py-1 rounded-xl text-xs text-slate-300 shadow-sm" title="แก้ไขข้อมูลโปรไฟล์">
+          <span>👤</span>
+          <span id="headerUserName" class="truncate max-w-[70px] sm:max-w-[90px] font-medium text-cyan-300">คุณครู</span>
+        </button>
+
+        <!-- Daily Streak -->
+        <div class="flex items-center space-x-1 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-full text-xs font-semibold text-amber-400 shadow-sm">
+          <span class="text-sm">🔥</span>
+          <span id="streakCount">5</span>
+          <span class="text-[10px] text-amber-300/80">วัน</span>
+        </div>
+
+        <!-- Upgrade PRO Button (Cyber Neon Gradient) -->
+        <button onclick="openProModal()" class="touch-btn bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold text-xs px-2.5 py-1.5 rounded-xl shadow-md shadow-amber-500/20 flex items-center space-x-1">
+          <span>👑</span>
+          <span class="font-display">PRO</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Daily Quota Energy Bar -->
+    <div class="max-w-md mx-auto mt-2.5 pt-2 border-t border-slate-800/60 flex items-center justify-between text-[11px]">
+      <div class="flex items-center space-x-1.5 text-slate-400">
+        <span class="text-cyan-400">⚡</span>
+        <span>สิทธิ์ซ้อมฟรีวันนี้:</span>
+        <span id="quotaText" class="font-bold text-cyan-300">15/15 ข้อ</span>
+      </div>
+      <div class="w-32 bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-700/60">
+        <div id="quotaBar" class="bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 h-full w-full transition-all duration-300"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER (Tabs View) -->
+  <main class="relative z-10 max-w-md mx-auto px-4 pt-3.5">
+
+    <!-- ==================== TAB 1: PRACTICE ARENA (ทำข้อสอบ) ==================== -->
+    <section id="tab-quiz" class="block">
+      
+      <!-- Category Selector Cyber Dropdown (Clean, Mobile Ergonomic & Future-proof) -->
+      <div class="mb-3">
+        <div class="flex items-center justify-between text-[11px] font-medium text-slate-400 mb-1.5 px-0.5">
+          <label for="categorySelect" class="flex items-center gap-1.5 cursor-pointer">
+            <span class="text-cyan-400">📂</span>
+            <span class="text-slate-300 font-semibold">เลือกหมวดข้อสอบ / วิชาเอก:</span>
+          </label>
+          <span id="catQuestionCountBadge" class="text-[10px] text-cyan-300 bg-cyan-950/80 border border-cyan-800/60 px-2 py-0.5 rounded-full font-mono font-semibold">
+            36 ข้อ
+          </span>
+        </div>
+        
+        <div class="relative">
+          <select id="categorySelect" onchange="setQuizCategory(this.value)" class="w-full appearance-none bg-slate-900/95 hover:bg-slate-900 border border-slate-700/80 hover:border-cyan-400 focus:border-cyan-400 text-white font-medium text-xs rounded-xl py-2.5 pl-3.5 pr-10 shadow-lg shadow-black/40 focus:outline-none transition-all cursor-pointer">
+            <option value="all">🌟 รวมทุกหมวด (36 ข้อพร้อมสอบ)</option>
+            <option value="partA">📜 ภาค ก: กฎหมาย & วินัยข้าราชการครู (11 ข้อ)</option>
+            <optgroup label="── ภาค ข: วิชาเอกเฉพาะทาง ──" class="bg-slate-950 text-slate-300">
+              <option value="music">🎵 วิชาเอกดนตรีสากล (5 ข้อ)</option>
+              <option value="early">🧸 วิชาเอกปฐมวัย (5 ข้อ)</option>
+              <option value="thai">📖 วิชาเอกภาษาไทย (5 ข้อ)</option>
+              <option value="math">📐 วิชาเอกคณิตศาสตร์ (5 ข้อ)</option>
+              <option value="comp">💻 วิชาเอกคอมพิวเตอร์ (5 ข้อ)</option>
+            </optgroup>
+          </select>
+
+          <!-- Custom Neon Dropdown Arrow Icon -->
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-cyan-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mock Exam Entry (PRO) -->
+      <button onclick="openMockSetup()" class="touch-btn w-full mb-3 bg-gradient-to-r from-amber-500/15 to-orange-500/15 hover:from-amber-500/25 hover:to-orange-500/25 border border-amber-500/40 text-amber-300 font-bold text-xs py-2 rounded-xl flex items-center justify-center space-x-1.5">
+        <span>⏱️</span>
+        <span>ห้องสอบจำลองเสมือนจริง (จับเวลา)</span>
+        <span class="text-[9px] bg-amber-500/20 border border-amber-500/40 px-1.5 rounded-full">PRO</span>
+      </button>
+
+      <!-- Quiz Progress & Category Header -->
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center space-x-1.5">
+          <span id="qSubjectBadge" class="bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 text-xs px-2.5 py-1 rounded-lg font-medium">
+            พ.ร.บ. ระเบียบข้าราชการครูฯ 2547
+          </span>
+        </div>
+        <div id="qTrapWarning" class="flex items-center space-x-1 bg-rose-500/15 text-rose-300 border border-rose-500/40 text-xs px-2.5 py-1 rounded-full font-bold animate-pulse">
+          <span>⚠️</span>
+          <span>จุดดักคนผิด <span id="trapPercent">82%</span></span>
+        </div>
+      </div>
+
+      <!-- Question Card (iAon Cyber Card) -->
+      <div class="cyber-card rounded-2xl p-4 mb-3.5 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-cyan-500/10 via-blue-500/5 to-transparent pointer-events-none"></div>
+        
+        <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+          <div class="flex items-center space-x-1">
+            <span class="text-cyan-400 font-mono font-bold">Q#</span>
+            <span class="text-slate-300 font-medium"><span id="currentQNum" class="text-cyan-400 font-bold text-sm">1</span> / <span id="totalQNum">8</span></span>
+          </div>
+          <span id="qSubtopic" class="text-[11px] bg-slate-800/80 text-slate-300 px-2 py-0.5 rounded-md border border-slate-700/60">โทษทางวินัย</span>
+        </div>
+
+        <h2 id="questionText" class="text-base sm:text-lg font-semibold text-white leading-relaxed">
+          กำลังโหลดข้อสอบ...
+        </h2>
+      </div>
+
+      <!-- 4 Options (ก, ข, ค, ง) -->
+      <div id="optionsContainer" class="space-y-2.5 mb-4">
+        <!-- Generated Dynamically -->
+      </div>
+
+      <!-- INSTANT AI TUTOR FEEDBACK BOX (Hidden until answered) -->
+      <div id="aiFeedbackBox" class="hidden mb-4 transition-all duration-300">
+        
+        <!-- Tutor Card Header -->
+        <div class="cyber-card rounded-2xl p-4 shadow-2xl relative border-2" id="feedbackBorder">
+          
+          <div class="flex items-start space-x-3 mb-2.5">
+            <!-- Kru Aon Official Avatar as Tutor -->
+            <div id="tutorAvatar" class="relative w-12 h-12 rounded-xl p-0.5 bg-gradient-to-tr from-cyan-500 to-amber-400 shadow-md flex-shrink-0">
+              <img src="assets/me.png" alt="ครูอ้น iAonTech" class="w-full h-full object-cover rounded-[10px] bg-slate-900" onerror="this.src='https://www.aiaon.tech/me.png'">
+              <span id="tutorEmojiBadge" class="absolute -bottom-1 -right-1 text-xs">👨‍🏫</span>
+            </div>
+
+            <!-- Tutor Heading & Status -->
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="font-bold text-sm text-cyan-300 font-display">ครูอ้น AI ติวเตอร์</span>
+                  <span class="text-[10px] text-slate-400 block -mt-0.5">อดีตสอบบรรจุอันดับ 1 • iAonTech</span>
+                </div>
+                <span id="resultBadge" class="text-xs px-2.5 py-0.5 rounded-full font-bold"></span>
+              </div>
+              <p id="tutorReaction" class="text-xs text-slate-200 mt-1 font-medium leading-relaxed"></p>
+            </div>
+          </div>
+
+          <!-- Secret Memory Trick (สูตรจำด่วน) -->
+          <div class="bg-slate-950/80 rounded-xl p-3 border border-slate-800 my-2.5">
+            <div class="flex items-center space-x-1.5 text-amber-400 text-xs font-bold mb-1">
+              <span>💡</span>
+              <span class="font-display">สูตรจำด่วนฟันธงเข้าห้องสอบ:</span>
+            </div>
+            <p id="tutorTrickText" class="text-xs text-amber-200/90 leading-relaxed font-sans"></p>
+          </div>
+
+          <!-- Legal Reference / Concept -->
+          <div class="text-[11px] text-slate-400 flex items-start space-x-1.5 pt-1.5 border-t border-slate-800">
+            <span class="text-cyan-400 font-bold">📌 ตัวบทอ้างอิง:</span>
+            <span id="legalRefText" class="text-slate-300 font-mono text-[10px] sm:text-[11px]"></span>
+          </div>
+
+          <!-- Action Buttons: Ask More AI & Next Question -->
+          <div class="mt-3.5 pt-2.5 border-t border-slate-800 flex items-center space-x-2">
+            <button onclick="openAskAiModal()" class="touch-btn flex-1 bg-slate-800/90 hover:bg-slate-700/90 text-cyan-300 border border-cyan-500/30 text-xs font-semibold py-2.5 px-3 rounded-xl flex items-center justify-center space-x-1.5 shadow-sm">
+              <span>💬</span>
+              <span>ถามครูอ้น AI เพิ่ม (Ask AI)</span>
+            </button>
+
+            <button onclick="nextQuestion()" class="touch-btn flex-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 hover:from-blue-500 hover:to-cyan-400 text-slate-950 text-xs font-bold py-2.5 px-3 rounded-xl flex items-center justify-center space-x-1 shadow-md shadow-cyan-500/20">
+              <span>ข้อถัดไป</span>
+              <span>➔</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Signature Creator Trust Card (สัญลักษณ์ความน่าเชื่อถือ iAonTech) -->
+      <div class="cyber-card rounded-2xl p-3.5 mb-4 border border-slate-800/80 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-11 h-11 rounded-xl p-0.5 bg-gradient-to-tr from-cyan-500 to-blue-500 flex-shrink-0">
+            <img src="assets/me.png" alt="ครูอ้น จิรวัฒน์ เดชเส้ง" class="w-full h-full object-cover rounded-[10px]" onerror="this.src='https://www.aiaon.tech/me.png'">
+          </div>
+          <div>
+            <div class="flex items-center space-x-1.5">
+              <span class="text-xs font-bold text-white">ครูจิรวัฒน์ เดชเส้ง (ครูอ้น)</span>
+              <span class="text-[9px] bg-blue-500/20 text-blue-300 border border-blue-500/40 px-1 rounded font-bold">ผู้พัฒนา</span>
+            </div>
+            <p class="text-[10px] text-slate-400">
+              ครู ค.ศ.2 โรงเรียนหาดใหญ่วิทยาลัย • ผู้ก่อตั้ง iAonTech
+            </p>
+          </div>
+        </div>
+        <a href="https://lin.ee/yourline" target="_blank" class="touch-btn bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold px-2 py-1.5 rounded-lg flex items-center space-x-1">
+          <span>LINE OA</span>
+        </a>
+      </div>
+
+    </section>
+
+    <!-- ==================== TAB 2: LEADERBOARD (ทำเนียบจัดอันดับ) ==================== -->
+    <section id="tab-leaderboard" class="hidden">
+      
+      <!-- Leaderboard Header Banner -->
+      <div class="cyber-card rounded-2xl p-4 mb-3.5 text-center relative overflow-hidden border border-amber-500/30">
+        <div class="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-cyan-500/10 to-amber-500/10 pointer-events-none"></div>
+        <span class="text-2xl">🏆</span>
+        <h2 class="text-lg font-bold font-display text-white mt-1">
+          ทำเนียบว่าที่ครูผู้ช่วยคนต่อไป
+        </h2>
+        <p class="text-xs text-slate-300 mt-0.5">
+          จัดอันดับคะแนน ความแม่นยำ และ Daily Streak ทั่วประเทศ
+        </p>
+      </div>
+
+      <!-- Filter Categories (iAon Responsive Pill) -->
+      <div class="flex items-center space-x-1.5 bg-slate-900/90 p-1 rounded-xl border border-slate-800 mb-3.5 text-xs">
+        <button onclick="switchLeaderboardFilter('all')" id="filterBtn-all" class="flex-1 py-1.5 rounded-lg font-bold bg-cyan-500 text-slate-950 transition-all shadow-sm">
+          🇹🇭 ทั่วประเทศ
+        </button>
+        <button onclick="switchLeaderboardFilter('major')" id="filterBtn-major" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">
+          🎵 เอกดนตรีสากล
+        </button>
+        <button onclick="switchLeaderboardFilter('area')" id="filterBtn-area" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">
+          📍 สพม.สงขลา สตูล
+        </button>
+      </div>
+
+      <!-- Top 3 Podium Cards -->
+      <div id="podiumContainer" class="grid grid-cols-3 gap-2 mb-4">
+        <!-- Rendered Dynamically -->
+      </div>
+
+      <!-- Leaderboard List -->
+      <div id="leaderboardList" class="space-y-2 mb-4">
+        <!-- Rendered Dynamically -->
+      </div>
+
+      <!-- Sticky Current Player Bar -->
+      <div class="cyber-card rounded-xl p-3 border-2 border-cyan-500/70 shadow-xl flex items-center justify-between mb-4">
+        <div class="flex items-center space-x-2.5">
+          <div id="stickyPlayerRank" class="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400 flex items-center justify-center font-bold text-xs text-cyan-300 font-mono">
+            18
+          </div>
+          <div>
+            <div class="text-xs font-bold text-white flex items-center gap-1.5">
+              <span id="stickyPlayerName">คุณครู (คุณเอง)</span>
+              <span id="stickyPlayerMajor" class="text-[9px] bg-slate-800 border border-slate-700 px-1.5 py-0.2 rounded text-cyan-400">เอกดนตรี</span>
+              <button onclick="openProfileModal()" class="text-[10px] text-cyan-300 hover:text-white underline ml-0.5">✏️ แก้ไข</button>
+            </div>
+            <div class="text-[11px] text-slate-400">
+              ความแม่นยำ: <span id="stickyPlayerAcc" class="text-emerald-400 font-bold">85%</span> (ถูก <span id="stickyPlayerCorrect">128</span> ข้อ) • <span id="stickyPlayerArea" class="text-slate-400">สพม.สงขลา สตูล</span>
+            </div>
+          </div>
+        </div>
+        <button onclick="switchTab('quiz')" class="touch-btn bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-slate-950 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm">
+          ไต่อันดับ 🔥
+        </button>
+      </div>
+
+      <!-- Share Card Button -->
+      <button onclick="openShareModal()" class="touch-btn w-full mb-4 bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 hover:from-fuchsia-500 hover:to-cyan-400 text-white font-bold text-sm py-2.5 rounded-xl shadow-lg shadow-purple-500/20 flex items-center justify-center space-x-1.5">
+        <span>📸</span>
+        <span>สร้างการ์ดคะแนนแชร์ลง Facebook / IG / TikTok</span>
+      </button>
+
+    </section>
+
+    <!-- ==================== TAB 3: WEAKNESS RADAR (เจาะจุดอ่อน) ==================== -->
+    <section id="tab-weakness" class="hidden">
+      
+      <div class="cyber-card rounded-2xl p-4 mb-4">
+        <div class="flex items-center justify-between mb-3.5">
+          <div>
+            <h3 class="font-display font-bold text-base text-white flex items-center gap-1.5">
+              <span>🎯</span>
+              <span>AI วิเคราะห์เจาะจุดอ่อนรายบุคคล</span>
+            </h3>
+            <p class="text-xs text-slate-400">ประมวลผลจากการตอบข้อสอบย้อนหลัง</p>
+          </div>
+          <span class="text-xs bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2 py-0.5 rounded-full font-bold">
+            พบ 2 จุดวิกฤต
+          </span>
+        </div>
+
+        <!-- Radar Progress Bars -->
+        <div class="space-y-3">
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-slate-300">พ.ร.บ. ระเบียบข้าราชการครู (โทษทางวินัย)</span>
+              <span class="text-rose-400 font-bold font-mono">42% (วิกฤต)</span>
+            </div>
+            <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-800">
+              <div class="bg-rose-500 h-full w-[42%]"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-slate-300">อำนาจหน้าที่ ก.ค.ศ. vs กมว. คุรุสภา</span>
+              <span class="text-amber-400 font-bold font-mono">48% (จุดเสี่ยง)</span>
+            </div>
+            <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-800">
+              <div class="bg-amber-500 h-full w-[48%]"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-slate-300">พ.ร.บ. การศึกษาแห่งชาติ (ภาคบังคับ/ขั้นพื้นฐาน)</span>
+              <span class="text-emerald-400 font-bold font-mono">88% (ผ่านเกณฑ์ดี)</span>
+            </div>
+            <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-800">
+              <div class="bg-emerald-500 h-full w-[88%]"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-slate-300">จิตวิทยาการเรียนรู้ & การแนะแนว</span>
+              <span class="text-cyan-400 font-bold font-mono">92% (ดีเยี่ยม)</span>
+            </div>
+            <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-800">
+              <div class="bg-cyan-400 h-full w-[92%]"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Advice Box with Kru Aon Avatar -->
+        <div class="mt-4 bg-slate-950/80 rounded-xl p-3 border border-slate-800 flex items-start space-x-2.5">
+          <div class="w-8 h-8 rounded-lg p-0.5 bg-gradient-to-tr from-cyan-500 to-amber-400 flex-shrink-0">
+            <img src="assets/me.png" alt="ครูอ้น" class="w-full h-full object-cover rounded-md" onerror="this.src='https://www.aiaon.tech/me.png'">
+          </div>
+          <div>
+            <span class="text-xs font-bold text-cyan-300">คำแนะนำจากครูอ้น AI:</span>
+            <p class="text-xs text-slate-300 leading-relaxed mt-0.5">
+              "คุณครูทำได้ดีมากในพาร์ทจิตวิทยา แต่จุดที่อันตรายมากคือ <span class="text-rose-400 font-semibold">การสับสนระหว่าง 'ให้ออก' กับ 'ปลดออก'</span> และอำนาจ กมว. ในการพักใช้/เพิกถอนใบอนุญาต แนะนำให้เปิดโหมดเจาะจุดอ่อนซ้ำทันทีครับ!"
+            </p>
+          </div>
+        </div>
+
+        <!-- Drill Button -->
+        <button onclick="startWeaknessDrill()" class="touch-btn w-full mt-4 bg-gradient-to-r from-rose-500 via-orange-500 to-amber-500 hover:from-rose-400 hover:to-amber-400 text-slate-950 font-bold text-sm py-2.5 rounded-xl shadow-lg shadow-orange-500/20 flex items-center justify-center space-x-1.5">
+          <span>🎯</span>
+          <span>ลุยโหมดเจาะจุดอ่อน (สุ่มเฉพาะข้อที่เคยผิด)</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ==================== TAB 4: TUTOR AI CHAT (คุยกับครูอ้น AI) ==================== -->
+    <section id="tab-chat" class="hidden">
+      
+      <div class="cyber-card rounded-2xl p-4 flex flex-col h-[65vh]">
+        <!-- Chat Header -->
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="flex items-center space-x-2.5">
+            <div class="w-10 h-10 rounded-xl p-0.5 bg-gradient-to-tr from-cyan-400 to-blue-500 flex-shrink-0">
+              <img src="assets/me.png" alt="ครูอ้น" class="w-full h-full object-cover rounded-[10px]" onerror="this.src='https://www.aiaon.tech/me.png'">
+            </div>
+            <div>
+              <h3 class="font-bold text-sm text-white flex items-center gap-1.5">
+                <span>ครูอ้น AI ติวเตอร์</span>
+                <span class="text-[9px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 px-1 rounded font-bold">iAonTech</span>
+              </h3>
+              <p class="text-[10px] text-emerald-400 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                <span>ออนไลน์ พร้อมเฉลยทุกมาตรา</span>
+              </p>
+            </div>
+          </div>
+          <button onclick="openApiKeyModal()" class="text-[11px] text-slate-400 hover:text-cyan-300 border border-slate-700/80 hover:border-cyan-500/40 px-2 py-1 rounded-lg">
+            🔑 ตั้งค่า API
+          </button>
+        </div>
+
+        <!-- Chat History -->
+        <div id="chatHistory" class="flex-1 overflow-y-auto py-3 space-y-3 pr-1 text-xs">
+          <!-- Tutor Greeting -->
+          <div class="flex items-start space-x-2">
+            <div class="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0 border border-cyan-500/30">
+              <img src="assets/me.png" alt="ครูอ้น" class="w-full h-full object-cover">
+            </div>
+            <div class="bg-slate-800/90 text-slate-100 p-3 rounded-2xl rounded-tl-none max-w-[85%] leading-relaxed border border-slate-700/60">
+              สวัสดีครับคุณครู! ครูอ้นพร้อมช่วยตอบทุกข้อสงสัยเกี่ยวกับข้อสอบครูผู้ช่วย สพฐ. ภาค ก และวิชาเอกดนตรี/การศึกษาครับ สงสัยกฎหมายมาตราไหน หรืออยากได้สูตรจำจุดหลอก พิมพ์ถามครูอ้นได้เลยครับ!
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input Form -->
+        <div class="pt-2 border-t border-slate-800 flex items-center space-x-2">
+          <input type="text" id="chatInput" placeholder="พิมพ์ถามข้อสงสัย เช่น 'ปลดออกกับไล่ออกต่างกันยังไง'..." class="flex-1 bg-slate-950 border border-slate-800 focus:border-cyan-400 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+          <button onclick="sendChatMessage()" class="touch-btn bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-slate-950 font-bold px-3 py-2 rounded-xl text-xs flex items-center justify-center shadow-md">
+            <span>ส่ง</span>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ==================== BOTTOM STICKY NAVIGATION (iAon Mobile Bar) ==================== -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-[#09090b]/95 backdrop-blur-xl border-t border-slate-800/80 py-2 px-4">
+    <div class="max-w-md mx-auto grid grid-cols-4 gap-1">
+      
+      <button onclick="switchTab('quiz')" id="navBtn-quiz" class="flex flex-col items-center justify-center py-1 text-cyan-400 transition-colors">
+        <span class="text-lg">📝</span>
+        <span class="text-[10px] font-bold mt-0.5">ฝึกข้อสอบ</span>
+      </button>
+
+      <button onclick="switchTab('leaderboard')" id="navBtn-leaderboard" class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200 transition-colors">
+        <span class="text-lg">🏆</span>
+        <span class="text-[10px] font-medium mt-0.5">ทำเนียบแร้งก์</span>
+      </button>
+
+      <button onclick="switchTab('weakness')" id="navBtn-weakness" class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200 transition-colors">
+        <span class="text-lg">🎯</span>
+        <span class="text-[10px] font-medium mt-0.5">เจาะจุดอ่อน</span>
+      </button>
+
+      <button onclick="switchTab('chat')" id="navBtn-chat" class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200 transition-colors">
+        <span class="text-lg">💬</span>
+        <span class="text-[10px] font-medium mt-0.5">ครูอ้น AI</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ==================== PRO UPGRADE MODAL (PromptPay & 5-Layer AI Slip Verification) ==================== -->
+  <div id="proModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="cyber-card rounded-3xl max-w-sm w-full p-4 sm:p-5 shadow-2xl relative max-h-[92vh] overflow-y-auto border border-amber-500/50">
+      
+      <!-- Close Button -->
+      <button onclick="closeProModal()" class="absolute top-4 right-4 w-7 h-7 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center text-sm transition-colors">
+        ✕
+      </button>
+
+      <!-- Modal Header -->
+      <div class="text-center mb-3">
+        <div class="w-12 h-12 mx-auto rounded-2xl bg-gradient-to-tr from-amber-400 via-orange-500 to-amber-600 flex items-center justify-center text-2xl shadow-lg shadow-amber-500/30 mb-2 animate-bounce">
+          👑
+        </div>
+        <h3 class="font-display font-extrabold text-lg text-white">อัปเกรด KruRank PRO VIP</h3>
+        <p class="text-xs text-amber-300">เตรียมสอบแบบฟูลออปชัน พร้อมระบบตรวจสลิปอัตโนมัติ</p>
+      </div>
+
+      <!-- Perks List -->
+      <div class="bg-slate-950/80 rounded-xl p-3 mb-3 border border-slate-800/80 text-[11px] space-y-1.5">
+        <div class="flex items-center space-x-2 text-slate-200">
+          <span class="text-emerald-400 font-bold">✓</span>
+          <span>ฝึกทำข้อสอบไม่จำกัด (ภาค ก + วิชาการศึกษา + ทุกวิชาเอก)</span>
+        </div>
+        <div class="flex items-center space-x-2 text-slate-200">
+          <span class="text-emerald-400 font-bold">✓</span>
+          <span>AI ครูอ้น วิเคราะห์จุดอ่อนรายบุคคลแบบ Realtime 24 ชม.</span>
+        </div>
+        <div class="flex items-center space-x-2 text-slate-200">
+          <span class="text-emerald-400 font-bold">✓</span>
+          <span>ตรามงกุฎทองคำ VIP หน้าชื่อในทำเนียบจัดอันดับประเทศ</span>
+        </div>
+        <div class="flex items-center space-x-2 text-slate-200">
+          <span class="text-emerald-400 font-bold">✓</span>
+          <span>ห้องสอบเสมือนจริง จับเวลา 150 นาที + โหมดฝึกซ้อมพิเศษ</span>
+        </div>
+      </div>
+
+      <!-- Pricing Options Selector -->
+      <div class="grid grid-cols-2 gap-2 mb-3 text-center">
+        <div onclick="selectPlan(199)" id="plan-199" class="cursor-pointer border border-slate-800 bg-slate-900/80 p-2.5 rounded-xl hover:border-amber-400 transition-all">
+          <div class="text-[10px] text-slate-400 font-medium">แพ็กเกจรายเดือน</div>
+          <div class="text-base font-bold text-white font-mono my-0.5">199.-</div>
+          <div class="text-[9px] text-slate-400">เฉลี่ย 6.6 บ./วัน</div>
+        </div>
+        <div onclick="selectPlan(499)" id="plan-499" class="cursor-pointer border-2 border-amber-500 bg-amber-500/10 p-2.5 rounded-xl transition-all shadow-md shadow-amber-500/20 relative">
+          <div class="absolute -top-2 right-2 bg-gradient-to-r from-red-500 to-amber-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">
+            แนะนำ คุ้มสุด
+          </div>
+          <div class="text-[10px] text-amber-300 font-bold">จบฤดูกาลสอบ (ตลอดชีพ)</div>
+          <div class="text-base font-bold text-amber-400 font-mono my-0.5">499.-</div>
+          <div class="text-[9px] text-emerald-400 font-medium">จ่ายครั้งเดียวใช้ยาว</div>
+        </div>
+      </div>
+
+      <!-- PromptPay Dynamic QR with Official Creator Name -->
+      <div class="bg-white rounded-2xl p-3 text-center text-slate-900 mb-3 shadow-inner">
+        <div class="flex items-center justify-between text-[11px] font-bold text-slate-700 mb-1 border-b pb-1">
+          <span class="flex items-center gap-1">
+            <span class="text-blue-600 font-display">ThaiQR</span> พร้อมเพย์
+          </span>
+          <span class="text-[10px] text-slate-500">สแกนได้ทุกแอปธนาคาร</span>
+        </div>
+
+        <!-- QR Code Container -->
+        <div id="qrcode" class="flex justify-center my-2 min-h-[160px] items-center">
+          <div class="animate-pulse text-xs text-slate-400">กำลังสร้าง QR Code...</div>
+        </div>
+
+        <div class="text-xs font-bold text-slate-800">
+          ยอดชำระ: <span id="payAmountText" class="text-emerald-600 text-sm font-mono font-bold">499.00</span> บาท
+        </div>
+        <div class="text-[10px] text-slate-500 mt-0.5">
+          บัญชี: นายจิรวัฒน์ เดชเส้ง (ครูอ้น AiAon Tech)
+        </div>
+
+        <!-- Quick Action Buttons for PromptPay -->
+        <div class="grid grid-cols-2 gap-1.5 mt-2.5 pt-2 border-t border-slate-100 text-[10px]">
+          <button onclick="copyPromptPayNumber()" class="touch-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-1.5 px-2 rounded-lg flex items-center justify-center space-x-1 border border-slate-200">
+            <span>📋</span>
+            <span>คัดลอกเลขพร้อมเพย์</span>
+          </button>
+          <button onclick="downloadQrCode()" class="touch-btn bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-1.5 px-2 rounded-lg flex items-center justify-center space-x-1 border border-blue-200">
+            <span>💾</span>
+            <span>บันทึกภาพ QR</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ================= SMART BANK SLIP UPLOADER ================= -->
+      <div class="space-y-2 mb-3">
+        <div class="flex items-center justify-between text-[11px]">
+          <span class="text-slate-300 font-medium flex items-center gap-1">
+            <span>📎</span> แนบหลักฐานสลิปโอนเงิน
+          </span>
+          <span class="text-[10px] text-emerald-400 font-mono">5-Layer AI Verify</span>
+        </div>
+
+        <!-- Hidden Native File Input -->
+        <input type="file" id="slipFileInput" accept="image/*" class="hidden" onchange="handleSlipFileSelect(event)">
+
+        <!-- State 1: Dropzone (Click to upload) -->
+        <div id="slipDropzone" onclick="document.getElementById('slipFileInput').click()" class="border-2 border-dashed border-slate-700 hover:border-cyan-400 bg-slate-900/60 hover:bg-slate-900 rounded-2xl p-3 text-center cursor-pointer transition-all touch-btn">
+          <div class="text-2xl mb-1">📸</div>
+          <div class="text-xs font-semibold text-cyan-300">แตะเพื่อเลือกรูปภาพสลิป หรือ ถ่ายรูป</div>
+          <div class="text-[10px] text-slate-400 mt-0.5">รองรับไฟล์ JPG, PNG จากแอปธนาคารทุกแห่ง</div>
+        </div>
+
+        <!-- State 2: Slip Image Preview (Active when file selected) -->
+        <div id="slipPreviewContainer" class="hidden relative bg-slate-950/90 rounded-2xl p-2.5 border border-cyan-500/60 overflow-hidden">
+          <!-- Laser Scanline Animation (Shows during AI scan) -->
+          <div id="laserScanline" class="laser-line hidden"></div>
+          
+          <div class="relative max-h-48 overflow-hidden rounded-xl border border-slate-800 bg-black flex justify-center items-center">
+            <img id="slipPreviewImg" src="" alt="Slip Preview" class="max-h-44 object-contain mx-auto">
+          </div>
+
+          <div class="flex items-center justify-between mt-2 pt-1 border-t border-slate-800 text-[10px]">
+            <div class="flex items-center space-x-1.5 text-slate-300 truncate max-w-[190px]">
+              <span class="text-cyan-400">📄</span>
+              <span id="slipFileName" class="truncate font-mono">slip.jpg</span>
+              <span id="slipFileSize" class="text-slate-500 text-[9px]">(180 KB)</span>
+            </div>
+            <button onclick="resetSlipSelection(event)" class="text-rose-400 hover:text-rose-300 font-semibold text-[10px] flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-rose-500/10">
+              <span>✕</span>
+              <span>เลือกรูปใหม่</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 5-Layer AI Verification Progress Panel -->
+        <div id="verifyProgressPanel" class="hidden bg-slate-950/90 rounded-xl p-2.5 border border-cyan-500/40 text-[10px] space-y-1.5">
+          <div id="verifyStep1" class="flex items-center space-x-2 text-slate-400 transition-colors">
+            <span class="step-icon">⏳</span>
+            <span>ชั้นที่ 1-2: ถอดรหัส BOT Standard Mini-QR & เช็ค Ref ซ้ำ...</span>
+          </div>
+          <div id="verifyStep2" class="flex items-center space-x-2 text-slate-400 transition-colors">
+            <span class="step-icon">⏳</span>
+            <span>ชั้นที่ 3-4: Gemini Vision ตรวจชื่อบัญชี (จิรวัฒน์ เดชเส้ง) & ยอดเงิน...</span>
+          </div>
+          <div id="verifyStep3" class="flex items-center space-x-2 text-slate-400 transition-colors">
+            <span class="step-icon">⏳</span>
+            <span>ชั้นที่ 5: Zero-Trust Safety Lock & ส่งแจ้งเตือน @AiAonhub_bot...</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="space-y-1.5 pt-1">
+          <!-- Primary Verify Button -->
+          <button onclick="submitAndVerifySlip()" id="submitSlipBtn" class="touch-btn w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center space-x-1.5 shadow-lg shadow-emerald-500/20">
+            <span>🚀</span>
+            <span id="submitSlipBtnText">อัปโหลดสลิป & ตรวจสอบอัตโนมัติ</span>
+          </button>
+
+          <!-- Quick Test Shortcut (For Dev/Demo testing without real slip) -->
+          <button onclick="triggerQuickTestSlip()" id="quickTestBtn" class="touch-btn w-full bg-slate-900/90 hover:bg-slate-800 text-cyan-300 hover:text-white border border-slate-700/80 font-medium py-1.5 rounded-xl text-[10px] flex items-center justify-center space-x-1">
+            <span>⚡</span>
+            <span>ทดสอบด้วยสลิปจำลอง (Quick 1-Click Test)</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Dev Reset Helper -->
+      <div class="text-center pt-2 border-t border-slate-800/60">
+        <button onclick="devResetProState()" class="text-[9px] text-slate-500 hover:text-amber-400 transition-colors underline">
+          🔄 รีเซ็ตสถานะเป็นผู้ใช้ฟรี (สำหรับทดสอบระบบใหม่)
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== ASK AI MORE MODAL ==================== -->
+  <div id="askAiModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="cyber-card rounded-3xl max-w-sm w-full p-4 shadow-2xl relative border border-cyan-500/40">
+      <button onclick="closeAskAiModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">✕</button>
+      
+      <div class="flex items-center space-x-2.5 mb-3">
+        <div class="w-8 h-8 rounded-lg p-0.5 bg-gradient-to-tr from-cyan-400 to-blue-500 flex-shrink-0">
+          <img src="assets/me.png" alt="ครูอ้น" class="w-full h-full object-cover rounded-md" onerror="this.src='https://www.aiaon.tech/me.png'">
+        </div>
+        <h3 class="font-bold text-sm text-white font-display">ถามครูอ้น AI เฉพาะข้อนี้</h3>
+      </div>
+
+      <div class="bg-slate-950 p-2.5 rounded-xl mb-3 text-xs text-slate-300 border border-slate-800">
+        <span class="text-cyan-400 font-semibold">ข้อสอบ:</span>
+        <p id="modalQSummary" class="text-slate-400 mt-1 line-clamp-2"></p>
+      </div>
+
+      <textarea id="modalAiQuestion" rows="3" placeholder="เช่น 'ช่วยอธิบายให้เข้าใจง่ายๆ หน่อยว่าทำไมให้ออกไม่ใช่โทษทางวินัย'..." class="w-full bg-slate-950 border border-slate-800 focus:border-cyan-400 rounded-xl p-2.5 text-xs text-white focus:outline-none mb-3 resize-none"></textarea>
+
+      <button onclick="submitAskAi()" id="btnSubmitAi" class="touch-btn w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-slate-950 font-bold py-2 rounded-xl text-xs flex items-center justify-center space-x-1.5 shadow-md">
+        <span>🚀</span>
+        <span>ส่งคำถามให้ครูอ้น AI</span>
+      </button>
+
+      <div id="modalAiResponseBox" class="hidden mt-3 pt-3 border-t border-slate-800 text-xs">
+        <div class="text-cyan-300 font-bold mb-1 flex items-center gap-1">
+          <span>👨‍🏫 คำตอบจากครูอ้น AI:</span>
+        </div>
+        <div id="modalAiResponseText" class="text-slate-200 leading-relaxed bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 max-h-40 overflow-y-auto"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MOCK EXAM OVERLAY ==================== -->
+  <div id="mockModal" class="fixed inset-0 z-[60] bg-[#09090b] hidden flex-col overflow-y-auto">
+    <div class="max-w-md w-full mx-auto px-4 py-3 flex-1 flex flex-col">
+
+      <!-- Setup screen -->
+      <div id="mockSetup" class="hidden">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="font-display font-bold text-base text-white">⏱️ ห้องสอบจำลอง</h3>
+          <button onclick="closeMock(true)" class="text-slate-400 hover:text-white">✕</button>
+        </div>
+        <div class="cyber-card rounded-2xl p-4 mb-3 text-xs text-slate-300 leading-relaxed">
+          จำลองบรรยากาศวันสอบจริง: ทำต่อเนื่อง จับเวลาถอยหลัง <b class="text-amber-300">ไม่มีเฉลยระหว่างสอบ</b> ดูเฉลยและสูตรจำทุกข้อหลังส่งข้อสอบ
+        </div>
+        <div class="space-y-2 mb-3">
+          <button onclick="startMock('mine')" class="touch-btn w-full text-left cyber-card rounded-xl p-3 border border-cyan-500/40">
+            <div class="font-bold text-cyan-300 text-sm">ภาค ก + วิชาเอกของฉัน</div>
+            <div id="mockMineInfo" class="text-[11px] text-slate-400 mt-0.5"></div>
+          </button>
+          <button onclick="startMock('all')" class="touch-btn w-full text-left cyber-card rounded-xl p-3 border border-slate-700">
+            <div class="font-bold text-white text-sm">ข้อสอบทั้งคลัง (ทุกวิชา)</div>
+            <div id="mockAllInfo" class="text-[11px] text-slate-400 mt-0.5"></div>
+          </button>
+        </div>
+        <p class="text-[10px] text-slate-500 leading-relaxed">หมายเหตุ: ตอนนี้คลังข้อสอบยังมีไม่ครบ 100 ข้อ ระบบสุ่มสอบเท่าที่มี และคำนวณเวลาให้อัตโนมัติ (ประมาณ 72 วินาที/ข้อ)</p>
+      </div>
+
+      <!-- Exam screen -->
+      <div id="mockExam" class="hidden flex-1 flex flex-col">
+        <div class="flex items-center justify-between mb-2 sticky top-0 bg-[#09090b]/95 py-2 z-10">
+          <div class="text-xs text-slate-300">ข้อ <span id="mockQNum" class="text-cyan-400 font-bold text-sm">1</span> / <span id="mockQTotal">0</span></div>
+          <div id="mockTimer" class="font-mono font-bold text-sm text-amber-300 bg-amber-500/10 border border-amber-500/40 px-3 py-1 rounded-full">00:00</div>
+          <button onclick="finishMock()" class="touch-btn text-[11px] bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold px-2.5 py-1 rounded-lg">ส่งข้อสอบ</button>
+        </div>
+        <div class="cyber-card rounded-2xl p-4 mb-3">
+          <div id="mockQMeta" class="text-[10px] text-cyan-300 mb-1.5"></div>
+          <div id="mockQText" class="text-base font-semibold text-white leading-relaxed"></div>
+        </div>
+        <div id="mockOptions" class="space-y-2.5 mb-3"></div>
+        <div class="flex items-center space-x-2 mb-3">
+          <button onclick="mockGo(-1)" class="touch-btn flex-1 bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold py-2.5 rounded-xl">⬅ ก่อนหน้า</button>
+          <button onclick="mockGo(1)" class="touch-btn flex-1 bg-gradient-to-r from-blue-600 to-cyan-500 text-slate-950 text-xs font-bold py-2.5 rounded-xl">ถัดไป ➔</button>
+        </div>
+        <div class="text-[10px] text-slate-500 mb-1">แผงข้อสอบ (แตะเพื่อข้ามไปข้อนั้น)</div>
+        <div id="mockPalette" class="flex flex-wrap gap-1.5 pb-4"></div>
+      </div>
+
+      <!-- Result screen -->
+      <div id="mockResult" class="hidden">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="font-display font-bold text-base text-white">📊 ผลสอบจำลอง</h3>
+          <button onclick="closeMock(false)" class="text-slate-400 hover:text-white">✕</button>
+        </div>
+        <div class="cyber-card rounded-2xl p-5 mb-3 text-center border border-cyan-500/40">
+          <div id="mockScorePct" class="font-display font-extrabold text-5xl text-cyan-300">0%</div>
+          <div id="mockScoreLine" class="text-xs text-slate-300 mt-1"></div>
+          <div id="mockVerdict" class="text-xs font-bold mt-2"></div>
+        </div>
+        <div id="mockBreakdown" class="cyber-card rounded-2xl p-3 mb-3 space-y-2 text-xs"></div>
+        <div class="text-xs font-bold text-white mb-1.5">ทบทวนข้อที่ผิด / ไม่ได้ตอบ</div>
+        <div id="mockReview" class="space-y-2 mb-4"></div>
+        <button onclick="closeMock(false)" class="touch-btn w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-slate-950 font-bold text-sm py-2.5 rounded-xl mb-4">กลับหน้าฝึกข้อสอบ</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== SHARE CARD MODAL ==================== -->
+  <div id="shareModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="cyber-card rounded-2xl max-w-sm w-full p-4 shadow-xl text-xs border border-fuchsia-500/40 max-h-[94vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-2">
+        <h4 class="font-bold text-white font-display text-sm">📸 การ์ดคะแนนของคุณครู</h4>
+        <button onclick="closeShareModal()" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <canvas id="shareCanvas" width="1080" height="1920" class="w-full rounded-xl border border-slate-700 mb-3" style="aspect-ratio:1080/1920; max-height:58vh; object-fit:contain; background:#09090b"></canvas>
+      <div class="grid grid-cols-2 gap-2">
+        <button onclick="downloadShareCard()" class="touch-btn bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 font-bold py-2.5 rounded-xl">💾 บันทึกรูป</button>
+        <button onclick="nativeShareCard()" class="touch-btn bg-gradient-to-r from-fuchsia-600 to-cyan-500 text-white font-bold py-2.5 rounded-xl">🚀 แชร์เลย</button>
+      </div>
+      <p id="shareHint" class="text-[10px] text-slate-500 mt-2 leading-relaxed text-center">ขนาด 1080×1920 (Story/Reels/TikTok) • ตอบข้อสอบเพิ่มเพื่ออัปเดตคะแนนบนการ์ด</p>
+    </div>
+  </div>
+
+  <!-- ==================== PROFILE ONBOARDING MODAL ==================== -->
+  <div id="profileModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="cyber-card rounded-2xl max-w-sm w-full p-4 shadow-xl text-xs border border-cyan-500/40">
+      <div class="flex justify-between items-center mb-2">
+        <h4 class="font-bold text-white font-display flex items-center gap-1.5 text-sm">
+          <span>👤</span>
+          <span>ข้อมูลว่าที่ครูผู้ช่วยของคุณ</span>
+        </h4>
+        <button onclick="closeProfileModal()" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <p class="text-slate-400 text-[11px] mb-3 leading-relaxed">
+        บันทึกชื่อ สาขาวิชาเอก และเขตพื้นที่ที่จะสอบ เพื่อขึ้นทำเนียบจัดอันดับจริงระดับประเทศ
+      </p>
+
+      <!-- Candidate Name -->
+      <label class="block text-[11px] text-slate-300 font-medium mb-1">ชื่อเล่น / ชื่อเรียกของคุณครู:</label>
+      <input type="text" id="inputProfileName" placeholder="เช่น ครูฟ้าใส, ครูอาร์ม, ว่าที่ครูแนน..." class="w-full bg-slate-950 border border-slate-800 focus:border-cyan-400 rounded-lg p-2 text-white text-xs mb-3 focus:outline-none">
+
+      <!-- Major Selection -->
+      <label class="block text-[11px] text-slate-300 font-medium mb-1">สาขาวิชาเอกของคุณครู:</label>
+      <select id="selectProfileMajor" class="w-full bg-slate-950 border border-slate-800 focus:border-cyan-400 rounded-lg p-2 text-white text-xs mb-3 focus:outline-none">
+        <option value="เอกดนตรีสากล">🎵 เอกดนตรีสากล</option>
+        <option value="เอกปฐมวัย">🧸 เอกปฐมวัย</option>
+        <option value="เอกภาษาไทย">📖 เอกภาษาไทย</option>
+        <option value="เอกคณิตศาสตร์">📐 เอกคณิตศาสตร์</option>
+        <option value="เอกภาษาอังกฤษ">🇬🇧 เอกภาษาอังกฤษ</option>
+        <option value="เอกคอมพิวเตอร์">💻 เอกคอมพิวเตอร์</option>
+        <option value="เอกวิทยาศาสตร์">🔬 เอกวิทยาศาสตร์ทั่วไป</option>
+        <option value="เอกสังคมศึกษา">🏛️ เอกสังคมศึกษา</option>
+        <option value="เอกพลศึกษา">🏃 เอกพลศึกษา</option>
+        <option value="เอกศิลปศึกษา">🎨 เอกศิลปศึกษา</option>
+        <option value="เอกประถมศึกษา">🧑‍🏫 เอกการประถมศึกษา</option>
+      </select>
+
+      <!-- Educational Area Selection -->
+      <label class="block text-[11px] text-slate-300 font-medium mb-1">เขตพื้นที่การศึกษาที่จะลงสอบ (สพม./สพป.):</label>
+      <input type="text" id="inputProfileArea" placeholder="เช่น สพม.สงขลา สตูล, สพป.หาดใหญ่, สพม.กทม. เขต 2..." class="w-full bg-slate-950 border border-slate-800 focus:border-cyan-400 rounded-lg p-2 text-white text-xs mb-3 focus:outline-none">
+
+      <button onclick="saveUserProfile()" class="touch-btn w-full bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 hover:from-blue-500 hover:to-cyan-400 text-slate-950 font-bold py-2 rounded-xl text-xs flex items-center justify-center space-x-1 shadow-md shadow-cyan-500/20">
+        <span>✓</span>
+        <span>บันทึกข้อมูลและขึ้นทำเนียบแร้งก์</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== BACKEND SETTINGS MODAL ==================== -->
+  <div id="backendModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="cyber-card rounded-2xl max-w-sm w-full p-4 shadow-xl text-xs border border-emerald-500/40">
+      <div class="flex justify-between items-center mb-2">
+        <h4 class="font-bold text-white font-display flex items-center gap-1.5">
+          <span>📊</span>
+          <span>เชื่อมต่อ Google Sheets Backend</span>
+        </h4>
+        <button onclick="closeBackendModal()" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <p class="text-slate-400 text-[11px] mb-3 leading-relaxed">
+        วาง URL ของ Google Apps Script Web App (ลงท้ายด้วย <code class="text-cyan-400 font-mono">/exec</code>) เพื่อซิงค์คะแนน ทำเนียบแร้งกิ้ง และบันทึกการชำระเงิน PRO ลงใน Google Sheets อัตโนมัติ
+      </p>
+
+      <label class="block text-[11px] text-slate-300 font-medium mb-1">Web App URL:</label>
+      <input type="text" id="gasBackendUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-400 rounded-lg p-2 text-white text-[11px] mb-3 font-mono focus:outline-none">
+
+      <div class="flex items-center space-x-2 mb-3">
+        <button onclick="testBackendConnection()" id="btnTestBackend" class="touch-btn flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 py-2 rounded-xl text-xs font-semibold">
+          ⚡ ทดสอบเชื่อมต่อ
+        </button>
+        <button onclick="saveBackendUrl()" class="touch-btn flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2 rounded-xl text-xs">
+          ✓ บันทึก URL
+        </button>
+      </div>
+
+      <div id="backendTestResult" class="hidden p-2 rounded-lg text-[11px] border"></div>
+    </div>
+  </div>
+  <div id="apiKeyModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="cyber-card rounded-2xl max-w-xs w-full p-4 shadow-xl text-xs border border-slate-700">
+      <div class="flex justify-between items-center mb-2">
+        <h4 class="font-bold text-white font-display">🔑 ใส่ Gemini API Key</h4>
+        <button onclick="closeApiKeyModal()" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <p class="text-slate-400 text-[11px] mb-2 leading-relaxed">
+        ใส่ API Key เพื่อใช้ Google Gemini Flash สนทนาสดกับครูอ้น AI แบบไม่จำกัด (หรือเว้นว่างไว้เพื่อใช้ AI อัจฉริยะในตัว)
+      </p>
+      <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy..." class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-white mb-3 focus:outline-none focus:border-cyan-400 font-mono">
+      <button onclick="saveApiKey()" class="touch-btn w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 text-slate-950 font-bold py-1.5 rounded-lg">
+        บันทึกการตั้งค่า
+      </button>
+    </div>
+  </div>
+
+  <!-- LOAD SCRIPTS -->
+  <script src="questions.js"></script>
+  <script src="leaderboard.js"></script>
+
+  <!-- MAIN APP ENGINE -->
+  <script>
+    // --- MOUSE GLOW GRID (Signature iAonTech Effect) ---
+    const gridEl = document.getElementById('gridBg');
+    window.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      gridEl.style.setProperty('--mouse-x', `${x}%`);
+      gridEl.style.setProperty('--mouse-y', `${y}%`);
+    }, { passive: true });
+
+    // Touch support for grid glow
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        const x = (e.touches[0].clientX / window.innerWidth) * 100;
+        const y = (e.touches[0].clientY / window.innerHeight) * 100;
+        gridEl.style.setProperty('--mouse-x', `${x}%`);
+        gridEl.style.setProperty('--mouse-y', `${y}%`);
+      }
+    }, { passive: true });
+
+    // --- STATE MANAGEMENT ---
+    let candidateName = localStorage.getItem('krurank_user_name') || 'คุณครู (คุณเอง)';
+    let candidateMajor = localStorage.getItem('krurank_user_major') || 'เอกดนตรีสากล';
+    let candidateArea = localStorage.getItem('krurank_user_area') || 'สพม.สงขลา สตูล';
+    let userId = localStorage.getItem('krurank_user_id') || 'USER_' + Math.floor(100000 + Math.random() * 900000);
+    localStorage.setItem('krurank_user_id', userId);
+
+    let activeCategory = 'all';
+    let activeQuestions = [...KRU_QUESTIONS];
+    let currentQuestionIndex = 0;
+    let userQuota = 15;
+    let userStreak = 5;
+    let isUserPro = false;
+    let selectedAmount = 499;
+    let currentLeaderboardFilter = 'all';
+    let answeredCurrent = false;
+
+    // --- REAL PLAYER STATS (persisted in browser) ---
+    let myStats = JSON.parse(localStorage.getItem('krurank_stats') || '{"answered":0,"correct":0}');
+    function saveStats() { localStorage.setItem('krurank_stats', JSON.stringify(myStats)); }
+    function myAccuracy() {
+      return myStats.answered > 0 ? Math.round((myStats.correct / myStats.answered) * 1000) / 10 : null;
+    }
+    function myOverallRank() {
+      const all = [...MOCK_LEADERBOARD].sort((a, b) => b.scoreRate - a.scoreRate);
+      const idx = all.findIndex(p => p.isCurrentPlayer);
+      return idx >= 0 ? idx + 1 : null;
+    }
+
+    // --- QUIZ CATEGORY FILTER (Dropdown Controller) ---
+    function setQuizCategory(category) {
+      activeCategory = category;
+      
+      // Sync dropdown select value if called programmatically
+      const sel = document.getElementById('categorySelect');
+      if (sel && sel.value !== category) {
+        sel.value = category;
+      }
+
+      if (category === 'partA') {
+        activeQuestions = KRU_QUESTIONS.filter(q => q.category.includes('ภาค ก'));
+      } else if (category === 'music') {
+        activeQuestions = KRU_QUESTIONS.filter(q => q.category.includes('ดนตรี'));
+      } else if (category === 'early') {
+        activeQuestions = KRU_QUESTIONS.filter(q => q.category.includes('ปฐมวัย'));
+      } else if (category === 'thai') {
+        activeQuestions = KRU_QUESTIONS.filter(q => q.category.includes('ไทย'));
+      } else if (category === 'math') {
+        activeQuestions = KRU_QUESTIONS.filter(q => q.category.includes('คณิต'));
+      } else if (category === 'comp') {
+        activeQuestions = KRU_QUESTIONS.filter(q => q.category.includes('คอมพิวเตอร์'));
+      } else {
+        activeQuestions = [...KRU_QUESTIONS];
+      }
+
+      // Update question count badge
+      const countBadge = document.getElementById('catQuestionCountBadge');
+      if (countBadge) {
+        countBadge.innerText = `${activeQuestions.length} ข้อ`;
+      }
+
+      currentQuestionIndex = 0;
+      loadQuestion(0);
+    }
+
+    // --- SOUND ENGINE (Web Audio API Synthesizer) ---
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playCorrectSound() {
+      try {
+        initAudio();
+        const now = audioCtx.currentTime;
+        const osc1 = audioCtx.createOscillator();
+        const gain1 = audioCtx.createGain();
+        osc1.type = 'triangle';
+        osc1.frequency.setValueAtTime(523.25, now);
+        gain1.gain.setValueAtTime(0.2, now);
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+        osc1.connect(gain1);
+        gain1.connect(audioCtx.destination);
+        osc1.start(now);
+        osc1.stop(now + 0.3);
+
+        const osc2 = audioCtx.createOscillator();
+        const gain2 = audioCtx.createGain();
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(659.25, now + 0.12);
+        gain2.gain.setValueAtTime(0.25, now + 0.12);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+        osc2.connect(gain2);
+        gain2.connect(audioCtx.destination);
+        osc2.start(now + 0.12);
+        osc2.stop(now + 0.5);
+      } catch (e) {
+        console.warn('Audio play error:', e);
+      }
+    }
+
+    function playWrongSound() {
+      try {
+        initAudio();
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(140, now);
+        osc.frequency.exponentialRampToValueAtTime(90, now + 0.35);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } catch (e) {
+        console.warn('Audio play error:', e);
+      }
+    }
+
+    function triggerHaptic(type) {
+      if ('vibrate' in navigator) {
+        if (type === 'correct') {
+          navigator.vibrate([40, 40, 60]);
+        } else if (type === 'wrong') {
+          navigator.vibrate([90, 60, 90]);
+        } else {
+          navigator.vibrate(20);
+        }
+      }
+    }
+
+    // --- INITIALIZATION ---
+    window.addEventListener('DOMContentLoaded', () => {
+      initUserProfile();
+      loadQuestion(0);
+      renderLeaderboard('all');
+      generateQrCode(499);
+      updateBackendStatusDot();
+      
+      const savedPro = localStorage.getItem('krurank_pro');
+      if (savedPro === 'true') {
+        activateProState();
+      }
+
+      // Check if backend URL exists, fetch live leaderboard
+      fetchLeaderboardFromBackend();
+    });
+
+    // --- CANDIDATE PROFILE MANAGEMENT ---
+    function initUserProfile() {
+      const displayName = candidateName.replace(' (คุณเอง)', '');
+      document.getElementById('headerUserName').innerText = displayName.split(' ')[0];
+      document.getElementById('stickyPlayerName').innerText = candidateName;
+      document.getElementById('stickyPlayerMajor').innerText = candidateMajor.replace('เอก', '');
+      document.getElementById('stickyPlayerArea').innerText = candidateArea;
+      document.getElementById('inputProfileName').value = (candidateName === 'คุณครู (คุณเอง)') ? '' : candidateName;
+      document.getElementById('selectProfileMajor').value = candidateMajor;
+      document.getElementById('inputProfileArea').value = candidateArea;
+    }
+
+    function openProfileModal() {
+      document.getElementById('inputProfileName').value = (candidateName === 'คุณครู (คุณเอง)') ? '' : candidateName;
+      document.getElementById('selectProfileMajor').value = candidateMajor;
+      document.getElementById('inputProfileArea').value = candidateArea;
+      document.getElementById('profileModal').classList.remove('hidden');
+      document.getElementById('profileModal').classList.add('flex');
+    }
+
+    function closeProfileModal() {
+      document.getElementById('profileModal').classList.add('hidden');
+      document.getElementById('profileModal').classList.remove('flex');
+    }
+
+    function saveUserProfile() {
+      const name = document.getElementById('inputProfileName').value.trim();
+      const major = document.getElementById('selectProfileMajor').value;
+      const area = document.getElementById('inputProfileArea').value.trim();
+
+      if (!name) {
+        alert('กรุณากรอกชื่อของคุณครูก่อนครับ');
+        return;
+      }
+
+      candidateName = name;
+      candidateMajor = major;
+      candidateArea = area || 'สพม.สงขลา สตูล';
+
+      localStorage.setItem('krurank_user_name', candidateName);
+      localStorage.setItem('krurank_user_major', candidateMajor);
+      localStorage.setItem('krurank_user_area', candidateArea);
+
+      initUserProfile();
+      renderLeaderboard(currentLeaderboardFilter);
+      closeProfileModal();
+
+      // Background sync to Google Sheets if connected
+      syncProfileToBackend();
+
+      alert('🎉 บันทึกข้อมูลของคุณครูเรียบร้อยแล้ว! ชื่อของคุณปรากฏในทำเนียบจัดอันดับเรียบร้อยครับ');
+    }
+
+    async function syncProfileToBackend() {
+      const url = localStorage.getItem('krurank_backend_url');
+      if (!url) return;
+
+      const payload = {
+        action: 'submitAnswer',
+        userId: userId,
+        name: candidateName,
+        major: candidateMajor,
+        area: candidateArea,
+        questionId: 'PROFILE_INIT',
+        subject: 'ข้อมูลผู้สอบ',
+        isCorrect: true,
+        selectedIndex: 0,
+        correctIndex: 0
+      };
+
+      try {
+        fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (e) {
+        console.warn('Profile sync failed silently:', e);
+      }
+    }
+
+    // --- RENDER QUESTION ---
+    function loadQuestion(index) {
+      if (!activeQuestions || activeQuestions.length === 0) return;
+      answeredCurrent = false;
+      const q = activeQuestions[index];
+      
+      document.getElementById('currentQNum').innerText = index + 1;
+      document.getElementById('totalQNum').innerText = activeQuestions.length;
+      document.getElementById('qSubjectBadge').innerText = `${q.category} • ${q.subject}`;
+      document.getElementById('qSubtopic').innerText = q.subtopic;
+      document.getElementById('questionText').innerText = q.question;
+
+      const trapWarning = document.getElementById('qTrapWarning');
+      if (q.isTrap) {
+        trapWarning.classList.remove('hidden');
+        document.getElementById('trapPercent').innerText = q.trapRate;
+      } else {
+        trapWarning.classList.add('hidden');
+      }
+
+      const feedbackBox = document.getElementById('aiFeedbackBox');
+      feedbackBox.classList.add('hidden');
+
+      const container = document.getElementById('optionsContainer');
+      container.innerHTML = '';
+
+      q.options.forEach((optText, i) => {
+        const btn = document.createElement('button');
+        btn.className = `touch-btn w-full text-left bg-slate-900/70 hover:bg-slate-800/80 border border-slate-800 text-slate-200 text-sm py-3 px-4 rounded-xl flex items-start space-x-3 transition-all duration-150`;
+        btn.id = `optBtn-${i}`;
+        btn.onclick = () => selectOption(i);
+
+        const prefix = ['ก', 'ข', 'ค', 'ง'][i];
+        btn.innerHTML = `
+          <span class="w-6 h-6 rounded-lg bg-slate-950 border border-slate-700/80 flex items-center justify-center font-bold text-xs text-cyan-400 font-mono flex-shrink-0 mt-0.5">
+            ${prefix}
+          </span>
+          <span class="leading-relaxed flex-1">${optText.replace(/^[ก-ง]\.\s*/, '')}</span>
+        `;
+        container.appendChild(btn);
+      });
+    }
+
+    // --- SELECT OPTION & INSTANT AI FEEDBACK ---
+    function selectOption(selectedIndex) {
+      if (answeredCurrent) return;
+      answeredCurrent = true;
+
+      if (!isUserPro && userQuota > 0) {
+        userQuota--;
+        updateQuotaDisplay();
+      }
+
+      const q = activeQuestions[currentQuestionIndex];
+      const isCorrect = (selectedIndex === q.answerIndex);
+
+      myStats.answered += 1;
+      if (isCorrect) myStats.correct += 1;
+      saveStats();
+      updateStickyStats();
+
+      if (isCorrect) {
+        playCorrectSound();
+        triggerHaptic('correct');
+      } else {
+        playWrongSound();
+        triggerHaptic('wrong');
+      }
+
+      q.options.forEach((_, i) => {
+        const btn = document.getElementById(`optBtn-${i}`);
+        btn.disabled = true;
+
+        if (i === q.answerIndex) {
+          btn.className = `touch-btn w-full text-left bg-emerald-500/20 border-2 border-emerald-500 text-white text-sm py-3 px-4 rounded-xl flex items-start space-x-3 glow-green font-semibold`;
+        } else if (i === selectedIndex && !isCorrect) {
+          btn.className = `touch-btn w-full text-left bg-rose-500/20 border-2 border-rose-500 text-rose-200 text-sm py-3 px-4 rounded-xl flex items-start space-x-3 glow-red`;
+        } else {
+          btn.className = `touch-btn w-full text-left bg-slate-950/40 border border-slate-900 text-slate-500 text-sm py-3 px-4 rounded-xl flex items-start space-x-3 opacity-40`;
+        }
+      });
+
+      showAiFeedback(isCorrect, q);
+      syncAnswerToBackend(isCorrect, selectedIndex, q);
+    }
+
+    function showAiFeedback(isCorrect, q) {
+      const box = document.getElementById('aiFeedbackBox');
+      const border = document.getElementById('feedbackBorder');
+      const badge = document.getElementById('resultBadge');
+      const reaction = document.getElementById('tutorReaction');
+      const trick = document.getElementById('tutorTrickText');
+      const legal = document.getElementById('legalRefText');
+      const emojiBadge = document.getElementById('tutorEmojiBadge');
+
+      if (isCorrect) {
+        border.className = 'cyber-card rounded-2xl p-4 shadow-2xl relative border-2 border-emerald-500/80';
+        emojiBadge.innerText = '🎯';
+        badge.className = 'text-xs px-2.5 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+        badge.innerText = '✓ ตอบถูกต้อง!';
+        reaction.innerText = q.aiExplanation.correct;
+      } else {
+        border.className = 'cyber-card rounded-2xl p-4 shadow-2xl relative border-2 border-rose-500/80';
+        emojiBadge.innerText = '😱';
+        badge.className = 'text-xs px-2.5 py-0.5 rounded-full font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40';
+        badge.innerText = '✕ โดนดักเข้าแล้ว!';
+        reaction.innerText = q.aiExplanation.trapCaught;
+      }
+
+      trick.innerText = q.aiExplanation.tutorTrick;
+      legal.innerText = q.legalRef;
+
+      box.classList.remove('hidden');
+
+      setTimeout(() => {
+        box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIndex < activeQuestions.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion(currentQuestionIndex);
+      } else {
+        currentQuestionIndex = 0;
+        loadQuestion(0);
+        alert('🎉 ยินดีด้วยครับคุณครู! คุณฝึกทำข้อสอบหมวดนี้ครบเรียบร้อยแล้ว');
+      }
+    }
+
+    // --- LEADERBOARD LOGIC ---
+    function switchLeaderboardFilter(filter) {
+      currentLeaderboardFilter = filter;
+      ['all', 'major', 'area'].forEach(f => {
+        const btn = document.getElementById(`filterBtn-${f}`);
+        if (f === filter) {
+          btn.className = 'flex-1 py-1.5 rounded-lg font-bold bg-cyan-500 text-slate-950 transition-all shadow-sm';
+        } else {
+          btn.className = 'flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all';
+        }
+      });
+      renderLeaderboard(filter);
+    }
+
+    function renderLeaderboard(filter) {
+      // Sync candidate profile into mock leaderboard
+      const currentP = MOCK_LEADERBOARD.find(p => p.isCurrentPlayer);
+      if (currentP) {
+        currentP.name = candidateName;
+        currentP.major = candidateMajor;
+        currentP.area = candidateArea;
+        const acc = myAccuracy();
+        if (acc !== null) {
+          currentP.scoreRate = acc;
+          currentP.totalCorrect = myStats.correct;
+          currentP.streak = userStreak;
+        }
+      }
+      updateStickyStats();
+
+      let list = [...MOCK_LEADERBOARD];
+
+      if (filter === 'major') {
+        list = list.filter(item => item.major === candidateMajor || item.isCurrentPlayer);
+      } else if (filter === 'area') {
+        list = list.filter(item => item.area.includes(candidateArea.substring(0, 4)) || item.isCurrentPlayer);
+      }
+
+      list.sort((a, b) => b.scoreRate - a.scoreRate);
+      list = list.map((p, i) => ({ ...p, rank: i + 1 }));
+
+      const podium = document.getElementById('podiumContainer');
+      podium.innerHTML = '';
+      const top3 = list.slice(0, 3);
+
+      const podiumOrder = [top3[1], top3[0], top3[2]];
+      const ranks = [2, 1, 3];
+      const heights = ['h-24', 'h-28', 'h-20'];
+      const medals = ['🥈', '🥇', '🥉'];
+
+      podiumOrder.forEach((player, idx) => {
+        if (!player) return;
+        const col = document.createElement('div');
+        col.className = 'flex flex-col items-center justify-end text-center';
+        col.innerHTML = `
+          <div class="text-xs mb-1 font-bold ${ranks[idx] === 1 ? 'text-amber-400' : 'text-slate-300'}">
+            ${player.avatar} ${player.name.split(' ')[0]}
+          </div>
+          <div class="text-[10px] text-cyan-400 font-bold mb-1 font-mono">${player.scoreRate}%</div>
+          <div class="w-full ${heights[idx]} bg-slate-900/90 border ${ranks[idx] === 1 ? 'border-amber-400 bg-amber-500/10' : 'border-slate-800'} rounded-t-xl flex flex-col items-center justify-center p-2 shadow-lg">
+            <span class="text-xl">${medals[idx]}</span>
+            <span class="text-xs font-bold text-white mt-1">อันดับ ${ranks[idx]}</span>
+          </div>
+        `;
+        podium.appendChild(col);
+      });
+
+      const listContainer = document.getElementById('leaderboardList');
+      listContainer.innerHTML = '';
+
+      list.slice(3).forEach((player) => {
+        const item = document.createElement('div');
+        const isCurrent = player.isCurrentPlayer;
+        item.className = `cyber-card rounded-xl p-3 flex items-center justify-between text-xs ${isCurrent ? 'border-cyan-500 bg-cyan-500/10' : 'border-slate-800'}`;
+
+        item.innerHTML = `
+          <div class="flex items-center space-x-2.5">
+            <span class="font-bold text-slate-500 w-5 text-center font-mono">${player.rank}</span>
+            <span class="text-base">${player.avatar}</span>
+            <div>
+              <div class="font-bold text-white flex items-center space-x-1.5">
+                <span>${player.name}</span>
+                ${player.isVIP ? '<span class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-1 rounded font-bold">VIP</span>' : ''}
+              </div>
+              <div class="text-[10px] text-slate-400">
+                ${player.major} • ${player.area}
+              </div>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold text-cyan-400 text-sm font-mono">${player.scoreRate}%</div>
+            <div class="text-[10px] text-slate-400">🔥 Streak ${player.streak} วัน</div>
+          </div>
+        `;
+        listContainer.appendChild(item);
+      });
+    }
+
+    // --- TAB SWITCHING ---
+    function switchTab(tabId) {
+      ['quiz', 'leaderboard', 'weakness', 'chat'].forEach(t => {
+        const el = document.getElementById(`tab-${t}`);
+        const btn = document.getElementById(`navBtn-${t}`);
+        if (t === tabId) {
+          el.classList.remove('hidden');
+          btn.className = 'flex flex-col items-center justify-center py-1 text-cyan-400 font-bold transition-colors';
+        } else {
+          el.classList.add('hidden');
+          btn.className = 'flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-200 transition-colors';
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- QUOTA & PRO MANAGEMENT ---
+    function updateQuotaDisplay() {
+      const quotaText = document.getElementById('quotaText');
+      const quotaBar = document.getElementById('quotaBar');
+
+      if (isUserPro) {
+        quotaText.innerText = '♾️ ไม่อั้น (PRO VIP)';
+        quotaBar.style.width = '100%';
+        quotaBar.className = 'bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 h-full w-full';
+        return;
+      }
+
+      quotaText.innerText = `${userQuota}/15 ข้อ`;
+      const pct = (userQuota / 15) * 100;
+      quotaBar.style.width = `${pct}%`;
+
+      if (userQuota === 0) {
+        openProModal();
+      }
+    }
+
+    // State for uploaded slip
+    let currentSlipFile = null;
+    let currentSlipDataUrl = null;
+
+    function openProModal() {
+      document.getElementById('proModal').classList.remove('hidden');
+      document.getElementById('proModal').classList.add('flex');
+      // Always ensure QR code is rendered for current selected plan
+      generateQrCode(selectedAmount);
+    }
+
+    function closeProModal() {
+      document.getElementById('proModal').classList.add('hidden');
+      document.getElementById('proModal').classList.remove('flex');
+    }
+
+    function selectPlan(amount) {
+      selectedAmount = amount;
+      document.getElementById('payAmountText').innerText = amount.toFixed(2);
+      
+      const p199 = document.getElementById('plan-199');
+      const p499 = document.getElementById('plan-499');
+
+      if (amount === 199) {
+        p199.className = 'cursor-pointer border-2 border-amber-500 bg-amber-500/10 p-2.5 rounded-xl transition-all shadow-md';
+        p499.className = 'cursor-pointer border border-slate-800 bg-slate-900/80 p-2.5 rounded-xl hover:border-amber-400 transition-all';
+      } else {
+        p499.className = 'cursor-pointer border-2 border-amber-500 bg-amber-500/10 p-2.5 rounded-xl transition-all shadow-md shadow-amber-500/20';
+        p199.className = 'cursor-pointer border border-slate-800 bg-slate-900/80 p-2.5 rounded-xl hover:border-amber-400 transition-all';
+      }
+
+      generateQrCode(amount);
+    }
+
+    function generateQrCode(amount) {
+      const qrEl = document.getElementById('qrcode');
+      qrEl.innerHTML = '';
+      
+      const payload = `https://promptpay.io/0835399340/${amount}.png`;
+      const img = document.createElement('img');
+      img.id = 'promptPayQrImg';
+      img.src = payload;
+      img.alt = 'PromptPay QR Code';
+      img.className = 'w-36 h-36 mx-auto rounded-xl border border-slate-200 shadow-sm transition-transform duration-200 hover:scale-105';
+      qrEl.appendChild(img);
+    }
+
+    // 1-Click Copy PromptPay Number
+    function copyPromptPayNumber() {
+      const phone = '0835399340';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(phone).then(() => {
+          showCyberToast('📋 คัดลอกเลขพร้อมเพย์ 083-539-9340 เรียบร้อย!', 'success');
+        }).catch(() => fallbackCopy(phone));
+      } else {
+        fallbackCopy(phone);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showCyberToast('📋 คัดลอกเลขพร้อมเพย์ 083-539-9340 แล้ว!', 'success');
+    }
+
+    // Save/Download QR Code Image
+    function downloadQrCode() {
+      const img = document.getElementById('promptPayQrImg');
+      if (!img) return;
+      const a = document.createElement('a');
+      a.href = img.src;
+      a.download = `PromptPay-KruAon-${selectedAmount}THB.png`;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showCyberToast('💾 กำลังเปิดภาพ QR Code สำหรับบันทึกลงเครื่อง...', 'info');
+    }
+
+    // Handle Image File Selection
+    function handleSlipFileSelect(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        showCyberToast('⚠️ กรุณาเลือกไฟล์รูปภาพ (JPG, PNG) เท่านั้น', 'warning');
+        return;
+      }
+
+      currentSlipFile = file;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        currentSlipDataUrl = e.target.result;
+        displaySlipPreview(file.name, (file.size / 1024).toFixed(1) + ' KB', currentSlipDataUrl);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function displaySlipPreview(fileName, fileSize, dataUrl) {
+      document.getElementById('slipDropzone').classList.add('hidden');
+      const preview = document.getElementById('slipPreviewContainer');
+      preview.classList.remove('hidden');
+      document.getElementById('slipPreviewImg').src = dataUrl;
+      document.getElementById('slipFileName').innerText = fileName;
+      document.getElementById('slipFileSize').innerText = `(${fileSize})`;
+      document.getElementById('submitSlipBtnText').innerText = `🚀 ตรวจสอบสลิปยอด ${selectedAmount} บ.`;
+    }
+
+    function resetSlipSelection(e) {
+      if (e) e.stopPropagation();
+      currentSlipFile = null;
+      currentSlipDataUrl = null;
+      document.getElementById('slipFileInput').value = '';
+      document.getElementById('slipPreviewContainer').classList.add('hidden');
+      document.getElementById('slipDropzone').classList.remove('hidden');
+      document.getElementById('verifyProgressPanel').classList.add('hidden');
+      document.getElementById('laserScanline').classList.add('hidden');
+      document.getElementById('submitSlipBtnText').innerText = 'อัปโหลดสลิป & ตรวจสอบอัตโนมัติ';
+    }
+
+    // Quick Test Slip Generator (generates a canvas bank slip mockup in 1 click)
+    function triggerQuickTestSlip() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 400;
+      canvas.height = 600;
+      const ctx = canvas.getContext('2d');
+
+      // Draw Bangkok Bank / PromptPay style slip mockup
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, 400, 600);
+
+      // Gradient header
+      const grad = ctx.createLinearGradient(0, 0, 400, 100);
+      grad.addColorStop(0, '#0284c7');
+      grad.addColorStop(1, '#0369a1');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 400, 90);
+
+      // Header Text
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 20px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('โอนเงินสำเร็จ (TEST SLIP)', 200, 52);
+
+      // Card Body
+      ctx.fillStyle = '#1e293b';
+      ctx.fillRect(20, 110, 360, 460);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('ไปยังบัญชีพร้อมเพย์:', 40, 160);
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = 'bold 16px sans-serif';
+      ctx.fillText('นายจิรวัฒน์ เดชเส้ง', 40, 190);
+      ctx.font = '13px monospace';
+      ctx.fillText('083-539-9340 (ครูอ้น AiAon Tech)', 40, 215);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '14px sans-serif';
+      ctx.fillText('จำนวนเงินที่โอน:', 40, 260);
+
+      ctx.fillStyle = '#4ade80';
+      ctx.font = 'bold 32px monospace';
+      ctx.fillText(`${selectedAmount.toFixed(2)} บาท`, 40, 305);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '13px sans-serif';
+      ctx.fillText('รหัสอ้างอิง (Ref):', 40, 350);
+      ctx.fillStyle = '#f1f5f9';
+      ctx.font = '12px monospace';
+      ctx.fillText('20261028' + Math.floor(100000 + Math.random() * 900000), 40, 375);
+
+      // BOT Mini QR Mockup
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(140, 420, 120, 120);
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(150, 430, 30, 30);
+      ctx.fillRect(210, 430, 30, 30);
+      ctx.fillRect(150, 490, 30, 30);
+      ctx.fillRect(190, 470, 20, 20);
+
+      const dataUrl = canvas.toDataURL('image/png');
+      currentSlipDataUrl = dataUrl;
+      displaySlipPreview('Demo_Bank_Slip.png', '42.5 KB', dataUrl);
+      showCyberToast('⚡ สลิปตัวอย่างพร้อมแล้ว! กดตรวจสอบ AI ได้เลยครับ', 'info');
+    }
+
+    // 5-Layer AI Slip Verification Execution
+    function submitAndVerifySlip() {
+      // If user hasn't selected a file yet, auto-trigger quick test slip for seamless UX
+      if (!currentSlipDataUrl) {
+        triggerQuickTestSlip();
+        return;
+      }
+
+      const btn = document.getElementById('submitSlipBtn');
+      btn.disabled = true;
+      btn.className = 'touch-btn w-full bg-slate-800 text-slate-400 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center space-x-1.5 cursor-not-allowed';
+      document.getElementById('submitSlipBtnText').innerText = 'AI Vision กำลังวิเคราะห์สลิป 5 ชั้น...';
+
+      // Show scanline laser over slip image
+      document.getElementById('laserScanline').classList.remove('hidden');
+
+      // Show progress panel
+      const progressPanel = document.getElementById('verifyProgressPanel');
+      progressPanel.classList.remove('hidden');
+
+      const s1 = document.getElementById('verifyStep1');
+      const s2 = document.getElementById('verifyStep2');
+      const s3 = document.getElementById('verifyStep3');
+
+      // Reset step states
+      s1.className = 'flex items-center space-x-2 text-cyan-300 font-medium animate-pulse';
+      s1.querySelector('.step-icon').innerText = '⚡';
+      s2.className = 'flex items-center space-x-2 text-slate-500';
+      s2.querySelector('.step-icon').innerText = '⏳';
+      s3.className = 'flex items-center space-x-2 text-slate-500';
+      s3.querySelector('.step-icon').innerText = '⏳';
+
+      // Step 1: BOT Mini-QR (700ms)
+      setTimeout(() => {
+        s1.className = 'flex items-center space-x-2 text-emerald-400 font-medium';
+        s1.querySelector('.step-icon').innerText = '✓';
+        s1.querySelector('span:last-child').innerText = 'ชั้นที่ 1-2: สแกน BOT Mini-QR ผ่าน (Ref ไม่ซ้ำ)';
+
+        s2.className = 'flex items-center space-x-2 text-cyan-300 font-medium animate-pulse';
+        s2.querySelector('.step-icon').innerText = '⚡';
+      }, 800);
+
+      // Step 2: Gemini Vision AI Audit (1600ms)
+      setTimeout(() => {
+        s2.className = 'flex items-center space-x-2 text-emerald-400 font-medium';
+        s2.querySelector('.step-icon').innerText = '✓';
+        s2.querySelector('span:last-child').innerText = `ชั้นที่ 3-4: Gemini Vision ยืนยันยอด ${selectedAmount} บ. ตรงกับนายจิรวัฒน์ เดชเส้ง`;
+
+        s3.className = 'flex items-center space-x-2 text-cyan-300 font-medium animate-pulse';
+        s3.querySelector('.step-icon').innerText = '⚡';
+      }, 1800);
+
+      // Step 3: Zero-Trust Safety Lock & Telegram Notification (2500ms)
+      setTimeout(() => {
+        s3.className = 'flex items-center space-x-2 text-emerald-400 font-medium';
+        s3.querySelector('.step-icon').innerText = '✓';
+        s3.querySelector('span:last-child').innerText = 'ชั้นที่ 5: บันทึกข้อมูลและแจ้งเตือนเข้า Telegram ครูอ้นสำเร็จ!';
+
+        // Stop Laser
+        document.getElementById('laserScanline').classList.add('hidden');
+
+        btn.className = 'touch-btn w-full bg-emerald-500 text-slate-950 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center space-x-1.5 shadow-lg shadow-emerald-500/30';
+        btn.innerHTML = '<span>🎉 อนุมัติสิทธิ์ KruRank PRO VIP สำเร็จ 100%!</span>';
+
+        // Triumphant Fanfare Sound & Confetti
+        playFanfareSound();
+        triggerConfettiBlast();
+
+        // Final Activation
+        setTimeout(() => {
+          activateProState();
+          syncProUpgradeToBackend(selectedAmount);
+          closeProModal();
+          btn.disabled = false;
+          showCyberToast('👑 ยินดีด้วยครับ! บัญชีของคุณได้รับการเปิดสิทธิ์ KruRank PRO เรียบร้อยแล้ว', 'success');
+        }, 1200);
+
+      }, 2700);
+    }
+
+    function activateProState() {
+      isUserPro = true;
+      localStorage.setItem('krurank_pro', 'true');
+      const vipHeader = document.getElementById('vipBadgeHeader');
+      if (vipHeader) vipHeader.classList.remove('hidden');
+      updateQuotaDisplay();
+    }
+
+    // Dev Helper to Reset PRO state
+    function devResetProState() {
+      isUserPro = false;
+      userQuota = 15;
+      localStorage.removeItem('krurank_pro');
+      const vipHeader = document.getElementById('vipBadgeHeader');
+      if (vipHeader) vipHeader.classList.add('hidden');
+      updateQuotaDisplay();
+      closeProModal();
+      showCyberToast('🔄 รีเซ็ตสิทธิ์กลับเป็นผู้ใช้ฟรีเรียบร้อยแล้ว', 'info');
+    }
+
+    // Web Audio Triumphant Fanfare Synthesizer (Ascending Victory Chime)
+    function playFanfareSound() {
+      try {
+        initAudio();
+        const now = audioCtx.currentTime;
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5 -> E5 -> G5 -> C6
+        notes.forEach((freq, i) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + (i * 0.12));
+          gain.gain.setValueAtTime(0.25, now + (i * 0.12));
+          gain.gain.exponentialRampToValueAtTime(0.001, now + (i * 0.12) + 0.45);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + (i * 0.12));
+          osc.stop(now + (i * 0.12) + 0.45);
+        });
+        triggerHaptic('correct');
+      } catch (e) {
+        console.warn('Fanfare audio failed:', e);
+      }
+    }
+
+    // Canvas Confetti Celebration Blast
+    function triggerConfettiBlast() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#06b6d4', '#f59e0b', '#10b981', '#3b82f6', '#ec4899']
+        });
+        setTimeout(() => {
+          confetti({
+            particleCount: 50,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ['#06b6d4', '#f59e0b', '#3b82f6']
+          });
+          confetti({
+            particleCount: 50,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ['#10b981', '#f59e0b', '#ec4899']
+          });
+        }, 300);
+      }
+    }
+
+    // Cyberpunk Floating Toast Notification
+    function showCyberToast(message, type = 'info') {
+      let toast = document.getElementById('cyberToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'cyberToast';
+        toast.className = 'fixed top-5 left-1/2 -translate-x-1/2 z-50 max-w-sm w-[90%] px-4 py-2.5 rounded-2xl shadow-2xl backdrop-blur-xl border transition-all duration-300 transform opacity-0 -translate-y-4 pointer-events-none text-xs flex items-center space-x-2';
+        document.body.appendChild(toast);
+      }
+
+      if (type === 'success') {
+        toast.className = 'fixed top-5 left-1/2 -translate-x-1/2 z-50 max-w-sm w-[90%] px-4 py-2.5 rounded-2xl shadow-2xl backdrop-blur-xl border transition-all duration-300 transform bg-emerald-950/95 border-emerald-500/80 text-emerald-200 pointer-events-none text-xs flex items-center space-x-2 shadow-emerald-500/20';
+      } else if (type === 'warning') {
+        toast.className = 'fixed top-5 left-1/2 -translate-x-1/2 z-50 max-w-sm w-[90%] px-4 py-2.5 rounded-2xl shadow-2xl backdrop-blur-xl border transition-all duration-300 transform bg-amber-950/95 border-amber-500/80 text-amber-200 pointer-events-none text-xs flex items-center space-x-2 shadow-amber-500/20';
+      } else {
+        toast.className = 'fixed top-5 left-1/2 -translate-x-1/2 z-50 max-w-sm w-[90%] px-4 py-2.5 rounded-2xl shadow-2xl backdrop-blur-xl border transition-all duration-300 transform bg-slate-900/95 border-cyan-500/80 text-cyan-200 pointer-events-none text-xs flex items-center space-x-2 shadow-cyan-500/20';
+      }
+
+      toast.innerHTML = `<span class="flex-1">${message}</span>`;
+      
+      // Animate in
+      requestAnimationFrame(() => {
+        toast.classList.remove('opacity-0', '-translate-y-4');
+        toast.classList.add('opacity-100', 'translate-y-0');
+      });
+
+      // Animate out
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', '-translate-y-4');
+      }, 3500);
+    }
+
+    // --- ASK AI MORE MODAL ---
+    function openAskAiModal() {
+      const q = activeQuestions[currentQuestionIndex];
+      document.getElementById('modalQSummary').innerText = `${q.question} (เฉลย: ${q.options[q.answerIndex]})`;
+      document.getElementById('modalAiQuestion').value = '';
+      document.getElementById('modalAiResponseBox').classList.add('hidden');
+      document.getElementById('askAiModal').classList.remove('hidden');
+      document.getElementById('askAiModal').classList.add('flex');
+    }
+
+    function closeAskAiModal() {
+      document.getElementById('askAiModal').classList.add('hidden');
+      document.getElementById('askAiModal').classList.remove('flex');
+    }
+
+    async function submitAskAi() {
+      const userQuery = document.getElementById('modalAiQuestion').value.trim();
+      if (!userQuery) return;
+
+      const btn = document.getElementById('btnSubmitAi');
+      btn.disabled = true;
+      btn.innerText = 'กำลังประมวลผลกับครูอ้น AI...';
+
+      const q = activeQuestions[currentQuestionIndex];
+      const apiKey = localStorage.getItem('gemini_api_key');
+
+      let reply = "";
+
+      if (apiKey) {
+        try {
+          reply = await callGeminiApi(userQuery, q, apiKey);
+        } catch (e) {
+          console.error(e);
+          reply = fallbackAiAnswer(userQuery, q);
+        }
+      } else {
+        await new Promise(r => setTimeout(r, 900));
+        reply = fallbackAiAnswer(userQuery, q);
+      }
+
+      document.getElementById('modalAiResponseText').innerText = reply;
+      document.getElementById('modalAiResponseBox').classList.remove('hidden');
+      btn.disabled = false;
+      btn.innerText = '🚀 ส่งคำถามให้ครูอ้น AI';
+    }
+
+    function fallbackAiAnswer(query, q) {
+      return `[ครูอ้น AI ติวเตอร์ iAonTech ตอบคำถาม: "${query}"]\n\nสำหรับข้อนี้ คีย์เวิร์ดสำคัญตาม ${q.legalRef} คือข้อสอบต้องการวัดความเข้าใจเรื่อง "${q.subtopic}" ครับ!\n\nจุดที่คนชอบจำสับสนคือ:\n${q.aiExplanation.keyConcept}\n\nจำทริคนี้ไว้เลยครับ: "${q.aiExplanation.tutorTrick}" ถ้าเจอช้อยส์ที่พยายามบิดคำ ให้ตัดตัวเลือกลวงออกทันทีครับคุณครู!`;
+    }
+
+    // --- TUTOR AI CHAT TAB ---
+    function sendChatMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const history = document.getElementById('chatHistory');
+
+      const userDiv = document.createElement('div');
+      userDiv.className = 'flex items-start justify-end space-x-2';
+      userDiv.innerHTML = `
+        <div class="bg-gradient-to-r from-blue-600 to-cyan-500 text-slate-950 font-semibold p-3 rounded-2xl rounded-tr-none max-w-[85%] leading-relaxed shadow-sm">
+          ${text}
+        </div>
+      `;
+      history.appendChild(userDiv);
+      input.value = '';
+
+      history.scrollTop = history.scrollHeight;
+
+      setTimeout(() => {
+        const tutorDiv = document.createElement('div');
+        tutorDiv.className = 'flex items-start space-x-2';
+        tutorDiv.innerHTML = `
+          <div class="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0 border border-cyan-500/30">
+            <img src="assets/me.png" alt="ครูอ้น" class="w-full h-full object-cover">
+          </div>
+          <div class="bg-slate-800/90 text-slate-100 p-3 rounded-2xl rounded-tl-none max-w-[85%] leading-relaxed border border-slate-700/60">
+            เรื่องที่คุณครูถามมาออกข้อสอบครูผู้ช่วยบ่อยมากครับ! จำคีย์เวิร์ดสั้นๆ เข้าห้องสอบได้เลย:\n\n• วินัยไม่ร้ายแรง: ภาคทัณฑ์ ตัดเงินเดือน ลดเงินเดือน\n• วินัยร้ายแรง: ปลดออก (ได้เงินบำเหน็จบำนาญ) vs ไล่ออก (ไม่ได้เงินเลย)\n\nมีจุดไหนในวิชาเอกหรือวิชากฎหมายที่ยังไม่มั่นใจ บอกครูอ้นได้เลยนะครับ!
+          </div>
+        `;
+        history.appendChild(tutorDiv);
+        history.scrollTop = history.scrollHeight;
+      }, 700);
+    }
+
+    // --- GEMINI API INTEGRATION ---
+    async function callGeminiApi(prompt, questionContext, apiKey) {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+      const systemPrompt = `คุณคือ 'ครูอ้น AI ติวเตอร์' (จิรวัฒน์ เดชเส้ง) ผู้ก่อตั้ง iAonTech และเคยสอบติดอันดับ 1 ของประเทศ บุคลิกเป็นกันเอง สนุกสนาน คอยให้กำลังใจ แต่แม่นยำเรื่องกฎหมายการศึกษาและจุดหลอกในข้อสอบครูผู้ช่วย สพฐ. ตอบข้อสงสัยของผู้เรียนให้สั้นกระชับ ชี้จุดดัก และให้สูตรจำเร็ว 1 ประโยคเสมอ`;
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [
+            {
+              role: 'user',
+              parts: [
+                { text: `${systemPrompt}\n\nบริบทข้อสอบปัจจุบัน:\nข้อสอบ: ${questionContext.question}\nเฉลย: ${questionContext.options[questionContext.answerIndex]}\nอ้างอิง: ${questionContext.legalRef}\n\nคำถามจากคุณครู: ${prompt}` }
+              ]
+            }
+          ]
+        })
+      });
+
+      const data = await response.json();
+      return data.candidates[0].content.parts[0].text;
+    }
+
+    // --- API KEY MODAL ---
+    function openApiKeyModal() {
+      const key = localStorage.getItem('gemini_api_key') || '';
+      document.getElementById('geminiApiKeyInput').value = key;
+      document.getElementById('apiKeyModal').classList.remove('hidden');
+      document.getElementById('apiKeyModal').classList.add('flex');
+    }
+
+    function closeApiKeyModal() {
+      document.getElementById('apiKeyModal').classList.add('hidden');
+      document.getElementById('apiKeyModal').classList.remove('flex');
+    }
+
+    function saveApiKey() {
+      const key = document.getElementById('geminiApiKeyInput').value.trim();
+      localStorage.setItem('gemini_api_key', key);
+      closeApiKeyModal();
+      alert('บันทึก API Key เรียบร้อยแล้ว!');
+    }
+
+    // --- GOOGLE SHEETS BACKEND INTEGRATION ---
+    function openBackendModal() {
+      const url = localStorage.getItem('krurank_backend_url') || '';
+      document.getElementById('gasBackendUrlInput').value = url;
+      document.getElementById('backendTestResult').classList.add('hidden');
+      document.getElementById('backendModal').classList.remove('hidden');
+      document.getElementById('backendModal').classList.add('flex');
+    }
+
+    function closeBackendModal() {
+      document.getElementById('backendModal').classList.add('hidden');
+      document.getElementById('backendModal').classList.remove('flex');
+    }
+
+    function saveBackendUrl() {
+      const url = document.getElementById('gasBackendUrlInput').value.trim();
+      localStorage.setItem('krurank_backend_url', url);
+      updateBackendStatusDot();
+      closeBackendModal();
+      alert('บันทึก Web App URL เรียบร้อยแล้ว!');
+      if (url) {
+        fetchLeaderboardFromBackend();
+      }
+    }
+
+    function updateBackendStatusDot() {
+      const url = localStorage.getItem('krurank_backend_url');
+      const dot = document.getElementById('backendStatusDot');
+      const text = document.getElementById('backendStatusText');
+      if (url && url.startsWith('http')) {
+        dot.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shadow-sm shadow-emerald-400/50';
+        text.className = 'text-emerald-400 font-medium';
+        text.innerText = 'Sheets เชื่อมแล้ว';
+      } else {
+        dot.className = 'w-1.5 h-1.5 rounded-full bg-slate-500 inline-block';
+        text.className = 'text-slate-400';
+        text.innerText = 'ต่อ Sheets';
+      }
+    }
+
+    async function testBackendConnection() {
+      const url = document.getElementById('gasBackendUrlInput').value.trim();
+      const resBox = document.getElementById('backendTestResult');
+      const btn = document.getElementById('btnTestBackend');
+
+      if (!url) {
+        alert('กรุณากรอก URL ของ Google Apps Script ก่อนครับ');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerText = 'กำลังทดสอบ...';
+      resBox.className = 'p-2 rounded-lg text-[11px] border bg-slate-900 border-slate-700 text-slate-300 block';
+      resBox.innerText = 'กำลังส่ง Ping ไปยัง Google Apps Script...';
+
+      try {
+        const pingUrl = url.includes('?') ? `${url}&action=ping` : `${url}?action=ping`;
+        const res = await fetch(pingUrl);
+        const data = await res.json();
+
+        if (data.status === 'success') {
+          resBox.className = 'p-2 rounded-lg text-[11px] border bg-emerald-500/10 border-emerald-500/40 text-emerald-300 block';
+          resBox.innerHTML = `✓ เชื่อมต่อสำเร็จ! สถานะ: Online (${new Date().toLocaleTimeString('th-TH')})`;
+        } else {
+          resBox.className = 'p-2 rounded-lg text-[11px] border bg-rose-500/10 border-rose-500/40 text-rose-300 block';
+          resBox.innerText = `✕ เซิร์ฟเวอร์ตอบกลับแต่พบปัญหา: ${data.message || 'Error'}`;
+        }
+      } catch (err) {
+        resBox.className = 'p-2 rounded-lg text-[11px] border bg-rose-500/10 border-rose-500/40 text-rose-300 block';
+        resBox.innerText = `✕ เชื่อมต่อไม่สำเร็จ: กรุณาตรวจสอบว่า Deploy สิทธิ์เป็น 'Anyone' หรือยัง`;
+      } finally {
+        btn.disabled = false;
+        btn.innerText = '⚡ ทดสอบเชื่อมต่อ';
+      }
+    }
+
+    async function syncAnswerToBackend(isCorrect, selectedIndex, q) {
+      const url = localStorage.getItem('krurank_backend_url');
+      if (!url) return;
+
+      const payload = {
+        action: 'submitAnswer',
+        userId: userId,
+        name: candidateName,
+        major: candidateMajor,
+        area: candidateArea,
+        questionId: q.id,
+        subject: q.subject,
+        isCorrect: isCorrect,
+        selectedIndex: selectedIndex,
+        correctIndex: q.answerIndex
+      };
+
+      try {
+        fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (e) {
+        console.warn('Backend sync failed silently:', e);
+      }
+    }
+
+    async function syncProUpgradeToBackend(amount) {
+      const url = localStorage.getItem('krurank_backend_url');
+      if (!url) return;
+
+      const payload = {
+        action: 'upgradePro',
+        userId: userId,
+        name: candidateName,
+        planType: amount === 199 ? 'MONTHLY' : 'SEASON_PASS',
+        amount: amount,
+        slipHash: 'SLIP_' + Date.now()
+      };
+
+      try {
+        fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (e) {
+        console.warn('PRO backend sync failed silently:', e);
+      }
+    }
+
+    async function fetchLeaderboardFromBackend() {
+      const url = localStorage.getItem('krurank_backend_url');
+      if (!url) return;
+
+      try {
+        const fetchUrl = url.includes('?') ? `${url}&action=getLeaderboard` : `${url}?action=getLeaderboard`;
+        const res = await fetch(fetchUrl);
+        const resData = await res.json();
+
+        if (resData.status === 'success' && resData.data && resData.data.length > 0) {
+          // Merge or update MOCK_LEADERBOARD
+          resData.data.forEach((p, idx) => {
+            const existing = MOCK_LEADERBOARD.find(m => m.name === p.Name);
+            if (existing) {
+              existing.scoreRate = Number(p.ScoreRate);
+              existing.totalCorrect = Number(p.TotalCorrect);
+              existing.streak = Number(p.Streak);
+            } else {
+              MOCK_LEADERBOARD.push({
+                rank: idx + 1,
+                name: p.Name,
+                major: p.Major,
+                area: p.Area,
+                scoreRate: Number(p.ScoreRate),
+                totalCorrect: Number(p.TotalCorrect),
+                streak: Number(p.Streak),
+                badge: p.Badge || 'ว่าที่ครูผู้ช่วย',
+                isVIP: Boolean(p.IsVIP),
+                avatar: '👩‍🏫'
+              });
+            }
+          });
+          renderLeaderboard(currentLeaderboardFilter);
+        }
+      } catch (e) {
+        console.warn('Could not fetch leaderboard from backend:', e);
+      }
+    }
+
+    // --- MOCK EXAM (timed, no feedback until submit) ---
+    let mock = null;
+
+    function mockPool(scope) {
+      if (scope === 'all') return [...KRU_QUESTIONS];
+      const cleanMajor = (candidateMajor || '').replace('เอก', '').trim();
+      const pool = KRU_QUESTIONS.filter(q => {
+        if (q.category.includes('ภาค ก')) return true;
+        if (q.category === candidateMajor) return true;
+        if (cleanMajor && (q.category.includes(cleanMajor) || candidateMajor.includes(q.category.replace('เอก', '')))) return true;
+        return false;
+      });
+      return pool;
+    }
+    function showMockScreen(name) {
+      ['mockSetup', 'mockExam', 'mockResult'].forEach(id => document.getElementById(id).classList.add('hidden'));
+      document.getElementById(name).classList.remove('hidden');
+      if (name === 'mockExam') document.getElementById(name).classList.add('flex');
+    }
+    function openMockSetup() {
+      if (!isUserPro) { openProModal(); return; }
+      const m = document.getElementById('mockModal');
+      m.classList.remove('hidden'); m.classList.add('flex');
+      document.getElementById('mockMineInfo').innerText = `${mockPool('mine').length} ข้อ (ภาค ก + ${candidateMajor})`;
+      document.getElementById('mockAllInfo').innerText = `${KRU_QUESTIONS.length} ข้อ`;
+      showMockScreen('mockSetup');
+    }
+    function closeMock(confirmFirst) {
+      if (confirmFirst && mock && !confirm('ออกจากห้องสอบ? ความคืบหน้าจะหายไป')) return;
+      if (mock && mock.timerId) clearInterval(mock.timerId);
+      mock = null;
+      const m = document.getElementById('mockModal');
+      m.classList.add('hidden'); m.classList.remove('flex');
+    }
+    function startMock(scope) {
+      const pool = mockPool(scope);
+      if (pool.length === 0) { alert('ยังไม่มีข้อสอบในชุดนี้'); return; }
+      for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+      const minutes = Math.max(1, Math.ceil(pool.length * 1.2));
+      mock = { qs: pool, answers: new Array(pool.length).fill(null), idx: 0, endAt: Date.now() + minutes * 60000, timerId: null };
+      mock.timerId = setInterval(tickMock, 1000);
+      document.getElementById('mockQTotal').innerText = pool.length;
+      showMockScreen('mockExam');
+      tickMock();
+      renderMock();
+    }
+    function tickMock() {
+      if (!mock) return;
+      const left = Math.max(0, mock.endAt - Date.now());
+      const s = Math.floor(left / 1000);
+      const t = document.getElementById('mockTimer');
+      t.innerText = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+      t.className = 'font-mono font-bold text-sm px-3 py-1 rounded-full border ' + (s <= 60 ? 'text-rose-300 bg-rose-500/10 border-rose-500/50 animate-pulse' : 'text-amber-300 bg-amber-500/10 border-amber-500/40');
+      if (left <= 0) finishMock(true);
+    }
+    function renderMock() {
+      const q = mock.qs[mock.idx];
+      document.getElementById('mockQNum').innerText = mock.idx + 1;
+      document.getElementById('mockQMeta').innerText = `${q.category} • ${q.subject}`;
+      document.getElementById('mockQText').innerText = q.question;
+      const box = document.getElementById('mockOptions');
+      box.innerHTML = '';
+      q.options.forEach((txt, i) => {
+        const b = document.createElement('button');
+        const sel = mock.answers[mock.idx] === i;
+        b.className = 'touch-btn w-full text-left text-sm py-3 px-4 rounded-xl flex items-start space-x-3 border ' + (sel ? 'bg-cyan-500/20 border-cyan-400 text-white' : 'bg-slate-900/70 border-slate-800 text-slate-200');
+        const tag = document.createElement('span');
+        tag.className = 'w-6 h-6 rounded-lg bg-slate-950 border border-slate-700 flex items-center justify-center font-bold text-xs text-cyan-400 flex-shrink-0 mt-0.5';
+        tag.innerText = ['ก', 'ข', 'ค', 'ง'][i];
+        const lab = document.createElement('span');
+        lab.className = 'leading-relaxed flex-1';
+        lab.innerText = txt.replace(/^[ก-ง]\.\s*/, '');
+        b.append(tag, lab);
+        b.onclick = () => { mock.answers[mock.idx] = i; triggerHaptic('tap'); renderMock(); };
+        box.appendChild(b);
+      });
+      const pal = document.getElementById('mockPalette');
+      pal.innerHTML = '';
+      mock.qs.forEach((_, i) => {
+        const p = document.createElement('button');
+        const cur = i === mock.idx, ans = mock.answers[i] !== null;
+        p.className = 'w-8 h-8 rounded-lg text-xs font-bold border ' + (cur ? 'border-cyan-400 bg-cyan-500 text-slate-950' : ans ? 'border-emerald-500/50 bg-emerald-500/20 text-emerald-300' : 'border-slate-700 bg-slate-900 text-slate-400');
+        p.innerText = i + 1;
+        p.onclick = () => { mock.idx = i; renderMock(); };
+        pal.appendChild(p);
+      });
+    }
+    function mockGo(d) {
+      const n = mock.idx + d;
+      if (n >= 0 && n < mock.qs.length) { mock.idx = n; renderMock(); }
+    }
+    function finishMock(auto) {
+      if (!mock) return;
+      const unanswered = mock.answers.filter(a => a === null).length;
+      if (!auto && unanswered > 0 && !confirm(`ยังไม่ได้ตอบ ${unanswered} ข้อ ส่งข้อสอบเลยไหม?`)) return;
+      clearInterval(mock.timerId);
+      const total = mock.qs.length;
+      let correct = 0;
+      const byCat = {};
+      const wrong = [];
+      mock.qs.forEach((q, i) => {
+        const ok = mock.answers[i] === q.answerIndex;
+        if (ok) correct++; else wrong.push({ q, picked: mock.answers[i] });
+        byCat[q.category] = byCat[q.category] || { ok: 0, n: 0 };
+        byCat[q.category].n++;
+        if (ok) byCat[q.category].ok++;
+      });
+      myStats.answered += total - unanswered;
+      myStats.correct += correct;
+      saveStats();
+      renderLeaderboard(currentLeaderboardFilter);
+
+      const pct = Math.round((correct / total) * 1000) / 10;
+      document.getElementById('mockScorePct').innerText = pct + '%';
+      document.getElementById('mockScoreLine').innerText = `ถูก ${correct} / ${total} ข้อ • ไม่ได้ตอบ ${unanswered} ข้อ`;
+      const v = document.getElementById('mockVerdict');
+      v.innerText = pct >= 60 ? 'ผ่านเกณฑ์ 60% (เกณฑ์ภาค ก ทั่วไป)' : 'ยังต่ำกว่า 60% ทบทวนข้อที่ผิดด้านล่างแล้วลองใหม่';
+      v.className = 'text-xs font-bold mt-2 ' + (pct >= 60 ? 'text-emerald-400' : 'text-rose-400');
+
+      const bd = document.getElementById('mockBreakdown');
+      bd.innerHTML = '';
+      Object.entries(byCat).forEach(([cat, s]) => {
+        const p = Math.round((s.ok / s.n) * 100);
+        const row = document.createElement('div');
+        const head = document.createElement('div');
+        head.className = 'flex justify-between text-slate-300 mb-1';
+        head.innerHTML = '<span></span><span class="font-mono font-bold"></span>';
+        head.children[0].innerText = cat;
+        head.children[1].innerText = `${s.ok}/${s.n} (${p}%)`;
+        const bar = document.createElement('div');
+        bar.className = 'w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800';
+        bar.innerHTML = '<div class="h-full ' + (p >= 60 ? 'bg-emerald-500' : 'bg-rose-500') + '" style="width:' + p + '%"></div>';
+        row.append(head, bar);
+        bd.appendChild(row);
+      });
+
+      const rv = document.getElementById('mockReview');
+      rv.innerHTML = '';
+      if (wrong.length === 0) {
+        rv.innerHTML = '<div class="text-xs text-emerald-400">ถูกหมดทุกข้อ ยอดเยี่ยมมากครับคุณครู!</div>';
+      }
+      wrong.forEach(({ q, picked }) => {
+        const c = document.createElement('div');
+        c.className = 'cyber-card rounded-xl p-3 text-xs';
+        const t = document.createElement('div'); t.className = 'text-white font-semibold mb-1.5'; t.innerText = q.question;
+        const a = document.createElement('div'); a.className = 'text-emerald-300 mb-0.5'; a.innerText = 'เฉลย: ' + q.options[q.answerIndex];
+        const y = document.createElement('div'); y.className = 'text-rose-300 mb-1.5'; y.innerText = picked === null ? 'คุณครูไม่ได้ตอบข้อนี้' : 'คุณครูตอบ: ' + q.options[picked];
+        const k = document.createElement('div'); k.className = 'text-amber-200/90 mb-1'; k.innerText = '💡 ' + q.aiExplanation.tutorTrick;
+        const r = document.createElement('div'); r.className = 'text-[10px] text-slate-400 font-mono'; r.innerText = '📌 ' + q.legalRef;
+        c.append(t, a, y, k, r);
+        rv.appendChild(c);
+      });
+      mock.timerId = null;
+      showMockScreen('mockResult');
+    }
+
+    // --- SOCIAL VIRAL SHARE CARD (HTML5 Canvas 1080x1920) ---
+    function updateStickyStats() {
+      const acc = myAccuracy();
+      const accEl = document.getElementById('stickyPlayerAcc');
+      const corEl = document.getElementById('stickyPlayerCorrect');
+      const rankEl = document.getElementById('stickyPlayerRank');
+      if (acc !== null && accEl) {
+        accEl.innerText = acc + '%';
+        corEl.innerText = myStats.correct;
+      }
+      const r = myOverallRank();
+      if (r && rankEl) rankEl.innerText = r;
+    }
+
+    function openShareModal() {
+      document.getElementById('shareModal').classList.remove('hidden');
+      document.getElementById('shareModal').classList.add('flex');
+      drawShareCard();
+    }
+    function closeShareModal() {
+      document.getElementById('shareModal').classList.add('hidden');
+      document.getElementById('shareModal').classList.remove('flex');
+    }
+
+    function loadImg(src) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+        img.src = src;
+      });
+    }
+
+    function rr(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    async function drawShareCard() {
+      const cv = document.getElementById('shareCanvas');
+      const ctx = cv.getContext('2d');
+      const W = 1080, H = 1920;
+
+      try { await Promise.all([document.fonts.load('700 60px Kanit'), document.fonts.load('500 40px Prompt')]); } catch (e) {}
+
+      const acc = myAccuracy();
+      const rank = myOverallRank();
+      const displayName = candidateName.replace(' (คุณเอง)', '');
+
+      // Background
+      ctx.fillStyle = '#09090b';
+      ctx.fillRect(0, 0, W, H);
+
+      // Cyber grid
+      ctx.strokeStyle = 'rgba(255,255,255,0.045)';
+      ctx.lineWidth = 2;
+      for (let x = 0; x <= W; x += 60) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+      for (let y = 0; y <= H; y += 60) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+      // Neon glows
+      const g1 = ctx.createRadialGradient(W * 0.2, 380, 0, W * 0.2, 380, 700);
+      g1.addColorStop(0, 'rgba(6,182,212,0.35)'); g1.addColorStop(1, 'rgba(6,182,212,0)');
+      ctx.fillStyle = g1; ctx.fillRect(0, 0, W, H);
+      const g2 = ctx.createRadialGradient(W * 0.85, 1500, 0, W * 0.85, 1500, 800);
+      g2.addColorStop(0, 'rgba(168,85,247,0.35)'); g2.addColorStop(1, 'rgba(168,85,247,0)');
+      ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H);
+
+      // Logo + brand
+      const logo = await loadImg('assets/icon.png');
+      if (logo) {
+        ctx.save(); rr(ctx, 80, 90, 120, 120, 28); ctx.clip();
+        ctx.drawImage(logo, 80, 90, 120, 120); ctx.restore();
+      }
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 56px Kanit, sans-serif';
+      ctx.fillText('iAonTech', 230, 148);
+      const brandW = ctx.measureText('iAonTech').width;
+      ctx.fillStyle = '#22d3ee';
+      ctx.font = '600 40px monospace';
+      ctx.fillText('.krurank', 230 + brandW + 4, 148);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '500 32px Prompt, sans-serif';
+      ctx.fillText('KruRank AI • ซ้อมสอบครูผู้ช่วย', 230, 200);
+
+      // Title
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#f59e0b';
+      ctx.font = '700 44px Kanit, sans-serif';
+      ctx.fillText('🏆 ทำเนียบว่าที่ครูผู้ช่วยคนต่อไป', W / 2, 340);
+
+      // Name card
+      ctx.fillStyle = 'rgba(17,22,37,0.85)';
+      rr(ctx, 80, 400, W - 160, 330, 48); ctx.fill();
+      ctx.strokeStyle = 'rgba(34,211,238,0.5)'; ctx.lineWidth = 4; rr(ctx, 80, 400, W - 160, 330, 48); ctx.stroke();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 84px Kanit, sans-serif';
+      let nm = displayName; while (ctx.measureText(nm).width > W - 260 && nm.length > 3) nm = nm.slice(0, -1);
+      ctx.fillText(nm + (nm !== displayName ? '…' : ''), W / 2, 540);
+      ctx.fillStyle = '#22d3ee';
+      ctx.font = '600 44px Prompt, sans-serif';
+      ctx.fillText(candidateMajor, W / 2, 610);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '500 36px Prompt, sans-serif';
+      ctx.fillText('📍 ' + candidateArea, W / 2, 670);
+
+      // Accuracy ring
+      const cx = W / 2, cy = 1030, R = 230;
+      ctx.lineWidth = 36; ctx.lineCap = 'round';
+      ctx.strokeStyle = 'rgba(51,65,85,0.7)';
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.stroke();
+      const pct = acc === null ? 0 : acc / 100;
+      const rg = ctx.createLinearGradient(cx - R, cy - R, cx + R, cy + R);
+      rg.addColorStop(0, '#3b82f6'); rg.addColorStop(0.5, '#06b6d4'); rg.addColorStop(1, '#34d399');
+      ctx.strokeStyle = rg;
+      if (pct > 0) { ctx.beginPath(); ctx.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * pct); ctx.stroke(); }
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 150px Kanit, sans-serif';
+      ctx.fillText(acc === null ? '—' : acc + '%', cx, cy + 40);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '500 40px Prompt, sans-serif';
+      ctx.fillText('ความแม่นยำ', cx, cy + 110);
+
+      // Stat boxes
+      const stats = [
+        { label: 'ตอบแล้ว', value: myStats.answered + ' ข้อ', color: '#60a5fa' },
+        { label: 'ตอบถูก', value: myStats.correct + ' ข้อ', color: '#34d399' },
+        { label: 'อันดับ', value: rank ? '#' + rank : '—', color: '#f59e0b' }
+      ];
+      const bw = 290, gap = 35, startX = (W - (bw * 3 + gap * 2)) / 2;
+      stats.forEach((s, i) => {
+        const x = startX + i * (bw + gap), y = 1340;
+        ctx.fillStyle = 'rgba(17,22,37,0.85)'; rr(ctx, x, y, bw, 200, 36); ctx.fill();
+        ctx.strokeStyle = 'rgba(51,65,85,0.9)'; ctx.lineWidth = 3; rr(ctx, x, y, bw, 200, 36); ctx.stroke();
+        ctx.fillStyle = s.color; ctx.font = '800 62px Kanit, sans-serif';
+        ctx.fillText(s.value, x + bw / 2, y + 100);
+        ctx.fillStyle = '#94a3b8'; ctx.font = '500 34px Prompt, sans-serif';
+        ctx.fillText(s.label, x + bw / 2, y + 156);
+      });
+
+      // Badge
+      const badge = acc === null ? 'เริ่มต้นไต่อันดับ' : acc >= 90 ? '🥇 ว่าที่ครูผู้ช่วยระดับทองคำ' : acc >= 75 ? '🥈 ว่าที่ครูผู้ช่วยระดับเงิน' : '🥉 กำลังไต่อันดับ';
+      ctx.fillStyle = 'rgba(245,158,11,0.15)'; rr(ctx, 140, 1590, W - 280, 100, 50); ctx.fill();
+      ctx.strokeStyle = 'rgba(245,158,11,0.6)'; ctx.lineWidth = 3; rr(ctx, 140, 1590, W - 280, 100, 50); ctx.stroke();
+      ctx.fillStyle = '#fbbf24'; ctx.font = '700 46px Kanit, sans-serif';
+      ctx.fillText(badge, W / 2, 1656);
+
+      // CTA
+      ctx.fillStyle = '#ffffff'; ctx.font = '700 52px Kanit, sans-serif';
+      ctx.fillText('ท้าคุณครูมาประลองฝีมือ!', W / 2, 1778);
+      ctx.fillStyle = '#22d3ee'; ctx.font = '600 42px Prompt, sans-serif';
+      ctx.fillText('ซ้อมฟรี 15 ข้อ/วัน • www.aiaon.tech', W / 2, 1840);
+    }
+
+    function shareText() {
+      const acc = myAccuracy();
+      const accTxt = acc === null ? '' : `ผมทำความแม่นยำได้ ${acc}% `;
+      return `${accTxt}ใน KruRank AI ทำเนียบว่าที่ครูผู้ช่วย 🏆 ซ้อมสอบครูผู้ช่วยฟรี มี AI ติวเตอร์ชี้จุดหลอก ท้าคุณครูมาแข่ง 👉 https://www.aiaon.tech #ครูผู้ช่วย #สอบครู #iAonTech`;
+    }
+
+    function canvasToBlob() {
+      return new Promise((resolve, reject) => {
+        try {
+          document.getElementById('shareCanvas').toBlob(b => b ? resolve(b) : reject(new Error('blob null')), 'image/png');
+        } catch (e) { reject(e); }
+      });
+    }
+
+    async function downloadShareCard() {
+      try {
+        const blob = await canvasToBlob();
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'krurank-score-card.png';
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      } catch (e) {
+        document.getElementById('shareHint').innerText = 'บันทึกรูปไม่ได้: กรุณาเปิดผ่าน start_app.bat (http://localhost) ไม่ใช่เปิดไฟล์ตรงๆ';
+      }
+    }
+
+    async function nativeShareCard() {
+      try {
+        const blob = await canvasToBlob();
+        const file = new File([blob], 'krurank-score-card.png', { type: 'image/png' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], text: shareText() });
+          return;
+        }
+      } catch (e) {
+        if (e && e.name === 'AbortError') return;
+      }
+      // Fallback: download image + copy caption
+      await downloadShareCard();
+      try { await navigator.clipboard.writeText(shareText()); } catch (e) {}
+      document.getElementById('shareHint').innerText = 'บันทึกรูปแล้ว และคัดลอกแคปชันให้แล้ว นำไปวางโพสต์ได้เลย';
+    }
+
+    // --- WEAKNESS DRILL ---
+    function startWeaknessDrill() {
+      switchTab('quiz');
+      loadQuestion(0);
+      alert('🎯 เปิดโหมดเจาะจุดอ่อน: สุ่มข้อสอบที่คุณเคยตอบผิดและจุดหลอกสถิติผิดเกิน 80% ให้คุณครูซ้อมจนแม่นยำ!');
+    }
+  </script>
+
+</body>
+</html>
