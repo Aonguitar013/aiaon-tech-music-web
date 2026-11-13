@@ -231,7 +231,7 @@
       <div class="flex items-center space-x-1.5 text-slate-400">
         <span class="text-cyan-400">⚡</span>
         <span>สิทธิ์ซ้อมฟรีวันนี้:</span>
-        <span id="quotaText" class="font-bold text-cyan-300">15/15 ข้อ</span>
+        <span id="quotaText" class="font-bold text-cyan-300">40/40 ข้อ</span>
       </div>
       <div class="w-32 bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-700/60">
         <div id="quotaBar" class="bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 h-full w-full transition-all duration-300"></div>
@@ -1043,7 +1043,7 @@
     let activeCategory = 'all';
     let activeQuestions = [...KRU_QUESTIONS];
     let currentQuestionIndex = 0;
-    let userQuota = 15;
+    let userQuota = 40;
     let userStreak = 5;
     let isUserPro = false;
     let selectedAmount = 499;
@@ -1528,8 +1528,8 @@
         return;
       }
 
-      quotaText.innerText = `${userQuota}/15 ข้อ`;
-      const pct = (userQuota / 15) * 100;
+      quotaText.innerText = `${userQuota}/40 ข้อ`;
+      const pct = Math.min(100, (userQuota / 40) * 100);
       quotaBar.style.width = `${pct}%`;
 
       if (userQuota === 0) {
@@ -1821,7 +1821,7 @@
     // Dev Helper to Reset PRO state
     function devResetProState() {
       isUserPro = false;
-      userQuota = 15;
+      userQuota = 40;
       localStorage.removeItem('krurank_pro');
       const vipHeader = document.getElementById('vipBadgeHeader');
       if (vipHeader) vipHeader.classList.add('hidden');
@@ -2599,7 +2599,7 @@
       ctx.fillStyle = '#ffffff'; ctx.font = '700 52px Kanit, sans-serif';
       ctx.fillText('ท้าคุณครูมาประลองฝีมือ!', W / 2, 1778);
       ctx.fillStyle = '#22d3ee'; ctx.font = '600 42px Prompt, sans-serif';
-      ctx.fillText('ซ้อมฟรี 15 ข้อ/วัน • www.aiaon.tech', W / 2, 1840);
+      ctx.fillText('ซ้อมฟรี 40 ข้อ/วัน • www.aiaon.tech', W / 2, 1840);
     }
 
     function shareText() {
