@@ -30,6 +30,41 @@ export interface StickerBriefPayload {
 const g = globalThis as any;
 if (!g.__stickerBriefOrders) g.__stickerBriefOrders = [];
 
+/**
+ * Reads the currently pinned message in Telegram to extract existing Rolling Queue orders
+ * so concurrent/multiple customer submissions (up to 15-20 orders) are accumulated without loss!
+ */
+async function fetchExistingPinnedQueue(): Promise<StickerBriefPayload[]> {
+  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return [];
+  try {
+    const res = await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getChat?chat_id=${TELEGRAM_CHAT_ID}`,
+      { cache: "no-store" }
+    );
+    if (!res.ok) return [];
+    const data = await res.json();
+    const pinned = data?.result?.pinned_message;
+    const pinnedText: string = pinned?.text || pinned?.caption || "";
+
+    // Check for multi-order queue format [[STICKER_QUEUE_JSON:[...]]]
+    const queueMatch = pinnedText.match(/\[\[STICKER_QUEUE_JSON:(\[[\s\S]*\])\]\]/);
+    if (queueMatch) {
+      const parsed = JSON.parse(queueMatch[1]);
+      if (Array.isArray(parsed)) return parsed;
+    }
+
+    // Backward compatibility: single-order format [[STICKER_ORDER_JSON:{...}]]
+    const singleMatch = pinnedText.match(/\[\[STICKER_ORDER_JSON:(\{[\s\S]*\})\]\]/);
+    if (singleMatch) {
+      const parsed = JSON.parse(singleMatch[1]);
+      if (parsed && parsed.orderId) return [parsed];
+    }
+  } catch (err) {
+    console.error("[StickerBriefAPI] Error reading existing pinned queue:", err);
+  }
+  return [];
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -121,7 +156,7 @@ export async function POST(req: NextRequest) {
       telegramPhotoFileId,
     };
 
-    // 2. Upload order.json as a Telegram Document to get permanent telegramJsonFileId
+    // 2. Upload full order.json as a Telegram Document to get permanent telegramJsonFileId
     let telegramJsonFileId = "";
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
       try {
@@ -155,13 +190,11 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. Send human-readable brief message AND pin the machine-readable JSON manifest
-    //    so `getChat` from local PC can ALWAYS read the latest order 100% deterministically!
-    const captionsFormatted = captions
-      .map((c, idx) => `${String(idx + 1).padStart(2, "0")}. ${c}`)
-      .join("\n");
-
-    const compactVaultJson = JSON.stringify({
+    // 3. Read existing pinned queue and prepend this new order (Rolling Queue of up to 15 orders)
+    //    Each item in the pinned queue stores compact metadata + telegramJsonFileId + telegramPhotoFileId
+    //    so even 15-20 concurrent orders easily fit inside Telegram's 4096-char message limit!
+    const existingQueue = await fetchExistingPinnedQueue();
+    const compactEntry: StickerBriefPayload = {
       orderId,
       submittedAt: orderPayload.submittedAt,
       teacherName,
@@ -178,12 +211,30 @@ export async function POST(req: NextRequest) {
       captions,
       telegramPhotoFileId,
       telegramJsonFileId,
-    });
+    };
+
+    const mergedQueue: StickerBriefPayload[] = [
+      compactEntry,
+      ...existingQueue.filter((item) => item.orderId !== orderId),
+    ].slice(0, 15);
+
+    // Ensure the serialized queue fits comfortably within 3000 chars; if very large, keep full captions on top 5 and rely on telegramJsonFileId for older ones
+    let queueJsonStr = JSON.stringify(mergedQueue);
+    if (queueJsonStr.length > 2800) {
+      const slimQueue = mergedQueue.map((item, idx) =>
+        idx < 4 ? item : { ...item, captions: [] }
+      );
+      queueJsonStr = JSON.stringify(slimQueue);
+    }
+
+    const captionsFormatted = captions
+      .map((c, idx) => `${String(idx + 1).padStart(2, "0")}. ${c}`)
+      .join("\n");
 
     const telegramText =
-      `🎨✨ [มีคุณครูส่งบรีฟสั่งทำสติกเกอร์ LINE ครบแล้ว!]\n` +
+      `🎨✨ [มีคุณครูส่งบรีฟสั่งทำสติกเกอร์ LINE ครบแล้ว!] (คิวสะสม ${mergedQueue.length} รายการ)\n` +
       `━━━━━━━━━━━━━━━\n` +
-      `🆔 รหัสออเดอร์: ${orderId}\n` +
+      `🆔 รหัสออเดอร์ล่าสุด: ${orderId}\n` +
       `👤 ชื่อคุณครู: ${teacherName}\n` +
       `📱 ช่องทางติดต่อ: ${contactInfo || "-"}\n` +
       `📦 แพ็กเกจ: [${packageCode}] ${packageName} (${stickerCount} รูป • ${packagePrice})\n` +
@@ -195,8 +246,8 @@ export async function POST(req: NextRequest) {
       `💬 คำพูดทั้ง ${captions.length} แอ็กชัน:\n${captionsFormatted}\n` +
       `━━━━━━━━━━━━━━━\n` +
       `🤖 สั่ง AI ใน Antigravity ได้ทันที เพียงพิมพ์ว่า:\n` +
-      `"ดึงบรีฟสติกเกอร์ล่าสุด"\n\n` +
-      `[[STICKER_ORDER_JSON:${compactVaultJson}]]`;
+      `"/sticker"\n\n` +
+      `[[STICKER_QUEUE_JSON:${queueJsonStr}]]`;
 
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
       try {
@@ -236,17 +287,15 @@ export async function POST(req: NextRequest) {
     }
 
     // Store in memory cache as well
-    g.__stickerBriefOrders.unshift(orderPayload);
-    if (g.__stickerBriefOrders.length > 20) {
-      g.__stickerBriefOrders.length = 20;
-    }
+    g.__stickerBriefOrders = mergedQueue;
 
     return NextResponse.json({
       status: "success",
       orderId,
+      queueSize: mergedQueue.length,
       telegramPhotoFileId,
       telegramJsonFileId,
-      message: "บันทึกบรีฟและส่งแจ้งเตือนถึงครูอ้นเรียบร้อยแล้วครับ!",
+      message: "บันทึกบรีฟเข้าคิวและส่งแจ้งเตือนถึงครูอ้นเรียบร้อยแล้วครับ!",
     });
   } catch (err) {
     console.error("[StickerBriefAPI] Error:", err);
