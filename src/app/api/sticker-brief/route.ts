@@ -6,14 +6,6 @@ const TELEGRAM_BOT_TOKEN =
   process.env.TELEGRAM_BOT_TOKEN || "8529471786:AAHI33E48vL4ic1J8tyszNAp7SwzkADaYKE";
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "7731447826";
 
-const DEFAULT_GOOGLE_SHEET_WEBHOOK_URL =
-  "https://script.google.com/macros/s/AKfycbyPRw7GjvTv24XFfCsX73QMvPh4e9AFxxc6bfZZubdck7d1MIILECDHMudDAkhE7bj4TQ/exec";
-
-const GOOGLE_SHEET_WEBHOOK_URL =
-  process.env.GOOGLE_SHEET_CHAT_WEBHOOK_URL ||
-  process.env.NEXT_PUBLIC_GOOGLE_SHEET_CHAT_WEBHOOK_URL ||
-  DEFAULT_GOOGLE_SHEET_WEBHOOK_URL;
-
 export interface StickerBriefPayload {
   orderId: string;
   submittedAt: string;
@@ -29,7 +21,8 @@ export interface StickerBriefPayload {
   stickerTitleTh: string;
   stickerTitleEn: string;
   captions: string[];
-  photoBase64?: string;
+  telegramPhotoFileId?: string;
+  telegramJsonFileId?: string;
 }
 
 // Persistent in-memory cache on globalThis
@@ -72,31 +65,7 @@ export async function POST(req: NextRequest) {
     const randPart = Math.floor(1000 + Math.random() * 9000);
     const orderId = `STK-${datePart}-${randPart}`;
 
-    const orderPayload: StickerBriefPayload = {
-      orderId,
-      submittedAt: now.toISOString(),
-      teacherName,
-      contactInfo,
-      packageCode,
-      packageName,
-      packagePrice,
-      stickerCount,
-      outfitStyle,
-      publishMode,
-      propsAndTrait,
-      stickerTitleTh,
-      stickerTitleEn,
-      captions,
-      photoBase64,
-    };
-
-    // 1. Store in global memory (keep last 20 orders)
-    g.__stickerBriefOrders.unshift(orderPayload);
-    if (g.__stickerBriefOrders.length > 20) {
-      g.__stickerBriefOrders.length = 20;
-    }
-
-    // 2. Upload photo to Telegram first (if photoBase64 is provided) to get Telegram file_id & visual alert
+    // 1. Upload photo to Telegram first (if photoBase64 is provided) to get permanent Telegram file_id
     let telegramPhotoFileId = "";
     if (photoBase64 && TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
       try {
@@ -134,10 +103,82 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. Send full structured brief message to Kru Aon's Telegram (@AiAonhub_bot)
+    const orderPayload: StickerBriefPayload = {
+      orderId,
+      submittedAt: now.toISOString(),
+      teacherName,
+      contactInfo,
+      packageCode,
+      packageName,
+      packagePrice,
+      stickerCount,
+      outfitStyle,
+      publishMode,
+      propsAndTrait,
+      stickerTitleTh,
+      stickerTitleEn,
+      captions,
+      telegramPhotoFileId,
+    };
+
+    // 2. Upload order.json as a Telegram Document to get permanent telegramJsonFileId
+    let telegramJsonFileId = "";
+    if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
+      try {
+        const jsonBytes = Buffer.from(JSON.stringify(orderPayload, null, 2), "utf-8");
+        const docForm = new FormData();
+        docForm.append("chat_id", TELEGRAM_CHAT_ID);
+        docForm.append(
+          "caption",
+          `📋 ไฟล์ข้อมูลบรีฟอัตโนมัติ (${orderId} - ${teacherName})`
+        );
+        docForm.append(
+          "document",
+          new Blob([jsonBytes], { type: "application/json" }),
+          `${orderId}_brief.json`
+        );
+
+        const docRes = await fetch(
+          `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument`,
+          {
+            method: "POST",
+            body: docForm,
+          }
+        );
+        if (docRes.ok) {
+          const docJson = await docRes.json();
+          telegramJsonFileId = docJson?.result?.document?.file_id || "";
+          orderPayload.telegramJsonFileId = telegramJsonFileId;
+        }
+      } catch (err) {
+        console.error("[StickerBriefAPI] Telegram document upload failed:", err);
+      }
+    }
+
+    // 3. Send human-readable brief message AND pin the machine-readable JSON manifest
+    //    so `getChat` from local PC can ALWAYS read the latest order 100% deterministically!
     const captionsFormatted = captions
       .map((c, idx) => `${String(idx + 1).padStart(2, "0")}. ${c}`)
       .join("\n");
+
+    const compactVaultJson = JSON.stringify({
+      orderId,
+      submittedAt: orderPayload.submittedAt,
+      teacherName,
+      contactInfo,
+      packageCode,
+      packageName,
+      packagePrice,
+      stickerCount,
+      outfitStyle,
+      publishMode,
+      propsAndTrait,
+      stickerTitleTh,
+      stickerTitleEn,
+      captions,
+      telegramPhotoFileId,
+      telegramJsonFileId,
+    });
 
     const telegramText =
       `🎨✨ [มีคุณครูส่งบรีฟสั่งทำสติกเกอร์ LINE ครบแล้ว!]\n` +
@@ -154,61 +195,57 @@ export async function POST(req: NextRequest) {
       `💬 คำพูดทั้ง ${captions.length} แอ็กชัน:\n${captionsFormatted}\n` +
       `━━━━━━━━━━━━━━━\n` +
       `🤖 สั่ง AI ใน Antigravity ได้ทันที เพียงพิมพ์ว่า:\n` +
-      `"ดึงบรีฟสติกเกอร์ล่าสุดมาออกแบบให้ดูก่อน"`;
+      `"ดึงบรีฟสติกเกอร์ล่าสุด"\n\n` +
+      `[[STICKER_ORDER_JSON:${compactVaultJson}]]`;
 
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
       try {
-        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: telegramText,
-          }),
-        });
+        const msgRes = await fetch(
+          `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: telegramText,
+            }),
+          }
+        );
+
+        if (msgRes.ok) {
+          const msgJson = await msgRes.json();
+          const messageId = msgJson?.result?.message_id;
+          if (messageId) {
+            await fetch(
+              `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/pinChatMessage`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  chat_id: TELEGRAM_CHAT_ID,
+                  message_id: messageId,
+                  disable_notification: true,
+                }),
+              }
+            );
+          }
+        }
       } catch (err) {
-        console.error("[StickerBriefAPI] Telegram text send failed:", err);
+        console.error("[StickerBriefAPI] Telegram text/pin send failed:", err);
       }
     }
 
-    // 4. Persist brief JSON + telegramPhotoFileId to Google Sheets Cloud Vault (via upsert_lead)
-    // So local PC script can pull the order 24/7 even across Vercel cold starts!
-    if (GOOGLE_SHEET_WEBHOOK_URL) {
-      try {
-        const cloudRecord = {
-          userId: `STICKER_ORDER_${orderId}`,
-          displayName: `🎨 [สติกเกอร์] ${teacherName}`,
-          status: "quoted",
-          lastSeenAt: now.toISOString(),
-          followUpCount: 0,
-          lastItem: `[${packageCode}] ${packageName}`,
-          lastAmount: parseInt(packagePrice.replace(/[^0-9]/g, ""), 10) || 1490,
-          stickerBrief: {
-            ...orderPayload,
-            photoBase64: undefined, // keep Google Sheet cell under 50k chars; use telegramPhotoFileId or compact thumbnail
-            telegramPhotoFileId,
-            photoThumbnailBase64:
-              photoBase64 && photoBase64.length < 38000 ? photoBase64 : undefined,
-          },
-        };
-
-        await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            action: "upsert_lead",
-            lead: cloudRecord,
-          }),
-        });
-      } catch (err) {
-        console.error("[StickerBriefAPI] Cloud sheet persist error:", err);
-      }
+    // Store in memory cache as well
+    g.__stickerBriefOrders.unshift(orderPayload);
+    if (g.__stickerBriefOrders.length > 20) {
+      g.__stickerBriefOrders.length = 20;
     }
 
     return NextResponse.json({
       status: "success",
       orderId,
       telegramPhotoFileId,
+      telegramJsonFileId,
       message: "บันทึกบรีฟและส่งแจ้งเตือนถึงครูอ้นเรียบร้อยแล้วครับ!",
     });
   } catch (err) {
