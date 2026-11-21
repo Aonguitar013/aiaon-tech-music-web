@@ -16,6 +16,26 @@ export interface CommandMenuItem {
 
 export const COMMAND_MENU_ITEMS: CommandMenuItem[] = [
   {
+    "id": "service-line-stickers",
+    "title": "รับออกแบบสติกเกอร์ LINE คาแรกเตอร์ครู 3D ครบวงจร",
+    "description": "ปั้นสติกเกอร์ LINE จากรูปถ่ายจริง 8/16/24 รูป ดูแลส่งตรวจจนวางขายบน LINE STORE + แถมไฟล์ PNG แต่งสไลด์ ว.PA",
+    "category": "pages",
+    "categoryLabel": "บริการยอดฮิต",
+    "url": "/line-stickers",
+    "code": "STK-16",
+    "price": "990 - 1,990 ฿",
+    "badge": "HOT 🎨",
+    "keywords": [
+      "สติกเกอร์",
+      "สติ๊กเกอร์",
+      "line sticker",
+      "สติกเกอร์ไลน์",
+      "รับทำสติกเกอร์",
+      "คาแรกเตอร์ครู",
+      "3d"
+    ]
+  },
+  {
     "id": "page-home",
     "title": "หน้าแรก (Home Dashboard)",
     "description": "ศูนย์รวม 8 มหาคลังนวัตกรรม AiAon Tech x Music",

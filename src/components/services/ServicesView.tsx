@@ -323,6 +323,43 @@ export function ServicesView() {
           </div>
         </div>
 
+        {/* --- NEW! 3D TEACHER LINE STICKER DESIGN SERVICE BANNER --- */}
+        <div className="mb-20 rounded-3xl p-7 sm:p-10 border border-[#06C755]/50 bg-linear-to-r from-[#06C755]/15 via-slate-900 to-emerald-950/60 relative overflow-hidden shadow-[0_0_50px_rgba(6,199,85,0.2)]">
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left max-w-2xl">
+              <img
+                src="/images/stickers/set2/main.png"
+                alt="iAon LINE Sticker 3D"
+                className="w-24 h-24 rounded-2xl bg-slate-800/90 p-2 border border-[#06C755]/40 object-contain shrink-0 shadow-[0_0_25px_rgba(6,199,85,0.3)]"
+              />
+              <div className="space-y-2.5">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#06C755]/20 border border-[#06C755]/40 text-[#4ade80] text-xs font-prompt font-bold">
+                  <Sparkles className="w-4 h-4 text-[#4ade80] animate-pulse" />
+                  <span>🎨 บริการใหม่ยอดฮิต! รับทำสติกเกอร์ LINE คาแรกเตอร์ครู 3D ครบวงจร</span>
+                </div>
+                <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
+                  เปลี่ยนรูปถ่ายคุณครูเป็น{" "}
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-[#4ade80] to-cyan-300">
+                    สติกเกอร์ LINE พูดได้ประจำตัว!
+                  </span>
+                </h2>
+                <p className="font-prompt text-xs sm:text-sm text-white/75 leading-relaxed">
+                  ปั้นคาแรกเตอร์ 3D จากรูปถ่ายจริง เลือกชุดและคำพูดเองได้ ดูแลไดคัท ใส่ฟอนต์ไทยคมชัด และส่งตรวจอนุมัติจนขึ้นขายบน <strong>LINE STORE</strong> พร้อมแถมไฟล์ PNG ความละเอียดสูงเอาไปแต่งสไลด์สอน &amp; ปก ว.PA <strong className="text-[#4ade80]">เริ่มต้นเพียง 990 ฿ (ชุดยอดนิยม 16 รูป 1,490 ฿)</strong>
+                </p>
+              </div>
+            </div>
+
+            <Link
+              href="/line-stickers"
+              className="px-7 py-4 rounded-2xl bg-linear-to-r from-[#06C755] to-emerald-500 hover:from-[#05b34c] hover:to-emerald-400 text-zinc-950 font-prompt font-black text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-[0_0_30px_rgba(6,199,85,0.45)] hover:scale-105 transition-all shrink-0"
+            >
+              <Sparkles className="w-5 h-5" />
+              <span>ดูตัวอย่าง 16 รูป &amp; สั่งทำสติกเกอร์</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
         {/* --- 4-STEP TRANSPARENT PROCESS --- */}
         <div className="mb-24">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">

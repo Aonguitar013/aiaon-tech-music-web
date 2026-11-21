@@ -123,6 +123,15 @@ const routes: RouteItem[] = [
     hoverColor: "teal",
     items: [
       { 
+        name: "รับทำสติกเกอร์ LINE คาแรกเตอร์ครู 3D", 
+        href: "/line-stickers", 
+        description: "ปั้นสติกเกอร์ LINE จากรูปถ่ายจริง ครบวงจรจนขึ้นขายบน LINE STORE", 
+        badge: "ฮิต! 990฿+", 
+        badgeColor: "teal", 
+        icon: Sparkles, 
+        hoverColor: "teal" 
+      },
+      { 
         name: "รับติดตั้ง & เฝ้าดูแล AI รายเดือน", 
         href: "/ai-caretaker", 
         description: "แอดมิน AI ตอบแชท ตรวจสลิป จองคิว พร้อมระบบเฝ้าระวัง 24 ชม.", 
