@@ -267,6 +267,44 @@ const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> =
   },
 };
 
+function extractShortNickname(rawName: string): string {
+  const cleaned = rawName
+    .trim()
+    .replace(/^(คุณครู|ครู|อาจารย์|ผอ\.|รองฯ|พี่|น้อง)\s*/i, "")
+    .trim();
+  return cleaned || "อ้น";
+}
+
+function buildNicknameCaptions(rawName: string): string[] {
+  const n = extractShortNickname(rawName);
+  return [
+    `${n}สวัสดีจ้า`,
+    `${n}รับทราบ!`,
+    `${n}โอเค!`,
+    `${n}ขอบคุณจ้า`,
+    `${n}สุดยอดเลย!`,
+    `${n}จัดให้เลย!`,
+    `${n}ปั่นงานอยู่...`,
+    `${n}ติดประชุม!`,
+    `${n}สอนอยู่จ้า`,
+    `${n}ทวงงานนะ!`,
+    `${n}ให้เกรด 4!`,
+    `${n}สู้ๆ นะ!`,
+    `${n}งานเข้าแล้ว!`,
+    `${n}พักเบรกแป๊บ`,
+    `${n}ตรวจงานเสร็จ!`,
+    `${n}ฝันดีจ้า`,
+    `${n}เลิฟเลย!`,
+    `${n}เหนื่อยจัง...`,
+    `${n}พร้อมลุย!`,
+    `${n}ยินดีด้วย!`,
+    `${n}รอแป๊บนะ`,
+    `${n}กำลังไปจ้า`,
+    `${n}เก่งมาก!`,
+    `${n}บ๊ายบาย!`,
+  ];
+}
+
 const OUTFIT_STYLES = [
   { id: "subject", label: "🎸 ชุดประจำวิชา / สายลุย (ดนตรี, พละ, วิทย์, คอมฯ, ศิลปะ)" },
   { id: "khaki", label: "👔 ชุดข้าราชการสีกากี / ชุดสูทผู้บริหารเนี๊ยบๆ" },
@@ -359,9 +397,20 @@ export function LineStickersView() {
 
   const applyPresetCaptions = (presetKey: string) => {
     setSelectedPresetKey(presetKey);
+    if (presetKey === "nickname") {
+      setCaptions(buildNicknameCaptions(teacherName));
+      return;
+    }
     const pack = PRESET_CAPTION_PACKS[presetKey];
     if (pack) {
       setCaptions([...pack.words]);
+    }
+  };
+
+  const handleTeacherNameChange = (val: string) => {
+    setTeacherName(val);
+    if (selectedPresetKey === "nickname") {
+      setCaptions(buildNicknameCaptions(val));
     }
   };
 
@@ -853,7 +902,7 @@ export function LineStickersView() {
                         type="text"
                         required
                         value={teacherName}
-                        onChange={(e) => setTeacherName(e.target.value)}
+                        onChange={(e) => handleTeacherNameChange(e.target.value)}
                         placeholder="เช่น ครูอ้น, ครูเมย์, ครูบอย..."
                         className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-sm focus:outline-none focus:border-[#06C755]"
                       />
@@ -1134,6 +1183,17 @@ export function LineStickersView() {
                         {pack.label}
                       </button>
                     ))}
+                    <button
+                      type="button"
+                      onClick={() => applyPresetCaptions("nickname")}
+                      className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
+                        selectedPresetKey === "nickname"
+                          ? "bg-linear-to-r from-[#06C755] to-emerald-400 text-zinc-950 border-[#4ade80] shadow-[0_0_18px_rgba(6,199,85,0.4)]"
+                          : "bg-[#06C755]/10 text-[#4ade80] border-[#06C755]/40 hover:bg-[#06C755]/20"
+                      }`}
+                    >
+                      {`✨ โพยที่ 4: ชื่อเล่นนำหน้าคำฮิต (เช่น "${extractShortNickname(teacherName)}โอเค!", "${extractShortNickname(teacherName)}รับทราบ!")`}
+                    </button>
                   </div>
                 </div>
 
