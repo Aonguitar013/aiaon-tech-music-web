@@ -179,7 +179,7 @@ const SET2_CAPTIONS = [
 
 const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> = {
   general: {
-    label: "📚 โพยที่ 1: คำพูดครูยอดฮิตทั่วไป (ใช้ได้ทุกวัน)",
+    label: "📚 โพยที่ 2: คำพูดครูยอดฮิตทั่วไป (ใช้ได้ทุกวัน)",
     words: [
       "สวัสดีจ้า",
       "รับทราบ!",
@@ -208,7 +208,7 @@ const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> =
     ],
   },
   executive: {
-    label: "🏛️ โพยที่ 2: สายผู้บริหาร / หัวหน้าระดับ / งานบริหาร",
+    label: "🏛️ โพยที่ 3: สายผู้บริหาร / หัวหน้าระดับ / งานบริหาร",
     words: [
       "สวัสดีครับ/ค่ะ",
       "รับทราบ ดำเนินการเลย",
@@ -237,7 +237,7 @@ const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> =
     ],
   },
   activity: {
-    label: "🎸 โพยที่ 3: ครูสายกิจกรรม (ดนตรี / พละ / วิทย์ / คอมฯ)",
+    label: "🎸 โพยที่ 4: ครูสายกิจกรรม (ดนตรี / พละ / วิทย์ / คอมฯ)",
     words: [
       "เข้าคาบเรียนด่วน!",
       "ซ้อมหรือยังพวกเรา?",
@@ -337,9 +337,9 @@ export function LineStickersView() {
   const [propsAndTrait, setPropsAndTrait] = useState<string>("");
   const [stickerTitleTh, setStickerTitleTh] = useState<string>("");
   const [stickerTitleEn, setStickerTitleEn] = useState<string>("");
-  const [selectedPresetKey, setSelectedPresetKey] = useState<string>("general");
+  const [selectedPresetKey, setSelectedPresetKey] = useState<string>("nickname");
   const [captions, setCaptions] = useState<string[]>(
-    PRESET_CAPTION_PACKS.general.words.slice(0, 24)
+    buildNicknameCaptions("")
   );
   const [photoBase64, setPhotoBase64] = useState<string>("");
   const [photoFileName, setPhotoFileName] = useState<string>("");
@@ -1167,8 +1167,19 @@ export function LineStickersView() {
                     </p>
                   </div>
 
-                  {/* Preset Loader Buttons */}
+                  {/* Preset Loader Buttons (Preset 1 Nickname first & auto-selected) */}
                   <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => applyPresetCaptions("nickname")}
+                      className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
+                        selectedPresetKey === "nickname"
+                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
+                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                      }`}
+                    >
+                      {`✨ โพยที่ 1: ชื่อเล่นนำหน้าคำฮิต (เช่น "${extractShortNickname(teacherName)}โอเค!", "${extractShortNickname(teacherName)}รับทราบ!")`}
+                    </button>
                     {Object.entries(PRESET_CAPTION_PACKS).map(([key, pack]) => (
                       <button
                         key={key}
@@ -1176,24 +1187,13 @@ export function LineStickersView() {
                         onClick={() => applyPresetCaptions(key)}
                         className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
                           selectedPresetKey === key
-                            ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.3)]"
+                            ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
                             : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
                         }`}
                       >
                         {pack.label}
                       </button>
                     ))}
-                    <button
-                      type="button"
-                      onClick={() => applyPresetCaptions("nickname")}
-                      className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
-                        selectedPresetKey === "nickname"
-                          ? "bg-linear-to-r from-[#06C755] to-emerald-400 text-zinc-950 border-[#4ade80] shadow-[0_0_18px_rgba(6,199,85,0.4)]"
-                          : "bg-[#06C755]/10 text-[#4ade80] border-[#06C755]/40 hover:bg-[#06C755]/20"
-                      }`}
-                    >
-                      {`✨ โพยที่ 4: ชื่อเล่นนำหน้าคำฮิต (เช่น "${extractShortNickname(teacherName)}โอเค!", "${extractShortNickname(teacherName)}รับทราบ!")`}
-                    </button>
                   </div>
                 </div>
 
