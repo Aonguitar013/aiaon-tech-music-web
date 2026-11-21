@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
@@ -12,17 +12,20 @@ import {
   Gift,
   Palette,
   Camera,
-  FileCheck2,
-  Layers,
-  Star,
-  HelpCircle,
-  ChevronDown,
-  Wand2,
-  Download,
   Award,
   Check,
   Smile,
   Music,
+  HelpCircle,
+  ChevronDown,
+  Wand2,
+  Upload,
+  User,
+  Phone,
+  FileText,
+  Loader2,
+  Send,
+  RefreshCw,
 } from "lucide-react";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 import { getLineOrderUrl } from "@/lib/line";
@@ -174,6 +177,96 @@ const SET2_CAPTIONS = [
   "วงนี้คุณภาพ!",
 ];
 
+const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> = {
+  general: {
+    label: "📚 โพยที่ 1: คำพูดครูยอดฮิตทั่วไป (ใช้ได้ทุกวัน)",
+    words: [
+      "สวัสดีจ้า",
+      "รับทราบ!",
+      "ขอบคุณมากจ้า",
+      "สุดยอดไปเลย!",
+      "ส่งงานด้วยนะ!",
+      "กำลังปั่นงาน...",
+      "ติดประชุมด่วน!",
+      "สอนอยู่จ้า",
+      "เอาไปเลย เกรด 4!",
+      "สู้ๆ นะทุกคน!",
+      "งานเข้าอีกแล้ว!",
+      "พักเบรกเติมพลัง",
+      "ตรวจงานเรียบร้อย!",
+      "โอเค จัดไป!",
+      "เหนื่อยจัง พักแป๊บ",
+      "ฝันดี ราตรีสวัสดิ์",
+      "ตรงเวลาด้วยนะ!",
+      "เก่งมากลูกศิษย์!",
+      "ฝากดูแลด้วยนะ",
+      "กำลังเดินทางจ้า",
+      "เช็กชื่อหน่อยจ้า!",
+      "เลิฟเลย!",
+      "ยินดีด้วยนะ!",
+      "เจอกันพรุ่งนี้!",
+    ],
+  },
+  executive: {
+    label: "🏛️ โพยที่ 2: สายผู้บริหาร / หัวหน้าระดับ / งานบริหาร",
+    words: [
+      "สวัสดีครับ/ค่ะ",
+      "รับทราบ ดำเนินการเลย",
+      "อนุมัติ! จัดไป",
+      "ขอบคุณทีมงานทุกคน",
+      "ติดประชุมผู้บริหาร",
+      "ฝากติดตามเรื่องด้วย",
+      "เอกสารเรียบร้อยดีมาก",
+      "ด่วนที่สุด!",
+      "ยอดเยี่ยมมากครับ",
+      "เป็นกำลังใจให้นะครับ",
+      "เดินทางปลอดภัย",
+      "พักดื่มกาแฟก่อน",
+      "สรุปผลส่งด้วยนะครับ",
+      "โอเค ตามนี้เลย",
+      "สู้ไปด้วยกัน!",
+      "พักผ่อนนะครับ",
+      "รบกวนตรวจทานด้วย",
+      "ขอบคุณสำหรับความร่วมมือ",
+      "เจอกันที่ห้องประชุม",
+      "พร้อมลุยงานใหญ่!",
+      "ภูมิใจในทีมนี้!",
+      "จัดส่งตามกำหนด",
+      "ยินดีด้วยครับ!",
+      "ราตรีสวัสดิ์ครับ",
+    ],
+  },
+  activity: {
+    label: "🎸 โพยที่ 3: ครูสายกิจกรรม (ดนตรี / พละ / วิทย์ / คอมฯ)",
+    words: [
+      "เข้าคาบเรียนด่วน!",
+      "ซ้อมหรือยังพวกเรา?",
+      "ส่งคลิปสอบด้วยนะ!",
+      "ตั้งใจฟังครูหน่อย!",
+      "เอาไปเลย เกรด 4!",
+      "เก็บอุปกรณ์ด้วย!",
+      "ขออีกเทคเดียว!",
+      "พร้อมลุยสนามจริง!",
+      "ใครยังไม่ส่งงาน?",
+      "สุดยอดฝีมือเลย!",
+      "ครูสอนอยู่นะครับ",
+      "รับทราบ จัดให้!",
+      "สู้ๆ ว่าที่แชมป์!",
+      "เหนื่อยแต่คุ้ม!",
+      "ขอบคุณมากครับ",
+      "เจอกันคาบหน้า!",
+      "วอร์มร่างกายก่อน!",
+      "ตั้งสติหน่อยพวกเรา!",
+      "ผลงานคุณภาพ!",
+      "ปั่นโปรเจกต์ไฟลุก!",
+      "พักดื่มน้ำก่อน",
+      "ปรบมือให้เลย!",
+      "โอเค ผ่านฉลุย!",
+      "กลับบ้านปลอดภัย!",
+    ],
+  },
+};
+
 const OUTFIT_STYLES = [
   { id: "subject", label: "🎸 ชุดประจำวิชา / สายลุย (ดนตรี, พละ, วิทย์, คอมฯ, ศิลปะ)" },
   { id: "khaki", label: "👔 ชุดข้าราชการสีกากี / ชุดสูทผู้บริหารเนี๊ยบๆ" },
@@ -199,9 +292,25 @@ export function LineStickersView() {
   const [selectedPkgId, setSelectedPkgId] = useState<string>("pro-16");
   const [selectedOutfit, setSelectedOutfit] = useState<string>("subject");
   const [selectedPublishMode, setSelectedPublishMode] = useState<string>("iaon-store");
-  const [customSubjectNote, setCustomSubjectNote] = useState<string>("");
+
+  // Full Brief Form States
+  const [teacherName, setTeacherName] = useState<string>("");
+  const [contactInfo, setContactInfo] = useState<string>("");
+  const [propsAndTrait, setPropsAndTrait] = useState<string>("");
+  const [stickerTitleTh, setStickerTitleTh] = useState<string>("");
+  const [stickerTitleEn, setStickerTitleEn] = useState<string>("");
+  const [selectedPresetKey, setSelectedPresetKey] = useState<string>("general");
+  const [captions, setCaptions] = useState<string[]>(
+    PRESET_CAPTION_PACKS.general.words.slice(0, 24)
+  );
+  const [photoBase64, setPhotoBase64] = useState<string>("");
+  const [photoFileName, setPhotoFileName] = useState<string>("");
+  const [isSubmittingBrief, setIsSubmittingBrief] = useState<boolean>(false);
+  const [submittedOrderId, setSubmittedOrderId] = useState<string>("");
+  const [submitError, setSubmitError] = useState<string>("");
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const { openLineModal } = useLineModal();
 
   const selectedPkg =
@@ -211,17 +320,77 @@ export function LineStickersView() {
   const selectedPublishObj =
     PUBLISH_MODES.find((m) => m.id === selectedPublishMode) || PUBLISH_MODES[0];
 
-  const buildStickerOrderMsg = (pkg: StickerPackage) => {
-    const noteLine = customSubjectNote.trim()
-      ? `\n📝 วิชาที่สอน / คาแรกเตอร์ที่อยากได้: ${customSubjectNote.trim()}`
+  // Client-side image compression via HTML5 Canvas (Max 900px, JPEG 75% quality per iaon_coding_dna.md)
+  const handlePhotoSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setPhotoFileName(file.name);
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const img = new Image();
+      img.onload = () => {
+        const MAX_DIM = 800;
+        let width = img.width;
+        let height = img.height;
+        if (width > height && width > MAX_DIM) {
+          height = Math.round((height * MAX_DIM) / width);
+          width = MAX_DIM;
+        } else if (height > MAX_DIM) {
+          width = Math.round((width * MAX_DIM) / height);
+          height = MAX_DIM;
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          const compressed = canvas.toDataURL("image/jpeg", 0.72);
+          setPhotoBase64(compressed);
+        }
+      };
+      if (typeof ev.target?.result === "string") {
+        img.src = ev.target.result;
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const applyPresetCaptions = (presetKey: string) => {
+    setSelectedPresetKey(presetKey);
+    const pack = PRESET_CAPTION_PACKS[presetKey];
+    if (pack) {
+      setCaptions([...pack.words]);
+    }
+  };
+
+  const updateSingleCaption = (index: number, value: string) => {
+    setCaptions((prev) => {
+      const next = [...prev];
+      next[index] = value;
+      return next;
+    });
+  };
+
+  const buildStickerOrderMsg = (pkg: StickerPackage, orderId?: string) => {
+    const activeCaps = captions
+      .slice(0, pkg.count)
+      .map((c, idx) => `${String(idx + 1).padStart(2, "0")}.${c}`)
+      .join(", ");
+    const orderTag = orderId ? `\n🆔 รหัสใบสั่งทำ: ${orderId}` : "";
+    const nameTag = teacherName.trim() ? `\n👤 ชื่อคุณครู: ${teacherName.trim()}` : "";
+    const noteLine = propsAndTrait.trim()
+      ? `\n🎸 วิชา/จุดเด่น: ${propsAndTrait.trim()}`
       : "";
-    return `สวัสดีครับครูอ้น สนใจจ้างทำสติกเกอร์ LINE คาแรกเตอร์ครู ครบวงจรครับ 🎨✨
+    return `สวัสดีครับครูอ้น สนใจจ้างทำสติกเกอร์ LINE คาแรกเตอร์ครู ครบวงจรครับ 🎨✨${orderTag}${nameTag}
 📦 แพ็กเกจ: [${pkg.code}] ${pkg.name} (${pkg.countLabel})
 💰 ราคาโปรเปิดตัว: ${pkg.price}
 👔 สไตล์ชุดที่ต้องการ: ${selectedOutfitObj.label}
 🏪 รูปแบบการวางขาย: ${selectedPublishObj.title}${noteLine}
+💬 คำพูดที่เลือก (${pkg.count} คำ): ${activeCaps}
 
-รบกวนขอเลขบัญชี / PromptPay QR Code และขั้นตอนการส่งรูปถ่ายกับลิสต์คำพูดด้วยครับ 🙏`;
+รบกวนขอเลขบัญชี / PromptPay QR Code เพื่อชำระเงินและเริ่มผลิตสติกเกอร์ได้เลยครับ 🙏`;
   };
 
   const handleOrderClick = (e: React.MouseEvent, pkg: StickerPackage) => {
@@ -234,6 +403,56 @@ export function LineStickersView() {
         itemCode: pkg.code,
         message: msg,
       });
+    }
+  };
+
+  const handleBriefFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitError("");
+
+    if (!teacherName.trim()) {
+      setSubmitError("กรุณากรอกชื่อเล่นหรือชื่อคุณครูก่อนกดส่งบรีฟครับ");
+      return;
+    }
+
+    setIsSubmittingBrief(true);
+    try {
+      const activeCaptions = captions
+        .slice(0, selectedPkg.count)
+        .map((c, i) => c.trim() || `คำพูดที่ ${i + 1}`);
+
+      const res = await fetch("/api/sticker-brief", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          teacherName: teacherName.trim(),
+          contactInfo: contactInfo.trim(),
+          packageCode: selectedPkg.code,
+          packageName: selectedPkg.name,
+          packagePrice: selectedPkg.price,
+          stickerCount: selectedPkg.count,
+          outfitStyle: selectedOutfitObj.label,
+          publishMode: selectedPublishObj.title,
+          propsAndTrait: propsAndTrait.trim() || "ตามรูปถ่ายต้นแบบ",
+          stickerTitleTh:
+            stickerTitleTh.trim() || `ครู${teacherName.trim()} สายลุย`,
+          stickerTitleEn:
+            stickerTitleEn.trim() || `Kru ${teacherName.trim()} Sticker`,
+          captions: activeCaptions,
+          photoBase64: photoBase64 || undefined,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setSubmitError(data.error || "ส่งบรีฟไม่สำเร็จ กรุณาลองใหม่อีกครั้ง");
+      } else {
+        setSubmittedOrderId(data.orderId || "STK-READY");
+      }
+    } catch {
+      setSubmitError("ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ กรุณาลองใหม่อีกครั้ง");
+    } finally {
+      setIsSubmittingBrief(false);
     }
   };
 
@@ -277,8 +496,8 @@ export function LineStickersView() {
             transition={{ delay: 0.16 }}
             className="font-prompt text-base sm:text-lg text-white/75 leading-relaxed max-w-3xl mx-auto"
           >
-            แค่ส่งรูปถ่าย 1–2 รูป + คำพูดฮิตติดปากเวลาสอนหรือคุยงาน ครูอ้นดูแลให้ครบวงจรตั้งแต่ปั้นคาแรกเตอร์ 3D ไดคัทขอบขาว ใส่ฟอนต์ภาษาไทยคมชัด ไปจนถึงส่งตรวจอนุมัติและวางขายจริงบน{" "}
-            <strong className="text-[#4ade80]">LINE STORE</strong> พร้อมแถมไฟล์ PNG ความละเอียดสูงเอาไปแต่งสไลด์สอนและปกเล่ม ว.PA ต่อได้ทันที!
+            แค่กรอกฟอร์มส่งรูปถ่าย 1 รูป + จิ้มเลือกคำพูดฮิต 16 คำบนหน้าเว็บนี้ ระบบจะส่งข้อมูลตรงเข้าห้องผลิต AI ของครูอ้นทันที! ดูแลครบวงจรจนวางขายจริงบน{" "}
+            <strong className="text-[#4ade80]">LINE STORE</strong> พร้อมแถมไฟล์ PNG ความละเอียดสูงเอาไปแต่งสไลด์สอนและปกเล่ม ว.PA ต่อได้เลย!
           </motion.p>
 
           <motion.div
@@ -288,11 +507,11 @@ export function LineStickersView() {
             className="flex flex-wrap items-center justify-center gap-4 pt-2"
           >
             <a
-              href="#packages"
+              href="#brief-form"
               className="px-8 py-4 rounded-2xl bg-linear-to-r from-[#06C755] to-emerald-500 hover:from-[#05b34c] hover:to-emerald-400 text-zinc-950 font-prompt font-black text-base flex items-center gap-2.5 shadow-[0_0_30px_rgba(6,199,85,0.4)] transition-all duration-300 hover:scale-105"
             >
               <Wand2 className="w-5 h-5" />
-              <span>ดูแพ็กเกจ &amp; สั่งทำสติกเกอร์ (เริ่ม 990 ฿)</span>
+              <span>กรอกบรีฟ &amp; อัปโหลดรูปสั่งทำทันที (เริ่ม 990 ฿)</span>
             </a>
 
             <a
@@ -437,50 +656,6 @@ export function LineStickersView() {
           </div>
         </div>
 
-        {/* ─── WHY TEACHERS LOVE THIS (3 VALUE PILLARS) ─── */}
-        <div className="mb-24 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              icon: Palette,
-              title: "1. คาแรกเตอร์ครู 3D เอกลักษณ์เฉพาะตัว",
-              desc: "ปั้นจากใบหน้าและบุคลิกจริงของคุณครู เลือกใส่ชุดกากี ชุดพละ ชุดสูท หรือถือพร็อพประจำวิชา (กีตาร์, ไมค์, หลอดทดลอง, กระดาน) ได้ตามสั่ง",
-              color: "border-cyan-500/30 bg-cyan-500/5 text-cyan-300",
-            },
-            {
-              icon: ShieldCheck,
-              title: "2. ดูแลส่งตรวจ LINE STORE จนผ่าน 100%",
-              desc: "ไม่ต้องปวดหัวกับกฎรูปตกขอบ พื้นหลังไม่ใส หรือตั้งค่าภาษาอังกฤษใน LINE Creators Market ครูอ้นจัดการแพ็กไฟล์และส่งตรวจให้จนขึ้นวางขายจริง",
-              color: "border-[#06C755]/30 bg-[#06C755]/5 text-[#4ade80]",
-            },
-            {
-              icon: Gift,
-              title: "3. ได้ทั้งสติกเกอร์ LINE + คลังภาพ PNG แต่งสื่อ",
-              desc: "นอกจากได้สติกเกอร์ไว้กดส่งในแชทแล้ว ยังได้รับไฟล์ภาพ PNG ความละเอียดสูงครบทุกท่า เอาไปแปะหน้าปกสไลด์สอน ปกรายงาน ว.PA หรือทำคลิป TikTok ได้คุ้มสุดๆ",
-              color: "border-amber-500/30 bg-amber-500/5 text-amber-300",
-            },
-          ].map((item, i) => {
-            const IconComp = item.icon;
-            return (
-              <div
-                key={i}
-                className={`p-6 sm:p-7 rounded-3xl border ${item.color} flex flex-col justify-between`}
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-4">
-                    <IconComp className="w-6 h-6" />
-                  </div>
-                  <h3 className="font-prompt text-lg sm:text-xl font-extrabold text-white mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="font-prompt text-xs sm:text-sm text-white/70 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
         {/* ─── 3 PRICING PACKAGES ─── */}
         <div id="packages" className="mb-24 scroll-mt-24">
           <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
@@ -566,14 +741,12 @@ export function LineStickersView() {
 
                 <div className="pt-4 border-t border-white/10 space-y-2.5">
                   <a
-                    href={getLineOrderUrl(buildStickerOrderMsg(pkg))}
-                    onClick={(e) => handleOrderClick(e, pkg)}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#brief-form"
+                    onClick={() => setSelectedPkgId(pkg.id)}
                     className={`w-full py-3.5 px-4 rounded-2xl font-prompt font-black text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] active:scale-95 bg-linear-to-r ${pkg.btnGradient}`}
                   >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>สั่งทำชุดนี้ผ่าน LINE ({pkg.price})</span>
+                    <Wand2 className="w-4 h-4" />
+                    <span>เลือกชุดนี้ &amp; กรอกบรีฟด้านล่าง ({pkg.price})</span>
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
@@ -582,234 +755,502 @@ export function LineStickersView() {
           </div>
         </div>
 
-        {/* ─── INTERACTIVE CUSTOM BRIEF BUILDER ─── */}
-        <div className="mb-24 max-w-4xl mx-auto rounded-3xl border border-[#06C755]/40 bg-slate-900/85 p-6 sm:p-10 shadow-[0_0_50px_rgba(6,199,85,0.15)]">
+        {/* ─── FULL INTERACTIVE BRIEF FORM + PHOTO UPLOAD + 16-WORD PICKER ─── */}
+        <div
+          id="brief-form"
+          className="mb-24 max-w-5xl mx-auto rounded-3xl border border-[#06C755]/50 bg-slate-900/90 p-6 sm:p-10 shadow-[0_0_60px_rgba(6,199,85,0.2)] scroll-mt-24"
+        >
           <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#06C755]/15 border border-[#06C755]/30 text-[#4ade80] text-xs font-prompt font-bold">
               <Wand2 className="w-3.5 h-3.5" />
-              <span>1-CLICK STICKER BRIEF BUILDER</span>
+              <span>DIRECT AI STUDIO BRIEF FORM • ส่งบรีฟตรงเข้าห้องผลิตสติกเกอร์ครูอ้น</span>
             </div>
             <h3 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
-              จัดสเปกสติกเกอร์ของคุณครู แล้วส่งให้ครูอ้นใน 1 คลิก
+              แบบฟอร์มส่งบรีฟ &amp; อัปโหลดรูปถ่ายต้นแบบ
             </h3>
-            <p className="font-prompt text-xs sm:text-sm text-white/60">
-              เลือกจำนวนรูป สไตล์ชุด และรูปแบบการวางขาย ระบบจะสรุปใบสั่งทำส่งเข้าแชท LINE ครูอ้นอัตโนมัติ
+            <p className="font-prompt text-xs sm:text-sm text-white/65">
+              กรอกข้อมูลด้านล่างให้ครบ ระบบจะส่งรูปถ่ายและคำพูดทั้ง {selectedPkg.count} คำตรงไปที่ระบบ AI ของครูอ้นเพื่อปั้นคาแรกเตอร์ต้นแบบให้ตรวจทันที!
             </p>
           </div>
 
-          <div className="space-y-6">
-            {/* 1. Choose Package */}
-            <div>
-              <label className="block font-prompt text-xs sm:text-sm font-bold text-[#4ade80] mb-3">
-                1. เลือกขนาดชุดสติกเกอร์:
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {STICKER_PACKAGES.map((pkg) => {
-                  const isSel = selectedPkgId === pkg.id;
-                  return (
-                    <button
-                      key={pkg.id}
-                      type="button"
-                      onClick={() => setSelectedPkgId(pkg.id)}
-                      className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
-                        isSel
-                          ? "border-[#06C755] bg-[#06C755]/15 ring-1 ring-[#06C755]"
-                          : "border-white/10 bg-white/5 hover:bg-white/10"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="font-prompt text-sm font-bold text-white">
-                          {pkg.count} แอ็กชัน
-                        </span>
-                        <span className="font-prompt text-sm font-black text-[#4ade80]">
-                          {pkg.price}
-                        </span>
-                      </div>
-                      <p className="font-prompt text-xs text-white/60">
-                        {pkg.name}
-                      </p>
-                    </button>
-                  );
-                })}
+          {submittedOrderId ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="p-8 rounded-3xl border border-[#06C755] bg-[#06C755]/10 text-center space-y-5"
+            >
+              <div className="w-16 h-16 rounded-full bg-[#06C755] text-zinc-950 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(6,199,85,0.5)]">
+                <Check className="w-9 h-9 stroke-[3]" />
               </div>
-            </div>
+              <div className="space-y-2">
+                <span className="px-3 py-1 rounded-full bg-white/10 text-[#4ade80] font-mono text-xs font-bold">
+                  รหัสใบสั่งทำ: {submittedOrderId}
+                </span>
+                <h4 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
+                  ส่งบรีฟและรูปถ่ายถึงระบบ AI ของครูอ้นเรียบร้อยแล้วครับ! 🎉
+                </h4>
+                <p className="font-prompt text-sm text-white/75 max-w-xl mx-auto leading-relaxed">
+                  ตอนนี้ข้อมูลและรูปถ่ายของ <strong>คุณครู{teacherName}</strong> ถูกส่งเข้าห้องผลิตของครูอ้นแล้ว ขั้นตอนสุดท้าย กดปุ่มด้านล่างเพื่อรับ <strong>QR Code พร้อมเพย์ ({selectedPkg.price})</strong> และรับภาพคาแรกเตอร์ต้นแบบใน LINE OA ได้เลยครับ!
+                </p>
+              </div>
 
-            {/* 2. Choose Outfit */}
-            <div>
-              <label className="block font-prompt text-xs sm:text-sm font-bold text-cyan-300 mb-3">
-                2. เลือกสไตล์ชุดแต่งกายที่อยากให้วาด:
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {OUTFIT_STYLES.map((outfit) => {
-                  const isSel = selectedOutfit === outfit.id;
-                  return (
+              <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
+                <a
+                  href={getLineOrderUrl(
+                    buildStickerOrderMsg(selectedPkg, submittedOrderId)
+                  )}
+                  onClick={(e) => {
+                    const msg = buildStickerOrderMsg(
+                      selectedPkg,
+                      submittedOrderId
+                    );
+                    if (!isMobileDevice()) {
+                      e.preventDefault();
+                      openLineModal({
+                        title: `ชำระเงินสติกเกอร์ LINE (${submittedOrderId})`,
+                        price: selectedPkg.price,
+                        itemCode: selectedPkg.code,
+                        message: msg,
+                      });
+                    }
+                  }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 rounded-2xl bg-linear-to-r from-[#06C755] to-emerald-500 hover:from-[#05b34c] hover:to-emerald-400 text-zinc-950 font-prompt font-black text-base flex items-center gap-2.5 shadow-[0_0_30px_rgba(6,199,85,0.45)] hover:scale-105 transition-all"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  <span>กดยืนยันใน LINE &amp; รับ QR พร้อมเพย์ ({selectedPkg.price})</span>
+                  <ArrowRight className="w-5 h-5" />
+                </a>
+
+                <button
+                  type="button"
+                  onClick={() => setSubmittedOrderId("")}
+                  className="px-5 py-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-white/80 font-prompt text-xs font-bold flex items-center gap-2 cursor-pointer"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  <span>แก้ไขข้อมูลบรีฟอีกครั้ง</span>
+                </button>
+              </div>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleBriefFormSubmit} className="space-y-8">
+              {/* STEP 1: Teacher Info & Photo Upload */}
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-5">
+                <h4 className="font-prompt text-base font-extrabold text-[#4ade80] flex items-center gap-2">
+                  <Camera className="w-5 h-5" />
+                  <span>ส่วนที่ 1: ข้อมูลคุณครู &amp; รูปถ่ายหน้าตรงต้นแบบ</span>
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                      ชื่อคุณครู / ชื่อเล่น (จำเป็น) *
+                    </label>
+                    <div className="relative">
+                      <User className="w-4 h-4 text-white/40 absolute left-3.5 top-3.5" />
+                      <input
+                        type="text"
+                        required
+                        value={teacherName}
+                        onChange={(e) => setTeacherName(e.target.value)}
+                        placeholder="เช่น ครูอ้น, ครูเมย์, ครูบอย..."
+                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-sm focus:outline-none focus:border-[#06C755]"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                      เบอร์โทร หรือ ชื่อ LINE ของคุณครู (ไว้ส่งงานกลับ)
+                    </label>
+                    <div className="relative">
+                      <Phone className="w-4 h-4 text-white/40 absolute left-3.5 top-3.5" />
+                      <input
+                        type="text"
+                        value={contactInfo}
+                        onChange={(e) => setContactInfo(e.target.value)}
+                        placeholder="เช่น 08x-xxx-xxxx หรือชื่อใน LINE..."
+                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-sm focus:outline-none focus:border-[#06C755]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Photo Upload Box */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center pt-2">
+                  <div className="sm:col-span-2">
+                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                      อัปโหลดรูปถ่ายหน้าตรง ยิ้มสดใส เห็นทรงผมชัดเจน (1 รูป)
+                    </label>
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handlePhotoSelect}
+                      className="hidden"
+                    />
                     <button
-                      key={outfit.id}
                       type="button"
-                      onClick={() => setSelectedOutfit(outfit.id)}
-                      className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
-                        isSel
-                          ? "border-cyan-400 bg-cyan-950/40 ring-1 ring-cyan-400"
-                          : "border-white/10 bg-white/5 hover:bg-white/10"
-                      }`}
+                      onClick={() => fileInputRef.current?.click()}
+                      className="w-full p-4 rounded-2xl border-2 border-dashed border-[#06C755]/50 hover:border-[#06C755] bg-[#06C755]/5 hover:bg-[#06C755]/10 text-left flex items-center justify-between gap-4 transition-all cursor-pointer"
                     >
-                      <div
-                        className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
-                          isSel
-                            ? "bg-cyan-400 border-cyan-300 text-zinc-950"
-                            : "border-white/30"
-                        }`}
-                      >
-                        {isSel && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-[#06C755]/20 text-[#4ade80] flex items-center justify-center shrink-0">
+                          <Upload className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <p className="font-prompt text-sm font-bold text-white">
+                            {photoFileName
+                              ? `เลือกรูปแล้ว: ${photoFileName}`
+                              : "คลิกเพื่อเลือกรูปถ่ายจากมือถือ / คอมพิวเตอร์"}
+                          </p>
+                          <p className="font-prompt text-xs text-white/50">
+                            ระบบย่อขนาดภาพอัตโนมัติ ปลอดภัย 100% (ใช้เป็นต้นแบบปั้นคาแรกเตอร์ 3D เท่านั้น)
+                          </p>
+                        </div>
                       </div>
-                      <span className="font-prompt text-xs sm:text-sm text-white">
-                        {outfit.label}
+                      <span className="px-3 py-1.5 rounded-xl bg-[#06C755] text-zinc-950 font-prompt text-xs font-black shrink-0">
+                        เลือกรูป
                       </span>
                     </button>
-                  );
-                })}
-              </div>
-            </div>
+                  </div>
 
-            {/* 3. Choose Publishing Mode */}
-            <div>
-              <label className="block font-prompt text-xs sm:text-sm font-bold text-amber-300 mb-3">
-                3. เลือกรูปแบบการนำขึ้นวางขายบน LINE STORE:
-              </label>
-              <div className="grid grid-cols-1 gap-3">
-                {PUBLISH_MODES.map((mode) => {
-                  const isSel = selectedPublishMode === mode.id;
-                  return (
-                    <button
-                      key={mode.id}
-                      type="button"
-                      onClick={() => setSelectedPublishMode(mode.id)}
-                      className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
-                        isSel
-                          ? "border-amber-400 bg-amber-950/30 ring-1 ring-amber-400"
-                          : "border-white/10 bg-white/5 hover:bg-white/10"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2.5 mb-1">
-                        <div
-                          className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
-                            isSel
-                              ? "bg-amber-400 border-amber-300 text-zinc-950"
-                              : "border-white/30"
-                          }`}
-                        >
-                          {isSel && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                        </div>
-                        <span className="font-prompt text-sm font-bold text-white">
-                          {mode.title}
+                  <div className="flex flex-col items-center justify-center">
+                    {photoBase64 ? (
+                      <div className="relative group">
+                        <img
+                          src={photoBase64}
+                          alt="Teacher Reference Preview"
+                          className="w-28 h-28 rounded-2xl object-cover border-2 border-[#06C755] shadow-[0_0_20px_rgba(6,199,85,0.3)]"
+                        />
+                        <span className="block text-[11px] font-prompt text-[#4ade80] text-center mt-1 font-bold">
+                          ✓ รูปต้นแบบพร้อมส่ง
                         </span>
                       </div>
-                      <p className="font-prompt text-xs text-white/65 pl-7 leading-relaxed">
-                        {mode.desc}
-                      </p>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+                    ) : (
+                      <div className="w-28 h-28 rounded-2xl border border-white/10 bg-white/5 flex flex-col items-center justify-center text-white/35 p-2 text-center">
+                        <Camera className="w-6 h-6 mb-1" />
+                        <span className="font-prompt text-[10px]">
+                          ตัวอย่างรูปที่จะอัปโหลด
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
 
-            {/* 4. Optional Subject / Props Note */}
-            <div>
-              <label className="block font-prompt text-xs sm:text-sm font-bold text-white/80 mb-2">
-                4. ระบุวิชาที่สอน หรือพร็อพประจำตัวสั้นๆ (ไม่บังคับ):
-              </label>
-              <input
-                type="text"
-                value={customSubjectNote}
-                onChange={(e) => setCustomSubjectNote(e.target.value)}
-                placeholder="เช่น ครูภาษาไทยถือไมค์, ครูดนตรีสะพายกีตาร์, ครูคณิตใส่แว่นถือไม้บรรทัด..."
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-white/35 font-prompt text-sm focus:outline-none focus:border-[#06C755]"
-              />
-            </div>
-
-            {/* Summary & Submit CTA */}
-            <div className="p-6 rounded-2xl bg-linear-to-r from-emerald-950/70 via-slate-900 to-cyan-950/70 border border-[#06C755]/40 flex flex-col sm:flex-row items-center justify-between gap-5">
-              <div>
-                <p className="font-prompt text-xs text-white/60">
-                  แพ็กเกจที่เลือก: <strong className="text-white">{selectedPkg.name} ({selectedPkg.countLabel})</strong>
-                </p>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="font-prompt text-3xl sm:text-4xl font-black text-[#4ade80]">
-                    {selectedPkg.price}
-                  </span>
-                  <span className="font-prompt text-xs text-white/50">
-                    (ดูแลครบวงจรจนวางขายบน LINE STORE)
-                  </span>
+                {/* Props & Facial Traits + Sticker Title */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                  <div>
+                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                      วิชาที่สอน / พร็อพคู่ใจ / จุดเด่นใบหน้า
+                    </label>
+                    <input
+                      type="text"
+                      value={propsAndTrait}
+                      onChange={(e) => setPropsAndTrait(e.target.value)}
+                      placeholder="เช่น ครูดนตรีถือไมค์/กีตาร์, ใส่แว่นกลม..."
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                      ชื่อชุดสติกเกอร์ภาษาไทย (โชว์บน LINE)
+                    </label>
+                    <input
+                      type="text"
+                      value={stickerTitleTh}
+                      onChange={(e) => setStickerTitleTh(e.target.value)}
+                      placeholder="เช่น ครูเมย์สายลุย / ครูอ้นใจดี"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                      ชื่อชุดภาษาอังกฤษ (ถ้ามี)
+                    </label>
+                    <input
+                      type="text"
+                      value={stickerTitleEn}
+                      onChange={(e) => setStickerTitleEn(e.target.value)}
+                      placeholder="เช่น Kru May Daily Life"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <a
-                href={getLineOrderUrl(buildStickerOrderMsg(selectedPkg))}
-                onClick={(e) => handleOrderClick(e, selectedPkg)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-linear-to-r from-[#06C755] to-emerald-500 hover:from-[#05b34c] hover:to-emerald-400 text-zinc-950 font-prompt font-black text-base flex items-center justify-center gap-2.5 shadow-[0_0_30px_rgba(6,199,85,0.4)] hover:scale-105 transition-all shrink-0"
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>ส่งบรีฟนี้สั่งทำกับครูอ้นทาง LINE</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
+              {/* STEP 2: Package, Outfit & Publishing Mode */}
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-6">
+                <h4 className="font-prompt text-base font-extrabold text-cyan-300 flex items-center gap-2">
+                  <Palette className="w-5 h-5" />
+                  <span>ส่วนที่ 2: เลือกขนาดแพ็กเกจ, ชุดแต่งกาย และการวางขาย</span>
+                </h4>
+
+                {/* Package Size */}
+                <div>
+                  <label className="block font-prompt text-xs font-bold text-white/80 mb-2.5">
+                    1. เลือกขนาดชุดสติกเกอร์:
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {STICKER_PACKAGES.map((pkg) => {
+                      const isSel = selectedPkgId === pkg.id;
+                      return (
+                        <button
+                          key={pkg.id}
+                          type="button"
+                          onClick={() => setSelectedPkgId(pkg.id)}
+                          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                            isSel
+                              ? "border-[#06C755] bg-[#06C755]/15 ring-1 ring-[#06C755]"
+                              : "border-white/10 bg-slate-950/50 hover:bg-white/10"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="font-prompt text-sm font-bold text-white">
+                              {pkg.count} แอ็กชัน
+                            </span>
+                            <span className="font-prompt text-sm font-black text-[#4ade80]">
+                              {pkg.price}
+                            </span>
+                          </div>
+                          <p className="font-prompt text-xs text-white/60">
+                            {pkg.name}
+                          </p>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Outfit Style */}
+                <div>
+                  <label className="block font-prompt text-xs font-bold text-white/80 mb-2.5">
+                    2. เลือกสไตล์ชุดแต่งกายหลัก:
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {OUTFIT_STYLES.map((outfit) => {
+                      const isSel = selectedOutfit === outfit.id;
+                      return (
+                        <button
+                          key={outfit.id}
+                          type="button"
+                          onClick={() => setSelectedOutfit(outfit.id)}
+                          className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
+                            isSel
+                              ? "border-cyan-400 bg-cyan-950/40 ring-1 ring-cyan-400"
+                              : "border-white/10 bg-slate-950/50 hover:bg-white/10"
+                          }`}
+                        >
+                          <div
+                            className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
+                              isSel
+                                ? "bg-cyan-400 border-cyan-300 text-zinc-950"
+                                : "border-white/30"
+                            }`}
+                          >
+                            {isSel && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                          </div>
+                          <span className="font-prompt text-xs sm:text-sm text-white">
+                            {outfit.label}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Publishing Mode */}
+                <div>
+                  <label className="block font-prompt text-xs font-bold text-white/80 mb-2.5">
+                    3. รูปแบบการนำขึ้นวางขายบน LINE STORE:
+                  </label>
+                  <div className="grid grid-cols-1 gap-3">
+                    {PUBLISH_MODES.map((mode) => {
+                      const isSel = selectedPublishMode === mode.id;
+                      return (
+                        <button
+                          key={mode.id}
+                          type="button"
+                          onClick={() => setSelectedPublishMode(mode.id)}
+                          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                            isSel
+                              ? "border-amber-400 bg-amber-950/30 ring-1 ring-amber-400"
+                              : "border-white/10 bg-slate-950/50 hover:bg-white/10"
+                          }`}
+                        >
+                          <div className="flex items-center gap-2.5 mb-1">
+                            <div
+                              className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
+                                isSel
+                                  ? "bg-amber-400 border-amber-300 text-zinc-950"
+                                  : "border-white/30"
+                              }`}
+                            >
+                              {isSel && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                            </div>
+                            <span className="font-prompt text-sm font-bold text-white">
+                              {mode.title}
+                            </span>
+                          </div>
+                          <p className="font-prompt text-xs text-white/65 pl-7 leading-relaxed">
+                            {mode.desc}
+                          </p>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* STEP 3: Interactive 8 / 16 / 24 Captions Grid with 1-Click Preset Loader */}
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <h4 className="font-prompt text-base font-extrabold text-amber-300 flex items-center gap-2">
+                      <FileText className="w-5 h-5" />
+                      <span>
+                        ส่วนที่ 3: กำหนดคำพูดบนสติกเกอร์ทั้ง {selectedPkg.count} รูป
+                      </span>
+                    </h4>
+                    <p className="font-prompt text-xs text-white/60 mt-0.5">
+                      คลิกเลือกโพยสำเร็จรูปด้านขวาเพื่อเติมคำอัตโนมัติ แล้วพิมพ์แก้เฉพาะช่องที่อยากเปลี่ยนได้เลยครับ (แนะนำคำสั้นๆ ไม่เกิน 12 ตัวอักษร)
+                    </p>
+                  </div>
+
+                  {/* Preset Loader Buttons */}
+                  <div className="flex flex-wrap gap-2">
+                    {Object.entries(PRESET_CAPTION_PACKS).map(([key, pack]) => (
+                      <button
+                        key={key}
+                        type="button"
+                        onClick={() => applyPresetCaptions(key)}
+                        className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
+                          selectedPresetKey === key
+                            ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.3)]"
+                            : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                        }`}
+                      >
+                        {pack.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {Array.from({ length: selectedPkg.count }, (_, idx) => {
+                    const numStr = String(idx + 1).padStart(2, "0");
+                    return (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-2 bg-slate-950/75 border border-white/15 rounded-xl px-3 py-2 focus-within:border-[#06C755]"
+                      >
+                        <span className="font-mono text-xs font-bold text-[#4ade80] shrink-0">
+                          #{numStr}
+                        </span>
+                        <input
+                          type="text"
+                          maxLength={22}
+                          value={captions[idx] || ""}
+                          onChange={(e) => updateSingleCaption(idx, e.target.value)}
+                          placeholder={`คำพูดที่ ${numStr}...`}
+                          className="w-full bg-transparent text-white font-prompt text-xs sm:text-sm focus:outline-none"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {submitError && (
+                <div className="p-4 rounded-xl bg-red-500/15 border border-red-500/40 text-red-300 font-prompt text-xs sm:text-sm text-center">
+                  ⚠️ {submitError}
+                </div>
+              )}
+
+              {/* Submit Brief Bar */}
+              <div className="p-6 rounded-2xl bg-linear-to-r from-emerald-950/80 via-slate-900 to-cyan-950/80 border border-[#06C755]/50 flex flex-col sm:flex-row items-center justify-between gap-5">
+                <div>
+                  <p className="font-prompt text-xs text-white/70">
+                    แพ็กเกจที่เลือก:{" "}
+                    <strong className="text-white">
+                      [{selectedPkg.code}] {selectedPkg.name} ({selectedPkg.count} รูป)
+                    </strong>
+                  </p>
+                  <div className="flex items-baseline gap-2 mt-1">
+                    <span className="font-prompt text-3xl sm:text-4xl font-black text-[#4ade80]">
+                      {selectedPkg.price}
+                    </span>
+                    <span className="font-prompt text-xs text-white/60">
+                      (ส่งบรีฟตรงเข้าเครื่องครูอ้น + ปั้นรูปต้นแบบให้ตรวจก่อนทำครบเซ็ต)
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmittingBrief}
+                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-linear-to-r from-[#06C755] to-emerald-500 hover:from-[#05b34c] hover:to-emerald-400 disabled:opacity-50 text-zinc-950 font-prompt font-black text-base flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(6,199,85,0.45)] hover:scale-105 transition-all cursor-pointer shrink-0"
+                >
+                  {isSubmittingBrief ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>กำลังส่งบรีฟและรูปถ่ายให้ครูอ้น...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      <span>🚀 ส่งบรีฟ &amp; รูปถ่ายเข้าห้องผลิตครูอ้นทันที</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          )}
         </div>
 
-        {/* ─── 4-STEP EASY WORKFLOW ─── */}
-        <div className="mb-24">
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-            <h3 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
-              4 ขั้นตอนง่ายๆ{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-[#06C755] to-cyan-400">
-                คุณครูรอรับสติกเกอร์ใน LINE ได้เลย
-              </span>
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              {
-                step: "01",
-                title: "ส่งรูปถ่าย 1–2 รูป + เลือกชุด",
-                desc: "ส่งรูปถ่ายหน้าตรงยิ้มสดใสใน LINE OA พร้อมบอกชุดและพร็อพประจำวิชาที่อยากได้",
-              },
-              {
-                step: "02",
-                title: "เลือกคำพูดฮิต (หรือใช้โพยครูอ้น)",
-                desc: "แจ้งคำพูด 8 / 16 / 24 คำที่ต้องการ (ถ้าคิดไม่ออก ครูอ้นมีโพยคำพูดครูยอดฮิตให้เลือกครบทุกสายงาน)",
-              },
-              {
-                step: "03",
-                title: "ปั้นคาแรกเตอร์ & ตรวจร่าง (1–3 วัน)",
-                desc: "ครูอ้นสร้างคาแรกเตอร์ 3D ไดคัทขอบขาว วางป้ายฟอนต์ไทยคมชัด ส่งให้ตรวจและรับไฟล์ PNG ความละเอียดสูง",
-              },
-              {
-                step: "04",
-                title: "ส่งตรวจ LINE & รับ Gift เข้าแชท!",
-                desc: "ครูอ้นส่งขึ้นระบบ LINE Creators Market เมื่ออนุมัติปุ๊บ กดส่งสติกเกอร์ชุดจริงเข้า LINE คุณครูทันที!",
-              },
-            ].map((s, idx) => (
+        {/* ─── WHY TEACHERS LOVE THIS (3 VALUE PILLARS) ─── */}
+        <div className="mb-24 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              icon: Palette,
+              title: "1. คาแรกเตอร์ครู 3D เอกลักษณ์เฉพาะตัว",
+              desc: "ปั้นจากใบหน้าและบุคลิกจริงของคุณครู เลือกใส่ชุดกากี ชุดพละ ชุดสูท หรือถือพร็อพประจำวิชา (กีตาร์, ไมค์, หลอดทดลอง, กระดาน) ได้ตามสั่ง",
+              color: "border-cyan-500/30 bg-cyan-500/5 text-cyan-300",
+            },
+            {
+              icon: ShieldCheck,
+              title: "2. ดูแลส่งตรวจ LINE STORE จนผ่าน 100%",
+              desc: "ไม่ต้องปวดหัวกับกฎรูปตกขอบ พื้นหลังไม่ใส หรือตั้งค่าภาษาอังกฤษใน LINE Creators Market ครูอ้นจัดการแพ็กไฟล์และส่งตรวจให้จนขึ้นวางขายจริง",
+              color: "border-[#06C755]/30 bg-[#06C755]/5 text-[#4ade80]",
+            },
+            {
+              icon: Gift,
+              title: "3. ได้ทั้งสติกเกอร์ LINE + คลังภาพ PNG แต่งสื่อ",
+              desc: "นอกจากได้สติกเกอร์ไว้กดส่งในแชทแล้ว ยังได้รับไฟล์ภาพ PNG ความละเอียดสูงครบทุกท่า เอาไปแปะหน้าปกสไลด์สอน ปกรายงาน ว.PA หรือทำคลิป TikTok ได้คุ้มสุดๆ",
+              color: "border-amber-500/30 bg-amber-500/5 text-amber-300",
+            },
+          ].map((item, i) => {
+            const IconComp = item.icon;
+            return (
               <div
-                key={idx}
-                className="p-6 rounded-3xl border border-white/10 bg-white/5 flex flex-col justify-between"
+                key={i}
+                className={`p-6 sm:p-7 rounded-3xl border ${item.color} flex flex-col justify-between`}
               >
-                <div className="text-3xl font-black font-mono text-[#4ade80]/30 mb-3">
-                  STEP {s.step}
-                </div>
                 <div>
-                  <h4 className="font-prompt text-base font-bold text-white mb-2">
-                    {s.title}
-                  </h4>
-                  <p className="font-prompt text-xs text-white/65 leading-relaxed">
-                    {s.desc}
+                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-4">
+                    <IconComp className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-prompt text-lg sm:text-xl font-extrabold text-white mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="font-prompt text-xs sm:text-sm text-white/70 leading-relaxed">
+                    {item.desc}
                   </p>
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
         {/* ─── FAQ SECTION ─── */}
@@ -824,19 +1265,15 @@ export function LineStickersView() {
             {[
               {
                 q: "ต้องสมัครบัญชี LINE Creators Market หรือกรอกเอกสารภาษีเองไหม?",
-                a: "ไม่ต้องเลยครับ! คุณครูสามารถเลือกแบบ 'ฝากวางขายบนร้าน iAon Tech' ได้เลย ครูอ้นจัดการอัปโหลดและส่งตรวจให้ทั้งหมด พออนุมัติปุ๊บ ครูอ้นกดส่งสติกเกอร์ชุดนั้นเป็นของขวัญ (Gift) ให้เข้า LINE คุณครูฟรี 1 ชุดทันที และเพื่อนครูคนอื่นๆ ก็กดซื้อจากลิงก์ร้านได้ตามปกติครับ (หรือถ้าคุณครูมีบัญชีตัวเองและอยากเอาขึ้นบัญชีตัวเอง ก็เลือกให้ครูอ้นส่งไฟล์ ZIP สำเร็จรูปให้ได้เช่นกันครับ)",
+                a: "ไม่ต้องเลยครับ! คุณครูสามารถเลือกแบบ 'ฝากวางขายบนร้าน iAon Tech' ได้เลย ครูอ้นจัดการอัปโหลดและส่งตรวจให้ทั้งหมด พออนุมัติปุ๊บ ครูอ้นกดส่งสติกเกอร์ชุดนั้นเป็นของขวัญ (Gift) ให้เข้า LINE คุณครูฟรี 1 ชุดทันที และเพื่อนครูคนอื่นๆ ก็กดซื้อจากลิงก์ร้านได้ตามปกติครับ",
               },
               {
-                q: "LINE ใช้เวลาตรวจอนุมัตินานแค่ไหน?",
-                a: "ครูอ้นใช้เวลาผลิตและแพ็กไฟล์ให้เสร็จภายใน 1–3 วันทำการ จากนั้นเมื่อกด Request Review แล้ว ทางทีมงาน LINE จะใช้เวลาตรวจอนุมัติประมาณ 1–3 วันทำการก็พร้อมกด Release วางขายบน LINE STORE ได้เลยครับ",
+                q: "หลังกดส่งบรีฟและรูปถ่ายบนหน้าเว็บแล้ว ขั้นตอนต่อไปคืออะไร?",
+                a: "ระบบ AI ของครูอ้นจะได้รับรูปถ่ายและคำพูดทั้ง 16 คำทันที จากนั้นจะปั้นคาแรกเตอร์ต้นแบบ 1 รูปส่งให้คุณครูตรวจคอนเฟิร์มหน้าตาและชุดใน LINE ก่อน เมื่อคุณครูพอใจแล้วจึงผลิตครบทั้งเซ็ตและส่งตรวจขึ้น LINE STORE ครับ",
               },
               {
                 q: "เอาไฟล์ภาพไปใช้ทำหน้าปก ว.PA หรือสไลด์สอนต่อได้ไหม?",
                 a: "ได้ 100% ครับ! ทุกแพ็กเกจครูอ้นแถมไฟล์ภาพ PNG พื้นหลังใสความละเอียดสูงครบทุกแอ็กชัน คุณครูสามารถนำไปวางบน Canva, PowerPoint, Google Slides, ปกรายงาน ว.PA หรือทำคลิปสั้นสร้างตัวตนได้เลยครับ",
-              },
-              {
-                q: "ถ้ายังคิดคำพูด 16 คำไม่ออก ครูอ้นช่วยคิดให้ได้ไหม?",
-                a: "ยินดีมากๆ ครับ! ครูอ้นมี 'โพยคำพูดครูยอดฮิตแยกตามวิชาและงานโรงเรียน' (เช่น เซ็ตครูประจำชั้น, เซ็ตครูวิชาการ, เซ็ตครูดนตรี/พละ, เซ็ตส่งงานราชการ) ให้คุณครูจิ้มเลือกหรือปรับคำให้เข้ากับสไตล์ตัวเองได้เลยครับ",
               },
             ].map((faq, idx) => {
               const isOpen = openFaqIdx === idx;
