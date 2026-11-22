@@ -22,6 +22,7 @@ import { logout } from "@/app/login/actions";
 import { cn } from "@/lib/utils";
 import { createClient as createBrowserSupabase } from "@/utils/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { NAVBAR_FLAGS } from "@/config/catalogVisibility";
 
 interface SubRouteItem {
   name: string;
@@ -48,130 +49,138 @@ interface RouteItem {
 const routes: RouteItem[] = [
   { name: "หน้าแรก", href: "/", icon: Terminal, hoverColor: "cyan" },
   {
-    name: "คลังระบบ & สินค้า",
+    name: "คลังสินค้า & ระบบ",
     icon: ShoppingBag,
     hoverColor: "amber",
     items: [
-      { 
-        name: "คอร์สเรียนออนไลน์ (Academy)", 
-        href: "/academy", 
-        description: "27+ คอร์ส AI, Google Apps Script, Web Development, ดนตรี", 
-        badge: "เปิดใหม่", 
-        badgeColor: "cyan", 
-        icon: GraduationCap, 
-        hoverColor: "cyan" 
+      ...(NAVBAR_FLAGS.showAcademy
+        ? [
+            {
+              name: "คอร์สเรียนออนไลน์ (Academy)",
+              href: "/academy",
+              description: "คอร์ส AI, Google Apps Script และเทคโนโลยีเพื่อการศึกษา",
+              badge: "เปิดใหม่",
+              badgeColor: "cyan" as const,
+              icon: GraduationCap,
+              hoverColor: "cyan",
+            },
+          ]
+        : []),
+      {
+        name: "คลังระบบโรงเรียน & ครู",
+        href: "/digital-vault",
+        description: "ระบบ Google Apps Script สากล ลดงานเอกสาร แจ้งซ่อม เช็คชื่อ ว.PA",
+        badge: "ยอดนิยม",
+        badgeColor: "amber",
+        icon: ShoppingBag,
+        hoverColor: "amber",
       },
-      { 
-        name: "คลัง 30 E-Book ครูไทย", 
-        href: "/ebooks", 
-        description: "30 คู่มือ นวัตกรรม ว.PA ผ่านฉลุย, AI Prompts, วิจัย 5 บท", 
-        badge: "Bestseller", 
-        badgeColor: "amber", 
-        icon: BookOpen, 
-        hoverColor: "amber" 
+      {
+        name: "คลัง E-Book ครูไทย (Top 10 & ชุดเซต)",
+        href: "/ebooks",
+        description: "คู่มือ ว.PA ผ่านฉลุย, 100 AI Prompts, วิจัย 5 บท พร้อมชุดเซตสุดคุ้ม",
+        badge: "Bestseller",
+        badgeColor: "amber",
+        icon: BookOpen,
+        hoverColor: "amber",
       },
-      { 
-        name: "คลังระบบครู & โรงเรียน", 
-        href: "/digital-vault", 
-        description: "20+ ระบบ Google Apps Script ลดงานเอกสาร ประเมิน ว.PA", 
-        badge: "ยอดนิยม", 
-        badgeColor: "amber", 
-        icon: ShoppingBag, 
-        hoverColor: "amber" 
+      {
+        name: "แพ็กเกจเหมาสุดคุ้ม (Bundles)",
+        href: "/bundles",
+        description: "ประหยัดสูงสุด 51% ปลดล็อกระบบโรงเรียนยกชุดพร้อมใช้งาน",
+        badge: "คุ้มสุด",
+        badgeColor: "purple",
+        icon: Sparkles,
+        hoverColor: "purple",
       },
-      { 
-        name: "กลุ่ม Telegram ติวสอบครูผู้ช่วย (AI Prep)", 
-        href: "/teacher-prep", 
-        description: "บอทยิงข้อสอบ 3 เวลา + AI เฉลยละเอียด + เพลงช่วยจำ พ.ร.บ.", 
-        badge: "ใหม่! ติวฟรี", 
-        badgeColor: "cyan", 
-        icon: GraduationCap, 
-        hoverColor: "cyan" 
+      {
+        name: "ติวสอบครูผู้ช่วย AI & เพลงช่วยจำ",
+        href: "/teacher-prep",
+        description: "บอทยิงข้อสอบ Telegram 3 เวลา + AI เฉลยละเอียด + อัลบั้มเพลงจำ พ.ร.บ.",
+        badge: "สอบติดไว",
+        badgeColor: "cyan",
+        icon: GraduationCap,
+        hoverColor: "cyan",
       },
-      { 
-        name: "ร้านค้าเพลงช่วยจำ & BGM คลิป ว.PA", 
-        href: "/music-store", 
-        description: "เพลงจำกฎหมายครู MP3, เพลงบรรเลง BGM ปลอดลิขสิทธิ์ 100%", 
-        badge: "NEW • 49฿+", 
-        badgeColor: "amber", 
-        icon: Music, 
-        hoverColor: "amber" 
+      {
+        name: "ร้านเพลงช่วยจำ & BGM คลิป ว.PA",
+        href: "/music-store",
+        description: "เพลงจำกฎหมายครู MP3 & เพลงบรรเลง BGM ปลอดลิขสิทธิ์ 100%",
+        badge: "ปลอดลิขสิทธิ์",
+        badgeColor: "amber",
+        icon: Music,
+        hoverColor: "amber",
       },
-      { 
-        name: "คลังนักเรียน & TCAS", 
-        href: "/student-vault", 
-        description: "Web Portfolio 3D, ระบบเช็คการบ้าน, AI Prompts", 
-        badge: "เริ่มต้น 69 ฿", 
-        badgeColor: "pink", 
-        icon: GraduationCap, 
-        hoverColor: "pink" 
-      },
-      { 
-        name: "แพ็กเกจเหมาสุดคุ้ม (Bundles)", 
-        href: "/bundles", 
-        description: "ประหยัดสูงสุด 70% ปลดล็อกระบบยกชุดพร้อมใช้งาน", 
-        badge: "คุ้มสุด", 
-        badgeColor: "purple", 
-        icon: Sparkles, 
-        hoverColor: "purple" 
+      {
+        name: "คลังนักเรียน & TCAS 3D",
+        href: "/student-vault",
+        description: "Web Portfolio 3D ยื่น TCAS & ระบบเช็คการบ้านประจำห้อง",
+        badge: "เริ่มต้น 129 ฿",
+        badgeColor: "pink",
+        icon: GraduationCap,
+        hoverColor: "pink",
       },
     ],
   },
   {
-    name: "บริการ & เครื่องมือ",
+    name: "บริการสั่งทำ",
     icon: Wrench,
     hoverColor: "teal",
     items: [
-      { 
-        name: "รับทำสติกเกอร์ LINE คาแรกเตอร์ครู 3D", 
-        href: "/line-stickers", 
-        description: "ปั้นสติกเกอร์ LINE จากรูปถ่ายจริง ครบวงจรจนขึ้นขายบน LINE STORE", 
-        badge: "ฮิต! 990฿+", 
-        badgeColor: "teal", 
-        icon: Sparkles, 
-        hoverColor: "teal" 
+      {
+        name: "รับทำสติกเกอร์ LINE คาแรกเตอร์ 3D",
+        href: "/line-stickers",
+        description: "ปั้นสติกเกอร์ LINE จากรูปถ่ายจริง (ครู / แม่ค้า / สัตว์เลี้ยง) ครบจนขึ้น LINE STORE",
+        badge: "🔥 ฮิต! 990฿+",
+        badgeColor: "teal",
+        icon: Sparkles,
+        hoverColor: "teal",
       },
-      { 
-        name: "รับติดตั้ง & เฝ้าดูแล AI รายเดือน", 
-        href: "/ai-caretaker", 
-        description: "แอดมิน AI ตอบแชท ตรวจสลิป จองคิว พร้อมระบบเฝ้าระวัง 24 ชม.", 
-        badge: "ใหม่! 990฿/ด.", 
-        badgeColor: "teal", 
-        icon: ShieldCheck, 
-        hoverColor: "teal" 
+      {
+        name: "รับติดตั้ง & เฝ้าดูแล AI ร้านค้า 24 ชม.",
+        href: "/ai-caretaker",
+        description: "แอดมิน AI ตอบแชท ตรวจสลิป จองคิว พร้อมระบบเฝ้าระวัง 24 ชม.",
+        badge: "990฿/ด.",
+        badgeColor: "teal",
+        icon: ShieldCheck,
+        hoverColor: "teal",
       },
-      { 
-        name: "ทำเนียบว่าที่ครูผู้ช่วย (KruRank AI)", 
-        href: "/krurank", 
-        description: "ซ้อมสอบ AI วิเคราะห์จุดหลอก + ชิงอันดับทำเนียบประเทศ", 
-        badge: "AI APP 👑", 
-        badgeColor: "cyan", 
-        icon: Crown, 
-        hoverColor: "cyan" 
+      {
+        name: "บริการรับพัฒนาระบบโรงเรียน/องค์กรตามสั่ง",
+        href: "/services",
+        description: "ออกแบบและพัฒนา Web App เฉพาะโรงเรียนและธุรกิจตามโจทย์จริง",
+        icon: Briefcase,
+        hoverColor: "teal",
       },
-      { 
-        name: "บริการรับพัฒนาระบบตามสั่ง", 
-        href: "/services", 
-        description: "ออกแบบและพัฒนา Web App เฉพาะโรงเรียนและองค์กร", 
-        icon: Briefcase, 
-        hoverColor: "teal" 
+      {
+        name: "ทำเนียบว่าที่ครูผู้ช่วย (KruRank AI)",
+        href: "/krurank",
+        description: "ซ้อมสอบ AI วิเคราะห์จุดหลอก + ชิงอันดับทำเนียบประเทศ",
+        badge: "AI APP 👑",
+        badgeColor: "cyan",
+        icon: Crown,
+        hoverColor: "cyan",
       },
-      { 
-        name: "iAon IT ง่ายๆ (Demo Playground)", 
-        href: "/saas", 
-        description: "ทดลองเล่น Simulator สดและสแกนเช็คชื่ออัตโนมัติ", 
-        icon: Terminal, 
-        hoverColor: "cyan" 
-      },
+      ...(NAVBAR_FLAGS.showSaasDemo
+        ? [
+            {
+              name: "iAon IT ง่ายๆ (Demo Playground)",
+              href: "/saas",
+              description: "ทดลองเล่น Simulator สดและสแกนเช็คชื่ออัตโนมัติ",
+              icon: Terminal,
+              hoverColor: "cyan",
+            },
+          ]
+        : []),
     ],
   },
-  { 
-    name: "ของแจกฟรี", 
-    href: "/freebies", 
-    icon: Gift, 
-    hoverColor: "purple", 
+  {
+    name: "ของแจกฟรี",
+    href: "/freebies",
+    icon: Gift,
+    hoverColor: "purple",
     badge: "FREE",
-    isSpecial: true 
+    isSpecial: true,
   },
   { name: "เกี่ยวกับเรา", href: "/about", icon: Info, hoverColor: "cyan" },
 ];

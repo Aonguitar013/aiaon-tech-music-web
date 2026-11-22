@@ -21,6 +21,36 @@ export interface SystemCoverTheme {
 export function getSystemCoverTheme(title: string, category: string): SystemCoverTheme {
   const upper = (title || "").toUpperCase();
 
+  // 0. Newest Flagship AONA09 & AONA10
+  if (upper.includes("AONA09") || upper.includes("แจ้งซ่อม") || upper.includes("อาคารสถานที่")) {
+    return {
+      code: "AONA09",
+      categoryName: "อาคารสถานที่ & ซ่อมบำรุง",
+      tagline: "SMART REPAIR & TELEGRAM 2-WAY",
+      icon: Zap,
+      gradient: "from-blue-950 via-slate-900 to-cyan-950",
+      borderAccent: "border-cyan-400/50",
+      glowColor: "rgba(6,182,212,0.38)",
+      badgeBg: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40",
+      pills: ["สแกน QR แจ้งซ่อม", "Telegram 2 ทาง", "แดชบอร์ด ผอ."],
+      iconColor: "text-cyan-400"
+    };
+  }
+  if (upper.includes("AONA10") || upper.includes("สุขาภิบาล") || upper.includes("แม่บ้าน")) {
+    return {
+      code: "AONA10",
+      categoryName: "สุขาภิบาล & แม่บ้าน",
+      tagline: "HYGIENE PATROL QR MATRIX",
+      icon: ShieldCheck,
+      gradient: "from-emerald-950 via-slate-900 to-teal-950",
+      borderAccent: "border-emerald-400/50",
+      glowColor: "rgba(16,185,129,0.35)",
+      badgeBg: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
+      pills: ["ตรวจ 3 เวลา", "Live Heatmap", "PDF 1 คลิก"],
+      iconColor: "text-emerald-400"
+    };
+  }
+
   // 1. AONA Series (Administration & School Ops)
   if (upper.includes("AONA01") || upper.includes("ทะเบียน") || upper.includes("รับ-ส่ง")) {
     return {

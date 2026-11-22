@@ -2,25 +2,26 @@ import React from "react";
 import type { Metadata } from "next";
 import { createClient } from "@/utils/supabase/server";
 import { DigitalVaultView } from "@/components/digital-vault/DigitalVaultView";
+import { transformDigitalVaultProducts } from "@/config/catalogVisibility";
 
 export const metadata: Metadata = {
-  title: "คลังสินค้าดิจิทัล (Digital Vault) | TechxMusic",
+  title: "คลังระบบโรงเรียน & ครู (Digital Vault) | AiAon Tech",
   description:
-    "แหล่งรวมคู่มือปฏิบัติงานระบบอัตโนมัติ เทมเพลต และสื่อการสอนคุณภาพสูงเพื่อช่วยผ่อนแรงครูไทย ยกระดับประสิทธิภาพการสอนให้สูงสุด",
+    "รวมระบบ Google Apps Script มาตรฐานสากลสำหรับครูทุกวิชาและโรงเรียนทั่วประเทศ ติดตั้งง่าย รันบน Google Drive ตัวเอง 100% ไร้ค่ารายเดือน",
   keywords: [
     "Digital Vault",
+    "ระบบโรงเรียน",
     "เทมเพลตครู",
     "Google Apps Script",
     "ระบบเช็คชื่อ",
-    "แจ้งเตือนไลน์",
-    "สื่อการสอนครู",
-    "E-book ดนตรี",
-    "TechxMusic",
+    "ระบบแจ้งซ่อมโรงเรียน",
+    "แจ้งเตือน Telegram",
+    "AiAon Tech",
   ],
   openGraph: {
-    title: "คลังสินค้าดิจิทัล (Digital Vault) | TechxMusic",
+    title: "คลังระบบโรงเรียน & ครู (Digital Vault) | AiAon Tech",
     description:
-      "รวบรวมเทมเพลตและระบบอัตโนมัติสำเร็จรูปเพื่อช่วยลดเวลาและประหยัดภาระงานให้กับคุณ",
+      "รวมระบบอัตโนมัติสำเร็จรูปมาตรฐานสากล ช่วยลดภาระงานเอกสารครูและโรงเรียนทั่วประเทศ",
     type: "website",
   },
 };
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 export default async function DigitalVaultPage() {
   const supabase = await createClient();
 
-  // Fetch all products from marketplace database
+  // Fetch all products from marketplace database (non-destructive: filtered & universalized via catalogVisibility)
   const { data: products, error } = await supabase
     .from("products")
     .select("*")
@@ -38,5 +39,7 @@ export default async function DigitalVaultPage() {
     console.error("Error fetching products for Digital Vault page:", error);
   }
 
-  return <DigitalVaultView initialProducts={products || []} />;
+  const universalProducts = transformDigitalVaultProducts(products || []);
+
+  return <DigitalVaultView initialProducts={universalProducts} />;
 }

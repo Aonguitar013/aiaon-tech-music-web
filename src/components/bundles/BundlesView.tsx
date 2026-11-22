@@ -13,8 +13,11 @@ import { BUNDLE_PACKAGES_DATA, BundleItem } from "@/components/bundles/bundleDat
 import { CyberVaultCrateMockup } from "@/components/bundles/CyberVaultCrateMockup";
 import { BundleDetailSection } from "@/components/bundles/BundleDetailSection";
 import { getLineOrderUrl } from "@/lib/line";
+import { HIDDEN_BUNDLE_IDS } from "@/config/catalogVisibility";
 
-const BUNDLE_PACKAGES = BUNDLE_PACKAGES_DATA;
+const BUNDLE_PACKAGES = BUNDLE_PACKAGES_DATA.filter(
+  (b) => !HIDDEN_BUNDLE_IDS.includes(b.id)
+);
 
 export function BundlesView() {
   const [selectedBundle, setSelectedBundle] = useState<BundleItem | null>(null);
@@ -78,7 +81,7 @@ export function BundlesView() {
         </div>
 
         {/* --- BUNDLES GRID --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
           {BUNDLE_PACKAGES.map((bundle, idx) => {
             return (
               <motion.div

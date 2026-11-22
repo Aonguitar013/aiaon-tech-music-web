@@ -95,7 +95,9 @@ export function ProductCard({ product }: ProductCardProps) {
     upperTitle.includes("AONE10") ||
     upperTitle.includes("3D") ||
     upperTitle.includes("AONM01") ||
-    upperTitle.includes("AONA06")
+    upperTitle.includes("AONA06") ||
+    upperTitle.includes("AONA09") ||
+    upperTitle.includes("AONA10")
   ) {
     vipPrice = "+350 ฿";
   }
@@ -122,9 +124,14 @@ export function ProductCard({ product }: ProductCardProps) {
   const lineOrderUrl = getLineOrderUrl(lineOrderMessage);
   const vipLineOrderUrl = getLineOrderUrl(vipLineOrderMessage);
 
-  const detailHref = product.id 
-    ? `/dashboard/marketplace/${product.id}` 
-    : `/dashboard/marketplace`;
+  const isDirectFlagship =
+    product.id?.startsWith("aona09-") || product.id?.startsWith("aona10-");
+
+  const detailHref = isDirectFlagship
+    ? lineOrderUrl
+    : product.id
+      ? `/dashboard/marketplace/${product.id}`
+      : `/dashboard/marketplace`;
 
   const handleVipClick = (e: React.MouseEvent) => {
     if (!isMobileDevice()) {

@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { FreebiesView, Freebie } from "@/components/freebies/FreebiesView";
 import type { Metadata } from "next";
 import { getLineOrderUrl } from "@/lib/line";
+import { SHOW_DB_FREEBIES } from "@/config/catalogVisibility";
 
 export const metadata: Metadata = {
   title: "คลังของแจกฟรี — โค้ด Google Apps Script, เทมเพลต และ AI Prompts | AiAon Tech",
@@ -71,7 +72,7 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
   },
   {
     id: "freebie-gas-asset-qr",
-    title: "ระบบบัตรติดทรัพย์สิน & สร้าง QR Code ครุภัณฑ์",
+    title: "ระบบสร้างป้าย QR Code ติดครุภัณฑ์โรงเรียนอัตโนมัติ (ฟรี!)",
     description: "ระบบสร้างรหัส QR Code ติดอุปกรณ์และครุภัณฑ์โรงเรียนแบบชุดใหญ่ พิมพ์เป็นสติกเกอร์ติดทรัพย์สินได้ใน 1 วินาที สแกนเช็คประวัติได้ทันที",
     category: "tech",
     icon_name: "QrCode",
@@ -81,11 +82,11 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
     border_color: "border-purple-500/30",
     text_color: "text-purple-400",
     bg_color: "bg-purple-500/10",
-    tag: "AONA04 (ระบบบริหารงานครู)",
+    tag: "FREE-QR (งานพัสดุ & ครุภัณฑ์)",
     file_size: "850 KB",
     file_type: "GAS & Sheet",
     download_url: getLineOrderUrl(
-      'สวัสดีครับครูอ้น ปลดล็อกรหัสสำเร็จแล้ว ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี:\n🎁 "[AONA04] ระบบบัตรติดทรัพย์สิน & สร้าง QR Code ครุภัณฑ์" ครับ 🙏'
+      'สวัสดีครับครูอ้น ปลดล็อกรหัสสำเร็จแล้ว ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี:\n🎁 "[FREE-QR] ระบบสร้างป้าย QR Code ติดครุภัณฑ์โรงเรียนอัตโนมัติ" ครับ 🙏'
     ),
   },
   {
@@ -147,8 +148,8 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
   },
   {
     id: "freebie-guitar-backing-pack",
-    title: "Lo-Fi & Acoustic Guitar Backing Track Pack (10 แทร็ค)",
-    description: "รวม 10 แทร็คดนตรี Backing Track สไตล์ Lo-Fi/Acoustic คุณภาพเสียงสตูดิโอ พร้อมตารางคอร์ดประกอบ สำหรับนักเรียนและคุณครูซ้อมดนตรีและทำคลิป",
+    title: "ชุดเพลงบรรเลง BGM ปลอดลิขสิทธิ์ 10 เพลง (สำหรับใส่คลิปการสอน / ว.PA)",
+    description: "รวม 10 แทร็คเพลงบรรเลง Acoustic & Lo-Fi คุณภาพเสียงสตูดิโอ ปลอดลิขสิทธิ์ 100% ใช้ใส่คลิปการสอน คลิป ว.PA หรือเปิดในห้องเรียนได้ทันที",
     category: "music",
     icon_name: "Music2",
     color_from: "from-purple-600",
@@ -157,25 +158,28 @@ const REAL_BUILTIN_FREEBIES: Freebie[] = [
     border_color: "border-purple-500/30",
     text_color: "text-purple-300",
     bg_color: "bg-purple-500/10",
-    tag: "Studio Music Assets",
+    tag: "FREE-BGM (เพลงประกอบคลิป ว.PA)",
     file_size: "68 MB",
     file_type: "ZIP Audio (WAV/MP3)",
     download_url: getLineOrderUrl(
-      'สวัสดีครับครูอ้น ปลดล็อกรหัสสำเร็จแล้ว ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี:\n🎁 "Lo-Fi & Acoustic Guitar Backing Track Pack (10 แทร็ค)" ครับ 🎸🙏'
+      'สวัสดีครับครูอ้น ปลดล็อกรหัสสำเร็จแล้ว ขอรับลิงก์ดาวน์โหลดไฟล์ฟรี:\n🎁 "ชุดเพลงบรรเลง BGM ปลอดลิขสิทธิ์ 10 เพลง (สำหรับใส่คลิปการสอน / ว.PA)" ครับ 🙏'
     ),
   },
 ];
 
 export default async function FreebiesPage() {
-  const supabase = await createClient();
-  // Fetch optional database freebies
-  const { data: dbFreebies } = await supabase
-    .from('freebies')
-    .select('*')
-    .order('created_at', { ascending: true });
+  let dbFreebies: Freebie[] = [];
+  if (SHOW_DB_FREEBIES) {
+    const supabase = await createClient();
+    const { data } = await supabase
+      .from('freebies')
+      .select('*')
+      .order('created_at', { ascending: true });
+    dbFreebies = (data as Freebie[]) || [];
+  }
 
-  // Merge built-in real systems with any database freebies
-  const combinedFreebies = [...REAL_BUILTIN_FREEBIES, ...(dbFreebies || [])];
+  // Merge built-in real systems with optional database freebies (controlled non-destructively via SHOW_DB_FREEBIES)
+  const combinedFreebies = [...REAL_BUILTIN_FREEBIES, ...dbFreebies];
 
   return <FreebiesView initialFreebies={combinedFreebies} />;
 }

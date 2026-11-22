@@ -16,6 +16,7 @@ import { Book3DMockup } from "@/components/ebooks/Book3DMockup";
 import { findEbookByCode, EbookMetadata } from "@/components/ebooks/ebookDataHelper";
 import { EbookDetailSection } from "@/components/ebooks/EbookDetailSection";
 import { getLineOrderUrl } from "@/lib/line";
+import { TOP_10_EBOOK_CODES, EBOOK_BUNDLE_SETS, EbookBundleSet } from "@/config/catalogVisibility";
 
 interface EbookItem {
   rank: number;
@@ -40,6 +41,7 @@ const EBOOKS_DATA: EbookItem[] = (rawEbooks as unknown) as EbookItem[];
 
 // Category Filter Tabs
 const CATEGORIES = [
+  { id: "TOP10", label: "🔥 10 เล่มขายดี", icon: Star },
   { id: "ALL", label: "ทั้งหมด 30 เล่ม", icon: BookOpen },
   { id: "PA", label: "ว.PA & วิทยฐานะ", icon: Award },
   { id: "AI", label: "AI & เทคโนโลยี", icon: Sparkles },
@@ -49,7 +51,7 @@ const CATEGORIES = [
 ];
 
 export function EbooksCatalogView() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
+  const [selectedCategory, setSelectedCategory] = useState<string>("TOP10");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [cart, setCart] = useState<EbookItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
@@ -101,23 +103,27 @@ export function EbooksCatalogView() {
 
   // Filtered books
   const filteredBooks = useMemo(() => {
+    const query = searchQuery.toLowerCase().trim();
     return EBOOKS_DATA.filter((book) => {
-      // Category Match
+      // Category Match (when user types a search query, search across all 30 books automatically)
       let catMatch = true;
-      if (selectedCategory === "PA") {
-        catMatch = book.category.includes("ว.PA") || book.title.includes("PA") || book.category.includes("วิชาชีพ");
-      } else if (selectedCategory === "AI") {
-        catMatch = book.category.includes("AI") || book.category.includes("เทคโนโลยี") || book.category.includes("AR");
-      } else if (selectedCategory === "RESEARCH") {
-        catMatch = book.category.includes("วิจัย") || book.category.includes("แผนการสอน") || book.category.includes("Active");
-      } else if (selectedCategory === "CLASSROOM") {
-        catMatch = book.category.includes("ชั้นเรียน") || book.category.includes("แนะแนว") || book.category.includes("จิตวิทยา");
-      } else if (selectedCategory === "ADMIN") {
-        catMatch = book.category.includes("บริหาร") || book.category.includes("สารบรรณ") || book.category.includes("พัสดุ") || book.category.includes("การเงิน");
+      if (query === "") {
+        if (selectedCategory === "TOP10") {
+          catMatch = TOP_10_EBOOK_CODES.includes(book.code);
+        } else if (selectedCategory === "PA") {
+          catMatch = book.category.includes("ว.PA") || book.title.includes("PA") || book.category.includes("วิชาชีพ");
+        } else if (selectedCategory === "AI") {
+          catMatch = book.category.includes("AI") || book.category.includes("เทคโนโลยี") || book.category.includes("AR");
+        } else if (selectedCategory === "RESEARCH") {
+          catMatch = book.category.includes("วิจัย") || book.category.includes("แผนการสอน") || book.category.includes("Active");
+        } else if (selectedCategory === "CLASSROOM") {
+          catMatch = book.category.includes("ชั้นเรียน") || book.category.includes("แนะแนว") || book.category.includes("จิตวิทยา");
+        } else if (selectedCategory === "ADMIN") {
+          catMatch = book.category.includes("บริหาร") || book.category.includes("สารบรรณ") || book.category.includes("พัสดุ") || book.category.includes("การเงิน");
+        }
       }
 
       // Search Query
-      const query = searchQuery.toLowerCase().trim();
       const searchMatch =
         query === "" ||
         book.title.toLowerCase().includes(query) ||
@@ -128,6 +134,17 @@ export function EbooksCatalogView() {
       return catMatch && searchMatch;
     });
   }, [selectedCategory, searchQuery]);
+
+  const handleBundleSetOrder = (e: React.MouseEvent, set: EbookBundleSet) => {
+    if (!isMobileDevice()) {
+      e.preventDefault();
+      openLineModal({
+        title: `${set.title} (${set.bookCount} เล่ม)`,
+        price: set.bundlePrice,
+        message: set.lineOrderMsg,
+      });
+    }
+  };
 
   // Color mapper helper
   const getBadgeClass = (theme: string) => {
@@ -262,6 +279,83 @@ export function EbooksCatalogView() {
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          1.5 CURATED E-BOOK BUNDLE SETS (3 ชุดเซตสุดคุ้ม)
+      ───────────────────────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-5">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+              📦 ไม่อยากเลือกทีละเล่ม? จัดเป็นชุดเซตคุ้มกว่า
+            </span>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
+              3 ชุดเซต E-Book ยอดนิยม (ประหยัดสูงสุด 62%)
+            </h2>
+          </div>
+          <button
+            onClick={() => setSelectedCategory("ALL")}
+            className="text-xs sm:text-sm text-indigo-300 hover:text-indigo-200 underline underline-offset-4 self-start sm:self-auto"
+          >
+            ดูรายเล่มครบทั้งหมด 30 เล่ม →
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {EBOOK_BUNDLE_SETS.map((set) => {
+            const accentStyles =
+              set.accent === "amber"
+                ? "border-amber-500/35 bg-linear-to-br from-amber-950/35 via-slate-900/90 to-slate-950 hover:border-amber-400/70"
+                : set.accent === "cyan"
+                  ? "border-cyan-500/35 bg-linear-to-br from-cyan-950/35 via-slate-900/90 to-slate-950 hover:border-cyan-400/70"
+                  : "border-purple-500/45 bg-linear-to-br from-purple-950/40 via-slate-900/90 to-indigo-950/40 hover:border-purple-400/80";
+            const badgeStyles =
+              set.accent === "amber"
+                ? "bg-amber-500/15 text-amber-300 border-amber-500/30"
+                : set.accent === "cyan"
+                  ? "bg-cyan-500/15 text-cyan-300 border-cyan-500/30"
+                  : "bg-purple-500/20 text-purple-200 border-purple-400/40";
+            return (
+              <div
+                key={set.id}
+                className={`rounded-2xl border p-5 flex flex-col justify-between transition-all duration-300 ${accentStyles}`}
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold border ${badgeStyles}`}>
+                      {set.badge}
+                    </span>
+                    <span className="text-xs font-bold text-slate-400">{set.bookCount} เล่ม</span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-extrabold text-white mb-1.5">{set.title}</h3>
+                  <p className="text-xs text-slate-300/80 leading-relaxed mb-4">{set.subtitle}</p>
+                </div>
+
+                <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-3">
+                  <div>
+                    <div className="text-[11px] text-slate-400 line-through">
+                      ฿{set.originalPrice.toLocaleString()}
+                    </div>
+                    <div className="text-xl font-black text-white">
+                      ฿{set.bundlePrice.toLocaleString()}
+                    </div>
+                  </div>
+                  <a
+                    href={getLineOrderUrl(set.lineOrderMsg)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => handleBundleSetOrder(e, set)}
+                    className="px-4 py-2.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-xs inline-flex items-center gap-1.5 shadow-lg transition cursor-pointer shrink-0"
+                  >
+                    <span>สั่งซื้อชุดเซต</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 

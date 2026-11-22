@@ -197,11 +197,11 @@ export const FREEBIES_EXTENDED_DATA: Record<string, FreebieDetailData> = {
 
   "freebie-gas-asset-qr": {
     id: "freebie-gas-asset-qr",
-    code: "AONA04",
-    title: "ระบบบัตรติดทรัพย์สิน & สร้าง QR Code ครุภัณฑ์",
+    code: "FREE-QR",
+    title: "ระบบสร้างป้าย QR Code ติดครุภัณฑ์โรงเรียนอัตโนมัติ (ฟรี!)",
     headline: "QR Asset Sticker Generator: เสกสติกเกอร์บาร์โค้ดติดพัสดุและครุภัณฑ์โรงเรียนใน 1 วินาที",
     subheadline: "จัดการงานพัสดุโรงเรียนให้เป็นเรื่องง่าย สร้าง QR Code ประจำอุปกรณ์ พิมพ์เป็นสติกเกอร์ติดทรัพย์สิน พร้อมสแกนเช็คประวัติได้ทันทีผ่านมือถือ",
-    tag: "AONA04 (ระบบบริหารงานครู)",
+    tag: "FREE-QR (งานพัสดุ & ครุภัณฑ์)",
     category: "tech",
     originalPrice: 490,
     price: 0,
@@ -405,8 +405,8 @@ export const FREEBIES_EXTENDED_DATA: Record<string, FreebieDetailData> = {
 
   "freebie-guitar-backing-pack": {
     id: "freebie-guitar-backing-pack",
-    code: "FREE-MUS",
-    title: "Lo-Fi & Acoustic Guitar Backing Track Pack (10 แทร็ค)",
+    code: "FREE-BGM",
+    title: "ชุดเพลงบรรเลง BGM ปลอดลิขสิทธิ์ 10 เพลง (สำหรับใส่คลิปการสอน / ว.PA)",
     headline: "Lo-Fi & Acoustic Audio Studio Pack: 10 แทร็คซ้อมดนตรี & เพลงประกอบคลิป ปลอดลิขสิทธิ์ 100%",
     subheadline: "ชุดไฟล์เสียงดนตรีบรรเลงกีตาร์อคูสติกและ Lo-Fi Chill Hop คุณภาพเสียงระดับสตูดิโอ 24-bit ใช้เปิดซ้อมดนตรี ประกอบคลิปการสอน หรือคลิปส่งประเมิน ว.PA ได้ตลอดชีพ",
     tag: "Studio Music Assets",

@@ -291,12 +291,19 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
     },
   ];
 
+  const academicCount = initialProducts.filter((p) => {
+    const t = (p.title || "").toLowerCase();
+    return t.includes("aone") || t.includes("นักเรียน") || t.includes("คะแนน") || t.includes("เช็คชื่อ") || t.includes("พฤติกรรม") || t.includes("ห้องเรียนสีขาว") || t.includes("สอบ");
+  }).length;
+  const adminCount = initialProducts.filter((p) => {
+    const t = (p.title || "").toLowerCase();
+    return t.includes("aona") || t.includes("บริหาร") || t.includes("ยานพาหนะ") || t.includes("เกียรติบัตร") || t.includes("พัสดุ") || t.includes("การลา") || t.includes("แจ้งซ่อม") || t.includes("สุขาภิบาล") || t.includes("แม่บ้าน");
+  }).length;
+
   const categories = [
-    { id: "All", label: "ทั้งหมด", count: initialProducts.length || 20 },
-    { id: "Academic", label: "🎓 วิชาการ & นักเรียน (หมวด E)", count: 11 },
-    { id: "Admin", label: "🏢 บริหาร & ยานพาหนะ (หมวด A)", count: 6 },
-    { id: "Activity", label: "🎪 กิจกรรม & ดนตรี (หมวด M)", count: 3 },
-    { id: "Free", label: "🎁 แจกฟรี (Freebies)", count: 8 },
+    { id: "All", label: "ทั้งหมด", count: initialProducts.length },
+    { id: "Academic", label: "🎓 ครูผู้สอน & ห้องเรียน", count: academicCount },
+    { id: "Admin", label: "🏢 บริหารโรงเรียน & อาคารสถานที่", count: adminCount },
     { id: "Hardware", label: "🎙️ สตูดิโอ & Gadgets", count: 4 },
   ];
 
@@ -323,7 +330,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
     } else if (filterCategory === "Academic") {
       matchesFilter = title.includes("aone") || title.includes("นักเรียน") || title.includes("คะแนน") || title.includes("เช็คชื่อ") || title.includes("พฤติกรรม") || title.includes("เครื่องแต่งกาย") || title.includes("ห้องเรียนสีขาว") || title.includes("สอบ");
     } else if (filterCategory === "Admin") {
-      matchesFilter = title.includes("aona") || title.includes("บริหาร") || title.includes("ยานพาหนะ") || title.includes("เกียรติบัตร") || title.includes("พัสดุ") || title.includes("สมุดติดต่อ") || title.includes("การลา");
+      matchesFilter = title.includes("aona") || title.includes("บริหาร") || title.includes("ยานพาหนะ") || title.includes("เกียรติบัตร") || title.includes("พัสดุ") || title.includes("สมุดติดต่อ") || title.includes("การลา") || title.includes("แจ้งซ่อม") || title.includes("สุขาภิบาล") || title.includes("แม่บ้าน");
     } else if (filterCategory === "Activity") {
       matchesFilter = title.includes("aonm") || title.includes("ลูกเสือ") || title.includes("ดนตรี") || title.includes("ซ้อมดนตรี");
     } else if (filterCategory === "Free") {
@@ -359,7 +366,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border-purple-500/30 bg-purple-500/10 text-purple-300 text-xs font-prompt font-semibold"
           >
             <ShoppingBag className="w-4 h-4 text-purple-400" />
-            <span>DIGITAL VAULT — คลัง 20 ระบบ Google Apps Script สำเร็จรูป</span>
+            <span>DIGITAL VAULT — คลัง {initialProducts.length} ระบบโรงเรียนมาตรฐานสากล (ใช้ได้ทุกวิชา ทุกระดับชั้น)</span>
           </motion.div>
 
           <motion.h1

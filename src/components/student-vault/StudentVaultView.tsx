@@ -14,7 +14,11 @@ import { STUDENT_PRODUCTS_DATA, StudentProductItem } from "@/components/student-
 import { StudentCardMockup } from "@/components/student-vault/StudentCardMockup";
 import { StudentDetailSection } from "@/components/student-vault/StudentDetailSection";
 import { getLineOrderUrl } from "@/lib/line";
-const STUDENT_PRODUCTS = STUDENT_PRODUCTS_DATA;
+import { HIDDEN_STUDENT_PRODUCT_CODES } from "@/config/catalogVisibility";
+
+const STUDENT_PRODUCTS = STUDENT_PRODUCTS_DATA.filter(
+  (p) => !HIDDEN_STUDENT_PRODUCT_CODES.includes(p.code)
+);
 
 export function StudentVaultView() {
   const [copiedPrompt, setCopiedPrompt] = useState<boolean>(false);
@@ -82,15 +86,15 @@ export function StudentVaultView() {
             className="inline-flex items-center gap-3 p-3 px-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-prompt text-xs sm:text-sm font-semibold shadow-[0_0_25px_rgba(16,185,129,0.2)]"
           >
             <Gift className="w-4 h-4 text-emerald-400 shrink-0 animate-bounce" />
-            <span>🎁 สมาชิกทุกคนรับฟรี: ระบบฝึกจำคำศัพท์ &amp; จำหน้า 3D Flashcard</span>
-            <Link href="/digital-vault" className="text-white underline hover:text-emerald-200 transition-colors">
+            <span>🎁 แจกฟรีสำหรับนักเรียน-นักศึกษา: คู่มือ AI Prompts ลับ &amp; 3D Flashcard</span>
+            <Link href="/freebies" className="text-white underline hover:text-emerald-200 transition-colors">
               กดรับฟรีที่นี่ →
             </Link>
           </motion.div>
         </div>
 
         {/* --- STUDENT PRODUCTS GRID --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 max-w-5xl mx-auto gap-8 mb-20">
           {STUDENT_PRODUCTS.map((prod, idx) => (
             <motion.div
               key={prod.id}

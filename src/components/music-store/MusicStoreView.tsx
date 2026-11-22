@@ -17,6 +17,7 @@ import {
 } from "@/components/music-store/musicDataHelper";
 import { VinylRecordMockup } from "@/components/music-store/VinylRecordMockup";
 import { MusicDetailSection } from "@/components/music-store/MusicDetailSection";
+import { HIDDEN_MUSIC_STORE_CODES } from "@/config/catalogVisibility";
 
 /* ─────────────────────────────────────────────────────────────
    TYPES & DATA: IAONTECH x MUSIC COMMERCIAL STORE
@@ -24,13 +25,14 @@ import { MusicDetailSection } from "@/components/music-store/MusicDetailSection"
 
 type MusicCategory = "ALL" | "MNEMONIC" | "BGM_PA" | "BACKING_STUDIO" | "CUSTOM";
 
-const MUSIC_PRODUCTS = MUSIC_STORE_PRODUCTS_DATA;
+const MUSIC_PRODUCTS = MUSIC_STORE_PRODUCTS_DATA.filter(
+  (p) => !HIDDEN_MUSIC_STORE_CODES.includes(p.code)
+);
 
 const CATEGORIES: { id: MusicCategory; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { id: "ALL", label: "🎵 สินค้าเพลงทั้งหมด", icon: Disc },
   { id: "MNEMONIC", label: "🎓 เพลงช่วยจำสอบครูผู้ช่วย", icon: GraduationCap },
   { id: "BGM_PA", label: "🎬 เพลง BGM คลิป ว.PA (ปลอดลิขสิทธิ์)", icon: Film },
-  { id: "BACKING_STUDIO", label: "🎸 Backing Track & พรีเซ็ตห้องอัด", icon: Guitar },
   { id: "CUSTOM", label: "✨ รับแต่งเพลงตามสั่ง", icon: Mic2 },
 ];
 
