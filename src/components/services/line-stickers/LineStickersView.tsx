@@ -294,12 +294,41 @@ const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> =
       "กลับบ้านปลอดภัย!",
     ],
   },
+  student: {
+    label: "🎒 โพยนักเรียน/นักศึกษา: วัยเรียนสายปั่นงาน / ส่งครู / คุยกับเพื่อน",
+    words: [
+      "สวัสดีครับ/ค่ะ",
+      "รับทราบค้าบ!",
+      "ส่งงานแล้วนะครับ!",
+      "ขอบคุณมากค้าบ",
+      "กำลังปั่นการบ้าน...",
+      "อ่านหนังสือสอบ!",
+      "ขอเกรด 4 นะครับ!",
+      "ไปเรียนก่อนนะ!",
+      "งานกลุ่มไฟลุก!",
+      "สู้ๆ นะเพื่อน!",
+      "การบ้านท่วมหัว!",
+      "พักกินหนมแป๊บ",
+      "เข้าใจแล้วค้าบ!",
+      "โอเค จัดไป!",
+      "ง่วงไม่ไหวแล้ว...",
+      "ฝันดี ราตรีสวัสดิ์",
+      "รอก่อนกำลังไป!",
+      "เลิฟเลยค้าบ!",
+      "สอบผ่านแล้วเย้!",
+      "เลิกเรียนแล้ว!",
+      "จดสรุปแป๊บนะ",
+      "ขอถามหน่อยค้าบ",
+      "ยินดีด้วยนะ!",
+      "เจอกันที่โรงเรียน!",
+    ],
+  },
 };
 
 function extractShortNickname(rawName: string): string {
   const cleaned = rawName
     .trim()
-    .replace(/^(คุณครู|ครู|อาจารย์|ผอ\.|รองฯ|คุณ|พี่|น้อง|บอส|เฮีย|เจ๊)\s*/i, "")
+    .replace(/^(คุณครู|ครู|อาจารย์|ผอ\.|รองฯ|คุณ|พี่|น้อง|เด็กชาย|เด็กหญิง|ด\.ช\.|ด\.ญ\.|บอส|เฮีย|เจ๊)\s*/i, "")
     .trim();
   return cleaned || "อ้น";
 }
@@ -364,9 +393,40 @@ function buildOfficeNicknameCaptions(rawName: string): string[] {
   ];
 }
 
+function buildStudentNicknameCaptions(rawName: string): string[] {
+  const n = extractShortNickname(rawName);
+  return [
+    `${n}สวัสดีจ้า`,
+    `${n}รับทราบ!`,
+    `${n}โอเคจัดไป!`,
+    `${n}ขอบคุณจ้า`,
+    `${n}ส่งงานแล้วนะ!`,
+    `${n}ปั่นการบ้านอยู่`,
+    `${n}ตั้งใจเรียนอยู่!`,
+    `${n}อ่านหนังสือสอบ`,
+    `${n}ขอเกรด 4 นะ!`,
+    `${n}สู้ๆ นะทุกคน!`,
+    `${n}การบ้านท่วมหัว!`,
+    `${n}พักกินหนมแป๊บ`,
+    `${n}สอบผ่านแล้วเย้!`,
+    `${n}เลิกเรียนแล้ว!`,
+    `${n}ง่วงจังเลย...`,
+    `${n}ฝันดีจ้า`,
+    `${n}เลิฟเลย!`,
+    `${n}สุดยอดเลย!`,
+    `${n}พร้อมลุย!`,
+    `${n}ยินดีด้วย!`,
+    `${n}รอแป๊บนะ`,
+    `${n}กำลังไปเรียน!`,
+    `${n}เก่งมาก!`,
+    `${n}บ๊ายบาย!`,
+  ];
+}
+
 const OUTFIT_STYLES = [
   { id: "office-smart", label: "💼 ชุดพนักงานออฟฟิศ / สมาร์ทแคชชวล / สูทเบลเซอร์วัยทำงาน" },
   { id: "office-casual", label: "👕 ชุดลำลองสบายๆ / เสื้อโปโลบริษัท / ยูนิฟอร์มองค์กร / WFH" },
+  { id: "student-uniform", label: "🎒 ชุดนักเรียน / ชุดนักศึกษา / ชุดพละโรงเรียน / ชุดรับปริญญา" },
   { id: "subject", label: "🎸 ชุดคุณครูประจำวิชา / สายลุย (ดนตรี, พละ, วิทย์, คอมฯ, ศิลปะ)" },
   { id: "khaki", label: "👔 ชุดข้าราชการสีกากี / ชุดสูทผู้บริหารเนี๊ยบๆ" },
   { id: "casual", label: "🏫 ชุดครูวัยรุ่น สมาร์ทแคชชวล / เสื้อโปโลโรงเรียน" },
@@ -466,6 +526,10 @@ export function LineStickersView() {
       setCaptions(buildOfficeNicknameCaptions(teacherName));
       return;
     }
+    if (presetKey === "student-nickname") {
+      setCaptions(buildStudentNicknameCaptions(teacherName));
+      return;
+    }
     const pack = PRESET_CAPTION_PACKS[presetKey];
     if (pack) {
       setCaptions([...pack.words]);
@@ -474,13 +538,23 @@ export function LineStickersView() {
 
   const handleOutfitSelect = (outfitId: string) => {
     setSelectedOutfit(outfitId);
+    const isNicknameMode =
+      selectedPresetKey === "nickname" ||
+      selectedPresetKey === "office-nickname" ||
+      selectedPresetKey === "student-nickname";
+
     if (outfitId === "office-smart" || outfitId === "office-casual") {
-      if (selectedPresetKey === "nickname") {
+      if (isNicknameMode) {
         setSelectedPresetKey("office-nickname");
         setCaptions(buildOfficeNicknameCaptions(teacherName));
       }
-    } else if (outfitId === "subject" || outfitId === "casual") {
-      if (selectedPresetKey === "office-nickname") {
+    } else if (outfitId === "student-uniform") {
+      if (isNicknameMode) {
+        setSelectedPresetKey("student-nickname");
+        setCaptions(buildStudentNicknameCaptions(teacherName));
+      }
+    } else if (outfitId === "subject" || outfitId === "casual" || outfitId === "khaki") {
+      if (isNicknameMode) {
         setSelectedPresetKey("nickname");
         setCaptions(buildNicknameCaptions(teacherName));
       }
@@ -493,6 +567,8 @@ export function LineStickersView() {
       setCaptions(buildNicknameCaptions(val));
     } else if (selectedPresetKey === "office-nickname") {
       setCaptions(buildOfficeNicknameCaptions(val));
+    } else if (selectedPresetKey === "student-nickname") {
+      setCaptions(buildStudentNicknameCaptions(val));
     }
   };
 
@@ -970,7 +1046,7 @@ export function LineStickersView() {
               <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-5">
                 <h4 className="font-prompt text-base font-extrabold text-[#4ade80] flex items-center gap-2">
                   <Camera className="w-5 h-5" />
-                  <span>ส่วนที่ 1: ข้อมูลผู้สั่งทำ (คุณครู / พนักงานออฟฟิศ / ทั่วไป) &amp; รูปถ่ายหน้าตรงต้นแบบ</span>
+                  <span>ส่วนที่ 1: ข้อมูลผู้สั่งทำ (คุณครู / พนักงานออฟฟิศ / นักเรียน-นักศึกษา / ทั่วไป) &amp; รูปถ่ายหน้าตรงต้นแบบ</span>
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1249,7 +1325,7 @@ export function LineStickersView() {
                     </p>
                   </div>
 
-                  {/* Preset Loader Buttons (Office & Teacher Nickname presets first) */}
+                  {/* Preset Loader Buttons (Office, Student & Teacher Nickname presets first) */}
                   <div className="flex flex-wrap gap-2">
                     <button
                       type="button"
@@ -1261,6 +1337,17 @@ export function LineStickersView() {
                       }`}
                     >
                       {`💼 โพยชื่อเล่นสายออฟฟิศ/ทั่วไป (เช่น "${extractShortNickname(teacherName)}รับทราบ!", "${extractShortNickname(teacherName)}ส่งงานแล้วนะ!")`}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => applyPresetCaptions("student-nickname")}
+                      className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
+                        selectedPresetKey === "student-nickname"
+                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
+                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                      }`}
+                    >
+                      {`🎒 โพยชื่อเล่นสายนักเรียน/นักศึกษา (เช่น "${extractShortNickname(teacherName)}ปั่นการบ้านอยู่", "${extractShortNickname(teacherName)}ขอเกรด 4 นะ!")`}
                     </button>
                     <button
                       type="button"
