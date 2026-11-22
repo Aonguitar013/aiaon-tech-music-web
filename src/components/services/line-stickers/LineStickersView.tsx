@@ -54,25 +54,25 @@ const STICKER_PACKAGES: StickerPackage[] = [
   {
     id: "starter-8",
     code: "STK-08",
-    name: "Starter Teacher Pack",
-    countLabel: "8 แอ็กชัน + Main/Tab",
+    name: "Starter 3D Pack (ชุดเริ่มต้น 8 รูป)",
+    countLabel: "สติกเกอร์ภาพนิ่ง 3D 8 รูป + ฟรีภาพปกแชท",
     count: 8,
     price: "990 ฿",
     priceNum: 990,
     originalPrice: "1,590 ฿",
-    badge: "⚡ เริ่มต้นคุ้มค่า • จบไว",
+    badge: "⚡ เริ่มต้นคุ้มค่า • จบไวในงบเบาๆ",
     badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
-    deliveryDays: "1–2 วันทำการ (ไม่รวมเวลา LINE ตรวจ)",
-    tagline: "ชุดเริ่มต้น 8 คำพูดฮิตประจำตัวครู",
+    deliveryDays: "ผลิตภาพ 1–2 วัน (LINE ตรวจอนุมัติเฉลี่ย 1–3 วัน)",
+    tagline: "ชุดเริ่มต้น 8 คำพูดฮิตประจำตัว (สำหรับทุกอาชีพ & แชทส่วนตัว)",
     description:
-      "เหมาะสำหรับคุณครูที่อยากมีสติกเกอร์คาแรกเตอร์ตัวเองไว้ส่งในกลุ่มงานโรงเรียน กลุ่มผู้ปกครอง หรือกลุ่มนักเรียนในงบเบาๆ",
+      "เหมาะสำหรับผู้ที่อยากมีสติกเกอร์คาแรกเตอร์ 3D ของตัวเอง ลูกน้อย คู่รัก หรือร้านค้า ไว้ส่งในแชทกลุ่มทำงานและครอบครัวในงบประหยัด",
     features: [
-      "ปั้นคาแรกเตอร์ 3D/การ์ตูนพรีเมียมจากรูปถ่ายจริง 1 ชุดแต่งกาย",
-      "สติกเกอร์ 8 ท่าทาง + 8 คำพูดฮิต (เลือกคำพูดเองได้ทุกคำ)",
+      "ปั้นคาแรกเตอร์ 3D พรีเมียมจากรูปถ่ายจริง 1 ชุดแต่งกาย (เลือกสีชุด/พร็อพได้)",
+      "สติกเกอร์ภาพนิ่ง 3D คมชัดสูง 8 ท่าทาง + 8 คำพูดฮิต (เลือกคำพูดเองได้ทุกคำ)",
       "ไดคัทพื้นหลังใส ตีขอบขาว + ป้ายข้อความฟอนต์อ่านง่ายคมชัด",
-      "จัดทำรูปหน้าปก (main.png) และไอคอนถาดแชท (tab.png) ครบมาตรฐาน LINE",
-      "ดูแลส่งตรวจอนุมัติขึ้น LINE STORE + ส่งเป็น Gift เข้า LINE ให้ใช้ฟรี 1 ชุด",
-      "แถมฟรี! ไฟล์ภาพ PNG ความละเอียดสูงทั้ง 8 รูป สำหรับแต่งสไลด์/เอกสาร",
+      "จัดทำภาพหน้าปกสติกเกอร์ (Main) และไอคอนถาดแชท (Tab) ครบมาตรฐาน LINE",
+      "ดูแลส่งตรวจอนุมัติขึ้น LINE STORE + ส่งเป็นของขวัญ (Gift) เข้า LINE ให้ใช้ฟรี 1 ชุด",
+      "แถมฟรี! ไฟล์ภาพ PNG พื้นหลังใสความละเอียดสูงทั้ง 8 รูป (ใช้แต่งภาพ/สไลด์/ปกร้านได้ทันที)",
     ],
     borderClass:
       "border-cyan-500/30 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)]",
@@ -82,27 +82,27 @@ const STICKER_PACKAGES: StickerPackage[] = [
   {
     id: "pro-16",
     code: "STK-16",
-    name: "Signature Teacher 16 Pack",
-    countLabel: "16 แอ็กชัน + Main/Tab",
+    name: "Signature Pro 16 Pack (ชุดยอดนิยม 16 รูป)",
+    countLabel: "สติกเกอร์ภาพนิ่ง 3D 16 รูป + ฟรีภาพปกแชท",
     count: 16,
     price: "1,490 ฿",
     priceNum: 1490,
     originalPrice: "2,490 ฿",
-    badge: "🔥 ขายดีอันดับ 1 • แบบเดียวกับครูอ้น!",
+    badge: "🔥 ขายดีอันดับ 1 • คุ้มค่าที่สุด!",
     badgeColor:
       "bg-linear-to-r from-[#06C755] via-emerald-500 to-teal-500 text-zinc-950 border-emerald-300/60",
     isPopular: true,
-    deliveryDays: "2–3 วันทำการ (ไม่รวมเวลา LINE ตรวจ)",
-    tagline: "ครบทุกอารมณ์การสอน ตรวจงาน ประชุม และชีวิตครู",
+    deliveryDays: "ผลิตภาพ 2–3 วัน (LINE ตรวจอนุมัติเฉลี่ย 1–3 วัน)",
+    tagline: "ครบทุกอารมณ์ทำงาน ตอบลูกค้า สอนหนังสือ ประชุม และชีวิตประจำวัน",
     description:
-      "เซ็ตมาตรฐานยอดนิยม 16 รูป ครอบคลุมทั้งคำทักทาย รับทราบ ตามงาน เช็กชื่อ ให้กำลังใจ และมุกฮาๆ ในโรงเรียน คุ้มค่าที่สุด!",
+      "เซ็ตมาตรฐานยอดนิยม 16 รูป ครอบคลุมทั้งคำทักทาย รับทราบ ส่งงาน ปิดการขาย ให้กำลังใจ และมุกน่ารักๆ ใช้ได้คุ้มทุกสถานการณ์!",
     features: [
-      "ปั้นคาแรกเตอร์ 3D/การ์ตูนพรีเมียมจากรูปถ่ายจริง (เลือกชุด & พร็อพประจำวิชาได้)",
-      "สติกเกอร์จัดเต็ม 16 ท่าทาง + 16 คำพูดประจำตัวครู (เลือกเองหรือใช้โพยครูอ้นได้)",
+      "ปั้นคาแรกเตอร์ 3D พรีเมียมจากรูปถ่ายจริง (เลือกชุด สีเสื้อ โลโก้บนอกเสื้อ & พร็อพคู่ใจได้)",
+      "สติกเกอร์ภาพนิ่ง 3D จัดเต็ม 16 ท่าทาง + 16 คำพูด (มีโพยสำเร็จรูป 6 สายอาชีพให้จิ้มเลือก)",
       "ไดคัทพื้นหลังใส ตีขอบขาวสติกเกอร์ + ป้ายคำพูดฟอนต์ Prompt สีสดคมชัด 100%",
-      "ตรวจเช็กระเบียบ LINE Creators Market ทุกพิกเซล การันตีผ่านการอนุมัติ 100%",
-      "ดูแลอัปโหลด & ส่งตรวจจนขึ้น LINE STORE + ส่งสติกเกอร์เข้า LINE ครูฟรีทันที!",
-      "แถมฟรี! ไฟล์ PNG 16 ท่าความละเอียดสูง เอาไปทำปก ว.PA / สื่อการสอน / คลิปสั้น",
+      "ตรวจเช็กระเบียบ LINE Creators Market ทุกพิกเซล การันตีดูแลจนผ่านการอนุมัติ 100%",
+      "เลือกเปิดขายสาธารณะ หรือตั้งค่าส่วนตัว (ซื้อได้เฉพาะคนที่มีลิงก์) + ส่ง Gift ฟรี 1 ชุดทันที!",
+      "แถมฟรี! ไฟล์ PNG 16 ท่าความละเอียดสูง ใช้ทำปกร้าน / สื่อการสอน / ว.PA / คลิปสั้นเชิงพาณิชย์ได้",
     ],
     borderClass:
       "border-[#06C755]/70 shadow-[0_0_45px_rgba(6,199,85,0.28)] scale-[1.02] ring-1 ring-[#06C755]/50",
@@ -112,25 +112,25 @@ const STICKER_PACKAGES: StickerPackage[] = [
   {
     id: "vip-24",
     code: "STK-24",
-    name: "Master Multi-Costume 24 Pack",
-    countLabel: "24 แอ็กชัน (คละชุดได้ 2-3 ชุด)",
+    name: "Master VIP Multi-Look 24 Pack",
+    countLabel: "สติกเกอร์ภาพนิ่ง 3D 24 รูป (คละชุดได้ 2-3 ชุด)",
     count: 24,
     price: "1,990 ฿",
     priceNum: 1990,
     originalPrice: "3,490 ฿",
-    badge: "👑 จัดเต็มคละชุด • คุ้มสุดระดับ VIP",
+    badge: "👑 จัดเต็มคละชุด • คุ้มสุดระดับ VIP / องค์กร",
     badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/40",
-    deliveryDays: "3–4 วันทำการ (ไม่รวมเวลา LINE ตรวจ)",
-    tagline: "คละชุดข้าราชการ + ชุดประจำวิชา + ชุดลำลองในเซ็ตเดียว",
+    deliveryDays: "ผลิตภาพ 3–4 วัน (LINE ตรวจอนุมัติเฉลี่ย 1–3 วัน)",
+    tagline: "คละชุดทำงาน + ชุดลำลอง + ชุดยูนิฟอร์มร้าน/องค์กร ในเซ็ตเดียว",
     description:
-      "สำหรับคุณครู ผู้บริหาร หรือกลุ่มสาระฯ ที่ต้องการสติกเกอร์ชุดใหญ่ 24 รูป สามารถคละชุดแต่งกายได้ถึง 3 สไตล์ในคอลเลกชันเดียว",
+      "สำหรับเจ้าของแบรนด์ ผู้บริหาร คุณครู หรือคู่รัก/ครอบครัว ที่ต้องการสติกเกอร์ชุดใหญ่ 24 รูป สามารถคละชุดแต่งกายได้ถึง 3 สไตล์ในคอลเลกชันเดียว",
     features: [
-      "ปั้นคาแรกเตอร์ครูคละชุดแต่งกายได้ 2–3 ชุด (เช่น ชุดกากี + ชุดพละ/ดนตรี + ชุดสูท)",
-      "สติกเกอร์ชุดใหญ่ 24 ท่าทาง + 24 คำพูด ครอบคลุมทั้งงานราชการและแชทส่วนตัว",
-      "ไดคัทพื้นหลังใส ตีขอบขาว + ออกแบบป้ายข้อความแยกโทนสีตามอารมณ์คำพูด",
-      "ดูแลส่งตรวจอนุมัติขึ้น LINE STORE ครบวงจร (ฝากขายร้าน iAon หรือเข้าบัญชีครูเองได้)",
-      "ส่งสติกเกอร์ชุดจริงเป็น Gift ให้คุณครูและเพื่อนครูรวม 2 ชุดฟรีทันทีที่อนุมัติ",
-      "แถมฟรี! คลังภาพ PNG คาแรกเตอร์ครู 24 แอ็กชัน สำหรับสร้าง Personal Branding",
+      "ปั้นคาแรกเตอร์ 3D คละชุดแต่งกายได้ 2–3 ชุด (เช่น ชุดสูทผู้บริหาร + ชุดยูนิฟอร์มร้าน + ชุดลำลองไปเที่ยว)",
+      "สติกเกอร์ภาพนิ่ง 3D ชุดใหญ่ 24 ท่าทาง + 24 คำพูด ครอบคลุมทั้งแชทงาน แชทลูกค้า และแชทครอบครัว",
+      "ไดคัทพื้นหลังใส ตีขอบขาว + ออกแบบป้ายข้อความแยกโทนสีหรือคุมโทนสีแบรนด์ (CI Color)",
+      "ดูแลส่งตรวจอนุมัติขึ้น LINE STORE ครบวงจร (พร้อมออกใบเสนอราคา/ใบเสร็จรับเงินสำหรับองค์กรได้)",
+      "ส่งสติกเกอร์ชุดจริงเป็นของขวัญ (Gift) ให้คุณและคนสนิทรวม 2 ชุดฟรีทันทีที่อนุมัติ!",
+      "แถมฟรี! คลังภาพ PNG คาแรกเตอร์ 24 แอ็กชัน สำหรับสร้าง Personal Branding & การตลาดครบวงจร",
     ],
     borderClass:
       "border-amber-500/40 hover:border-amber-400 hover:shadow-[0_0_35px_rgba(245,158,11,0.25)]",
@@ -613,34 +613,49 @@ const OUTFIT_STYLES = [
   { id: "mixed", label: "✨ คละหลายชุดในเซ็ตเดียว (สำหรับแพ็กเกจ 16 หรือ 24 รูป)" },
 ];
 
+const CHARACTER_TYPES = [
+  { id: "female", label: "👩 ผู้หญิง (Female)" },
+  { id: "male", label: "👨 ผู้ชาย (Male)" },
+  { id: "couple", label: "💑 คู่รัก / 2 คนในเซ็ตเดียว" },
+  { id: "kid", label: "👶 เด็ก / ลูกน้อย" },
+  { id: "pet-mascot", label: "🐾 สัตว์เลี้ยง / มาสคอตแบรนด์" },
+];
+
 const PUBLISH_MODES = [
   {
-    id: "iaon-store",
-    title: "ฝากวางขายบนร้าน iAon Tech (แนะนำ • สะดวกที่สุด 100%)",
-    desc: "ไม่ต้องสมัครบัญชี LINE Creators ไม่ต้องกรอกเอกสารภาษีญี่ปุ่นหรือผูกบัญชีเอง ครูอ้นอัปโหลดขึ้นร้าน iAon Tech ให้ครบวงจร พออนุมัติปุ๊บ ครูอ้นกดส่งสติกเกอร์เข้า LINE ให้คุณใช้งานฟรีทันที และแชร์ลิงก์ให้เพื่อนร่วมงาน/ลูกค้ากดซื้อได้เลย!",
+    id: "iaon-store-public",
+    title: "🌐 ฝากวางขายสาธารณะบนร้าน iAon Tech (แนะนำ • สะดวกที่สุด 100%)",
+    desc: "ไม่ต้องสมัครบัญชี LINE Creators หรือกรอกภาษีญี่ปุ่นเอง ครูอ้นอัปโหลดขึ้นร้าน iAon Tech ให้ครบวงจร พออนุมัติปุ๊บ ส่งสติกเกอร์เป็น Gift เข้า LINE ให้คุณใช้ฟรีทันที และเพื่อนๆ สามารถค้นหาหรือกดซื้อจากลิงก์ได้ทั่วโลก!",
+  },
+  {
+    id: "iaon-store-private",
+    title: "🔒 ฝากอัปโหลดแบบส่วนตัว (ซ่อนจากหน้าร้าน • โหลดได้เฉพาะคนที่มีลิงก์)",
+    desc: "เหมาะสำหรับผู้ที่ต้องการความเป็นส่วนตัว คู่รัก ลูกน้อย หรือใช้เฉพาะในองค์กร สติกเกอร์จะไม่แสดงในหน้าค้นหาสาธารณะของ LINE STORE เฉพาะคนที่คุณส่งลิงก์ให้เท่านั้นถึงจะเห็นและดาวน์โหลดได้ (ครูอ้นส่ง Gift ให้ใช้ฟรีเหมือนเดิม!)",
   },
   {
     id: "own-account",
-    title: "อัปโหลดเข้าบัญชี LINE Creators ของลูกค้าเอง",
-    desc: "ครูอ้นส่งมอบไฟล์ ZIP มาตรฐาน LINE (ครบทั้ง 01-16.png, main.png, tab.png) พร้อมโพยชื่อและคำอธิบาย 2 ภาษา ให้คุณกดอัปโหลดเข้าบัญชีตัวเองเพื่อรับส่วนแบ่งยอดขายเข้าบัญชีของคุณโดยตรง",
+    title: "💼 อัปโหลดเข้าบัญชี LINE Creators ของลูกค้า/บริษัทเอง (รับรายได้จากยอดขาย 100%)",
+    desc: "ครูอ้นส่งมอบไฟล์ ZIP มาตรฐาน LINE (ครบทั้ง 01-16.png, main.png, tab.png) พร้อมโพยชื่อและคำอธิบาย 2 ภาษา ให้คุณกดอัปโหลดเข้าบัญชีตัวเองเพื่อรับส่วนแบ่งยอดขายเข้าบัญชีของคุณหรือบริษัทโดยตรง",
   },
 ];
 
 export function LineStickersView() {
   const [activePortfolioTab, setActivePortfolioTab] = useState<"set2" | "set1">("set2");
   const [selectedPkgId, setSelectedPkgId] = useState<string>("pro-16");
-  const [selectedOutfit, setSelectedOutfit] = useState<string>("subject");
-  const [selectedPublishMode, setSelectedPublishMode] = useState<string>("iaon-store");
+  const [selectedOutfit, setSelectedOutfit] = useState<string>("office-smart");
+  const [selectedPublishMode, setSelectedPublishMode] = useState<string>("iaon-store-public");
 
   // Full Brief Form States
   const [teacherName, setTeacherName] = useState<string>("");
   const [contactInfo, setContactInfo] = useState<string>("");
+  const [characterType, setCharacterType] = useState<string>("female");
+  const [colorTheme, setColorTheme] = useState<string>("");
   const [propsAndTrait, setPropsAndTrait] = useState<string>("");
   const [stickerTitleTh, setStickerTitleTh] = useState<string>("");
   const [stickerTitleEn, setStickerTitleEn] = useState<string>("");
-  const [selectedPresetKey, setSelectedPresetKey] = useState<string>("nickname");
+  const [selectedPresetKey, setSelectedPresetKey] = useState<string>("office-nickname");
   const [captions, setCaptions] = useState<string[]>(
-    buildNicknameCaptions("")
+    buildOfficeNicknameCaptions("")
   );
   const [photoBase64, setPhotoBase64] = useState<string>("");
   const [photoFileName, setPhotoFileName] = useState<string>("");
@@ -776,20 +791,24 @@ export function LineStickersView() {
     });
   };
 
+  const selectedCharTypeObj =
+    CHARACTER_TYPES.find((c) => c.id === characterType) || CHARACTER_TYPES[0];
+
   const buildStickerOrderMsg = (pkg: StickerPackage, orderId?: string) => {
     const activeCaps = captions
       .slice(0, pkg.count)
       .map((c, idx) => `${String(idx + 1).padStart(2, "0")}.${c}`)
       .join(", ");
     const orderTag = orderId ? `\n🆔 รหัสใบสั่งทำ: ${orderId}` : "";
-    const nameTag = teacherName.trim() ? `\n👤 ชื่อคุณครู: ${teacherName.trim()}` : "";
+    const nameTag = teacherName.trim() ? `\n👤 ชื่อบนสติกเกอร์: ${teacherName.trim()} (${selectedCharTypeObj.label})` : "";
+    const colorLine = colorTheme.trim() ? `\n🎨 สีชุด/สีแบรนด์ (CI): ${colorTheme.trim()}` : "";
     const noteLine = propsAndTrait.trim()
-      ? `\n🎸 วิชา/จุดเด่น: ${propsAndTrait.trim()}`
+      ? `\n🎸 อาชีพ/พร็อพ/จุดเด่น: ${propsAndTrait.trim()}`
       : "";
-    return `สวัสดีครับครูอ้น สนใจจ้างทำสติกเกอร์ LINE คาแรกเตอร์ครู ครบวงจรครับ 🎨✨${orderTag}${nameTag}
+    return `สวัสดีครับครูอ้น สนใจจ้างทำสติกเกอร์ LINE คาแรกเตอร์ 3D ครบวงจรครับ 🎨✨${orderTag}${nameTag}
 📦 แพ็กเกจ: [${pkg.code}] ${pkg.name} (${pkg.countLabel})
 💰 ราคาโปรเปิดตัว: ${pkg.price}
-👔 สไตล์ชุดที่ต้องการ: ${selectedOutfitObj.label}
+👔 สไตล์ชุดที่ต้องการ: ${selectedOutfitObj.label}${colorLine}
 🏪 รูปแบบการวางขาย: ${selectedPublishObj.title}${noteLine}
 💬 คำพูดที่เลือก (${pkg.count} คำ): ${activeCaps}
 
@@ -814,7 +833,7 @@ export function LineStickersView() {
     setSubmitError("");
 
     if (!teacherName.trim()) {
-      setSubmitError("กรุณากรอกชื่อเล่นหรือชื่อคุณครูก่อนกดส่งบรีฟครับ");
+      setSubmitError("กรุณากรอกชื่อเล่นหรือชื่อที่ใช้บนสติกเกอร์ก่อนกดส่งบรีฟครับ");
       return;
     }
 
@@ -823,6 +842,14 @@ export function LineStickersView() {
       const activeCaptions = captions
         .slice(0, selectedPkg.count)
         .map((c, i) => c.trim() || `คำพูดที่ ${i + 1}`);
+
+      const combinedTrait = [
+        `เพศ/รูปแบบ: ${selectedCharTypeObj.label}`,
+        colorTheme.trim() ? `สีเสื้อ/สีแบรนด์: ${colorTheme.trim()}` : "",
+        propsAndTrait.trim() ? `พร็อพ/จุดเด่น: ${propsAndTrait.trim()}` : "ตามรูปถ่ายต้นแบบ",
+      ]
+        .filter(Boolean)
+        .join(" | ");
 
       const res = await fetch("/api/sticker-brief", {
         method: "POST",
@@ -836,7 +863,7 @@ export function LineStickersView() {
           stickerCount: selectedPkg.count,
           outfitStyle: selectedOutfitObj.label,
           publishMode: selectedPublishObj.title,
-          propsAndTrait: propsAndTrait.trim() || "ตามรูปถ่ายต้นแบบ",
+          propsAndTrait: combinedTrait,
           stickerTitleTh:
             stickerTitleTh.trim() || `${teacherName.trim()} สดใสทุกวัน`,
           stickerTitleEn:
@@ -878,7 +905,7 @@ export function LineStickersView() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#06C755]/40 bg-[#06C755]/15 text-[#4ade80] font-prompt text-xs sm:text-sm font-bold tracking-wide shadow-[0_0_25px_rgba(6,199,85,0.25)]"
           >
             <Sparkles className="w-4 h-4 text-[#4ade80] animate-pulse" />
-            <span>NEW SERVICE • บริการรับทำสติกเกอร์ LINE คาแรกเตอร์ครู 3D ครบวงจร</span>
+            <span>3D LINE STICKER STUDIO • บริการรับทำสติกเกอร์ LINE คาแรกเตอร์ 3D ครบวงจร</span>
           </motion.div>
 
           <motion.h1
@@ -887,9 +914,9 @@ export function LineStickersView() {
             transition={{ delay: 0.08 }}
             className="font-prompt text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight"
           >
-            เปลี่ยนรูปถ่ายของคุณครู เป็น{" "}
+            เปลี่ยนรูปถ่ายของคุณ เป็น{" "}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-[#06C755] via-emerald-300 to-cyan-300 drop-shadow-[0_0_35px_rgba(6,199,85,0.35)]">
-              สติกเกอร์ LINE ประจำตัวสุดเท่
+              สติกเกอร์ LINE คาแรกเตอร์ 3D สุดเท่
             </span>
           </motion.h1>
 
@@ -899,8 +926,8 @@ export function LineStickersView() {
             transition={{ delay: 0.16 }}
             className="font-prompt text-base sm:text-lg text-white/75 leading-relaxed max-w-3xl mx-auto"
           >
-            แค่กรอกฟอร์มส่งรูปถ่าย 1 รูป + จิ้มเลือกคำพูดฮิต 16 คำบนหน้าเว็บนี้ ระบบจะส่งข้อมูลตรงเข้าห้องผลิต AI ของครูอ้นทันที! ดูแลครบวงจรจนวางขายจริงบน{" "}
-            <strong className="text-[#4ade80]">LINE STORE</strong> พร้อมแถมไฟล์ PNG ความละเอียดสูงเอาไปแต่งสไลด์สอนและปกเล่ม ว.PA ต่อได้เลย!
+            รองรับทุกสายอาชีพ! ทั้ง <strong className="text-white">พนักงานออฟฟิศ • แม่ค้าออนไลน์/แบรนด์ร้านค้า • คุณหมอ/พยาบาล • คู่รัก/ลูกน้อย/สัตว์เลี้ยง • นักเรียน • และคุณครู</strong> แค่ส่งรูปถ่าย 1 รูป + จิ้มเลือกโพยคำพูดฮิตบนหน้าเว็บนี้ ครูอ้นดูแลครบวงจรจนขึ้น{" "}
+            <strong className="text-[#4ade80]">LINE STORE</strong> พร้อมแถมไฟล์ PNG พื้นหลังใสความละเอียดสูงเอาไปแต่งปกร้านและสื่อโซเชียลได้ทันที!
           </motion.p>
 
           <motion.div
@@ -1064,16 +1091,16 @@ export function LineStickersView() {
           <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-prompt font-bold">
               <Award className="w-4 h-4" />
-              <span>SPECIAL LAUNCH PRICING • โปรโมชันเปิดตัวสำหรับเพื่อนครู</span>
+              <span>SPECIAL LAUNCH PRICING • โปรโมชันเปิดตัวสุดคุ้มสำหรับทุกสายอาชีพ</span>
             </div>
             <h2 className="font-prompt text-2xl sm:text-4xl font-extrabold text-white">
-              เลือกแพ็กเกจสติกเกอร์ LINE{" "}
+              เลือกแพ็กเกจสติกเกอร์ LINE 3D{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-[#06C755] to-cyan-400">
-                ที่เหมาะกับสไตล์คุณครู
+                ที่เหมาะกับสไตล์และธุรกิจของคุณ
               </span>
             </h2>
             <p className="font-prompt text-sm text-white/60">
-              ราคาเดียวจบครบวงจร ไม่มีบวกเพิ่ม ได้ทั้งสติกเกอร์ขึ้น LINE STORE และไฟล์ภาพ PNG ความละเอียดสูง
+              ราคาเดียวจบครบวงจร ไม่มีบวกเพิ่ม ได้ทั้งสติกเกอร์ภาพนิ่ง 3D ขึ้น LINE STORE และไฟล์ภาพ PNG ความละเอียดสูง (ต้องการชุดใหญ่ 32–40 รูป หรือออกใบเสนอราคาองค์กร ทัก LINE ได้เลยครับ)
             </p>
           </div>
 
@@ -1128,7 +1155,7 @@ export function LineStickersView() {
 
                   <div className="space-y-2.5 mb-8 border-t border-white/10 pt-5">
                     <p className="font-prompt text-xs font-bold text-white/50 uppercase tracking-wider mb-2">
-                      สิ่งที่คุณครูจะได้รับครบชุด:
+                      สิ่งที่คุณจะได้รับครบชุด:
                     </p>
                     {pkg.features.map((feat, fIdx) => (
                       <div
@@ -1242,13 +1269,13 @@ export function LineStickersView() {
               <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-5">
                 <h4 className="font-prompt text-base font-extrabold text-[#4ade80] flex items-center gap-2">
                   <Camera className="w-5 h-5" />
-                  <span>ส่วนที่ 1: ข้อมูลผู้สั่งทำ (คุณครู / พนักงานออฟฟิศ / นักเรียน-นักศึกษา / ทั่วไป) &amp; รูปถ่ายหน้าตรงต้นแบบ</span>
+                  <span>ส่วนที่ 1: ข้อมูลผู้สั่งทำ &amp; รูปถ่ายต้นแบบ (รองรับทุกอาชีพ / ร้านค้า / คู่รัก / สัตว์เลี้ยง)</span>
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
-                      ชื่อเล่น / ชื่อที่ใช้เรียกบนสติกเกอร์ (จำเป็น) *
+                      ชื่อเล่น / ชื่อแบรนด์ที่ใช้เรียกบนสติกเกอร์ (จำเป็น) *
                     </label>
                     <div className="relative">
                       <User className="w-4 h-4 text-white/40 absolute left-3.5 top-3.5" />
@@ -1257,7 +1284,7 @@ export function LineStickersView() {
                         required
                         value={teacherName}
                         onChange={(e) => handleTeacherNameChange(e.target.value)}
-                        placeholder="เช่น เมย์, บอย, ครูอ้น, บอสเจ..."
+                        placeholder="เช่น เมย์, บอย, ร้านพลอยสวย, หมอเจ, ครูอ้น..."
                         className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-sm focus:outline-none focus:border-[#06C755]"
                       />
                     </div>
@@ -1265,7 +1292,7 @@ export function LineStickersView() {
 
                   <div>
                     <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
-                      เบอร์โทร หรือ ชื่อ LINE ของคุณ (ไว้ส่งงานกลับ)
+                      เบอร์โทร หรือ ชื่อ LINE ของคุณ (ไว้ส่งรูปต้นแบบให้ตรวจ)
                     </label>
                     <div className="relative">
                       <Phone className="w-4 h-4 text-white/40 absolute left-3.5 top-3.5" />
@@ -1280,11 +1307,37 @@ export function LineStickersView() {
                   </div>
                 </div>
 
+                {/* Character Gender / Type Pills */}
+                <div>
+                  <label className="block font-prompt text-xs font-bold text-white/80 mb-2">
+                    รูปแบบคาแรกเตอร์ / เพศ (ช่วยให้ AI ปั้นโครงหน้าและเลือกหมวด LINE ได้แม่นยำ 100%):
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {CHARACTER_TYPES.map((ct) => {
+                      const isSel = characterType === ct.id;
+                      return (
+                        <button
+                          key={ct.id}
+                          type="button"
+                          onClick={() => setCharacterType(ct.id)}
+                          className={`px-3.5 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
+                            isSel
+                              ? "bg-[#06C755] text-zinc-950 border-[#4ade80] shadow-[0_0_15px_rgba(6,199,85,0.35)]"
+                              : "bg-slate-950/60 text-white/75 border-white/15 hover:bg-white/10"
+                          }`}
+                        >
+                          {ct.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 {/* Photo Upload Box */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center pt-1">
                   <div className="sm:col-span-2">
                     <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
-                      อัปโหลดรูปถ่ายหน้าตรง ยิ้มสดใส เห็นทรงผมชัดเจน (1 รูป)
+                      อัปโหลดรูปถ่ายต้นแบบ (รูปเซลฟี่เห็นหน้า-ทรงผมชัด หรือรูปคู่/สัตว์เลี้ยง/โลโก้ร้าน)
                     </label>
                     <input
                       ref={fileInputRef}
@@ -1309,7 +1362,7 @@ export function LineStickersView() {
                               : "คลิกเพื่อเลือกรูปถ่ายจากมือถือ / คอมพิวเตอร์"}
                           </p>
                           <p className="font-prompt text-xs text-white/50">
-                            ระบบย่อขนาดภาพอัตโนมัติ ปลอดภัย 100% (ใช้เป็นต้นแบบปั้นคาแรกเตอร์ 3D เท่านั้น)
+                            (หากต้องการส่งหลายรูป เช่น รูปคน + รูปโลโก้ร้าน สามารถส่งเพิ่มในแชท LINE หลังกดยืนยันได้ครับ)
                           </p>
                         </div>
                       </div>
@@ -1324,7 +1377,7 @@ export function LineStickersView() {
                       <div className="relative group">
                         <img
                           src={photoBase64}
-                          alt="Teacher Reference Preview"
+                          alt="Customer Reference Preview"
                           className="w-28 h-28 rounded-2xl object-cover border-2 border-[#06C755] shadow-[0_0_20px_rgba(6,199,85,0.3)]"
                         />
                         <span className="block text-[11px] font-prompt text-[#4ade80] text-center mt-1 font-bold">
@@ -1335,48 +1388,63 @@ export function LineStickersView() {
                       <div className="w-28 h-28 rounded-2xl border border-white/10 bg-white/5 flex flex-col items-center justify-center text-white/35 p-2 text-center">
                         <Camera className="w-6 h-6 mb-1" />
                         <span className="font-prompt text-[10px]">
-                          ตัวอย่างรูปที่จะอัปโหลด
+                          อัปโหลดที่นี่ หรือส่งรูปใน LINE ภายหลังได้
                         </span>
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* Props & Facial Traits + Sticker Title */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                {/* Color Theme + Props & Facial Traits + Sticker Title */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                   <div>
                     <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
-                      อาชีพ / สายงาน / พร็อพคู่ใจ / จุดเด่นใบหน้า
+                      🎨 สีเสื้อ / สีประจำแบรนด์ (CI Color) / โลโก้บนอกเสื้อ
+                    </label>
+                    <input
+                      type="text"
+                      value={colorTheme}
+                      onChange={(e) => setColorTheme(e.target.value)}
+                      placeholder="เช่น สูทสีชมพูพาสเทล, เสื้อเชิ้ตสีฟ้า, สีแบรนด์เขียว-ทอง, หรือตามรูปถ่าย"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                      🎸 อาชีพ / พร็อพคู่ใจ / จุดเด่นใบหน้า (แว่นตา, ทรงผม, สัตว์เลี้ยง)
                     </label>
                     <input
                       type="text"
                       value={propsAndTrait}
                       onChange={(e) => setPropsAndTrait(e.target.value)}
-                      placeholder="เช่น พนักงานออฟฟิศถือแก้วกาแฟ/โน้ตบุ๊ก, ครูดนตรี, ใส่แว่น..."
+                      placeholder="เช่น ถือแก้วกาแฟ+โน้ตบุ๊ก, ถือกล่องพัสดุ, ใส่แว่นกลม, อุ้มแมวส้ม..."
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
                     />
                   </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
-                      ชื่อชุดสติกเกอร์ภาษาไทย (โชว์บน LINE)
+                      ชื่อชุดสติกเกอร์ภาษาไทย (โชว์บน LINE • เว้นว่างให้ครูอ้นตั้งให้ได้)
                     </label>
                     <input
                       type="text"
                       value={stickerTitleTh}
                       onChange={(e) => setStickerTitleTh(e.target.value)}
-                      placeholder="เช่น เมย์สายลุยออฟฟิศ / ครูอ้นใจดี"
+                      placeholder="เช่น เมย์สายลุยออฟฟิศ / พลอยแม่ค้าออนไลน์ / ครูอ้นใจดี"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
                     />
                   </div>
                   <div>
                     <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
-                      ชื่อชุดภาษาอังกฤษ (ถ้ามี)
+                      ชื่อชุดภาษาอังกฤษ (เว้นว่างไว้ได้เลย • ครูอ้นตั้งชื่อภาษาอังกฤษให้ฟรี!)
                     </label>
                     <input
                       type="text"
                       value={stickerTitleEn}
                       onChange={(e) => setStickerTitleEn(e.target.value)}
-                      placeholder="เช่น May Office Life / Kru Aon"
+                      placeholder="เว้นว่างได้เลย หรือระบุ เช่น May Office Cute Life"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
                     />
                   </div>
@@ -1516,8 +1584,8 @@ export function LineStickersView() {
                         ส่วนที่ 3: กำหนดคำพูดบนสติกเกอร์ทั้ง {selectedPkg.count} รูป
                       </span>
                     </h4>
-                    <p className="font-prompt text-xs text-white/60 mt-0.5">
-                      คลิกเลือกโพยสำเร็จรูปด้านขวาเพื่อเติมคำอัตโนมัติ แล้วพิมพ์แก้เฉพาะช่องที่อยากเปลี่ยนได้เลยครับ (แนะนำคำสั้นๆ ไม่เกิน 12 ตัวอักษร)
+                    <p className="font-prompt text-xs text-white/60 mt-0.5 leading-relaxed">
+                      💡 <strong>ไม่ต้องคิดท่าทางเอง!</strong> ครูอ้นและระบบ AI จะออกแบบท่าทางและอารมณ์ให้เข้ากับคำพูดแต่ละข้อโดยอัตโนมัติ (คลิกปุ่มโพยด้านล่างเพื่อเติมคำใน 1 คลิก หรือพิมพ์แก้คำที่ต้องการได้เลย แนะนำไม่เกิน 12–15 ตัวอักษรเพื่อความคมชัดสูงสุด)
                     </p>
                   </div>
 
@@ -1678,25 +1746,25 @@ export function LineStickersView() {
           )}
         </div>
 
-        {/* ─── WHY TEACHERS LOVE THIS (3 VALUE PILLARS) ─── */}
+        {/* ─── WHY CUSTOMERS LOVE THIS (3 VALUE PILLARS) ─── */}
         <div className="mb-24 grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
               icon: Palette,
-              title: "1. คาแรกเตอร์ครู 3D เอกลักษณ์เฉพาะตัว",
-              desc: "ปั้นจากใบหน้าและบุคลิกจริงของคุณครู เลือกใส่ชุดกากี ชุดพละ ชุดสูท หรือถือพร็อพประจำวิชา (กีตาร์, ไมค์, หลอดทดลอง, กระดาน) ได้ตามสั่ง",
+              title: "1. คาแรกเตอร์ 3D เอกลักษณ์เฉพาะตัวคุณ",
+              desc: "ปั้นจากใบหน้าและบุคลิกจริงของคุณ เลือกใส่ชุดสูทออฟฟิศ ชุดแม่ค้าออนไลน์ ชุดหมอ-พยาบาล ชุดคู่รัก หรือชุดคุณครู พร้อมระบุสีแบรนด์ (CI) และโลโก้บนอกเสื้อได้ตามสั่ง",
               color: "border-cyan-500/30 bg-cyan-500/5 text-cyan-300",
             },
             {
               icon: ShieldCheck,
               title: "2. ดูแลส่งตรวจ LINE STORE จนผ่าน 100%",
-              desc: "ไม่ต้องปวดหัวกับกฎรูปตกขอบ พื้นหลังไม่ใส หรือตั้งค่าภาษาอังกฤษใน LINE Creators Market ครูอ้นจัดการแพ็กไฟล์และส่งตรวจให้จนขึ้นวางขายจริง",
+              desc: "ไม่ต้องปวดหัวกับกฎรูปตกขอบ พื้นหลังไม่ใส หรือการตั้งค่าภาษาอังกฤษใน LINE Creators Market ครูอ้นจัดการแพ็กไฟล์และส่งตรวจให้ครบวงจร (เลือกเปิดสาธารณะหรือซ่อนลิงก์ส่วนตัวได้)",
               color: "border-[#06C755]/30 bg-[#06C755]/5 text-[#4ade80]",
             },
             {
               icon: Gift,
-              title: "3. ได้ทั้งสติกเกอร์ LINE + คลังภาพ PNG แต่งสื่อ",
-              desc: "นอกจากได้สติกเกอร์ไว้กดส่งในแชทแล้ว ยังได้รับไฟล์ภาพ PNG ความละเอียดสูงครบทุกท่า เอาไปแปะหน้าปกสไลด์สอน ปกรายงาน ว.PA หรือทำคลิป TikTok ได้คุ้มสุดๆ",
+              title: "3. ได้ทั้งสติกเกอร์ LINE + คลังภาพ PNG คมชัดสูง",
+              desc: "นอกจากได้สติกเกอร์ไว้กดส่งในแชทแล้ว ยังได้รับไฟล์ภาพ PNG พื้นหลังใสความละเอียดสูงครบทุกท่า เอาไปทำปกร้านค้า ป้ายโฆษณา สไลด์นำเสนอ หรือทำคลิป TikTok เชิงพาณิชย์ได้ทันที",
               color: "border-amber-500/30 bg-amber-500/5 text-amber-300",
             },
           ].map((item, i) => {
@@ -1734,15 +1802,23 @@ export function LineStickersView() {
             {[
               {
                 q: "ต้องสมัครบัญชี LINE Creators Market หรือกรอกเอกสารภาษีเองไหม?",
-                a: "ไม่ต้องเลยครับ! คุณครูสามารถเลือกแบบ 'ฝากวางขายบนร้าน iAon Tech' ได้เลย ครูอ้นจัดการอัปโหลดและส่งตรวจให้ทั้งหมด พออนุมัติปุ๊บ ครูอ้นกดส่งสติกเกอร์ชุดนั้นเป็นของขวัญ (Gift) ให้เข้า LINE คุณครูฟรี 1 ชุดทันที และเพื่อนครูคนอื่นๆ ก็กดซื้อจากลิงก์ร้านได้ตามปกติครับ",
+                a: "ไม่ต้องเลยครับ! คุณสามารถเลือกแบบ 'ฝากวางขายบนร้าน iAon Tech' ได้เลย ครูอ้นจัดการอัปโหลดและส่งตรวจให้ทั้งหมด พออนุมัติปุ๊บ ครูอ้นกดส่งสติกเกอร์ชุดนั้นเป็นของขวัญ (Gift) เข้า LINE ให้คุณใช้งานฟรี 1 ชุดทันที และเพื่อนๆ หรือลูกค้าก็กดดาวน์โหลดจากลิงก์ได้ตามปกติครับ",
               },
               {
-                q: "หลังกดส่งบรีฟและรูปถ่ายบนหน้าเว็บแล้ว ขั้นตอนต่อไปคืออะไร?",
-                a: "ระบบ AI ของครูอ้นจะได้รับรูปถ่ายและคำพูดทั้ง 16 คำทันที จากนั้นจะปั้นคาแรกเตอร์ต้นแบบ 1 รูปส่งให้คุณครูตรวจคอนเฟิร์มหน้าตาและชุดใน LINE ก่อน เมื่อคุณครูพอใจแล้วจึงผลิตครบทั้งเซ็ตและส่งตรวจขึ้น LINE STORE ครับ",
+                q: "ใช้เวลาผลิตและรอ LINE ตรวจอนุมัตินานแค่ไหน? (สำหรับคนรีบใช้งาน / ส่งเป็นของขวัญ)",
+                a: "ครูอ้นปั้นภาพคาแรกเตอร์ต้นแบบรูปที่ 1 ให้คุณตรวจภายใน 24 ชม. หลังยืนยันออเดอร์ เมื่อคุณอนุมัติต้นแบบแล้ว จะผลิตครบทั้ง 8/16/24 รูปและส่งตรวจขึ้นระบบ LINE ทันที โดยปกติทีมงาน LINE ใช้เวลาตรวจอนุมัติเพียง 1–3 วันทำการเท่านั้นครับ!",
               },
               {
-                q: "เอาไฟล์ภาพไปใช้ทำหน้าปก ว.PA หรือสไลด์สอนต่อได้ไหม?",
-                a: "ได้ 100% ครับ! ทุกแพ็กเกจครูอ้นแถมไฟล์ภาพ PNG พื้นหลังใสความละเอียดสูงครบทุกแอ็กชัน คุณครูสามารถนำไปวางบน Canva, PowerPoint, Google Slides, ปกรายงาน ว.PA หรือทำคลิปสั้นสร้างตัวตนได้เลยครับ",
+                q: "ไม่อยากให้คนแปลกหน้าค้นเจอรูปเราบน LINE STORE ตั้งเป็นแบบส่วนตัวได้ไหม?",
+                a: "ทำได้ 100% ครับ! ในฟอร์มส่วนที่ 2 คุณสามารถเลือก '🔒 ฝากอัปโหลดแบบส่วนตัว (ซ่อนจากหน้าร้าน)' ได้เลย สติกเกอร์ของคุณจะไม่แสดงในระบบค้นหาสาธารณะของ LINE STORE เฉพาะครอบครัว เพื่อน หรือคนที่คุณส่งลิงก์ให้เท่านั้นถึงจะมองเห็นและดาวน์โหลดได้ครับ",
+              },
+              {
+                q: "สั่งทำในนามบริษัท / แบรนด์ร้านค้า ออกใบเสนอราคาและใบเสร็จรับเงินได้ไหม? และใครเป็นเจ้าของลิขสิทธิ์ภาพ?",
+                a: "ออกเอกสารใบเสนอราคาและใบเสร็จรับเงินให้ได้ครบถ้วนครับ! และไฟล์ภาพ PNG พื้นหลังใสความละเอียดสูงทั้งหมดที่แถมให้ ลูกค้าสามารถนำไปใช้งานเชิงพาณิชย์ โพสต์โปรโมตร้านค้า ติดป้ายโฆษณา พิมพ์สติกเกอร์ หรือแต่งสไลด์ได้โดยไม่ติดลิขสิทธิ์ 100% ครับ",
+              },
+              {
+                q: "อยากทำสติกเกอร์คู่รัก 2 คน, รูปลูกน้อย, สัตว์เลี้ยง หรือชุดใหญ่ 32–40 รูป รับทำไหม?",
+                a: "รับทำทั้งหมดครับ! คุณสามารถติ๊กเลือกรูปแบบ 'คู่รัก / เด็ก / สัตว์เลี้ยง / มาสคอต' ในฟอร์มส่วนที่ 1 ได้เลย ส่วนถ้าต้องการชุดใหญ่พิเศษ 32 หรือ 40 รูป หรือต้องการส่งรูปถ่ายหลายมุม สามารถกดส่งบรีฟเบื้องต้นแล้วส่งรูปเพิ่มเติมใน LINE OA ได้ทันทีครับ",
               },
             ].map((faq, idx) => {
               const isOpen = openFaqIdx === idx;
