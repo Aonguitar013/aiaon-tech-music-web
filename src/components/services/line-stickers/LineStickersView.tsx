@@ -323,12 +323,99 @@ const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> =
       "เจอกันที่โรงเรียน!",
     ],
   },
+  seller: {
+    label: "🛍️ โพยแม่ค้าออนไลน์ / เซลส์ / เจ้าของแบรนด์ (ปิดการขาย & ตอบลูกค้า)",
+    words: [
+      "สวัสดีจ้า ยินดีต้อนรับ",
+      "รับออเดอร์จ้า!",
+      "ขอบคุณที่อุดหนุนน้า",
+      "จัดส่งเรียบร้อยจ้า!",
+      "แจ้งเลขพัสดุจ้า",
+      "พร้อมส่งมากๆ เลย!",
+      "โอนแล้วแจ้งสลิปน้า",
+      "กำลังแพ็กของจ้า...",
+      "สนใจชิ้นไหนทักเลย!",
+      "โปรคุ้มมาก ห้ามพลาด!",
+      "ของเข้าใหม่จ้า!",
+      "รอรับความปังได้เลย",
+      "เฮงๆ รวยๆ ปังๆ จ้า",
+      "โอเค จัดให้เลย!",
+      "ขอเช็กสต็อกแป๊บน้า",
+      "ฝันดี ขอบคุณนะจ๊ะ",
+      "ลดพิเศษให้เลย!",
+      "รีวิวให้ด้วยน้า",
+      "เลิฟลูกค้าที่สุด!",
+      "ตอบช้าขออภัยจ้า",
+      "ยอดเข้าแล้ว ขอบคุณจ้า",
+      "ส่งด่วนให้วันนี้เลย!",
+      "มีของแถมให้ด้วยน้า",
+      "ไว้แวะมาอุดหนุนใหม่นะ",
+    ],
+  },
+  medical: {
+    label: "🩺 โพยคุณหมอ / พยาบาล / เภสัชกร / สายสุขภาพ (อยู่เวร & ดูแลสุขภาพ)",
+    words: [
+      "สวัสดีจ้า",
+      "รับทราบเคสจ้า!",
+      "ขึ้นเวรแล้วจ้า!",
+      "ลงเวรแล้ว เย้!",
+      "รับเวรต่อเลยจ้า",
+      "คนไข้เต็มวอร์ดเลย!",
+      "ดูแลสุขภาพด้วยนะ",
+      "ทานยาให้ครบนะจ๊ะ",
+      "เคสด่วนเข้าจ้า!",
+      "สู้ๆ นะทีมเวรเรา!",
+      "พักเติมกาแฟแป๊บ",
+      "ตรวจเรียบร้อยดีมาก",
+      "โอเค จัดการให้เลย",
+      "ขอบคุณมากนะคะ/ครับ",
+      "ง่วงไม่ไหว กาแฟด่วน",
+      "นอนพักผ่อนเยอะๆ นะ",
+      "ดื่มน้ำเยอะๆ น้า",
+      "หายไวๆ นะคะ/ครับ",
+      "เป็นกำลังใจให้นะ!",
+      "ติดตรวจคนไข้อยู่จ้า",
+      "ผลตรวจปกติ เยี่ยมมาก!",
+      "ส่งเวรเรียบร้อย!",
+      "ยินดีด้วยนะจ๊ะ!",
+      "ราตรีสวัสดิ์ พักผ่อนนะ",
+    ],
+  },
+  family: {
+    label: "💕 โพยสายอ้อนแฟน / ครอบครัว / อวยพรมงคล (ส่งความรัก & พลังบวกทุกวัน)",
+    words: [
+      "สวัสดีวันสดใสจ้า",
+      "คิดถึงที่สุดเลย!",
+      "เป็นห่วงนะรู้ไหม",
+      "ทานข้าวหรือยังจ๊ะ?",
+      "รักที่สุดในโลก!",
+      "กอดๆ เติมพลังนะ",
+      "กลับบ้านดีๆ น้า",
+      "สู้ๆ นะคนเก่ง!",
+      "ขอบคุณที่ดูแลกันนะ",
+      "โอเค ตามใจเลยจ้า!",
+      "งอนแล้วนะ ง้อด้วย!",
+      "โชคดี มีความสุขนะ",
+      "เฮงๆ รวยๆ ตลอดไป",
+      "สุขภาพแข็งแรงนะจ๊ะ",
+      "พักผ่อนบ้างนะ เป็นห่วง",
+      "ฝันดี ราตรีสวัสดิ์จ้า",
+      "ถึงบ้านแล้วบอกด้วยนะ",
+      "รออยู่นะจ๊ะ!",
+      "เลิฟยู จุ๊บๆ!",
+      "เหนื่อยไหม กอดกัน",
+      "บุญรักษา พระคุ้มครอง",
+      "วันนี้สดใสจังเลย",
+      "ยินดีด้วยนะคนเก่ง!",
+      "บ๊ายบาย เจอกันนะ!",
+    ],
+  },
 };
 
 function extractShortNickname(rawName: string): string {
   const cleaned = rawName
     .trim()
-    .replace(/^(คุณครู|ครู|อาจารย์|ผอ\.|รองฯ|คุณ|พี่|น้อง|เด็กชาย|เด็กหญิง|ด\.ช\.|ด\.ญ\.|บอส|เฮีย|เจ๊)\s*/i, "")
+    .replace(/^(คุณครู|ครู|อาจารย์|ผอ\.|รองฯ|คุณหมอ|หมอ|พยาบาล|เภสัช|คุณ|พี่|น้อง|เด็กชาย|เด็กหญิง|ด\.ช\.|ด\.ญ\.|แม่ค้า|บอส|เฮีย|เจ๊)\s*/i, "")
     .trim();
   return cleaned || "อ้น";
 }
@@ -423,9 +510,102 @@ function buildStudentNicknameCaptions(rawName: string): string[] {
   ];
 }
 
+function buildSellerNicknameCaptions(rawName: string): string[] {
+  const n = extractShortNickname(rawName);
+  return [
+    `${n}สวัสดีจ้า`,
+    `${n}รับออเดอร์จ้า!`,
+    `${n}ขอบคุณที่อุดหนุน`,
+    `${n}จัดส่งแล้วจ้า!`,
+    `${n}แจ้งเลขพัสดุน้า`,
+    `${n}พร้อมส่งมาก!`,
+    `${n}กำลังแพ็กของจ้า`,
+    `${n}โอนแล้วแจ้งสลิปน้า`,
+    `${n}เช็กสต็อกแป๊บจ้า`,
+    `${n}โปรคุ้มมาก!`,
+    `${n}ลดพิเศษให้เลย!`,
+    `${n}ยอดเข้าแล้วจ้า!`,
+    `${n}เฮงๆ รวยๆ จ้า!`,
+    `${n}โอเค จัดให้เลย!`,
+    `${n}รีวิวให้ด้วยน้า`,
+    `${n}ฝันดี ขอบคุณจ้า`,
+    `${n}เลิฟลูกค้าที่สุด!`,
+    `${n}ของเข้าใหม่จ้า!`,
+    `${n}พร้อมลุยส่งด่วน!`,
+    `${n}ยินดีให้บริการ!`,
+    `${n}รอรับได้เลยจ้า`,
+    `${n}มีของแถมให้น้า`,
+    `${n}สุดยอดเลย!`,
+    `${n}แวะมาอุดหนุนใหม่นะ`,
+  ];
+}
+
+function buildMedicalNicknameCaptions(rawName: string): string[] {
+  const n = extractShortNickname(rawName);
+  return [
+    `${n}สวัสดีจ้า`,
+    `${n}รับทราบเคสจ้า!`,
+    `${n}ขึ้นเวรแล้วจ้า!`,
+    `${n}ลงเวรแล้ว เย้!`,
+    `${n}รับเวรต่อเลย!`,
+    `${n}คนไข้เต็มเลย!`,
+    `${n}ดูแลสุขภาพนะ`,
+    `${n}ทานยาด้วยน้า`,
+    `${n}เคสด่วนเข้าจ้า!`,
+    `${n}สู้ๆ นะทีมเรา!`,
+    `${n}พักเติมกาแฟแป๊บ`,
+    `${n}ตรวจเรียบร้อยจ้า`,
+    `${n}โอเค จัดให้เลย!`,
+    `${n}ขอบคุณมากจ้า`,
+    `${n}หายไวๆ นะจ๊ะ!`,
+    `${n}นอนพักผ่อนเยอะๆ`,
+    `${n}เลิฟเลย!`,
+    `${n}ผลตรวจเยี่ยมมาก`,
+    `${n}พร้อมลุยเวรดึก!`,
+    `${n}ยินดีด้วยจ้า!`,
+    `${n}ติดตรวจอยู่น้า`,
+    `${n}ดื่มน้ำเยอะๆ นะ`,
+    `${n}ส่งเวรเรียบร้อย!`,
+    `${n}ฝันดีจ้า`,
+  ];
+}
+
+function buildFamilyNicknameCaptions(rawName: string): string[] {
+  const n = extractShortNickname(rawName);
+  return [
+    `${n}สวัสดีวันสดใส`,
+    `${n}คิดถึงจังเลย!`,
+    `${n}เป็นห่วงนะจ๊ะ`,
+    `${n}ทานข้าวหรือยัง?`,
+    `${n}รักที่สุดเลย!`,
+    `${n}กอดเติมพลังนะ`,
+    `${n}กลับบ้านดีๆ น้า`,
+    `${n}สู้ๆ นะคนเก่ง!`,
+    `${n}ขอบคุณนะจ๊ะ`,
+    `${n}โอเค ตามใจเลย!`,
+    `${n}งอนแล้ว ง้อด้วย!`,
+    `${n}โชคดี มีสุขนะ`,
+    `${n}เฮงๆ รวยๆ จ้า!`,
+    `${n}สุขภาพแข็งแรงนะ`,
+    `${n}พักผ่อนบ้างน้า`,
+    `${n}ฝันดี จุ๊บๆ จ้า`,
+    `${n}เลิฟยูที่สุด!`,
+    `${n}รออยู่นะจ๊ะ`,
+    `${n}ถึงบ้านบอกด้วยนะ`,
+    `${n}ยินดีด้วยนะ!`,
+    `${n}เหนื่อยไหม กอดกัน`,
+    `${n}บุญรักษานะจ๊ะ`,
+    `${n}เก่งมากเลย!`,
+    `${n}บ๊ายบายจ้า!`,
+  ];
+}
+
 const OUTFIT_STYLES = [
   { id: "office-smart", label: "💼 ชุดพนักงานออฟฟิศ / สมาร์ทแคชชวล / สูทเบลเซอร์วัยทำงาน" },
   { id: "office-casual", label: "👕 ชุดลำลองสบายๆ / เสื้อโปโลบริษัท / ยูนิฟอร์มองค์กร / WFH" },
+  { id: "seller-shop", label: "🛍️ ชุดแม่ค้าออนไลน์ / เจ้าของแบรนด์ / เซลส์ (ถือกล่องพัสดุ/ป้ายโปร/ถุงช้อป)" },
+  { id: "medical-coat", label: "🩺 ชุดคุณหมอ / ชุดพยาบาล / เภสัชกร / ชุดสครับ (Scrub) สายสุขภาพ" },
+  { id: "family-casual", label: "💕 ชุดไปเที่ยวคาเฟ่ / ชุดลำลองน่ารักอ้อนแฟน / ชุดผ้าไทยอวยพรมงคล" },
   { id: "student-uniform", label: "🎒 ชุดนักเรียน / ชุดนักศึกษา / ชุดพละโรงเรียน / ชุดรับปริญญา" },
   { id: "subject", label: "🎸 ชุดคุณครูประจำวิชา / สายลุย (ดนตรี, พละ, วิทย์, คอมฯ, ศิลปะ)" },
   { id: "khaki", label: "👔 ชุดข้าราชการสีกากี / ชุดสูทผู้บริหารเนี๊ยบๆ" },
@@ -530,6 +710,18 @@ export function LineStickersView() {
       setCaptions(buildStudentNicknameCaptions(teacherName));
       return;
     }
+    if (presetKey === "seller-nickname") {
+      setCaptions(buildSellerNicknameCaptions(teacherName));
+      return;
+    }
+    if (presetKey === "medical-nickname") {
+      setCaptions(buildMedicalNicknameCaptions(teacherName));
+      return;
+    }
+    if (presetKey === "family-nickname") {
+      setCaptions(buildFamilyNicknameCaptions(teacherName));
+      return;
+    }
     const pack = PRESET_CAPTION_PACKS[presetKey];
     if (pack) {
       setCaptions([...pack.words]);
@@ -538,26 +730,24 @@ export function LineStickersView() {
 
   const handleOutfitSelect = (outfitId: string) => {
     setSelectedOutfit(outfitId);
-    const isNicknameMode =
-      selectedPresetKey === "nickname" ||
-      selectedPresetKey === "office-nickname" ||
-      selectedPresetKey === "student-nickname";
-
     if (outfitId === "office-smart" || outfitId === "office-casual") {
-      if (isNicknameMode) {
-        setSelectedPresetKey("office-nickname");
-        setCaptions(buildOfficeNicknameCaptions(teacherName));
-      }
+      setSelectedPresetKey("office-nickname");
+      setCaptions(buildOfficeNicknameCaptions(teacherName));
+    } else if (outfitId === "seller-shop") {
+      setSelectedPresetKey("seller-nickname");
+      setCaptions(buildSellerNicknameCaptions(teacherName));
+    } else if (outfitId === "medical-coat") {
+      setSelectedPresetKey("medical-nickname");
+      setCaptions(buildMedicalNicknameCaptions(teacherName));
+    } else if (outfitId === "family-casual") {
+      setSelectedPresetKey("family-nickname");
+      setCaptions(buildFamilyNicknameCaptions(teacherName));
     } else if (outfitId === "student-uniform") {
-      if (isNicknameMode) {
-        setSelectedPresetKey("student-nickname");
-        setCaptions(buildStudentNicknameCaptions(teacherName));
-      }
+      setSelectedPresetKey("student-nickname");
+      setCaptions(buildStudentNicknameCaptions(teacherName));
     } else if (outfitId === "subject" || outfitId === "casual" || outfitId === "khaki") {
-      if (isNicknameMode) {
-        setSelectedPresetKey("nickname");
-        setCaptions(buildNicknameCaptions(teacherName));
-      }
+      setSelectedPresetKey("nickname");
+      setCaptions(buildNicknameCaptions(teacherName));
     }
   };
 
@@ -569,6 +759,12 @@ export function LineStickersView() {
       setCaptions(buildOfficeNicknameCaptions(val));
     } else if (selectedPresetKey === "student-nickname") {
       setCaptions(buildStudentNicknameCaptions(val));
+    } else if (selectedPresetKey === "seller-nickname") {
+      setCaptions(buildSellerNicknameCaptions(val));
+    } else if (selectedPresetKey === "medical-nickname") {
+      setCaptions(buildMedicalNicknameCaptions(val));
+    } else if (selectedPresetKey === "family-nickname") {
+      setCaptions(buildFamilyNicknameCaptions(val));
     }
   };
 
@@ -1325,7 +1521,7 @@ export function LineStickersView() {
                     </p>
                   </div>
 
-                  {/* Preset Loader Buttons (Office, Student & Teacher Nickname presets first) */}
+                  {/* Preset Loader Buttons (All Top-Selling Nickname & General Presets) */}
                   <div className="flex flex-wrap gap-2">
                     <button
                       type="button"
@@ -1336,7 +1532,40 @@ export function LineStickersView() {
                           : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
                       }`}
                     >
-                      {`💼 โพยชื่อเล่นสายออฟฟิศ/ทั่วไป (เช่น "${extractShortNickname(teacherName)}รับทราบ!", "${extractShortNickname(teacherName)}ส่งงานแล้วนะ!")`}
+                      {`💼 โพยชื่อเล่นสายออฟฟิศ (เช่น "${extractShortNickname(teacherName)}รับทราบ!", "${extractShortNickname(teacherName)}ส่งงานแล้วนะ!")`}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => applyPresetCaptions("seller-nickname")}
+                      className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
+                        selectedPresetKey === "seller-nickname"
+                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
+                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                      }`}
+                    >
+                      {`🛍️ โพยชื่อเล่นแม่ค้าออนไลน์/เซลส์ (เช่น "${extractShortNickname(teacherName)}รับออเดอร์จ้า!", "${extractShortNickname(teacherName)}จัดส่งแล้วจ้า!")`}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => applyPresetCaptions("medical-nickname")}
+                      className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
+                        selectedPresetKey === "medical-nickname"
+                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
+                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                      }`}
+                    >
+                      {`🩺 โพยชื่อเล่นหมอ/พยาบาล (เช่น "${extractShortNickname(teacherName)}ขึ้นเวรแล้วจ้า!", "${extractShortNickname(teacherName)}ดูแลสุขภาพนะ")`}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => applyPresetCaptions("family-nickname")}
+                      className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
+                        selectedPresetKey === "family-nickname"
+                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
+                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                      }`}
+                    >
+                      {`💕 โพยชื่อเล่นสายอ้อนแฟน/ครอบครัว (เช่น "${extractShortNickname(teacherName)}คิดถึงจังเลย!", "${extractShortNickname(teacherName)}รักที่สุดเลย!")`}
                     </button>
                     <button
                       type="button"
@@ -1347,7 +1576,7 @@ export function LineStickersView() {
                           : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
                       }`}
                     >
-                      {`🎒 โพยชื่อเล่นสายนักเรียน/นักศึกษา (เช่น "${extractShortNickname(teacherName)}ปั่นการบ้านอยู่", "${extractShortNickname(teacherName)}ขอเกรด 4 นะ!")`}
+                      {`🎒 โพยชื่อเล่นนักเรียน/นักศึกษา (เช่น "${extractShortNickname(teacherName)}ปั่นการบ้านอยู่", "${extractShortNickname(teacherName)}ขอเกรด 4 นะ!")`}
                     </button>
                     <button
                       type="button"
