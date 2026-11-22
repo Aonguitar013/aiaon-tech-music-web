@@ -261,23 +261,20 @@ export function BundlesView() {
               <thead>
                 <tr className="border-b border-white/10 text-white/50">
                   <th className="py-3 px-4">คุณสมบัติ / แพ็กเกจ</th>
-                  <th className="py-3 px-4 text-cyan-300">Classroom Pro</th>
+                  <th className="py-3 px-4 text-cyan-300">Homeroom Pro</th>
                   <th className="py-3 px-4 text-amber-300">Admin Suite</th>
-                  <th className="py-3 px-4 text-emerald-300">Scout &amp; Activity</th>
                   <th className="py-3 px-4 text-purple-300 font-bold bg-purple-500/10 rounded-t-xl">All-in-One Lifetime 👑</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5 text-white/80">
                 <tr>
                   <td className="py-3 px-4 font-semibold text-white">จำนวนระบบที่ได้รับ</td>
-                  <td className="py-3 px-4">3 ระบบ (ม.3 &amp; สีขาว)</td>
+                  <td className="py-3 px-4">3 ระบบ (งานชั้นเรียน &amp; สีขาว)</td>
                   <td className="py-3 px-4">3 ระบบ (ยานพาหนะ &amp; พัสดุ)</td>
-                  <td className="py-3 px-4">3 ระบบ (ลูกเสือ &amp; ดนตรี)</td>
                   <td className="py-3 px-4 font-bold text-purple-300 bg-purple-500/5">ครบทั้ง 20 ระบบ ⚡</td>
                 </tr>
                 <tr>
                   <td className="py-3 px-4 font-semibold text-white">สิทธิ์ใช้งานตลอดชีพ</td>
-                  <td className="py-3 px-4 text-emerald-400">✓ มี</td>
                   <td className="py-3 px-4 text-emerald-400">✓ มี</td>
                   <td className="py-3 px-4 text-emerald-400">✓ มี</td>
                   <td className="py-3 px-4 text-emerald-400 font-bold bg-purple-500/5">✓ มีตลอดชีพ</td>
@@ -286,12 +283,10 @@ export function BundlesView() {
                   <td className="py-3 px-4 font-semibold text-white">สิทธิ์รับระบบใหม่ในอนาคตฟรี</td>
                   <td className="py-3 px-4 text-white/40">-</td>
                   <td className="py-3 px-4 text-white/40">-</td>
-                  <td className="py-3 px-4 text-white/40">-</td>
                   <td className="py-3 px-4 text-emerald-400 font-bold bg-purple-500/5">✓ ฟรีตลอดชีพ 🚀</td>
                 </tr>
                 <tr>
                   <td className="py-3 px-4 font-semibold text-white">สิทธิ์ปรึกษาครูอ้นผ่าน LINE OA</td>
-                  <td className="py-3 px-4 text-emerald-400">✓ มี</td>
                   <td className="py-3 px-4 text-emerald-400">✓ มี</td>
                   <td className="py-3 px-4 text-emerald-400">✓ มี</td>
                   <td className="py-3 px-4 text-emerald-400 font-bold bg-purple-500/5">✓ VIP Priority Support</td>
@@ -300,7 +295,6 @@ export function BundlesView() {
                   <td className="py-3 px-4 font-semibold text-white">ราคาพิเศษ</td>
                   <td className="py-3 px-4 font-bold text-cyan-300">1,490 ฿</td>
                   <td className="py-3 px-4 font-bold text-amber-300">1,990 ฿</td>
-                  <td className="py-3 px-4 font-bold text-emerald-300">990 ฿</td>
                   <td className="py-3 px-4 font-black text-purple-300 bg-purple-500/10 rounded-b-xl text-base">4,990 ฿ (ลด 51%)</td>
                 </tr>
               </tbody>

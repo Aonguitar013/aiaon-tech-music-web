@@ -200,7 +200,7 @@ export function HeroSection() {
             className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-emerald-500/30 text-emerald-300 font-prompt font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition-all hover:scale-102 shadow-sm"
           >
             <Gift className="w-4 h-4 text-emerald-400 animate-bounce" />
-            <span>🎁 รับโค้ดฟรี 7 ระบบ (รหัส FREE69)</span>
+            <span>🎁 รับของแจกฟรีพร้อมใช้ (0 ฿)</span>
           </Link>
         </motion.div>
 

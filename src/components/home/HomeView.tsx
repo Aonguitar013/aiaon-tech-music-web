@@ -566,11 +566,11 @@ export function HomeView() {
                     </div>
                     <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between">
                       <span className="font-semibold text-white/90">BGM คลื่นสมอง คลิปสอน 60 นาที ว.PA</span>
-                      <span className="text-pink-300 font-bold">149 ฿</span>
+                      <span className="text-pink-300 font-bold">290 ฿</span>
                     </div>
                     <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between">
                       <span className="font-semibold text-white/90">รับแต่งเพลงประจำโรงเรียน/องค์กร</span>
-                      <span className="text-cyan-300 font-bold">3,500 ฿</span>
+                      <span className="text-cyan-300 font-bold">เริ่มต้น 1,900 ฿</span>
                     </div>
                   </div>
                 </div>
@@ -1376,7 +1376,7 @@ export function HomeView() {
                 href="/freebies"
                 className="w-full sm:w-auto px-8 py-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-semibold text-base transition-all"
               >
-                <span>🎁 ดูของแจกฟรี 7 ระบบ</span>
+                <span>🎁 ดูของแจกฟรีพร้อมใช้ (0 ฿)</span>
               </Link>
             </div>
           </div>
