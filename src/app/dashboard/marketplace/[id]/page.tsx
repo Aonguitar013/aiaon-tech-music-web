@@ -9,6 +9,7 @@ import { DvdCaseMockup } from "@/components/marketplace/DvdCaseMockup";
 import { AoneProductDetailSection } from "@/components/marketplace/AoneProductDetailSection";
 import { getSystemCoverTheme } from "@/components/marketplace/systemCoverTheme";
 import { getLineOrderUrl, buildSystemOrderMessage } from "@/lib/line";
+import { EXTRA_FLAGSHIP_VAULT_PRODUCTS } from "@/config/catalogVisibility";
 
 export function getVipSetupDetails(title: string) {
   const upper = title.toUpperCase();
@@ -28,13 +29,15 @@ export function getVipSetupDetails(title: string) {
     upper.includes("AONA01") || upper.includes("AONA03") || upper.includes("เกียรติบัตร") ||
     upper.includes("AONE01") || upper.includes("AONE02") || upper.includes("AONE05") ||
     upper.includes("AONE08") || upper.includes("AONE10") || upper.includes("3D") ||
-    upper.includes("AONM01") || upper.includes("AONA06")
+    upper.includes("AONM01") || upper.includes("AONA06") ||
+    upper.includes("AONA09") || upper.includes("AONA10") ||
+    upper.includes("แจ้งซ่อม") || upper.includes("สุขาภิบาล")
   ) {
     return {
       priceText: "+350 ฿",
       tierName: "Standard Setup",
       badge: "ยอดนิยม ⭐⭐",
-      description: "สร้าง Drive Folder รับไฟล์/รูปภาพ + ผูก Folder ID + เชื่อมฐานข้อมูลชีต และ Deploy พร้อมใช้ 100%"
+      description: "สร้าง Drive Folder รับไฟล์/รูปภาพ + ตั้งค่า Telegram Bot & Webhook + เชื่อมฐานข้อมูลชีต และ Deploy พร้อมใช้ 100%"
     };
   }
 
@@ -53,7 +56,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const { data: { user } } = await supabase.auth.getUser();
 
   // Fetch product (including file_url) and check purchase status concurrently (auth is optional for guests)
-  const [{ data: product, error }, existingOrder] = await Promise.all([
+  const [{ data: dbProduct }, existingOrder] = await Promise.all([
     supabase.from('products').select('*, file_url').eq('id', id).single(),
     user
       ? supabase
@@ -67,9 +70,12 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       : Promise.resolve(null),
   ]);
 
+  const flagshipFallback = EXTRA_FLAGSHIP_VAULT_PRODUCTS.find((p) => p.id === id);
+  const product = dbProduct || (flagshipFallback ? { ...flagshipFallback, file_url: null } : null);
+
   const isPurchased = !!existingOrder;
 
-  if (error || !product) {
+  if (!product) {
     return (
         <div className="w-full min-h-[50vh] flex flex-col items-center justify-center text-white/50">
             <p className="font-prompt text-xl mb-4">ไม่พบสินค้านี้</p>
@@ -121,7 +127,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   const vipSetup = getVipSetupDetails(product.title);
   const coverTheme = getSystemCoverTheme(product.title || "", product.category || "");
-  const isAoneProduct = coverTheme.code.startsWith("AONE");
+  const isAoneProduct =
+    coverTheme.code.startsWith("AONE") ||
+    coverTheme.code === "AONA09" ||
+    coverTheme.code === "AONA10";
 
   return (
     <div className="w-full max-w-[1200px] mx-auto min-h-screen flex flex-col pb-20">
@@ -164,10 +173,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                  code={coverTheme.code}
                  title={product.title}
                  price={product.price || "0 บาท"}
-                 cleanPrice={product.price || "0 บาท"}
+                 cleanPrice={(product.price || "0 บาท").replace(/\s*THB/i, " ฿")}
                  vipPrice={vipSetup.priceText}
                  isFree={isFree}
                  vipSetup={vipSetup}
+                 mockupImageUrl={product.image_url}
                  product={{ id: product.id, title: product.title, price: product.price || "0 บาท" }}
                />
              ) : (

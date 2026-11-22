@@ -222,6 +222,44 @@ export const AONE_DETAILS: Record<string, AoneDetailData> = {
       { q: "ใช้งานตอนไม่มีอินเทอร์เน็ตได้ไหม?", a: "ระบบมีโหมดออฟไลน์แคชชั่วคราว เมื่ออุปกรณ์เชื่อมต่อสัญญาณเน็ตจะซิงค์ข้อมูลเข้าสู่ศูนย์บัญชาการทันทีครับ" },
     ]
   },
+  AONA09: {
+    code: "AONA09",
+    headline: "ระบบแจ้งซ่อม & อาคารสถานที่อัจฉริยะ: สแกน QR แจ้งซ่อม เด้งเข้า Telegram 2 ทาง ช่างกดรับ-ปิดงานในแชตทันที",
+    subheadline: "เปลี่ยนการแจ้งซ่อมผ่านกระดาษหรือทักไลน์กลุ่มแล้วข้อความจมหาย ให้กลายเป็นระบบ Work Order ระดับองค์กร รันฟรีบน Google Workspace ของโรงเรียนเอง 100%",
+    beforePain: "แจ้งซ่อมผ่านกระดาษหรือพิมพ์ลงไลน์กลุ่มแล้วข้อความเลื่อนหาย ไม่รู้ช่างรับงานหรือยัง ซ่อมเสร็จตอนไหน ผู้บริหารไม่มีสถิติสรุปงบวัสดุและผลงานช่างประจำเดือน",
+    afterBenefit: "ครูสแกน QR หน้าห้องถ่ายรูปแจ้งซ่อมใน 10 วิ เด้งเข้ากลุ่ม Telegram ช่างทันที ช่างกดปุ่ม [รับงาน] / [ปิดงาน] ในแชตได้เลย พร้อมแดชบอร์ดสถิติผู้บริหารและพิมพ์ PDF 1 คลิก",
+    timeSaved: "ลดเวลาตามช่างและทำรายงานซ่อมบำรุง 20+ ชม./เดือน",
+    features: [
+      { title: "แจ้งซ่อม 10 วิ ผ่าน QR ประจำห้อง + บีบอัดรูปอัตโนมัติ", desc: "สแกน QR หน้าห้องเรียนเลือกอาคาร/ห้องอัตโนมัติ ถ่ายรูปจุดชำรุดบีบอัดลง Drive ไม่เปลืองพื้นที่" },
+      { title: "Telegram 2 ทาง (Interactive Inline Buttons)", desc: "แจ้งเตือนเข้ากลุ่มช่างทันที ช่างกดรับงาน อัปเดตสถานะ และปิดงานจาก Telegram ได้เลยแบบ Real-time" },
+      { title: "แดชบอร์ดสถิติผู้บริหาร & คลังวัสดุ (Executive Analytics)", desc: "สรุปอัตราปิดงาน %, คะแนนประเมินช่าง CSAT, Top 5 อาคารที่ซ่อมบ่อย และงบวัสดุ พร้อมพิมพ์ PDF 1 คลิก" },
+      { title: "ระบบความปลอดภัย PDPA & รหัสผ่านแอดมินแบบ Hash", desc: "ค้นหาสถานะสาธารณะซ่อนชื่อ-เบอร์ผู้แจ้ง พร้อมระบบล็อกอินแอดมินป้องกันเดารหัสผ่าน" },
+    ],
+    faqs: [
+      { q: "ไม่เก่งเขียนโค้ด จะติดตั้งระบบเองได้ไหม?", a: "ได้ 100% ครับ มีไฟล์โค้ดคลีนพร้อมฟังก์ชัน setupDatabase() สร้างตารางอัตโนมัติ + คู่มือ 3 นาทีทำตามทีละขั้น หรือเลือกให้ครูอ้นติดตั้งให้พร้อมใช้ (+350 ฿) ได้เลยครับ" },
+      { q: "มีค่าบริการรายเดือนไหม?", a: "ไม่มีรายเดือนตลอดชีพครับ จ่ายครั้งเดียว 690 ฿ ข้อมูลทั้งหมดเก็บอยู่ใน Google Sheets & Google Drive ของโรงเรียนคุณเอง 100%" },
+      { q: "ปรับเปลี่ยนสีและโลโก้ให้ตรงกับโรงเรียนตัวเองได้ไหม?", a: "ได้ครับ โค้ดออกแบบแยกธีมสีและชื่อโรงเรียนไว้ที่ด้านบนสุด เปลี่ยนชื่อโรงเรียนและโลโก้ได้ใน 1 นาทีครับ" },
+    ]
+  },
+  AONA10: {
+    code: "AONA10",
+    headline: "ระบบตรวจสุขาภิบาล & งานแม่บ้าน 3 เวลา: สแกน QR หน้าห้องน้ำ ถ่ายรูป Before-After ขึ้น Live Matrix Heatmap อัตโนมัติ",
+    subheadline: "ตอบโจทย์นโยบาย 'สุขาดี มีความสุข' ของ สพฐ. เต็มรูปแบบ ตัดรอบตรวจ เช้า/เที่ยง/เย็น อัตโนมัติ แจ้งเตือนจุดแดงที่ยังไม่ล้างเข้า Telegram ผู้บริหารทันที",
+    beforePain: "ใบเซ็นชื่อหน้าห้องน้ำโดนน้ำเปียกขาด แม่บ้านเซ็นล่วงหน้าหรือเซ็นย้อนหลัง ผู้บริหารไม่รู้ว่าห้องน้ำอาคารไหนยังไม่สะอาดจนกว่าจะมีคนร้องเรียน",
+    afterBenefit: "แม่บ้านสแกน QR ประจำจุดถ่ายรูปส่งงาน 3 เวลา ระบบขึ้นกระดาน Live Matrix Heatmap (เขียว/แดง) ทันที ตัดรอบ 08:30 / 13:30 / 17:00 ส่งสรุปเข้า Telegram และพิมพ์รายงาน PDF 1 คลิก",
+    timeSaved: "ยกระดับมาตรฐานสุขาภิบาล & ลดเวลาตรวจหน้างาน 100%",
+    features: [
+      { title: "Live Matrix Heatmap 3 เวลา (เช้า / เที่ยง / เย็น)", desc: "เห็นภาพรวมห้องน้ำทุกอาคารในจอเดียว จุดไหนล้างแล้วขึ้นสีเขียว จุดไหนยังไม่ตรวจขึ้นสีแดงชัดเจน" },
+      { title: "1-Click QR Tag Generator พิมพ์ติดหน้าห้องน้ำทุกจุด", desc: "กดปุ่มเดียวสร้างป้าย QR Code พร้อมชื่ออาคารและจุดตรวจ สั่งพิมพ์เคลือบติดหน้าห้องน้ำได้ทันที" },
+      { title: "Telegram Auto Cut-off 3 รอบเวลา", desc: "ตั้งเวลาตัดรอบอัตโนมัติ เช้า/เที่ยง/เย็น ส่งสรุปจุดที่ยังไม่ทำความสะอาดเข้ากลุ่มผู้บริหารทันที" },
+      { title: "รายงานผู้บริหาร 1-Click PDF & ถ่ายรูป Before-After", desc: "แนบภาพถ่ายก่อน-หลังทำความสะอาดบีบอัดลง Drive อัตโนมัติ พร้อมพิมพ์รายงานสรุปประจำวัน/เดือนส่ง สพฐ." },
+    ],
+    faqs: [
+      { q: "แม่บ้านใช้งานยากไหม ถ้าไม่ถนัดเทคโนโลยี?", a: "ง่ายมากครับ แม่บ้านแค่เปิดกล้องมือถือสแกน QR หน้าห้องน้ำ → เลือกชื่อตัวเอง → ถ่ายรูป → กดส่ง ครบจบใน 3 แตะ ไม่ต้องล็อกอินให้ยุ่งยากครับ" },
+      { q: "รองรับห้องน้ำหรือจุดตรวจกี่จุด?", a: "ไม่จำกัดจุดตรวจครับ มีไฟล์ตัวอย่าง 62 จุดให้พร้อมใช้งาน สามารถเพิ่ม/ลบชื่ออาคารและห้องน้ำใน Google Sheets ได้เองตลอดเวลา" },
+      { q: "มีค่าเช่ารายเดือนไหม?", a: "ไม่มีรายเดือนครับ จ่ายครั้งเดียว 590 ฿ เป็นเจ้าของโค้ดและฐานข้อมูลตลอดชีพครับ" },
+    ]
+  },
 };
 
 interface AoneProductDetailSectionProps {
@@ -232,6 +270,7 @@ interface AoneProductDetailSectionProps {
   vipPrice: string;
   isFree: boolean;
   vipSetup: { priceText: string; tierName: string; badge: string; description: string };
+  mockupImageUrl?: string;
   product: { id: string; title: string; price: string };
 }
 
@@ -243,6 +282,7 @@ export function AoneProductDetailSection({
   vipPrice,
   isFree,
   vipSetup,
+  mockupImageUrl,
   product,
 }: AoneProductDetailSectionProps) {
   const { openLineModal } = useLineModal();
@@ -303,7 +343,15 @@ export function AoneProductDetailSection({
               title={title}
               tagline={meta.tagline}
               glowColor={meta.glow}
-              heroBadge={data.code === "AONE09" ? "⭐ HERO SYSTEM" : isFree ? "FREE LEAD 🎁" : "SMART APP"}
+              heroBadge={
+                data.code === "AONA09" || data.code === "AONA10"
+                  ? "🔥 NEW FLAGSHIP"
+                  : data.code === "AONE09"
+                    ? "⭐ HERO SYSTEM"
+                    : isFree
+                      ? "FREE LEAD 🎁"
+                      : "SMART APP"
+              }
             />
             <span className="text-[11px] text-cyan-300 font-mono mt-3 flex items-center gap-1.5 opacity-80">
               <span>💿</span> คลิกที่แผ่นดิสก์เพื่อดึงเข้า/ออก
@@ -405,6 +453,33 @@ export function AoneProductDetailSection({
 
         </div>
       </div>
+
+      {/* ══════════════════════════════════════════════════════════
+          1.5 LIVE DEVICE MOCKUP PREVIEW (LAPTOP + MOBILE + TELEGRAM)
+          ══════════════════════════════════════════════════════════ */}
+      {mockupImageUrl && (
+        <div className="glass-card p-5 sm:p-7 border-cyan-400/30 rounded-3xl bg-slate-950/85 relative overflow-hidden shadow-[0_0_45px_rgba(6,182,212,0.18)]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <div className="flex items-center gap-2">
+              <Laptop className="w-5 h-5 text-cyan-400 shrink-0" />
+              <h2 className="text-lg sm:text-xl font-extrabold text-white">
+                ภาพตัวอย่างหน้าจอระบบจริง (Desktop Dashboard + Mobile &amp; Telegram 2 ทาง)
+              </h2>
+            </div>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-bold self-start sm:self-auto">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Responsive 100%</span>
+            </span>
+          </div>
+          <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#060b18]">
+            <img
+              src={mockupImageUrl}
+              alt={`ภาพตัวอย่างหน้าจอระบบ ${title}`}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        </div>
+      )}
 
       {/* ══════════════════════════════════════════════════════════
           2. BEFORE vs AFTER: THE PAIN & RELIEF COMPARISON
