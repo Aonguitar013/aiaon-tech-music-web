@@ -174,6 +174,22 @@ export const AONE_SYSTEM_META: Record<string, {
     docSpec: "Google Docs/PDF Auto",
     glow: "rgba(16, 185, 129, 0.45)",
   },
+  AONA09: {
+    shortName: "แจ้งซ่อม & อาคารสถานที่",
+    emoji: "🛠️",
+    badge: "Telegram 2 ทาง + QR",
+    tagline: "SMART REPAIR & TELEGRAM 2-WAY",
+    docSpec: "QR + Telegram Bot + PDF",
+    glow: "rgba(6, 182, 212, 0.55)",
+  },
+  AONA10: {
+    shortName: "ตรวจห้องน้ำ & แม่บ้าน 3 เวลา",
+    emoji: "🧼",
+    badge: "Live Heatmap + QR",
+    tagline: "HYGIENE PATROL 3-TIME MATRIX",
+    docSpec: "3-Time QR + Telegram",
+    glow: "rgba(16, 185, 129, 0.55)",
+  },
 
   // ── AONM Series (Activities, Scouts & Music) ──
   AONM01: {
@@ -296,7 +312,15 @@ export function DvdCaseMockup({
 
   const activeGlow = glowColor || preset.glow;
   const activeTagline = tagline || preset.tagline;
-  const activeBadge = heroBadge || (cleanCode === "AONE09" ? "⭐ HERO SYSTEM" : cleanCode === "AONE10" || cleanCode === "AONE12" ? "FREE LEAD 🎁" : "SMART APP");
+  const activeBadge =
+    heroBadge ||
+    (cleanCode === "AONA09" || cleanCode === "AONA10"
+      ? "🔥 NEW FLAGSHIP"
+      : cleanCode === "AONE09"
+        ? "⭐ HERO SYSTEM"
+        : cleanCode === "AONE10" || cleanCode === "AONE12"
+          ? "FREE LEAD 🎁"
+          : "SMART APP");
   const displayShortName = preset.shortName;
   const emoji = preset.emoji;
   const featureBadge = preset.badge;

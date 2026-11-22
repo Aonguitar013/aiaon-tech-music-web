@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
-  Tag, Gift, ShieldCheck, Zap, ArrowRight, 
+  Tag, Gift, ShieldCheck, Zap, ArrowRight, Eye, X, CheckCircle2,
   QrCode, Award, Truck, FileText, CheckSquare, Users, BookOpen, Clock,
   Music, Compass, Smartphone, Cpu, GraduationCap, Bot, 
   Activity, Star, Layers, ShoppingCart
@@ -38,6 +38,7 @@ import { getLineOrderUrl, buildSystemOrderMessage, buildVipSetupOrderMessage } f
 export function ProductCard({ product }: ProductCardProps) {
   const { brandTheme } = useBrandTheme();
   const { openLineModal } = useLineModal();
+  const [showMockupModal, setShowMockupModal] = useState(false);
 
   let rawDesc = product.description;
   let parsedType = "";
@@ -163,16 +164,44 @@ export function ProductCard({ product }: ProductCardProps) {
       hoverBorder
     )}>
       
-      {/* ── BESPOKE 3D HOLOGRAPHIC COVER ART / 3D DVD MOCKUP (Clickable to detail) ── */}
-      <Link href={detailHref} className="block relative w-full border-b border-white/10 overflow-hidden bg-gradient-to-br from-cyan-950/40 via-slate-950 to-indigo-950/40 flex flex-col justify-center cursor-pointer">
-        <DvdCaseMockup
-          code={coverTheme.code}
-          title={product.title}
-          categoryName={coverTheme.categoryName}
-          tagline={coverTheme.tagline}
-          glowColor={coverTheme.glowColor}
-        />
-      </Link>
+      {/* ── BESPOKE 3D HOLOGRAPHIC COVER ART / 3D DVD MOCKUP (Clickable to detail or preview) ── */}
+      {isDirectFlagship && product.image_url ? (
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => setShowMockupModal(true)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setShowMockupModal(true);
+            }
+          }}
+          className="block relative w-full border-b border-white/10 overflow-hidden bg-gradient-to-br from-cyan-950/40 via-slate-950 to-indigo-950/40 flex flex-col justify-center cursor-pointer"
+        >
+          <DvdCaseMockup
+            code={coverTheme.code}
+            title={product.title}
+            categoryName={coverTheme.categoryName}
+            tagline={coverTheme.tagline}
+            glowColor={coverTheme.glowColor}
+            isInteractive={false}
+          />
+          <span className="absolute top-3 right-3 z-20 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-500/20 hover:bg-cyan-500/35 border border-cyan-400/40 text-cyan-200 text-[11px] font-prompt font-bold backdrop-blur-md transition-all shadow-md">
+            <Eye className="w-3.5 h-3.5" />
+            <span>ดูภาพหน้าจอจริง</span>
+          </span>
+        </div>
+      ) : (
+        <Link href={detailHref} className="block relative w-full border-b border-white/10 overflow-hidden bg-gradient-to-br from-cyan-950/40 via-slate-950 to-indigo-950/40 flex flex-col justify-center cursor-pointer">
+          <DvdCaseMockup
+            code={coverTheme.code}
+            title={product.title}
+            categoryName={coverTheme.categoryName}
+            tagline={coverTheme.tagline}
+            glowColor={coverTheme.glowColor}
+          />
+        </Link>
+      )}
 
       {/* ── CARD BODY ─────────────────────────────────────────── */}
       <div className="p-5 sm:p-6 flex flex-col flex-1 z-10">
@@ -208,6 +237,17 @@ export function ProductCard({ product }: ProductCardProps) {
             {rawDesc}
           </p>
         </Link>
+
+        {product.image_url && (
+          <button
+            type="button"
+            onClick={() => setShowMockupModal(true)}
+            className="mb-4 w-full py-2 px-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/30 hover:border-cyan-400/60 text-cyan-300 font-prompt text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
+          >
+            <Eye className="w-3.5 h-3.5 shrink-0" />
+            <span>ดูภาพหน้าจอจริง &amp; แดชบอร์ด (Mockup)</span>
+          </button>
+        )}
 
         {/* --- CLEAN SINGLE-LINE PRICE & CTA FOOTER --- */}
         <div className="mt-auto pt-4 border-t border-white/10 space-y-3">
@@ -302,6 +342,89 @@ export function ProductCard({ product }: ProductCardProps) {
 
         </div>
       </div>
+
+      {/* ── DEVICE MOCKUP PREVIEW MODAL ── */}
+      {showMockupModal && product.image_url && (
+        <div
+          className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+          onClick={() => setShowMockupModal(false)}
+        >
+          <div
+            className="relative w-full max-w-3xl rounded-3xl border border-cyan-400/35 bg-slate-950/95 shadow-[0_0_60px_rgba(6,182,212,0.28)] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-white/10 bg-slate-900/80">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <span className={cn("px-2.5 py-0.5 rounded-full text-[11px] font-prompt font-extrabold border shrink-0", coverTheme.badgeBg)}>
+                  {coverTheme.code}
+                </span>
+                <h4 className="font-prompt text-sm sm:text-base font-bold text-white truncate">
+                  {product.title}
+                </h4>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowMockupModal(false)}
+                aria-label="ปิดหน้าต่างพรีวิว"
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/80 hover:text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Mockup Showcase Image */}
+            <div className="relative bg-[#060b18] border-b border-white/10">
+              <img
+                src={product.image_url}
+                alt={`ตัวอย่างหน้าจอระบบ ${product.title}`}
+                className="w-full max-h-[55vh] object-contain mx-auto"
+              />
+            </div>
+
+            {/* Details & CTA */}
+            <div className="p-5 sm:p-6 space-y-4">
+              <div className="flex flex-wrap gap-2">
+                {coverTheme.pills.map((pill) => (
+                  <span
+                    key={pill}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-400/25 text-cyan-200 text-xs font-prompt font-semibold"
+                  >
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>{pill}</span>
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-xs sm:text-sm font-prompt text-white/75 leading-relaxed">
+                {rawDesc}
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2 border-t border-white/10">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-prompt text-2xl font-black text-white">{cleanPrice}</span>
+                  <span className="font-prompt text-xs text-emerald-300 font-semibold">• จ่ายครั้งเดียว ไม่มีรายเดือน</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={lineOrderUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      setShowMockupModal(false);
+                      handleOrderClick(e);
+                    }}
+                    className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-linear-to-r from-[#06C755] to-[#049b42] hover:from-[#05b34c] hover:to-[#038538] text-white font-prompt text-sm font-extrabold flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer"
+                  >
+                    <ShoppingCart className="w-4 h-4" />
+                    <span>สั่งซื้อรับระบบทันที</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

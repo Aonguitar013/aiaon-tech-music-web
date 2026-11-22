@@ -121,6 +121,7 @@ export const EXTRA_FLAGSHIP_VAULT_PRODUCTS: ProductLike[] = [
       "ระบบแจ้งซ่อมบำรุงและงานอาคารสถานที่ครบวงจร สแกน QR หน้าห้องแจ้งซ่อมพร้อมรูปถ่าย แจ้งเตือนช่าง/แม่บ้านกดรับ-ปิดงานผ่าน Telegram 2 ทาง + แดชบอร์ดสถิติผู้บริหารและคลังวัสดุ (ปรับสีธีมโรงเรียนได้เอง)",
     price: "690 THB",
     category: "GoogleScript",
+    image_url: "/images/mockups/aona09_repair_telegram_mockup.jpg",
     setupTier: "easy-setup",
   },
   {
@@ -130,6 +131,7 @@ export const EXTRA_FLAGSHIP_VAULT_PRODUCTS: ProductLike[] = [
       "ระบบตรวจความสะอาดห้องน้ำและอาคารเรียน เช้า/เที่ยง/เย็น แม่บ้านสแกน QR ถ่ายรูป Before-After ขึ้น Live Matrix Heatmap อัตโนมัติ พร้อมแจ้งเตือนจุดค้างตรวจเข้า Telegram และพิมพ์รายงาน PDF 1 คลิก",
     price: "590 THB",
     category: "GoogleScript",
+    image_url: "/images/mockups/aona10_hygiene_matrix_mockup.jpg",
     setupTier: "easy-setup",
   },
 ];
