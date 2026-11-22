@@ -178,8 +178,37 @@ const SET2_CAPTIONS = [
 ];
 
 const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> = {
+  office: {
+    label: "🏢 โพยออฟฟิศ: พนักงานออฟฟิศ / สายทำงาน / WFH ยอดฮิต",
+    words: [
+      "สวัสดีคร้าบ/ค่ะ",
+      "รับทราบ! จัดให้",
+      "โอเค ตามนี้เลย!",
+      "ขอบคุณมากจ้า",
+      "สุดยอดไปเลย!",
+      "กำลังปั่นงาน...",
+      "ติดประชุมด่วน!",
+      "ส่งไฟล์แล้วนะ!",
+      "รออนุมัติจ้า",
+      "ตามงานหน่อยนะ!",
+      "งานเข้าอีกแล้ว!",
+      "กาแฟเยียวยาใจ",
+      "เคลียร์งานเสร็จ!",
+      "สู้ๆ นะทีมเรา!",
+      "เลิกงานแล้ว บาย!",
+      "ฝันดี พักผ่อนนะ",
+      "ขอแก้แป๊บเดียว!",
+      "ไฟลุกท่วมโต๊ะ!",
+      "เดดไลน์มารอแล้ว",
+      "เงินเดือนออกแล้ว!",
+      "พักเที่ยงกันเถอะ",
+      "ฝากดูอันนี้หน่อย",
+      "ยินดีด้วยนะ!",
+      "กลับบ้านปลอดภัย!",
+    ],
+  },
   general: {
-    label: "📚 โพยที่ 2: คำพูดครูยอดฮิตทั่วไป (ใช้ได้ทุกวัน)",
+    label: "📚 โพยคุณครู: คำพูดครูยอดฮิตทั่วไป (ใช้ได้ทุกวัน)",
     words: [
       "สวัสดีจ้า",
       "รับทราบ!",
@@ -208,7 +237,7 @@ const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> =
     ],
   },
   executive: {
-    label: "🏛️ โพยที่ 3: สายผู้บริหาร / หัวหน้าระดับ / งานบริหาร",
+    label: "🏛️ โพยผู้บริหาร: หัวหน้างาน / ผู้บริหาร / ผอ. / เจ้าของธุรกิจ",
     words: [
       "สวัสดีครับ/ค่ะ",
       "รับทราบ ดำเนินการเลย",
@@ -237,7 +266,7 @@ const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> =
     ],
   },
   activity: {
-    label: "🎸 โพยที่ 4: ครูสายกิจกรรม (ดนตรี / พละ / วิทย์ / คอมฯ)",
+    label: "🎸 โพยครูสายลุย: ครูสายกิจกรรม (ดนตรี / พละ / วิทย์ / คอมฯ)",
     words: [
       "เข้าคาบเรียนด่วน!",
       "ซ้อมหรือยังพวกเรา?",
@@ -270,7 +299,7 @@ const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> =
 function extractShortNickname(rawName: string): string {
   const cleaned = rawName
     .trim()
-    .replace(/^(คุณครู|ครู|อาจารย์|ผอ\.|รองฯ|พี่|น้อง)\s*/i, "")
+    .replace(/^(คุณครู|ครู|อาจารย์|ผอ\.|รองฯ|คุณ|พี่|น้อง|บอส|เฮีย|เจ๊)\s*/i, "")
     .trim();
   return cleaned || "อ้น";
 }
@@ -305,10 +334,42 @@ function buildNicknameCaptions(rawName: string): string[] {
   ];
 }
 
+function buildOfficeNicknameCaptions(rawName: string): string[] {
+  const n = extractShortNickname(rawName);
+  return [
+    `${n}สวัสดีจ้า`,
+    `${n}รับทราบ!`,
+    `${n}โอเคจัดไป!`,
+    `${n}ขอบคุณจ้า`,
+    `${n}สุดยอดเลย!`,
+    `${n}จัดให้เลย!`,
+    `${n}ปั่นงานอยู่...`,
+    `${n}ติดประชุม!`,
+    `${n}ส่งงานแล้วนะ!`,
+    `${n}ตามงานนะ!`,
+    `${n}อนุมัติผ่าน!`,
+    `${n}สู้ๆ นะ!`,
+    `${n}งานเข้าแล้ว!`,
+    `${n}พักจิบกาแฟ`,
+    `${n}เคลียร์งานจบ!`,
+    `${n}เลิกงานแล้ว!`,
+    `${n}เลิฟเลย!`,
+    `${n}เหนื่อยจัง...`,
+    `${n}พร้อมลุย!`,
+    `${n}ยินดีด้วย!`,
+    `${n}รอแป๊บนะ`,
+    `${n}กำลังไปจ้า`,
+    `${n}เก่งมาก!`,
+    `${n}ฝันดีจ้า`,
+  ];
+}
+
 const OUTFIT_STYLES = [
-  { id: "subject", label: "🎸 ชุดประจำวิชา / สายลุย (ดนตรี, พละ, วิทย์, คอมฯ, ศิลปะ)" },
+  { id: "office-smart", label: "💼 ชุดพนักงานออฟฟิศ / สมาร์ทแคชชวล / สูทเบลเซอร์วัยทำงาน" },
+  { id: "office-casual", label: "👕 ชุดลำลองสบายๆ / เสื้อโปโลบริษัท / ยูนิฟอร์มองค์กร / WFH" },
+  { id: "subject", label: "🎸 ชุดคุณครูประจำวิชา / สายลุย (ดนตรี, พละ, วิทย์, คอมฯ, ศิลปะ)" },
   { id: "khaki", label: "👔 ชุดข้าราชการสีกากี / ชุดสูทผู้บริหารเนี๊ยบๆ" },
-  { id: "casual", label: "👕 ชุดครูวัยรุ่น สมาร์ทแคชชวล / เสื้อโปโลโรงเรียน" },
+  { id: "casual", label: "🏫 ชุดครูวัยรุ่น สมาร์ทแคชชวล / เสื้อโปโลโรงเรียน" },
   { id: "mixed", label: "✨ คละหลายชุดในเซ็ตเดียว (สำหรับแพ็กเกจ 16 หรือ 24 รูป)" },
 ];
 
@@ -316,12 +377,12 @@ const PUBLISH_MODES = [
   {
     id: "iaon-store",
     title: "ฝากวางขายบนร้าน iAon Tech (แนะนำ • สะดวกที่สุด 100%)",
-    desc: "ไม่ต้องสมัครบัญชี LINE Creators ไม่ต้องกรอกเอกสารภาษีญี่ปุ่นหรือผูก PayPal เอง ครูอ้นอัปโหลดขึ้นร้าน iAon Tech ให้ครบวงจร พออนุมัติปุ๊บ ครูอ้นกดส่งสติกเกอร์เข้า LINE คุณครูให้ใช้งานฟรีทันที และแชร์ลิงก์ให้เพื่อนครู/นักเรียนกดซื้อได้เลย!",
+    desc: "ไม่ต้องสมัครบัญชี LINE Creators ไม่ต้องกรอกเอกสารภาษีญี่ปุ่นหรือผูกบัญชีเอง ครูอ้นอัปโหลดขึ้นร้าน iAon Tech ให้ครบวงจร พออนุมัติปุ๊บ ครูอ้นกดส่งสติกเกอร์เข้า LINE ให้คุณใช้งานฟรีทันที และแชร์ลิงก์ให้เพื่อนร่วมงาน/ลูกค้ากดซื้อได้เลย!",
   },
   {
     id: "own-account",
-    title: "อัปโหลดเข้าบัญชี LINE Creators ของคุณครูเอง",
-    desc: "ครูอ้นส่งมอบไฟล์ ZIP มาตรฐาน LINE (ครบทั้ง 01-16.png, main.png, tab.png) พร้อมโพยชื่อและคำอธิบาย 2 ภาษา ให้คุณครูกดอัปโหลดเข้าบัญชีตัวเองเพื่อรับส่วนแบ่งยอดขายเข้าบัญชีคุณครูโดยตรง",
+    title: "อัปโหลดเข้าบัญชี LINE Creators ของลูกค้าเอง",
+    desc: "ครูอ้นส่งมอบไฟล์ ZIP มาตรฐาน LINE (ครบทั้ง 01-16.png, main.png, tab.png) พร้อมโพยชื่อและคำอธิบาย 2 ภาษา ให้คุณกดอัปโหลดเข้าบัญชีตัวเองเพื่อรับส่วนแบ่งยอดขายเข้าบัญชีของคุณโดยตรง",
   },
 ];
 
@@ -401,9 +462,28 @@ export function LineStickersView() {
       setCaptions(buildNicknameCaptions(teacherName));
       return;
     }
+    if (presetKey === "office-nickname") {
+      setCaptions(buildOfficeNicknameCaptions(teacherName));
+      return;
+    }
     const pack = PRESET_CAPTION_PACKS[presetKey];
     if (pack) {
       setCaptions([...pack.words]);
+    }
+  };
+
+  const handleOutfitSelect = (outfitId: string) => {
+    setSelectedOutfit(outfitId);
+    if (outfitId === "office-smart" || outfitId === "office-casual") {
+      if (selectedPresetKey === "nickname") {
+        setSelectedPresetKey("office-nickname");
+        setCaptions(buildOfficeNicknameCaptions(teacherName));
+      }
+    } else if (outfitId === "subject" || outfitId === "casual") {
+      if (selectedPresetKey === "office-nickname") {
+        setSelectedPresetKey("nickname");
+        setCaptions(buildNicknameCaptions(teacherName));
+      }
     }
   };
 
@@ -411,6 +491,8 @@ export function LineStickersView() {
     setTeacherName(val);
     if (selectedPresetKey === "nickname") {
       setCaptions(buildNicknameCaptions(val));
+    } else if (selectedPresetKey === "office-nickname") {
+      setCaptions(buildOfficeNicknameCaptions(val));
     }
   };
 
@@ -484,9 +566,9 @@ export function LineStickersView() {
           publishMode: selectedPublishObj.title,
           propsAndTrait: propsAndTrait.trim() || "ตามรูปถ่ายต้นแบบ",
           stickerTitleTh:
-            stickerTitleTh.trim() || `ครู${teacherName.trim()} สายลุย`,
+            stickerTitleTh.trim() || `${teacherName.trim()} สดใสทุกวัน`,
           stickerTitleEn:
-            stickerTitleEn.trim() || `Kru ${teacherName.trim()} Sticker`,
+            stickerTitleEn.trim() || `${teacherName.trim()} Cute Daily Life`,
           captions: activeCaptions,
           photoBase64: photoBase64 || undefined,
         }),
@@ -839,7 +921,7 @@ export function LineStickersView() {
                   ส่งบรีฟและรูปถ่ายถึงระบบ AI ของครูอ้นเรียบร้อยแล้วครับ! 🎉
                 </h4>
                 <p className="font-prompt text-sm text-white/75 max-w-xl mx-auto leading-relaxed">
-                  ตอนนี้ข้อมูลและรูปถ่ายของ <strong>คุณครู{teacherName}</strong> ถูกส่งเข้าห้องผลิตของครูอ้นแล้ว ขั้นตอนสุดท้าย กดปุ่มด้านล่างเพื่อรับ <strong>QR Code พร้อมเพย์ ({selectedPkg.price})</strong> และรับภาพคาแรกเตอร์ต้นแบบใน LINE OA ได้เลยครับ!
+                  ตอนนี้ข้อมูลและรูปถ่ายของ <strong>{teacherName}</strong> ถูกส่งเข้าห้องผลิตของครูอ้นแล้ว ขั้นตอนสุดท้าย กดปุ่มด้านล่างเพื่อรับ <strong>QR Code พร้อมเพย์ ({selectedPkg.price})</strong> และรับภาพคาแรกเตอร์ต้นแบบใน LINE OA ได้เลยครับ!
                 </p>
               </div>
 
@@ -884,17 +966,17 @@ export function LineStickersView() {
             </motion.div>
           ) : (
             <form onSubmit={handleBriefFormSubmit} className="space-y-8">
-              {/* STEP 1: Teacher Info & Photo Upload */}
+              {/* STEP 1: Customer Info & Photo Upload */}
               <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-5">
                 <h4 className="font-prompt text-base font-extrabold text-[#4ade80] flex items-center gap-2">
                   <Camera className="w-5 h-5" />
-                  <span>ส่วนที่ 1: ข้อมูลคุณครู &amp; รูปถ่ายหน้าตรงต้นแบบ</span>
+                  <span>ส่วนที่ 1: ข้อมูลผู้สั่งทำ (คุณครู / พนักงานออฟฟิศ / ทั่วไป) &amp; รูปถ่ายหน้าตรงต้นแบบ</span>
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
-                      ชื่อคุณครู / ชื่อเล่น (จำเป็น) *
+                      ชื่อเล่น / ชื่อที่ใช้เรียกบนสติกเกอร์ (จำเป็น) *
                     </label>
                     <div className="relative">
                       <User className="w-4 h-4 text-white/40 absolute left-3.5 top-3.5" />
@@ -903,7 +985,7 @@ export function LineStickersView() {
                         required
                         value={teacherName}
                         onChange={(e) => handleTeacherNameChange(e.target.value)}
-                        placeholder="เช่น ครูอ้น, ครูเมย์, ครูบอย..."
+                        placeholder="เช่น เมย์, บอย, ครูอ้น, บอสเจ..."
                         className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-sm focus:outline-none focus:border-[#06C755]"
                       />
                     </div>
@@ -911,7 +993,7 @@ export function LineStickersView() {
 
                   <div>
                     <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
-                      เบอร์โทร หรือ ชื่อ LINE ของคุณครู (ไว้ส่งงานกลับ)
+                      เบอร์โทร หรือ ชื่อ LINE ของคุณ (ไว้ส่งงานกลับ)
                     </label>
                     <div className="relative">
                       <Phone className="w-4 h-4 text-white/40 absolute left-3.5 top-3.5" />
@@ -992,13 +1074,13 @@ export function LineStickersView() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                   <div>
                     <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
-                      วิชาที่สอน / พร็อพคู่ใจ / จุดเด่นใบหน้า
+                      อาชีพ / สายงาน / พร็อพคู่ใจ / จุดเด่นใบหน้า
                     </label>
                     <input
                       type="text"
                       value={propsAndTrait}
                       onChange={(e) => setPropsAndTrait(e.target.value)}
-                      placeholder="เช่น ครูดนตรีถือไมค์/กีตาร์, ใส่แว่นกลม..."
+                      placeholder="เช่น พนักงานออฟฟิศถือแก้วกาแฟ/โน้ตบุ๊ก, ครูดนตรี, ใส่แว่น..."
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
                     />
                   </div>
@@ -1010,7 +1092,7 @@ export function LineStickersView() {
                       type="text"
                       value={stickerTitleTh}
                       onChange={(e) => setStickerTitleTh(e.target.value)}
-                      placeholder="เช่น ครูเมย์สายลุย / ครูอ้นใจดี"
+                      placeholder="เช่น เมย์สายลุยออฟฟิศ / ครูอ้นใจดี"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
                     />
                   </div>
@@ -1022,7 +1104,7 @@ export function LineStickersView() {
                       type="text"
                       value={stickerTitleEn}
                       onChange={(e) => setStickerTitleEn(e.target.value)}
-                      placeholder="เช่น Kru May Daily Life"
+                      placeholder="เช่น May Office Life / Kru Aon"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
                     />
                   </div>
@@ -1084,7 +1166,7 @@ export function LineStickersView() {
                         <button
                           key={outfit.id}
                           type="button"
-                          onClick={() => setSelectedOutfit(outfit.id)}
+                          onClick={() => handleOutfitSelect(outfit.id)}
                           className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
                             isSel
                               ? "border-cyan-400 bg-cyan-950/40 ring-1 ring-cyan-400"
@@ -1167,8 +1249,19 @@ export function LineStickersView() {
                     </p>
                   </div>
 
-                  {/* Preset Loader Buttons (Preset 1 Nickname first & auto-selected) */}
+                  {/* Preset Loader Buttons (Office & Teacher Nickname presets first) */}
                   <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => applyPresetCaptions("office-nickname")}
+                      className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
+                        selectedPresetKey === "office-nickname"
+                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
+                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                      }`}
+                    >
+                      {`💼 โพยชื่อเล่นสายออฟฟิศ/ทั่วไป (เช่น "${extractShortNickname(teacherName)}รับทราบ!", "${extractShortNickname(teacherName)}ส่งงานแล้วนะ!")`}
+                    </button>
                     <button
                       type="button"
                       onClick={() => applyPresetCaptions("nickname")}
@@ -1178,7 +1271,7 @@ export function LineStickersView() {
                           : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
                       }`}
                     >
-                      {`✨ โพยที่ 1: ชื่อเล่นนำหน้าคำฮิต (เช่น "${extractShortNickname(teacherName)}โอเค!", "${extractShortNickname(teacherName)}รับทราบ!")`}
+                      {`✨ โพยชื่อเล่นสายคุณครู (เช่น "${extractShortNickname(teacherName)}สอนอยู่จ้า", "${extractShortNickname(teacherName)}ให้เกรด 4!")`}
                     </button>
                     {Object.entries(PRESET_CAPTION_PACKS).map(([key, pack]) => (
                       <button
