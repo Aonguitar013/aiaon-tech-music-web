@@ -177,6 +177,97 @@ const SET2_CAPTIONS = [
   "วงนี้คุณภาพ!",
 ];
 
+type PortfolioSetId = "set4_yadom" | "set5_football" | "set3_khaotom" | "set2" | "set1";
+
+interface PortfolioSetConfig {
+  id: PortfolioSetId;
+  folder: string;
+  tabLabel: string;
+  title: string;
+  statusBadge: string;
+  isLive: boolean;
+  storeUrl: string;
+  activeTabClass: string;
+  captions: string[];
+}
+
+const PORTFOLIO_SETS: PortfolioSetConfig[] = [
+  {
+    id: "set4_yadom",
+    folder: "set4_yadom",
+    tabLabel: "🌿 น้องยาดมเขียว 3D (24 รูป)",
+    title: "น้องยาดมเขียว 3D พลังชีวิตคนไทย (Nong Yadom 3D • มาสคอต)",
+    statusBadge: "🟡 ส่งตรวจ LINE Creators แล้ว (ID: 49404291)",
+    isLive: false,
+    storeUrl: "https://line.me/S/shop/sticker/author/6844942",
+    activeTabClass: "bg-linear-to-r from-emerald-400 to-teal-500 text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.4)]",
+    captions: [
+      "ขอสูดแป๊บ!", "ชื่นใจสุดๆ", "รับทราบจ้า!", "ขอบคุณมากนะ",
+      "สวัสดีเช้าวันใหม่", "ความดันขึ้นแล้วนะ!", "จะเป็นลม...", "งานเข้าจนหน้ามืด",
+      "ใจเย็นๆ สูดลึกๆ", "รอดเพราะอันนี้แหละ", "ประชุมยาวมาก!", "สู้ชีวิต แต่ชีวิตสู้กลับ",
+      "ขอพักสมอง 5 นาที", "โอเค จัดไป!", "สู้ๆ นะ เดี๋ยวก็ผ่านไป", "หิวแล้ว กินไรดี?",
+      "เงินเดือนออกยัง?", "สภาพตอนบ่ายสาม", "ปวดหัวตุ้บๆ", "ช็อกเลยดิ!",
+      "5555 ขำจนหอบ", "กำลังรีบไป!", "เติมพลังสมุนไพร!", "หมดแรงแล้ว ฝันดีนะ",
+    ],
+  },
+  {
+    id: "set5_football",
+    folder: "set5_football",
+    tabLabel: "⚽ ไอ้ลูกบอลสายปั่น (24 รูป)",
+    title: "ไอ้ลูกบอลสายปั่น ขิงเพื่อนบอล (Troll Football 3D • มาสคอต)",
+    statusBadge: "🟡 กำลังตรวจ LINE Creators (ID: 49399480)",
+    isLive: false,
+    storeUrl: "https://line.me/S/shop/sticker/author/6844942",
+    activeTabClass: "bg-linear-to-r from-amber-400 to-orange-500 text-zinc-950 shadow-[0_0_20px_rgba(245,158,11,0.4)]",
+    captions: [
+      "รับปี๊บไหมเพื่อน?", "ออกจากรูได้แล้ว!", "เงียบกริบเลยนะกลุ่มนี้", "สภาพ!",
+      "คาบ้านเลยนะ!", "ข้างบนหนาวจัง!", "ปีหน้าว่ากันใหม่นะ", "แชมป์ว่าวอีกแล้ว!",
+      "เช็กตารางคะแนนแป๊บ", "ตื่นยัง? บอลจบแล้ว", "ไหนบอกจะถล่ม?", "เซฟโค้ชด้วยนะ!",
+      "ยับเลยเพื่อนรัก!", "ขอเสียงคนแพ้หน่อย!", "ไม่ได้โม้ แค่เรื่องจริง", "ทีมคนจริง ไม่พูดเยอะ",
+      "VAR เช็กด่วน!", "กรรมการเข้าข้างป่ะเนี่ย!", "โดนทดเจ็บอีกแล้ว!", "ปลดโค้ชเถอะ!",
+      "คืนนี้เจอกัน อย่าหนี!", "ขอคลุมปี๊บแป๊บ...", "ขอมุดหลุมก่อนนะ", "ปิดไฟนอนดีกว่า...",
+    ],
+  },
+  {
+    id: "set3_khaotom",
+    folder: "set3_khaotom",
+    tabLabel: "🐾 ข้าวต้มแมวแฉ็ง (สัตว์เลี้ยง 3D)",
+    title: "ข้าวต้มแมวแฉ็ง (Khao Tom - Cute Daily Life • สัตว์เลี้ยง)",
+    statusBadge: "🟢 ผ่านอนุมัติแล้ว บน LINE STORE (ID: 49380562)",
+    isLive: true,
+    storeUrl: "https://line.me/S/sticker/38176379",
+    activeTabClass: "bg-linear-to-r from-pink-400 to-rose-500 text-zinc-950 shadow-[0_0_20px_rgba(244,63,94,0.4)]",
+    captions: [
+      "สวัสดีวันสดใสจ้า", "คิดถึงที่สุดเลย!", "เป็นห่วงนะรู้ไหม", "ทานข้าวหรือยังจ๊ะ?",
+      "รักที่สุดในโลก!", "กอดๆ เติมพลังนะ", "กลับบ้านดีๆ น้า", "สู้ๆ นะคนเก่ง!",
+      "ขอบคุณที่ดูแลกันนะ", "โอเค ตามใจเลยจ้า!", "งอนแล้วนะ ง้อด้วย!", "โชคดี มีความสุขนะ",
+      "เฮงๆ รวยๆ ตลอดไป", "สุขภาพแข็งแรงนะจ๊ะ", "พักผ่อนบ้างนะ เป็นห่วง", "ฝันดี ราตรีสวัสดิ์จ้า",
+    ],
+  },
+  {
+    id: "set2",
+    folder: "set2",
+    tabLabel: "🎸 ครูดนตรีสากล (On Sale)",
+    title: "iAon - ครูดนตรีสากลสายลุย (iAon - Western Music Teacher)",
+    statusBadge: "🟢 ON SALE บน LINE STORE (ID: 49349839)",
+    isLive: true,
+    storeUrl: "https://line.me/S/sticker/38159226",
+    activeTabClass: "bg-linear-to-r from-[#06C755] to-emerald-500 text-zinc-950 shadow-[0_0_20px_rgba(6,199,85,0.35)]",
+    captions: SET2_CAPTIONS,
+  },
+  {
+    id: "set1",
+    folder: "set1",
+    tabLabel: "😊 Daily Expressions (On Sale)",
+    title: "iAon - Daily Expressions (ไอ้อ้น สติกเกอร์พูดได้รายวัน)",
+    statusBadge: "🟢 ON SALE บน LINE STORE (ID: 49318083)",
+    isLive: true,
+    storeUrl: "https://line.me/S/sticker/38143374",
+    activeTabClass: "bg-linear-to-r from-cyan-400 to-blue-500 text-zinc-950 shadow-[0_0_20px_rgba(6,182,212,0.35)]",
+    captions: SET1_CAPTIONS,
+  },
+];
+
 const PRESET_CAPTION_PACKS: Record<string, { label: string; words: string[] }> = {
   office: {
     label: "🏢 โพยออฟฟิศ: พนักงานออฟฟิศ / สายทำงาน / WFH ยอดฮิต",
@@ -640,7 +731,7 @@ const PUBLISH_MODES = [
 ];
 
 export function LineStickersView() {
-  const [activePortfolioTab, setActivePortfolioTab] = useState<"set2" | "set1">("set2");
+  const [activePortfolioTab, setActivePortfolioTab] = useState<PortfolioSetId>("set4_yadom");
   const [selectedPkgId, setSelectedPkgId] = useState<string>("pro-16");
   const [selectedOutfit, setSelectedOutfit] = useState<string>("office-smart");
   const [selectedPublishMode, setSelectedPublishMode] = useState<string>("iaon-store-public");
@@ -886,8 +977,10 @@ export function LineStickersView() {
     }
   };
 
-  const activeSetFolder = activePortfolioTab === "set2" ? "set2" : "set1";
-  const activeCaptions = activePortfolioTab === "set2" ? SET2_CAPTIONS : SET1_CAPTIONS;
+  const activePortfolio =
+    PORTFOLIO_SETS.find((p) => p.id === activePortfolioTab) || PORTFOLIO_SETS[0];
+  const activeSetFolder = activePortfolio.folder;
+  const activeCaptions = activePortfolio.captions;
 
   return (
     <div className="min-h-screen bg-[#070913] text-white overflow-x-hidden relative pb-28">
@@ -956,49 +1049,38 @@ export function LineStickersView() {
           </motion.div>
         </div>
 
-        {/* ─── LIVE PORTFOLIO SHOWCASE (SET 1 & SET 2) ─── */}
+        {/* ─── LIVE PORTFOLIO SHOWCASE (5 REAL PRODUCTION SETS) ─── */}
         <div className="mb-24 rounded-3xl border border-white/10 bg-slate-900/75 backdrop-blur-xl p-6 sm:p-10 shadow-[0_0_60px_rgba(0,0,0,0.5)]">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 pb-6 border-b border-white/10">
+          <div className="flex flex-col gap-6 mb-8 pb-6 border-b border-white/10">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06C755]/15 border border-[#06C755]/30 text-[#4ade80] text-xs font-prompt font-bold mb-2">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 <span>REAL PRODUCTION GALLERY • ผลงานจริงที่ผ่านระบบ LINE Creators Market</span>
               </div>
               <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
-                ตัวอย่างผลงานจริง 16 แอ็กชัน (คมชัดทุกคำ • ไดคัทเนี้ยบทุกรูป)
+                ตัวอย่างผลงานจริง 5 สไตล์ (คนจริง • สัตว์เลี้ยง • มาสคอต 3D)
               </h2>
               <p className="font-prompt text-xs sm:text-sm text-white/60 mt-1">
-                คลิกสลับดูตัวอย่างทั้ง 2 สไตล์: ชุดครูดนตรีสากลสายลุย และชุดคำพูดทำงานรายวัน
+                คลิกสลับดูตัวอย่างครบทุกแนว: คมชัดทุกคำ • ไดคัทเนี้ยบทุกรูป • รองรับทั้ง 16 และ 24 แอ็กชัน
               </p>
             </div>
 
-            {/* Switch Tabs */}
+            {/* Switch Tabs (5 Real Sets) */}
             <div className="flex flex-wrap items-center gap-2.5">
-              <button
-                type="button"
-                onClick={() => setActivePortfolioTab("set2")}
-                className={`px-4 py-2.5 rounded-xl font-prompt text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
-                  activePortfolioTab === "set2"
-                    ? "bg-linear-to-r from-[#06C755] to-emerald-500 text-zinc-950 shadow-[0_0_20px_rgba(6,199,85,0.35)]"
-                    : "bg-white/5 text-white/70 border border-white/10 hover:bg-white/10"
-                }`}
-              >
-                <Music className="w-4 h-4" />
-                <span>ชุดที่ 2: ครูดนตรีสากลสายลุย (ID: 49349839)</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActivePortfolioTab("set1")}
-                className={`px-4 py-2.5 rounded-xl font-prompt text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
-                  activePortfolioTab === "set1"
-                    ? "bg-linear-to-r from-cyan-400 to-blue-500 text-zinc-950 shadow-[0_0_20px_rgba(6,182,212,0.35)]"
-                    : "bg-white/5 text-white/70 border border-white/10 hover:bg-white/10"
-                }`}
-              >
-                <Smile className="w-4 h-4" />
-                <span>ชุดที่ 1: Daily Expressions (On Sale บน LINE STORE)</span>
-              </button>
+              {PORTFOLIO_SETS.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActivePortfolioTab(item.id)}
+                  className={`px-4 py-2.5 rounded-xl font-prompt text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
+                    activePortfolioTab === item.id
+                      ? item.activeTabClass
+                      : "bg-white/5 text-white/75 border border-white/10 hover:bg-white/10"
+                  }`}
+                >
+                  <span>{item.tabLabel}</span>
+                </button>
+              ))}
             </div>
           </div>
 
@@ -1013,46 +1095,38 @@ export function LineStickersView() {
               <div>
                 <div className="flex flex-wrap items-center gap-2">
                   <h3 className="font-prompt text-base sm:text-lg font-extrabold text-white">
-                    {activePortfolioTab === "set2"
-                      ? "iAon - ครูดนตรีสากลสายลุย (iAon - Western Music Teacher)"
-                      : "iAon - Daily Expressions (ไอ้อ้น สติกเกอร์พูดได้รายวัน)"}
+                    {activePortfolio.title}
                   </h3>
                   <span
                     className={`px-2.5 py-0.5 rounded-full text-[11px] font-prompt font-bold ${
-                      activePortfolioTab === "set1"
+                      activePortfolio.isLive
                         ? "bg-[#06C755]/20 text-[#4ade80] border border-[#06C755]/40"
                         : "bg-amber-500/20 text-amber-300 border border-amber-500/40"
                     }`}
                   >
-                    {activePortfolioTab === "set1"
-                      ? "🟢 ON SALE บน LINE STORE"
-                      : "⏳ ส่งตรวจ LINE Creators แล้ว (ID: 49349839)"}
+                    {activePortfolio.statusBadge}
                   </span>
                 </div>
                 <p className="font-prompt text-xs text-white/60 mt-1">
-                  มาตรฐานไฟล์แท้: 16 รูป (`370×320 px`) + รูปปก `main.png` (`240×240 px`) + ไอคอนแท็บ `tab.png` (`96×74 px`)
+                  มาตรฐานไฟล์แท้: {activeCaptions.length} รูป (`370×320 px`) + รูปปก `main.png` (`240×240 px`) + ไอคอนแท็บ `tab.png` (`96×74 px`)
                 </p>
               </div>
             </div>
 
             <a
-              href={
-                activePortfolioTab === "set1"
-                  ? "https://line.me/S/sticker/38143374"
-                  : "https://line.me/S/shop/sticker/author/6844942"
-              }
+              href={activePortfolio.storeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2.5 rounded-xl bg-[#06C755]/20 hover:bg-[#06C755]/30 border border-[#06C755]/40 text-[#4ade80] font-prompt text-xs font-bold flex items-center gap-2 transition-all shrink-0"
             >
-              <span>เปิดดูร้าน iAon Tech บน LINE STORE</span>
+              <span>{activePortfolio.isLive ? "เปิดดูชุดนี้บน LINE STORE" : "เปิดดูร้าน iAon Tech บน LINE STORE"}</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
 
-          {/* 16 Sticker Grid */}
+          {/* Dynamic 16 / 24 Sticker Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3.5">
-            {Array.from({ length: 16 }, (_, idx) => {
+            {Array.from({ length: activeCaptions.length }, (_, idx) => {
               const numStr = String(idx + 1).padStart(2, "0");
               const caption = activeCaptions[idx] || `แอ็กชัน #${numStr}`;
               return (
