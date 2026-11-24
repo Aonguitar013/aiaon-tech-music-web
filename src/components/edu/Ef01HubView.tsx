@@ -971,72 +971,88 @@ export function Ef01HubView() {
         </section>
 
         {/* ============================================================
-            SECTION 4: BUILT-IN CROSS-SELL (EDU-MU01 + LAUNCH BUNDLE)
+            SECTION 4: BUILT-IN CROSS-SELL (RT01 LIVE + MEGA BUNDLE 3 BOOKS)
         ============================================================ */}
-        <section className="rounded-3xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-950/35 via-slate-900/95 to-indigo-950/45 p-5 sm:p-8 shadow-xl">
+        <section className="rounded-3xl border border-rose-400/30 bg-gradient-to-br from-rose-950/35 via-slate-900/95 to-fuchsia-950/40 p-5 sm:p-8 shadow-xl space-y-5">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
             <div className="md:col-span-4 flex justify-center">
               <div className="relative flex items-center justify-center">
-                <div className="rounded-full border-2 border-fuchsia-400/50 bg-[#fffdf7] p-3 w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center shadow-[0_12px_28px_rgba(232,121,249,0.28)] overflow-hidden">
+                <div className="rounded-full border-2 border-rose-400/50 bg-[#fffdf7] p-3 w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center shadow-[0_12px_28px_rgba(251,113,133,0.28)] overflow-hidden">
                   <img
-                    src="/edu/khaotom-3d.webp"
-                    alt="Khao Tom Music 3D"
+                    src="/edu/mami-3d.webp"
+                    alt="Mama Mami 3D Routine Kit"
                     className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
-                <span className="absolute -bottom-3 rounded-full bg-fuchsia-500 px-3 py-1 text-xs font-bold text-white shadow-lg whitespace-nowrap">
-                  EDU-MU01 • {lang === "th" ? "กำลังผลิต" : "COMING SOON"}
+                <span className="absolute -bottom-3 rounded-full bg-emerald-500 px-3 py-1 text-xs font-bold text-slate-950 shadow-lg whitespace-nowrap">
+                  EDU-RT01 • {lang === "th" ? "พร้อมใช้งานแล้ว!" : "LIVE NOW!"}
                 </span>
               </div>
             </div>
 
             <div className="md:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/35 bg-fuchsia-500/15 px-3 py-1 text-xs font-semibold text-fuchsia-200">
+              <div className="inline-flex items-center gap-2 rounded-full border border-rose-400/35 bg-rose-500/15 px-3 py-1 text-xs font-semibold text-rose-200">
                 <Music className="w-3.5 h-3.5" />
                 <span>
                   {lang === "th"
-                    ? "NEXT RELEASE • สินค้าตัวที่ 2 ในจักรวาล iAon Edu-Verse"
-                    : "NEXT RELEASE • iAon EDU-VERSE BLUE OCEAN EDITION"}
+                    ? "PAIR & SAVE • ชุดสร้างวินัย 30 วัน + ดนตรีน้องข้าวต้ม"
+                    : "PAIR & SAVE • 30-DAY ROUTINE KIT + MUSIC ADVENTURE"}
                 </span>
               </div>
 
               <h2 className="text-xl sm:text-2xl font-bold text-white">
                 {lang === "th"
-                  ? "สนุกกับจังหวะและโน้ตดนตรีกับน้องข้าวต้ม (+ 6 เพลง/เสียงจริง QR!)"
-                  : "Khao Tom's Music & Rhythm Adventure (+ 6 Real QR Audio Tracks!)"}
+                  ? "ชุดสร้างวินัย & กิจวัตร 30 วันกับแม่ใหญ่ (EDU-RT01) เปิดให้ลองฟรี 5 หน้าแล้ว!"
+                  : "Mama Mami's 30-Day Routine Kit (EDU-RT01) — 5-Page Freebie Now Live!"}
               </h2>
 
               <p className="text-sm text-white/75 leading-relaxed">
                 {lang === "th"
-                  ? "ลบจุดอ่อนใบงานดนตรีแบบกระดาษใบ้! สแกน QR ฟังเสียงดัง-เบา สูง-ต่ำ, ปรบมือตามจังหวะจริง 70/95 BPM, เกมทายเสียงเครื่องดนตรี 8 ชนิด และเพลงธีมน้องข้าวต้ม พ่อแม่ไม่รู้ดนตรีก็สอนลูกสนุกได้ใน 30 วินาที"
-                  : "No more silent music worksheets! Scan QR codes for Loud/Soft & Pitch quizzes, 70/95 BPM rhythm tracks, 8 real instrument sounds, and Khao Tom's theme song — designed by a real music teacher."}
+                  ? "ฝึกสมอง EF คู่กับการสร้างวินัยกิจวัตรประจำวัน! ครบ 5-in-1 ทั้งบอร์ดเช้า-เย็น-ก่อนนอน, การ์ดตีนตุ๊กแก 24 ใบ, ขวดโหล 20 ดาว, คูปองรางวัล 8 ใบ และมุมสงบใจ SEL พร้อมจับคู่เหมาครบ 3 เล่มกับน้องข้าวต้มดนตรี (EDU-MU01)"
+                  : "Pair Brain EF with calm daily habits! Complete 5-in-1 Routine Boards, 24 Velcro Cards, 20-Star Jar, 8 Reward Coupons & SEL Calm-Down Corner — or grab all 3 books in our Launch Mega Bundle."}
               </p>
+
+              <div className="flex flex-wrap gap-2.5">
+                <Link
+                  href="/edu/rt01"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-rose-400 hover:bg-rose-300 px-4 py-2.5 text-sm font-bold text-slate-950 transition-colors"
+                >
+                  <span>
+                    {lang === "th"
+                      ? "ไปลองเล่น EDU-RT01 (แจกฟรี 5 หน้า)"
+                      : "Explore EDU-RT01 (Free 5-Page Sample)"}
+                  </span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
 
               <div className="rounded-2xl border border-amber-400/30 bg-amber-400/10 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <div className="text-xs font-bold text-amber-300 uppercase tracking-wide">
                     {lang === "th"
-                      ? "🔥 โปรจองแพ็กคู่สุดคุ้ม (EF01 + MU01)"
-                      : "🔥 Launch Duo Bundle (EF01 + MU01)"}
+                      ? "🔥 Mega Bundle ครบ 3 เล่ม (EF01 + RT01 + MU01)"
+                      : "🔥 3-Book Launch Mega Bundle (EF01 + RT01 + MU01)"}
                   </div>
                   <div className="text-sm text-white/90">
                     {lang === "th"
-                      ? "รับ EF01 ไปเล่นก่อนทันที + ส่ง MU01 ทันทีที่คลอด เพียง 199 ฿ (จากปกติ 228 ฿)"
-                      : "Get EF01 today + receive MU01 on launch day for only 199 THB ($8.99)"}
+                      ? "รับไฟล์ PDF ครบ 3 เล่ม (96 หน้า) ทันที + ปลดล็อก 6 แทร็กเสียง MU01 ฟรีบนเว็บ เพียง 249 ฿ (จาก 327 ฿)"
+                      : "Get all 3 PDFs (96 pages) today + automatic unlock for MU01's 6 audio tracks for only 249 THB ($11.99)"}
                   </div>
                 </div>
                 <a
                   href={getEduOrderLineUrl({
-                    sku: "EDU-MU01",
-                    edition: "BUNDLE",
+                    sku: "EDU-EF01",
+                    edition: "MEGA_BUNDLE",
                     lang,
                   })}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="shrink-0 inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 px-4 py-2.5 text-sm font-bold text-slate-950 transition-colors"
                 >
-                  <span>{lang === "th" ? "จองแพ็กคู่ทาง LINE" : "Reserve Bundle"}</span>
+                  <span>
+                    {lang === "th" ? "สั่งเหมา 3 เล่ม (249 ฿)" : "Order 3-Pack"}
+                  </span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
