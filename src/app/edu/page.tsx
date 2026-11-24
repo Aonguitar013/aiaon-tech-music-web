@@ -16,13 +16,13 @@ import { EDU_CATALOG, getEduOrderLineUrl } from "@/lib/eduCatalog";
 
 export const metadata: Metadata = {
   title:
-    "iAon Edu-Verse — สื่อการสอน Hybrid 3 ชุดเปิดตัว (EF + สร้างวินัย 30 วัน + ดนตรี QR)",
+    "iAon Edu-Verse — สื่อการสอน Hybrid ครบ 4 ชุดเปิดตัว (EF + วินัย 30 วัน + Busy Book + ดนตรี)",
   description:
-    "คลังสื่อการสอนดิจิทัลแบบ Hybrid กระดาษคู่ QR Code มาตรฐานครูตัวจริง Zero AI-Slop ครบ 3 ชุดเปิดตัว: น้องแซลมอน EF, แม่ใหญ่ชุดสร้างวินัย 30 วัน และน้องข้าวต้มดนตรี แจกฟรีรวม 10 หน้า พร้อม Mega Bundle 3 เล่ม 249 ฿",
+    "คลังสื่อการสอนดิจิทัลแบบ Hybrid กระดาษคู่ QR Code มาตรฐานครูตัวจริง Zero AI-Slop ครบ 4 ชุดเปิดตัว: น้องแซลมอน EF, แม่ใหญ่สร้างวินัย 30 วัน, น้องชาบู Busy Book 45 การ์ด และน้องข้าวต้มดนตรี แจกฟรีรวม 15 หน้า!",
   openGraph: {
-    title: "iAon Edu-Verse — สื่อการสอน Hybrid ครบ 3 ชุดโดยแก๊ง 6 แมว & ครูอ้น",
+    title: "iAon Edu-Verse — สื่อการสอน Hybrid ครบ 4 ชุดโดยแก๊ง 6 แมว & ครูอ้น",
     description:
-      "ใบงานฝึก EF, ชุดสร้างวินัย 30 วันตีนตุ๊กแก และดนตรีเด็กเล็ก Hybrid QR พร้อม Focus/Routine Timer และแจกฟรี 10 หน้า",
+      "ใบงานฝึก EF, ชุดสร้างวินัย 30 วัน, Busy Book ตีนตุ๊กแก 45 การ์ด & บอร์ดแปรงฟัน และดนตรีเด็กเล็ก แจกฟรีรวม 15 หน้า!",
     url: "https://www.aiaon.tech/edu",
     images: [
       {
@@ -46,12 +46,12 @@ export default function EduVerseHubPage() {
             <div className="lg:col-span-6 p-6 sm:p-10 space-y-5">
               <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/35 bg-amber-400/10 px-3.5 py-1 text-xs font-bold text-amber-300">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>iAon EDU-VERSE • 3 LAUNCH KITS (96 PAGES)</span>
+                <span>iAon EDU-VERSE • 4 LAUNCH KITS (128 PAGES)</span>
               </span>
 
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
                 สื่อการสอน Hybrid{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-rose-300 to-cyan-300">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-pink-300 to-cyan-300">
                   กระดาษ + QR มีชีวิต
                 </span>
               </h1>
@@ -65,24 +65,31 @@ export default function EduVerseHubPage() {
               <div className="flex flex-wrap gap-2.5 pt-1">
                 <Link
                   href="/edu/ef01"
-                  className="inline-flex items-center gap-2 rounded-2xl bg-amber-400 hover:bg-amber-300 px-4 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-amber-500/20 transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-2xl bg-amber-400 hover:bg-amber-300 px-3.5 py-2.5 text-xs sm:text-sm font-bold text-slate-950 shadow-lg shadow-amber-500/20 transition-colors"
                 >
                   <span>EF01 แซลมอน (ฟรี 5 หน้า)</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/edu/rt01"
-                  className="inline-flex items-center gap-2 rounded-2xl bg-rose-400 hover:bg-rose-300 px-4 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-rose-500/20 transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-2xl bg-rose-400 hover:bg-rose-300 px-3.5 py-2.5 text-xs sm:text-sm font-bold text-slate-950 shadow-lg shadow-rose-500/20 transition-colors"
                 >
                   <span>RT01 แม่ใหญ่ (ฟรี 5 หน้า)</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
+                <Link
+                  href="/edu/bb01"
+                  className="inline-flex items-center gap-1.5 rounded-2xl bg-pink-400 hover:bg-pink-300 px-3.5 py-2.5 text-xs sm:text-sm font-bold text-slate-950 shadow-lg shadow-pink-500/20 transition-colors"
+                >
+                  <span>BB01 ชาบู (ฟรี 5 หน้า)</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
                 <a
                   href="#mega-bundle"
-                  className="inline-flex items-center gap-2 rounded-2xl border border-amber-400/40 bg-amber-400/10 hover:bg-amber-400/20 px-4 py-3 text-sm font-semibold text-amber-200 transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-2xl border border-amber-400/40 bg-amber-400/10 hover:bg-amber-400/20 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-amber-200 transition-colors"
                 >
                   <Gift className="w-4 h-4" />
-                  <span>โปรเหมา 3 เล่ม (249 ฿)</span>
+                  <span>โปรเหมาสุดคุ้ม (249฿ / 319฿)</span>
                 </a>
               </div>
             </div>
@@ -103,12 +110,12 @@ export default function EduVerseHubPage() {
             {
               icon: QrCode,
               title: "Hybrid QR บนกระดาษ",
-              desc: "สแกนเปิด Focus Timer, Routine Timer หรือฟังเสียงดนตรีจริงได้ทันที ไม่มีลิงก์ตาย",
+              desc: "สแกนเปิด Focus Timer, Routine Timer, นาฬิกาแปรงฟัน 2 นาที หรือฟังเสียงดนตรีได้ทันที",
             },
             {
               icon: ShieldCheck,
               title: "Zero AI-Slop 100%",
-              desc: "เขาวงกต ซูโดกุ บอร์ดตีนตุ๊กแก และโน้ตดนตรีตรวจถูกต้องตามหลักวิชาการทุกหน้า",
+              desc: "เขาวงกต ซูโดกุ บอร์ดตีนตุ๊กแก 45 ชิ้น และโน้ตดนตรีตรวจถูกต้องทุกหน้า",
             },
             {
               icon: Printer,
@@ -139,23 +146,23 @@ export default function EduVerseHubPage() {
           })}
         </section>
 
-        {/* 3-SKU Catalog Grid */}
+        {/* 4-SKU Balanced 2x2 Catalog Grid */}
         <section className="space-y-5">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <h2 className="text-2xl font-bold text-white">
-                คลังสื่อการสอนครบ 3 เล่มเปิดตัว (SKU Catalog)
+                คลังสื่อการสอนครบ 4 เล่มเปิดตัว (SKU Catalog)
               </h2>
               <p className="text-sm text-white/65">
-                เลือกชุดสื่อเพื่อเปิดเครื่องมือ Hybrid QR บนเว็บ หรือดาวน์โหลดชุดทดลองฟรี (รวม 10 หน้า)
+                เลือกชุดสื่อเพื่อเปิดเครื่องมือ Hybrid QR บนเว็บ หรือดาวน์โหลดชุดทดลองฟรี (รวม 15 หน้า!)
               </p>
             </div>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/35 bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-300">
-              <span>2 เล่มพร้อมใช้เต็มระบบ • 1 เล่มรออัปเสียง</span>
+              <span>3 เล่มพร้อมใช้เต็มระบบ • 1 เล่มรออัปเสียง</span>
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {EDU_CATALOG.map((item) => {
               const isLive = item.status === "live";
               const cardBorder =
@@ -163,24 +170,30 @@ export default function EduVerseHubPage() {
                   ? "border-amber-400/40 bg-gradient-to-b from-amber-500/10 to-slate-950"
                   : item.accent === "rose"
                     ? "border-rose-400/40 bg-gradient-to-b from-rose-500/10 to-slate-950"
-                    : "border-fuchsia-400/30 bg-gradient-to-b from-fuchsia-500/10 to-slate-950";
+                    : item.accent === "pink"
+                      ? "border-pink-400/40 bg-gradient-to-b from-pink-500/10 to-slate-950"
+                      : "border-fuchsia-400/30 bg-gradient-to-b from-fuchsia-500/10 to-slate-950";
 
               const ringAccent =
                 item.accent === "amber"
                   ? "ring-amber-400/60"
                   : item.accent === "rose"
                     ? "ring-rose-400/60"
-                    : "ring-fuchsia-400/60";
+                    : item.accent === "pink"
+                      ? "ring-pink-400/60"
+                      : "ring-fuchsia-400/60";
 
               const ctaBg =
                 item.accent === "rose"
                   ? "bg-rose-400 hover:bg-rose-300 text-slate-950"
-                  : "bg-amber-400 hover:bg-amber-300 text-slate-950";
+                  : item.accent === "pink"
+                    ? "bg-pink-400 hover:bg-pink-300 text-slate-950"
+                    : "bg-amber-400 hover:bg-amber-300 text-slate-950";
 
               return (
                 <div
                   key={item.sku}
-                  className={`rounded-3xl border p-5 flex flex-col justify-between gap-5 shadow-xl ${cardBorder}`}
+                  className={`rounded-3xl border p-5 sm:p-6 flex flex-col justify-between gap-5 shadow-xl ${cardBorder}`}
                 >
                   <div className="space-y-4">
                     {/* Top badges */}
@@ -199,41 +212,47 @@ export default function EduVerseHubPage() {
                       </span>
                     </div>
 
-                    {/* Real Mockup Cover (unobstructed 1:1 preview) */}
-                    <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-slate-900 aspect-square">
-                      <img
-                        src={item.coverImage}
-                        alt={item.titleTh}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-
-                    {/* 3D Mascot Avatar + Title & Description */}
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className={`w-12 h-12 rounded-full bg-[#fffdf7] p-1 ring-2 ${ringAccent} shadow-md overflow-hidden flex items-center justify-center shrink-0`}
-                        >
-                          <img
-                            src={item.heroImage}
-                            alt={item.characterNameEn}
-                            className="w-full h-full object-contain"
-                            loading="lazy"
-                          />
-                        </div>
-                        <div className="min-w-0">
-                          <h3 className="text-base sm:text-lg font-bold text-white leading-snug">
-                            {item.titleTh}
-                          </h3>
-                          <p className="text-xs font-medium text-amber-200/85 mt-0.5">
-                            {item.ageRangeTh} • {item.pages} หน้าเต็ม (4 PDF)
-                          </p>
-                        </div>
+                    {/* Horizontal split on desktop inside card for crisp scannability */}
+                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                      <div className="sm:col-span-5 rounded-2xl overflow-hidden border border-white/10 bg-slate-900 aspect-square">
+                        <img
+                          src={item.coverImage}
+                          alt={item.titleTh}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
                       </div>
-                      <p className="text-xs text-white/65 leading-relaxed">
-                        {item.subtitleTh}
-                      </p>
+
+                      <div className="sm:col-span-7 space-y-2.5">
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`w-12 h-12 rounded-full bg-[#fffdf7] p-1 ring-2 ${ringAccent} shadow-md overflow-hidden flex items-center justify-center shrink-0`}
+                          >
+                            <img
+                              src={item.heroImage}
+                              alt={item.characterNameEn}
+                              className="w-full h-full object-contain"
+                              loading="lazy"
+                            />
+                          </div>
+                          <div className="min-w-0">
+                            <div className="text-[11px] font-semibold text-white/60">
+                              {item.characterNameTh}
+                            </div>
+                            <div className="text-xs font-semibold text-amber-200">
+                              {item.ageRangeTh}
+                            </div>
+                          </div>
+                        </div>
+
+                        <h3 className="text-base sm:text-lg font-bold text-white leading-snug">
+                          {item.titleTh}
+                        </h3>
+
+                        <p className="text-xs text-white/65 leading-relaxed">
+                          {item.subtitleTh}
+                        </p>
+                      </div>
                     </div>
                   </div>
 
@@ -246,6 +265,7 @@ export default function EduVerseHubPage() {
                           {item.priceHomeThb} ฿
                         </strong>
                       </span>
+                      <span className="text-white/45">• {item.pages} หน้า (4 PDF) •</span>
                       <span>
                         Class{" "}
                         <strong className="text-base text-sky-300">
@@ -267,7 +287,7 @@ export default function EduVerseHubPage() {
                         <a
                           href={getEduOrderLineUrl({
                             sku: item.sku,
-                            edition: "MEGA_BUNDLE",
+                            edition: "ALL4_BUNDLE",
                             lang: "th",
                           })}
                           target="_blank"
@@ -275,7 +295,7 @@ export default function EduVerseHubPage() {
                           className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-fuchsia-400/45 bg-fuchsia-500/20 hover:bg-fuchsia-500/30 px-4 py-2.5 text-sm font-semibold text-fuchsia-100 transition-colors"
                         >
                           <FaLine className="w-4 h-4 text-[#06C755]" />
-                          <span>รับพร้อม Mega Bundle 3 เล่ม (249 ฿)</span>
+                          <span>รับพร้อม All-4 Bundle ครบ 4 เล่ม (319 ฿)</span>
                         </a>
                         <p className="text-[11px] text-center text-fuchsia-200/75">
                           * ไฟล์ PDF 32 หน้าเสร็จแล้ว • 6 แทร็กเสียงอัปเดตฟรีบนเว็บเมื่อเปิดระบบ
@@ -289,10 +309,10 @@ export default function EduVerseHubPage() {
           </div>
         </section>
 
-        {/* Mega Bundle 3-Book Conversion Section */}
+        {/* Honest Launch Bundles Section */}
         <section
           id="mega-bundle"
-          className="rounded-3xl border border-amber-400/35 bg-gradient-to-br from-amber-950/35 via-slate-900/95 to-rose-950/35 p-6 sm:p-8 shadow-2xl space-y-6"
+          className="rounded-3xl border border-amber-400/35 bg-gradient-to-br from-amber-950/35 via-slate-900/95 to-pink-950/35 p-6 sm:p-8 shadow-2xl space-y-6"
         >
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div className="space-y-2 max-w-2xl">
@@ -308,12 +328,12 @@ export default function EduVerseHubPage() {
               </p>
             </div>
 
-            {/* Mini 3-book visual stack */}
-            <div className="flex items-center gap-2 shrink-0">
+            {/* Mini 4-book visual stack */}
+            <div className="flex items-center gap-2 shrink-0 flex-wrap">
               {EDU_CATALOG.map((item) => (
                 <div
                   key={item.sku}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border border-white/20 shadow-lg bg-slate-900"
+                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border border-white/20 shadow-lg bg-slate-900"
                 >
                   <img
                     src={item.coverImage}
@@ -327,31 +347,32 @@ export default function EduVerseHubPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* Option 1: Mega Bundle 3 Books (249 THB) */}
-            <div className="rounded-2xl border border-amber-400/50 bg-slate-950/80 p-5 sm:p-6 flex flex-col justify-between gap-5 shadow-xl">
+            {/* Option 1: 3-Book Live Trio Pack (249 THB — 100% Live Today!) */}
+            <div className="rounded-2xl border border-emerald-400/50 bg-slate-950/80 p-5 sm:p-6 flex flex-col justify-between gap-5 shadow-xl">
               <div className="space-y-4">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="rounded-full bg-amber-400 px-3 py-1 text-xs font-extrabold text-slate-950">
-                    🔥 แนะนำ • คุ้มสุด (ประหยัด 78 ฿)
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-400 px-3 py-1 text-xs font-extrabold text-slate-950">
+                    <Zap className="w-3.5 h-3.5" />
+                    <span>แนะนำ • เว็บ QR พร้อมใช้ 100% วันนี้!</span>
                   </span>
-                  <span className="text-xs font-mono text-amber-200">
+                  <span className="text-xs font-mono text-emerald-200">
                     96 หน้า • 12 PDF
                   </span>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-white">
-                    Mega Bundle ครบ 3 เล่ม (Home Edition)
+                    แพ็ก 3 เล่มพร้อมใช้ทันที (EF01 + RT01 + BB01)
                   </h3>
                   <div className="mt-2 flex items-baseline gap-2.5">
-                    <span className="text-4xl font-extrabold text-amber-300">
+                    <span className="text-4xl font-extrabold text-emerald-300">
                       249 ฿
                     </span>
                     <span className="text-sm text-white/45 line-through">
-                      327 ฿
+                      297 ฿
                     </span>
                     <span className="text-xs text-white/60">
-                      (เฉลี่ยเพียงเล่มละ 83 ฿)
+                      (ประหยัด 48 ฿ • เฉลี่ยเล่มละ 83 ฿)
                     </span>
                   </div>
                 </div>
@@ -359,9 +380,68 @@ export default function EduVerseHubPage() {
                 <ul className="space-y-2 text-sm text-white/85">
                   {[
                     "EDU-EF01 น้องแซลมอน EF 32 หน้า + เว็บ Focus Timer ใช้ได้ทันที",
-                    "EDU-RT01 แม่ใหญ่สร้างวินัย 30 วัน 32 หน้า (ขอบ 20mm) + Routine Timer ใช้ได้ทันที",
-                    "EDU-MU01 น้องข้าวต้มดนตรี 32 หน้า รับ PDF ทันที + ปลดล็อก 6 แทร็กเสียงฟรีบนเว็บเมื่อเปิดระบบ",
-                    "ครบ 12 ไฟล์ PDF (TH/EN × สี/ขาวดำ) ปริ้นท์ซ้ำได้ตลอดชีพในครอบครัว",
+                    "EDU-RT01 แม่ใหญ่สร้างวินัย 30 วัน 32 หน้า + Routine Timer ใช้ได้ทันที",
+                    "EDU-BB01 น้องชาบู Busy Book 45 การ์ด + บอร์ดแปรงฟัน + Brush Timer ใช้ได้ทันที",
+                    "ครบ 12 ไฟล์ PDF (TH/EN × สี/ขาวดำ) ไม่มีเล่มรออัปเดต พร้อมลุยวันนี้เลย!",
+                  ].map((line) => (
+                    <li key={line} className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <a
+                href={getEduOrderLineUrl({
+                  sku: "EDU-EF01",
+                  edition: "TRIO_LIVE",
+                  lang: "th",
+                })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] px-5 py-3.5 text-base font-bold text-white shadow-lg shadow-emerald-500/25 transition-colors"
+              >
+                <FaLine className="w-5 h-5" />
+                <span>สั่งซื้อแพ็ก 3 เล่มพร้อมใช้ (249 ฿) ทาง LINE</span>
+              </a>
+            </div>
+
+            {/* Option 2: All-4 Universe Bundle (319 THB — Save 107 THB!) */}
+            <div className="rounded-2xl border border-amber-400/45 bg-slate-950/75 p-5 sm:p-6 flex flex-col justify-between gap-5 shadow-xl">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="rounded-full bg-amber-400 px-3 py-1 text-xs font-extrabold text-slate-950">
+                    🔥 เหมาครบจักรวาล 4 เล่ม (ประหยัด 107 ฿)
+                  </span>
+                  <span className="text-xs font-mono text-amber-200">
+                    128 หน้า • 16 PDF
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-white">
+                    All-4 Universe Bundle (EF01 + RT01 + BB01 + MU01)
+                  </h3>
+                  <div className="mt-2 flex items-baseline gap-2.5">
+                    <span className="text-4xl font-extrabold text-amber-300">
+                      319 ฿
+                    </span>
+                    <span className="text-sm text-white/45 line-through">
+                      426 ฿
+                    </span>
+                    <span className="text-xs text-white/60">
+                      (เฉลี่ยเพียงเล่มละ 79.75 ฿!)
+                    </span>
+                  </div>
+                </div>
+
+                <ul className="space-y-2 text-sm text-white/85">
+                  {[
+                    "ได้ครบทั้ง 3 เล่มพร้อมใช้ทันที (EF01 + RT01 + BB01 = 96 หน้า)",
+                    "บวกเล่มที่ 4 EDU-MU01 น้องข้าวต้มดนตรี 32 หน้า รับไฟล์ PDF ทันที",
+                    "ปลดล็อก 6 แทร็กเสียงจริงของ MU01 ฟรีอัตโนมัติบนเว็บเมื่อเปิดระบบ",
+                    "ครบ 16 ไฟล์ PDF (TH/EN × สี/ขาวดำ) ปริ้นท์ซ้ำได้ตลอดชีพในครอบครัว",
                   ].map((line) => (
                     <li key={line} className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
@@ -374,75 +454,15 @@ export default function EduVerseHubPage() {
               <a
                 href={getEduOrderLineUrl({
                   sku: "EDU-EF01",
-                  edition: "MEGA_BUNDLE",
+                  edition: "ALL4_BUNDLE",
                   lang: "th",
                 })}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] px-5 py-3.5 text-base font-bold text-white shadow-lg shadow-emerald-500/25 transition-colors"
-              >
-                <FaLine className="w-5 h-5" />
-                <span>สั่งซื้อ Mega Bundle 3 เล่ม (249 ฿) ทาง LINE</span>
-              </a>
-            </div>
-
-            {/* Option 2: Live Duo Pack EF01 + RT01 (179 THB) */}
-            <div className="rounded-2xl border border-rose-400/35 bg-slate-950/70 p-5 sm:p-6 flex flex-col justify-between gap-5">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-rose-400/20 border border-rose-400/40 px-3 py-1 text-xs font-bold text-rose-200">
-                    <Zap className="w-3.5 h-3.5" />
-                    <span>พร้อมใช้งานเว็บ QR 100% วันนี้</span>
-                  </span>
-                  <span className="text-xs font-mono text-rose-200">
-                    64 หน้า • 8 PDF
-                  </span>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-white">
-                    แพ็กคู่พร้อมใช้ทันที EF01 + RT01 (Home)
-                  </h3>
-                  <div className="mt-2 flex items-baseline gap-2.5">
-                    <span className="text-4xl font-extrabold text-rose-300">
-                      179 ฿
-                    </span>
-                    <span className="text-sm text-white/45 line-through">
-                      198 ฿
-                    </span>
-                    <span className="text-xs text-white/60">
-                      (2 เล่มระบบเว็บครบแล้ว 100%)
-                    </span>
-                  </div>
-                </div>
-
-                <ul className="space-y-2 text-sm text-white/85">
-                  {[
-                    "EDU-EF01 ฝึกเชาวน์ปัญญา EF & โค้ดดิ้งไร้จอ 32 หน้า + Focus Timer",
-                    "EDU-RT01 ชุดสร้างวินัย 30 วัน & ตีนตุ๊กแก 32 หน้า + Routine Timer",
-                    "เหมาะสำหรับพ่อแม่ที่ต้องการเฉพาะชุดที่เว็บ QR ใช้งานครบ 100% ทันที",
-                    "ครบ 8 ไฟล์ PDF (TH/EN × สี/ขาวดำ) ปริ้นท์ A4 & US Letter ไม่ตกขอบ",
-                  ].map((line) => (
-                    <li key={line} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
-                      <span>{line}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <a
-                href={getEduOrderLineUrl({
-                  sku: "EDU-EF01",
-                  edition: "DUO_LIVE",
-                  lang: "th",
-                })}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-rose-400/50 bg-rose-500/20 hover:bg-rose-500/30 px-5 py-3.5 text-base font-bold text-rose-100 transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-400/60 bg-amber-400/20 hover:bg-amber-400/30 px-5 py-3.5 text-base font-bold text-amber-100 transition-colors"
               >
                 <FaLine className="w-5 h-5 text-[#06C755]" />
-                <span>สั่งซื้อแพ็กคู่ EF01 + RT01 (179 ฿) ทาง LINE</span>
+                <span>สั่งซื้อ All-4 Bundle ครบ 4 เล่ม (319 ฿) ทาง LINE</span>
               </a>
             </div>
           </div>
