@@ -173,6 +173,7 @@ export default function RootLayout({
                     <h3 className="text-white font-bold font-prompt text-lg">Quick Links</h3>
                     <ul className="space-y-2 text-white/50 text-sm font-prompt">
                        <li><a href="/about"    className="hover:text-blue-400 transition-colors duration-200">About Me</a></li>
+                      <li><a href="/edu" className="hover:text-pink-400 text-pink-300 font-semibold transition-colors duration-200">🐾 สื่อการสอนเด็กเล็ก Hybrid QR (iAon Edu-Verse)</a></li>
                       <li><a href="/teacher-prep" className="hover:text-cyan-400 text-cyan-300 font-semibold transition-colors duration-200">🎓 กลุ่ม Telegram ติวสอบครูผู้ช่วย (AI Prep)</a></li>
                       <li><a href="/music-store" className="hover:text-amber-400 text-amber-300 font-semibold transition-colors duration-200">🎵 ร้านค้าเพลงช่วยจำ &amp; BGM คลิป ว.PA</a></li>
                       <li><a href="/student-vault" className="hover:text-pink-400 text-pink-300 font-semibold transition-colors duration-200">🎒 คลังนักเรียน &amp; TCAS</a></li>

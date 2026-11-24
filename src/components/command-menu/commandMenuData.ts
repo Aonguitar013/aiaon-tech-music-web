@@ -16,6 +16,68 @@ export interface CommandMenuItem {
 
 export const COMMAND_MENU_ITEMS: CommandMenuItem[] = [
   {
+    "id": "edu-verse-hub",
+    "title": "iAon Edu-Verse — คลังสื่อการสอนเด็กเล็ก Hybrid QR (ครบ 4 ชุด)",
+    "description": "ใบงาน EF น้องแซลมอน, ชุดสร้างวินัย 30 วันแม่ใหญ่, Busy Book น้องชาบู 45 การ์ด และดนตรีน้องข้าวต้ม (แจกฟรี 15 หน้า!)",
+    "category": "pages",
+    "categoryLabel": "สื่อการสอนเด็กเล็ก",
+    "url": "/edu",
+    "code": "EDU-HUB",
+    "price": "99 - 319 ฿",
+    "badge": "NEW 🐾",
+    "keywords": [
+      "edu",
+      "edu-verse",
+      "สื่อการสอนเด็กเล็ก",
+      "อนุบาล",
+      "ใบงาน",
+      "ef",
+      "busy book",
+      "สร้างวินัย",
+      "ตีนตุ๊กแก",
+      "น้องแซลมอน",
+      "แม่ใหญ่",
+      "น้องชาบู",
+      "น้องข้าวต้ม"
+    ]
+  },
+  {
+    "id": "edu-ef01",
+    "title": "EDU-EF01: นักสืบสมองไวกับน้องแซลมอน (32 หน้า + Focus Timer)",
+    "description": "ฝึก EF 5 ด้าน + โค้ดดิ้งไร้จอ + ซูโดกุภาพ 4x4 พร้อมนาฬิกาจับเวลาสมาธิ 5 นาที & โหลดฟรี 5 หน้า",
+    "category": "pages",
+    "categoryLabel": "สื่อการสอนเด็กเล็ก",
+    "url": "/edu/ef01",
+    "code": "EDU-EF01",
+    "price": "99 / 199 ฿",
+    "badge": "ฟรี 5 หน้า",
+    "keywords": ["ef01", "น้องแซลมอน", "ef", "เชาวน์ปัญญา", "โค้ดดิ้ง", "ซูโดกุ", "focus timer"]
+  },
+  {
+    "id": "edu-rt01",
+    "title": "EDU-RT01: ชุดสร้างวินัย & กิจวัตร 30 วันกับแม่ใหญ่ (32 หน้า + Routine Timer)",
+    "description": "บอร์ดเช้า-เย็น-ก่อนนอน + การ์ดตีนตุ๊กแก 24 ใบ + ขวดโหล 20 ดาว + คูปอง 8 ใบ + มุมสงบใจ SEL & โหลดฟรี 5 หน้า",
+    "category": "pages",
+    "categoryLabel": "สื่อการสอนเด็กเล็ก",
+    "url": "/edu/rt01",
+    "code": "EDU-RT01",
+    "price": "99 / 199 ฿",
+    "badge": "ฟรี 5 หน้า",
+    "keywords": ["rt01", "แม่ใหญ่", "สร้างวินัย", "กิจวัตร", "ขวดโหลดาว", "ตีนตุ๊กแก", "routine timer"]
+  },
+  {
+    "id": "edu-bb01",
+    "title": "EDU-BB01: สมุด Busy Book ลีลามือ & สุขอนามัยกับน้องชาบู (32 หน้า + Brush Timer)",
+    "description": "ลีลามือ 6 หน้า + การ์ดตีนตุ๊กแก 45 ชิ้นติดป้ายหน้า + บอร์ดแปรงฟันไวท์บอร์ด P15 + ล้างมือ 6 ขั้น WHO & โหลดฟรี 5 หน้า",
+    "category": "pages",
+    "categoryLabel": "สื่อการสอนเด็กเล็ก",
+    "url": "/edu/bb01",
+    "code": "EDU-BB01",
+    "price": "99 / 199 ฿",
+    "badge": "ฟรี 5 หน้า",
+    "keywords": ["bb01", "น้องชาบู", "busy book", "ลีลามือ", "แปรงฟัน", "ล้างมือ", "สุขอนามัย", "ตีนตุ๊กแก"]
+  },
+  {
     "id": "service-line-stickers",
     "title": "รับออกแบบสติกเกอร์ LINE คาแรกเตอร์ครู 3D ครบวงจร",
     "description": "ปั้นสติกเกอร์ LINE จากรูปถ่ายจริง 8/16/24 รูป ดูแลส่งตรวจจนวางขายบน LINE STORE + แถมไฟล์ PNG แต่งสไลด์ ว.PA",

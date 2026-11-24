@@ -67,6 +67,15 @@ const routes: RouteItem[] = [
           ]
         : []),
       {
+        name: "สื่อการสอนเด็กเล็ก Hybrid QR (iAon Edu-Verse)",
+        href: "/edu",
+        description: "ใบงาน EF, ชุดสร้างวินัย 30 วัน, Busy Book ตีนตุ๊กแก 45 การ์ด & ดนตรี (แจกฟรี 15 หน้า!)",
+        badge: "ใหม่! 99฿",
+        badgeColor: "pink",
+        icon: Sparkles,
+        hoverColor: "pink",
+      },
+      {
         name: "คลังระบบโรงเรียน & ครู",
         href: "/digital-vault",
         description: "ระบบ Google Apps Script สากล ลดงานเอกสาร แจ้งซ่อม เช็คชื่อ ว.PA",
