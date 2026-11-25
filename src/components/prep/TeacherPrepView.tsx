@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  GraduationCap, Bot, Music, Sparkles, Send, CheckCircle2,
-  XCircle, Clock, 
-  ArrowRight, Zap, 
+  GraduationCap, Bot, Music, Send, CheckCircle2,
+  XCircle, Clock,
+  ArrowRight, Zap,
   Headphones, MessageCircle, Lightbulb, Play, Pause,
   Crown, BookOpen
 } from "lucide-react";
@@ -15,10 +15,6 @@ import { GoldenTicketMockup } from "@/components/prep/GoldenTicketMockup";
 import { PREP_VIP_DATA, PREP_BOT_ONLY_DATA, KRURANK_AI_PRO_DATA, PrepVipProduct } from "@/components/prep/prepDataHelper";
 import { TeacherPrepDetailSection } from "@/components/prep/TeacherPrepDetailSection";
 import { getLineOrderUrl } from "@/lib/line";
-
-/* ─────────────────────────────────────────────────────────────
-   DATA: INTERACTIVE DAILY QUIZ SIMULATOR (3 วิชาหลัก)
-───────────────────────────────────────────────────────────── */
 
 interface QuizItem {
   id: string;
@@ -37,7 +33,7 @@ const SAMPLE_QUIZZES: QuizItem[] = [
     id: "q-morning",
     timeSlot: "🌅 รอบเช้า 07:30 น. • กฎหมายการศึกษา & พ.ร.บ.",
     category: "ภาค ข • กฎหมายการศึกษา",
-    badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+    badgeColor: "bg-cyan-50 text-cyan-800 border-cyan-200",
     question:
       "ข้อใดคือ 'โทษทางวินัยอย่างไม่ร้ายแรง' ตาม พ.ร.บ.ระเบียบข้าราชการครูและบุคลากรทางการศึกษา?",
     options: [
@@ -56,7 +52,7 @@ const SAMPLE_QUIZZES: QuizItem[] = [
     id: "q-noon",
     timeSlot: "☀️ รอบเที่ยง 12:15 น. • วิชาการศึกษา & การออกแบบการเรียนรู้",
     category: "ภาค ข • มาตรฐานวิชาการศึกษา",
-    badgeColor: "bg-purple-500/20 text-purple-300 border-purple-500/30",
+    badgeColor: "bg-purple-50 text-purple-800 border-purple-200",
     question:
       "การออกแบบการจัดการเรียนรู้แบบ Backward Design (เข้าใจด้วยกระบวนการย้อนกลับ) ขั้นตอนแรกสุดที่ครูต้องทำคือข้อใด?",
     options: [
@@ -75,7 +71,7 @@ const SAMPLE_QUIZZES: QuizItem[] = [
     id: "q-night",
     timeSlot: "🌙 รอบค่ำ 20:00 น. • มาตรฐานวิชาชีพครู & จรรยาบรรณ",
     category: "ภาค ข • วินัยและจรรยาบรรณ",
-    badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+    badgeColor: "bg-amber-50 text-amber-800 border-amber-200",
     question:
       "ครูนำผลงานของนักเรียนไปตีพิมพ์เผยแพร่เป็นผลงานของตนเองเพื่อขอเลื่อนวิทยฐานะ เป็นการกระทำที่ผิดจรรยาบรรณต่อสิ่งใดโดยตรงที่สุด?",
     options: [
@@ -91,10 +87,6 @@ const SAMPLE_QUIZZES: QuizItem[] = [
       "🎵 ท่อนฮุกเพลงจำ: 'จรรยาบรรณห้าด้านท่องไว้... ตนเอง วิชาชีพ ผู้รับบริการ ร่วมวิชาชีพ และ สังคมไทย!'",
   },
 ];
-
-/* ─────────────────────────────────────────────────────────────
-   DATA: SAMPLE MNEMONIC SONGS
-───────────────────────────────────────────────────────────── */
 
 interface MnemonicSong {
   id: string;
@@ -143,10 +135,6 @@ const MNEMONIC_SONGS: MnemonicSong[] = [
   },
 ];
 
-/* ─────────────────────────────────────────────────────────────
-   DATA: MEMBERSHIP TIERS
-───────────────────────────────────────────────────────────── */
-
 const PREP_TIERS = [
   {
     id: "free-channel",
@@ -154,8 +142,8 @@ const PREP_TIERS = [
     price: "ฟรี 0 ฿",
     period: "เข้ากลุ่มได้ทันที ไม่มีค่าใช้จ่าย",
     badge: "🟢 เปิดรับสมาชิกใหม่",
-    badgeClass: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
-    borderClass: "border-emerald-500/30 hover:border-emerald-400",
+    badgeClass: "bg-emerald-50 text-emerald-800 border-emerald-200",
+    borderClass: "border-[#E2E8F0] hover:border-emerald-400",
     isPopular: false,
     productData: null,
     features: [
@@ -173,8 +161,8 @@ const PREP_TIERS = [
     price: "290 ฿",
     period: "จ่ายครั้งเดียว • ดูแลยาวจนกว่าจะสอบบรรจุติด!",
     badge: "🎯 สั่งซื้อแยก • เน้นฝึกทำข้อสอบ",
-    badgeClass: "bg-cyan-500/20 text-cyan-300 border-cyan-400 font-bold",
-    borderClass: "border-cyan-500/40 hover:border-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.15)]",
+    badgeClass: "bg-cyan-50 text-cyan-800 border-cyan-200 font-bold",
+    borderClass: "border-[#E2E8F0] hover:border-cyan-400",
     isPopular: false,
     productData: PREP_BOT_ONLY_DATA,
     features: [
@@ -193,8 +181,8 @@ const PREP_TIERS = [
     price: "390 ฿",
     period: "จ่ายครั้งเดียว • กลุ่มติว + เพลง MP3 ตลอดชีพ",
     badge: "👑 แนะนำอันดับ 1 • ประหยัด 99 ฿",
-    badgeClass: "bg-gradient-to-r from-amber-400 to-orange-500 text-zinc-950 border-amber-400 font-black",
-    borderClass: "border-amber-500/70 shadow-[0_0_45px_rgba(245,158,11,0.25)] ring-2 ring-amber-400/40 lg:scale-105",
+    badgeClass: "bg-amber-400 text-[#0F172A] border-amber-500 font-black",
+    borderClass: "border-amber-400 shadow-md ring-2 ring-amber-400/25 lg:scale-[1.02]",
     isPopular: true,
     productData: PREP_VIP_DATA,
     features: [
@@ -213,16 +201,16 @@ const PREP_TIERS = [
     price: "499 ฿",
     period: "จบฤดูกาลสอบ (ตลอดชีพ) • เว็บแอปซ้อมสอบสด",
     badge: "🔥 ใหม่! ซ้อมสอบ AI บนเว็บ",
-    badgeClass: "bg-gradient-to-r from-cyan-400 to-teal-400 text-zinc-950 border-cyan-400 font-black",
-    borderClass: "border-cyan-400/70 shadow-[0_0_45px_rgba(6,182,212,0.25)] ring-2 ring-cyan-400/40 hover:border-cyan-300",
+    badgeClass: "bg-[#EFF6FF] text-[#1D4ED8] border-[#BFDBFE] font-black",
+    borderClass: "border-[#BFDBFE] hover:border-[#2563EB]",
     isPopular: false,
     productData: KRURANK_AI_PRO_DATA,
     features: [
-      "🎮 Web Application ซ้อมสอบ Gamified สไตล์ Cyberpunk เปิดผ่านมือถือได้ทันที ไม่ต้องโหลดแอป",
+      "🎮 Web Application ซ้อมสอบ Gamified เปิดผ่านมือถือได้ทันที ไม่ต้องโหลดแอป",
       "🤖 ครูอ้น AI ติวเตอร์ ชี้จุดดักหลอก 24 ชม. พร้อมสูตรจำด่วนฟันธง 1 ประโยค (ทำข้อสอบไม่อั้นตลอดชีพ)",
       "📜 ครอบคลุม ภาค ก (กฎหมาย วินัย จรรยาบรรณ) และ ภาค ข ครบ 5 วิชาเอกยอดนิยม (ดนตรี, ปฐมวัย, ไทย, คณิต, คอมฯ)",
       "🏆 ทำเนียบจัดอันดับระดับประเทศ (National Leaderboard) เทียบความแม่นยำรายวิชาเอก & เขตพื้นที่การศึกษา",
-      "📸 การ์ดคะแนน Cyberpunk 1080x1920 พร้อมปุ่มแชร์สถิติจริงลง TikTok / Reels / Instagram Story ใน 1 วินาที",
+      "📸 การ์ดคะแนน 1080x1920 พร้อมปุ่มแชร์สถิติจริงลง TikTok / Reels / Instagram Story ใน 1 วินาที",
     ],
     ctaText: "เปิดสิทธิ์ KruRank PRO (499 ฿)",
     isVip: true,
@@ -230,15 +218,10 @@ const PREP_TIERS = [
 ];
 
 export function TeacherPrepView() {
-  // Quiz Simulator State
   const [activeQuizIdx, setActiveQuizIdx] = useState<number>(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
-
-  // Mnemonic Song Player State
   const [activeSongIdx, setActiveSongIdx] = useState<number>(0);
   const [isPlayingPreview, setIsPlayingPreview] = useState<boolean>(false);
-
-  // 7-Pillars Detail Modal State
   const [isDetailModalOpen, setIsDetailModalOpen] = useState<boolean>(false);
   const [selectedDetailProduct, setSelectedDetailProduct] = useState<PrepVipProduct>(PREP_VIP_DATA);
   const { openLineModal } = useLineModal();
@@ -246,7 +229,6 @@ export function TeacherPrepView() {
   const currentQuiz = SAMPLE_QUIZZES[activeQuizIdx];
   const currentSong = MNEMONIC_SONGS[activeSongIdx];
 
-  // Web Audio Chime for Quiz & Song Preview
   const playSound = (type: "correct" | "wrong" | "melody") => {
     try {
       const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
@@ -279,7 +261,6 @@ export function TeacherPrepView() {
           osc.stop(now + idx * 0.12 + 0.2);
         });
       } else {
-        // Short upbeat triad melody preview
         const notes = [523.25, 587.33, 659.25, 783.99, 659.25, 1046.5];
         notes.forEach((freq, idx) => {
           const osc = ctx.createOscillator();
@@ -343,17 +324,17 @@ export function TeacherPrepView() {
   };
 
   return (
-    <div className="w-full relative overflow-hidden min-h-screen pt-8 md:pt-12 pb-28 text-white font-prompt">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 relative z-10">
+    <div className="w-full relative overflow-hidden min-h-screen bg-[#FAF8F5] pt-10 md:pt-14 pb-28 text-[#1E293B] font-prompt">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 relative z-10">
 
-        {/* ── 1. HERO SECTION ──────────────────────────────────────── */}
+        {/* 1. HERO SECTION */}
         <section className="text-center max-w-4xl mx-auto space-y-6">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-semibold shadow-[0_0_25px_rgba(6,182,212,0.25)]"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] text-xs sm:text-sm font-semibold"
           >
-            <GraduationCap className="w-4 h-4 text-cyan-400" />
+            <GraduationCap className="w-4 h-4 text-[#2563EB]" />
             <span>AIAON PREP ECOSYSTEM • กลุ่มเทเลแกรมติวสอบครูผู้ช่วยด้วย AI + ดนตรี</span>
           </motion.div>
 
@@ -361,10 +342,10 @@ export function TeacherPrepView() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight"
+            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-[#0F172A]"
           >
             เปลี่ยนการอ่านหนังสือสอบที่แสนสาหัส{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400">
+            <span className="text-[#2563EB]">
               ให้สอบติดในรอบเดียวด้วยบอท Telegram &amp; เพลงช่วยจำ
             </span>
           </motion.h1>
@@ -373,9 +354,9 @@ export function TeacherPrepView() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-sm sm:text-base lg:text-lg text-white/70 max-w-3xl mx-auto leading-relaxed"
+            className="text-sm sm:text-base lg:text-lg text-[#475569] max-w-3xl mx-auto leading-relaxed"
           >
-            ผสานความเชี่ยวชาญของ <strong className="text-white">ครูอ้น (ครูดนตรีสากล ค.ศ.2 โรงเรียนหาดใหญ่วิทยาลัย &amp; ผู้พัฒนาระบบ AI)</strong>{" "}
+            ผสานความเชี่ยวชาญของ <strong className="text-[#0F172A]">ครูอ้น (ครูดนตรีสากล ค.ศ.2 โรงเรียนหาดใหญ่วิทยาลัย &amp; ผู้พัฒนาระบบ AI)</strong>{" "}
             เสิร์ฟข้อสอบเก็งแม่นยำเข้ามือถือคุณวันละ 3 เวลา (เช้า-เที่ยง-ค่ำ) พร้อม AI อธิบายเฉลยรายข้อ และเพลงช่วยจำ พ.ร.บ. ที่ฟังแค่ 3 รอบก็จำขึ้นใจ
           </motion.p>
 
@@ -388,9 +369,9 @@ export function TeacherPrepView() {
             <button
               type="button"
               onClick={() => setIsDetailModalOpen(true)}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 text-slate-950 font-black text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(245,158,11,0.4)] transition-all hover:scale-105 cursor-pointer border border-amber-300"
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-black text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-sm transition-all hover:scale-105 cursor-pointer"
             >
-              <Crown className="w-5 h-5 fill-slate-950" />
+              <Crown className="w-5 h-5" />
               <span>เปิดตั๋วทองคำ VIP (เจาะลึก 7 ข้อ • 390 ฿)</span>
               <ArrowRight className="w-4 h-4" />
             </button>
@@ -399,9 +380,9 @@ export function TeacherPrepView() {
               href={getLinePrepUrl(false)}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-7 py-4 rounded-2xl glass-card bg-white/5 hover:bg-white/10 border border-white/15 text-white font-semibold text-sm sm:text-base flex items-center justify-center gap-2 transition-all cursor-pointer"
+              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-[#EFF6FF] border border-[#E2E8F0] hover:border-[#2563EB] text-[#0F172A] font-semibold text-sm sm:text-base flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer"
             >
-              <Send className="w-4 h-4 text-cyan-400" />
+              <Send className="w-4 h-4 text-[#2563EB]" />
               <span>ขอรับลิงก์กลุ่ม Telegram ติวฟรี</span>
             </a>
           </motion.div>
@@ -413,78 +394,76 @@ export function TeacherPrepView() {
                 icon: Clock,
                 title: "1. บอทยิงข้อสอบ 3 เวลาชีวิต",
                 desc: "07:30 ตื่นนอน • 12:15 พักเที่ยง • 20:00 ก่อนนอน สะสมวันละนิดแต่สม่ำเสมอ",
-                color: "text-cyan-400 border-cyan-500/25 bg-cyan-500/5",
+                iconCls: "bg-[#EFF6FF] border-[#BFDBFE] text-[#2563EB]",
               },
               {
                 icon: Music,
                 title: "2. เพลงช่วยจำ (Earworm Effect)",
                 desc: "เปลี่ยน พ.ร.บ. และวินัยครูสุดหิน ให้เป็นท่อนฮุกติดหู เปิดฟังตอนขับรถได้ทันที",
-                color: "text-purple-400 border-purple-500/25 bg-purple-500/5",
+                iconCls: "bg-[#F5F3FF] border-[#DDD6FE] text-[#7C3AED]",
               },
               {
                 icon: Bot,
                 title: "3. AI เฉลยละเอียด + ซ้อมสัมภาษณ์",
                 desc: "ตอบผิดปุ๊บ AI ชี้จุดหลอกทันที พร้อมระบบเก็งคำถามสัมภาษณ์ ภาค ค",
-                color: "text-amber-400 border-amber-500/25 bg-amber-500/5",
+                iconCls: "bg-[#FEF9EF] border-[#FDE68A] text-[#D97706]",
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className={`rounded-2xl p-4 border ${item.color} flex items-start gap-3.5 backdrop-blur-md`}
+                className="rounded-2xl p-4 bg-white border border-[#E2E8F0] shadow-2xs flex items-start gap-3.5"
               >
-                <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 shrink-0">
+                <div className={`p-2.5 rounded-xl border shrink-0 ${item.iconCls}`}>
                   <item.icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white">{item.title}</h3>
-                  <p className="text-xs text-white/60 mt-1 leading-relaxed">{item.desc}</p>
+                  <h3 className="text-sm font-bold text-[#0F172A]">{item.title}</h3>
+                  <p className="text-xs text-[#475569] mt-1 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ── 2. LIVE INTERACTIVE TELEGRAM BOT SIMULATOR & AUDIO PREVIEWS ── */}
+        {/* 2. LIVE INTERACTIVE TELEGRAM BOT SIMULATOR & AUDIO PREVIEWS */}
         <section className="space-y-8" id="simulator">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold border border-purple-500/30">
-              <Zap className="w-3.5 h-3.5 text-purple-400" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F5F3FF] text-[#6D28D9] text-xs font-bold border border-[#DDD6FE]">
+              <Zap className="w-3.5 h-3.5 text-[#7C3AED]" />
               <span>LIVE TELEGRAM BOT SIMULATOR • ทดลองทำข้อสอบจริง</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-extrabold">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
               สัมผัสประสบการณ์ในกลุ่ม{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
+              <span className="text-[#2563EB]">
                 Telegram AiAon Prep
               </span>
             </h2>
-            <p className="text-xs sm:text-sm text-white/60">
+            <p className="text-xs sm:text-sm text-[#475569]">
               ลองกดเลือกช่วงเวลาและคลิกคำตอบด้านล่าง เพื่อดูการทำงานของบอทข้อสอบและคำอธิบายเฉลยจาก AI
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
             {/* Left 7 Cols: Telegram Daily Quiz Simulator */}
-            <div className="lg:col-span-7 rounded-3xl border border-cyan-500/30 bg-slate-900/75 backdrop-blur-xl p-6 sm:p-8 shadow-[0_0_50px_rgba(6,182,212,0.12)] space-y-6">
-              {/* Header Bar */}
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+            <div className="lg:col-span-7 rounded-3xl border border-[#E2E8F0] bg-white p-6 sm:p-8 shadow-sm space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E2E8F0] pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg">
+                  <div className="w-10 h-10 rounded-2xl bg-[#2563EB] flex items-center justify-center shadow-xs">
                     <Send className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                    <h3 className="text-sm sm:text-base font-bold text-[#0F172A] flex items-center gap-2">
                       AiAon Prep Daily Quiz Bot
-                      <span className="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      <span className="text-[11px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
                         ONLINE
                       </span>
                     </h3>
-                    <p className="text-xs text-white/50">จำลองหน้าต่าง Telegram Quiz Mode</p>
+                    <p className="text-xs text-[#64748B]">จำลองหน้าต่าง Telegram Quiz Mode</p>
                   </div>
                 </div>
 
                 {/* Time Slot Selector */}
-                <div className="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/10">
+                <div className="flex items-center gap-1.5 bg-[#FAF8F5] p-1 rounded-xl border border-[#E2E8F0]">
                   {["07:30 เช้า", "12:15 เที่ยง", "20:00 ค่ำ"].map((label, idx) => (
                     <button
                       key={idx}
@@ -492,8 +471,8 @@ export function TeacherPrepView() {
                       onClick={() => handleSwitchQuiz(idx)}
                       className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                         activeQuizIdx === idx
-                          ? "bg-cyan-500 text-zinc-950 shadow-sm"
-                          : "text-white/60 hover:text-white"
+                          ? "bg-[#2563EB] text-white shadow-2xs"
+                          : "text-[#475569] hover:text-[#0F172A]"
                       }`}
                     >
                       {label}
@@ -505,15 +484,15 @@ export function TeacherPrepView() {
               {/* Quiz Question Card */}
               <div className="space-y-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-xs font-semibold text-cyan-300">
+                  <span className="text-xs font-semibold text-[#0E7490]">
                     {currentQuiz.timeSlot}
                   </span>
-                  <span className={`text-[11px] px-2.5 py-0.5 rounded-full border ${currentQuiz.badgeColor}`}>
+                  <span className={`text-[11px] px-2.5 py-0.5 rounded-full border font-semibold ${currentQuiz.badgeColor}`}>
                     {currentQuiz.category}
                   </span>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-sm sm:text-base font-bold text-white leading-relaxed">
+                <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] text-sm sm:text-base font-bold text-[#0F172A] leading-relaxed">
                   {currentQuiz.question}
                 </div>
 
@@ -524,15 +503,15 @@ export function TeacherPrepView() {
                     const isCorrect = oIdx === currentQuiz.correctIndex;
                     const isAnswered = selectedOption !== null;
 
-                    let btnStyle = "bg-white/5 border-white/10 hover:border-cyan-400 hover:bg-white/10 text-white/85";
+                    let btnStyle = "bg-[#FAF8F5] border-[#E2E8F0] hover:border-[#2563EB] hover:bg-[#EFF6FF] text-[#1E293B]";
 
                     if (isAnswered) {
                       if (isCorrect) {
-                        btnStyle = "bg-emerald-500/20 border-emerald-400 text-emerald-200 font-bold shadow-[0_0_20px_rgba(16,185,129,0.3)]";
+                        btnStyle = "bg-emerald-50 border-emerald-400 text-emerald-900 font-bold";
                       } else if (isSelected && !isCorrect) {
-                        btnStyle = "bg-rose-500/20 border-rose-400 text-rose-200 font-bold";
+                        btnStyle = "bg-rose-50 border-rose-400 text-rose-900 font-bold";
                       } else {
-                        btnStyle = "bg-white/5 border-white/5 text-white/40 opacity-60";
+                        btnStyle = "bg-[#FAF8F5] border-[#E2E8F0] text-[#94A3B8] opacity-70";
                       }
                     }
 
@@ -548,9 +527,9 @@ export function TeacherPrepView() {
                         {isAnswered && (
                           <span className="shrink-0">
                             {isCorrect ? (
-                              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                              <CheckCircle2 className="w-5 h-5 text-emerald-600" />
                             ) : isSelected ? (
-                              <XCircle className="w-5 h-5 text-rose-400" />
+                              <XCircle className="w-5 h-5 text-rose-600" />
                             ) : null}
                           </span>
                         )}
@@ -559,20 +538,20 @@ export function TeacherPrepView() {
                   })}
                 </div>
 
-                {/* AI Explanation Box (Reveals when answered) */}
+                {/* AI Explanation Box */}
                 <AnimatePresence>
                   {selectedOption !== null && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="rounded-2xl bg-cyan-950/40 border border-cyan-500/35 p-4 sm:p-5 space-y-3"
+                      className="rounded-2xl bg-[#EFF6FF] border border-[#BFDBFE] p-4 sm:p-5 space-y-3"
                     >
-                      <div className="text-xs sm:text-sm text-cyan-100 leading-relaxed">
+                      <div className="text-xs sm:text-sm text-[#1E293B] leading-relaxed">
                         {currentQuiz.aiExplanation}
                       </div>
-                      <div className="text-xs text-amber-300 bg-amber-500/10 p-2.5 rounded-xl border border-amber-500/20 flex items-center gap-2">
-                        <Lightbulb className="w-4 h-4 text-amber-400 shrink-0" />
+                      <div className="text-xs text-[#92400E] bg-[#FEF9EF] p-2.5 rounded-xl border border-[#FDE68A] flex items-center gap-2 font-medium">
+                        <Lightbulb className="w-4 h-4 text-[#D97706] shrink-0" />
                         <span>{currentQuiz.mnemonicTip}</span>
                       </div>
                     </motion.div>
@@ -582,22 +561,21 @@ export function TeacherPrepView() {
             </div>
 
             {/* Right 5 Cols: Mnemonic Audio Preview Lab */}
-            <div className="lg:col-span-5 rounded-3xl border border-purple-500/30 bg-slate-900/75 backdrop-blur-xl p-6 sm:p-8 shadow-[0_0_50px_rgba(168,85,247,0.12)] space-y-5">
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+            <div className="lg:col-span-5 rounded-3xl border border-[#E2E8F0] bg-white p-6 sm:p-8 shadow-sm space-y-5">
+              <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg">
+                  <div className="w-10 h-10 rounded-2xl bg-[#7C3AED] flex items-center justify-center shadow-xs">
                     <Headphones className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-sm sm:text-base font-bold text-white">
+                    <h3 className="text-sm sm:text-base font-bold text-[#0F172A]">
                       คลังเพลงช่วยจำ (Mnemonic Songs)
                     </h3>
-                    <p className="text-xs text-white/50">แต่งและเรียบเรียงโดย ครูอ้น (ดนตรีสากล ญ.ว.)</p>
+                    <p className="text-xs text-[#64748B]">แต่งและเรียบเรียงโดย ครูอ้น (ดนตรีสากล ญ.ว.)</p>
                   </div>
                 </div>
               </div>
 
-              {/* Song Selector Tabs */}
               <div className="space-y-2">
                 {MNEMONIC_SONGS.map((song, sIdx) => (
                   <button
@@ -606,29 +584,29 @@ export function TeacherPrepView() {
                     onClick={() => setActiveSongIdx(sIdx)}
                     className={`w-full text-left p-3 rounded-xl border transition-all flex items-center justify-between gap-2 cursor-pointer ${
                       activeSongIdx === sIdx
-                        ? "bg-purple-500/20 border-purple-400 text-white"
-                        : "bg-white/5 border-white/10 text-white/65 hover:text-white"
+                        ? "bg-[#F5F3FF] border-[#7C3AED] text-[#0F172A]"
+                        : "bg-[#FAF8F5] border-[#E2E8F0] text-[#475569] hover:text-[#0F172A]"
                     }`}
                   >
                     <div className="truncate">
                       <div className="text-xs sm:text-sm font-bold truncate">{song.title}</div>
-                      <div className="text-[11px] text-white/50 truncate">{song.topic}</div>
+                      <div className="text-[11px] text-[#64748B] truncate">{song.topic}</div>
                     </div>
-                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0">
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#FEF9EF] text-[#92400E] border border-[#FDE68A] shrink-0 font-semibold">
                       {song.examFrequency}
                     </span>
                   </button>
                 ))}
               </div>
 
-              {/* Active Song Lyrics & Audio Chime Preview */}
-              <div className="rounded-2xl bg-black/50 border border-purple-500/25 p-4 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-purple-300">{currentSong.genre}</span>
+              {/* Active Song Lyrics */}
+              <div className="rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] p-4 space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs font-semibold text-[#6D28D9]">{currentSong.genre}</span>
                   <button
                     type="button"
                     onClick={handleToggleSongPreview}
-                    className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer"
+                    className="px-3 py-1.5 rounded-xl bg-[#7C3AED] hover:bg-[#6D28D9] text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs cursor-pointer"
                   >
                     {isPlayingPreview ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                     <span>{isPlayingPreview ? "กำลังเล่นโน้ตตัวอย่าง..." : "ฟังเมโลดี้ตัวอย่าง 🎵"}</span>
@@ -639,41 +617,40 @@ export function TeacherPrepView() {
                   {currentSong.lyrics.map((line, lIdx) => (
                     <p
                       key={lIdx}
-                      className="text-xs text-white/85 bg-white/5 rounded-lg px-3 py-2 border border-white/5 leading-relaxed"
+                      className="text-xs text-[#1E293B] bg-white rounded-lg px-3 py-2 border border-[#E2E8F0] leading-relaxed"
                     >
                       {line}
                     </p>
                   ))}
                 </div>
 
-                <p className="text-[11px] text-white/45 text-center pt-1">
+                <p className="text-[11px] text-[#64748B] text-center pt-1">
                   🎧 สมาชิกกลุ่ม VIP สามารถดาวน์โหลดไฟล์ MP3 เต็มเพลงฟังออฟไลน์ใน Telegram ได้เลย
                 </p>
 
                 <Link
                   href="/music-store"
-                  className="w-full py-2.5 px-4 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/35 text-amber-300 font-bold text-xs flex items-center justify-center gap-2 transition-all mt-2"
+                  className="w-full py-2.5 px-4 rounded-xl bg-[#FEF9EF] hover:bg-[#FEF3C7] border border-[#FDE68A] text-[#92400E] font-bold text-xs flex items-center justify-center gap-2 transition-all mt-2"
                 >
-                  <Music className="w-4 h-4" />
+                  <Music className="w-4 h-4 text-[#D97706]" />
                   <span>เข้าสู่ร้านค้าเพลงช่วยจำ &amp; BGM คลิป ว.PA ปลอดลิขสิทธิ์</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
-
           </div>
         </section>
 
-        {/* ── 3. TEACHER LIFETIME ECOSYSTEM (เติบโตไปด้วยกันตลอดชีพครู) ─ */}
-        <section className="rounded-3xl p-6 sm:p-10 border border-white/10 bg-slate-900/60 backdrop-blur-xl space-y-8">
+        {/* 3. TEACHER LIFETIME ECOSYSTEM */}
+        <section className="rounded-3xl p-6 sm:p-10 border border-[#E2E8F0] bg-white shadow-sm space-y-8">
           <div className="text-center max-w-3xl mx-auto space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#B45309]">
               THE LIFETIME TEACHER JOURNEY • ดูแลกันตั้งแต่สอบบรรจุจนถึง ค.ศ.3
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
               ทำไมครูยุคใหม่ถึงเลือกเริ่มต้นที่ AiAon Prep?
             </h2>
-            <p className="text-xs sm:text-sm text-white/65">
+            <p className="text-xs sm:text-sm text-[#475569]">
               เพราะเราไม่ได้แค่ติวให้คุณสอบติด แต่เตรียมเครื่องมือลดภาระงานเอกสารไว้รอรับคุณตั้งแต่วันแรกที่รายงานตัวเข้าโรงเรียน
             </p>
           </div>
@@ -685,56 +662,53 @@ export function TeacherPrepView() {
                 title: "สอบติดด้วย AI & เพลงช่วยจำ",
                 desc: "ตะลุยโจทย์ผ่าน Telegram Daily Quiz วันละ 3 รอบ + ฟังเพลงจำกฎหมาย + ซ้อมสัมภาษณ์ ภาค ค กับ AI จนมั่นใจเต็มร้อย",
                 badge: "AiAon Prep (Telegram)",
-                color: "border-cyan-500/30 bg-cyan-950/20",
-                textColor: "text-cyan-300",
+                textColor: "text-[#0E7490]",
               },
               {
                 stage: "STAGE 2 • ครูผู้ช่วย 2 ปีแรก (ประเมิน 4 ครั้ง)",
                 title: "ผ่านประเมินเข้มข้นแบบไม่เหนื่อย",
                 desc: "เมื่อสอบติด รับทันทีคู่มือครูบรรจุใหม่ [EB30] และสิทธิ์ลด 50% ระบบแฟ้มสะสมงานดิจิทัล E-Portfolio [AONA08] สำหรับประเมินครูผู้ช่วย",
                 badge: "EB30 + ระบบ AONA08",
-                color: "border-purple-500/30 bg-purple-950/20",
-                textColor: "text-purple-300",
+                textColor: "text-[#6D28D9]",
               },
               {
                 stage: "STAGE 3 • ครู ค.ศ.2 - ค.ศ.3 & งานโรงเรียน",
                 title: "เสกงาน ว.PA & SAR เสร็จในคลิกเดียว",
                 desc: "ต่อยอดสู่ระบบเช็คชื่อ LINE [AONE01], ระบบจัดทำเล่ม ว.PA & SAR 15 ตัวชี้วัดอัตโนมัติ [AONA07] ให้มีเวลาไปใช้ชีวิตและสอนเด็กอย่างมีความสุข",
                 badge: "AONA07 + 20 ระบบครู",
-                color: "border-amber-500/30 bg-amber-950/20",
-                textColor: "text-amber-300",
+                textColor: "text-[#B45309]",
               },
             ].map((step, sIdx) => (
               <div
                 key={sIdx}
-                className={`rounded-2xl p-6 border ${step.color} flex flex-col justify-between space-y-4`}
+                className="rounded-2xl p-6 border border-[#E2E8F0] bg-[#FAF8F5] flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-2.5">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
                     <span className={`text-xs font-extrabold ${step.textColor}`}>{step.stage}</span>
-                    <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-white/10 text-white/80">
+                    <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-white border border-[#E2E8F0] text-[#475569] font-medium">
                       {step.badge}
                     </span>
                   </div>
-                  <h3 className="text-lg font-extrabold text-white">{step.title}</h3>
-                  <p className="text-xs text-white/70 leading-relaxed">{step.desc}</p>
+                  <h3 className="text-lg font-extrabold text-[#0F172A]">{step.title}</h3>
+                  <p className="text-xs text-[#475569] leading-relaxed">{step.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ── 4. PRICING & TELEGRAM JOIN CARDS ─────────────────────── */}
+        {/* 4. PRICING & TELEGRAM JOIN CARDS */}
         <section className="space-y-10" id="join-telegram">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
               เลือกกลุ่ม{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400">
+              <span className="text-[#D97706]">
                 Telegram เตรียมสอบครูผู้ช่วย
               </span>{" "}
               ที่เหมาะกับคุณ
             </h2>
-            <p className="text-xs sm:text-sm text-white/60">
+            <p className="text-xs sm:text-sm text-[#475569]">
               เริ่มต้นเข้ากลุ่มติวฟรีได้ทันที หรืออัปเกรดเป็น VIP Exam Pass เพียงครั้งเดียว ดูแลยาวจนกว่าจะสอบติด
             </p>
           </div>
@@ -743,7 +717,7 @@ export function TeacherPrepView() {
             {PREP_TIERS.map((tier) => (
               <div
                 key={tier.id}
-                className={`rounded-3xl p-6 sm:p-8 bg-slate-900/80 backdrop-blur-xl border ${tier.borderClass} flex flex-col justify-between space-y-6 transition-all`}
+                className={`rounded-3xl p-6 sm:p-7 bg-white shadow-sm border ${tier.borderClass} flex flex-col justify-between space-y-6 transition-all`}
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between gap-2">
@@ -752,14 +726,13 @@ export function TeacherPrepView() {
                     </span>
                   </div>
 
-                  {/* ──────────────── 3D Golden Ticket Mockup for VIP Tiers ──────────────── */}
                   {tier.isVip && (
                     <div
                       onClick={() => {
                         if (tier.productData) setSelectedDetailProduct(tier.productData);
                         setIsDetailModalOpen(true);
                       }}
-                      className="relative w-full my-2 cursor-pointer flex justify-center py-2"
+                      className="relative w-full my-2 cursor-pointer flex justify-center py-3 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]"
                       title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของตั๋วทองคำนี้"
                     >
                       <GoldenTicketMockup
@@ -778,24 +751,24 @@ export function TeacherPrepView() {
                           setIsDetailModalOpen(true);
                         }
                       }}
-                      className={`text-xl sm:text-2xl font-extrabold text-white ${
-                        tier.isVip ? "cursor-pointer hover:text-amber-300 transition-colors" : ""
+                      className={`text-xl sm:text-2xl font-extrabold text-[#0F172A] ${
+                        tier.isVip ? "cursor-pointer hover:text-[#2563EB] transition-colors" : ""
                       }`}
                     >
                       {tier.name}
                     </h3>
-                    <div className="flex items-baseline gap-2 mt-2">
-                      <span className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-amber-300">
+                    <div className="flex flex-wrap items-baseline gap-2 mt-2">
+                      <span className="text-3xl sm:text-4xl font-black text-[#0F172A]">
                         {tier.price}
                       </span>
-                      <span className="text-xs text-white/60">{tier.period}</span>
+                      <span className="text-xs text-[#64748B]">{tier.period}</span>
                     </div>
                   </div>
 
-                  <ul className="space-y-2.5 pt-2 border-t border-white/10">
+                  <ul className="space-y-2.5 pt-2 border-t border-[#F1F5F9]">
                     {tier.features.map((feat, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-2.5 text-xs text-white/85 leading-relaxed">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <li key={fIdx} className="flex items-start gap-2.5 text-xs text-[#1E293B] leading-relaxed">
+                        <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -807,7 +780,7 @@ export function TeacherPrepView() {
                     {tier.id === "krurank-ai-pass" && (
                       <Link
                         href="/krurank"
-                        className="w-full py-3 px-3 rounded-2xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 font-bold text-xs flex items-center justify-center gap-1.5 border border-cyan-400/40 transition-all hover:scale-[1.02] cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+                        className="w-full py-3 px-3 rounded-2xl bg-[#EFF6FF] hover:bg-[#DBEAFE] text-[#1D4ED8] font-bold text-xs flex items-center justify-center gap-1.5 border border-[#BFDBFE] transition-all cursor-pointer"
                       >
                         <span>🎮 เข้าสู่สนามสอบสด /krurank</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -820,9 +793,9 @@ export function TeacherPrepView() {
                           if (tier.productData) setSelectedDetailProduct(tier.productData);
                           setIsDetailModalOpen(true);
                         }}
-                        className="w-full py-3.5 px-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs flex items-center justify-center gap-1.5 border border-white/20 transition-all cursor-pointer"
+                        className="w-full py-3 px-3 rounded-2xl bg-[#FAF8F5] hover:bg-[#F1ECE4] text-[#0F172A] font-bold text-xs flex items-center justify-center gap-1.5 border border-[#E2E8F0] transition-all cursor-pointer"
                       >
-                        <BookOpen className="w-3.5 h-3.5 text-amber-400" />
+                        <BookOpen className="w-3.5 h-3.5 text-[#D97706]" />
                         <span>เจาะลึก 7 ข้อ</span>
                       </button>
 
@@ -834,9 +807,9 @@ export function TeacherPrepView() {
                         data-line-title={tier.productData.title}
                         data-line-price={tier.productData.price}
                         data-line-code={tier.productData.id}
-                        className="w-full py-3.5 px-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-[0_0_25px_rgba(6,199,85,0.35)] transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white"
+                        className="w-full py-3 px-3 rounded-2xl font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-all hover:scale-[1.02] cursor-pointer bg-[#06C755] hover:bg-[#05b34c] text-[#052E16]"
                       >
-                        <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                        <MessageCircle className="w-3.5 h-3.5" />
                         <span>{tier.id === "bot-only-pass" ? "สมัครเฉพาะบอท" : tier.id === "krurank-ai-pass" ? "สั่งซื้อสิทธิ์ PRO" : "สมัครบันเดิลคุ้มสุด"}</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </a>
@@ -847,7 +820,7 @@ export function TeacherPrepView() {
                     href={getLinePrepUrl(false)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(6,199,85,0.35)] transition-all hover:scale-[1.02] cursor-pointer bg-gradient-to-r from-[#06C755] to-[#05b34c] hover:from-[#05b34c] hover:to-[#049b42] text-white"
+                    className="w-full py-3.5 px-4 rounded-2xl font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition-all hover:scale-[1.02] cursor-pointer bg-[#06C755] hover:bg-[#05b34c] text-[#052E16]"
                   >
                     <Send className="w-3.5 h-3.5" />
                     <span>{tier.ctaText}</span>
@@ -858,15 +831,12 @@ export function TeacherPrepView() {
             ))}
           </div>
         </section>
-
       </div>
 
-      {/* ─────────────────────────────────────────────────────────────
-          7-PILLARS TEACHER PREP DETAIL MODAL
-      ───────────────────────────────────────────────────────────── */}
+      {/* 7-PILLARS TEACHER PREP DETAIL MODAL */}
       <AnimatePresence>
         {isDetailModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#0F172A]/70 backdrop-blur-sm overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}

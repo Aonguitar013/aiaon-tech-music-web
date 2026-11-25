@@ -3,13 +3,12 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  BookOpen, Sparkles, Award, FileText, 
+  BookOpen, Sparkles, Award, FileText,
   HeartHandshake, Users, Search,
   ShoppingCart, Check, ArrowRight, ShieldCheck, Download,
-  MessageCircle, Star, 
+  MessageCircle, Star,
   ChevronDown, CheckCircle2, Zap
 } from "lucide-react";
-import Link from "next/link";
 import rawEbooks from "@/data/ebooks-catalog.json";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 import { Book3DMockup } from "@/components/ebooks/Book3DMockup";
@@ -39,7 +38,6 @@ interface EbookItem {
 
 const EBOOKS_DATA: EbookItem[] = (rawEbooks as unknown) as EbookItem[];
 
-// Category Filter Tabs
 const CATEGORIES = [
   { id: "TOP10", label: "🔥 10 เล่มขายดี", icon: Star },
   { id: "ALL", label: "ทั้งหมด 30 เล่ม", icon: BookOpen },
@@ -58,7 +56,6 @@ export function EbooksCatalogView() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [detailEbook, setDetailEbook] = useState<EbookMetadata | null>(null);
 
-  // Cart operations
   const addToCart = (item: EbookItem) => {
     if (!cart.some((c) => c.code === item.code)) {
       setCart((prev) => [...prev, item]);
@@ -101,11 +98,9 @@ export function EbooksCatalogView() {
     }
   };
 
-  // Filtered books
   const filteredBooks = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
     return EBOOKS_DATA.filter((book) => {
-      // Category Match (when user types a search query, search across all 30 books automatically)
       let catMatch = true;
       if (query === "") {
         if (selectedCategory === "TOP10") {
@@ -123,7 +118,6 @@ export function EbooksCatalogView() {
         }
       }
 
-      // Search Query
       const searchMatch =
         query === "" ||
         book.title.toLowerCase().includes(query) ||
@@ -146,90 +140,55 @@ export function EbooksCatalogView() {
     }
   };
 
-  // Color mapper helper
   const getBadgeClass = (theme: string) => {
     switch (theme) {
-      case "emerald": return "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
-      case "cyan": return "bg-cyan-500/10 text-cyan-400 border-cyan-500/30";
-      case "purple": return "bg-purple-500/10 text-purple-400 border-purple-500/30";
-      case "amber": return "bg-amber-500/10 text-amber-400 border-amber-500/30";
-      case "rose": return "bg-rose-500/10 text-rose-400 border-rose-500/30";
-      case "blue": return "bg-blue-500/10 text-blue-400 border-blue-500/30";
-      case "teal": return "bg-teal-500/10 text-teal-400 border-teal-500/30";
-      case "orange": return "bg-orange-500/10 text-orange-400 border-orange-500/30";
-      case "pink": return "bg-pink-500/10 text-pink-400 border-pink-500/30";
-      default: return "bg-indigo-500/10 text-indigo-400 border-indigo-500/30";
-    }
-  };
-
-  const getBorderGlow = (theme: string) => {
-    switch (theme) {
-      case "emerald": return "hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)]";
-      case "cyan": return "hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]";
-      case "purple": return "hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]";
-      case "amber": return "hover:border-amber-500/50 hover:shadow-[0_0_30px_rgba(245,158,11,0.15)]";
-      case "rose": return "hover:border-rose-500/50 hover:shadow-[0_0_30px_rgba(244,63,94,0.15)]";
-      default: return "hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)]";
-    }
-  };
-
-  const getThemeGlowColor = (theme: string) => {
-    switch (theme) {
-      case "emerald": return "rgba(16,185,129,0.35)";
-      case "cyan": return "rgba(6,182,212,0.35)";
-      case "purple": return "rgba(168,85,247,0.35)";
-      case "amber": return "rgba(245,158,11,0.35)";
-      case "rose": return "rgba(244,63,94,0.35)";
-      case "blue": return "rgba(59,130,246,0.35)";
-      case "teal": return "rgba(20,184,166,0.35)";
-      case "orange": return "rgba(249,115,22,0.35)";
-      case "pink": return "rgba(236,72,153,0.35)";
-      default: return "rgba(99,102,241,0.35)";
+      case "emerald": return "bg-emerald-50 text-emerald-800 border-emerald-200";
+      case "cyan": return "bg-cyan-50 text-cyan-800 border-cyan-200";
+      case "purple": return "bg-purple-50 text-purple-800 border-purple-200";
+      case "amber": return "bg-amber-50 text-amber-800 border-amber-200";
+      case "rose": return "bg-rose-50 text-rose-700 border-rose-200";
+      case "blue": return "bg-blue-50 text-blue-800 border-blue-200";
+      case "teal": return "bg-teal-50 text-teal-800 border-teal-200";
+      case "orange": return "bg-orange-50 text-orange-800 border-orange-200";
+      case "pink": return "bg-pink-50 text-pink-700 border-pink-200";
+      default: return "bg-indigo-50 text-indigo-800 border-indigo-200";
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 pt-24 pb-20 selection:bg-indigo-500 selection:text-white">
-      {/* ─────────────────────────────────────────────────────────────
-          1. HERO SECTION
-      ───────────────────────────────────────────────────────────── */}
-      <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16 overflow-hidden">
-        {/* Glow ambient background */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-gradient-to-b from-indigo-600/20 via-purple-600/10 to-transparent blur-3xl pointer-events-none -z-10" />
-
+    <div className="min-h-screen bg-[#FAF8F5] text-[#1E293B] pt-10 sm:pt-14 pb-20 selection:bg-amber-200 selection:text-[#0F172A] font-prompt">
+      {/* 1. HERO SECTION */}
+      <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-14">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Eyebrow Badge */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-400/30 text-indigo-300 text-xs sm:text-sm font-bold uppercase tracking-wider mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FEF9EF] border border-[#FDE68A] text-[#92400E] text-xs sm:text-sm font-bold uppercase tracking-wider mb-6"
           >
-            <Sparkles className="w-4 h-4 text-indigo-400" />
+            <Sparkles className="w-4 h-4 text-[#D97706]" />
             <span>iAon Tech 2026 Bestseller E-Book Collection</span>
           </motion.div>
 
-          {/* Main Title */}
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] mb-6"
+            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] text-[#0F172A] mb-6"
           >
             คลัง 30 สุดยอด E-Book<br />
-            <span className="bg-gradient-to-r from-indigo-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              นวัตกรรม & คู่มือครูไทย ยุคใหม่
+            <span className="text-[#D97706]">
+              นวัตกรรม &amp; คู่มือครูไทย ยุคใหม่
             </span>
           </motion.h1>
 
-          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-base sm:text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto mb-8 font-light"
+            className="text-base sm:text-xl text-[#475569] leading-relaxed max-w-3xl mx-auto mb-8"
           >
-            เรียงลำดับจากความต้องการสูงสุดของครูไทย (อันดับ 1 ถึง 30) แก้ปัญหาตรงจุด ปลดล็อก ว.PA เสกงานด้วย AI 
-            และคืนเวลาชีวิตให้คุณครูทุกคน <span className="text-white font-medium">“ให้ระบบทำงานแทนคุณ แล้วเอาเวลาไปใช้ชีวิตนะครับ”</span>
+            เรียงลำดับจากความต้องการสูงสุดของครูไทย (อันดับ 1 ถึง 30) แก้ปัญหาตรงจุด ปลดล็อก ว.PA เสกงานด้วย AI
+            และคืนเวลาชีวิตให้คุณครูทุกคน <span className="text-[#0F172A] font-semibold">“ให้ระบบทำงานแทนคุณ แล้วเอาเวลาไปใช้ชีวิตนะครับ”</span>
           </motion.p>
 
           {/* Value Props Bar */}
@@ -239,65 +198,63 @@ export function EbooksCatalogView() {
             transition={{ delay: 0.3 }}
             className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto text-left"
           >
-            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+            <div className="bg-white border border-[#E2E8F0] shadow-2xs rounded-2xl p-3.5 flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center shrink-0">
                 <CheckCircle2 className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs text-slate-400">เนื้อหาเข้มข้น</div>
-                <div className="text-xs sm:text-sm font-bold text-white">ใช้ส่งตรวจได้จริง</div>
+                <div className="text-xs text-[#64748B]">เนื้อหาเข้มข้น</div>
+                <div className="text-xs sm:text-sm font-bold text-[#0F172A]">ใช้ส่งตรวจได้จริง</div>
               </div>
             </div>
 
-            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+            <div className="bg-white border border-[#E2E8F0] shadow-2xs rounded-2xl p-3.5 flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-cyan-50 border border-cyan-200 text-cyan-700 flex items-center justify-center shrink-0">
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs text-slate-400">แถมฟรี Prompts</div>
-                <div className="text-xs sm:text-sm font-bold text-white">คัดลอกสั่ง AI ทันที</div>
+                <div className="text-xs text-[#64748B]">แถมฟรี Prompts</div>
+                <div className="text-xs sm:text-sm font-bold text-[#0F172A]">คัดลอกสั่ง AI ทันที</div>
               </div>
             </div>
 
-            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+            <div className="bg-white border border-[#E2E8F0] shadow-2xs rounded-2xl p-3.5 flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-purple-50 border border-purple-200 text-purple-700 flex items-center justify-center shrink-0">
                 <Download className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs text-slate-400">ฟอร์แมตมาตรฐาน</div>
-                <div className="text-xs sm:text-sm font-bold text-white">อ่าน Web + พิมพ์ A4</div>
+                <div className="text-xs text-[#64748B]">ฟอร์แมตมาตรฐาน</div>
+                <div className="text-xs sm:text-sm font-bold text-[#0F172A]">อ่าน Web + พิมพ์ A4</div>
               </div>
             </div>
 
-            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+            <div className="bg-white border border-[#E2E8F0] shadow-2xs rounded-2xl p-3.5 flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center shrink-0">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs text-slate-400">อัปเดตฟรีตลอดชีพ</div>
-                <div className="text-xs sm:text-sm font-bold text-white">ประกันมาตรฐาน ก.ค.ศ.</div>
+                <div className="text-xs text-[#64748B]">อัปเดตฟรีตลอดชีพ</div>
+                <div className="text-xs sm:text-sm font-bold text-[#0F172A]">ประกันมาตรฐาน ก.ค.ศ.</div>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────
-          1.5 CURATED E-BOOK BUNDLE SETS (3 ชุดเซตสุดคุ้ม)
-      ───────────────────────────────────────────────────────────── */}
+      {/* 1.5 CURATED E-BOOK BUNDLE SETS */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-5">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#B45309]">
               📦 ไม่อยากเลือกทีละเล่ม? จัดเป็นชุดเซตคุ้มกว่า
             </span>
-            <h2 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] mt-1">
               3 ชุดเซต E-Book ยอดนิยม (ประหยัดสูงสุด 62%)
             </h2>
           </div>
           <button
             onClick={() => setSelectedCategory("ALL")}
-            className="text-xs sm:text-sm text-indigo-300 hover:text-indigo-200 underline underline-offset-4 self-start sm:self-auto"
+            className="text-xs sm:text-sm text-[#1D4ED8] hover:text-[#1E40AF] underline underline-offset-4 self-start sm:self-auto font-semibold cursor-pointer"
           >
             ดูรายเล่มครบทั้งหมด 30 เล่ม →
           </button>
@@ -305,40 +262,40 @@ export function EbooksCatalogView() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {EBOOK_BUNDLE_SETS.map((set) => {
-            const accentStyles =
+            const borderStyles =
               set.accent === "amber"
-                ? "border-amber-500/35 bg-linear-to-br from-amber-950/35 via-slate-900/90 to-slate-950 hover:border-amber-400/70"
+                ? "border-amber-200 hover:border-amber-400"
                 : set.accent === "cyan"
-                  ? "border-cyan-500/35 bg-linear-to-br from-cyan-950/35 via-slate-900/90 to-slate-950 hover:border-cyan-400/70"
-                  : "border-purple-500/45 bg-linear-to-br from-purple-950/40 via-slate-900/90 to-indigo-950/40 hover:border-purple-400/80";
+                  ? "border-cyan-200 hover:border-cyan-400"
+                  : "border-purple-200 hover:border-purple-400";
             const badgeStyles =
               set.accent === "amber"
-                ? "bg-amber-500/15 text-amber-300 border-amber-500/30"
+                ? "bg-amber-50 text-amber-800 border-amber-200"
                 : set.accent === "cyan"
-                  ? "bg-cyan-500/15 text-cyan-300 border-cyan-500/30"
-                  : "bg-purple-500/20 text-purple-200 border-purple-400/40";
+                  ? "bg-cyan-50 text-cyan-800 border-cyan-200"
+                  : "bg-purple-50 text-purple-800 border-purple-200";
             return (
               <div
                 key={set.id}
-                className={`rounded-2xl border p-5 flex flex-col justify-between transition-all duration-300 ${accentStyles}`}
+                className={`rounded-3xl bg-white border p-5 sm:p-6 shadow-sm hover:shadow-md flex flex-col justify-between transition-all duration-300 ${borderStyles}`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold border ${badgeStyles}`}>
                       {set.badge}
                     </span>
-                    <span className="text-xs font-bold text-slate-400">{set.bookCount} เล่ม</span>
+                    <span className="text-xs font-bold text-[#64748B]">{set.bookCount} เล่ม</span>
                   </div>
-                  <h3 className="text-base sm:text-lg font-extrabold text-white mb-1.5">{set.title}</h3>
-                  <p className="text-xs text-slate-300/80 leading-relaxed mb-4">{set.subtitle}</p>
+                  <h3 className="text-base sm:text-lg font-extrabold text-[#0F172A] mb-1.5">{set.title}</h3>
+                  <p className="text-xs text-[#475569] leading-relaxed mb-4">{set.subtitle}</p>
                 </div>
 
-                <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-3">
+                <div className="pt-3 border-t border-[#F1F5F9] flex items-center justify-between gap-3">
                   <div>
-                    <div className="text-[11px] text-slate-400 line-through">
+                    <div className="text-[11px] text-[#94A3B8] line-through">
                       ฿{set.originalPrice.toLocaleString()}
                     </div>
-                    <div className="text-xl font-black text-white">
+                    <div className="text-xl font-black text-[#0F172A]">
                       ฿{set.bundlePrice.toLocaleString()}
                     </div>
                   </div>
@@ -347,7 +304,7 @@ export function EbooksCatalogView() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => handleBundleSetOrder(e, set)}
-                    className="px-4 py-2.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-xs inline-flex items-center gap-1.5 shadow-lg transition cursor-pointer shrink-0"
+                    className="px-4 py-2.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-extrabold text-xs inline-flex items-center gap-1.5 shadow-xs transition cursor-pointer shrink-0"
                   >
                     <span>สั่งซื้อชุดเซต</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -359,11 +316,9 @@ export function EbooksCatalogView() {
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────
-          2. FILTER & SEARCH CONTROLS
-      ───────────────────────────────────────────────────────────── */}
+      {/* 2. FILTER & SEARCH CONTROLS */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-10">
-        <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-4 sm:p-6 backdrop-blur-xl shadow-xl flex flex-col md:flex-row gap-4 items-center justify-between">
+        <div className="bg-white border border-[#E2E8F0] rounded-3xl p-4 sm:p-6 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
           {/* Category Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
             {CATEGORIES.map((cat) => {
@@ -373,10 +328,10 @@ export function EbooksCatalogView() {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition flex items-center gap-2 ${
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition flex items-center gap-2 cursor-pointer border ${
                     isSelected
-                      ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/30"
-                      : "bg-slate-800/60 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/50"
+                      ? "bg-[#0F172A] text-white border-[#0F172A] shadow-xs"
+                      : "bg-[#FAF8F5] hover:bg-[#F1ECE4] text-[#475569] hover:text-[#0F172A] border-[#E2E8F0]"
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -388,30 +343,28 @@ export function EbooksCatalogView() {
 
           {/* Search Box */}
           <div className="relative w-full md:w-72 shrink-0">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="ค้นหาชื่อเล่ม, รหัส, ว.PA..."
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition"
+              className="w-full bg-[#FAF8F5] border border-[#CBD5E1] rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#2563EB] focus:bg-white transition"
             />
           </div>
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────
-          3. E-BOOK PRODUCT GRID (30 ITEMS)
-      ───────────────────────────────────────────────────────────── */}
+      {/* 3. E-BOOK PRODUCT GRID */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20">
         <div className="flex items-center justify-between mb-6">
-          <div className="text-sm text-slate-400">
-            แสดงผล <span className="text-indigo-400 font-bold">{filteredBooks.length}</span> จาก 30 เล่ม
+          <div className="text-sm text-[#475569]">
+            แสดงผล <span className="text-[#1D4ED8] font-bold">{filteredBooks.length}</span> จาก 30 เล่ม
           </div>
           {cart.length > 0 && (
             <button
               onClick={() => setIsCartOpen(true)}
-              className="inline-flex items-center gap-2 text-xs sm:text-sm bg-indigo-600/20 text-indigo-300 border border-indigo-500/40 px-3.5 py-1.5 rounded-xl hover:bg-indigo-600 hover:text-white transition font-bold"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm bg-[#EFF6FF] text-[#1D4ED8] border border-[#BFDBFE] px-3.5 py-1.5 rounded-xl hover:bg-[#DBEAFE] transition font-bold cursor-pointer"
             >
               <ShoppingCart className="w-4 h-4" />
               <span>เปิดดูตะกร้า ({cart.length} เล่ม)</span>
@@ -422,7 +375,6 @@ export function EbooksCatalogView() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredBooks.map((book) => {
             const inCart = isInCart(book.code);
-            const glowColor = getThemeGlowColor(book.themeColor);
             return (
               <motion.div
                 key={book.code}
@@ -432,21 +384,7 @@ export function EbooksCatalogView() {
                 transition={{ duration: 0.2 }}
                 className="group relative flex flex-col h-full"
               >
-                {/* Outer radial spotlight glow on hover */}
-                <div
-                  className="absolute -inset-0.5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md pointer-events-none"
-                  style={{
-                    background: `radial-gradient(ellipse at center, ${glowColor}, transparent 70%)`,
-                  }}
-                />
-
-                {/* Inner Card Container */}
-                <div
-                  className={`relative z-10 bg-slate-900/80 backdrop-blur-md border border-slate-800/80 group-hover:border-white/20 rounded-3xl p-6 flex flex-col justify-between h-full transition-all duration-300 shadow-xl ${getBorderGlow(
-                    book.themeColor
-                  )}`}
-                >
-                  {/* Top Rank & Category Pill */}
+                <div className="relative z-10 bg-white border border-[#E2E8F0] hover:border-[#CBD5E1] rounded-3xl p-6 flex flex-col justify-between h-full transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1">
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <span
@@ -456,18 +394,17 @@ export function EbooksCatalogView() {
                       >
                         อันดับ #{book.rank} • {book.code}
                       </span>
-                      <span className="text-[11px] text-slate-400 font-medium">
+                      <span className="text-[11px] text-[#059669] font-semibold">
                         ประหยัด {book.discountPct}%
                       </span>
                     </div>
 
-                    {/* ──────────────── 3D Book Mockup Display ──────────────── */}
                     <div
                       onClick={() => {
                         const meta = findEbookByCode(book.code);
                         if (meta) setDetailEbook(meta);
                       }}
-                      className="relative w-full mb-4 cursor-pointer"
+                      className="relative w-full mb-4 cursor-pointer py-3 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] flex justify-center"
                       title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของ E-Book เล่มนี้"
                     >
                       <Book3DMockup
@@ -481,31 +418,28 @@ export function EbooksCatalogView() {
                       />
                     </div>
 
-                    {/* Title */}
                     <h3
                       onClick={() => {
                         const meta = findEbookByCode(book.code);
                         if (meta) setDetailEbook(meta);
                       }}
-                      className="text-base sm:text-lg font-bold text-white group-hover:text-indigo-300 transition leading-snug mb-2 line-clamp-2 cursor-pointer"
+                      className="text-base sm:text-lg font-bold text-[#0F172A] group-hover:text-[#1D4ED8] transition leading-snug mb-2 line-clamp-2 cursor-pointer"
                     >
                       {book.title}
                     </h3>
 
-                    {/* Synopsis */}
-                    <p className="text-xs text-slate-400 leading-relaxed mb-4 line-clamp-2 font-light">
+                    <p className="text-xs text-[#475569] leading-relaxed mb-4 line-clamp-2">
                       {book.synopsis}
                     </p>
 
-                    {/* Highlights Bullet */}
-                    <div className="bg-slate-950/60 rounded-2xl p-3.5 mb-5 border border-slate-800/60 space-y-2">
-                      <div className="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5 mb-1">
-                        <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                    <div className="bg-[#FAF8F5] rounded-2xl p-3.5 mb-5 border border-[#E2E8F0] space-y-2">
+                      <div className="text-[11px] font-bold text-[#334155] uppercase tracking-wider flex items-center gap-1.5 mb-1">
+                        <Star className="w-3 h-3 text-[#D97706] fill-[#D97706]" />
                         <span>จุดเด่นประจำเล่ม</span>
                       </div>
                       {book.highlights.slice(0, 3).map((hl, i) => (
-                        <div key={i} className="text-xs text-slate-400 flex items-start gap-2 leading-tight">
-                          <span className="text-indigo-400 font-bold shrink-0 text-[11px]">✓</span>
+                        <div key={i} className="text-xs text-[#475569] flex items-start gap-2 leading-tight">
+                          <span className="text-[#059669] font-bold shrink-0 text-[11px]">✓</span>
                           <span className="line-clamp-1">{hl}</span>
                         </div>
                       ))}
@@ -513,50 +447,48 @@ export function EbooksCatalogView() {
                   </div>
 
                   {/* Pricing & Actions */}
-                  <div className="pt-4 border-t border-slate-800/80">
+                  <div className="pt-4 border-t border-[#F1F5F9]">
                     <div className="flex items-baseline justify-between mb-4">
                       <div>
-                        <div className="text-[11px] text-slate-500 font-medium">ราคาพิเศษเปิดตัว</div>
+                        <div className="text-[11px] text-[#64748B] font-medium">ราคาพิเศษเปิดตัว</div>
                         <div className="flex items-baseline gap-2">
-                          <span className="text-2xl font-black text-amber-400">
+                          <span className="text-2xl font-black text-[#D97706]">
                             ฿{book.earlyBirdPrice}
                           </span>
-                          <span className="text-xs text-slate-500 line-through">
+                          <span className="text-xs text-[#94A3B8] line-through">
                             ฿{book.regularPrice}
                           </span>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-[11px] text-slate-500">สิทธิ์สถานศึกษา</div>
-                        <div className="text-xs font-semibold text-slate-400">
+                        <div className="text-[11px] text-[#64748B]">สิทธิ์สถานศึกษา</div>
+                        <div className="text-xs font-semibold text-[#334155]">
                           ฿{book.schoolPrice}
                         </div>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-3 gap-1.5">
-                      {/* Action 1: 7 Pillars Detail */}
                       <button
                         type="button"
                         onClick={() => {
                           const meta = findEbookByCode(book.code);
                           if (meta) setDetailEbook(meta);
                         }}
-                        className="py-2.5 px-2 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 border border-indigo-500/30"
+                        className="py-2.5 px-2 bg-[#EFF6FF] hover:bg-[#DBEAFE] text-[#1D4ED8] rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 border border-[#BFDBFE] cursor-pointer"
                         title="ดูเจาะลึก 7 องค์ประกอบ"
                       >
                         <BookOpen className="w-3.5 h-3.5" />
                         <span className="truncate">เจาะลึก</span>
                       </button>
 
-                      {/* Action 2: Add to Cart */}
                       <button
                         type="button"
                         onClick={() => (inCart ? removeFromCart(book.code) : addToCart(book))}
-                        className={`py-2.5 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 ${
+                        className={`py-2.5 px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 cursor-pointer border ${
                           inCart
-                            ? "bg-emerald-600/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-600/30"
-                            : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
+                            ? "bg-emerald-50 text-emerald-800 border-emerald-300"
+                            : "bg-[#FAF8F5] hover:bg-[#F1ECE4] text-[#0F172A] border-[#E2E8F0]"
                         }`}
                       >
                         {inCart ? (
@@ -572,7 +504,6 @@ export function EbooksCatalogView() {
                         )}
                       </button>
 
-                      {/* Action 3: Order Instant via LINE */}
                       <a
                         href={getLineOrderUrl(
                           `สวัสดีครับครูอ้น สนใจสั่งซื้อ E-Book [${book.code}] ${book.title} ราคา ${book.earlyBirdPrice} บาท ครับ`
@@ -582,7 +513,7 @@ export function EbooksCatalogView() {
                         data-line-code={book.code}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="py-2.5 px-2 bg-[#06C755] hover:bg-[#05b34c] text-white rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-1 shadow-md shadow-[#06C755]/25"
+                        className="py-2.5 px-2 bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-1 shadow-xs"
                       >
                         <span className="truncate">สั่งซื้อ</span>
                         <ArrowRight className="w-3 h-3" />
@@ -596,56 +527,52 @@ export function EbooksCatalogView() {
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────
-          4. SUPER BUNDLE VALUE PACK (เหมา 30 เล่ม สุดคุ้ม)
-      ───────────────────────────────────────────────────────────── */}
+      {/* 4. SUPER BUNDLE VALUE PACK */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20">
-        <div className="bg-gradient-to-r from-indigo-950 via-slate-900 to-purple-950 border-2 border-indigo-500/40 rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 blur-3xl rounded-full pointer-events-none" />
-
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div className="bg-white border-2 border-[#FDE68A] rounded-3xl p-8 sm:p-12 shadow-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
             <div className="lg:col-span-2">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold uppercase mb-4">
-                <Zap className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FEF9EF] text-[#92400E] border border-[#FDE68A] text-xs font-bold uppercase mb-4">
+                <Zap className="w-3.5 h-3.5 text-[#D97706]" />
                 <span>ULTIMATE MASTER PACK • ลดกระหน่ำ 70%</span>
               </div>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-4 leading-tight">
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] mb-4 leading-tight">
                 แพ็กเกจเหมาคลัง 30 เล่มจบ<br />
-                <span className="text-indigo-400">“The All-in-One Thai Teacher Vault”</span>
+                <span className="text-[#1D4ED8]">“The All-in-One Thai Teacher Vault”</span>
               </h2>
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6 font-light">
-                ปลดล็อกทุกความก้าวหน้าในวิชาชีพครู รับสิทธิ์การอ่านออนไลน์และดาวน์โหลดไฟล์แม่แบบทั้ง 30 เล่ม 
-                (ว.PA, แผน Active Learning, AI Prompts, วิจัย CAR 5 บท, งานสารบรรณ, Google Sheets อัตโนมัติ) 
+              <p className="text-[#475569] text-sm sm:text-base leading-relaxed mb-6">
+                ปลดล็อกทุกความก้าวหน้าในวิชาชีพครู รับสิทธิ์การอ่านออนไลน์และดาวน์โหลดไฟล์แม่แบบทั้ง 30 เล่ม
+                (ว.PA, แผน Active Learning, AI Prompts, วิจัย CAR 5 บท, งานสารบรรณ, Google Sheets อัตโนมัติ)
                 พร้อมสิทธิ์เข้ากลุ่ม VIP ครูนักพัฒนา อัปเดตฟรีตลอดชีพ
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#1E293B]">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0" />
                   <span>รับสิทธิ์ใช้งานครบทั้ง 30 เล่ม ตลอดชีพ</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0" />
                   <span>แถมฟรี คลัง AI Prompts พร้อมใช้กว่า 500 คำสั่ง</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0" />
                   <span>พิมพ์เอกสารเป็น PDF A4 สวยงามเข้าเล่มได้ทันที</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0" />
                   <span>ปรึกษาแนวทางการประเมินกับครูอ้นโดยตรง</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-slate-950/80 border border-indigo-500/30 rounded-2xl p-6 text-center">
-              <div className="text-xs text-slate-400 mb-1">มูลค่ารวมแยกเล่ม ฿19,200</div>
-              <div className="text-slate-500 line-through text-base font-bold mb-1">฿9,900</div>
-              <div className="text-4xl sm:text-5xl font-black text-amber-400 mb-2">
+            <div className="bg-[#FAF8F5] border border-[#E2E8F0] rounded-2xl p-6 text-center">
+              <div className="text-xs text-[#64748B] mb-1">มูลค่ารวมแยกเล่ม ฿19,200</div>
+              <div className="text-[#94A3B8] line-through text-base font-bold mb-1">฿9,900</div>
+              <div className="text-4xl sm:text-5xl font-black text-[#D97706] mb-2">
                 ฿2,990
               </div>
-              <div className="text-xs text-emerald-400 font-semibold mb-6">
+              <div className="text-xs text-[#059669] font-semibold mb-6">
                 เฉลี่ยเพียงเล่มละ 99 บาทเท่านั้น!
               </div>
 
@@ -658,7 +585,7 @@ export function EbooksCatalogView() {
                 data-line-code="VAULT-30"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3.5 px-4 bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:to-[#049b42] text-white font-extrabold rounded-xl shadow-[0_0_25px_rgba(6,199,85,0.35)] transition flex items-center justify-center gap-2 text-sm"
+                className="w-full py-3.5 px-4 bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-extrabold rounded-xl shadow-xs transition flex items-center justify-center gap-2 text-sm"
               >
                 <span>สั่งซื้อแพ็กเหมา 30 เล่ม</span>
                 <ArrowRight className="w-4 h-4" />
@@ -668,15 +595,13 @@ export function EbooksCatalogView() {
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────
-          5. FAQ SECTION
-      ───────────────────────────────────────────────────────────── */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-20">
+      {/* 5. FAQ SECTION */}
+      <section className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto mb-16">
         <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#0F172A] mb-2">
             คำถามที่พบบ่อย (FAQ)
           </h2>
-          <p className="text-slate-400 text-sm">
+          <p className="text-[#64748B] text-sm">
             ข้อสงสัยเกี่ยวกับการสั่งซื้อและรูปแบบการใช้งาน E-Book
           </p>
         </div>
@@ -702,21 +627,21 @@ export function EbooksCatalogView() {
           ].map((faq, idx) => (
             <div
               key={idx}
-              className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden transition"
+              className="bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-2xs transition"
             >
               <button
                 onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-slate-200 hover:text-white"
+                className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-[#0F172A] hover:bg-[#FAF8F5] cursor-pointer"
               >
                 <span>{faq.q}</span>
                 <ChevronDown
-                  className={`w-4 h-4 text-slate-400 shrink-0 transition-transform ${
-                    activeFaq === idx ? "rotate-180 text-indigo-400" : ""
+                  className={`w-4 h-4 text-[#64748B] shrink-0 transition-transform ${
+                    activeFaq === idx ? "rotate-180 text-[#1D4ED8]" : ""
                   }`}
                 />
               </button>
               {activeFaq === idx && (
-                <div className="px-4 pb-4 sm:px-5 sm:pb-5 text-xs sm:text-sm text-slate-400 leading-relaxed border-t border-slate-800/60 pt-3">
+                <div className="px-4 pb-4 sm:px-5 sm:pb-5 text-xs sm:text-sm text-[#475569] leading-relaxed border-t border-[#F1F5F9] pt-3">
                   {faq.a}
                 </div>
               )}
@@ -725,75 +650,70 @@ export function EbooksCatalogView() {
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────
-          6. FLOATING CART MODAL / DRAWER
-      ───────────────────────────────────────────────────────────── */}
-      {/* Sticky cart bar: keeps the cart reachable while scrolling the 30-book list */}
+      {/* 6. FLOATING CART MODAL / DRAWER */}
       {cart.length > 0 && !isCartOpen && (
         <button
           type="button"
           onClick={() => setIsCartOpen(true)}
-          className="fixed bottom-6 left-4 right-24 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 z-40 flex items-center justify-between gap-3 rounded-2xl bg-indigo-600 px-4 py-3 font-semibold text-white shadow-[0_0_25px_rgba(99,102,241,0.55)] ring-1 ring-white/20 transition active:scale-95 hover:bg-indigo-500"
+          className="fixed bottom-6 left-4 right-24 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 z-40 flex items-center justify-between gap-3 rounded-2xl bg-[#0F172A] px-4 py-3 font-semibold text-white shadow-lg transition active:scale-95 hover:bg-[#1E293B] cursor-pointer"
         >
           <span className="flex items-center gap-2 text-sm">
             <ShoppingCart className="h-4 w-4 shrink-0" />
             ตะกร้า {cart.length} เล่ม · ฿{cartTotal}
           </span>
-          <span className="whitespace-nowrap rounded-full bg-white/20 px-3 py-1 text-xs">ดูตะกร้า →</span>
+          <span className="whitespace-nowrap rounded-full bg-white/15 px-3 py-1 text-xs">ดูตะกร้า →</span>
         </button>
       )}
 
       <AnimatePresence>
         {isCartOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0F172A]/60 backdrop-blur-sm">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl"
+              className="bg-white border border-[#E2E8F0] rounded-3xl max-w-lg w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl"
             >
-              {/* Header */}
-              <div className="p-5 border-b border-slate-800 flex items-center justify-between">
+              <div className="p-5 border-b border-[#E2E8F0] flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <ShoppingCart className="w-5 h-5 text-indigo-400" />
-                  <h3 className="font-bold text-white text-base">
+                  <ShoppingCart className="w-5 h-5 text-[#1D4ED8]" />
+                  <h3 className="font-bold text-[#0F172A] text-base">
                     รายการ E-Book ในตะกร้า ({cart.length} เล่ม)
                   </h3>
                 </div>
                 <button
                   onClick={() => setIsCartOpen(false)}
-                  className="text-slate-400 hover:text-white text-xs font-semibold px-2 py-1"
+                  className="text-[#64748B] hover:text-[#0F172A] text-xs font-semibold px-2 py-1 cursor-pointer"
                 >
                   ปิด
                 </button>
               </div>
 
-              {/* Items List */}
               <div className="p-5 overflow-y-auto space-y-3 flex-1">
                 {cart.length === 0 ? (
-                  <div className="text-center py-12 text-slate-500 text-sm">
+                  <div className="text-center py-12 text-[#64748B] text-sm">
                     ยังไม่มี E-Book ในตะกร้าครับ
                   </div>
                 ) : (
                   cart.map((item) => (
                     <div
                       key={item.code}
-                      className="flex items-center justify-between gap-3 bg-slate-950 p-3 rounded-2xl border border-slate-800"
+                      className="flex items-center justify-between gap-3 bg-[#FAF8F5] p-3 rounded-2xl border border-[#E2E8F0]"
                     >
                       <div className="min-w-0">
-                        <div className="text-xs font-bold text-white truncate">
+                        <div className="text-xs font-bold text-[#0F172A] truncate">
                           [{item.code}] {item.title}
                         </div>
-                        <div className="text-[11px] text-slate-400">
+                        <div className="text-[11px] text-[#475569]">
                           ฿{item.earlyBirdPrice}{" "}
-                          <span className="line-through text-slate-600 text-[11px]">
+                          <span className="line-through text-[#94A3B8] text-[11px]">
                             ฿{item.regularPrice}
                           </span>
                         </div>
                       </div>
                       <button
                         onClick={() => removeFromCart(item.code)}
-                        className="text-rose-400 hover:text-rose-300 text-xs shrink-0 px-2 py-1"
+                        className="text-rose-600 hover:text-rose-700 text-xs font-semibold shrink-0 px-2 py-1 cursor-pointer"
                       >
                         ลบ
                       </button>
@@ -802,16 +722,15 @@ export function EbooksCatalogView() {
                 )}
               </div>
 
-              {/* Footer Checkout */}
               {cart.length > 0 && (
-                <div className="p-5 border-t border-slate-800 bg-slate-950/60">
+                <div className="p-5 border-t border-[#E2E8F0] bg-[#FAF8F5]">
                   <div className="flex items-center justify-between mb-3 text-sm">
-                    <span className="text-slate-400">ยอดรวมพิเศษ:</span>
+                    <span className="text-[#475569]">ยอดรวมพิเศษ:</span>
                     <div className="text-right">
-                      <span className="text-slate-500 line-through text-xs mr-2">
+                      <span className="text-[#94A3B8] line-through text-xs mr-2">
                         ฿{originalTotal}
                       </span>
-                      <span className="text-xl font-black text-indigo-400">
+                      <span className="text-xl font-black text-[#D97706]">
                         ฿{cartTotal}
                       </span>
                     </div>
@@ -824,7 +743,7 @@ export function EbooksCatalogView() {
                     data-line-price={cartTotal}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3 bg-[#06C755] hover:bg-[#05b34c] text-white font-bold rounded-xl flex items-center justify-center gap-2 text-sm transition shadow-lg shadow-[#06C755]/30"
+                    className="w-full py-3 bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-extrabold rounded-xl flex items-center justify-center gap-2 text-sm transition shadow-xs"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>ยืนยันคำสั่งซื้อทาง LINE OA</span>
@@ -836,25 +755,23 @@ export function EbooksCatalogView() {
         )}
       </AnimatePresence>
 
-      {/* ─────────────────────────────────────────────────────────────
-          7. E-BOOK 7-PILLARS DETAIL MODAL / DRAWER
-      ───────────────────────────────────────────────────────────── */}
+      {/* 7. E-BOOK 7-PILLARS DETAIL MODAL */}
       <AnimatePresence>
         {detailEbook && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#0F172A]/65 backdrop-blur-sm overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-slate-950 border border-indigo-500/30 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
+              className="relative bg-[#FAF8F5] border border-[#E2E8F0] rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
             >
-              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-slate-950/90 backdrop-blur-sm border-b border-slate-800/80 mb-6">
-                <span className="text-xs sm:text-sm font-bold text-indigo-300">
+              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-[#FAF8F5]/95 backdrop-blur-sm border-b border-[#E2E8F0] mb-6">
+                <span className="text-xs sm:text-sm font-bold text-[#1D4ED8]">
                   [{detailEbook.code}] เจาะลึก 7 องค์ประกอบหลัก E-Book
                 </span>
                 <button
                   onClick={() => setDetailEbook(null)}
-                  className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white text-xs font-bold transition flex items-center gap-1.5"
+                  className="px-3 py-1.5 rounded-xl bg-white border border-[#E2E8F0] hover:border-[#CBD5E1] text-[#475569] hover:text-[#0F172A] text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
                 >
                   ✕ ปิดหน้าต่าง
                 </button>

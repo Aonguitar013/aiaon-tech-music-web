@@ -59,12 +59,12 @@ export default async function EbookDetailPage({ params }: EbookPageProps) {
 
   if (!ebook) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-4">
+      <div className="min-h-screen bg-[#FAF8F5] text-[#0F172A] flex flex-col items-center justify-center p-4 font-prompt">
         <h1 className="text-2xl font-bold mb-3">ไม่พบ E-Book เล่มนี้</h1>
-        <p className="text-slate-400 text-sm mb-6">รหัสที่คุณค้นหาอาจไม่ถูกต้อง หรือยังไม่เปิดให้สั่งซื้อ</p>
+        <p className="text-[#475569] text-sm mb-6">รหัสที่คุณค้นหาอาจไม่ถูกต้อง หรือยังไม่เปิดให้สั่งซื้อ</p>
         <Link
           href="/ebooks"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm hover:bg-indigo-500 transition"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#2563EB] text-white font-bold text-sm hover:bg-[#1D4ED8] transition"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>กลับสู่คลัง 30 E-Book</span>
@@ -74,13 +74,13 @@ export default async function EbookDetailPage({ params }: EbookPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 pt-24 pb-20 selection:bg-indigo-500 selection:text-white font-prompt">
+    <div className="min-h-screen bg-[#FAF8F5] text-[#1E293B] pt-10 sm:pt-14 pb-20 selection:bg-amber-200 selection:text-[#0F172A] font-prompt">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Navigation Breadcrumb */}
         <div className="mb-8">
           <Link
             href="/ebooks"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm text-slate-400 hover:text-white transition font-medium"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm text-[#475569] hover:text-[#0F172A] transition font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>กลับหน้าคลัง 30 สุดยอด E-Book</span>
