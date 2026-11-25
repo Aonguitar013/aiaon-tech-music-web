@@ -6,7 +6,7 @@ export interface EduSkuItem {
   sku: string;
   slug: string;
   status: "live" | "coming_soon";
-  accent: "amber" | "rose" | "pink" | "fuchsia";
+  accent: "amber" | "rose" | "pink" | "fuchsia" | "teal";
   characterNameTh: string;
   characterNameEn: string;
   titleTh: string;
@@ -137,6 +137,33 @@ export const EDU_CATALOG: EduSkuItem[] = [
     badgeTh: "พร้อมใช้งาน • 6 แทร็กเสียง & จังหวะ",
     badgeEn: "Live Now • 6 Audio Tracks & Beat",
   },
+  {
+    sku: "EDU-VL01",
+    slug: "vl01",
+    status: "live",
+    accent: "teal",
+    characterNameTh: "น้องบ๊อบ",
+    characterNameEn: "Explorer Bob",
+    titleTh: "นักผจญภัยสายภาษา & Phonics กับน้องบ๊อบ — เล่ม 1",
+    titleEn: "Bob's Visual Phonics & Early Vocabulary Adventure — Level 1",
+    subtitleTh:
+      "แผนที่เสียงโฟนิกส์ A–Z + คัด 3 เส้น + คำศัพท์ 6 หมวด 36 คำ + ผสมคำ CVC + 27 แฟลชการ์ดตัดเล่น + กระดานกดฟังเสียง QR (ขอบ 20mm)",
+    subtitleEn:
+      "A–Z Phonics Soundboard + 3-Line Tracing + 36 Everyday Words + CVC Blending + 27 Cut-Out Flashcards (20mm Margin)",
+    ageRangeTh: "อายุ 3–6 ปี (อนุบาล 1 – เตรียม ป.1)",
+    ageRangeEn: "Ages 3–6 (Pre-K to Grade 1)",
+    pages: 32,
+    heroImage: "/edu/bob-3d.webp",
+    coverImage: "/edu/vl01/mockup-01-cover.webp",
+    freebieThUrl: "/edu/vl01/EDU-VL01_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/vl01/EDU-VL01_Freebie_5Pages_EN.pdf",
+    priceHomeThb: 99,
+    priceHomeUsd: "$4.99",
+    priceClassThb: 199,
+    priceClassUsd: "$9.99",
+    badgeTh: "พร้อมใช้งาน • กระดานเสียง A–Z",
+    badgeEn: "Live Now • A–Z Soundboard",
+  },
 ];
 
 export type EduOrderEdition =
@@ -145,6 +172,7 @@ export type EduOrderEdition =
   | "DUO_LIVE"
   | "TRIO_LIVE"
   | "ALL4_BUNDLE"
+  | "ALL5_BUNDLE"
   | "MEGA_BUNDLE"
   | "BUNDLE";
 
@@ -156,6 +184,14 @@ export function getEduOrderLineUrl(params: {
   const { sku, edition, lang } = params;
   const item =
     EDU_CATALOG.find((entry) => entry.sku === sku) ?? EDU_CATALOG[0];
+
+  if (edition === "ALL5_BUNDLE") {
+    const msg =
+      lang === "th"
+        ? `สวัสดีครับครูอ้น สนใจสั่งซื้อโปรเหมาครบจักรวาล 5 เล่ม Live iAon Edu-Verse (Home Edition):\n🎁 1) EDU-EF01 น้องแซลมอน EF (32 หน้า + Focus Timer)\n🎁 2) EDU-RT01 แม่ใหญ่สร้างวินัย 30 วัน (32 หน้า + Routine Timer)\n🎁 3) EDU-BB01 น้องชาบู Busy Book 45 การ์ด (32 หน้า + Brush Timer)\n🎁 4) EDU-MU01 น้องข้าวต้มดนตรี (32 หน้า + ห้องซ้อม 6 แทร็กเสียงจริง)\n🎁 5) EDU-VL01 น้องบ๊อบภาษา & Phonics (32 หน้า + 27 แฟลชการ์ด + กระดานเสียง A–Z)\n💰 ราคาโปรเหมา 5 เล่ม: 399 ฿ (จากปกติ 525 ฿ • ครบ 160 หน้า 20 ไฟล์ TH/EN สี+ขาวดำ)\nรบกวนขอเลขพร้อมเพย์เพื่อรับไฟล์ PDF ทันทีครับ 🙏`
+        : `Hi Teacher Aon! I'd like to order the All-5 Universe Bundle (Home Edition — 160 Pages / 20 PDFs):\n🎁 EF01 + RT01 + BB01 + MU01 + VL01 (All 5 Live Hybrid QR Kits!)\n💰 Bundle Price: 399 THB ($18.99)\nPlease share payment & download instructions!`;
+    return getLineOrderUrl(msg);
+  }
 
   if (edition === "ALL4_BUNDLE") {
     const msg =
