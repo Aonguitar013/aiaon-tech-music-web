@@ -99,8 +99,8 @@ const OFFICIAL_CHANNELS: ChannelCardItem[] = [
     url: "https://www.facebook.com/search/top?q=%E0%B9%84%E0%B8%AD%E0%B8%97%E0%B8%B5%E0%B8%87%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B9%86%20%E0%B8%AA%E0%B9%84%E0%B8%95%E0%B8%A5%E0%B9%8C%20iAon",
     buttonText: "ไปที่เพจ ไอทีง่ายๆ สไตล์ iAon",
     badge: "MAIN HUB",
-    colorClass: "text-blue-400",
-    borderClass: "border-blue-500/30 hover:border-blue-400/70",
+    colorClass: "text-blue-700",
+    borderClass: "border-[#E2E8F0] hover:border-blue-400",
     bgGlow: "from-blue-600/20 via-indigo-600/10 to-transparent",
     iconText: "🚩",
   },
@@ -116,8 +116,8 @@ const OFFICIAL_CHANNELS: ChannelCardItem[] = [
     url: "https://www.facebook.com/search/top?q=Aon%20Jirawat",
     buttonText: "ส่องเฟซบุ๊ก Aon Jirawat",
     badge: "PERSONAL STORY",
-    colorClass: "text-sky-400",
-    borderClass: "border-sky-500/30 hover:border-sky-400/70",
+    colorClass: "text-sky-700",
+    borderClass: "border-[#E2E8F0] hover:border-sky-400",
     bgGlow: "from-sky-600/20 via-cyan-600/10 to-transparent",
     iconText: "📘",
   },
@@ -133,8 +133,8 @@ const OFFICIAL_CHANNELS: ChannelCardItem[] = [
     url: "https://www.instagram.com/iaontech",
     buttonText: "ติดตาม IG @iaontech",
     badge: "VISUAL & REELS",
-    colorClass: "text-pink-400",
-    borderClass: "border-pink-500/30 hover:border-pink-400/70",
+    colorClass: "text-pink-700",
+    borderClass: "border-[#E2E8F0] hover:border-pink-400",
     bgGlow: "from-pink-600/20 via-purple-600/10 to-transparent",
     iconText: "📸",
   },
@@ -150,8 +150,8 @@ const OFFICIAL_CHANNELS: ChannelCardItem[] = [
     url: "https://www.threads.net/@iaontech",
     buttonText: "อ่านทริคบน Threads @iaontech",
     badge: "QUICK INSIGHTS",
-    colorClass: "text-slate-200",
-    borderClass: "border-slate-500/30 hover:border-slate-300/70",
+    colorClass: "text-slate-700",
+    borderClass: "border-[#E2E8F0] hover:border-slate-400",
     bgGlow: "from-slate-500/20 via-zinc-600/10 to-transparent",
     iconText: "🧵",
   },
@@ -167,8 +167,8 @@ const OFFICIAL_CHANNELS: ChannelCardItem[] = [
     url: "https://www.tiktok.com/@iaontech",
     buttonText: "ดูคลิปใน TikTok @iAonTech",
     badge: "SHORT VIDEO",
-    colorClass: "text-cyan-400",
-    borderClass: "border-cyan-500/30 hover:border-cyan-400/70",
+    colorClass: "text-cyan-700",
+    borderClass: "border-[#E2E8F0] hover:border-cyan-400",
     bgGlow: "from-cyan-500/20 via-rose-500/10 to-transparent",
     iconText: "🎵",
   },
@@ -184,8 +184,8 @@ const OFFICIAL_CHANNELS: ChannelCardItem[] = [
     url: "https://www.youtube.com/@iaontech",
     buttonText: "เปิดช่อง YouTube iAonTech",
     badge: "DEEP DIVE",
-    colorClass: "text-red-400",
-    borderClass: "border-red-500/30 hover:border-red-400/70",
+    colorClass: "text-red-700",
+    borderClass: "border-[#E2E8F0] hover:border-red-400",
     bgGlow: "from-red-600/20 via-orange-600/10 to-transparent",
     iconText: "📺",
   },
@@ -203,8 +203,8 @@ const OFFICIAL_CHANNELS: ChannelCardItem[] = [
     ),
     buttonText: "แอด LINE OA @deu6776s ทันที",
     badge: "OFFICIAL CONTACT",
-    colorClass: "text-emerald-400",
-    borderClass: "border-emerald-500/40 hover:border-emerald-400",
+    colorClass: "text-emerald-700",
+    borderClass: "border-[#E2E8F0] hover:border-emerald-400",
     bgGlow: "from-emerald-500/25 via-teal-500/10 to-transparent",
     iconText: "💬",
   },
@@ -488,7 +488,7 @@ export function AboutMasterView() {
   const activeCert = selectedCertIndex !== null ? CERTIFICATES[selectedCertIndex] : null;
 
   return (
-    <div className="w-full relative overflow-hidden min-h-screen pb-28 font-prompt text-white">
+    <div className="w-full relative overflow-hidden min-h-screen pb-28 font-prompt text-[#1E293B]">
       {/* Dynamic Ambient Background Glows */}
       <div className="absolute top-0 left-1/4 w-[750px] h-[650px] bg-blue-600/12 blur-[190px] rounded-full pointer-events-none" />
       <div className="absolute top-1/3 right-10 w-[700px] h-[700px] bg-purple-600/12 blur-[190px] rounded-full pointer-events-none" />
@@ -555,7 +555,7 @@ export function AboutMasterView() {
            SECTION 1: HERO & IDENTITY (KRU AON'S STORY)
         ============================================================ */}
         <section id="identity" className="pt-2">
-          <div className="glass-card relative rounded-3xl border border-white/15 p-6 sm:p-10 lg:p-12 overflow-hidden shadow-2xl">
+          <div className="bg-white shadow-sm relative rounded-3xl border border-[#E2E8F0] p-6 sm:p-10 lg:p-12 overflow-hidden shadow-sm">
             {/* Ambient Corner Highlights */}
             <div className="absolute -top-32 -left-10 w-96 h-96 bg-cyan-500/20 blur-[120px] rounded-full pointer-events-none" />
             <div className="absolute -bottom-32 -right-10 w-96 h-96 bg-purple-500/20 blur-[120px] rounded-full pointer-events-none" />
@@ -594,7 +594,7 @@ export function AboutMasterView() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
                   </span>
-                  <span className="font-prompt text-xs font-semibold text-emerald-400">
+                  <span className="font-prompt text-xs font-semibold text-[#047857]">
                     พร้อมรับบรรยาย &amp; ดูแลระบบ AI 24 ชม.
                   </span>
                 </div>
@@ -602,34 +602,34 @@ export function AboutMasterView() {
 
               {/* Story & Philosophy Details */}
               <div className="flex-1 text-center lg:text-left space-y-5">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-bold tracking-wide">
-                  <UserCheck className="w-4 h-4 text-cyan-400" />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-[#0E7490] text-xs sm:text-sm font-bold tracking-wide">
+                  <UserCheck className="w-4 h-4 text-[#0E7490]" />
                   <span>ABOUT KRU AON • จิรวัฒน์ เดชเส้ง</span>
                 </div>
 
-                <h1 className="font-prompt text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                <h1 className="font-prompt text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
                   เมื่อคนขี้เกียจทำงานเอกสาร{" "}
-                  <span className="block sm:inline bg-linear-to-r from-cyan-400 via-teal-300 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
+                  <span className="block sm:inline bg-linear-to-r from-[#0369A1] via-[#0F766E] to-[#B45309] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
                     เสกโค้ดให้คอมทำงานแทน!
                   </span>
                 </h1>
 
-                <p className="font-prompt text-white/80 text-base sm:text-lg leading-relaxed">
+                <p className="font-prompt text-[#475569] text-base sm:text-lg leading-relaxed">
                   สวัสดีครับ ผม <strong>ครูอ้น (จิรวัฒน์ เดชเส้ง)</strong> ข้าราชการครู ค.ศ.2 กลุ่มสาระการเรียนรู้ศิลปะ (ดนตรีสากล) โรงเรียนหาดใหญ่วิทยาลัย จังหวัดสงขลา ด้วยหัวใจที่รักในเสียงดนตรีและหลงใหลในโลกของเทคโนโลยี ผมจึงทุ่มเทเขียนโปรแกรมและสร้างสรรค์ระบบ <strong>Smart School Automation &amp; AI Caretaker</strong> ขึ้นมา เพื่อเปลี่ยนเวลาตรวจเอกสาร งานธุรการ และการตอบแชทที่ซ้ำซาก ให้กลายเป็นเวลาสอนเด็กๆ และเวลาใช้ชีวิตของพวกเราครับ
                 </p>
 
                 {/* Badge tags */}
                 <div className="flex flex-wrap gap-2.5 justify-center lg:justify-start pt-2">
                   {[
-                    { icon: GraduationCap, text: "ข้าราชการครู ค.ศ.2 (ดนตรีสากล)", color: "text-blue-400" },
-                    { icon: Rocket, text: "Google Apps Script & AI Automation", color: "text-cyan-400" },
-                    { icon: Music, text: "เพลงช่วยจำ & BGM ปลอดลิขสิทธิ์", color: "text-pink-400" },
-                    { icon: ShieldCheck, text: "AI Caretaker แอดมินเฝ้าร้าน 24 ชม.", color: "text-emerald-400" },
-                    { icon: Guitar, text: "วิทยากรบรรยาย Generative AI", color: "text-amber-400" },
+                    { icon: GraduationCap, text: "ข้าราชการครู ค.ศ.2 (ดนตรีสากล)", color: "text-[#1D4ED8]" },
+                    { icon: Rocket, text: "Google Apps Script & AI Automation", color: "text-[#0E7490]" },
+                    { icon: Music, text: "เพลงช่วยจำ & BGM ปลอดลิขสิทธิ์", color: "text-[#BE185D]" },
+                    { icon: ShieldCheck, text: "AI Caretaker แอดมินเฝ้าร้าน 24 ชม.", color: "text-[#047857]" },
+                    { icon: Guitar, text: "วิทยากรบรรยาย Generative AI", color: "text-[#B45309]" },
                   ].map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center gap-2 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full text-white/85 text-xs sm:text-sm hover:bg-white/10 transition-colors"
+                      className="flex items-center gap-2 bg-[#FAF8F5] border border-[#E2E8F0] px-3.5 py-1.5 rounded-full text-[#475569] text-xs sm:text-sm hover:bg-[#F1ECE4] transition-colors"
                     >
                       <item.icon className={`w-4 h-4 ${item.color} shrink-0`} />
                       <span className="font-prompt font-medium">{item.text}</span>
@@ -654,16 +654,16 @@ export function AboutMasterView() {
 
                   <button
                     onClick={handleCopyBioUrl}
-                    className="font-prompt inline-flex items-center gap-2 px-5 py-3 rounded-full glass-card border border-white/15 hover:border-cyan-400/50 text-white/80 hover:text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer"
+                    className="font-prompt inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white shadow-sm border border-[#E2E8F0] hover:border-cyan-400 text-[#475569] hover:text-[#0F172A] text-xs sm:text-sm font-semibold transition-all cursor-pointer"
                   >
                     {copiedBioLink ? (
                       <>
-                        <Check className="w-4 h-4 text-emerald-400" />
-                        <span className="text-emerald-300">คัดลอกลิงก์ aiaon.tech/about แล้ว!</span>
+                        <Check className="w-4 h-4 text-[#047857]" />
+                        <span className="text-[#047857]">คัดลอกลิงก์ aiaon.tech/about แล้ว!</span>
                       </>
                     ) : (
                       <>
-                        <Copy className="w-4 h-4 text-cyan-400" />
+                        <Copy className="w-4 h-4 text-[#0E7490]" />
                         <span>แชร์หน้าแนะนำตัวครูอ้น</span>
                       </>
                     )}
@@ -682,15 +682,15 @@ export function AboutMasterView() {
         <section id="channels" className="pt-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
-              <div className="font-prompt inline-flex items-center gap-2 text-cyan-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
+              <div className="font-prompt inline-flex items-center gap-2 text-[#0E7490] text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
                 <Radio className="w-4 h-4" />
                 <span>ALL OFFICIAL CHANNELS • 7 ช่องทางทางการของครูอ้น</span>
               </div>
-              <h2 className="font-prompt text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-                📲 ติดตามจักรวาล <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-teal-300 to-amber-300">iAonTech</span> ได้ครบทุกแพลตฟอร์ม
+              <h2 className="font-prompt text-2xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight">
+                📲 ติดตามจักรวาล <span className="text-transparent bg-clip-text bg-linear-to-r from-[#0369A1] via-[#0F766E] to-[#B45309]">iAonTech</span> ได้ครบทุกแพลตฟอร์ม
               </h2>
             </div>
-            <p className="font-prompt text-white/60 text-sm md:text-right max-w-md">
+            <p className="font-prompt text-[#64748B] text-sm md:text-right max-w-md">
               คลิกติดตามช่องทางต้นทางของแท้ 100% เรียงลำดับจากไลฟ์สดแม่พิมพ์ ➔ คลิปสั้น ➔ คลิปยาว ➔ และจุดรับบริการที่ LINE OA
             </p>
           </div>
@@ -703,11 +703,11 @@ export function AboutMasterView() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className={`group glass-card relative rounded-3xl bg-linear-to-br ${ch.bgGlow} border ${ch.borderClass} p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between shadow-xl`}
+                className={`group bg-white shadow-sm relative rounded-3xl bg-linear-to-br ${ch.bgGlow} border ${ch.borderClass} p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between shadow-sm`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className="font-prompt text-xs font-bold px-3 py-1 rounded-full bg-white/5 text-white/80 border border-white/10">
+                    <span className="font-prompt text-xs font-bold px-3 py-1 rounded-full bg-[#FAF8F5] text-[#475569] border border-[#E2E8F0]">
                       {ch.stepLabel}
                     </span>
                     <span className={`font-prompt text-xs font-extrabold tracking-wider ${ch.colorClass}`}>
@@ -716,24 +716,24 @@ export function AboutMasterView() {
                   </div>
 
                   <div className="flex items-start gap-3.5 mb-3.5">
-                    <div className="text-3xl shrink-0 bg-white/5 w-12 h-12 rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-105 transition-transform">
+                    <div className="text-3xl shrink-0 bg-[#FAF8F5] w-12 h-12 rounded-2xl flex items-center justify-center border border-[#E2E8F0] group-hover:scale-105 transition-transform">
                       {ch.iconText}
                     </div>
                     <div>
-                      <div className="font-prompt text-xs text-white/55 font-semibold">
+                      <div className="font-prompt text-xs text-[#64748B] font-semibold">
                         {ch.platform}
                       </div>
-                      <h3 className="font-prompt text-lg sm:text-xl font-extrabold text-white group-hover:text-cyan-300 transition-colors">
+                      <h3 className="font-prompt text-lg sm:text-xl font-extrabold text-[#0F172A] group-hover:text-[#0E7490] transition-colors">
                         {ch.name}
                       </h3>
-                      <div className="font-mono text-xs text-cyan-400">{ch.handle}</div>
+                      <div className="font-mono text-xs text-[#0E7490]">{ch.handle}</div>
                     </div>
                   </div>
 
-                  <p className="font-prompt text-white/75 text-sm leading-relaxed mb-3">
+                  <p className="font-prompt text-[#475569] text-sm leading-relaxed mb-3">
                     {ch.role}
                   </p>
-                  <div className="font-prompt text-xs text-amber-300/95 font-semibold mb-5">
+                  <div className="font-prompt text-xs text-[#B45309] font-semibold mb-5">
                     {ch.schedule}
                   </div>
                 </div>
@@ -742,16 +742,17 @@ export function AboutMasterView() {
                   href={ch.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-prompt inline-flex items-center justify-between w-full px-4 py-3 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 group-hover:border-cyan-500/40 text-sm font-bold text-white transition-all"
+                  className="font-prompt inline-flex items-center justify-between w-full px-4 py-3 rounded-xl bg-[#FAF8F5] hover:bg-cyan-50 border border-[#E2E8F0] group-hover:border-cyan-400 text-sm font-bold text-[#0F172A] transition-all"
                 >
                   <span>{ch.buttonText}</span>
-                  <ExternalLink className="w-4 h-4 text-cyan-400" />
+                  <ExternalLink className="w-4 h-4 text-[#0E7490]" />
                 </a>
               </motion.div>
             ))}
           </div>
         </section>
 
+        <div className="rounded-[2rem] bg-[#0B1220] text-white p-4 sm:p-8 space-y-24">
         {/* ============================================================
            SECTION 3: 3 OFFICIAL GADGET & AFFILIATE STORES
         ============================================================ */}
@@ -1275,6 +1276,7 @@ export function AboutMasterView() {
             </div>
           </div>
         </section>
+        </div>
 
       </div>
 

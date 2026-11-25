@@ -28,5 +28,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <PillarThemeWrapper pillar="tech" surface="dark"><AboutMasterView /></PillarThemeWrapper>;
+  return <PillarThemeWrapper pillar="tech"><AboutMasterView /></PillarThemeWrapper>;
 }
