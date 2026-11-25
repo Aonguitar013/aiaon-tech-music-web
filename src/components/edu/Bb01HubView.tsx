@@ -474,56 +474,56 @@ export function Bb01HubView() {
         ];
 
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-hidden bg-[#FFFDF7] text-[#1E293B] -mt-4 md:-mt-8 pt-6 md:pt-10 pb-16 border-b border-pink-200/80">
       {toastMsg && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md animate-in fade-in slide-in-from-top-3 duration-200">
-          <div className="rounded-2xl border border-pink-400/45 bg-slate-950/95 backdrop-blur-xl px-4 py-3 text-center text-sm font-medium text-pink-100 shadow-2xl shadow-pink-500/20">
+          <div className="rounded-2xl border-2 border-pink-400 bg-slate-900 px-4 py-3 text-center text-sm font-semibold text-white shadow-2xl">
             {toastMsg}
           </div>
         </div>
       )}
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-4 pb-16 space-y-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
         {/* Top Utility Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <Link
             href="/edu"
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs sm:text-sm text-white/80 hover:text-pink-300 hover:border-pink-400/40 transition-colors"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:text-pink-700 hover:border-pink-300 shadow-xs transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>iAon Edu-Verse</span>
-            <span className="text-white/40">/</span>
-            <span className="font-semibold text-pink-300">EDU-BB01</span>
+            <span className="text-slate-300">/</span>
+            <span className="font-bold text-pink-700">EDU-BB01</span>
           </Link>
 
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setSoundEnabled((prev) => !prev)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/85 hover:bg-white/10 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 shadow-xs transition-colors cursor-pointer"
               aria-label="Toggle Sound"
             >
               {soundEnabled ? (
                 <>
-                  <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <Volume2 className="w-3.5 h-3.5 text-emerald-600" />
                   <span>{lang === "th" ? "เปิดเสียง" : "Sound On"}</span>
                 </>
               ) : (
                 <>
-                  <VolumeX className="w-3.5 h-3.5 text-rose-400" />
+                  <VolumeX className="w-3.5 h-3.5 text-rose-600" />
                   <span>{lang === "th" ? "ปิดเสียง" : "Muted"}</span>
                 </>
               )}
             </button>
 
-            <div className="inline-flex rounded-full border border-white/15 bg-black/40 p-0.5 text-xs font-semibold">
+            <div className="inline-flex rounded-full border border-slate-200 bg-white p-0.5 text-xs font-bold shadow-xs">
               <button
                 type="button"
                 onClick={() => setLang("th")}
                 className={`rounded-full px-3 py-1 transition-all cursor-pointer ${
                   lang === "th"
-                    ? "bg-pink-400 text-slate-950 shadow"
-                    : "text-white/70 hover:text-white"
+                    ? "bg-pink-600 text-white shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 🇹🇭 ไทย
@@ -533,8 +533,8 @@ export function Bb01HubView() {
                 onClick={() => setLang("en")}
                 className={`rounded-full px-3 py-1 transition-all cursor-pointer ${
                   lang === "en"
-                    ? "bg-pink-400 text-slate-950 shadow"
-                    : "text-white/70 hover:text-white"
+                    ? "bg-pink-600 text-white shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 🇬🇧 EN
@@ -546,7 +546,7 @@ export function Bb01HubView() {
         {/* ============================================================
             SECTION 1: HERO + 2-MIN BRUSH / 20-SEC HANDWASH TIMER + CHECKLIST
         ============================================================ */}
-        <section className="relative rounded-3xl border border-pink-400/30 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-pink-950/35 p-5 sm:p-8 shadow-2xl overflow-hidden">
+        <section className="relative rounded-3xl border-2 border-pink-200 bg-white p-5 sm:p-8 shadow-lg shadow-pink-900/5 overflow-hidden">
           {isCelebrating && (
             <div className="pointer-events-none absolute inset-0 overflow-hidden z-20">
               {CONFETTI_PIECES.map((c, idx) => (
@@ -559,14 +559,14 @@ export function Bb01HubView() {
             </div>
           )}
 
-          <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-pink-500/15 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-cyan-500/15 blur-3xl" />
+          <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-pink-100/70 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-sky-100/60 blur-3xl" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center min-w-0">
             {/* Left: Hygiene & Busy Book Timer */}
             <div className="lg:col-span-6 min-w-0 w-full flex flex-col items-center text-center space-y-5">
-              <div className="inline-flex items-center justify-center gap-1.5 rounded-full border border-pink-400/35 bg-pink-400/10 px-3 py-1 text-[11px] sm:text-xs font-semibold text-pink-200 max-w-full flex-wrap">
-                <Clock className="w-3.5 h-3.5 shrink-0" />
+              <div className="inline-flex items-center justify-center gap-1.5 rounded-full border border-pink-300 bg-pink-50 px-3 py-1 text-[11px] sm:text-xs font-bold text-pink-900 max-w-full flex-wrap">
+                <Clock className="w-3.5 h-3.5 shrink-0 text-pink-600" />
                 <span>
                   {lang === "th"
                     ? "HYBRID QR • นาฬิกาแปรงฟัน 2 นาที & ล้างมือ 20 วิ"
@@ -574,7 +574,7 @@ export function Bb01HubView() {
                 </span>
               </div>
 
-              <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight break-words w-full">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B] leading-tight break-words w-full">
                 {lang === "th"
                   ? "Busy Book ลีลามือ & สุขอนามัยกับน้องชาบู"
                   : "Shabu's Hygiene & Busy Book Timer"}
@@ -589,10 +589,10 @@ export function Bb01HubView() {
                       key={p.seconds}
                       type="button"
                       onClick={() => handleSelectPreset(p.seconds)}
-                      className={`rounded-2xl border px-2.5 py-2 text-xs font-semibold transition-all cursor-pointer flex flex-col items-center gap-0.5 ${
+                      className={`rounded-2xl border-2 px-2.5 py-2 text-xs font-bold transition-all cursor-pointer flex flex-col items-center gap-0.5 ${
                         active
-                          ? "border-pink-400 bg-pink-400 text-slate-950 shadow-lg shadow-pink-500/25"
-                          : "border-white/15 bg-white/5 text-white/85 hover:border-pink-400/45 hover:bg-white/10"
+                          ? "border-pink-600 bg-pink-600 text-white shadow-md shadow-pink-500/20"
+                          : "border-slate-200 bg-[#FDF2F8] text-slate-800 hover:border-pink-400 hover:bg-pink-50"
                       }`}
                     >
                       <span className="text-sm leading-none">
@@ -600,7 +600,7 @@ export function Bb01HubView() {
                       </span>
                       <span
                         className={`text-[11px] ${
-                          active ? "text-slate-900 font-bold" : "text-white/55"
+                          active ? "text-pink-100 font-bold" : "text-slate-600"
                         }`}
                       >
                         {lang === "th" ? p.tagTh : p.tagEn}
@@ -622,7 +622,7 @@ export function Bb01HubView() {
                     cy="110"
                     r={ringRadius}
                     fill="none"
-                    stroke="rgba(255,255,255,0.10)"
+                    stroke="#E2E8F0"
                     strokeWidth="12"
                   />
                   <circle
@@ -630,7 +630,7 @@ export function Bb01HubView() {
                     cy="110"
                     r={ringRadius}
                     fill="none"
-                    stroke={isCelebrating ? "#34d399" : "#f472b6"}
+                    stroke={isCelebrating ? "#10B981" : "#DB2777"}
                     strokeWidth="12"
                     strokeLinecap="round"
                     strokeDasharray={ringCircumference}
@@ -641,7 +641,7 @@ export function Bb01HubView() {
 
                 <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
                   <div
-                    className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#fffdf7] p-1.5 ring-2 ring-pink-400/60 shadow-[0_8px_20px_rgba(244,114,182,0.3)] overflow-hidden flex items-center justify-center transition-transform duration-300 ${
+                    className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#FFFDF7] p-1.5 ring-2 ring-pink-400 shadow-md overflow-hidden flex items-center justify-center transition-transform duration-300 ${
                       isCelebrating
                         ? "scale-110 animate-bounce"
                         : isRunning
@@ -655,13 +655,13 @@ export function Bb01HubView() {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <div className="mt-2 font-mono text-3xl sm:text-4xl font-bold tracking-wider text-white tabular-nums">
+                  <div className="mt-2 font-mono text-3xl sm:text-4xl font-extrabold tracking-wider text-slate-900 tabular-nums">
                     {formattedTime}
                   </div>
                 </div>
               </div>
 
-              <p className="text-sm sm:text-base text-pink-100/90 max-w-md min-h-[1.75rem] px-1 break-words">
+              <p className="text-sm sm:text-base font-medium text-slate-700 max-w-md min-h-[1.75rem] px-1 break-words">
                 {statusText}
               </p>
 
@@ -670,7 +670,7 @@ export function Bb01HubView() {
                 <button
                   type="button"
                   onClick={handleStartPause}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-pink-400 to-amber-300 px-5 py-3 text-sm sm:text-base font-bold text-slate-950 shadow-lg shadow-pink-500/25 hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer min-w-[148px]"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-pink-600 hover:bg-pink-700 px-5 py-3 text-sm sm:text-base font-extrabold text-white shadow-md shadow-pink-500/20 active:scale-[0.98] transition-all cursor-pointer min-w-[148px]"
                 >
                   {isRunning ? (
                     <>
@@ -700,7 +700,7 @@ export function Bb01HubView() {
                 <button
                   type="button"
                   onClick={handleResetTimer}
-                  className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white/85 hover:bg-white/10 active:scale-[0.98] transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-slate-300 bg-slate-100 hover:bg-slate-200 px-4 py-3 text-sm font-bold text-slate-800 active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>{lang === "th" ? "รีเซ็ต" : "Reset"}</span>
@@ -715,9 +715,9 @@ export function Bb01HubView() {
                         : "👏 Bravo! Sparkling clean — Shabu applauds your awesome habit!"
                     )
                   }
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-400/40 bg-emerald-500/15 px-4 py-3 text-sm sm:text-base font-bold text-emerald-300 hover:bg-emerald-500/25 active:scale-[0.98] transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-emerald-300 bg-emerald-50 hover:bg-emerald-100 px-4 py-3 text-sm sm:text-base font-bold text-emerald-900 active:scale-[0.98] transition-all cursor-pointer"
                 >
-                  <Sparkles className="w-4 h-4" />
+                  <Sparkles className="w-4 h-4 text-emerald-700" />
                   <span>
                     {lang === "th" ? "👏 ปรบมือให้ดาว!" : "👏 Cheer & Star!"}
                   </span>
@@ -726,37 +726,37 @@ export function Bb01HubView() {
             </div>
 
             {/* Right: Interactive 6-Step WHO Handwash + 6 Busy Book Boards */}
-            <div className="lg:col-span-6 min-w-0 w-full rounded-2xl border border-white/10 bg-black/35 p-4 sm:p-5 space-y-4">
+            <div className="lg:col-span-6 min-w-0 w-full rounded-2xl border border-pink-200 bg-[#FDF2F8] p-4 sm:p-5 space-y-4">
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                    <Droplets className="w-5 h-5 text-cyan-400" />
+                  <h2 className="text-base sm:text-lg font-extrabold text-[#1E293B] flex items-center gap-2">
+                    <Droplets className="w-5 h-5 text-sky-600" />
                     <span>
                       {lang === "th"
                         ? "เช็กลิสต์ล้างมือ WHO & Busy Book"
                         : "WHO Handwash & Busy Book Tracker"}
                     </span>
                   </h2>
-                  <p className="text-xs text-white/60 mt-0.5">
+                  <p className="text-xs text-slate-600 mt-0.5">
                     {lang === "th"
                       ? "แตะทีละข้อเพื่อเก็บดาวกับน้องชาบู (บันทึกในเครื่องอัตโนมัติ)"
                       : "Tap each step with your toddler to earn stars (saved on device)"}
                   </p>
                 </div>
-                <span className="shrink-0 rounded-full bg-amber-400/15 border border-amber-400/35 px-3 py-1 text-xs font-bold text-amber-300">
+                <span className="shrink-0 rounded-full bg-amber-100 border border-amber-300 px-3 py-1 text-xs font-extrabold text-amber-900">
                   {totalStars}/{maxStars} ⭐
                 </span>
               </div>
 
               {/* Progress Bar */}
               <div className="space-y-1.5">
-                <div className="h-2.5 w-full rounded-full bg-white/10 overflow-hidden">
+                <div className="h-2.5 w-full rounded-full bg-slate-200 overflow-hidden">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-pink-400 via-cyan-300 to-emerald-400 transition-all duration-500"
+                    className="h-full rounded-full bg-gradient-to-r from-pink-500 via-sky-500 to-emerald-500 transition-all duration-500"
                     style={{ width: `${(totalStars / maxStars) * 100}%` }}
                   />
                 </div>
-                <div className="flex items-center justify-between text-[11px] text-white/55">
+                <div className="flex items-center justify-between text-[11px] font-medium text-slate-600">
                   <span>
                     {lang === "th"
                       ? `แท็บนี้ทำครบ ${tabDone}/6 ข้อ`
@@ -766,7 +766,7 @@ export function Bb01HubView() {
                     <button
                       type="button"
                       onClick={handleResetChecklist}
-                      className="text-pink-300 hover:text-pink-200 underline cursor-pointer"
+                      className="text-pink-700 hover:text-pink-900 font-bold underline cursor-pointer"
                     >
                       {lang === "th" ? "รีเซ็ตเริ่มใหม่" : "Reset All"}
                     </button>
@@ -775,14 +775,14 @@ export function Bb01HubView() {
               </div>
 
               {/* 2 Tabs */}
-              <div className="grid grid-cols-2 gap-1.5 rounded-xl bg-white/[0.04] p-1 border border-white/10">
+              <div className="grid grid-cols-2 gap-1.5 rounded-xl bg-white p-1 border border-pink-200 shadow-xs">
                 <button
                   type="button"
                   onClick={() => setActiveTab("handwash")}
                   className={`flex items-center justify-center gap-1.5 rounded-lg py-2 px-2 text-xs font-bold transition-all cursor-pointer ${
                     activeTab === "handwash"
-                      ? "bg-pink-400 text-slate-950 shadow"
-                      : "text-white/70 hover:text-white hover:bg-white/5"
+                      ? "bg-pink-600 text-white shadow-xs"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-pink-50"
                   }`}
                 >
                   <Droplets className="w-3.5 h-3.5 shrink-0" />
@@ -793,8 +793,8 @@ export function Bb01HubView() {
                   onClick={() => setActiveTab("busybook")}
                   className={`flex items-center justify-center gap-1.5 rounded-lg py-2 px-2 text-xs font-bold transition-all cursor-pointer ${
                     activeTab === "busybook"
-                      ? "bg-pink-400 text-slate-950 shadow"
-                      : "text-white/70 hover:text-white hover:bg-white/5"
+                      ? "bg-pink-600 text-white shadow-xs"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-pink-50"
                   }`}
                 >
                   <Scissors className="w-3.5 h-3.5 shrink-0" />
@@ -813,28 +813,24 @@ export function Bb01HubView() {
                       onClick={() => toggleItem(it.id, it.tab)}
                       className={`w-full text-left flex items-center gap-3 rounded-xl border p-2.5 transition-all cursor-pointer ${
                         done
-                          ? "border-pink-400/50 bg-pink-400/12"
-                          : "border-white/10 bg-white/[0.03] hover:bg-white/[0.07]"
+                          ? "border-pink-400 bg-pink-50 shadow-xs"
+                          : "border-slate-200 bg-white hover:border-pink-300"
                       }`}
                     >
                       <span className="text-lg shrink-0">{it.icon}</span>
                       <div className="min-w-0 flex-1">
-                        <div
-                          className={`text-sm font-semibold truncate ${
-                            done ? "text-pink-100" : "text-white"
-                          }`}
-                        >
+                        <div className="text-sm font-bold text-[#1E293B] truncate">
                           {lang === "th" ? it.titleTh : it.titleEn}
                         </div>
-                        <div className="text-xs text-white/60 truncate">
+                        <div className="text-xs text-slate-600 truncate">
                           {lang === "th" ? it.tipTh : it.tipEn}
                         </div>
                       </div>
                       <Star
                         className={`w-5 h-5 shrink-0 transition-transform ${
                           done
-                            ? "text-amber-300 fill-amber-300 scale-110"
-                            : "text-white/25"
+                            ? "text-amber-500 fill-amber-400 scale-110"
+                            : "text-slate-300"
                         }`}
                       />
                     </button>
@@ -850,14 +846,14 @@ export function Bb01HubView() {
         ============================================================ */}
         <section
           id="freebie"
-          className="rounded-3xl border border-cyan-400/30 bg-gradient-to-r from-cyan-950/45 via-slate-900/90 to-slate-900/95 p-5 sm:p-8 shadow-xl"
+          className="rounded-3xl border-2 border-sky-200 bg-sky-50/75 p-5 sm:p-8 shadow-md shadow-sky-900/5"
         >
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
             <div className="md:col-span-4 flex justify-center">
               <button
                 type="button"
                 onClick={() => setLightboxIndex(0)}
-                className="group relative rounded-2xl overflow-hidden border border-white/15 shadow-lg max-w-[240px] cursor-pointer"
+                className="group relative rounded-2xl overflow-hidden border-2 border-white shadow-md max-w-[240px] cursor-pointer bg-white"
               >
                 <img
                   src="/edu/bb01/mockup-01-cover.webp"
@@ -865,15 +861,15 @@ export function Bb01HubView() {
                   className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
-                <span className="absolute top-2.5 left-2.5 rounded-full bg-emerald-500 px-2.5 py-0.5 text-[11px] font-bold text-slate-950 shadow">
+                <span className="absolute top-2.5 left-2.5 rounded-full bg-emerald-600 px-2.5 py-0.5 text-[11px] font-bold text-white shadow">
                   {lang === "th" ? "แจกฟรี 5 หน้า!" : "FREE 5-PAGE SAMPLE"}
                 </span>
               </button>
             </div>
 
             <div className="md:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full bg-cyan-400/15 border border-cyan-400/35 px-3 py-1 text-xs font-semibold text-cyan-300">
-                <Download className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 rounded-full bg-white border border-sky-300 px-3 py-1 text-xs font-bold text-sky-900">
+                <Download className="w-3.5 h-3.5 text-sky-700" />
                 <span>
                   {lang === "th"
                     ? "ทดลองปริ้นท์ให้ลูกเล่นฟรีก่อนซื้อ (0 ฿) • แถมหน้าไวรัล P15!"
@@ -881,13 +877,13 @@ export function Bb01HubView() {
                 </span>
               </div>
 
-              <h2 className="text-xl sm:text-2xl font-bold text-white">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#1E293B]">
                 {lang === "th"
                   ? "ดาวน์โหลดชุดทดลองฟรี 5 หน้า (ลีลามือ + บอร์ด 6 สี + บอร์ดแปรงฟันไวท์บอร์ด P15!)"
                   : "Download the 5-Page Free Sample (Tracing + 6 Colors Mat + Wipe-Clean Teeth Board!)"}
               </h2>
 
-              <p className="text-sm text-white/75 leading-relaxed">
+              <p className="text-sm text-slate-700 leading-relaxed">
                 {lang === "th"
                   ? "คลิกโหลดไฟล์ PDF ไปปริ้นท์ A4 ได้เลยทันทีไม่ต้องลงทะเบียน ใส่ซองใสหรือเคลือบให้ลูกเล่นเกมเช็ดคราบแมงกินฟันคู่กับนาฬิกาแปรงฟัน 2 นาทีด้านบนได้เลยวันนี้!"
                   : "Direct 1-click download — no login needed. Slip Page 15 into a sheet protector and let your toddler brush away dry-erase spots alongside our 2-minute timer!"}
@@ -902,7 +898,7 @@ export function Bb01HubView() {
                       "📥 กำลังดาวน์โหลด Busy Book น้องชาบูฟรี (5 หน้า) — ปริ้นท์ลองเล่นบอร์ดแปรงฟันได้เลย!"
                     )
                   }
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-400 px-5 py-3 text-sm sm:text-base font-bold text-slate-950 shadow-lg shadow-cyan-500/20 hover:bg-cyan-300 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-700 hover:bg-sky-800 px-5 py-3 text-sm sm:text-base font-bold text-white shadow-md shadow-sky-600/20 transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   <span>โหลดฟรี 5 หน้า (ภาษาไทย • PDF)</span>
@@ -916,7 +912,7 @@ export function Bb01HubView() {
                       "📥 Downloading Shabu’s English 5-Page Freebie PDF — ready to print!"
                     )
                   }
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-cyan-400/40 bg-cyan-500/10 px-5 py-3 text-sm sm:text-base font-semibold text-cyan-200 hover:bg-cyan-500/20 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-sky-300 bg-white hover:bg-sky-50 px-5 py-3 text-sm sm:text-base font-bold text-sky-900 transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   <span>Free 5-Page Sample (English • PDF)</span>
@@ -931,20 +927,20 @@ export function Bb01HubView() {
         ============================================================ */}
         <section id="full-pack" className="space-y-6">
           <div className="text-center space-y-2 max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-pink-400/35 bg-pink-400/10 px-3 py-1 text-xs font-semibold text-pink-200">
-              <Layers className="w-3.5 h-3.5" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-pink-300 bg-pink-50 px-3 py-1 text-xs font-bold text-pink-900">
+              <Layers className="w-3.5 h-3.5 text-pink-600" />
               <span>
                 {lang === "th"
                   ? "3-IN-1 BUSY BOOK • ขอบเจาะรู 20mm + การ์ดตีนตุ๊กแก 45 ชิ้นติดป้ายหน้า"
                   : "3-IN-1 BUSY BOOK • 20MM BINDER MARGIN + 45 PAGE-TAGGED VELCRO PIECES"}
               </span>
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B]">
               {lang === "th"
                 ? "ปลดล็อกเล่มเต็ม 32 หน้า (ครบ 4 ไฟล์ TH/EN × สี/ขาวดำ)"
                 : "Unlock the Complete 32-Page Busy Book (4 PDFs: TH/EN × Color/B&W)"}
             </h2>
-            <p className="text-sm text-white/70">
+            <p className="text-sm text-slate-600">
               {lang === "th"
                 ? "ครบทั้งลีลามือ 6 หน้า, บอร์ดตีนตุ๊กแก 6 หมวด, บอร์ดแปรงฟันลบได้, ล้างมือ 6 ขั้น WHO, ฝึกกรรไกร, เขาวงกต และการ์ดตัดแปะ 45 ชิ้น!"
                 : "Includes 6 tracing pages, 6 Velcro boards, wipe-clean teeth board, 6-step handwashing, safe scissor practice, easy maze & 45 cutout pieces!"}
@@ -958,9 +954,9 @@ export function Bb01HubView() {
                 key={img.src}
                 type="button"
                 onClick={() => setLightboxIndex(idx)}
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden text-left hover:border-pink-400/50 transition-all cursor-pointer"
+                className="group rounded-2xl border border-slate-200 bg-white overflow-hidden text-left hover:border-pink-400 shadow-xs transition-all cursor-pointer"
               >
-                <div className="aspect-square overflow-hidden bg-slate-900">
+                <div className="aspect-square overflow-hidden bg-[#FDF2F8]">
                   <img
                     src={img.src}
                     alt={lang === "th" ? img.labelTh : img.labelEn}
@@ -968,7 +964,7 @@ export function Bb01HubView() {
                     loading="lazy"
                   />
                 </div>
-                <div className="p-2.5 text-xs font-medium text-white/85 line-clamp-2">
+                <div className="p-2.5 text-xs font-semibold text-slate-700 line-clamp-2">
                   {lang === "th" ? img.labelTh : img.labelEn}
                 </div>
               </button>
@@ -978,38 +974,38 @@ export function Bb01HubView() {
           {/* Dual-Edition Pricing Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* HOME EDITION */}
-            <div className="rounded-3xl border border-pink-400/40 bg-gradient-to-b from-pink-500/12 via-slate-900/95 to-slate-950 p-6 flex flex-col justify-between space-y-6 shadow-xl">
+            <div className="rounded-3xl border-2 border-pink-300 bg-white p-6 flex flex-col justify-between space-y-6 shadow-md">
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-pink-400/20 px-3 py-1 text-xs font-bold text-pink-200">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-pink-100 border border-pink-300 px-3 py-1 text-xs font-extrabold text-pink-900">
                     <Home className="w-3.5 h-3.5" />
                     <span>HOME EDITION</span>
                   </span>
-                  <span className="rounded-full bg-emerald-500/20 border border-emerald-400/35 px-2.5 py-0.5 text-xs font-semibold text-emerald-300">
+                  <span className="rounded-full bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 text-xs font-bold text-emerald-900">
                     {lang === "th" ? "ยอดนิยมสำหรับพ่อแม่ 3–5 ปี" : "Best for Toddlers 3–5"}
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-white">
+                  <h3 className="text-xl font-extrabold text-[#1E293B]">
                     {lang === "th"
                       ? "สิทธิ์ใช้ในครอบครัว (Personal Use)"
                       : "Family & Personal License"}
                   </h3>
-                  <div className="mt-2 flex items-baseline gap-2.5">
-                    <span className="text-4xl font-extrabold text-pink-300">
+                  <div className="mt-2 flex items-baseline gap-2.5 flex-wrap">
+                    <span className="text-4xl font-extrabold text-pink-700">
                       {lang === "th" ? "99 ฿" : "$4.99"}
                     </span>
-                    <span className="text-sm text-white/45 line-through">
+                    <span className="text-sm text-slate-400 line-through">
                       {lang === "th" ? "149 ฿" : "$6.99"}
                     </span>
-                    <span className="text-xs text-white/60">
+                    <span className="text-xs font-medium text-slate-600">
                       {lang === "th" ? "(จ่ายครั้งเดียว)" : "(99 THB • One-time)"}
                     </span>
                   </div>
                 </div>
 
-                <ul className="space-y-2.5 text-sm text-white/85">
+                <ul className="space-y-2.5 text-sm text-slate-700">
                   {(lang === "th"
                     ? [
                         "ครบ 32 หน้าเต็ม: ลีลามือ 6 หน้า + บอร์ดตีนตุ๊กแก 6 หมวด + การ์ด 45 ชิ้นติดป้ายหน้า",
@@ -1025,7 +1021,7 @@ export function Bb01HubView() {
                       ]
                   ).map((item) => (
                     <li key={item} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-pink-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-pink-600 shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -1040,7 +1036,7 @@ export function Bb01HubView() {
                 })}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] px-5 py-3.5 text-base font-bold text-white shadow-lg shadow-emerald-500/20 transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] px-5 py-3.5 text-base font-bold text-white shadow-md shadow-emerald-500/20 transition-colors"
               >
                 <FaLine className="w-5 h-5" />
                 <span>
@@ -1052,14 +1048,14 @@ export function Bb01HubView() {
             </div>
 
             {/* CLASS EDITION */}
-            <div className="rounded-3xl border border-sky-400/35 bg-gradient-to-b from-sky-500/10 via-slate-900/95 to-slate-950 p-6 flex flex-col justify-between space-y-6 shadow-xl">
+            <div className="rounded-3xl border-2 border-sky-300 bg-white p-6 flex flex-col justify-between space-y-6 shadow-md">
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-400/20 px-3 py-1 text-xs font-bold text-sky-300">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-100 border border-sky-300 px-3 py-1 text-xs font-extrabold text-sky-900">
                     <School className="w-3.5 h-3.5" />
                     <span>CLASS EDITION</span>
                   </span>
-                  <span className="rounded-full bg-sky-500/20 border border-sky-400/35 px-2.5 py-0.5 text-xs font-semibold text-sky-300">
+                  <span className="rounded-full bg-sky-50 border border-sky-200 px-2.5 py-0.5 text-xs font-bold text-sky-800">
                     {lang === "th"
                       ? "สำหรับครูอนุบาล / เนอสเซอรี"
                       : "Preschool & Nursery Teachers"}
@@ -1067,19 +1063,19 @@ export function Bb01HubView() {
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-white">
+                  <h3 className="text-xl font-extrabold text-[#1E293B]">
                     {lang === "th"
                       ? "สิทธิ์คุณครู / ห้องเรียน (Classroom License)"
                       : "Single-Teacher Classroom License"}
                   </h3>
-                  <div className="mt-2 flex items-baseline gap-2.5">
-                    <span className="text-4xl font-extrabold text-sky-300">
+                  <div className="mt-2 flex items-baseline gap-2.5 flex-wrap">
+                    <span className="text-4xl font-extrabold text-sky-700">
                       {lang === "th" ? "199 ฿" : "$9.99"}
                     </span>
-                    <span className="text-sm text-white/45 line-through">
+                    <span className="text-sm text-slate-400 line-through">
                       {lang === "th" ? "299 ฿" : "$14.99"}
                     </span>
-                    <span className="text-xs text-white/60">
+                    <span className="text-xs font-medium text-slate-600">
                       {lang === "th"
                         ? "(ปริ้นท์แจกเด็กไม่จำกัด)"
                         : "(199 THB • Unlimited copies)"}
@@ -1087,7 +1083,7 @@ export function Bb01HubView() {
                   </div>
                 </div>
 
-                <ul className="space-y-2.5 text-sm text-white/85">
+                <ul className="space-y-2.5 text-sm text-slate-700">
                   {(lang === "th"
                     ? [
                         "สิทธิ์ถูกกฎหมายสำหรับคุณครู 1 ท่าน ทำมุมประสบการณ์ & ปริ้นท์แจกเด็กไม่จำกัด",
@@ -1103,7 +1099,7 @@ export function Bb01HubView() {
                       ]
                   ).map((item) => (
                     <li key={item} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -1118,9 +1114,9 @@ export function Bb01HubView() {
                 })}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-sky-400/50 bg-sky-500/20 hover:bg-sky-500/30 px-5 py-3.5 text-base font-bold text-sky-100 transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-700 hover:bg-sky-800 px-5 py-3.5 text-base font-bold text-white shadow-md shadow-sky-600/20 transition-colors"
               >
-                <FaLine className="w-5 h-5 text-[#06C755]" />
+                <FaLine className="w-5 h-5 text-white" />
                 <span>
                   {lang === "th"
                     ? "สั่งซื้อ Class Edition (199 ฿) ทาง LINE"
@@ -1134,11 +1130,11 @@ export function Bb01HubView() {
         {/* ============================================================
             SECTION 4: BUILT-IN CROSS-SELL (3-LIVE TRIO & ALL-4 BUNDLE)
         ============================================================ */}
-        <section className="rounded-3xl border border-amber-400/35 bg-gradient-to-br from-amber-950/35 via-slate-900/95 to-pink-950/35 p-5 sm:p-8 shadow-xl space-y-5">
+        <section className="rounded-3xl border-2 border-amber-300 bg-gradient-to-br from-[#FEF9EF] via-white to-[#FDF2F8] p-5 sm:p-8 shadow-md space-y-5">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
             <div className="space-y-2.5 max-w-2xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-400/15 px-3 py-1 text-xs font-bold text-amber-300">
-                <Gift className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-100 px-3 py-1 text-xs font-extrabold text-amber-950">
+                <Gift className="w-3.5 h-3.5 text-amber-700" />
                 <span>
                   {lang === "th"
                     ? "⚡ โปร 3 เล่มพร้อมใช้ทันที (EF01 + RT01 + BB01 = 249 ฿)"
@@ -1146,28 +1142,28 @@ export function Bb01HubView() {
                 </span>
               </div>
 
-              <h2 className="text-xl sm:text-2xl font-bold text-white">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#1E293B]">
                 {lang === "th"
                   ? "เหมาครบ 3 เล่มที่เว็บ QR ใช้งานได้เต็มระบบ 100% วันนี้!"
                   : "Bundle All 3 Live Hybrid QR Kits (96 Pages • 12 PDFs)!"}
               </h2>
 
-              <p className="text-sm text-white/75 leading-relaxed">
+              <p className="text-sm text-slate-700 leading-relaxed">
                 {lang === "th"
                   ? "ได้ครบทั้ง Busy Book น้องชาบู (BB01) + ชุดสร้างวินัย 30 วันแม่ใหญ่ (RT01) + นักสืบสมองไว EF น้องแซลมอน (EF01) รวม 96 หน้า 12 ไฟล์ PDF พร้อมเว็บจับเวลาใช้งานได้ทันทีทั้ง 3 เล่ม!"
                   : "Get Shabu’s Busy Book (BB01) + Mama Mami’s 30-Day Routine (RT01) + Detective Salmon’s Brain EF (EF01) — 96 pages / 12 PDFs with all 3 companion timers live today!"}
               </p>
             </div>
 
-            <div className="shrink-0 rounded-2xl border border-amber-400/35 bg-black/40 p-4 text-center space-y-3 min-w-[240px]">
+            <div className="shrink-0 rounded-2xl border-2 border-amber-300 bg-white p-4 text-center space-y-3 min-w-[240px] shadow-sm">
               <div>
-                <div className="text-xs text-white/50 line-through">
+                <div className="text-xs text-slate-400 line-through">
                   {lang === "th" ? "ปกติ 297 ฿" : "Regular $14.97"}
                 </div>
-                <div className="text-3xl font-extrabold text-amber-300">
+                <div className="text-3xl font-extrabold text-amber-700">
                   {lang === "th" ? "249 ฿" : "$11.99"}
                 </div>
-                <div className="text-[11px] font-semibold text-emerald-300">
+                <div className="text-[11px] font-bold text-emerald-700">
                   {lang === "th"
                     ? "ประหยัดทันที 48 ฿ • พร้อมใช้ 100%!"
                     : "Save 20% • All 3 Live Today!"}
@@ -1182,9 +1178,9 @@ export function Bb01HubView() {
                 })}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 px-4 py-2.5 text-sm font-bold text-slate-950 transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-500 px-4 py-2.5 text-sm font-extrabold text-slate-950 transition-colors"
               >
-                <FaLine className="w-4 h-4" />
+                <FaLine className="w-4 h-4 text-[#047857]" />
                 <span>
                   {lang === "th"
                     ? "สั่งแพ็ก 3 เล่ม (249 ฿)"
@@ -1194,10 +1190,10 @@ export function Bb01HubView() {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
+          <div className="pt-4 border-t border-amber-200/80 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
             <Link
               href="/edu/rt01"
-              className="inline-flex items-center gap-1.5 font-bold text-rose-300 hover:text-rose-200"
+              className="inline-flex items-center gap-1.5 font-extrabold text-rose-700 hover:text-rose-900"
             >
               <span>
                 {lang === "th"
@@ -1208,7 +1204,7 @@ export function Bb01HubView() {
             </Link>
             <Link
               href="/edu/ef01"
-              className="inline-flex items-center gap-1.5 font-bold text-amber-300 hover:text-amber-200"
+              className="inline-flex items-center gap-1.5 font-extrabold text-amber-800 hover:text-amber-950"
             >
               <span>
                 {lang === "th"
@@ -1223,17 +1219,17 @@ export function Bb01HubView() {
         {/* ============================================================
             SECTION 5: FAQ ACCORDION
         ============================================================ */}
-        <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 sm:p-7 space-y-4">
-          <div className="flex items-center gap-2 text-white">
-            <HelpCircle className="w-5 h-5 text-pink-400" />
-            <h2 className="text-lg sm:text-xl font-bold">
+        <section className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-7 shadow-sm space-y-4">
+          <div className="flex items-center gap-2 text-[#1E293B]">
+            <HelpCircle className="w-5 h-5 text-pink-600" />
+            <h2 className="text-lg sm:text-xl font-extrabold">
               {lang === "th"
                 ? "คำถามที่พบบ่อย & วิธีประกอบ Busy Book น้องชาบู"
                 : "Parent & Teacher Quick Guide (FAQ)"}
             </h2>
           </div>
 
-          <div className="divide-y divide-white/10">
+          <div className="divide-y divide-slate-200">
             {faqs.map((item, idx) => {
               const isOpen = openFaq === idx;
               return (
@@ -1241,17 +1237,17 @@ export function Bb01HubView() {
                   <button
                     type="button"
                     onClick={() => setOpenFaq(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between gap-3 text-left text-sm sm:text-base font-semibold text-white/95 hover:text-pink-300 transition-colors cursor-pointer"
+                    className="w-full flex items-center justify-between gap-3 text-left text-sm sm:text-base font-bold text-[#1E293B] hover:text-pink-700 transition-colors cursor-pointer"
                   >
                     <span>{item.q}</span>
                     <ChevronDown
-                      className={`w-4 h-4 shrink-0 text-white/60 transition-transform ${
-                        isOpen ? "rotate-180 text-pink-400" : ""
+                      className={`w-4 h-4 shrink-0 text-slate-400 transition-transform ${
+                        isOpen ? "rotate-180 text-pink-600" : ""
                       }`}
                     />
                   </button>
                   {isOpen && (
-                    <p className="mt-2.5 text-sm text-white/70 leading-relaxed pr-6">
+                    <p className="mt-2.5 text-sm text-slate-600 leading-relaxed pr-6">
                       {item.a}
                     </p>
                   )}
@@ -1260,9 +1256,9 @@ export function Bb01HubView() {
             })}
           </div>
 
-          <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs text-white/50 border-t border-white/10">
-            <span className="inline-flex items-center gap-1.5">
-              <Printer className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="pt-3 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 border-t border-slate-200">
+            <span className="inline-flex items-center gap-1.5 font-medium">
+              <Printer className="w-3.5 h-3.5 text-sky-600" />
               <span>
                 {lang === "th"
                   ? "รองรับ A4 & US Letter • ขอบเจาะรู 20mm • การ์ดติดป้ายหน้าทุกชิ้น"
@@ -1271,7 +1267,7 @@ export function Bb01HubView() {
             </span>
             <Link
               href="/edu"
-              className="text-pink-300 hover:underline font-medium"
+              className="text-pink-700 hover:underline font-bold"
             >
               {lang === "th"
                 ? "ดูสื่อทั้งหมด 4 เล่มใน iAon Edu-Verse →"
@@ -1284,25 +1280,25 @@ export function Bb01HubView() {
       {/* LIGHTBOX MODAL */}
       {lightboxIndex !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 backdrop-blur-md p-4"
           onClick={() => setLightboxIndex(null)}
           role="dialog"
           aria-modal="true"
         >
           <div
-            className="relative max-w-3xl w-full rounded-3xl border border-white/15 bg-slate-950 p-3 sm:p-4 shadow-2xl"
+            className="relative max-w-3xl w-full rounded-3xl border border-slate-200 bg-white p-3 sm:p-4 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setLightboxIndex(null)}
-              className="absolute top-3 right-3 z-10 rounded-full bg-black/70 border border-white/20 p-2 text-white hover:bg-white/20 cursor-pointer"
+              className="absolute top-3 right-3 z-10 rounded-full bg-slate-900/85 border border-white/20 p-2 text-white hover:bg-slate-800 cursor-pointer"
               aria-label="Close preview"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="relative flex items-center justify-center">
+            <div className="relative flex items-center justify-center bg-[#FDF2F8] rounded-2xl p-2">
               <img
                 src={GALLERY_IMAGES[lightboxIndex].src}
                 alt={
@@ -1310,7 +1306,7 @@ export function Bb01HubView() {
                     ? GALLERY_IMAGES[lightboxIndex].labelTh
                     : GALLERY_IMAGES[lightboxIndex].labelEn
                 }
-                className="max-h-[75vh] w-auto rounded-2xl object-contain"
+                className="max-h-[75vh] w-auto rounded-xl object-contain"
               />
             </div>
 
@@ -1323,17 +1319,17 @@ export function Bb01HubView() {
                       GALLERY_IMAGES.length
                   )
                 }
-                className="inline-flex items-center gap-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs sm:text-sm text-white hover:bg-white/15 cursor-pointer"
+                className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 px-3 py-2 text-xs sm:text-sm font-bold text-slate-800 cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>{lang === "th" ? "ก่อนหน้า" : "Prev"}</span>
               </button>
 
-              <div className="text-center text-xs sm:text-sm font-medium text-white/85">
+              <div className="text-center text-xs sm:text-sm font-bold text-slate-800">
                 {lang === "th"
                   ? GALLERY_IMAGES[lightboxIndex].labelTh
                   : GALLERY_IMAGES[lightboxIndex].labelEn}{" "}
-                <span className="text-white/45">
+                <span className="text-slate-500">
                   ({lightboxIndex + 1}/{GALLERY_IMAGES.length})
                 </span>
               </div>
@@ -1343,7 +1339,7 @@ export function Bb01HubView() {
                 onClick={() =>
                   setLightboxIndex((lightboxIndex + 1) % GALLERY_IMAGES.length)
                 }
-                className="inline-flex items-center gap-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs sm:text-sm text-white hover:bg-white/15 cursor-pointer"
+                className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 px-3 py-2 text-xs sm:text-sm font-bold text-slate-800 cursor-pointer"
               >
                 <span>{lang === "th" ? "ถัดไป" : "Next"}</span>
                 <ChevronRight className="w-4 h-4" />

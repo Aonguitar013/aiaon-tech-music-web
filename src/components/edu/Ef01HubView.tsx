@@ -369,57 +369,57 @@ export function Ef01HubView() {
         ];
 
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-hidden bg-[#FFFDF7] text-[#1E293B] -mt-4 md:-mt-8 pt-6 md:pt-10 pb-16 border-b border-amber-200/80">
       {/* Floating Toast Notification */}
       {toastMsg && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md animate-in fade-in slide-in-from-top-3 duration-200">
-          <div className="rounded-2xl border border-amber-400/40 bg-slate-950/95 backdrop-blur-xl px-4 py-3 text-center text-sm font-medium text-amber-100 shadow-2xl shadow-amber-500/20">
+          <div className="rounded-2xl border-2 border-amber-400 bg-slate-900 px-4 py-3 text-center text-sm font-semibold text-white shadow-2xl">
             {toastMsg}
           </div>
         </div>
       )}
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-4 pb-16 space-y-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
         {/* Top Utility Bar: Breadcrumb + Bilingual Toggle + Audio Toggle */}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <Link
             href="/edu"
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs sm:text-sm text-white/80 hover:text-amber-300 hover:border-amber-400/40 transition-colors"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:text-amber-800 hover:border-amber-300 shadow-xs transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>iAon Edu-Verse</span>
-            <span className="text-white/40">/</span>
-            <span className="font-semibold text-amber-300">EDU-EF01</span>
+            <span className="text-slate-300">/</span>
+            <span className="font-bold text-amber-800">EDU-EF01</span>
           </Link>
 
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setSoundEnabled((prev) => !prev)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/85 hover:bg-white/10 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 shadow-xs transition-colors cursor-pointer"
               aria-label="Toggle Sound"
             >
               {soundEnabled ? (
                 <>
-                  <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <Volume2 className="w-3.5 h-3.5 text-emerald-600" />
                   <span>{lang === "th" ? "เปิดเสียง" : "Sound On"}</span>
                 </>
               ) : (
                 <>
-                  <VolumeX className="w-3.5 h-3.5 text-rose-400" />
+                  <VolumeX className="w-3.5 h-3.5 text-rose-600" />
                   <span>{lang === "th" ? "ปิดเสียง" : "Muted"}</span>
                 </>
               )}
             </button>
 
-            <div className="inline-flex rounded-full border border-white/15 bg-black/40 p-0.5 text-xs font-semibold">
+            <div className="inline-flex rounded-full border border-slate-200 bg-white p-0.5 text-xs font-bold shadow-xs">
               <button
                 type="button"
                 onClick={() => setLang("th")}
                 className={`rounded-full px-3 py-1 transition-all cursor-pointer ${
                   lang === "th"
-                    ? "bg-amber-400 text-slate-950 shadow"
-                    : "text-white/70 hover:text-white"
+                    ? "bg-amber-400 text-slate-950 shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 🇹🇭 ไทย
@@ -429,8 +429,8 @@ export function Ef01HubView() {
                 onClick={() => setLang("en")}
                 className={`rounded-full px-3 py-1 transition-all cursor-pointer ${
                   lang === "en"
-                    ? "bg-amber-400 text-slate-950 shadow"
-                    : "text-white/70 hover:text-white"
+                    ? "bg-amber-400 text-slate-950 shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 🇬🇧 EN
@@ -442,7 +442,7 @@ export function Ef01HubView() {
         {/* ============================================================
             SECTION 1: HERO + HYBRID QR FOCUS TIMER (ABOVE THE FOLD)
         ============================================================ */}
-        <section className="relative rounded-3xl border border-amber-400/25 bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-amber-950/35 p-5 sm:p-8 shadow-2xl overflow-hidden">
+        <section className="relative rounded-3xl border-2 border-amber-200 bg-white p-5 sm:p-8 shadow-lg shadow-amber-900/5 overflow-hidden">
           {/* Confetti overlay during celebration */}
           {isCelebrating && (
             <div className="pointer-events-none absolute inset-0 overflow-hidden z-20">
@@ -456,15 +456,15 @@ export function Ef01HubView() {
             </div>
           )}
 
-          {/* Subtle ambient glow */}
-          <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-amber-500/15 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-cyan-500/15 blur-3xl" />
+          {/* Subtle warm editorial wash */}
+          <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-amber-100/70 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-sky-100/60 blur-3xl" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center min-w-0">
             {/* Left: Timer Ring + Controls */}
             <div className="lg:col-span-7 min-w-0 w-full flex flex-col items-center text-center space-y-5">
-              <div className="inline-flex items-center justify-center gap-1.5 rounded-full border border-amber-400/35 bg-amber-400/10 px-3 py-1 text-[11px] sm:text-xs font-semibold text-amber-300 max-w-full flex-wrap">
-                <Clock className="w-3.5 h-3.5 shrink-0" />
+              <div className="inline-flex items-center justify-center gap-1.5 rounded-full border border-amber-300 bg-amber-50 px-3 py-1 text-[11px] sm:text-xs font-bold text-amber-900 max-w-full flex-wrap">
+                <Clock className="w-3.5 h-3.5 shrink-0 text-amber-700" />
                 <span>
                   {lang === "th"
                     ? "HYBRID QR • นาฬิกาจับเวลาสมาธิไร้หน้าจอ"
@@ -472,7 +472,7 @@ export function Ef01HubView() {
                 </span>
               </div>
 
-              <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight break-words w-full">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B] leading-tight break-words w-full">
                 {lang === "th"
                   ? "นักสืบสมองไวกับน้องแซลมอน"
                   : "Detective Salmon's Focus Timer"}
@@ -487,16 +487,16 @@ export function Ef01HubView() {
                       key={p.seconds}
                       type="button"
                       onClick={() => handleSelectPreset(p.seconds)}
-                      className={`rounded-2xl border px-3 py-2 text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                      className={`rounded-2xl border-2 px-3 py-2 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                         active
-                          ? "border-amber-400 bg-amber-400 text-slate-950 shadow-lg shadow-amber-400/25"
-                          : "border-white/15 bg-white/5 text-white/80 hover:border-amber-400/40 hover:bg-white/10"
+                          ? "border-amber-500 bg-amber-400 text-slate-950 shadow-md shadow-amber-400/25"
+                          : "border-slate-200 bg-[#FEF9EF] text-slate-800 hover:border-amber-400 hover:bg-amber-50"
                       }`}
                     >
                       <span>{lang === "th" ? p.labelTh : p.labelEn}</span>
                       <span
                         className={`ml-1 text-[11px] ${
-                          active ? "text-slate-800" : "text-white/50"
+                          active ? "text-slate-900 font-bold" : "text-slate-500"
                         }`}
                       >
                         ({lang === "th" ? p.tagTh : p.tagEn})
@@ -518,7 +518,7 @@ export function Ef01HubView() {
                     cy="110"
                     r={ringRadius}
                     fill="none"
-                    stroke="rgba(255,255,255,0.10)"
+                    stroke="#E2E8F0"
                     strokeWidth="12"
                   />
                   <circle
@@ -526,7 +526,7 @@ export function Ef01HubView() {
                     cy="110"
                     r={ringRadius}
                     fill="none"
-                    stroke={isCelebrating ? "#34d399" : "#fbbf24"}
+                    stroke={isCelebrating ? "#10B981" : "#F59E0B"}
                     strokeWidth="12"
                     strokeLinecap="round"
                     strokeDasharray={ringCircumference}
@@ -537,7 +537,7 @@ export function Ef01HubView() {
 
                 <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
                   <div
-                    className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#fffdf7] p-1.5 ring-2 ring-amber-400/60 shadow-[0_8px_20px_rgba(251,191,36,0.3)] overflow-hidden flex items-center justify-center transition-transform duration-300 ${
+                    className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#FFFDF7] p-1.5 ring-2 ring-amber-400 shadow-md overflow-hidden flex items-center justify-center transition-transform duration-300 ${
                       isCelebrating
                         ? "scale-110 animate-bounce"
                         : isRunning
@@ -551,13 +551,13 @@ export function Ef01HubView() {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <div className="mt-2 font-mono text-3xl sm:text-4xl font-bold tracking-wider text-white tabular-nums">
+                  <div className="mt-2 font-mono text-3xl sm:text-4xl font-extrabold tracking-wider text-slate-900 tabular-nums">
                     {formattedTime}
                   </div>
                 </div>
               </div>
 
-              <p className="text-sm sm:text-base text-amber-100/90 max-w-md min-h-[1.75rem] px-1 break-words">
+              <p className="text-sm sm:text-base font-medium text-slate-700 max-w-md min-h-[1.75rem] px-1 break-words">
                 {statusText}
               </p>
 
@@ -566,7 +566,7 @@ export function Ef01HubView() {
                 <button
                   type="button"
                   onClick={handleStartPause}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 px-5 py-3 text-sm sm:text-base font-bold text-slate-950 shadow-lg shadow-amber-500/25 hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer min-w-[148px]"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-amber-400 hover:bg-amber-500 px-5 py-3 text-sm sm:text-base font-extrabold text-slate-950 shadow-md shadow-amber-500/20 active:scale-[0.98] transition-all cursor-pointer min-w-[148px]"
                 >
                   {isRunning ? (
                     <>
@@ -596,7 +596,7 @@ export function Ef01HubView() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white/85 hover:bg-white/10 active:scale-[0.98] transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-slate-300 bg-slate-100 hover:bg-slate-200 px-4 py-3 text-sm font-bold text-slate-800 active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>{lang === "th" ? "รีเซ็ต" : "Reset"}</span>
@@ -611,9 +611,9 @@ export function Ef01HubView() {
                         : "👏 Bravo! Detective Salmon applauds your awesome work!"
                     )
                   }
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-400/40 bg-emerald-500/15 px-4 py-3 text-sm sm:text-base font-bold text-emerald-300 hover:bg-emerald-500/25 active:scale-[0.98] transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-emerald-300 bg-emerald-50 hover:bg-emerald-100 px-4 py-3 text-sm sm:text-base font-bold text-emerald-900 active:scale-[0.98] transition-all cursor-pointer"
                 >
-                  <Sparkles className="w-4 h-4" />
+                  <Sparkles className="w-4 h-4 text-emerald-700" />
                   <span>
                     {lang === "th" ? "👏 กดปรบมือให้รางวัล!" : "👏 Applause Reward!"}
                   </span>
@@ -622,30 +622,30 @@ export function Ef01HubView() {
             </div>
 
             {/* Right: 5-Mission Interactive Star Tracker */}
-            <div className="lg:col-span-5 min-w-0 w-full rounded-2xl border border-white/10 bg-black/35 p-4 sm:p-5 space-y-4">
+            <div className="lg:col-span-5 min-w-0 w-full rounded-2xl border border-amber-200 bg-[#FEF9EF] p-4 sm:p-5 space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <div>
-                  <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                    <Award className="w-5 h-5 text-amber-400" />
+                  <h2 className="text-base sm:text-lg font-extrabold text-[#1E293B] flex items-center gap-2">
+                    <Award className="w-5 h-5 text-amber-600" />
                     <span>
                       {lang === "th" ? "สะสมดาว 5 ด่านนักสืบ" : "5-Mission Star Tracker"}
                     </span>
                   </h2>
-                  <p className="text-xs text-white/60 mt-0.5">
+                  <p className="text-xs text-slate-600 mt-0.5">
                     {lang === "th"
                       ? "ทำใบงานจบแต่ละด่าน แตะรับดาวได้เลย (บันทึกในเครื่องอัตโนมัติ)"
                       : "Tap each mission as your child completes it (saved on this device)"}
                   </p>
                 </div>
-                <span className="shrink-0 rounded-full bg-amber-400/15 border border-amber-400/35 px-3 py-1 text-xs font-bold text-amber-300">
+                <span className="shrink-0 rounded-full bg-amber-100 border border-amber-300 px-3 py-1 text-xs font-extrabold text-amber-900">
                   {completedMissions.length}/5 ⭐
                 </span>
               </div>
 
               {/* Progress Bar */}
-              <div className="h-2 w-full rounded-full bg-white/10 overflow-hidden">
+              <div className="h-2.5 w-full rounded-full bg-slate-200 overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-amber-400 to-emerald-400 transition-all duration-500"
+                  className="h-full rounded-full bg-gradient-to-r from-amber-500 to-emerald-500 transition-all duration-500"
                   style={{ width: `${(completedMissions.length / 5) * 100}%` }}
                 />
               </div>
@@ -660,24 +660,24 @@ export function Ef01HubView() {
                       onClick={() => toggleMissionStar(m.id)}
                       className={`w-full text-left flex items-center gap-3 rounded-xl border p-3 transition-all cursor-pointer ${
                         done
-                          ? "border-amber-400/50 bg-amber-400/12"
-                          : "border-white/10 bg-white/[0.03] hover:bg-white/[0.07]"
+                          ? "border-amber-400 bg-amber-50 shadow-xs"
+                          : "border-slate-200 bg-white hover:border-amber-300"
                       }`}
                     >
                       <span className="text-xl shrink-0">{m.icon}</span>
                       <div className="min-w-0 flex-1">
-                        <div className="text-sm font-semibold text-white truncate">
+                        <div className="text-sm font-bold text-[#1E293B] truncate">
                           {lang === "th" ? m.titleTh : m.titleEn}
                         </div>
-                        <div className="text-xs text-white/60 truncate">
+                        <div className="text-xs text-slate-600 truncate">
                           {lang === "th" ? m.descTh : m.descEn}
                         </div>
                       </div>
                       <Star
                         className={`w-5 h-5 shrink-0 transition-transform ${
                           done
-                            ? "text-amber-400 fill-amber-400 scale-110"
-                            : "text-white/25"
+                            ? "text-amber-500 fill-amber-400 scale-110"
+                            : "text-slate-300"
                         }`}
                       />
                     </button>
@@ -693,14 +693,14 @@ export function Ef01HubView() {
         ============================================================ */}
         <section
           id="freebie"
-          className="rounded-3xl border border-cyan-400/30 bg-gradient-to-r from-cyan-950/45 via-slate-900/90 to-slate-900/95 p-5 sm:p-8 shadow-xl"
+          className="rounded-3xl border-2 border-sky-200 bg-sky-50/75 p-5 sm:p-8 shadow-md shadow-sky-900/5"
         >
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
             <div className="md:col-span-4 flex justify-center">
               <button
                 type="button"
                 onClick={() => setLightboxIndex(0)}
-                className="group relative rounded-2xl overflow-hidden border border-white/15 shadow-lg max-w-[240px] cursor-pointer"
+                className="group relative rounded-2xl overflow-hidden border-2 border-white shadow-md max-w-[240px] cursor-pointer bg-white"
               >
                 <img
                   src="/edu/ef01/mockup-01-cover.webp"
@@ -708,15 +708,15 @@ export function Ef01HubView() {
                   className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
-                <span className="absolute top-2.5 left-2.5 rounded-full bg-emerald-500 px-2.5 py-0.5 text-[11px] font-bold text-slate-950 shadow">
+                <span className="absolute top-2.5 left-2.5 rounded-full bg-emerald-600 px-2.5 py-0.5 text-[11px] font-bold text-white shadow">
                   {lang === "th" ? "แจกฟรี 5 หน้า!" : "FREE 5-PAGE SAMPLE"}
                 </span>
               </button>
             </div>
 
             <div className="md:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full bg-cyan-400/15 border border-cyan-400/35 px-3 py-1 text-xs font-semibold text-cyan-300">
-                <Download className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 rounded-full bg-white border border-sky-300 px-3 py-1 text-xs font-bold text-sky-900">
+                <Download className="w-3.5 h-3.5 text-sky-700" />
                 <span>
                   {lang === "th"
                     ? "ทดลองปริ้นท์ให้ลูกเล่นฟรีก่อนตัดสินใจ (0 ฿)"
@@ -724,13 +724,13 @@ export function Ef01HubView() {
                 </span>
               </div>
 
-              <h2 className="text-xl sm:text-2xl font-bold text-white">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#1E293B]">
                 {lang === "th"
                   ? "ดาวน์โหลดชุดทดลองฟรี 5 หน้า (จับคู่เงาแก๊งแมว + อนุกรม + โค้ดดิ้งไร้จอ)"
                   : "Download the 5-Page Free Sample (Cat Shadows + Patterns + Unplugged Coding)"}
               </h2>
 
-              <p className="text-sm text-white/75 leading-relaxed">
+              <p className="text-sm text-slate-700 leading-relaxed">
                 {lang === "th"
                   ? "คลิกโหลดไฟล์ PDF ความละเอียดสูงไปปริ้นท์กระดาษ A4 ได้เลยทันที ไม่ต้องสมัครสมาชิก คัด 3 ด่านเด็ดที่เด็ก 4–6 ปีชอบมากที่สุดมาให้ลองเทสความชัดและความสนุกก่อนซื้อเล่มเต็ม 32 หน้าครับ"
                   : "Direct 1-click download — no login required. Print on A4 or US Letter and test our Zero AI-Slop vector quality with your child right away."}
@@ -745,7 +745,7 @@ export function Ef01HubView() {
                       "📥 กำลังดาวน์โหลดชุดทดลองภาษาไทย (5 หน้า) — ปริ้นท์ A4 แล้วมาจับเวลากันเลย!"
                     )
                   }
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-400 px-5 py-3 text-sm sm:text-base font-bold text-slate-950 shadow-lg shadow-cyan-500/20 hover:bg-cyan-300 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-700 hover:bg-sky-800 px-5 py-3 text-sm sm:text-base font-bold text-white shadow-md shadow-sky-600/20 transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   <span>โหลดฟรี 5 หน้า (ภาษาไทย • PDF)</span>
@@ -759,7 +759,7 @@ export function Ef01HubView() {
                       "📥 Downloading English 5-Page Freebie PDF — ready for A4 & US Letter!"
                     )
                   }
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-cyan-400/40 bg-cyan-500/10 px-5 py-3 text-sm sm:text-base font-semibold text-cyan-200 hover:bg-cyan-500/20 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-sky-300 bg-white hover:bg-sky-50 px-5 py-3 text-sm sm:text-base font-bold text-sky-900 transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   <span>Free 5-Page Sample (English • PDF)</span>
@@ -774,20 +774,20 @@ export function Ef01HubView() {
         ============================================================ */}
         <section id="full-pack" className="space-y-6">
           <div className="text-center space-y-2 max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/35 bg-amber-400/10 px-3 py-1 text-xs font-semibold text-amber-300">
-              <ShieldCheck className="w-3.5 h-3.5" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-amber-50 px-3 py-1 text-xs font-bold text-amber-900">
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-700" />
               <span>
                 {lang === "th"
                   ? "ZERO AI-SLOP • ตรวจคำตอบทางคณิตศาสตร์ครบทุกหน้า"
                   : "ZERO AI-SLOP • 100% MATH-VERIFIED PUZZLES"}
               </span>
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B]">
               {lang === "th"
                 ? "ปลดล็อกเล่มเต็ม 32 หน้า (ครบ 4 ไฟล์ TH/EN × สี/ขาวดำ)"
                 : "Unlock the Complete 32-Page Pack (4 PDFs: TH/EN × Color/B&W)"}
             </h2>
-            <p className="text-sm text-white/70">
+            <p className="text-sm text-slate-600">
               {lang === "th"
                 ? "ซื้อครั้งเดียวปริ้นท์ซ้ำกี่รอบก็ได้ พร้อมเฉลยอัตโนมัติ 3 หน้า (เส้นทางเขาวงกต & ซูโดกุ) และใบประกาศนียบัตรนักสืบ"
                 : "One-time purchase, print forever. Includes all 5 EF missions, 3 complete Answer Key pages, and a printable Award Certificate."}
@@ -801,9 +801,9 @@ export function Ef01HubView() {
                 key={img.src}
                 type="button"
                 onClick={() => setLightboxIndex(idx)}
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden text-left hover:border-amber-400/50 transition-all cursor-pointer"
+                className="group rounded-2xl border border-slate-200 bg-white overflow-hidden text-left hover:border-amber-400 shadow-xs transition-all cursor-pointer"
               >
-                <div className="aspect-square overflow-hidden bg-slate-900">
+                <div className="aspect-square overflow-hidden bg-[#FEF9EF]">
                   <img
                     src={img.src}
                     alt={lang === "th" ? img.labelTh : img.labelEn}
@@ -811,7 +811,7 @@ export function Ef01HubView() {
                     loading="lazy"
                   />
                 </div>
-                <div className="p-2 text-[11px] font-medium text-white/80 line-clamp-2">
+                <div className="p-2 text-[11px] font-semibold text-slate-700 line-clamp-2">
                   {lang === "th" ? img.labelTh : img.labelEn}
                 </div>
               </button>
@@ -821,38 +821,38 @@ export function Ef01HubView() {
           {/* Dual-Edition Pricing Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* HOME EDITION */}
-            <div className="rounded-3xl border border-amber-400/40 bg-gradient-to-b from-amber-500/10 via-slate-900/95 to-slate-950 p-6 flex flex-col justify-between space-y-6 shadow-xl">
+            <div className="rounded-3xl border-2 border-amber-300 bg-white p-6 flex flex-col justify-between space-y-6 shadow-md">
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400/20 px-3 py-1 text-xs font-bold text-amber-300">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 border border-amber-300 px-3 py-1 text-xs font-extrabold text-amber-900">
                     <Home className="w-3.5 h-3.5" />
                     <span>HOME EDITION</span>
                   </span>
-                  <span className="rounded-full bg-emerald-500/20 border border-emerald-400/35 px-2.5 py-0.5 text-xs font-semibold text-emerald-300">
+                  <span className="rounded-full bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 text-xs font-bold text-emerald-900">
                     {lang === "th" ? "ยอดนิยมสำหรับพ่อแม่" : "Best for Families"}
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-white">
+                  <h3 className="text-xl font-extrabold text-[#1E293B]">
                     {lang === "th"
                       ? "สิทธิ์ใช้ในครอบครัว (Personal Use)"
                       : "Family & Personal License"}
                   </h3>
-                  <div className="mt-2 flex items-baseline gap-2.5">
-                    <span className="text-4xl font-extrabold text-amber-300">
+                  <div className="mt-2 flex items-baseline gap-2.5 flex-wrap">
+                    <span className="text-4xl font-extrabold text-amber-700">
                       {lang === "th" ? "99 ฿" : "$4.99"}
                     </span>
-                    <span className="text-sm text-white/45 line-through">
+                    <span className="text-sm text-slate-400 line-through">
                       {lang === "th" ? "149 ฿" : "$6.99"}
                     </span>
-                    <span className="text-xs text-white/60">
+                    <span className="text-xs font-medium text-slate-600">
                       {lang === "th" ? "(จ่ายครั้งเดียว)" : "(99 THB • One-time)"}
                     </span>
                   </div>
                 </div>
 
-                <ul className="space-y-2.5 text-sm text-white/85">
+                <ul className="space-y-2.5 text-sm text-slate-700">
                   {(lang === "th"
                     ? [
                         "ใบงาน 32 หน้าเต็ม ครบ 5 ด่าน EF + โค้ดดิ้งไร้จอ + ซูโดกุ 4×4",
@@ -868,7 +868,7 @@ export function Ef01HubView() {
                       ]
                   ).map((item) => (
                     <li key={item} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -883,7 +883,7 @@ export function Ef01HubView() {
                 })}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] px-5 py-3.5 text-base font-bold text-white shadow-lg shadow-emerald-500/20 transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] px-5 py-3.5 text-base font-bold text-white shadow-md shadow-emerald-500/20 transition-colors"
               >
                 <FaLine className="w-5 h-5" />
                 <span>
@@ -895,38 +895,38 @@ export function Ef01HubView() {
             </div>
 
             {/* CLASS EDITION */}
-            <div className="rounded-3xl border border-sky-400/35 bg-gradient-to-b from-sky-500/10 via-slate-900/95 to-slate-950 p-6 flex flex-col justify-between space-y-6 shadow-xl">
+            <div className="rounded-3xl border-2 border-sky-300 bg-white p-6 flex flex-col justify-between space-y-6 shadow-md">
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-400/20 px-3 py-1 text-xs font-bold text-sky-300">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-100 border border-sky-300 px-3 py-1 text-xs font-extrabold text-sky-900">
                     <School className="w-3.5 h-3.5" />
                     <span>CLASS EDITION</span>
                   </span>
-                  <span className="rounded-full bg-sky-500/20 border border-sky-400/35 px-2.5 py-0.5 text-xs font-semibold text-sky-300">
+                  <span className="rounded-full bg-sky-50 border border-sky-200 px-2.5 py-0.5 text-xs font-bold text-sky-800">
                     {lang === "th" ? "สำหรับคุณครู / ศูนย์เด็กเล็ก" : "Teachers & Classrooms"}
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-white">
+                  <h3 className="text-xl font-extrabold text-[#1E293B]">
                     {lang === "th"
                       ? "สิทธิ์คุณครู / ห้องเรียน (Classroom License)"
                       : "Single-Teacher Classroom License"}
                   </h3>
-                  <div className="mt-2 flex items-baseline gap-2.5">
-                    <span className="text-4xl font-extrabold text-sky-300">
+                  <div className="mt-2 flex items-baseline gap-2.5 flex-wrap">
+                    <span className="text-4xl font-extrabold text-sky-700">
                       {lang === "th" ? "199 ฿" : "$9.99"}
                     </span>
-                    <span className="text-sm text-white/45 line-through">
+                    <span className="text-sm text-slate-400 line-through">
                       {lang === "th" ? "299 ฿" : "$14.99"}
                     </span>
-                    <span className="text-xs text-white/60">
+                    <span className="text-xs font-medium text-slate-600">
                       {lang === "th" ? "(ปริ้นท์แจกเด็กไม่จำกัด)" : "(199 THB • Unlimited copies)"}
                     </span>
                   </div>
                 </div>
 
-                <ul className="space-y-2.5 text-sm text-white/85">
+                <ul className="space-y-2.5 text-sm text-slate-700">
                   {(lang === "th"
                     ? [
                         "สิทธิ์ถูกกฎหมายสำหรับคุณครู 1 ท่าน ปริ้นท์แจกนักเรียนได้ไม่จำกัด",
@@ -942,7 +942,7 @@ export function Ef01HubView() {
                       ]
                   ).map((item) => (
                     <li key={item} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -957,9 +957,9 @@ export function Ef01HubView() {
                 })}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-sky-400/50 bg-sky-500/20 hover:bg-sky-500/30 px-5 py-3.5 text-base font-bold text-sky-100 transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-700 hover:bg-sky-800 px-5 py-3.5 text-base font-bold text-white shadow-md shadow-sky-600/20 transition-colors"
               >
-                <FaLine className="w-5 h-5 text-[#06C755]" />
+                <FaLine className="w-5 h-5 text-white" />
                 <span>
                   {lang === "th"
                     ? "สั่งซื้อ Class Edition (199 ฿) ทาง LINE"
@@ -973,11 +973,11 @@ export function Ef01HubView() {
         {/* ============================================================
             SECTION 4: BUILT-IN CROSS-SELL (RT01 LIVE + MEGA BUNDLE 3 BOOKS)
         ============================================================ */}
-        <section className="rounded-3xl border border-rose-400/30 bg-gradient-to-br from-rose-950/35 via-slate-900/95 to-fuchsia-950/40 p-5 sm:p-8 shadow-xl space-y-5">
+        <section className="rounded-3xl border-2 border-rose-200 bg-gradient-to-br from-[#FFF5F5] via-white to-[#FEF9EF] p-5 sm:p-8 shadow-md space-y-5">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
             <div className="md:col-span-4 flex justify-center">
               <div className="relative flex items-center justify-center">
-                <div className="rounded-full border-2 border-rose-400/50 bg-[#fffdf7] p-3 w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center shadow-[0_12px_28px_rgba(251,113,133,0.28)] overflow-hidden">
+                <div className="rounded-full border-2 border-rose-300 bg-[#FFFDF7] p-3 w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center shadow-md overflow-hidden">
                   <img
                     src="/edu/mami-3d.webp"
                     alt="Mama Mami 3D Routine Kit"
@@ -985,15 +985,15 @@ export function Ef01HubView() {
                     loading="lazy"
                   />
                 </div>
-                <span className="absolute -bottom-3 rounded-full bg-emerald-500 px-3 py-1 text-xs font-bold text-slate-950 shadow-lg whitespace-nowrap">
+                <span className="absolute -bottom-3 rounded-full bg-emerald-600 px-3 py-1 text-xs font-bold text-white shadow-md whitespace-nowrap">
                   EDU-RT01 • {lang === "th" ? "พร้อมใช้งานแล้ว!" : "LIVE NOW!"}
                 </span>
               </div>
             </div>
 
             <div className="md:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-rose-400/35 bg-rose-500/15 px-3 py-1 text-xs font-semibold text-rose-200">
-                <Music className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-rose-300 bg-rose-50 px-3 py-1 text-xs font-bold text-rose-900">
+                <Music className="w-3.5 h-3.5 text-rose-600" />
                 <span>
                   {lang === "th"
                     ? "PAIR & SAVE • ชุดสร้างวินัย 30 วัน + ดนตรีน้องข้าวต้ม"
@@ -1001,13 +1001,13 @@ export function Ef01HubView() {
                 </span>
               </div>
 
-              <h2 className="text-xl sm:text-2xl font-bold text-white">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#1E293B]">
                 {lang === "th"
                   ? "ชุดสร้างวินัย & กิจวัตร 30 วันกับแม่ใหญ่ (EDU-RT01) เปิดให้ลองฟรี 5 หน้าแล้ว!"
                   : "Mama Mami's 30-Day Routine Kit (EDU-RT01) — 5-Page Freebie Now Live!"}
               </h2>
 
-              <p className="text-sm text-white/75 leading-relaxed">
+              <p className="text-sm text-slate-700 leading-relaxed">
                 {lang === "th"
                   ? "ฝึกสมอง EF คู่กับการสร้างวินัยกิจวัตรประจำวัน! ครบ 5-in-1 ทั้งบอร์ดเช้า-เย็น-ก่อนนอน, การ์ดตีนตุ๊กแก 24 ใบ, ขวดโหล 20 ดาว, คูปองรางวัล 8 ใบ และมุมสงบใจ SEL พร้อมจับคู่เหมาครบ 3 เล่มกับน้องข้าวต้มดนตรี (EDU-MU01)"
                   : "Pair Brain EF with calm daily habits! Complete 5-in-1 Routine Boards, 24 Velcro Cards, 20-Star Jar, 8 Reward Coupons & SEL Calm-Down Corner — or grab all 3 books in our Launch Mega Bundle."}
@@ -1016,7 +1016,7 @@ export function Ef01HubView() {
               <div className="flex flex-wrap gap-2.5">
                 <Link
                   href="/edu/rt01"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-rose-400 hover:bg-rose-300 px-4 py-2.5 text-sm font-bold text-slate-950 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-rose-600 hover:bg-rose-700 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors"
                 >
                   <span>
                     {lang === "th"
@@ -1027,14 +1027,14 @@ export function Ef01HubView() {
                 </Link>
               </div>
 
-              <div className="rounded-2xl border border-amber-400/30 bg-amber-400/10 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="rounded-2xl border border-amber-300 bg-amber-50 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <div className="text-xs font-bold text-amber-300 uppercase tracking-wide">
+                  <div className="text-xs font-extrabold text-amber-900 uppercase tracking-wide">
                     {lang === "th"
                       ? "🔥 Mega Bundle ครบ 3 เล่ม (EF01 + RT01 + MU01)"
                       : "🔥 3-Book Launch Mega Bundle (EF01 + RT01 + MU01)"}
                   </div>
-                  <div className="text-sm text-white/90">
+                  <div className="text-sm text-slate-800 font-medium">
                     {lang === "th"
                       ? "รับไฟล์ PDF ครบ 3 เล่ม (96 หน้า) ทันที + ปลดล็อก 6 แทร็กเสียง MU01 ฟรีบนเว็บ เพียง 249 ฿ (จาก 327 ฿)"
                       : "Get all 3 PDFs (96 pages) today + automatic unlock for MU01's 6 audio tracks for only 249 THB ($11.99)"}
@@ -1048,7 +1048,7 @@ export function Ef01HubView() {
                   })}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 px-4 py-2.5 text-sm font-bold text-slate-950 transition-colors"
+                  className="shrink-0 inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-500 px-4 py-2.5 text-sm font-extrabold text-slate-950 shadow-xs transition-colors"
                 >
                   <span>
                     {lang === "th" ? "สั่งเหมา 3 เล่ม (249 ฿)" : "Order 3-Pack"}
@@ -1063,17 +1063,17 @@ export function Ef01HubView() {
         {/* ============================================================
             SECTION 5: PARENT 30-SECOND GUIDE & FAQ ACCORDION
         ============================================================ */}
-        <section className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 sm:p-7 space-y-4">
-          <div className="flex items-center gap-2 text-white">
-            <HelpCircle className="w-5 h-5 text-amber-400" />
-            <h2 className="text-lg sm:text-xl font-bold">
+        <section className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-7 shadow-sm space-y-4">
+          <div className="flex items-center gap-2 text-[#1E293B]">
+            <HelpCircle className="w-5 h-5 text-amber-600" />
+            <h2 className="text-lg sm:text-xl font-extrabold">
               {lang === "th"
                 ? "คำถามที่พบบ่อย & วิธีใช้งานสำหรับผู้ปกครอง/คุณครู"
                 : "Parent & Teacher Quick Guide (FAQ)"}
             </h2>
           </div>
 
-          <div className="divide-y divide-white/10">
+          <div className="divide-y divide-slate-200">
             {faqs.map((item, idx) => {
               const isOpen = openFaq === idx;
               return (
@@ -1081,17 +1081,17 @@ export function Ef01HubView() {
                   <button
                     type="button"
                     onClick={() => setOpenFaq(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between gap-3 text-left text-sm sm:text-base font-semibold text-white/95 hover:text-amber-300 transition-colors cursor-pointer"
+                    className="w-full flex items-center justify-between gap-3 text-left text-sm sm:text-base font-bold text-[#1E293B] hover:text-amber-800 transition-colors cursor-pointer"
                   >
                     <span>{item.q}</span>
                     <ChevronDown
-                      className={`w-4 h-4 shrink-0 text-white/60 transition-transform ${
-                        isOpen ? "rotate-180 text-amber-400" : ""
+                      className={`w-4 h-4 shrink-0 text-slate-400 transition-transform ${
+                        isOpen ? "rotate-180 text-amber-600" : ""
                       }`}
                     />
                   </button>
                   {isOpen && (
-                    <p className="mt-2.5 text-sm text-white/70 leading-relaxed pr-6">
+                    <p className="mt-2.5 text-sm text-slate-600 leading-relaxed pr-6">
                       {item.a}
                     </p>
                   )}
@@ -1100,9 +1100,9 @@ export function Ef01HubView() {
             })}
           </div>
 
-          <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs text-white/50 border-t border-white/10">
-            <span className="inline-flex items-center gap-1.5">
-              <Printer className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="pt-3 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 border-t border-slate-200">
+            <span className="inline-flex items-center gap-1.5 font-medium">
+              <Printer className="w-3.5 h-3.5 text-sky-600" />
               <span>
                 {lang === "th"
                   ? "รองรับกระดาษ A4 & US Letter • ปลอดภัยไร้โฆษณา 100%"
@@ -1111,7 +1111,7 @@ export function Ef01HubView() {
             </span>
             <Link
               href="/edu"
-              className="text-amber-300 hover:underline font-medium"
+              className="text-amber-800 hover:underline font-bold"
             >
               {lang === "th" ? "ดูสื่อทั้งหมดใน iAon Edu-Verse →" : "Explore all iAon Edu-Verse →"}
             </Link>
@@ -1124,25 +1124,25 @@ export function Ef01HubView() {
       ============================================================ */}
       {lightboxIndex !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 backdrop-blur-md p-4"
           onClick={() => setLightboxIndex(null)}
           role="dialog"
           aria-modal="true"
         >
           <div
-            className="relative max-w-3xl w-full rounded-3xl border border-white/15 bg-slate-950 p-3 sm:p-4 shadow-2xl"
+            className="relative max-w-3xl w-full rounded-3xl border border-slate-200 bg-white p-3 sm:p-4 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setLightboxIndex(null)}
-              className="absolute top-3 right-3 z-10 rounded-full bg-black/70 border border-white/20 p-2 text-white hover:bg-white/20 cursor-pointer"
+              className="absolute top-3 right-3 z-10 rounded-full bg-slate-900/85 border border-white/20 p-2 text-white hover:bg-slate-800 cursor-pointer"
               aria-label="Close preview"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="relative flex items-center justify-center">
+            <div className="relative flex items-center justify-center bg-[#FEF9EF] rounded-2xl p-2">
               <img
                 src={GALLERY_IMAGES[lightboxIndex].src}
                 alt={
@@ -1150,7 +1150,7 @@ export function Ef01HubView() {
                     ? GALLERY_IMAGES[lightboxIndex].labelTh
                     : GALLERY_IMAGES[lightboxIndex].labelEn
                 }
-                className="max-h-[75vh] w-auto rounded-2xl object-contain"
+                className="max-h-[75vh] w-auto rounded-xl object-contain"
               />
             </div>
 
@@ -1163,17 +1163,17 @@ export function Ef01HubView() {
                       GALLERY_IMAGES.length
                   )
                 }
-                className="inline-flex items-center gap-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs sm:text-sm text-white hover:bg-white/15 cursor-pointer"
+                className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 px-3 py-2 text-xs sm:text-sm font-bold text-slate-800 cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>{lang === "th" ? "ก่อนหน้า" : "Prev"}</span>
               </button>
 
-              <div className="text-center text-xs sm:text-sm font-medium text-white/85">
+              <div className="text-center text-xs sm:text-sm font-bold text-slate-800">
                 {lang === "th"
                   ? GALLERY_IMAGES[lightboxIndex].labelTh
                   : GALLERY_IMAGES[lightboxIndex].labelEn}{" "}
-                <span className="text-white/45">
+                <span className="text-slate-500">
                   ({lightboxIndex + 1}/{GALLERY_IMAGES.length})
                 </span>
               </div>
@@ -1183,7 +1183,7 @@ export function Ef01HubView() {
                 onClick={() =>
                   setLightboxIndex((lightboxIndex + 1) % GALLERY_IMAGES.length)
                 }
-                className="inline-flex items-center gap-1 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs sm:text-sm text-white hover:bg-white/15 cursor-pointer"
+                className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 px-3 py-2 text-xs sm:text-sm font-bold text-slate-800 cursor-pointer"
               >
                 <span>{lang === "th" ? "ถัดไป" : "Next"}</span>
                 <ChevronRight className="w-4 h-4" />
