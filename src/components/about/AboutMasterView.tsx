@@ -221,8 +221,8 @@ const GADGET_STORES = [
     url: "https://www.tiktok.com/@iaontech",
     buttonLabel: "เข้าสู่ TikTok Shop: iAonTech Studio & Gadget",
     badge: "ขายดีในคลิปสั้น",
-    accent: "from-cyan-500 to-rose-500",
-    border: "border-cyan-500/40 hover:border-cyan-400",
+    accent: "from-cyan-600 to-rose-600",
+    border: "border-[#E2E8F0] hover:border-cyan-400",
     icon: "🎵",
   },
   {
@@ -235,8 +235,8 @@ const GADGET_STORES = [
     url: "https://shopee.co.th/search?keyword=shure%20sm27",
     buttonLabel: "เข้าสู่ Shopee: iAonTech Gadget",
     badge: "โค้ดลด Shopee Video โหดมาก",
-    accent: "from-orange-500 to-amber-500",
-    border: "border-orange-500/40 hover:border-orange-400",
+    accent: "from-orange-600 to-amber-600",
+    border: "border-[#E2E8F0] hover:border-orange-400",
     icon: "🧡",
   },
   {
@@ -249,8 +249,8 @@ const GADGET_STORES = [
     url: "https://www.lazada.co.th/catalog/?q=logitech+streamcam",
     buttonLabel: "เข้าสู่ Lazada: iAonTech Official Select",
     badge: "LazMall ประกันศูนย์",
-    accent: "from-blue-500 to-indigo-600",
-    border: "border-blue-500/40 hover:border-blue-400",
+    accent: "from-blue-600 to-indigo-700",
+    border: "border-[#E2E8F0] hover:border-blue-400",
     icon: "💙",
   },
 ];
@@ -752,22 +752,21 @@ export function AboutMasterView() {
           </div>
         </section>
 
-        <div className="rounded-[2rem] bg-[#0B1220] text-white p-4 sm:p-8 space-y-24">
         {/* ============================================================
            SECTION 3: 3 OFFICIAL GADGET & AFFILIATE STORES
         ============================================================ */}
         <section id="stores" className="pt-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
-              <div className="font-prompt inline-flex items-center gap-2 text-amber-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
+              <div className="font-prompt inline-flex items-center gap-2 text-[#B45309] text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
                 <Store className="w-4 h-4" />
                 <span>OFFICIAL GADGET &amp; TECH STORES • 3 แพลตฟอร์มหลัก</span>
               </div>
-              <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
                 🛒 หน้าร้านไอที &amp; พิกัดแกดเจ็ตที่ครูอ้นคัดมาให้แล้ว
               </h2>
             </div>
-            <p className="font-prompt text-white/60 text-sm md:text-right max-w-md">
+            <p className="font-prompt text-[#64748B] text-sm md:text-right max-w-md">
               สะดวกช้อปบนแพลตฟอร์มไหน กดคลิกไปที่หน้าร้านต้นทางได้ทันที ของแท้ 100% พร้อมโค้ดลดพิเศษ
             </p>
           </div>
@@ -780,26 +779,26 @@ export function AboutMasterView() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.08 + idx * 0.08 }}
-                className={`glass-card relative rounded-3xl border ${store.border} p-6 sm:p-7 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 shadow-xl`}
+                className={`bg-white shadow-sm relative rounded-3xl border ${store.border} p-6 sm:p-7 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 shadow-sm`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-4">
                     <span className="text-3xl">{store.icon}</span>
-                    <span className="font-prompt px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                    <span className="font-prompt px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-[#B45309] border border-amber-300">
                       {store.badge}
                     </span>
                   </div>
 
-                  <div className="font-prompt text-xs font-bold uppercase tracking-wider text-white/50 mb-1">
+                  <div className="font-prompt text-xs font-bold uppercase tracking-wider text-[#64748B] mb-1">
                     {store.platform}
                   </div>
-                  <h3 className="font-prompt text-xl font-extrabold text-white mb-2">
+                  <h3 className="font-prompt text-xl font-extrabold text-[#0F172A] mb-2">
                     {store.storeName}
                   </h3>
-                  <p className="font-prompt text-cyan-300 text-xs sm:text-sm font-semibold mb-3">
+                  <p className="font-prompt text-[#0E7490] text-xs sm:text-sm font-semibold mb-3">
                     {store.tagline}
                   </p>
-                  <p className="font-prompt text-white/70 text-sm leading-relaxed mb-6">
+                  <p className="font-prompt text-[#475569] text-sm leading-relaxed mb-6">
                     {store.description}
                   </p>
                 </div>
@@ -822,17 +821,17 @@ export function AboutMasterView() {
            SECTION 4: KRU AON'S STUDIO GEAR CHECKLIST
         ============================================================ */}
         <section id="gear" className="pt-6">
-          <div className="glass-card rounded-3xl border border-white/10 p-6 sm:p-10">
+          <div className="bg-white shadow-sm rounded-3xl border border-[#E2E8F0] p-6 sm:p-10">
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-8">
               <div>
-                <div className="font-prompt inline-flex items-center gap-2 text-teal-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
+                <div className="font-prompt inline-flex items-center gap-2 text-[#0F766E] text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
                   <Laptop className="w-4 h-4" />
                   <span>KRU AON&apos;S REAL WORKING GEAR</span>
                 </div>
-                <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
                   🎧 เปิดกรุอุปกรณ์จริงบนโต๊ะทำงานครูอ้น (ใช้จริง รีวิวจริงทุกชิ้น)
                 </h2>
-                <p className="font-prompt text-white/65 text-sm mt-1">
+                <p className="font-prompt text-[#64748B] text-sm mt-1">
                   อุปกรณ์ทุกชิ้นด้านล่างคืออาวุธจริงที่ครูอ้นใช้สร้างระบบ AI, ไลฟ์สด และสอนดนตรี กดเทียบราคาจากทั้ง 3 ร้านได้เลย
                 </p>
               </div>
@@ -850,8 +849,8 @@ export function AboutMasterView() {
                     onClick={() => setSelectedGearCat(tab.key as GearCategory)}
                     className={`font-prompt px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                       selectedGearCat === tab.key
-                        ? "bg-linear-to-r from-cyan-400 to-teal-400 text-zinc-950 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
-                        : "bg-white/5 text-white/75 border border-white/10 hover:border-white/25 hover:text-white"
+                        ? "bg-linear-to-r from-cyan-600 to-teal-600 text-white shadow-sm"
+                        : "bg-[#FAF8F5] text-[#475569] border border-[#E2E8F0] hover:border-[#CBD5E1] hover:text-[#0F172A]"
                     }`}
                   >
                     {tab.label}
@@ -864,29 +863,29 @@ export function AboutMasterView() {
               {filteredGear.map((gear) => (
                 <div
                   key={gear.id}
-                  className="rounded-2xl bg-black/40 border border-white/10 p-5 sm:p-6 flex flex-col justify-between hover:border-cyan-500/40 transition-all"
+                  className="rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] p-5 sm:p-6 flex flex-col justify-between hover:border-cyan-400 transition-all"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="font-prompt px-2.5 py-1 rounded-full bg-teal-500/15 border border-teal-500/30 text-teal-300 text-xs font-bold">
+                      <span className="font-prompt px-2.5 py-1 rounded-full bg-teal-50 border border-teal-300 text-[#0F766E] text-xs font-bold">
                         {gear.badge}
                       </span>
-                      <Sparkles className="w-4 h-4 text-amber-400" />
+                      <Sparkles className="w-4 h-4 text-[#B45309]" />
                     </div>
 
-                    <h3 className="font-prompt text-base sm:text-lg font-extrabold text-white mb-2">
+                    <h3 className="font-prompt text-base sm:text-lg font-extrabold text-[#0F172A] mb-2">
                       {gear.name}
                     </h3>
-                    <p className="font-prompt text-xs text-cyan-300/95 mb-2 leading-relaxed">
+                    <p className="font-prompt text-xs text-[#0E7490] mb-2 leading-relaxed">
                       <strong>หน้าที่ในระบบครูอ้น:</strong> {gear.roleInWorkflow}
                     </p>
-                    <p className="font-prompt text-xs text-white/65 leading-relaxed mb-5">
+                    <p className="font-prompt text-xs text-[#64748B] leading-relaxed mb-5">
                       &ldquo;{gear.whyKruAonLovesIt}&rdquo;
                     </p>
                   </div>
 
-                  <div className="space-y-2.5 pt-3.5 border-t border-white/10">
-                    <div className="font-prompt text-[11px] font-semibold text-white/55">
+                  <div className="space-y-2.5 pt-3.5 border-t border-[#E2E8F0]">
+                    <div className="font-prompt text-[11px] font-semibold text-[#64748B]">
                       คลิกเช็กราคาของแท้ในหน้าร้านครูอ้น:
                     </div>
                     <div className="grid grid-cols-3 gap-2">
@@ -894,7 +893,7 @@ export function AboutMasterView() {
                         href={gear.tiktokShopUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-white/5 hover:bg-cyan-500/15 border border-cyan-500/30 text-[11px] font-bold text-cyan-300 transition-all"
+                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-[#FAF8F5] hover:bg-cyan-50 border border-cyan-300 text-[11px] font-bold text-[#0E7490] transition-all"
                       >
                         <span>🎵 TikTok</span>
                       </a>
@@ -902,7 +901,7 @@ export function AboutMasterView() {
                         href={gear.shopeeUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-white/5 hover:bg-orange-500/15 border border-orange-500/30 text-[11px] font-bold text-orange-300 transition-all"
+                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-[#FAF8F5] hover:bg-orange-50 border border-orange-300 text-[11px] font-bold text-[#C2410C] transition-all"
                       >
                         <span>🧡 Shopee</span>
                       </a>
@@ -910,7 +909,7 @@ export function AboutMasterView() {
                         href={gear.lazadaUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-white/5 hover:bg-blue-500/15 border border-blue-500/30 text-[11px] font-bold text-blue-300 transition-all"
+                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-[#FAF8F5] hover:bg-blue-50 border border-blue-300 text-[11px] font-bold text-[#1D4ED8] transition-all"
                       >
                         <span>💙 Lazada</span>
                       </a>
@@ -922,6 +921,7 @@ export function AboutMasterView() {
           </div>
         </section>
 
+        <div className="rounded-[2rem] bg-[#0B1220] text-white p-4 sm:p-8 space-y-24">
         {/* ============================================================
            SECTION 5: VERIFIED CERTIFICATIONS & ACHIEVEMENTS
         ============================================================ */}
