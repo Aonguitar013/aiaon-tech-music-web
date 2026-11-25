@@ -9,7 +9,6 @@ import {
   ArrowRight,
   Headphones,
   Zap,
-  Sparkles,
   Flame,
   Star,
   ShieldCheck,
@@ -32,7 +31,6 @@ interface NoBrainerBundle {
   title: string;
   badge: string;
   badgeStyle: string;
-  cardGlow: string;
   borderColor: string;
   accentText: string;
   items: BundleItem[];
@@ -50,11 +48,9 @@ const BUNDLE_DATA: NoBrainerBundle[] = [
     itemCode: "BUNDLE-01",
     title: "ชุดเอาตัวรอดครูประจำชั้นยุคดิจิทัล",
     badge: "🟢 ZERO-TECH 100% (ก๊อปปี้ชีตใช้ได้ทันที)",
-    badgeStyle:
-      "bg-emerald-500/15 text-emerald-300 border-emerald-500/30 shadow-[0_0_12px_rgba(16,185,129,0.25)]",
-    cardGlow: "rgba(16,185,129,0.12)",
-    borderColor: "border-emerald-500/30 hover:border-emerald-400/70",
-    accentText: "text-emerald-400",
+    badgeStyle: "bg-emerald-50 text-emerald-800 border-emerald-200",
+    borderColor: "border-[#E2E8F0] hover:border-emerald-400",
+    accentText: "text-emerald-600",
     items: [
       {
         code: "SYS09",
@@ -87,11 +83,9 @@ const BUNDLE_DATA: NoBrainerBundle[] = [
     itemCode: "BUNDLE-02",
     title: "ชุดทางลัดปิดเทอมไว & ส่งงาน ว.PA",
     badge: "⭐ BEST VALUE (คุ้มค่าที่สุด)",
-    badgeStyle:
-      "bg-amber-500/15 text-amber-300 border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.3)]",
-    cardGlow: "rgba(245,158,11,0.15)",
-    borderColor: "border-amber-500/40 hover:border-amber-300/80",
-    accentText: "text-amber-400",
+    badgeStyle: "bg-amber-50 text-amber-800 border-amber-200",
+    borderColor: "border-amber-300 hover:border-amber-400",
+    accentText: "text-amber-600",
     isBestValue: true,
     items: [
       {
@@ -126,11 +120,9 @@ const BUNDLE_DATA: NoBrainerBundle[] = [
     itemCode: "BUNDLE-03",
     title: "ชุดสอบติดครูผู้ช่วยฉบับเร่งรัด (Fast-Track Pass)",
     badge: "🔥 HOT CAMPAIGN (ขายดีอันดับ 1)",
-    badgeStyle:
-      "bg-rose-500/15 text-rose-300 border-rose-500/40 shadow-[0_0_15px_rgba(244,63,94,0.3)]",
-    cardGlow: "rgba(244,63,94,0.15)",
-    borderColor: "border-rose-500/40 hover:border-rose-300/80",
-    accentText: "text-rose-400",
+    badgeStyle: "bg-rose-50 text-rose-700 border-rose-200",
+    borderColor: "border-rose-200 hover:border-rose-400",
+    accentText: "text-rose-600",
     isHot: true,
     hasAudioPreview: true,
     items: [
@@ -159,22 +151,19 @@ export function NoBrainerBundles({ className }: { className?: string }) {
   return (
     <section
       id="no-brainer-bundles"
-      className={cn("relative py-12 sm:py-16 scroll-mt-24", className)}
+      className={cn("relative py-10 sm:py-14 scroll-mt-24", className)}
     >
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[380px] bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 blur-[150px] rounded-full pointer-events-none" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-3.5">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 space-y-3.5">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-prompt font-bold shadow-[0_0_15px_rgba(16,185,129,0.25)]"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-prompt font-bold"
           >
-            <Zap className="w-4 h-4 text-emerald-400" />
+            <Zap className="w-4 h-4 text-emerald-600" />
             <span>⚡ ZERO-TECH IMPULSE DEALS • ซื้อง่าย เริ่มต้นเพียง 249 บาท</span>
           </motion.div>
 
@@ -183,10 +172,10 @@ export function NoBrainerBundles({ className }: { className?: string }) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-prompt text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight"
+            className="font-prompt text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] tracking-tight leading-tight"
           >
             3 มหาบันเดิลสุดคุ้ม{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 drop-shadow-[0_0_25px_rgba(16,185,129,0.4)]">
+            <span className="text-[#0F766E]">
               ก๊อปปี้ชีตใช้ได้ทันที ไม่ต้องแตะโค้ด
             </span>
           </motion.h2>
@@ -196,7 +185,7 @@ export function NoBrainerBundles({ className }: { className?: string }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-white/70 font-prompt text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto"
+            className="text-[#475569] font-prompt text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto"
           >
             คัดสรรระบบที่ครูไทยใช้บ่อยที่สุด มัดรวมในราคาเข้าถึงง่าย
             ประหยัดเวลางานเอกสารไปทั้งเทอม ปลดล็อกและรับไฟล์พร้อมใช้อัตโนมัติทาง LINE OA ทันที
@@ -228,25 +217,21 @@ export function NoBrainerBundles({ className }: { className?: string }) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={cn(
-                  "relative flex flex-col h-full rounded-3xl p-6 sm:p-7 backdrop-blur-xl bg-slate-950/80 border transition-all duration-300 shadow-xl group hover:translate-y-[-4px]",
+                  "relative flex flex-col h-full rounded-3xl p-6 sm:p-7 bg-white border transition-all duration-300 shadow-sm hover:shadow-md group hover:-translate-y-1",
                   bundle.borderColor,
-                  bundle.isBestValue &&
-                    "ring-1 ring-amber-500/30 md:scale-[1.02] shadow-[0_0_35px_rgba(245,158,11,0.18)]"
+                  bundle.isBestValue && "ring-2 ring-amber-400/35 md:scale-[1.02]"
                 )}
-                style={{
-                  boxShadow: `0 10px 40px -10px ${bundle.cardGlow}`,
-                }}
               >
                 {/* Popular Corner Badge */}
                 {bundle.isBestValue && (
-                  <div className="absolute -top-3.5 right-6 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-prompt font-extrabold text-[11px] uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.5)] flex items-center gap-1.5">
+                  <div className="absolute -top-3.5 right-6 px-3.5 py-1 rounded-full bg-amber-500 text-white font-prompt font-extrabold text-[11px] uppercase tracking-wider shadow-sm flex items-center gap-1.5">
                     <Star className="w-3.5 h-3.5 fill-white text-white" />
                     <span>แนะนำสูงสุด</span>
                   </div>
                 )}
 
                 {bundle.isHot && (
-                  <div className="absolute -top-3.5 right-6 px-3.5 py-1 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-prompt font-extrabold text-[11px] uppercase tracking-wider shadow-[0_0_15px_rgba(244,63,94,0.5)] flex items-center gap-1.5">
+                  <div className="absolute -top-3.5 right-6 px-3.5 py-1 rounded-full bg-rose-600 text-white font-prompt font-extrabold text-[11px] uppercase tracking-wider shadow-sm flex items-center gap-1.5">
                     <Flame className="w-3.5 h-3.5 fill-white text-white" />
                     <span>ขายดีอันดับ 1</span>
                   </div>
@@ -265,17 +250,17 @@ export function NoBrainerBundles({ className }: { className?: string }) {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-prompt text-xl sm:text-2xl font-extrabold text-white mb-2 leading-snug group-hover:text-emerald-300 transition-colors">
+                <h3 className="font-prompt text-xl sm:text-2xl font-extrabold text-[#0F172A] mb-2 leading-snug group-hover:text-[#0F766E] transition-colors">
                   {bundle.title}
                 </h3>
-                <div className="text-[11px] font-mono font-bold text-white/40 mb-5">
+                <div className="text-[11px] font-mono font-bold text-[#64748B] mb-5">
                   ITEM CODE: {bundle.itemCode}
                 </div>
 
                 {/* Included Items Checklist */}
                 <div className="mb-6 flex-1 space-y-3">
-                  <div className="text-xs font-prompt font-bold text-white/70 uppercase tracking-wider flex items-center gap-1.5 border-b border-white/10 pb-2">
-                    <Layers className="w-3.5 h-3.5 text-cyan-400" />
+                  <div className="text-xs font-prompt font-bold text-[#475569] uppercase tracking-wider flex items-center gap-1.5 border-b border-[#F1F5F9] pb-2">
+                    <Layers className="w-3.5 h-3.5 text-[#2563EB]" />
                     <span>รายการระบบที่ได้รับในชุด:</span>
                   </div>
 
@@ -286,24 +271,24 @@ export function NoBrainerBundles({ className }: { className?: string }) {
                         className={cn(
                           "rounded-xl p-2.5 text-xs font-prompt flex items-start gap-2.5 transition-all border",
                           it.isBonus
-                            ? "bg-amber-500/10 border-amber-500/30 text-amber-200 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
-                            : "bg-white/5 border-white/10 text-white/90"
+                            ? "bg-[#FEF9EF] border-[#FDE68A] text-[#92400E]"
+                            : "bg-[#FAF8F5] border-[#E2E8F0] text-[#1E293B]"
                         )}
                       >
                         <CheckCircle2
                           className={cn(
                             "w-4 h-4 shrink-0 mt-0.5",
-                            it.isBonus ? "text-amber-400" : bundle.accentText
+                            it.isBonus ? "text-amber-600" : bundle.accentText
                           )}
                         />
                         <div className="min-w-0">
                           <div className="font-bold flex items-center gap-1.5 flex-wrap">
-                            <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-black/40 text-cyan-300 border border-cyan-500/20">
+                            <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-white text-[#1D4ED8] border border-[#BFDBFE]">
                               {it.code}
                             </span>
-                            <span className="text-white text-xs">{it.name}</span>
+                            <span className="text-[#0F172A] text-xs">{it.name}</span>
                           </div>
-                          <p className="text-[11px] text-white/60 mt-0.5 leading-relaxed">
+                          <p className="text-[11px] text-[#475569] mt-0.5 leading-relaxed">
                             {it.desc}
                           </p>
                         </div>
@@ -313,30 +298,30 @@ export function NoBrainerBundles({ className }: { className?: string }) {
                 </div>
 
                 {/* Pricing Block */}
-                <div className="mb-5 pt-4 border-t border-white/10">
+                <div className="mb-5 pt-4 border-t border-[#F1F5F9]">
                   <div className="flex items-baseline justify-between mb-1.5">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-prompt text-white/50 line-through">
+                      <span className="text-xs font-prompt text-[#94A3B8] line-through">
                         ปกติ {bundle.regularPrice} ฿
                       </span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-prompt font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-prompt font-bold bg-rose-50 text-rose-700 border border-rose-200">
                         {bundle.savings}
                       </span>
                     </div>
-                    <span className="text-[11px] font-prompt text-emerald-400 font-semibold flex items-center gap-1">
-                      <ShieldCheck className="w-3.5 h-3.5" />
+                    <span className="text-[11px] font-prompt text-emerald-700 font-semibold flex items-center gap-1">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                       จ่ายจบ ตลอดชีพ
                     </span>
                   </div>
 
                   <div className="flex items-baseline gap-1.5">
-                    <span className="font-prompt text-3xl sm:text-4xl font-black text-white">
+                    <span className="font-prompt text-3xl sm:text-4xl font-black text-[#0F172A]">
                       {bundle.price}
                     </span>
-                    <span className="font-prompt text-sm font-bold text-white/70">
+                    <span className="font-prompt text-sm font-bold text-[#475569]">
                       บาท
                     </span>
-                    <span className="text-[11px] font-prompt text-white/40 ml-1">
+                    <span className="text-[11px] font-prompt text-[#64748B] ml-1">
                       (ก๊อปปี้ชีตใช้ได้ทันที)
                     </span>
                   </div>
@@ -344,7 +329,6 @@ export function NoBrainerBundles({ className }: { className?: string }) {
 
                 {/* Action Buttons */}
                 <div className="space-y-2 mt-auto">
-                  {/* Primary LINE Order Button */}
                   <a
                     href={lineOrderUrl}
                     target="_blank"
@@ -354,36 +338,32 @@ export function NoBrainerBundles({ className }: { className?: string }) {
                     data-line-price={`${bundle.price} ฿`}
                     data-line-code={bundle.itemCode}
                     title={`คลิกเพื่อสั่งซื้อ ${bundle.title} ผ่าน LINE OA`}
-                    className="w-full h-12 py-3 px-4 rounded-xl font-prompt font-extrabold text-sm sm:text-base flex items-center justify-between transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer bg-gradient-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:via-[#049b42] hover:to-[#05b34c] text-white shadow-[0_0_20px_rgba(6,199,85,0.35)] hover:shadow-[0_0_32px_rgba(6,199,85,0.6)] border border-[#06C755]/40 relative overflow-hidden group/btn"
+                    className="w-full h-12 py-3 px-4 rounded-xl font-prompt font-extrabold text-sm sm:text-base flex items-center justify-between transition-all duration-300 hover:scale-[1.01] active:scale-[0.98] cursor-pointer bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] shadow-xs group/btn"
                   >
-                    {/* Subtle light sweep */}
-                    <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
-
-                    <div className="flex items-center gap-2 relative z-10">
-                      <ShoppingCart className="w-4 h-4 text-white shrink-0" />
+                    <div className="flex items-center gap-2">
+                      <ShoppingCart className="w-4 h-4 text-[#052E16] shrink-0" />
                       <span>สั่งซื้อผ่าน LINE ({bundle.price} ฿)</span>
                     </div>
 
-                    <div className="w-6 h-6 rounded-lg bg-black/20 flex items-center justify-center relative z-10 shrink-0">
-                      <ArrowRight className="w-3.5 h-3.5 text-white transition-transform group-hover/btn:translate-x-0.5" />
+                    <div className="w-6 h-6 rounded-lg bg-[#052E16]/12 flex items-center justify-center shrink-0">
+                      <ArrowRight className="w-3.5 h-3.5 text-[#052E16] transition-transform group-hover/btn:translate-x-0.5" />
                     </div>
                   </a>
 
-                  {/* Secondary Audio Preview Button for BUNDLE-03 */}
                   {bundle.hasAudioPreview && (
                     <Link
                       href="/teacher-prep"
-                      className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-rose-300 hover:text-white text-xs font-prompt font-bold flex items-center justify-center gap-2 border border-rose-500/25 hover:border-rose-400/50 transition-all cursor-pointer shadow-sm"
+                      className="w-full py-2.5 px-3 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-prompt font-bold flex items-center justify-center gap-2 border border-rose-200 transition-all cursor-pointer"
                     >
-                      <Headphones className="w-3.5 h-3.5 text-rose-400" />
+                      <Headphones className="w-3.5 h-3.5 text-rose-600" />
                       <span>🎧 ทดลองฟังเพลงตัวอย่าง &amp; ดูบอทติว</span>
                     </Link>
                   )}
                 </div>
 
                 {/* Footer Micro-assurance */}
-                <div className="mt-3.5 pt-2 text-center text-[11px] font-prompt text-white/50 flex items-center justify-center gap-1.5">
-                  <FileSpreadsheet className="w-3 h-3 text-emerald-400 shrink-0" />
+                <div className="mt-3.5 pt-2 text-center text-[11px] font-prompt text-[#64748B] flex items-center justify-center gap-1.5">
+                  <FileSpreadsheet className="w-3 h-3 text-emerald-600 shrink-0" />
                   <span>มีคลิปแนะนำ 3 นาที • ปลดล็อกชีตและบอทอัตโนมัติ</span>
                 </div>
               </motion.div>

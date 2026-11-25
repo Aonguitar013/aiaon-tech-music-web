@@ -61,7 +61,7 @@ const STICKER_PACKAGES: StickerPackage[] = [
     priceNum: 990,
     originalPrice: "1,590 ฿",
     badge: "⚡ เริ่มต้นคุ้มค่า • จบไวในงบเบาๆ",
-    badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
+    badgeColor: "bg-cyan-50 text-cyan-800 border-cyan-200",
     deliveryDays: "ผลิตภาพ 1–2 วัน (LINE ตรวจอนุมัติเฉลี่ย 1–3 วัน)",
     tagline: "ชุดเริ่มต้น 8 คำพูดฮิตประจำตัว (สำหรับทุกอาชีพ & แชทส่วนตัว)",
     description:
@@ -75,9 +75,9 @@ const STICKER_PACKAGES: StickerPackage[] = [
       "แถมฟรี! ไฟล์ภาพ PNG พื้นหลังใสความละเอียดสูงทั้ง 8 รูป (ใช้แต่งภาพ/สไลด์/ปกร้านได้ทันที)",
     ],
     borderClass:
-      "border-cyan-500/30 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(6,182,212,0.25)]",
+      "border-[#E2E8F0] hover:border-cyan-400 hover:shadow-md",
     btnGradient:
-      "from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white",
+      "from-[#2563EB] to-[#0891B2] hover:from-[#1D4ED8] hover:to-[#0E7490] text-white",
   },
   {
     id: "pro-16",
@@ -90,7 +90,7 @@ const STICKER_PACKAGES: StickerPackage[] = [
     originalPrice: "2,490 ฿",
     badge: "🔥 ขายดีอันดับ 1 • คุ้มค่าที่สุด!",
     badgeColor:
-      "bg-linear-to-r from-[#06C755] via-emerald-500 to-teal-500 text-zinc-950 border-emerald-300/60",
+      "bg-[#06C755] text-[#052E16] border-[#059669]",
     isPopular: true,
     deliveryDays: "ผลิตภาพ 2–3 วัน (LINE ตรวจอนุมัติเฉลี่ย 1–3 วัน)",
     tagline: "ครบทุกอารมณ์ทำงาน ตอบลูกค้า สอนหนังสือ ประชุม และชีวิตประจำวัน",
@@ -105,9 +105,9 @@ const STICKER_PACKAGES: StickerPackage[] = [
       "แถมฟรี! ไฟล์ PNG 16 ท่าความละเอียดสูง ใช้ทำปกร้าน / สื่อการสอน / ว.PA / คลิปสั้นเชิงพาณิชย์ได้",
     ],
     borderClass:
-      "border-[#06C755]/70 shadow-[0_0_45px_rgba(6,199,85,0.28)] scale-[1.02] ring-1 ring-[#06C755]/50",
+      "border-[#06C755] shadow-md lg:scale-[1.02] ring-2 ring-[#06C755]/25",
     btnGradient:
-      "from-[#06C755] via-emerald-500 to-teal-500 hover:from-[#05b34c] hover:to-emerald-400 text-zinc-950",
+      "from-[#06C755] to-[#05B34C] hover:from-[#05B34C] hover:to-[#049B42] text-[#052E16]",
   },
   {
     id: "vip-24",
@@ -119,7 +119,7 @@ const STICKER_PACKAGES: StickerPackage[] = [
     priceNum: 1990,
     originalPrice: "3,490 ฿",
     badge: "👑 จัดเต็มคละชุด • คุ้มสุดระดับ VIP / องค์กร",
-    badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/40",
+    badgeColor: "bg-amber-50 text-amber-800 border-amber-200",
     deliveryDays: "ผลิตภาพ 3–4 วัน (LINE ตรวจอนุมัติเฉลี่ย 1–3 วัน)",
     tagline: "คละชุดทำงาน + ชุดลำลอง + ชุดยูนิฟอร์มร้าน/องค์กร ในเซ็ตเดียว",
     description:
@@ -133,9 +133,9 @@ const STICKER_PACKAGES: StickerPackage[] = [
       "แถมฟรี! คลังภาพ PNG คาแรกเตอร์ 24 แอ็กชัน สำหรับสร้าง Personal Branding & การตลาดครบวงจร",
     ],
     borderClass:
-      "border-amber-500/40 hover:border-amber-400 hover:shadow-[0_0_35px_rgba(245,158,11,0.25)]",
+      "border-[#FDE68A] hover:border-amber-400 hover:shadow-md",
     btnGradient:
-      "from-amber-400 via-orange-400 to-yellow-400 hover:from-amber-300 hover:to-orange-300 text-zinc-950",
+      "from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-[#0F172A]",
   },
 ];
 
@@ -1044,20 +1044,18 @@ export function LineStickersView() {
           </motion.div>
         </div>
 
-        {/* ─── STUDIO SHOWCASE + PRICING + INTERACTIVE BRIEF BUILDER (Dark Studio Container) ─── */}
-        <div className="mb-20 rounded-[2rem] bg-[#0B1220] text-white p-4 sm:p-8 border border-[#E2E8F0] shadow-sm">
         {/* ─── LIVE PORTFOLIO SHOWCASE (5 REAL PRODUCTION SETS) ─── */}
-        <div className="mb-24 rounded-3xl border border-white/10 bg-slate-900/75 backdrop-blur-xl p-6 sm:p-10 shadow-[0_0_60px_rgba(0,0,0,0.5)]">
-          <div className="flex flex-col gap-6 mb-8 pb-6 border-b border-white/10">
+        <div className="mb-20 rounded-3xl border border-[#E2E8F0] bg-white p-6 sm:p-10 shadow-sm">
+          <div className="flex flex-col gap-6 mb-8 pb-6 border-b border-[#E2E8F0]">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#06C755]/15 border border-[#06C755]/30 text-[#4ade80] text-xs font-prompt font-bold mb-2">
-                <CheckCircle2 className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-prompt font-bold mb-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                 <span>REAL PRODUCTION GALLERY • ผลงานจริงที่ผ่านระบบ LINE Creators Market</span>
               </div>
-              <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
+              <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
                 ตัวอย่างผลงานจริง 5 สไตล์ (คนจริง • สัตว์เลี้ยง • มาสคอต 3D)
               </h2>
-              <p className="font-prompt text-xs sm:text-sm text-white/60 mt-1">
+              <p className="font-prompt text-xs sm:text-sm text-[#475569] mt-1">
                 คลิกสลับดูตัวอย่างครบทุกแนว: คมชัดทุกคำ • ไดคัทเนี้ยบทุกรูป • รองรับทั้ง 16 และ 24 แอ็กชัน
               </p>
             </div>
@@ -1069,10 +1067,10 @@ export function LineStickersView() {
                   key={item.id}
                   type="button"
                   onClick={() => setActivePortfolioTab(item.id)}
-                  className={`px-4 py-2.5 rounded-xl font-prompt text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
+                  className={`px-4 py-2.5 rounded-xl font-prompt text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer border ${
                     activePortfolioTab === item.id
-                      ? item.activeTabClass
-                      : "bg-white/5 text-white/75 border border-white/10 hover:bg-white/10"
+                      ? item.activeTabClass + " border-transparent"
+                      : "bg-[#FAF8F5] text-[#475569] border-[#E2E8F0] hover:bg-[#F1ECE4] hover:text-[#0F172A]"
                   }`}
                 >
                   <span>{item.tabLabel}</span>
@@ -1082,29 +1080,29 @@ export function LineStickersView() {
           </div>
 
           {/* Collection Status Bar */}
-          <div className="mb-6 p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="mb-6 p-4 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <img
                 src={`/images/stickers/${activeSetFolder}/main.png`}
                 alt="Main Sticker Cover"
-                className="w-16 h-16 rounded-2xl bg-slate-800/80 p-1.5 border border-white/15 object-contain shrink-0"
+                className="w-16 h-16 rounded-2xl bg-white p-1.5 border border-[#E2E8F0] object-contain shrink-0 shadow-2xs"
               />
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-prompt text-base sm:text-lg font-extrabold text-white">
+                  <h3 className="font-prompt text-base sm:text-lg font-extrabold text-[#0F172A]">
                     {activePortfolio.title}
                   </h3>
                   <span
-                    className={`px-2.5 py-0.5 rounded-full text-[11px] font-prompt font-bold ${
+                    className={`px-2.5 py-0.5 rounded-full text-[11px] font-prompt font-bold border ${
                       activePortfolio.isLive
-                        ? "bg-[#06C755]/20 text-[#4ade80] border border-[#06C755]/40"
-                        : "bg-amber-500/20 text-amber-300 border border-amber-500/40"
+                        ? "bg-emerald-50 text-emerald-800 border-emerald-200"
+                        : "bg-amber-50 text-amber-800 border-amber-200"
                     }`}
                   >
                     {activePortfolio.statusBadge}
                   </span>
                 </div>
-                <p className="font-prompt text-xs text-white/60 mt-1">
+                <p className="font-prompt text-xs text-[#64748B] mt-1">
                   มาตรฐานไฟล์แท้: {activeCaptions.length} รูป (`370×320 px`) + รูปปก `main.png` (`240×240 px`) + ไอคอนแท็บ `tab.png` (`96×74 px`)
                 </p>
               </div>
@@ -1114,7 +1112,7 @@ export function LineStickersView() {
               href={activePortfolio.storeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-xl bg-[#06C755]/20 hover:bg-[#06C755]/30 border border-[#06C755]/40 text-[#4ade80] font-prompt text-xs font-bold flex items-center gap-2 transition-all shrink-0"
+              className="px-4 py-2.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-prompt text-xs font-extrabold flex items-center gap-2 transition-all shrink-0 shadow-xs"
             >
               <span>{activePortfolio.isLive ? "เปิดดูชุดนี้บน LINE STORE" : "เปิดดูร้าน iAon Tech บน LINE STORE"}</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -1132,11 +1130,11 @@ export function LineStickersView() {
                   initial={{ opacity: 0, scale: 0.92 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.02 }}
-                  className="group rounded-2xl bg-[#111626] hover:bg-[#172036] border border-white/8 hover:border-[#06C755]/50 p-3 flex flex-col items-center justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(6,199,85,0.18)]"
+                  className="group rounded-2xl bg-[#FAF8F5] hover:bg-white border border-[#E2E8F0] hover:border-[#06C755] p-3 flex flex-col items-center justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-sm"
                 >
-                  <div className="w-full flex items-center justify-between text-[10px] font-mono text-white/40 mb-1">
+                  <div className="w-full flex items-center justify-between text-[10px] font-mono text-[#94A3B8] mb-1">
                     <span>#{numStr}</span>
-                    <span className="text-[#4ade80] opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-[#059669] font-bold opacity-0 group-hover:opacity-100 transition-opacity">
                       PNG ใส
                     </span>
                   </div>
@@ -1145,10 +1143,10 @@ export function LineStickersView() {
                       src={`/images/stickers/${activeSetFolder}/${numStr}.png`}
                       alt={caption}
                       loading="lazy"
-                      className="max-w-full max-h-full object-contain drop-shadow-[0_6px_12px_rgba(0,0,0,0.45)] group-hover:scale-105 transition-transform duration-200"
+                      className="max-w-full max-h-full object-contain drop-shadow-[0_4px_10px_rgba(15,23,42,0.14)] group-hover:scale-105 transition-transform duration-200"
                     />
                   </div>
-                  <p className="font-prompt text-[11px] font-semibold text-white/80 text-center mt-2 line-clamp-1">
+                  <p className="font-prompt text-[11px] font-semibold text-[#1E293B] text-center mt-2 line-clamp-1">
                     {caption}
                   </p>
                 </motion.div>
@@ -1158,19 +1156,19 @@ export function LineStickersView() {
         </div>
 
         {/* ─── 3 PRICING PACKAGES ─── */}
-        <div id="packages" className="mb-24 scroll-mt-24">
+        <div id="packages" className="mb-20 scroll-mt-24">
           <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-prompt font-bold">
-              <Award className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-prompt font-bold">
+              <Award className="w-4 h-4 text-emerald-600" />
               <span>SPECIAL LAUNCH PRICING • โปรโมชันเปิดตัวสุดคุ้มสำหรับทุกสายอาชีพ</span>
             </div>
-            <h2 className="font-prompt text-2xl sm:text-4xl font-extrabold text-white">
+            <h2 className="font-prompt text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
               เลือกแพ็กเกจสติกเกอร์ LINE 3D{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-[#06C755] to-cyan-400">
+              <span className="text-[#059669]">
                 ที่เหมาะกับสไตล์และธุรกิจของคุณ
               </span>
             </h2>
-            <p className="font-prompt text-sm text-white/60">
+            <p className="font-prompt text-sm text-[#475569]">
               ราคาเดียวจบครบวงจร ไม่มีบวกเพิ่ม ได้ทั้งสติกเกอร์ภาพนิ่ง 3D ขึ้น LINE STORE และไฟล์ภาพ PNG ความละเอียดสูง (ต้องการชุดใหญ่ 32–40 รูป หรือออกใบเสนอราคาองค์กร ทัก LINE ได้เลยครับ)
             </p>
           </div>
@@ -1179,11 +1177,11 @@ export function LineStickersView() {
             {STICKER_PACKAGES.map((pkg) => (
               <div
                 key={pkg.id}
-                className={`relative rounded-3xl p-7 sm:p-8 border bg-slate-900/80 flex flex-col justify-between transition-all duration-300 backdrop-blur-sm ${pkg.borderClass}`}
+                className={`relative rounded-3xl p-7 sm:p-8 border bg-white shadow-sm flex flex-col justify-between transition-all duration-300 ${pkg.borderClass}`}
               >
                 {pkg.badge && (
                   <div
-                    className={`absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-prompt font-extrabold shadow-md border whitespace-nowrap ${pkg.badgeColor}`}
+                    className={`absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-prompt font-extrabold shadow-xs border whitespace-nowrap ${pkg.badgeColor}`}
                   >
                     {pkg.badge}
                   </div>
@@ -1191,60 +1189,60 @@ export function LineStickersView() {
 
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-2 pt-2">
-                    <span className="px-2.5 py-1 rounded-lg bg-white/10 text-white/80 font-mono text-xs font-bold">
+                    <span className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-[#E2E8F0] text-[#475569] font-mono text-xs font-bold">
                       {pkg.code}
                     </span>
-                    <span className="font-prompt text-xs font-bold text-[#4ade80]">
+                    <span className="font-prompt text-xs font-bold text-[#059669]">
                       {pkg.countLabel}
                     </span>
                   </div>
 
-                  <h3 className="font-prompt text-2xl font-extrabold text-white mb-1">
+                  <h3 className="font-prompt text-2xl font-extrabold text-[#0F172A] mb-1">
                     {pkg.name}
                   </h3>
-                  <p className="font-prompt text-xs text-white/60 mb-5">
+                  <p className="font-prompt text-xs text-[#64748B] mb-5">
                     {pkg.tagline}
                   </p>
 
-                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 mb-5">
+                  <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] mb-5">
                     <div className="flex items-baseline gap-2.5">
-                      <span className="font-prompt text-3xl sm:text-4xl font-black text-white">
+                      <span className="font-prompt text-3xl sm:text-4xl font-black text-[#0F172A]">
                         {pkg.price}
                       </span>
-                      <span className="font-prompt text-sm text-white/40 line-through">
+                      <span className="font-prompt text-sm text-[#94A3B8] line-through">
                         {pkg.originalPrice}
                       </span>
                     </div>
-                    <p className="font-prompt text-xs text-cyan-300 mt-1">
+                    <p className="font-prompt text-xs text-[#0E7490] font-medium mt-1">
                       ⏱️ ระยะเวลาผลิตภาพ: {pkg.deliveryDays}
                     </p>
                   </div>
 
-                  <p className="font-prompt text-xs text-white/75 leading-relaxed mb-6">
+                  <p className="font-prompt text-xs text-[#475569] leading-relaxed mb-6">
                     {pkg.description}
                   </p>
 
-                  <div className="space-y-2.5 mb-8 border-t border-white/10 pt-5">
-                    <p className="font-prompt text-xs font-bold text-white/50 uppercase tracking-wider mb-2">
+                  <div className="space-y-2.5 mb-8 border-t border-[#F1F5F9] pt-5">
+                    <p className="font-prompt text-xs font-bold text-[#64748B] uppercase tracking-wider mb-2">
                       สิ่งที่คุณจะได้รับครบชุด:
                     </p>
                     {pkg.features.map((feat, fIdx) => (
                       <div
                         key={fIdx}
-                        className="flex items-start gap-2.5 text-xs font-prompt text-white/85"
+                        className="flex items-start gap-2.5 text-xs font-prompt text-[#1E293B]"
                       >
-                        <CheckCircle2 className="w-4 h-4 text-[#4ade80] shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 space-y-2.5">
+                <div className="pt-4 border-t border-[#F1F5F9] space-y-2.5">
                   <a
                     href="#brief-form"
                     onClick={() => setSelectedPkgId(pkg.id)}
-                    className={`w-full py-3.5 px-4 rounded-2xl font-prompt font-black text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] active:scale-95 bg-linear-to-r ${pkg.btnGradient}`}
+                    className={`w-full py-3.5 px-4 rounded-2xl font-prompt font-black text-sm flex items-center justify-center gap-2 shadow-xs transition-all hover:scale-[1.02] active:scale-95 bg-linear-to-r ${pkg.btnGradient}`}
                   >
                     <Wand2 className="w-4 h-4" />
                     <span>เลือกชุดนี้ &amp; กรอกบรีฟด้านล่าง ({pkg.price})</span>
@@ -1259,17 +1257,17 @@ export function LineStickersView() {
         {/* ─── FULL INTERACTIVE BRIEF FORM + PHOTO UPLOAD + 16-WORD PICKER ─── */}
         <div
           id="brief-form"
-          className="mb-24 max-w-5xl mx-auto rounded-3xl border border-[#06C755]/50 bg-slate-900/90 p-6 sm:p-10 shadow-[0_0_60px_rgba(6,199,85,0.2)] scroll-mt-24"
+          className="mb-20 max-w-5xl mx-auto rounded-3xl border border-[#E2E8F0] bg-white p-6 sm:p-10 shadow-sm scroll-mt-24"
         >
           <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#06C755]/15 border border-[#06C755]/30 text-[#4ade80] text-xs font-prompt font-bold">
-              <Wand2 className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-prompt font-bold">
+              <Wand2 className="w-3.5 h-3.5 text-emerald-600" />
               <span>DIRECT AI STUDIO BRIEF FORM • ส่งบรีฟตรงเข้าห้องผลิตสติกเกอร์ครูอ้น</span>
             </div>
-            <h3 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
+            <h3 className="font-prompt text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
               แบบฟอร์มส่งบรีฟ &amp; อัปโหลดรูปถ่ายต้นแบบ
             </h3>
-            <p className="font-prompt text-xs sm:text-sm text-white/65">
+            <p className="font-prompt text-xs sm:text-sm text-[#475569]">
               กรอกข้อมูลด้านล่างให้ครบ ระบบจะส่งรูปถ่ายและคำพูดทั้ง {selectedPkg.count} คำตรงไปที่ระบบ AI ของครูอ้นเพื่อปั้นคาแรกเตอร์ต้นแบบให้ตรวจทันที!
             </p>
           </div>
@@ -1278,20 +1276,20 @@ export function LineStickersView() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="p-8 rounded-3xl border border-[#06C755] bg-[#06C755]/10 text-center space-y-5"
+              className="p-8 rounded-3xl border border-emerald-300 bg-emerald-50 text-center space-y-5"
             >
-              <div className="w-16 h-16 rounded-full bg-[#06C755] text-zinc-950 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(6,199,85,0.5)]">
+              <div className="w-16 h-16 rounded-full bg-[#06C755] text-[#052E16] flex items-center justify-center mx-auto shadow-sm">
                 <Check className="w-9 h-9 stroke-[3]" />
               </div>
               <div className="space-y-2">
-                <span className="px-3 py-1 rounded-full bg-white/10 text-[#4ade80] font-mono text-xs font-bold">
+                <span className="px-3 py-1 rounded-full bg-white border border-emerald-200 text-emerald-800 font-mono text-xs font-bold">
                   รหัสใบสั่งทำ: {submittedOrderId}
                 </span>
-                <h4 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
+                <h4 className="font-prompt text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
                   ส่งบรีฟและรูปถ่ายถึงระบบ AI ของครูอ้นเรียบร้อยแล้วครับ! 🎉
                 </h4>
-                <p className="font-prompt text-sm text-white/75 max-w-xl mx-auto leading-relaxed">
-                  ตอนนี้ข้อมูลและรูปถ่ายของ <strong>{teacherName}</strong> ถูกส่งเข้าห้องผลิตของครูอ้นแล้ว ขั้นตอนสุดท้าย กดปุ่มด้านล่างเพื่อรับ <strong>QR Code พร้อมเพย์ ({selectedPkg.price})</strong> และรับภาพคาแรกเตอร์ต้นแบบใน LINE OA ได้เลยครับ!
+                <p className="font-prompt text-sm text-[#475569] max-w-xl mx-auto leading-relaxed">
+                  ตอนนี้ข้อมูลและรูปถ่ายของ <strong className="text-[#0F172A]">{teacherName}</strong> ถูกส่งเข้าห้องผลิตของครูอ้นแล้ว ขั้นตอนสุดท้าย กดปุ่มด้านล่างเพื่อรับ <strong className="text-[#0F172A]">QR Code พร้อมเพย์ ({selectedPkg.price})</strong> และรับภาพคาแรกเตอร์ต้นแบบใน LINE OA ได้เลยครับ!
                 </p>
               </div>
 
@@ -1317,7 +1315,7 @@ export function LineStickersView() {
                   }}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 py-4 rounded-2xl bg-linear-to-r from-[#06C755] to-emerald-500 hover:from-[#05b34c] hover:to-emerald-400 text-zinc-950 font-prompt font-black text-base flex items-center gap-2.5 shadow-[0_0_30px_rgba(6,199,85,0.45)] hover:scale-105 transition-all"
+                  className="px-8 py-4 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-prompt font-black text-base flex items-center gap-2.5 shadow-sm hover:scale-105 transition-all"
                 >
                   <MessageCircle className="w-5 h-5" />
                   <span>กดยืนยันใน LINE &amp; รับ QR พร้อมเพย์ ({selectedPkg.price})</span>
@@ -1327,7 +1325,7 @@ export function LineStickersView() {
                 <button
                   type="button"
                   onClick={() => setSubmittedOrderId("")}
-                  className="px-5 py-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-white/80 font-prompt text-xs font-bold flex items-center gap-2 cursor-pointer"
+                  className="px-5 py-4 rounded-2xl bg-white hover:bg-[#FAF8F5] border border-[#E2E8F0] text-[#475569] font-prompt text-xs font-bold flex items-center gap-2 cursor-pointer"
                 >
                   <RefreshCw className="w-4 h-4" />
                   <span>แก้ไขข้อมูลบรีฟอีกครั้ง</span>
@@ -1337,42 +1335,42 @@ export function LineStickersView() {
           ) : (
             <form onSubmit={handleBriefFormSubmit} className="space-y-8">
               {/* STEP 1: Customer Info & Photo Upload */}
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-5">
-                <h4 className="font-prompt text-base font-extrabold text-[#4ade80] flex items-center gap-2">
+              <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] space-y-5">
+                <h4 className="font-prompt text-base font-extrabold text-[#059669] flex items-center gap-2">
                   <Camera className="w-5 h-5" />
                   <span>ส่วนที่ 1: ข้อมูลผู้สั่งทำ &amp; รูปถ่ายต้นแบบ (รองรับทุกอาชีพ / ร้านค้า / คู่รัก / สัตว์เลี้ยง)</span>
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                    <label className="block font-prompt text-xs font-bold text-[#334155] mb-1.5">
                       ชื่อเล่น / ชื่อแบรนด์ที่ใช้เรียกบนสติกเกอร์ (จำเป็น) *
                     </label>
                     <div className="relative">
-                      <User className="w-4 h-4 text-white/40 absolute left-3.5 top-3.5" />
+                      <User className="w-4 h-4 text-[#94A3B8] absolute left-3.5 top-3.5" />
                       <input
                         type="text"
                         required
                         value={teacherName}
                         onChange={(e) => handleTeacherNameChange(e.target.value)}
                         placeholder="เช่น เมย์, บอย, ร้านพลอยสวย, หมอเจ, ครูอ้น..."
-                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-sm focus:outline-none focus:border-[#06C755]"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-[#CBD5E1] text-[#0F172A] placeholder:text-[#94A3B8] font-prompt text-sm focus:outline-none focus:border-[#06C755] focus:ring-2 focus:ring-[#06C755]/20"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                    <label className="block font-prompt text-xs font-bold text-[#334155] mb-1.5">
                       เบอร์โทร หรือ ชื่อ LINE ของคุณ (ไว้ส่งรูปต้นแบบให้ตรวจ)
                     </label>
                     <div className="relative">
-                      <Phone className="w-4 h-4 text-white/40 absolute left-3.5 top-3.5" />
+                      <Phone className="w-4 h-4 text-[#94A3B8] absolute left-3.5 top-3.5" />
                       <input
                         type="text"
                         value={contactInfo}
                         onChange={(e) => setContactInfo(e.target.value)}
                         placeholder="เช่น 08x-xxx-xxxx หรือชื่อใน LINE..."
-                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-sm focus:outline-none focus:border-[#06C755]"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-[#CBD5E1] text-[#0F172A] placeholder:text-[#94A3B8] font-prompt text-sm focus:outline-none focus:border-[#06C755] focus:ring-2 focus:ring-[#06C755]/20"
                       />
                     </div>
                   </div>
@@ -1380,7 +1378,7 @@ export function LineStickersView() {
 
                 {/* Character Gender / Type Pills */}
                 <div>
-                  <label className="block font-prompt text-xs font-bold text-white/80 mb-2">
+                  <label className="block font-prompt text-xs font-bold text-[#334155] mb-2">
                     รูปแบบคาแรกเตอร์ / เพศ (ช่วยให้ AI ปั้นโครงหน้าและเลือกหมวด LINE ได้แม่นยำ 100%):
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -1393,8 +1391,8 @@ export function LineStickersView() {
                           onClick={() => setCharacterType(ct.id)}
                           className={`px-3.5 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
                             isSel
-                              ? "bg-[#06C755] text-zinc-950 border-[#4ade80] shadow-[0_0_15px_rgba(6,199,85,0.35)]"
-                              : "bg-slate-950/60 text-white/75 border-white/15 hover:bg-white/10"
+                              ? "bg-[#06C755] text-[#052E16] border-[#059669] shadow-xs"
+                              : "bg-white text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1] hover:text-[#0F172A]"
                           }`}
                         >
                           {ct.label}
@@ -1407,7 +1405,7 @@ export function LineStickersView() {
                 {/* Photo Upload Box */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center pt-1">
                   <div className="sm:col-span-2">
-                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                    <label className="block font-prompt text-xs font-bold text-[#334155] mb-1.5">
                       อัปโหลดรูปถ่ายต้นแบบ (รูปเซลฟี่เห็นหน้า-ทรงผมชัด หรือรูปคู่/สัตว์เลี้ยง/โลโก้ร้าน)
                     </label>
                     <input
@@ -1420,24 +1418,24 @@ export function LineStickersView() {
                     <button
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
-                      className="w-full p-4 rounded-2xl border-2 border-dashed border-[#06C755]/50 hover:border-[#06C755] bg-[#06C755]/5 hover:bg-[#06C755]/10 text-left flex items-center justify-between gap-4 transition-all cursor-pointer"
+                      className="w-full p-4 rounded-2xl border-2 border-dashed border-[#06C755]/60 hover:border-[#06C755] bg-white hover:bg-emerald-50/40 text-left flex items-center justify-between gap-4 transition-all cursor-pointer"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-[#06C755]/20 text-[#4ade80] flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center shrink-0">
                           <Upload className="w-5 h-5" />
                         </div>
                         <div>
-                          <p className="font-prompt text-sm font-bold text-white">
+                          <p className="font-prompt text-sm font-bold text-[#0F172A]">
                             {photoFileName
                               ? `เลือกรูปแล้ว: ${photoFileName}`
                               : "คลิกเพื่อเลือกรูปถ่ายจากมือถือ / คอมพิวเตอร์"}
                           </p>
-                          <p className="font-prompt text-xs text-white/50">
+                          <p className="font-prompt text-xs text-[#64748B]">
                             (หากต้องการส่งหลายรูป เช่น รูปคน + รูปโลโก้ร้าน สามารถส่งเพิ่มในแชท LINE หลังกดยืนยันได้ครับ)
                           </p>
                         </div>
                       </div>
-                      <span className="px-3 py-1.5 rounded-xl bg-[#06C755] text-zinc-950 font-prompt text-xs font-black shrink-0">
+                      <span className="px-3 py-1.5 rounded-xl bg-[#06C755] text-[#052E16] font-prompt text-xs font-black shrink-0">
                         เลือกรูป
                       </span>
                     </button>
@@ -1449,14 +1447,14 @@ export function LineStickersView() {
                         <img
                           src={photoBase64}
                           alt="Customer Reference Preview"
-                          className="w-28 h-28 rounded-2xl object-cover border-2 border-[#06C755] shadow-[0_0_20px_rgba(6,199,85,0.3)]"
+                          className="w-28 h-28 rounded-2xl object-cover border-2 border-[#06C755] shadow-sm"
                         />
-                        <span className="block text-[11px] font-prompt text-[#4ade80] text-center mt-1 font-bold">
+                        <span className="block text-[11px] font-prompt text-emerald-700 text-center mt-1 font-bold">
                           ✓ รูปต้นแบบพร้อมส่ง
                         </span>
                       </div>
                     ) : (
-                      <div className="w-28 h-28 rounded-2xl border border-white/10 bg-white/5 flex flex-col items-center justify-center text-white/35 p-2 text-center">
+                      <div className="w-28 h-28 rounded-2xl border border-[#E2E8F0] bg-white flex flex-col items-center justify-center text-[#94A3B8] p-2 text-center">
                         <Camera className="w-6 h-6 mb-1" />
                         <span className="font-prompt text-[10px]">
                           อัปโหลดที่นี่ หรือส่งรูปใน LINE ภายหลังได้
@@ -1469,7 +1467,7 @@ export function LineStickersView() {
                 {/* Color Theme + Props & Facial Traits + Sticker Title */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                   <div>
-                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                    <label className="block font-prompt text-xs font-bold text-[#334155] mb-1.5">
                       🎨 สีเสื้อ / สีประจำแบรนด์ (CI Color) / โลโก้บนอกเสื้อ
                     </label>
                     <input
@@ -1477,11 +1475,11 @@ export function LineStickersView() {
                       value={colorTheme}
                       onChange={(e) => setColorTheme(e.target.value)}
                       placeholder="เช่น สูทสีชมพูพาสเทล, เสื้อเชิ้ตสีฟ้า, สีแบรนด์เขียว-ทอง, หรือตามรูปถ่าย"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#CBD5E1] text-[#0F172A] placeholder:text-[#94A3B8] font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
                     />
                   </div>
                   <div>
-                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                    <label className="block font-prompt text-xs font-bold text-[#334155] mb-1.5">
                       🎸 อาชีพ / พร็อพคู่ใจ / จุดเด่นใบหน้า (แว่นตา, ทรงผม, สัตว์เลี้ยง)
                     </label>
                     <input
@@ -1489,14 +1487,14 @@ export function LineStickersView() {
                       value={propsAndTrait}
                       onChange={(e) => setPropsAndTrait(e.target.value)}
                       placeholder="เช่น ถือแก้วกาแฟ+โน้ตบุ๊ก, ถือกล่องพัสดุ, ใส่แว่นกลม, อุ้มแมวส้ม..."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#CBD5E1] text-[#0F172A] placeholder:text-[#94A3B8] font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                    <label className="block font-prompt text-xs font-bold text-[#334155] mb-1.5">
                       ชื่อชุดสติกเกอร์ภาษาไทย (โชว์บน LINE • เว้นว่างให้ครูอ้นตั้งให้ได้)
                     </label>
                     <input
@@ -1504,11 +1502,11 @@ export function LineStickersView() {
                       value={stickerTitleTh}
                       onChange={(e) => setStickerTitleTh(e.target.value)}
                       placeholder="เช่น เมย์สายลุยออฟฟิศ / พลอยแม่ค้าออนไลน์ / ครูอ้นใจดี"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#CBD5E1] text-[#0F172A] placeholder:text-[#94A3B8] font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
                     />
                   </div>
                   <div>
-                    <label className="block font-prompt text-xs font-bold text-white/80 mb-1.5">
+                    <label className="block font-prompt text-xs font-bold text-[#334155] mb-1.5">
                       ชื่อชุดภาษาอังกฤษ (เว้นว่างไว้ได้เลย • ครูอ้นตั้งชื่อภาษาอังกฤษให้ฟรี!)
                     </label>
                     <input
@@ -1516,22 +1514,22 @@ export function LineStickersView() {
                       value={stickerTitleEn}
                       onChange={(e) => setStickerTitleEn(e.target.value)}
                       placeholder="เว้นว่างได้เลย หรือระบุ เช่น May Office Cute Life"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950/70 border border-white/15 text-white placeholder:text-white/35 font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#CBD5E1] text-[#0F172A] placeholder:text-[#94A3B8] font-prompt text-xs sm:text-sm focus:outline-none focus:border-[#06C755]"
                     />
                   </div>
                 </div>
               </div>
 
               {/* STEP 2: Package, Outfit & Publishing Mode */}
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-6">
-                <h4 className="font-prompt text-base font-extrabold text-cyan-300 flex items-center gap-2">
+              <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] space-y-6">
+                <h4 className="font-prompt text-base font-extrabold text-[#1D4ED8] flex items-center gap-2">
                   <Palette className="w-5 h-5" />
                   <span>ส่วนที่ 2: เลือกขนาดแพ็กเกจ, ชุดแต่งกาย และการวางขาย</span>
                 </h4>
 
                 {/* Package Size */}
                 <div>
-                  <label className="block font-prompt text-xs font-bold text-white/80 mb-2.5">
+                  <label className="block font-prompt text-xs font-bold text-[#334155] mb-2.5">
                     1. เลือกขนาดชุดสติกเกอร์:
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -1544,19 +1542,19 @@ export function LineStickersView() {
                           onClick={() => setSelectedPkgId(pkg.id)}
                           className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                             isSel
-                              ? "border-[#06C755] bg-[#06C755]/15 ring-1 ring-[#06C755]"
-                              : "border-white/10 bg-slate-950/50 hover:bg-white/10"
+                              ? "border-[#06C755] bg-emerald-50 ring-1 ring-[#06C755]"
+                              : "border-[#E2E8F0] bg-white hover:border-[#CBD5E1]"
                           }`}
                         >
                           <div className="flex items-center justify-between mb-1">
-                            <span className="font-prompt text-sm font-bold text-white">
+                            <span className="font-prompt text-sm font-bold text-[#0F172A]">
                               {pkg.count} แอ็กชัน
                             </span>
-                            <span className="font-prompt text-sm font-black text-[#4ade80]">
+                            <span className="font-prompt text-sm font-black text-[#059669]">
                               {pkg.price}
                             </span>
                           </div>
-                          <p className="font-prompt text-xs text-white/60">
+                          <p className="font-prompt text-xs text-[#64748B]">
                             {pkg.name}
                           </p>
                         </button>
@@ -1567,7 +1565,7 @@ export function LineStickersView() {
 
                 {/* Outfit Style */}
                 <div>
-                  <label className="block font-prompt text-xs font-bold text-white/80 mb-2.5">
+                  <label className="block font-prompt text-xs font-bold text-[#334155] mb-2.5">
                     2. เลือกสไตล์ชุดแต่งกายหลัก:
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1580,20 +1578,20 @@ export function LineStickersView() {
                           onClick={() => handleOutfitSelect(outfit.id)}
                           className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
                             isSel
-                              ? "border-cyan-400 bg-cyan-950/40 ring-1 ring-cyan-400"
-                              : "border-white/10 bg-slate-950/50 hover:bg-white/10"
+                              ? "border-[#2563EB] bg-[#EFF6FF] ring-1 ring-[#2563EB]"
+                              : "border-[#E2E8F0] bg-white hover:border-[#CBD5E1]"
                           }`}
                         >
                           <div
                             className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
                               isSel
-                                ? "bg-cyan-400 border-cyan-300 text-zinc-950"
-                                : "border-white/30"
+                                ? "bg-[#2563EB] border-[#2563EB] text-white"
+                                : "border-[#CBD5E1]"
                             }`}
                           >
                             {isSel && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                           </div>
-                          <span className="font-prompt text-xs sm:text-sm text-white">
+                          <span className="font-prompt text-xs sm:text-sm text-[#0F172A]">
                             {outfit.label}
                           </span>
                         </button>
@@ -1604,7 +1602,7 @@ export function LineStickersView() {
 
                 {/* Publishing Mode */}
                 <div>
-                  <label className="block font-prompt text-xs font-bold text-white/80 mb-2.5">
+                  <label className="block font-prompt text-xs font-bold text-[#334155] mb-2.5">
                     3. รูปแบบการนำขึ้นวางขายบน LINE STORE:
                   </label>
                   <div className="grid grid-cols-1 gap-3">
@@ -1617,25 +1615,25 @@ export function LineStickersView() {
                           onClick={() => setSelectedPublishMode(mode.id)}
                           className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                             isSel
-                              ? "border-amber-400 bg-amber-950/30 ring-1 ring-amber-400"
-                              : "border-white/10 bg-slate-950/50 hover:bg-white/10"
+                              ? "border-amber-400 bg-[#FEF9EF] ring-1 ring-amber-400"
+                              : "border-[#E2E8F0] bg-white hover:border-[#CBD5E1]"
                           }`}
                         >
                           <div className="flex items-center gap-2.5 mb-1">
                             <div
                               className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
                                 isSel
-                                  ? "bg-amber-400 border-amber-300 text-zinc-950"
-                                  : "border-white/30"
+                                  ? "bg-amber-500 border-amber-500 text-white"
+                                  : "border-[#CBD5E1]"
                               }`}
                             >
                               {isSel && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                             </div>
-                            <span className="font-prompt text-sm font-bold text-white">
+                            <span className="font-prompt text-sm font-bold text-[#0F172A]">
                               {mode.title}
                             </span>
                           </div>
-                          <p className="font-prompt text-xs text-white/65 pl-7 leading-relaxed">
+                          <p className="font-prompt text-xs text-[#475569] pl-7 leading-relaxed">
                             {mode.desc}
                           </p>
                         </button>
@@ -1646,17 +1644,17 @@ export function LineStickersView() {
               </div>
 
               {/* STEP 3: Interactive 8 / 16 / 24 Captions Grid with 1-Click Preset Loader */}
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-5">
+              <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] space-y-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
-                    <h4 className="font-prompt text-base font-extrabold text-amber-300 flex items-center gap-2">
+                    <h4 className="font-prompt text-base font-extrabold text-[#B45309] flex items-center gap-2">
                       <FileText className="w-5 h-5" />
                       <span>
                         ส่วนที่ 3: กำหนดคำพูดบนสติกเกอร์ทั้ง {selectedPkg.count} รูป
                       </span>
                     </h4>
-                    <p className="font-prompt text-xs text-white/60 mt-0.5 leading-relaxed">
-                      💡 <strong>ไม่ต้องคิดท่าทางเอง!</strong> ครูอ้นและระบบ AI จะออกแบบท่าทางและอารมณ์ให้เข้ากับคำพูดแต่ละข้อโดยอัตโนมัติ (คลิกปุ่มโพยด้านล่างเพื่อเติมคำใน 1 คลิก หรือพิมพ์แก้คำที่ต้องการได้เลย แนะนำไม่เกิน 12–15 ตัวอักษรเพื่อความคมชัดสูงสุด)
+                    <p className="font-prompt text-xs text-[#475569] mt-0.5 leading-relaxed">
+                      💡 <strong className="text-[#0F172A]">ไม่ต้องคิดท่าทางเอง!</strong> ครูอ้นและระบบ AI จะออกแบบท่าทางและอารมณ์ให้เข้ากับคำพูดแต่ละข้อโดยอัตโนมัติ (คลิกปุ่มโพยด้านล่างเพื่อเติมคำใน 1 คลิก หรือพิมพ์แก้คำที่ต้องการได้เลย แนะนำไม่เกิน 12–15 ตัวอักษรเพื่อความคมชัดสูงสุด)
                     </p>
                   </div>
 
@@ -1667,8 +1665,8 @@ export function LineStickersView() {
                       onClick={() => applyPresetCaptions("office-nickname")}
                       className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
                         selectedPresetKey === "office-nickname"
-                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
-                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                          ? "bg-amber-400 text-[#0F172A] border-amber-500 shadow-xs"
+                          : "bg-white text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1] hover:text-[#0F172A]"
                       }`}
                     >
                       {`💼 โพยชื่อเล่นสายออฟฟิศ (เช่น "${extractShortNickname(teacherName)}รับทราบ!", "${extractShortNickname(teacherName)}ส่งงานแล้วนะ!")`}
@@ -1678,8 +1676,8 @@ export function LineStickersView() {
                       onClick={() => applyPresetCaptions("seller-nickname")}
                       className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
                         selectedPresetKey === "seller-nickname"
-                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
-                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                          ? "bg-amber-400 text-[#0F172A] border-amber-500 shadow-xs"
+                          : "bg-white text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1] hover:text-[#0F172A]"
                       }`}
                     >
                       {`🛍️ โพยชื่อเล่นแม่ค้าออนไลน์/เซลส์ (เช่น "${extractShortNickname(teacherName)}รับออเดอร์จ้า!", "${extractShortNickname(teacherName)}จัดส่งแล้วจ้า!")`}
@@ -1689,8 +1687,8 @@ export function LineStickersView() {
                       onClick={() => applyPresetCaptions("medical-nickname")}
                       className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
                         selectedPresetKey === "medical-nickname"
-                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
-                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                          ? "bg-amber-400 text-[#0F172A] border-amber-500 shadow-xs"
+                          : "bg-white text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1] hover:text-[#0F172A]"
                       }`}
                     >
                       {`🩺 โพยชื่อเล่นหมอ/พยาบาล (เช่น "${extractShortNickname(teacherName)}ขึ้นเวรแล้วจ้า!", "${extractShortNickname(teacherName)}ดูแลสุขภาพนะ")`}
@@ -1700,8 +1698,8 @@ export function LineStickersView() {
                       onClick={() => applyPresetCaptions("family-nickname")}
                       className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
                         selectedPresetKey === "family-nickname"
-                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
-                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                          ? "bg-amber-400 text-[#0F172A] border-amber-500 shadow-xs"
+                          : "bg-white text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1] hover:text-[#0F172A]"
                       }`}
                     >
                       {`💕 โพยชื่อเล่นสายอ้อนแฟน/ครอบครัว (เช่น "${extractShortNickname(teacherName)}คิดถึงจังเลย!", "${extractShortNickname(teacherName)}รักที่สุดเลย!")`}
@@ -1711,8 +1709,8 @@ export function LineStickersView() {
                       onClick={() => applyPresetCaptions("student-nickname")}
                       className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
                         selectedPresetKey === "student-nickname"
-                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
-                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                          ? "bg-amber-400 text-[#0F172A] border-amber-500 shadow-xs"
+                          : "bg-white text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1] hover:text-[#0F172A]"
                       }`}
                     >
                       {`🎒 โพยชื่อเล่นนักเรียน/นักศึกษา (เช่น "${extractShortNickname(teacherName)}ปั่นการบ้านอยู่", "${extractShortNickname(teacherName)}ขอเกรด 4 นะ!")`}
@@ -1722,8 +1720,8 @@ export function LineStickersView() {
                       onClick={() => applyPresetCaptions("nickname")}
                       className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
                         selectedPresetKey === "nickname"
-                          ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
-                          : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                          ? "bg-amber-400 text-[#0F172A] border-amber-500 shadow-xs"
+                          : "bg-white text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1] hover:text-[#0F172A]"
                       }`}
                     >
                       {`✨ โพยชื่อเล่นสายคุณครู (เช่น "${extractShortNickname(teacherName)}สอนอยู่จ้า", "${extractShortNickname(teacherName)}ให้เกรด 4!")`}
@@ -1735,8 +1733,8 @@ export function LineStickersView() {
                         onClick={() => applyPresetCaptions(key)}
                         className={`px-3 py-2 rounded-xl font-prompt text-xs font-bold transition-all cursor-pointer border ${
                           selectedPresetKey === key
-                            ? "bg-amber-400 text-zinc-950 border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.35)]"
-                            : "bg-white/5 text-white/75 border-white/15 hover:bg-white/10"
+                            ? "bg-amber-400 text-[#0F172A] border-amber-500 shadow-xs"
+                            : "bg-white text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1] hover:text-[#0F172A]"
                         }`}
                       >
                         {pack.label}
@@ -1751,9 +1749,9 @@ export function LineStickersView() {
                     return (
                       <div
                         key={idx}
-                        className="flex items-center gap-2 bg-slate-950/75 border border-white/15 rounded-xl px-3 py-2 focus-within:border-[#06C755]"
+                        className="flex items-center gap-2 bg-white border border-[#CBD5E1] rounded-xl px-3 py-2 focus-within:border-[#06C755] focus-within:ring-2 focus-within:ring-[#06C755]/15"
                       >
-                        <span className="font-mono text-xs font-bold text-[#4ade80] shrink-0">
+                        <span className="font-mono text-xs font-bold text-[#059669] shrink-0">
                           #{numStr}
                         </span>
                         <input
@@ -1762,7 +1760,7 @@ export function LineStickersView() {
                           value={captions[idx] || ""}
                           onChange={(e) => updateSingleCaption(idx, e.target.value)}
                           placeholder={`คำพูดที่ ${numStr}...`}
-                          className="w-full bg-transparent text-white font-prompt text-xs sm:text-sm focus:outline-none"
+                          className="w-full bg-transparent text-[#0F172A] placeholder:text-[#94A3B8] font-prompt text-xs sm:text-sm focus:outline-none"
                         />
                       </div>
                     );
@@ -1771,25 +1769,25 @@ export function LineStickersView() {
               </div>
 
               {submitError && (
-                <div className="p-4 rounded-xl bg-red-500/15 border border-red-500/40 text-red-300 font-prompt text-xs sm:text-sm text-center">
+                <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 font-prompt text-xs sm:text-sm text-center">
                   ⚠️ {submitError}
                 </div>
               )}
 
               {/* Submit Brief Bar */}
-              <div className="p-6 rounded-2xl bg-linear-to-r from-emerald-950/80 via-slate-900 to-cyan-950/80 border border-[#06C755]/50 flex flex-col sm:flex-row items-center justify-between gap-5">
+              <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-emerald-300 flex flex-col sm:flex-row items-center justify-between gap-5">
                 <div>
-                  <p className="font-prompt text-xs text-white/70">
+                  <p className="font-prompt text-xs text-[#475569]">
                     แพ็กเกจที่เลือก:{" "}
-                    <strong className="text-white">
+                    <strong className="text-[#0F172A]">
                       [{selectedPkg.code}] {selectedPkg.name} ({selectedPkg.count} รูป)
                     </strong>
                   </p>
                   <div className="flex items-baseline gap-2 mt-1">
-                    <span className="font-prompt text-3xl sm:text-4xl font-black text-[#4ade80]">
+                    <span className="font-prompt text-3xl sm:text-4xl font-black text-[#059669]">
                       {selectedPkg.price}
                     </span>
-                    <span className="font-prompt text-xs text-white/60">
+                    <span className="font-prompt text-xs text-[#64748B]">
                       (ส่งบรีฟตรงเข้าเครื่องครูอ้น + ปั้นรูปต้นแบบให้ตรวจก่อนทำครบเซ็ต)
                     </span>
                   </div>
@@ -1798,7 +1796,7 @@ export function LineStickersView() {
                 <button
                   type="submit"
                   disabled={isSubmittingBrief}
-                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-linear-to-r from-[#06C755] to-emerald-500 hover:from-[#05b34c] hover:to-emerald-400 disabled:opacity-50 text-zinc-950 font-prompt font-black text-base flex items-center justify-center gap-2.5 shadow-[0_0_35px_rgba(6,199,85,0.45)] hover:scale-105 transition-all cursor-pointer shrink-0"
+                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] disabled:opacity-50 text-[#052E16] font-prompt font-black text-base flex items-center justify-center gap-2.5 shadow-sm hover:scale-[1.02] transition-all cursor-pointer shrink-0"
                 >
                   {isSubmittingBrief ? (
                     <>
@@ -1815,7 +1813,6 @@ export function LineStickersView() {
               </div>
             </form>
           )}
-        </div>
         </div>
 
         {/* ─── WHY CUSTOMERS LOVE THIS (3 VALUE PILLARS) ─── */}

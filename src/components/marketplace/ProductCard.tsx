@@ -53,9 +53,9 @@ export function ProductCard({ product }: ProductCardProps) {
 
   const isMusicBrand = brandTheme === "music";
   const hoverBorder = isMusicBrand 
-    ? "hover:border-amber-400 hover:shadow-[0_0_35px_rgba(245,158,11,0.25)]" 
-    : "hover:border-cyan-400 hover:shadow-[0_0_35px_rgba(6,182,212,0.25)]";
-  const hoverText = isMusicBrand ? "group-hover:text-amber-300" : "group-hover:text-cyan-300";
+    ? "hover:border-amber-400 hover:shadow-md" 
+    : "hover:border-[#2563EB]/50 hover:shadow-md";
+  const hoverText = isMusicBrand ? "group-hover:text-amber-700" : "group-hover:text-[#1D4ED8]";
 
   const priceStr = (product.price || "").trim().toLowerCase();
   const isFree =
@@ -154,12 +154,12 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div className={cn(
-      "glass-card flex flex-col h-full rounded-3xl border border-white/10 transition-all duration-300 relative overflow-hidden bg-slate-950/70 shadow-xl hover:bg-slate-900/90 group",
+      "flex flex-col h-full rounded-3xl border border-[#E2E8F0] transition-all duration-300 relative overflow-hidden bg-white shadow-sm hover:-translate-y-1 group",
       hoverBorder
     )}>
       
       {/* ── BESPOKE 3D HOLOGRAPHIC COVER ART / 3D DVD MOCKUP (Clickable to detail) ── */}
-      <Link href={detailHref} className="block relative w-full border-b border-white/10 overflow-hidden bg-gradient-to-br from-cyan-950/40 via-slate-950 to-indigo-950/40 flex flex-col justify-center cursor-pointer">
+      <Link href={detailHref} className="block relative w-full border-b border-[#E2E8F0] overflow-hidden bg-[#FAF8F5] flex flex-col justify-center cursor-pointer">
         <DvdCaseMockup
           code={coverTheme.code}
           title={product.title}
@@ -168,7 +168,7 @@ export function ProductCard({ product }: ProductCardProps) {
           glowColor={coverTheme.glowColor}
         />
         {product.image_url && (
-          <span className="absolute top-3 right-3 z-20 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-200 text-[11px] font-prompt font-bold backdrop-blur-md shadow-md">
+          <span className="absolute top-3 right-3 z-20 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/95 border border-[#BFDBFE] text-[#1D4ED8] text-[11px] font-prompt font-bold backdrop-blur-md shadow-xs">
             <Eye className="w-3.5 h-3.5" />
             <span>มีภาพหน้าจอจริง</span>
           </span>
@@ -190,7 +190,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <Link href={detailHref} className="block group/title cursor-pointer mb-2">
           <h3 className={cn(
-            "text-base sm:text-lg font-bold font-prompt text-white line-clamp-2 leading-snug transition-colors",
+            "text-base sm:text-lg font-bold font-prompt text-[#0F172A] line-clamp-2 leading-snug transition-colors",
             hoverText
           )}>
             {product.title}
@@ -198,14 +198,14 @@ export function ProductCard({ product }: ProductCardProps) {
         </Link>
 
         {parsedType && (
-          <div className="flex items-center gap-1.5 mb-2.5 text-xs font-prompt text-cyan-400">
+          <div className="flex items-center gap-1.5 mb-2.5 text-xs font-prompt text-[#0E7490] font-medium">
             <Tag className="w-3.5 h-3.5 shrink-0" />
             <span className="truncate">{parsedType}</span>
           </div>
         )}
 
         <Link href={detailHref} className="block flex-1 cursor-pointer mb-5">
-          <p className="text-xs font-prompt text-white/60 line-clamp-3 leading-relaxed hover:text-white/80 transition-colors">
+          <p className="text-xs font-prompt text-[#475569] line-clamp-3 leading-relaxed hover:text-[#0F172A] transition-colors">
             {rawDesc}
           </p>
         </Link>
@@ -213,7 +213,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {product.image_url && (
           <Link
             href={detailHref}
-            className="mb-4 w-full py-2 px-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/30 hover:border-cyan-400/60 text-cyan-300 font-prompt text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
+            className="mb-4 w-full py-2 px-3 rounded-xl bg-[#EFF6FF] hover:bg-[#DBEAFE] border border-[#BFDBFE] hover:border-[#93C5FD] text-[#1D4ED8] font-prompt text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
             <Eye className="w-3.5 h-3.5 shrink-0" />
             <span>ดูรายละเอียด &amp; ภาพหน้าจอจริง</span>
@@ -221,26 +221,26 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
 
         {/* --- CLEAN SINGLE-LINE PRICE & CTA FOOTER --- */}
-        <div className="mt-auto pt-4 border-t border-white/10 space-y-3">
+        <div className="mt-auto pt-4 border-t border-[#F1F5F9] space-y-3">
           
           {/* Price Row — Never wraps */}
           <div className="flex items-end justify-between gap-2">
             <div>
-              <div className="text-[11px] font-prompt text-white/50 font-medium whitespace-nowrap mb-0.5">
+              <div className="text-[11px] font-prompt text-[#64748B] font-medium whitespace-nowrap mb-0.5">
                 {isFree ? "🎁 ของขวัญพิเศษ" : "⚡ จ่ายครั้งเดียวตลอดชีพ"}
               </div>
               <div className="flex items-baseline gap-2 whitespace-nowrap">
                 <span className={cn(
                   "font-prompt text-2xl font-black tracking-tight whitespace-nowrap",
                   isFree 
-                    ? "text-emerald-400" 
-                    : "text-white"
+                    ? "text-[#059669]" 
+                    : "text-[#0F172A]"
                 )}>
                   {cleanPrice}
                 </span>
 
                 {!isFree && numericPrice > 0 && (
-                  <span className="font-prompt text-xs text-white/35 line-through whitespace-nowrap">
+                  <span className="font-prompt text-xs text-[#94A3B8] line-through whitespace-nowrap">
                     {originalAnchorPrice} ฿
                   </span>
                 )}
@@ -248,8 +248,8 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
 
             <div className="flex flex-col items-end gap-1 shrink-0">
-              <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-[11px] font-prompt text-emerald-300 flex items-center gap-1 font-semibold whitespace-nowrap">
-                <ShieldCheck className="w-3 h-3 text-emerald-400 shrink-0" />
+              <span className="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[11px] font-prompt text-emerald-700 flex items-center gap-1 font-semibold whitespace-nowrap">
+                <ShieldCheck className="w-3 h-3 text-emerald-600 shrink-0" />
                 <span>ไม่มีรายเดือน</span>
               </span>
             </div>
@@ -266,7 +266,7 @@ export function ProductCard({ product }: ProductCardProps) {
               data-line-price={`${cleanPrice} + ${vipPrice}`}
               data-line-code={coverTheme.code}
               title="คลิกเพื่อสั่งซื้อพร้อมบริการให้ครูอ้นติดตั้งให้พร้อมใช้ (VIP Setup)"
-              className="block text-[11px] font-prompt text-amber-300/90 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/25 hover:border-amber-400/50 rounded-lg py-1 px-2.5 text-center whitespace-nowrap truncate transition-all cursor-pointer"
+              className="block text-[11px] font-prompt font-semibold text-[#92400E] hover:text-[#78350F] bg-[#FEF9EF] hover:bg-[#FEF3C7] border border-[#FDE68A] hover:border-amber-400 rounded-lg py-1.5 px-2.5 text-center whitespace-nowrap truncate transition-all cursor-pointer"
             >
               🛠️ ออปชันครูอ้นติดตั้งให้พร้อมใช้ ({vipPrice})
             </a>
@@ -283,31 +283,25 @@ export function ProductCard({ product }: ProductCardProps) {
             data-line-code={coverTheme.code}
             title="คลิกเพื่อสั่งซื้อผ่าน LINE OA ทันที"
             className={cn(
-              "w-full h-11 px-4 rounded-xl font-prompt text-sm font-extrabold flex items-center justify-between whitespace-nowrap transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.98] cursor-pointer relative overflow-hidden",
+              "w-full h-11 px-4 rounded-xl font-prompt text-sm font-extrabold flex items-center justify-between whitespace-nowrap transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.98] cursor-pointer relative overflow-hidden shadow-xs",
               isFree 
-                ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.25)] group-hover:shadow-[0_0_30px_rgba(16,185,129,0.45)]" 
-                : "bg-linear-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:via-[#049b42] hover:to-[#05b34c] text-white shadow-[0_0_20px_rgba(6,199,85,0.35)] group-hover:shadow-[0_0_32px_rgba(6,199,85,0.55)] border border-[#06C755]/30"
+                ? "bg-[#06C755] hover:bg-[#05b34c] text-[#052E16]" 
+                : "bg-[#06C755] hover:bg-[#05b34c] text-[#052E16]"
             )}
           >
-            {/* Subtle Light Sweep */}
-            <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/45 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out pointer-events-none" />
-
             <div className="flex items-center gap-2 relative z-10 whitespace-nowrap">
               {isFree ? (
-                <Gift className="w-4 h-4 text-zinc-950 shrink-0" />
+                <Gift className="w-4 h-4 text-[#052E16] shrink-0" />
               ) : (
-                <ShoppingCart className="w-4 h-4 text-white shrink-0" />
+                <ShoppingCart className="w-4 h-4 text-[#052E16] shrink-0" />
               )}
               <span className="tracking-tight">
                 {isFree ? "รับระบบและโค้ดฟรี (LINE)" : "สั่งซื้อรับระบบทันที (LINE)"}
               </span>
             </div>
 
-            <div className={cn(
-              "w-6 h-6 rounded-lg flex items-center justify-center relative z-10 shrink-0 transition-all",
-              isFree ? "bg-zinc-950/12 group-hover:bg-zinc-950/20" : "bg-black/20 group-hover:bg-black/30"
-            )}>
-              <ArrowRight className={cn("w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5", isFree ? "text-zinc-950" : "text-white")} />
+            <div className="w-6 h-6 rounded-lg bg-[#052E16]/12 group-hover:bg-[#052E16]/20 flex items-center justify-center relative z-10 shrink-0 transition-all">
+              <ArrowRight className="w-3.5 h-3.5 text-[#052E16] transition-transform group-hover:translate-x-0.5" />
             </div>
           </a>
 

@@ -97,10 +97,10 @@ export function getSetupTierInfo(tier: SetupTier): SetupTierInfo {
         filterLabel: "🟢 ก๊อปปี้ใช้ได้ทันที (Zero-Tech)",
         badgeText: "🟢 พร้อมใช้ทันที (ไม่ต้องแก้โค้ด)",
         badgeStyle:
-          "bg-emerald-500/15 text-emerald-300 border-emerald-500/40 shadow-[0_0_12px_rgba(16,185,129,0.35)]",
-        glowColor: "rgba(16,185,129,0.35)",
-        textColor: "text-emerald-400",
-        borderColor: "border-emerald-500/40",
+          "bg-emerald-50 text-emerald-700 border-emerald-200",
+        glowColor: "rgba(16,185,129,0.2)",
+        textColor: "text-emerald-700",
+        borderColor: "border-emerald-200",
       };
     case "vip-enterprise":
       return {
@@ -109,10 +109,10 @@ export function getSetupTierInfo(tier: SetupTier): SetupTierInfo {
         filterLabel: "🔴 ระบบระดับโรงเรียน / VIP",
         badgeText: "🔴 ระบบใหญ่ / บริการติดตั้ง VIP",
         badgeStyle:
-          "bg-purple-500/15 text-purple-300 border-purple-500/40 shadow-[0_0_12px_rgba(168,85,247,0.35)]",
-        glowColor: "rgba(168,85,247,0.35)",
-        textColor: "text-purple-400",
-        borderColor: "border-purple-500/40",
+          "bg-purple-50 text-purple-700 border-purple-200",
+        glowColor: "rgba(168,85,247,0.2)",
+        textColor: "text-purple-700",
+        borderColor: "border-purple-200",
       };
     case "easy-setup":
     default:
@@ -122,10 +122,10 @@ export function getSetupTierInfo(tier: SetupTier): SetupTierInfo {
         filterLabel: "🟡 ตั้งค่าใน 3 นาที",
         badgeText: "🟡 ตั้งค่าใน 3 นาที (มีเมนูไทย)",
         badgeStyle:
-          "bg-amber-500/15 text-amber-300 border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.3)]",
-        glowColor: "rgba(245,158,11,0.3)",
-        textColor: "text-amber-400",
-        borderColor: "border-amber-500/40",
+          "bg-amber-50 text-amber-800 border-amber-200",
+        glowColor: "rgba(245,158,11,0.2)",
+        textColor: "text-amber-700",
+        borderColor: "border-amber-200",
       };
   }
 }

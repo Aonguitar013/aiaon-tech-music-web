@@ -428,10 +428,10 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
           </Link>
         </motion.div>
 
-        {/* --- ZERO-TECH NO-BRAINER BUNDLES & STUDENT VAULT (Dark Showcase Tray) --- */}
-        <div className="rounded-[2rem] bg-[#0B1220] text-white p-4 sm:p-8 mb-10 border border-[#E2E8F0] shadow-sm space-y-6">
-          <NoBrainerBundles className="py-2 sm:py-4" />
-          <StudentVaultPromotionSection className="py-2" />
+        {/* --- ZERO-TECH NO-BRAINER BUNDLES & STUDENT VAULT --- */}
+        <div className="mb-10 space-y-6">
+          <NoBrainerBundles className="py-4 sm:py-6" />
+          <StudentVaultPromotionSection className="py-4" />
         </div>
 
         {/* --- SETUP DIFFICULTY TIER FILTER --- */}
@@ -537,8 +537,8 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
           </div>
         </motion.div>
 
-        {/* Product Cards Grid (Dark Studio Tray for rich product cards) */}
-        <div className="rounded-[2rem] bg-[#0B1220] text-white p-5 sm:p-8 border border-[#E2E8F0] shadow-sm">
+        {/* Product Cards Grid */}
+        <div>
           <motion.div
             layout
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
@@ -548,9 +548,9 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
                 <ProductCard key={product.id || index} product={product} index={index} />
               ))
             ) : (
-              <div className="col-span-full flex flex-col items-center justify-center py-20 text-white/60">
+              <div className="col-span-full flex flex-col items-center justify-center py-20 text-[#64748B] bg-white rounded-3xl border border-[#E2E8F0]">
                 <ShoppingBag className="w-16 h-16 mb-4 opacity-30" />
-                <p className="font-prompt text-lg">ไม่พบระบบที่ตรงกับคำค้นหา</p>
+                <p className="font-prompt text-lg text-[#0F172A] font-semibold">ไม่พบระบบที่ตรงกับคำค้นหา</p>
                 <button
                   onClick={() => { setSearchTerm(""); setFilterCategory("All"); setSetupTierFilter("all"); }}
                   className="mt-4 px-5 py-2.5 bg-[#2563EB] text-white rounded-xl hover:bg-[#1D4ED8] font-prompt text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-sm"

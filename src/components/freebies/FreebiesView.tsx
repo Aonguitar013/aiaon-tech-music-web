@@ -781,7 +781,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
           </AnimatePresence>
 
           {/* ── Permanent Bottom Impulse Upgrade Section ───── */}
-          <div className="mt-16 sm:mt-24 rounded-[2rem] bg-[#0B1220] text-white p-4 sm:p-8"><FreebieUpsellSection className="" /></div>
+          <div className="mt-16 sm:mt-24"><FreebieUpsellSection className="" /></div>
 
           {/* ── CTA for LINE Community ─────────────────────── */}
           <motion.div

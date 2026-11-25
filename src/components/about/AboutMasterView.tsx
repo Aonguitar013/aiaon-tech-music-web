@@ -334,7 +334,7 @@ const CERTIFICATES: Certificate[] = [
     credentialId: "WF5PYDSIAA55",
     issueDate: "Apr 13, 2026",
     category: "AI & Machine Learning",
-    categoryColor: "text-blue-400",
+    categoryColor: "text-[#1D4ED8] bg-[#EFF6FF]/95 border-[#BFDBFE]",
     verifyUrl: "https://coursera.org/verify/WF5PYDSIAA55",
   },
   {
@@ -345,7 +345,7 @@ const CERTIFICATES: Certificate[] = [
     credentialId: "e73e41",
     issueDate: "June 13, 2026",
     category: "AI & Design",
-    categoryColor: "text-purple-400",
+    categoryColor: "text-[#6D28D9] bg-[#F5F3FF]/95 border-[#DDD6FE]",
   },
   {
     id: "cert-workspace-ai",
@@ -355,7 +355,7 @@ const CERTIFICATES: Certificate[] = [
     credentialId: "CERT202606130001",
     issueDate: "June 13, 2026",
     category: "AI & Innovation",
-    categoryColor: "text-cyan-400",
+    categoryColor: "text-[#0E7490] bg-[#ECFEFF]/95 border-[#A5F3FC]",
     verifyUrl: "https://www.workspace.in.th",
   },
 ];
@@ -512,40 +512,40 @@ export function AboutMasterView() {
            NAV PILLS (Quick Scroll Menu)
         ============================================================ */}
         <div className="w-full flex justify-center sticky top-20 z-40">
-          <nav className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-black/80 backdrop-blur-xl border border-white/15 shadow-[0_10px_35px_rgba(0,0,0,0.6)] overflow-x-auto max-w-full no-scrollbar">
+          <nav className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-white/95 backdrop-blur-xl border border-[#E2E8F0] shadow-md overflow-x-auto max-w-full no-scrollbar">
             <a
               href="#identity"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-white/80 hover:text-white hover:bg-white/10 transition-all whitespace-nowrap"
+              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#334155] hover:text-[#0F172A] hover:bg-[#FAF8F5] transition-all whitespace-nowrap"
             >
               👤 ประวัติครูอ้น
             </a>
             <a
               href="#channels"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-cyan-300 hover:text-white hover:bg-cyan-500/20 transition-all whitespace-nowrap"
+              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#0E7490] hover:bg-cyan-50 transition-all whitespace-nowrap"
             >
               📲 7 ช่องทางหลัก
             </a>
             <a
               href="#stores"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-amber-300 hover:text-white hover:bg-amber-500/20 transition-all whitespace-nowrap"
+              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#B45309] hover:bg-amber-50 transition-all whitespace-nowrap"
             >
               🛒 3 หน้าร้านไอที
             </a>
             <a
               href="#gear"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-teal-300 hover:text-white hover:bg-teal-500/20 transition-all whitespace-nowrap"
+              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#0F766E] hover:bg-teal-50 transition-all whitespace-nowrap"
             >
               🎧 โต๊ะทำงาน &amp; อุปกรณ์
             </a>
             <a
               href="#certificates"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-purple-300 hover:text-white hover:bg-purple-500/20 transition-all whitespace-nowrap"
+              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#6D28D9] hover:bg-purple-50 transition-all whitespace-nowrap"
             >
               🏆 ใบเซอร์ AI
             </a>
             <a
               href="#showcase"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-blue-300 hover:text-white hover:bg-blue-500/20 transition-all whitespace-nowrap"
+              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#1D4ED8] hover:bg-blue-50 transition-all whitespace-nowrap"
             >
               ⏱️ เครื่องคำนวณเวลา
             </a>
@@ -977,7 +977,7 @@ export function AboutMasterView() {
 
                   <div className="absolute top-3 left-3">
                     <span
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-prompt font-semibold backdrop-blur-md bg-black/60 border border-white/15 ${cert.categoryColor}`}
+                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-prompt font-semibold backdrop-blur-md border shadow-xs ${cert.categoryColor}`}
                     >
                       <BadgeCheck className="w-3 h-3" />
                       {cert.category}
@@ -1340,7 +1340,7 @@ export function AboutMasterView() {
 
               <div className="w-full max-w-3xl text-center px-4 space-y-3">
                 <span
-                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-prompt font-semibold backdrop-blur-md bg-white/5 border border-white/10 ${activeCert.categoryColor}`}
+                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-prompt font-semibold border shadow-xs ${activeCert.categoryColor}`}
                 >
                   <BadgeCheck className="w-3.5 h-3.5" />
                   {activeCert.category}
