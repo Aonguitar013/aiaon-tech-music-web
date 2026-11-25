@@ -124,7 +124,7 @@ export default function RootLayout({
               ============================================================ */}
 
               {/* Animated grid background (full viewport, fixed) */}
-              <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+              <div data-bg-grid="" className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
                 <MouseGlowGrid />
 
                 {/* Global Ambient Lights — gently animated */}

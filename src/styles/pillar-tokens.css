@@ -219,3 +219,12 @@
   color: #FFFFFF;
   overflow-x: clip;
 }
+
+/* Light-shell pages: page canvas follows warm paper so gaps around the shell never show the dark body */
+body:has([data-aiaon-shell]:not([data-surface="dark"])) {
+  background-color: #FAF8F5;
+}
+
+body:has([data-aiaon-shell]:not([data-surface="dark"])) [data-bg-grid] {
+  display: none;
+}

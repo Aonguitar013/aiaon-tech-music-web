@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
@@ -921,25 +922,24 @@ export function AboutMasterView() {
           </div>
         </section>
 
-        <div className="rounded-[2rem] bg-[#0B1220] text-white p-4 sm:p-8 space-y-24">
         {/* ============================================================
            SECTION 5: VERIFIED CERTIFICATIONS & ACHIEVEMENTS
         ============================================================ */}
         <section id="certificates" className="pt-6">
           <div className="text-center mb-12 px-4">
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-amber-500/20 bg-amber-500/5 text-amber-400 text-xs sm:text-sm font-prompt font-medium mb-4">
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-amber-300 bg-amber-50 text-[#B45309] text-xs sm:text-sm font-prompt font-medium mb-4">
               <Award className="w-4 h-4" />
               ความสำเร็จและใบประกาศนียบัตร
             </span>
 
-            <h2 className="font-prompt text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight text-white">
+            <h2 className="font-prompt text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#0F172A]">
               Certificates &amp;{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-purple-400 to-pink-400">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-[#B45309] via-[#7C3AED] to-[#BE185D]">
                 AI Credentials
               </span>
             </h2>
 
-            <p className="text-white/60 max-w-xl mx-auto text-sm sm:text-base font-prompt font-light leading-relaxed">
+            <p className="text-[#64748B] max-w-xl mx-auto text-sm sm:text-base font-prompt font-light leading-relaxed">
               ใบรับรองความเชี่ยวชาญด้าน AI และนวัตกรรมดิจิทัลที่ผ่านการเรียนรู้และทดสอบจริง
             </p>
           </div>
@@ -956,10 +956,10 @@ export function AboutMasterView() {
                 key={cert.id}
                 variants={cardVariants}
                 onClick={() => setSelectedCertIndex(index)}
-                className="group relative rounded-3xl border border-white/10 bg-white/3 backdrop-blur-sm overflow-hidden cursor-pointer
+                className="group relative rounded-3xl border border-[#E2E8F0] bg-white backdrop-blur-sm overflow-hidden cursor-pointer
                            transition-all duration-300 ease-out hover:border-purple-500/40 hover:shadow-[0_8px_40px_rgba(168,85,247,0.2)] hover:-translate-y-1 flex flex-col justify-between"
               >
-                <div className="relative w-full aspect-[16/9] overflow-hidden bg-white/5">
+                <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#FAF8F5]">
                   <Image
                     src={cert.imageSrc}
                     alt={cert.title}
@@ -987,23 +987,23 @@ export function AboutMasterView() {
 
                 <div className="p-5 space-y-3 relative z-10 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-prompt text-base font-semibold text-white leading-snug group-hover:text-purple-200 transition-colors line-clamp-2">
+                    <h3 className="font-prompt text-base font-semibold text-[#0F172A] leading-snug group-hover:text-[#6D28D9] transition-colors line-clamp-2">
                       {cert.title}
                     </h3>
-                    <p className="text-xs sm:text-sm font-prompt text-white/55 font-medium mt-1">
+                    <p className="text-xs sm:text-sm font-prompt text-[#64748B] font-medium mt-1">
                       {cert.issuer}
                     </p>
                   </div>
 
-                  <div className="border-t border-white/10 pt-3 space-y-1.5 text-xs font-prompt text-white/50">
+                  <div className="border-t border-[#E2E8F0] pt-3 space-y-1.5 text-xs font-prompt text-[#64748B]">
                     <div className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-amber-400/80 shrink-0" />
+                      <Calendar className="w-3.5 h-3.5 text-[#B45309] shrink-0" />
                       <span>ออกเมื่อ: {cert.issueDate}</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <Hash className="w-3.5 h-3.5 text-purple-400/80 shrink-0" />
+                      <Hash className="w-3.5 h-3.5 text-[#6D28D9] shrink-0" />
                       <span>ID: </span>
-                      <span className="text-purple-300 font-mono font-semibold">{cert.credentialId}</span>
+                      <span className="text-[#6D28D9] font-mono font-semibold">{cert.credentialId}</span>
                     </div>
                     {cert.verifyUrl && (
                       <a
@@ -1011,7 +1011,7 @@ export function AboutMasterView() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1 text-[11px] font-prompt text-cyan-400 hover:text-cyan-300 pt-1"
+                        className="inline-flex items-center gap-1 text-[11px] font-prompt text-[#0E7490] hover:text-[#155E75] pt-1"
                       >
                         <ExternalLink className="w-3 h-3" />
                         <span>ตรวจสอบใบรับรองออนไลน์</span>
@@ -1029,13 +1029,13 @@ export function AboutMasterView() {
         ============================================================ */}
         <section id="showcase" className="pt-6">
           <div className="text-center mb-12 px-4">
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full glass-card border-blue-500/20 bg-blue-500/5 text-blue-400 text-xs sm:text-sm font-prompt font-medium mb-4">
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white shadow-sm border-blue-200 bg-blue-50 text-[#1D4ED8] text-xs sm:text-sm font-prompt font-medium mb-4">
               <Cpu className="w-4 h-4" /> SMART SCHOOL AUTOMATION
             </span>
-            <h2 className="font-prompt text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight text-white">
-              นวัตกรรมลดภาระงานครู <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-400 to-teal-400">เห็นภาพจริงใน 1 นาที</span>
+            <h2 className="font-prompt text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#0F172A]">
+              นวัตกรรมลดภาระงานครู <span className="text-transparent bg-clip-text bg-linear-to-r from-[#1D4ED8] via-[#0E7490] to-[#0F766E]">เห็นภาพจริงใน 1 นาที</span>
             </h2>
-            <p className="text-white/60 max-w-2xl mx-auto text-sm sm:text-base font-prompt font-light leading-relaxed">
+            <p className="text-[#64748B] max-w-2xl mx-auto text-sm sm:text-base font-prompt font-light leading-relaxed">
               ทดลองเลื่อนสไลเดอร์คำนวณชั่วโมงที่ระบบช่วยซื้อเวลาชีวิตกลับคืน และกดสแกนการ์ดเพื่อดูการแจ้งเตือนจำลองด้านล่างได้เลย
             </p>
           </div>
@@ -1043,20 +1043,20 @@ export function AboutMasterView() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             
             {/* Left: ROI Time Calculator */}
-            <div className="glass-card rounded-3xl border border-white/10 p-6 sm:p-8 flex flex-col justify-between bg-white/3 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none" />
+            <div className="bg-white shadow-sm rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 flex flex-col justify-between bg-white relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-blue-50 blur-[80px] rounded-full pointer-events-none" />
 
               <div>
-                <h3 className="font-prompt text-xl sm:text-2xl font-bold text-white mb-6 flex items-center gap-2.5">
-                  <Clock className="w-5 h-5 text-blue-400" />
+                <h3 className="font-prompt text-xl sm:text-2xl font-bold text-[#0F172A] mb-6 flex items-center gap-2.5">
+                  <Clock className="w-5 h-5 text-[#1D4ED8]" />
                   <span>เครื่องคำนวณเวลาที่ประหยัดได้</span>
                 </h3>
 
                 <div className="space-y-6">
                   <div>
                     <div className="flex justify-between items-center mb-2 font-prompt text-sm">
-                      <span className="text-white/75">จำนวนนักเรียนในห้องเรียน</span>
-                      <span className="font-bold text-cyan-400">{students} คน</span>
+                      <span className="text-[#475569]">จำนวนนักเรียนในห้องเรียน</span>
+                      <span className="font-bold text-[#0E7490]">{students} คน</span>
                     </div>
                     <input
                       type="range"
@@ -1064,14 +1064,14 @@ export function AboutMasterView() {
                       max="100"
                       value={students}
                       onChange={(e) => setStudents(Number(e.target.value))}
-                      className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-400"
                     />
                   </div>
 
                   <div>
                     <div className="flex justify-between items-center mb-2 font-prompt text-sm">
-                      <span className="text-white/75">เวลาที่ใช้เช็คชื่อและแจ้งเตือนแบบเดิม (ต่อคน)</span>
-                      <span className="font-bold text-cyan-400">{timePerStudent} วินาที</span>
+                      <span className="text-[#475569]">เวลาที่ใช้เช็คชื่อและแจ้งเตือนแบบเดิม (ต่อคน)</span>
+                      <span className="font-bold text-[#0E7490]">{timePerStudent} วินาที</span>
                     </div>
                     <input
                       type="range"
@@ -1079,14 +1079,14 @@ export function AboutMasterView() {
                       max="45"
                       value={timePerStudent}
                       onChange={(e) => setTimePerStudent(Number(e.target.value))}
-                      className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-400"
                     />
                   </div>
 
                   <div>
                     <div className="flex justify-between items-center mb-2 font-prompt text-sm">
-                      <span className="text-white/75">เวลาทำรายงานฝ่ายวิชาการต่อเทอม</span>
-                      <span className="font-bold text-cyan-400">{reportHours} ชั่วโมง</span>
+                      <span className="text-[#475569]">เวลาทำรายงานฝ่ายวิชาการต่อเทอม</span>
+                      <span className="font-bold text-[#0E7490]">{reportHours} ชั่วโมง</span>
                     </div>
                     <input
                       type="range"
@@ -1094,33 +1094,33 @@ export function AboutMasterView() {
                       max="30"
                       value={reportHours}
                       onChange={(e) => setReportHours(Number(e.target.value))}
-                      className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-400"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Result display */}
-              <div className="mt-8 pt-6 border-t border-white/10 bg-blue-500/10 rounded-2xl p-5 border border-blue-500/20">
+              <div className="mt-8 pt-6 border-t border-[#E2E8F0] bg-blue-50 rounded-2xl p-5 border border-blue-200">
                 <div className="grid grid-cols-2 gap-4 text-center">
-                  <div className="border-r border-white/10 pr-2">
-                    <span className="text-[11px] uppercase font-prompt tracking-wider text-white/50 block mb-1">
+                  <div className="border-r border-[#E2E8F0] pr-2">
+                    <span className="text-[11px] uppercase font-prompt tracking-wider text-[#64748B] block mb-1">
                       ประหยัดได้ต่อภาคเรียน
                     </span>
-                    <span className="text-3xl sm:text-4xl font-extrabold font-prompt text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-400">
+                    <span className="text-3xl sm:text-4xl font-extrabold font-prompt text-transparent bg-clip-text bg-linear-to-r from-[#1D4ED8] to-[#0E7490]">
                       {termTimeSavedHours} ชม.
                     </span>
                   </div>
                   <div className="pl-2">
-                    <span className="text-[11px] uppercase font-prompt tracking-wider text-white/50 block mb-1">
+                    <span className="text-[11px] uppercase font-prompt tracking-wider text-[#64748B] block mb-1">
                       คืนเวลานอนพักผ่อน
                     </span>
-                    <span className="text-3xl sm:text-4xl font-extrabold font-prompt text-transparent bg-clip-text bg-linear-to-r from-teal-400 to-emerald-400">
+                    <span className="text-3xl sm:text-4xl font-extrabold font-prompt text-transparent bg-clip-text bg-linear-to-r from-[#0F766E] to-[#047857]">
                       ~ {equivalentSleepDays} วัน
                     </span>
                   </div>
                 </div>
-                <p className="text-xs text-white/60 font-prompt text-center mt-4 leading-relaxed">
+                <p className="text-xs text-[#64748B] font-prompt text-center mt-4 leading-relaxed">
                   * คำนวณจากการเปิดเรียน 100 วันต่อหนึ่งภาคเรียน ยิ่งมีหลายห้องเรียน หรือสอนหลายระดับชั้น เวลาที่ประหยัดได้จะเพิ่มขึ้นเป็นทวีคูณ!
                 </p>
               </div>
@@ -1128,15 +1128,15 @@ export function AboutMasterView() {
             </div>
 
             {/* Right: Interactive Phone Preview */}
-            <div className="glass-card rounded-3xl border border-white/10 p-6 sm:p-8 flex flex-col justify-between items-center bg-white/3 relative overflow-hidden">
+            <div className="bg-white shadow-sm rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 flex flex-col justify-between items-center bg-white relative overflow-hidden">
               <div className="absolute top-0 left-0 w-48 h-48 bg-cyan-500/10 blur-[80px] rounded-full pointer-events-none" />
 
               <div className="w-full text-center lg:text-left mb-6">
-                <h3 className="font-prompt text-xl sm:text-2xl font-bold text-white mb-1.5 flex items-center justify-center lg:justify-start gap-2.5">
-                  <Smartphone className="w-5 h-5 text-cyan-400" />
+                <h3 className="font-prompt text-xl sm:text-2xl font-bold text-[#0F172A] mb-1.5 flex items-center justify-center lg:justify-start gap-2.5">
+                  <Smartphone className="w-5 h-5 text-[#0E7490]" />
                   <span>เครื่องจำลองแจ้งเตือน LINE</span>
                 </h3>
-                <p className="text-xs sm:text-sm font-prompt text-white/60">
+                <p className="text-xs sm:text-sm font-prompt text-[#64748B]">
                   จำลองการส่งข้อมูลเช็คชื่อเข้า LINE ของผู้ปกครองแบบ Real-time
                 </p>
               </div>
@@ -1232,7 +1232,7 @@ export function AboutMasterView() {
               </div>
 
               <div className="mt-4 text-center">
-                <span className="text-xs text-white/45 font-prompt">
+                <span className="text-xs text-[#64748B] font-prompt">
                   * ลองคลิกปุ่มสีฟ้าจำลองด้านบนเพื่อทดสอบการยิงแจ้งเตือน LINE
                 </span>
               </div>
@@ -1245,18 +1245,18 @@ export function AboutMasterView() {
            SECTION 7: SPEAKER & CONSULTATION BOOKING BANNER
         ============================================================ */}
         <section className="pt-4">
-          <div className="rounded-3xl p-8 sm:p-12 relative overflow-hidden bg-linear-to-r from-blue-900/40 via-purple-900/40 to-teal-900/40 border border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.15)] text-center">
+          <div className="rounded-3xl p-8 sm:p-12 relative overflow-hidden bg-white border border-cyan-300 shadow-sm text-center">
             <div className="max-w-3xl mx-auto space-y-5">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-bold tracking-wide">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-300 text-[#0E7490] text-xs font-bold tracking-wide">
+                <Sparkles className="w-4 h-4 text-[#0E7490]" />
                 <span>SPEAKER &amp; CONSULTING • เชิญเป็นวิทยากร &amp; ปรึกษางานระบบ</span>
               </span>
 
-              <h2 className="font-prompt text-2xl sm:text-4xl font-extrabold text-white">
+              <h2 className="font-prompt text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
                 พร้อมยกระดับองค์กรและการศึกษาด้วยพลัง AI แล้วหรือยัง?
               </h2>
 
-              <p className="font-prompt text-white/75 text-sm sm:text-base leading-relaxed">
+              <p className="font-prompt text-[#475569] text-sm sm:text-base leading-relaxed">
                 ครูอ้นยินดีรับเชิญเป็นวิทยากรบรรยาย อบรมเชิงปฏิบัติการ (Workshop) การประยุกต์ใช้ AI ในโรงเรียน, การสร้างระบบ Automation ด้วย Google Apps Script หรือการวางสถาปัตยกรรมระบบสำหรับธุรกิจ SME
               </p>
 
@@ -1276,13 +1276,13 @@ export function AboutMasterView() {
             </div>
           </div>
         </section>
-        </div>
 
       </div>
 
       {/* ============================================================
          CERTIFICATE LIGHTBOX MODAL
       ============================================================ */}
+      {typeof document !== "undefined" && createPortal(
       <AnimatePresence>
         {activeCert && (
           <motion.div
@@ -1290,7 +1290,7 @@ export function AboutMasterView() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleCloseCert}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md select-none"
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md select-none"
           >
             <button
               onClick={handleCloseCert}
@@ -1383,7 +1383,9 @@ export function AboutMasterView() {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+      document.body
+      )}
     </div>
   );
 }
