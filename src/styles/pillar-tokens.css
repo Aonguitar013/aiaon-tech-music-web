@@ -1,0 +1,213 @@
+/* ============================================================================
+   AiAon Tech — Official Master Brand Bible V2.0 (Warm Premium Editorial)
+   Scoped to [data-aiaon-shell] and [data-edu-theme] so existing utility/dark
+   pages remain 100% unaffected until opted-in via <PillarThemeWrapper />.
+   ============================================================================ */
+
+[data-aiaon-shell] {
+  color-scheme: light;
+  --aiaon-canvas: #FAF8F5;
+  --aiaon-alternate-canvas: #FFFDF9;
+  --aiaon-card: #FFFFFF;
+  --aiaon-heading: #0F172A;
+  --aiaon-body: #1E293B;
+  --aiaon-muted: #475569;
+  --aiaon-border: #E2E8F0;
+  --aiaon-shadow: 0 8px 22px rgba(48, 39, 24, 0.035);
+  --aiaon-focus: #2563EB;
+  --aiaon-radius: 24px;
+  --aiaon-button-radius: 12px;
+  --aiaon-thumbnail-radius: 16px;
+  --aiaon-container-max: 1240px;
+  --aiaon-card-gap: 18px;
+  --aiaon-transition: 280ms;
+  background-color: var(--aiaon-canvas);
+  color: var(--aiaon-body);
+}
+
+/* Layer 2: 4-Pillar Chromatic Tokens (15% Differentiation) */
+[data-aiaon-shell] [data-pillar="tech"],
+[data-aiaon-shell][data-pillar="tech"] {
+  --pillar-accent: #2563EB;
+  --pillar-secondary: #22D3EE;
+  --pillar-text: #1D4ED8;
+  --pillar-tint: #EFF6FF;
+  --pillar-border: #BFDBFE;
+}
+
+[data-aiaon-shell] [data-pillar="edu"],
+[data-aiaon-shell][data-pillar="edu"] {
+  --pillar-canvas: #FFFDF7;
+  --pillar-accent: #F59E0B;
+  --pillar-secondary: #E11D48;
+  --pillar-text: #92400E;
+  --pillar-tint: #FEF9EF;
+  --pillar-border: #FDE68A;
+}
+
+[data-aiaon-shell] [data-pillar="audio"],
+[data-aiaon-shell][data-pillar="audio"] {
+  --pillar-accent: #EA580C;
+  --pillar-secondary: #0D9488;
+  --pillar-text: #0F766E;
+  --pillar-tint: #F0FDFA;
+  --pillar-border: #99F6E4;
+}
+
+[data-aiaon-shell] [data-pillar="studio"],
+[data-aiaon-shell][data-pillar="studio"] {
+  --pillar-accent: #7C3AED;
+  --pillar-secondary: #DB2777;
+  --pillar-text: #6D28D9;
+  --pillar-tint: #FAF5FF;
+  --pillar-border: #DDD6FE;
+}
+
+[data-aiaon-shell] [data-pillar="about"],
+[data-aiaon-shell][data-pillar="about"] {
+  --pillar-accent: #D97706;
+  --pillar-secondary: #475569;
+  --pillar-text: #92400E;
+  --pillar-tint: #FEF3C7;
+  --pillar-border: #FDE68A;
+}
+
+/* Editorial Cards & WCAG AA Accessible Buttons */
+[data-aiaon-shell] .aiaon-card {
+  background: var(--aiaon-card);
+  border: 1px solid var(--aiaon-border);
+  border-radius: var(--aiaon-radius);
+  box-shadow: var(--aiaon-shadow);
+  min-width: 0;
+}
+
+[data-aiaon-shell] .aiaon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.625rem 1rem;
+  border-radius: var(--aiaon-button-radius);
+  font-weight: 600;
+  background: var(--btn-bg, #0F172A);
+  color: var(--btn-fg, #FFFFFF);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+[data-aiaon-shell] .aiaon-btn:hover {
+  transform: translateY(-1px);
+}
+
+[data-aiaon-shell] :focus-visible {
+  outline: 3px solid var(--aiaon-focus, #2563EB);
+  outline-offset: 3px;
+}
+
+/* WCAG AA Verified Semantic Button Tokens (19 Pairs) */
+[data-aiaon-shell] .aiaon-btn[data-button="master"]        { --btn-bg: #0F172A; --btn-fg: #FFFFFF; }
+[data-aiaon-shell] .aiaon-btn[data-button="freebies"]      { --btn-bg: #FEF3C7; --btn-fg: #78350F; }
+[data-aiaon-shell] .aiaon-btn[data-button="line"]          { --btn-bg: #06C755; --btn-fg: #052E16; }
+[data-aiaon-shell] .aiaon-btn[data-button="lineWhite"]     { --btn-bg: #007A36; --btn-fg: #FFFFFF; }
+[data-aiaon-shell] .aiaon-btn[data-button="teal"]          { --btn-bg: #0D9488; --btn-fg: #020617; }
+[data-aiaon-shell] .aiaon-btn[data-button="tealWhite"]     { --btn-bg: #0F766E; --btn-fg: #FFFFFF; }
+[data-aiaon-shell] .aiaon-btn[data-button="class"]         { --btn-bg: #0369A1; --btn-fg: #FFFFFF; }
+[data-aiaon-shell] .aiaon-btn[data-button="pillar-tech"]   { --btn-bg: #1D4ED8; --btn-fg: #FFFFFF; }
+[data-aiaon-shell] .aiaon-btn[data-button="pillar-edu"]    { --btn-bg: #92400E; --btn-fg: #FFFFFF; }
+[data-aiaon-shell] .aiaon-btn[data-button="pillar-audio"]  { --btn-bg: #0F766E; --btn-fg: #FFFFFF; }
+[data-aiaon-shell] .aiaon-btn[data-button="pillar-studio"] { --btn-bg: #6D28D9; --btn-fg: #FFFFFF; }
+[data-aiaon-shell] .aiaon-btn[data-button="pillar-about"]  { --btn-bg: #92400E; --btn-fg: #FFFFFF; }
+
+/* Optional Dark Mode Utility Scope for App Dashboards / Developer Tools */
+[data-aiaon-app][data-theme="dark"] {
+  color-scheme: dark;
+  --aiaon-canvas: #0B1120;
+  --aiaon-card: #0F172A;
+  --aiaon-heading: #F8FAFC;
+  --aiaon-body: #E2E8F0;
+  --aiaon-muted: #CBD5E1;
+  --aiaon-border: #475569;
+  background-color: var(--aiaon-canvas);
+  color: var(--aiaon-body);
+}
+
+/* iAon Edu-Verse v1.5.0 Nested World Tokens (supports both ef01 & EDU-EF01) */
+[data-edu-theme] {
+  color-scheme: light;
+  --edu-canvas: #FFFDF7;
+  --edu-section: #FEF9EF;
+  --edu-surface: #FFFFFF;
+  --edu-heading: #0F172A;
+  --edu-body: #1E293B;
+  --edu-muted: #475569;
+  --edu-focus: #0369A1;
+  --edu-line-bg: #06C755;
+  --edu-line-fg: #052E16;
+  --edu-line-white-bg: #007A36;
+  --edu-line-white-fg: #FFFFFF;
+  --edu-teal-bg: #0D9488;
+  --edu-teal-fg: #020617;
+  --edu-teal-white-bg: #0F766E;
+  --edu-teal-white-fg: #FFFFFF;
+  --edu-class-bg: #0369A1;
+  --edu-class-fg: #FFFFFF;
+}
+
+[data-edu-theme] :is([data-edu-world="EDU-EF01"], [data-edu-world="ef01"]) {
+  --edu-world-accent: #F59E0B;
+  --edu-world-surface: #FEF9EF;
+  --edu-world-border: #FDE68A;
+  --edu-world-button-bg: #FBBF24;
+  --edu-world-button-fg: #020617;
+}
+
+[data-edu-theme] :is([data-edu-world="EDU-RT01"], [data-edu-world="rt01"]) {
+  --edu-world-accent: #E11D48;
+  --edu-world-surface: #FFF5F5;
+  --edu-world-border: #FECDD3;
+  --edu-world-button-bg: #E11D48;
+  --edu-world-button-fg: #FFFFFF;
+}
+
+[data-edu-theme] :is([data-edu-world="EDU-BB01"], [data-edu-world="bb01"]) {
+  --edu-world-accent: #DB2777;
+  --edu-world-surface: #FDF2F8;
+  --edu-world-border: #FBCFE8;
+  --edu-world-button-bg: #DB2777;
+  --edu-world-button-fg: #FFFFFF;
+}
+
+[data-edu-theme] :is([data-edu-world="EDU-MU01"], [data-edu-world="mu01"]) {
+  --edu-world-accent: #7C3AED;
+  --edu-world-surface: #FAF5FF;
+  --edu-world-border: #DDD6FE;
+  --edu-world-button-bg: #7C3AED;
+  --edu-world-button-fg: #FFFFFF;
+}
+
+[data-edu-theme] :is([data-edu-world="EDU-VL01"], [data-edu-world="vl01"]) {
+  --edu-world-accent: #0D9488;
+  --edu-world-surface: #F0FDFA;
+  --edu-world-border: #99F6E4;
+  --edu-world-button-bg: #0F766E;
+  --edu-world-button-fg: #FFFFFF;
+}
+
+[data-edu-theme] :is([data-edu-world="EDU-AC01"], [data-edu-world="ac01"]) {
+  --edu-world-accent: #4F46E5;
+  --edu-world-surface: #EEF2FF;
+  --edu-world-border: #C7D2FE;
+  --edu-world-button-bg: #4F46E5;
+  --edu-world-button-fg: #FFFFFF;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-aiaon-shell] *,
+  [data-aiaon-shell] *::before,
+  [data-aiaon-shell] *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

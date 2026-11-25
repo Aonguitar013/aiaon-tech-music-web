@@ -146,74 +146,72 @@ export default function RootLayout({
               </main>
 
               {/* ============================================================
-                  FOOTER
+                  FOOTER — Warm Premium Editorial V2.0
               ============================================================ */}
               <footer
                 id="footer"
-                className="border-t border-white/10 mt-24 py-16 relative overflow-hidden z-10"
+                data-aiaon-shell=""
+                className="border-t border-[#E2E8F0] bg-[#FAF8F5] text-[#1E293B] mt-24 py-14 relative overflow-hidden z-10"
               >
-                {/* Footer background */}
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-none" />
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-500/8 blur-[100px] pointer-events-none rounded-full" />
-
-                <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-12 text-center md:text-left relative z-10 w-full">
+                <div className="max-w-[1240px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-4 gap-10 text-left relative z-10 w-full">
                   {/* Brand */}
-                  <div className="space-y-4 md:max-w-sm">
-                    <h2 className="font-prompt text-2xl font-normal tracking-widest text-white uppercase flex items-center gap-1">
-                      iAonTech<span className="text-blue-500">xMusic</span>
-                    </h2>
-                    <p className="text-white/50 text-sm font-prompt leading-relaxed">
-                      Tech Educator &amp; Content Creator. มุ่งมั่นสร้างระบบลดภาระครู
-                      และยกระดับการศึกษาด้วย Automation
+                  <div className="space-y-3.5 md:col-span-1">
+                    <div className="inline-flex items-center gap-2.5">
+                      <svg aria-hidden="true" width="30" height="24" viewBox="0 0 64 52" className="shrink-0">
+                        <circle cx="15" cy="8" r="6" fill="#22D3EE" />
+                        <path d="M10 19h13L10 49H0zm6 30L36 5q5-7 10 0l18 44H50L40 24 29 49z" fill="#2563EB" />
+                        <path d="M34 36h13l6 13H43z" fill="#0EA5E9" />
+                      </svg>
+                      <h2 className="font-prompt text-xl font-bold tracking-tight text-[#0F172A]">
+                        AiAon <span className="text-[#2563EB]">Tech</span>
+                      </h2>
+                    </div>
+                    <p className="text-[#475569] text-sm font-prompt leading-relaxed">
+                      Intelligent Technology. More Human Life. — สตูดิโอนวัตกรรม สื่อการสอน และงานดนตรี โดย ครูอ้น (Teacher · Musician · Maker)
                     </p>
                   </div>
 
-                  {/* Quick Links */}
-                  <div className="space-y-4">
-                    <h3 className="text-white font-bold font-prompt text-lg">Quick Links</h3>
-                    <ul className="space-y-2 text-white/50 text-sm font-prompt">
-                       <li><a href="/about"    className="hover:text-blue-400 transition-colors duration-200">About Me</a></li>
-                      <li><a href="/edu" className="hover:text-pink-400 text-pink-300 font-semibold transition-colors duration-200">🐾 สื่อการสอนเด็กเล็ก Hybrid QR (iAon Edu-Verse)</a></li>
-                      <li><a href="/teacher-prep" className="hover:text-cyan-400 text-cyan-300 font-semibold transition-colors duration-200">🎓 กลุ่ม Telegram ติวสอบครูผู้ช่วย (AI Prep)</a></li>
-                      <li><a href="/music-store" className="hover:text-amber-400 text-amber-300 font-semibold transition-colors duration-200">🎵 ร้านค้าเพลงช่วยจำ &amp; BGM คลิป ว.PA</a></li>
-                      <li><a href="/student-vault" className="hover:text-pink-400 text-pink-300 font-semibold transition-colors duration-200">🎒 คลังนักเรียน &amp; TCAS</a></li>
-                      <li><a href="/bundles"   className="hover:text-purple-400 text-purple-300 font-semibold transition-colors duration-200">✨ แพ็กเกจเหมาสุดคุ้ม (Bundles)</a></li>
-                      <li><a href="/digital-vault" className="hover:text-blue-400 transition-colors duration-200">คลัง 20 ระบบ (Digital Vault)</a></li>
-                      <li><a href="/services" className="hover:text-teal-400 transition-colors duration-200">บริการรับทำระบบตามสั่ง</a></li>
+                  {/* 4-Pillar Quick Links */}
+                  <div className="space-y-3">
+                    <h3 className="text-[#0F172A] font-bold font-prompt text-sm uppercase tracking-wider">
+                      Ecosystem Pillars
+                    </h3>
+                    <ul className="space-y-2 text-[#475569] text-sm font-prompt">
+                      <li><a href="/digital-vault" className="hover:text-[#2563EB] transition-colors">01 คลังระบบโรงเรียน (Digital Vault)</a></li>
+                      <li><a href="/krurank" className="hover:text-[#2563EB] transition-colors">01 ทำเนียบครูผู้ช่วย (KruRank AI)</a></li>
+                      <li><a href="/edu" className="hover:text-[#92400E] font-medium text-[#0F172A] transition-colors">02 สื่อเด็กเล็ก Hybrid QR (iAon Edu-Verse)</a></li>
+                      <li><a href="/ebooks" className="hover:text-[#92400E] transition-colors">02 คลัง E-Book ครูไทย &amp; ติวสอบ</a></li>
+                      <li><a href="/line-stickers" className="hover:text-[#6D28D9] transition-colors">03 สติกเกอร์ LINE 3D &amp; อิโมจิ</a></li>
+                      <li><a href="/music-store" className="hover:text-[#0F766E] transition-colors">03 ร้านเพลงช่วยจำ &amp; BGM คลิป ว.PA</a></li>
                     </ul>
                   </div>
 
-                  {/* Legal & Policies */}
-                  <div className="space-y-4">
-                    <h3 className="text-white font-bold font-prompt text-lg">นโยบายและความปลอดภัย</h3>
-                    <ul className="space-y-2 text-white/50 text-sm font-prompt">
-                      <li>
-                        <a href="/terms" className="hover:text-cyan-400 transition-colors duration-200">
-                          เงื่อนไขการใช้งาน (Terms)
-                        </a>
-                      </li>
-                      <li>
-                        <a href="/privacy" className="hover:text-cyan-400 transition-colors duration-200">
-                          นโยบายความเป็นส่วนตัว (PDPA)
-                        </a>
-                      </li>
-                      <li>
-                        <a href="/refund" className="hover:text-cyan-400 transition-colors duration-200">
-                          นโยบายการคืนเงิน (Refund)
-                        </a>
-                      </li>
+                  {/* Resources & Legal */}
+                  <div className="space-y-3">
+                    <h3 className="text-[#0F172A] font-bold font-prompt text-sm uppercase tracking-wider">
+                      คลัง &amp; นโยบาย
+                    </h3>
+                    <ul className="space-y-2 text-[#475569] text-sm font-prompt">
+                      <li><a href="/bundles" className="hover:text-[#2563EB] transition-colors">แพ็กเกจเหมาสุดคุ้ม (Bundles)</a></li>
+                      <li><a href="/freebies" className="hover:text-[#92400E] transition-colors">ของแจกฟรี (Freebies)</a></li>
+                      <li><a href="/about" className="hover:text-[#0F172A] transition-colors">เกี่ยวกับครูอ้น (About iAon)</a></li>
+                      <li><a href="/terms" className="hover:text-[#0F172A] transition-colors">เงื่อนไขการใช้งาน (Terms)</a></li>
+                      <li><a href="/privacy" className="hover:text-[#0F172A] transition-colors">นโยบายความเป็นส่วนตัว (PDPA)</a></li>
+                      <li><a href="/refund" className="hover:text-[#0F172A] transition-colors">นโยบายการคืนเงิน (Refund)</a></li>
                     </ul>
                   </div>
 
                   {/* Social */}
-                  <div className="space-y-4">
-                    <h3 className="text-white font-bold font-prompt text-lg">Connect With Me</h3>
-                    <div className="flex justify-center md:justify-start gap-3">
+                  <div className="space-y-3">
+                    <h3 className="text-[#0F172A] font-bold font-prompt text-sm uppercase tracking-wider">
+                      Connect With iAon
+                    </h3>
+                    <div className="flex gap-2.5">
                       <a
                         href="https://www.youtube.com/@aiaontech"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2.5 glass-card hover:bg-red-500/20 text-white hover:text-red-400 transition-all duration-200 hover:scale-110"
+                        className="p-2.5 rounded-xl bg-white border border-[#E2E8F0] text-[#475569] hover:text-red-600 hover:border-red-200 transition-all shadow-2xs"
                         title="YouTube"
                         aria-label="YouTube"
                       >
@@ -223,7 +221,7 @@ export default function RootLayout({
                         href="https://www.tiktok.com/@aiaontech"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2.5 glass-card hover:bg-white/10 text-white hover:text-white transition-all duration-200 hover:scale-110"
+                        className="p-2.5 rounded-xl bg-white border border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:border-slate-300 transition-all shadow-2xs"
                         title="TikTok"
                         aria-label="TikTok"
                       >
@@ -233,7 +231,7 @@ export default function RootLayout({
                         href="https://www.facebook.com/iAontech"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2.5 glass-card hover:bg-blue-600/20 text-white hover:text-blue-400 transition-all duration-200 hover:scale-110"
+                        className="p-2.5 rounded-xl bg-white border border-[#E2E8F0] text-[#475569] hover:text-[#2563EB] hover:border-blue-200 transition-all shadow-2xs"
                         title="Facebook"
                         aria-label="Facebook"
                       >
@@ -245,7 +243,7 @@ export default function RootLayout({
                         )}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2.5 glass-card hover:bg-green-500/20 text-white hover:text-green-400 transition-all duration-200 hover:scale-110"
+                        className="p-2.5 rounded-xl bg-[#06C755] text-[#052E16] hover:bg-[#05b34c] transition-all shadow-2xs"
                         title="LINE OA (@deu6776s)"
                         aria-label="LINE OA (@deu6776s)"
                       >
@@ -256,16 +254,16 @@ export default function RootLayout({
                 </div>
 
                 {/* Copyright & Legal Links Bar */}
-                <div className="border-t border-white/10 mt-12 pt-8 text-center text-white/40 font-prompt text-xs relative z-10 flex flex-col md:flex-row items-center justify-between gap-4 max-w-7xl mx-auto px-4">
+                <div className="border-t border-[#E2E8F0] mt-10 pt-6 text-[#64748B] font-prompt text-xs relative z-10 flex flex-col md:flex-row items-center justify-between gap-4 max-w-[1240px] mx-auto px-4 sm:px-6">
                   <p suppressHydrationWarning>
-                    © {new Date().getFullYear()} AiAon Tech Ecosystem. All Rights Reserved.
+                    © {new Date().getFullYear()} AiAon Tech Ecosystem · One Universe, Different Worlds.
                   </p>
-                  <div className="flex items-center gap-6 text-white/50">
-                    <a href="/terms" className="hover:text-cyan-400 transition-colors">เงื่อนไขการใช้งาน</a>
+                  <div className="flex items-center gap-5">
+                    <a href="/terms" className="hover:text-[#0F172A] transition-colors">เงื่อนไขการใช้งาน</a>
                     <span>•</span>
-                    <a href="/privacy" className="hover:text-cyan-400 transition-colors">นโยบายความเป็นส่วนตัว (PDPA)</a>
+                    <a href="/privacy" className="hover:text-[#0F172A] transition-colors">PDPA</a>
                     <span>•</span>
-                    <a href="/refund" className="hover:text-cyan-400 transition-colors">นโยบายการคืนเงิน</a>
+                    <a href="/refund" className="hover:text-[#0F172A] transition-colors">นโยบายคืนเงิน</a>
                   </div>
                 </div>
               </footer>

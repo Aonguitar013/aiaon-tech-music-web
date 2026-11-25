@@ -1,198 +1,104 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, LogIn, LogOut, LayoutDashboard, GraduationCap, ShoppingBag, Terminal, Gift, Briefcase, ChevronDown, Info, Wrench, Sparkles, ShieldCheck, Globe, Music, BookOpen, Search, Crown } from "lucide-react";
-import { useCommandMenu } from "@/components/command-menu/CommandMenuProvider";
+import { usePathname } from "next/navigation";
 import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuContent,
-} from "@/components/ui/navigation-menu";
+  Menu,
+  LogIn,
+  LogOut,
+  LayoutDashboard,
+  GraduationCap,
+  Gift,
+  Briefcase,
+  ChevronDown,
+  Sparkles,
+  ShieldCheck,
+  Music,
+  BookOpen,
+  Search,
+  Crown,
+  Database,
+  PawPrint,
+  Target,
+  Backpack,
+  Cat,
+  Sliders,
+  Radio,
+  UserRound,
+  Zap,
+  ScrollText,
+  ArrowUpRight,
+} from "lucide-react";
+import { useCommandMenu } from "@/components/command-menu/CommandMenuProvider";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
-  SheetTitle
+  SheetTitle,
 } from "@/components/ui/sheet";
 import { logout } from "@/app/login/actions";
 import { cn } from "@/lib/utils";
 import { createClient as createBrowserSupabase } from "@/utils/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
-import { NAVBAR_FLAGS } from "@/config/catalogVisibility";
+import {
+  NAVIGATION_PILLARS,
+  type NavIconKey,
+  type NavPillarGroup,
+  type PillarId,
+} from "@/config/navigationRegistry";
 
-interface SubRouteItem {
-  name: string;
-  href: string;
-  description?: string;
-  badge?: string;
-  badgeColor?: "amber" | "purple" | "cyan" | "pink" | "teal";
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  icon?: React.ComponentType<any>;
-  hoverColor?: string;
+const ICON_MAP: Record<NavIconKey, React.ComponentType<{ className?: string }>> = {
+  crown: Crown,
+  database: Database,
+  sparkles: Sparkles,
+  "shield-check": ShieldCheck,
+  briefcase: Briefcase,
+  "paw-print": PawPrint,
+  "book-open": BookOpen,
+  "graduation-cap": GraduationCap,
+  target: Target,
+  backpack: Backpack,
+  music: Music,
+  cat: Cat,
+  sliders: Sliders,
+  radio: Radio,
+  "user-round": UserRound,
+  zap: Zap,
+  "scroll-text": ScrollText,
+};
+
+function getPillarIconStyles(pillar: PillarId) {
+  switch (pillar) {
+    case "tech":
+      return "bg-[#EFF6FF] text-[#1D4ED8] border-[#BFDBFE]";
+    case "edu":
+      return "bg-[#FEF9EF] text-[#92400E] border-[#FDE68A]";
+    case "audio":
+      return "bg-[#F0FDFA] text-[#0F766E] border-[#99F6E4]";
+    case "studio":
+      return "bg-[#FAF5FF] text-[#6D28D9] border-[#DDD6FE]";
+    case "about":
+    default:
+      return "bg-[#FEF3C7] text-[#92400E] border-[#FDE68A]";
+  }
 }
 
-interface RouteItem {
-  name: string;
-  href?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  icon?: React.ComponentType<any>;
-  hoverColor: string;
-  badge?: string;
-  isSpecial?: boolean;
-  items?: SubRouteItem[];
+function getBadgeStyles(tone?: "blue" | "amber" | "violet" | "teal" | "rose") {
+  switch (tone) {
+    case "blue":
+      return "bg-[#EFF6FF] text-[#1D4ED8] border-[#BFDBFE]";
+    case "violet":
+      return "bg-[#FAF5FF] text-[#6D28D9] border-[#DDD6FE]";
+    case "teal":
+      return "bg-[#F0FDFA] text-[#0F766E] border-[#99F6E4]";
+    case "rose":
+      return "bg-[#FFF1F2] text-[#BE123C] border-[#FECDD3]";
+    case "amber":
+    default:
+      return "bg-[#FEF3C7] text-[#92400E] border-[#FDE68A]";
+  }
 }
-
-const routes: RouteItem[] = [
-  { name: "หน้าแรก", href: "/", icon: Terminal, hoverColor: "cyan" },
-  {
-    name: "คลังสินค้า & ระบบ",
-    icon: ShoppingBag,
-    hoverColor: "amber",
-    items: [
-      ...(NAVBAR_FLAGS.showAcademy
-        ? [
-            {
-              name: "คอร์สเรียนออนไลน์ (Academy)",
-              href: "/academy",
-              description: "คอร์ส AI, Google Apps Script และเทคโนโลยีเพื่อการศึกษา",
-              badge: "เปิดใหม่",
-              badgeColor: "cyan" as const,
-              icon: GraduationCap,
-              hoverColor: "cyan",
-            },
-          ]
-        : []),
-      {
-        name: "สื่อการสอนเด็กเล็ก Hybrid QR (iAon Edu-Verse)",
-        href: "/edu",
-        description: "ใบงาน EF, ชุดสร้างวินัย 30 วัน, Busy Book ตีนตุ๊กแก 45 การ์ด & ดนตรี (แจกฟรี 15 หน้า!)",
-        badge: "ใหม่! 99฿",
-        badgeColor: "pink",
-        icon: Sparkles,
-        hoverColor: "pink",
-      },
-      {
-        name: "คลังระบบโรงเรียน & ครู",
-        href: "/digital-vault",
-        description: "ระบบ Google Apps Script สากล ลดงานเอกสาร แจ้งซ่อม เช็คชื่อ ว.PA",
-        badge: "ยอดนิยม",
-        badgeColor: "amber",
-        icon: ShoppingBag,
-        hoverColor: "amber",
-      },
-      {
-        name: "คลัง E-Book ครูไทย (Top 10 & ชุดเซต)",
-        href: "/ebooks",
-        description: "คู่มือ ว.PA ผ่านฉลุย, 100 AI Prompts, วิจัย 5 บท พร้อมชุดเซตสุดคุ้ม",
-        badge: "Bestseller",
-        badgeColor: "amber",
-        icon: BookOpen,
-        hoverColor: "amber",
-      },
-      {
-        name: "แพ็กเกจเหมาสุดคุ้ม (Bundles)",
-        href: "/bundles",
-        description: "ประหยัดสูงสุด 51% ปลดล็อกระบบโรงเรียนยกชุดพร้อมใช้งาน",
-        badge: "คุ้มสุด",
-        badgeColor: "purple",
-        icon: Sparkles,
-        hoverColor: "purple",
-      },
-      {
-        name: "ติวสอบครูผู้ช่วย AI & เพลงช่วยจำ",
-        href: "/teacher-prep",
-        description: "บอทยิงข้อสอบ Telegram 3 เวลา + AI เฉลยละเอียด + อัลบั้มเพลงจำ พ.ร.บ.",
-        badge: "สอบติดไว",
-        badgeColor: "cyan",
-        icon: GraduationCap,
-        hoverColor: "cyan",
-      },
-      {
-        name: "ร้านเพลงช่วยจำ & BGM คลิป ว.PA",
-        href: "/music-store",
-        description: "เพลงจำกฎหมายครู MP3 & เพลงบรรเลง BGM ปลอดลิขสิทธิ์ 100%",
-        badge: "ปลอดลิขสิทธิ์",
-        badgeColor: "amber",
-        icon: Music,
-        hoverColor: "amber",
-      },
-      {
-        name: "คลังนักเรียน & TCAS 3D",
-        href: "/student-vault",
-        description: "Web Portfolio 3D ยื่น TCAS & ระบบเช็คการบ้านประจำห้อง",
-        badge: "เริ่มต้น 129 ฿",
-        badgeColor: "pink",
-        icon: GraduationCap,
-        hoverColor: "pink",
-      },
-    ],
-  },
-  {
-    name: "บริการสั่งทำ",
-    icon: Wrench,
-    hoverColor: "teal",
-    items: [
-      {
-        name: "รับทำสติกเกอร์ LINE คาแรกเตอร์ 3D",
-        href: "/line-stickers",
-        description: "ปั้นสติกเกอร์ LINE จากรูปถ่ายจริง (ครู / แม่ค้า / สัตว์เลี้ยง) ครบจนขึ้น LINE STORE",
-        badge: "🔥 ฮิต! 990฿+",
-        badgeColor: "teal",
-        icon: Sparkles,
-        hoverColor: "teal",
-      },
-      {
-        name: "รับติดตั้ง & เฝ้าดูแล AI ร้านค้า 24 ชม.",
-        href: "/ai-caretaker",
-        description: "แอดมิน AI ตอบแชท ตรวจสลิป จองคิว พร้อมระบบเฝ้าระวัง 24 ชม.",
-        badge: "990฿/ด.",
-        badgeColor: "teal",
-        icon: ShieldCheck,
-        hoverColor: "teal",
-      },
-      {
-        name: "บริการรับพัฒนาระบบโรงเรียน/องค์กรตามสั่ง",
-        href: "/services",
-        description: "ออกแบบและพัฒนา Web App เฉพาะโรงเรียนและธุรกิจตามโจทย์จริง",
-        icon: Briefcase,
-        hoverColor: "teal",
-      },
-      {
-        name: "ทำเนียบว่าที่ครูผู้ช่วย (KruRank AI)",
-        href: "/krurank",
-        description: "ซ้อมสอบ AI วิเคราะห์จุดหลอก + ชิงอันดับทำเนียบประเทศ",
-        badge: "AI APP 👑",
-        badgeColor: "cyan",
-        icon: Crown,
-        hoverColor: "cyan",
-      },
-      ...(NAVBAR_FLAGS.showSaasDemo
-        ? [
-            {
-              name: "iAon IT ง่ายๆ (Demo Playground)",
-              href: "/saas",
-              description: "ทดลองเล่น Simulator สดและสแกนเช็คชื่ออัตโนมัติ",
-              icon: Terminal,
-              hoverColor: "cyan",
-            },
-          ]
-        : []),
-    ],
-  },
-  {
-    name: "ของแจกฟรี",
-    href: "/freebies",
-    icon: Gift,
-    hoverColor: "purple",
-    badge: "FREE",
-    isSpecial: true,
-  },
-  { name: "เกี่ยวกับเรา", href: "/about", icon: Info, hoverColor: "cyan" },
-];
 
 interface NavbarProps {
   /** Optional initial user (e.g. from a server component). Normally resolved client-side. */
@@ -200,9 +106,21 @@ interface NavbarProps {
 }
 
 export function Navbar({ user: initialUser = null }: NavbarProps) {
+  const pathname = usePathname();
   const [user, setUser] = useState<SupabaseUser | null>(initialUser);
+  const { open: openCommandMenu } = useCommandMenu();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Resolve auth state in the browser so the root layout stays static/cacheable
+  // Desktop Mega Menu state (supports hover, click, keyboard & Escape)
+  const [activePillarId, setActivePillarId] = useState<string | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Single-open Mobile Accordion state (opening one collapses others)
+  const [openMobilePillar, setOpenMobilePillar] = useState<string | null>("products");
+
+  // Resolve Supabase auth state client-side
   useEffect(() => {
     const supabase = createBrowserSupabase();
     let active = true;
@@ -221,452 +139,452 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
     };
   }, []);
 
-  // Sign out: update the UI immediately, clear the browser session, then run the server action
-  // (clears server cookies + redirects). Without this the client state would stay stale until refresh.
   const handleLogout = async () => {
     setUser(null);
     try {
       await createBrowserSupabase().auth.signOut();
     } catch {
-      // ignore – the server action below also signs out
+      // ignore – server action below also clears session
     }
     await logout();
   };
 
-  const { open: openCommandMenu } = useCommandMenu();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [openMobileMenus, setOpenMobileMenus] = useState<Record<string, boolean>>({});
+  // Close menus on route change
+  useEffect(() => {
+    setActivePillarId(null);
+    setMobileOpen(false);
+  }, [pathname]);
 
-  const toggleMobileMenu = (name: string) => {
-    setOpenMobileMenus((prev) => ({
-      ...prev,
-      [name]: !prev[name],
-    }));
-  };
-
+  // Scroll shadow effect
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      setIsScrolled(scrollTop > 15);
+      const scrollTop =
+        window.scrollY ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+      setIsScrolled(scrollTop > 12);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    document.body.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
+  // Outside click & Escape key dismissal
+  useEffect(() => {
+    const handlePointerDown = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setActivePillarId(null);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActivePillarId(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      document.body.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
+  const openDesktopMenu = (id: string) => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setActivePillarId(id);
+  };
+
+  const scheduleCloseDesktopMenu = () => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    closeTimeoutRef.current = setTimeout(() => {
+      setActivePillarId(null);
+    }, 160);
+  };
+
+  const activeGroup: NavPillarGroup | undefined = NAVIGATION_PILLARS.find(
+    (g) => g.id === activePillarId
+  );
+
   return (
-    <nav className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-300",
-      isScrolled 
-        ? "glass-nav py-2" 
-        : "bg-[#09090b]/85 backdrop-blur-xl border-b border-white/8 py-3"
-    )}>
-      <div className="max-w-7xl mx-auto flex h-16 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        
-        {/* Logo */}
-        <div className="shrink-0 flex items-center">
-          <Link href="/" className="font-prompt text-xl font-normal text-white flex items-center gap-1 transition-all duration-300 hover:text-cyan-400 hover:-translate-y-0.5 group whitespace-nowrap">
-            iAonTech<span className="text-blue-500 group-hover:text-cyan-400 transition-colors duration-300">xMusic</span>
-          </Link>
-        </div>
+    <header
+      ref={navRef}
+      data-aiaon-shell=""
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-200 border-b border-[#E2E8F0] bg-[#FAF8F5]/95 backdrop-blur-md text-[#0F172A]",
+        isScrolled && "shadow-[0_8px_24px_rgba(48,39,24,0.06)] bg-[#FAF8F5]/98"
+      )}
+    >
+      <div className="max-w-[1240px] mx-auto flex h-[66px] lg:h-[74px] items-center justify-between gap-3 px-4 sm:px-6">
+        {/* Master Brand Logo (Geometric iA Monogram + AiAon Tech) */}
+        <Link
+          href="/"
+          aria-label="AiAon Tech — หน้าแรก"
+          className="shrink-0 inline-flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] rounded-xl py-1 pr-2"
+        >
+          <svg
+            aria-hidden="true"
+            width="34"
+            height="28"
+            viewBox="0 0 64 52"
+            className="shrink-0 transition-transform duration-200 group-hover:scale-105"
+          >
+            <circle cx="15" cy="8" r="6" fill="#22D3EE" />
+            <path
+              d="M10 19h13L10 49H0zm6 30L36 5q5-7 10 0l18 44H50L40 24 29 49z"
+              fill="#2563EB"
+            />
+            <path d="M34 36h13l6 13H43z" fill="#0EA5E9" />
+          </svg>
+          <span className="font-prompt text-[19px] font-bold tracking-tight text-[#0F172A] whitespace-nowrap">
+            AiAon <span className="text-[#2563EB]">Tech</span>
+          </span>
+        </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop 4-Pillar Mega Navigation (>= 1024px) */}
+        <nav
+          aria-label="เมนูหลัก 4 เสาหลัก"
+          className="hidden lg:flex items-center gap-1"
+          onMouseLeave={scheduleCloseDesktopMenu}
+        >
+          {NAVIGATION_PILLARS.map((group) => {
+            const isOpen = activePillarId === group.id;
+            return (
+              <div
+                key={group.id}
+                className="relative"
+                onMouseEnter={() => openDesktopMenu(group.id)}
+              >
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  aria-controls={`mega-menu-${group.id}`}
+                  onClick={() =>
+                    setActivePillarId(isOpen ? null : group.id)
+                  }
+                  className={cn(
+                    "inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-prompt font-medium transition-colors cursor-pointer select-none whitespace-nowrap",
+                    isOpen
+                      ? "bg-white text-[#0F172A] shadow-xs ring-1 ring-[#E2E8F0]"
+                      : "text-[#475569] hover:text-[#0F172A] hover:bg-white/70"
+                  )}
+                >
+                  <span className="text-[11px] font-mono font-semibold text-[#94A3B8]">
+                    {group.number}
+                  </span>
+                  <span>{group.label}</span>
+                  <ChevronDown
+                    className={cn(
+                      "w-3.5 h-3.5 text-[#64748B] transition-transform duration-200",
+                      isOpen && "rotate-180 text-[#0F172A]"
+                    )}
+                  />
+                </button>
+              </div>
+            );
+          })}
+        </nav>
+
+        {/* Right Action Controls (Desktop) */}
         <div className="hidden lg:flex items-center gap-2 shrink-0">
-          <NavigationMenu>
-            <NavigationMenuList className="gap-1 flex-nowrap">
-              {routes.map((route) => {
-                const isCyan   = route.hoverColor === "cyan";
-                const isPurple = route.hoverColor === "purple";
-                const isTeal   = route.hoverColor === "teal";
-
-                // 1. Special Highlighted Item (e.g. ของแจกฟรี 🎁)
-                if (route.isSpecial) {
-                  return (
-                    <NavigationMenuItem key={route.name} className="shrink-0">
-                      <NavigationMenuLink 
-                        className="relative w-max whitespace-nowrap shrink-0 px-3 py-1.5 rounded-xl font-prompt text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-1.5 bg-linear-to-r from-purple-500/15 to-pink-500/15 border border-purple-500/30 text-purple-200 hover:text-white hover:border-purple-400/60 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] cursor-pointer group select-none"
-                        render={<Link href={route.href || ""} />}
-                      >
-                        <Gift className="w-4 h-4 text-pink-400 group-hover:rotate-12 transition-transform duration-300 shrink-0" />
-                        <span>{route.name}</span>
-                        <span className="bg-linear-to-r from-purple-500 to-pink-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(236,72,153,0.5)]">
-                          FREE
-                        </span>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  );
-                }
-
-                // 2. Dropdown Menu with Rich 2-Line Sub-items
-                if ("items" in route && route.items) {
-                  const TriggerIcon = route.icon;
-                  return (
-                    <NavigationMenuItem key={route.name} className="shrink-0">
-                      <NavigationMenuTrigger
-                        className={cn(
-                          "relative w-max whitespace-nowrap shrink-0 bg-transparent text-white/80 px-3 py-1.5 rounded-xl font-prompt text-sm font-normal transition-all duration-300 flex items-center gap-1.5 group select-none cursor-pointer border border-transparent data-[state=open]:text-white data-[state=open]:bg-white/5 data-[state=open]:border-white/10 data-open:text-white data-open:bg-white/5 data-open:border-white/10",
-                          isTeal
-                            ? "hover:text-teal-400 hover:bg-teal-500/5 hover:border-teal-500/20 data-[state=open]:text-teal-400 data-[state=open]:bg-teal-500/5 data-[state=open]:border-teal-500/20"
-                            : isPurple
-                            ? "hover:text-purple-400 hover:bg-purple-500/5 hover:border-purple-500/20 data-[state=open]:text-purple-400 data-[state=open]:bg-purple-500/5 data-[state=open]:border-purple-500/20"
-                            : isCyan 
-                            ? "hover:text-cyan-400 hover:bg-cyan-500/5 hover:border-cyan-500/20 data-[state=open]:text-cyan-400 data-[state=open]:bg-cyan-500/5 data-[state=open]:border-cyan-500/20"
-                            : "hover:text-amber-400 hover:bg-amber-400/5 hover:border-amber-400/20 data-[state=open]:text-amber-400 data-[state=open]:bg-amber-400/5 data-[state=open]:border-amber-400/20"
-                        )}
-                      >
-                        {TriggerIcon && <TriggerIcon className="w-4 h-4 shrink-0 opacity-70 group-hover:opacity-100 transition-opacity" />}
-                        {route.name}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="flex flex-col gap-1.5 w-[360px] sm:w-[400px] p-2.5 bg-black/95 border border-white/15 rounded-2xl backdrop-blur-xl shadow-[0_15px_50px_rgba(0,0,0,0.85)] animate-in fade-in zoom-in-95 duration-200">
-                        {route.items.map((subItem) => {
-                          const SubIcon = subItem.icon;
-                          const isSubTeal   = subItem.hoverColor === "teal";
-                          const isSubPurple = subItem.hoverColor === "purple";
-                          const isSubCyan   = subItem.hoverColor === "cyan";
-                          const isSubPink   = subItem.hoverColor === "pink";
-
-                          return (
-                            <NavigationMenuLink
-                              key={subItem.name}
-                              className={cn(
-                                "flex items-start gap-3 p-2.5 rounded-xl transition-all duration-200 group hover:translate-x-1 cursor-pointer select-none border border-transparent",
-                                isSubTeal
-                                  ? "hover:bg-teal-500/10 hover:border-teal-500/20"
-                                  : isSubPurple
-                                  ? "hover:bg-purple-500/10 hover:border-purple-500/20"
-                                  : isSubCyan
-                                  ? "hover:bg-cyan-500/10 hover:border-cyan-500/20"
-                                  : isSubPink
-                                  ? "hover:bg-pink-500/10 hover:border-pink-500/20"
-                                  : "hover:bg-amber-400/10 hover:border-amber-400/20"
-                              )}
-                              render={<Link href={subItem.href || ""} />}
-                            >
-                              <div className={cn(
-                                "w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 border transition-all duration-300",
-                                isSubTeal
-                                  ? "bg-teal-500/10 border-teal-500/30 text-teal-400 group-hover:scale-105 group-hover:shadow-[0_0_12px_rgba(20,184,166,0.4)]"
-                                  : isSubPurple
-                                  ? "bg-purple-500/10 border-purple-500/30 text-purple-400 group-hover:scale-105 group-hover:shadow-[0_0_12px_rgba(168,85,247,0.4)]"
-                                  : isSubCyan
-                                  ? "bg-cyan-500/10 border-cyan-500/30 text-cyan-400 group-hover:scale-105 group-hover:shadow-[0_0_12px_rgba(34,211,238,0.4)]"
-                                  : isSubPink
-                                  ? "bg-pink-500/10 border-pink-500/30 text-pink-400 group-hover:scale-105 group-hover:shadow-[0_0_12px_rgba(244,63,94,0.4)]"
-                                  : "bg-amber-400/10 border-amber-400/30 text-amber-400 group-hover:scale-105 group-hover:shadow-[0_0_12px_rgba(245,158,11,0.4)]"
-                              )}>
-                                {SubIcon && <SubIcon className="w-4 h-4" />}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center justify-between gap-1.5">
-                                  <span className={cn(
-                                    "font-prompt text-sm font-medium transition-colors duration-200",
-                                    isSubTeal ? "text-white/90 group-hover:text-teal-300"
-                                    : isSubPurple ? "text-white/90 group-hover:text-purple-300"
-                                    : isSubCyan ? "text-white/90 group-hover:text-cyan-300"
-                                    : isSubPink ? "text-white/90 group-hover:text-pink-300"
-                                    : "text-white/90 group-hover:text-amber-300"
-                                  )}>
-                                    {subItem.name}
-                                  </span>
-                                  {subItem.badge && (
-                                    <span className={cn(
-                                      "text-[11px] font-prompt px-2 py-0.5 rounded-full border shrink-0 font-medium",
-                                      subItem.badgeColor === "amber" && "bg-amber-500/15 text-amber-300 border-amber-500/30 shadow-[0_0_8px_rgba(245,158,11,0.2)]",
-                                      subItem.badgeColor === "pink" && "bg-pink-500/15 text-pink-300 border-pink-500/30 shadow-[0_0_8px_rgba(244,63,94,0.2)]",
-                                      subItem.badgeColor === "purple" && "bg-purple-500/15 text-purple-300 border-purple-500/30 shadow-[0_0_8px_rgba(168,85,247,0.2)]",
-                                      subItem.badgeColor === "teal" && "bg-teal-500/15 text-teal-300 border-teal-500/30 shadow-[0_0_8px_rgba(20,184,166,0.2)]",
-                                      subItem.badgeColor === "cyan" && "bg-cyan-500/15 text-cyan-300 border-cyan-500/30 shadow-[0_0_8px_rgba(34,211,238,0.2)]"
-                                    )}>
-                                      {subItem.badge}
-                                    </span>
-                                  )}
-                                </div>
-                                {subItem.description && (
-                                  <p className="text-xs font-prompt text-white/50 group-hover:text-white/70 transition-colors line-clamp-1 font-light mt-0.5">
-                                    {subItem.description}
-                                  </p>
-                                )}
-                              </div>
-                            </NavigationMenuLink>
-                          );
-                        })}
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-                  );
-                }
-
-                // 3. Regular Top-Level Nav Link
-                return (
-                  <NavigationMenuItem key={route.name} className="shrink-0">
-                    <NavigationMenuLink 
-                      className={cn(
-                        "relative w-max whitespace-nowrap shrink-0 bg-transparent text-white/75 px-3 py-1.5 rounded-xl font-prompt text-sm font-normal transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-1.5 group overflow-hidden border border-transparent select-none cursor-pointer",
-                        isTeal
-                          ? "hover:text-teal-400 hover:bg-teal-500/5 hover:border-teal-500/20 hover:shadow-[0_0_15px_rgba(20,184,166,0.3)]"
-                          : isPurple
-                          ? "hover:text-purple-400 hover:bg-purple-500/5 hover:border-purple-500/20 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
-                          : isCyan 
-                          ? "hover:text-cyan-400 hover:bg-cyan-500/5 hover:border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.25)]"
-                          : "hover:text-amber-400 hover:bg-amber-400/5 hover:border-amber-400/20 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)]"
-                      )}
-                      render={<Link href={route.href || ""} />}
-                    >
-                      {route.icon && <route.icon className="w-4 h-4 shrink-0 opacity-70 group-hover:opacity-100 transition-opacity" />}
-                      <span>{route.name}</span>
-                      {/* Underline glow effect */}
-                      <span className={cn(
-                        "absolute bottom-0 left-3 right-3 h-[2px] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center",
-                        isTeal
-                          ? "bg-linear-to-r from-teal-400 to-emerald-400 shadow-[0_0_8px_rgba(20,184,166,0.8)]"
-                          : isPurple
-                          ? "bg-linear-to-r from-purple-400 to-pink-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]"
-                          : isCyan 
-                          ? "bg-linear-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]"
-                          : "bg-linear-to-r from-amber-400 to-orange-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]"
-                      )} />
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                );
-              })}
-            </NavigationMenuList>
-          </NavigationMenu>
-
-          {/* Quick Search (Ctrl+K) Trigger */}
+          {/* Quick Search (⌘K) */}
           <button
             type="button"
             onClick={openCommandMenu}
             aria-label="ค้นหาด่วน (Ctrl+K)"
-            className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-500/40 text-white/60 hover:text-white text-xs font-prompt transition-all duration-300 group cursor-pointer shadow-sm hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] ml-1 shrink-0 select-none"
+            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white hover:bg-[#FFFDF9] border border-[#E2E8F0] hover:border-[#2563EB]/40 text-[#475569] hover:text-[#0F172A] text-xs font-prompt transition-all cursor-pointer shadow-2xs"
           >
-            <Search className="w-3.5 h-3.5 text-cyan-400 group-hover:scale-110 transition-transform" />
-            <span className="hidden xl:inline text-white/70 group-hover:text-white">ค้นหาระบบ, E-Book...</span>
-            <span className="xl:hidden">ค้นหา</span>
-            <kbd className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono text-white/40 group-hover:text-cyan-300 bg-white/5 border border-white/10 rounded-md">
+            <Search className="w-3.5 h-3.5 text-[#2563EB]" />
+            <span className="hidden xl:inline">ค้นหา...</span>
+            <kbd className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono text-[#64748B] bg-[#FAF8F5] border border-[#E2E8F0] rounded-md">
               ⌘K
             </kbd>
           </button>
 
+          {/* 🎁 Freebies Lead Magnet CTA (WCAG AA 8.15:1) */}
+          <Link
+            href="/freebies"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#FEF3C7] hover:bg-[#FDE68A] text-[#78350F] border border-[#FDE68A] text-sm font-prompt font-semibold transition-all whitespace-nowrap shadow-2xs"
+          >
+            <Gift className="w-4 h-4 shrink-0" />
+            <span>Freebies</span>
+          </Link>
+
+          {/* Auth-Aware Console CTA */}
           {user ? (
-              <div className="flex items-center gap-2 ml-1 shrink-0">
-                  <Link 
-                    href="/dashboard" 
-                    className="relative w-max whitespace-nowrap shrink-0 bg-transparent text-white/80 px-3.5 py-1.5 rounded-xl font-prompt text-sm font-normal transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-1.5 group overflow-hidden hover:text-cyan-400 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.25)]"
-                  >
-                      <LayoutDashboard className="w-4 h-4 shrink-0" /> <span>แผงควบคุม</span>
-                      <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center bg-linear-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    aria-label="ออกจากระบบ"
-                    className="group inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 font-prompt text-sm text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-rose-400/40 hover:bg-rose-500/10 hover:text-rose-300 hover:shadow-[0_0_18px_rgba(244,63,94,0.25)] active:scale-95 shrink-0 whitespace-nowrap cursor-pointer"
-                  >
-                    <LogOut className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5" />
-                    <span>ออกจากระบบ</span>
-                  </button>
-              </div>
+            <div className="flex items-center gap-1.5">
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] text-white text-sm font-prompt font-semibold transition-all whitespace-nowrap"
+              >
+                <LayoutDashboard className="w-4 h-4 shrink-0" />
+                <span>แผงควบคุม</span>
+              </Link>
+              <button
+                type="button"
+                onClick={handleLogout}
+                aria-label="ออกจากระบบ"
+                title="ออกจากระบบ"
+                className="inline-flex items-center justify-center p-2 rounded-xl border border-[#E2E8F0] bg-white text-[#475569] hover:text-[#BE123C] hover:border-[#FECDD3] hover:bg-[#FFF1F2] transition-colors cursor-pointer"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
           ) : (
             <Link
               href="/login"
-              className="group relative ml-1 inline-flex shrink-0 items-center gap-2 overflow-hidden whitespace-nowrap rounded-full bg-linear-to-r from-blue-600 via-blue-500 to-cyan-400 px-5 py-2 font-prompt text-sm font-medium text-white shadow-[0_0_20px_rgba(59,130,246,0.45)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_28px_rgba(34,211,238,0.6)] active:scale-95"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] text-white text-sm font-prompt font-semibold transition-all whitespace-nowrap shadow-xs"
             >
-              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-              <LogIn className="relative h-4 w-4 shrink-0" />
-              <span className="relative">เข้าสู่ระบบ</span>
+              <LogIn className="w-4 h-4 shrink-0" />
+              <span>เข้าสู่ระบบ</span>
             </Link>
           )}
         </div>
 
-        {/* Mobile Navigation (Search & Hamburger) */}
-        <div className="flex lg:hidden items-center gap-1">
+        {/* Mobile Actions (< 1024px) */}
+        <div className="flex lg:hidden items-center gap-1.5">
           <button
             type="button"
             onClick={openCommandMenu}
             aria-label="ค้นหาด่วน (Ctrl+K)"
-            className="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors flex items-center justify-center cursor-pointer"
+            className="p-2.5 rounded-xl bg-white border border-[#E2E8F0] text-[#0F172A] hover:bg-[#FFFDF9] transition-colors cursor-pointer"
           >
-            <Search className="h-5 w-5 text-cyan-400" />
-            <span className="sr-only">ค้นหาด่วน</span>
+            <Search className="h-4 w-4 text-[#2563EB]" />
           </button>
+
+          <Link
+            href="/freebies"
+            className="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-[#FEF3C7] text-[#78350F] border border-[#FDE68A] text-xs font-prompt font-semibold whitespace-nowrap"
+          >
+            <Gift className="w-3.5 h-3.5" />
+            <span>ฟรี</span>
+          </Link>
+
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-            <SheetTrigger className="p-2 text-white hover:bg-white/10 rounded-xl transition-colors flex items-center justify-center">
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Open main menu</span>
+            <SheetTrigger
+              aria-label="เปิดเมนูหลัก"
+              className="p-2.5 rounded-xl bg-white border border-[#E2E8F0] text-[#0F172A] hover:bg-[#FFFDF9] transition-colors cursor-pointer"
+            >
+              <Menu className="h-5 w-5" />
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="bg-black/95 border-l border-white/10 overflow-y-auto px-5 pt-6 pb-24"
+              className="w-[88vw] max-w-[380px] bg-[#FAF8F5] text-[#0F172A] border-l border-[#E2E8F0] overflow-y-auto px-5 pt-6 pb-24"
               onClick={(e) => {
-                // Close the menu after tapping any navigation link
                 if ((e.target as HTMLElement).closest("a")) setMobileOpen(false);
               }}
             >
-              <SheetTitle className="text-left font-prompt text-xl font-bold text-white mb-6">
-                เมนูหลัก
+              <SheetTitle className="text-left font-prompt text-lg font-bold text-[#0F172A] flex items-center gap-2 pb-4 border-b border-[#E2E8F0]">
+                <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#2563EB]" />
+                AiAon Universe
               </SheetTitle>
-              <div className="flex flex-col gap-2 mt-6">
-                {routes.map((route) => {
-                  const isCyan   = route.hoverColor === "cyan";
-                  const isPurple = route.hoverColor === "purple";
-                  const isTeal   = route.hoverColor === "teal";
 
-                  // Mobile: Special Item (ของแจกฟรี)
-                  if (route.isSpecial) {
-                    return (
-                      <Link 
-                        key={route.name}
-                        href={route.href || ""}
-                        className="font-prompt text-base font-medium text-purple-200 bg-linear-to-r from-purple-500/15 to-pink-500/15 border border-purple-500/30 hover:border-purple-400/60 px-4 py-2.5 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-between shadow-[0_0_15px_rgba(168,85,247,0.2)] mt-1"
+              {/* Single-Open 4-Pillar Accordion */}
+              <div className="flex flex-col gap-2.5 mt-4">
+                {NAVIGATION_PILLARS.map((group) => {
+                  const isExpanded = openMobilePillar === group.id;
+                  return (
+                    <div
+                      key={group.id}
+                      className="rounded-2xl bg-white border border-[#E2E8F0] overflow-hidden shadow-2xs"
+                    >
+                      <button
+                        type="button"
+                        aria-expanded={isExpanded}
+                        onClick={() =>
+                          setOpenMobilePillar(isExpanded ? null : group.id)
+                        }
+                        className="w-full flex items-center justify-between px-4 py-3.5 text-left font-prompt cursor-pointer"
                       >
-                        <span className="flex items-center gap-2.5">
-                          <Gift className="w-5 h-5 text-pink-400" />
-                          {route.name}
-                        </span>
-                        <span className="bg-linear-to-r from-purple-500 to-pink-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-[0_0_8px_rgba(236,72,153,0.5)]">
-                          FREE
-                        </span>
-                      </Link>
-                    );
-                  }
-
-                  // Mobile: Dropdown Accordion
-                  if ("items" in route && route.items) {
-                    const isExpanded = !!openMobileMenus[route.name];
-                    const MobileDropdownIcon = route.icon;
-                    return (
-                      <div key={route.name} className="flex flex-col">
-                        <button
-                          onClick={() => toggleMobileMenu(route.name)}
-                          className={cn(
-                            "font-prompt text-base font-normal text-white/80 px-4 py-2.5 rounded-xl transition-all duration-300 flex items-center justify-between w-full text-left outline-none cursor-pointer",
-                            isTeal
-                              ? "hover:text-teal-400 hover:bg-teal-500/5 active:scale-95"
-                              : isPurple
-                              ? "hover:text-purple-400 hover:bg-purple-500/5 active:scale-95"
-                              : isCyan 
-                              ? "hover:text-cyan-400 hover:bg-cyan-500/5 active:scale-95"
-                              : "hover:text-amber-400 hover:bg-amber-400/5 active:scale-95"
-                          )}
-                        >
-                          <span className="flex items-center gap-2.5">
-                            {MobileDropdownIcon && <MobileDropdownIcon className="w-5 h-5 shrink-0 opacity-70" />}
-                            {route.name}
+                        <div className="flex items-center gap-2.5">
+                          <span className="text-xs font-mono font-bold text-[#94A3B8]">
+                            {group.number}
                           </span>
-                          <ChevronDown className={cn("w-4 h-4 transition-transform duration-300 opacity-70", isExpanded && "rotate-180")} />
-                        </button>
-                        
-                        <div className={cn(
-                          "grid transition-all duration-300 ease-in-out pl-2 overflow-hidden",
-                          isExpanded ? "grid-rows-[1fr] opacity-100 mt-1 mb-2" : "grid-rows-[0fr] opacity-0"
-                        )}>
-                          <div className="overflow-hidden flex flex-col gap-1.5 border-l border-white/10 pl-2">
-                            {route.items.map((subItem) => {
-                              const SubIcon = subItem.icon;
-                              const isSubTeal   = subItem.hoverColor === "teal";
-                              const isSubPurple = subItem.hoverColor === "purple";
-                              const isSubCyan   = subItem.hoverColor === "cyan";
-                              const isSubPink   = subItem.hoverColor === "pink";
-
-                              return (
-                                <Link 
-                                  key={subItem.name}
-                                  href={subItem.href || ""}
-                                  className={cn(
-                                    "font-prompt p-2.5 rounded-xl transition-all duration-300 flex items-start gap-2.5 bg-white/[0.02] border border-white/5",
-                                    isSubTeal
-                                      ? "hover:text-teal-400 hover:bg-teal-500/10 hover:border-teal-500/20"
-                                      : isSubPurple
-                                      ? "hover:text-purple-400 hover:bg-purple-500/10 hover:border-purple-500/20"
-                                      : isSubCyan 
-                                      ? "hover:text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-500/20"
-                                      : isSubPink
-                                      ? "hover:text-pink-400 hover:bg-pink-500/10 hover:border-pink-500/20"
-                                      : "hover:text-amber-400 hover:bg-amber-400/10 hover:border-amber-400/20"
-                                  )}
-                                >
-                                  {SubIcon && <SubIcon className="w-4 h-4 shrink-0 mt-0.5 text-white/60" />}
-                                  <div className="flex-1 min-w-0">
-                                    <div className="flex items-center justify-between gap-1">
-                                      <span className="text-sm font-medium text-white/90">{subItem.name}</span>
-                                      {subItem.badge && (
-                                        <span className="text-[11px] px-1.5 py-0.5 rounded-full bg-white/10 text-white/80 border border-white/15">
-                                          {subItem.badge}
-                                        </span>
-                                      )}
-                                    </div>
-                                    {subItem.description && (
-                                      <p className="text-xs text-white/40 line-clamp-1 font-light mt-0.5">{subItem.description}</p>
-                                    )}
-                                  </div>
-                                </Link>
-                              );
-                            })}
+                          <div>
+                            <div className="text-sm font-bold text-[#0F172A]">
+                              {group.label}
+                            </div>
+                            <div className="text-[11px] text-[#64748B]">
+                              {group.thaiLabel}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  }
+                        <ChevronDown
+                          className={cn(
+                            "w-4 h-4 text-[#64748B] transition-transform duration-200",
+                            isExpanded && "rotate-180 text-[#0F172A]"
+                          )}
+                        />
+                      </button>
 
-                  // Mobile: Regular Links
-                  const Icon = route.icon;
-                  return (
-                    <Link 
-                      key={route.name}
-                      href={route.href || ""}
-                      className={cn(
-                        "font-prompt text-base font-normal text-white/80 px-4 py-2.5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2.5",
-                        isTeal
-                          ? "hover:text-teal-400 hover:bg-teal-500/5 border border-transparent hover:border-teal-500/20 hover:shadow-[0_0_15px_rgba(20,184,166,0.3)]"
-                          : isPurple
-                          ? "hover:text-purple-400 hover:bg-purple-500/5 border border-transparent hover:border-purple-500/20 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
-                          : isCyan 
-                          ? "hover:text-cyan-400 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.25)]"
-                          : "hover:text-amber-400 hover:bg-amber-400/5 border border-transparent hover:border-amber-400/20 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)]"
+                      {isExpanded && (
+                        <div className="px-3 pb-3 pt-1 flex flex-col gap-1.5 border-t border-[#F1F5F9]">
+                          {group.items.map((item) => {
+                            const IconComp = ICON_MAP[item.icon];
+                            return (
+                              <Link
+                                key={item.id}
+                                href={item.href}
+                                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#FAF8F5] transition-colors"
+                              >
+                                <div
+                                  className={cn(
+                                    "w-9 h-9 rounded-xl border flex items-center justify-center shrink-0 mt-0.5",
+                                    getPillarIconStyles(group.pillar)
+                                  )}
+                                >
+                                  <IconComp className="w-4 h-4" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center justify-between gap-1.5">
+                                    <span className="text-sm font-semibold text-[#0F172A] truncate">
+                                      {item.label}
+                                    </span>
+                                    {item.badge && (
+                                      <span
+                                        className={cn(
+                                          "text-[10px] font-semibold px-2 py-0.5 rounded-full border shrink-0",
+                                          getBadgeStyles(item.badgeTone)
+                                        )}
+                                      >
+                                        {item.badge}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <p className="text-xs text-[#475569] line-clamp-1 mt-0.5">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </Link>
+                            );
+                          })}
+                        </div>
                       )}
-                    >
-                      {Icon && <Icon className="w-5 h-5 shrink-0 opacity-70" />}
-                      {route.name}
-                    </Link>
+                    </div>
                   );
                 })}
-                
+
+                {/* Mobile Freebies & Auth */}
+                <Link
+                  href="/freebies"
+                  className="mt-2 flex items-center justify-between px-4 py-3 rounded-2xl bg-[#FEF3C7] text-[#78350F] border border-[#FDE68A] font-prompt text-sm font-bold"
+                >
+                  <span className="flex items-center gap-2">
+                    <Gift className="w-4 h-4" />
+                    คลังของแจกฟรี (Freebies)
+                  </span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </Link>
+
                 {user ? (
-                   <>
-                     <Link 
-                       href="/dashboard" 
-                       className="font-prompt text-base font-normal text-white/80 hover:text-cyan-400 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.25)] px-4 py-2.5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 active:scale-95 flex items-center gap-2.5 mt-2"
-                     >
-                        <LayoutDashboard className="w-5 h-5 text-white/70" /> แผงควบคุม
-                     </Link>
-                     <button
-                        type="button"
-                        onClick={handleLogout}
-                        className="mt-6 inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-rose-400/30 bg-rose-500/10 py-2.5 font-prompt text-sm font-medium text-rose-300 transition-all hover:bg-rose-500/20 hover:shadow-[0_0_18px_rgba(244,63,94,0.25)] active:scale-95"
-                     >
-                        <LogOut className="h-4 w-4" /> ออกจากระบบ
-                     </button>
-                   </>
+                  <div className="flex flex-col gap-2 mt-2">
+                    <Link
+                      href="/dashboard"
+                      className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0F172A] text-white font-prompt text-sm font-semibold"
+                    >
+                      <LayoutDashboard className="w-4 h-4" />
+                      แผงควบคุมสมาชิก
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#FFF1F2] text-[#BE123C] border border-[#FECDD3] font-prompt text-sm font-semibold cursor-pointer"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      ออกจากระบบ
+                    </button>
+                  </div>
                 ) : (
                   <Link
                     href="/login"
-                    className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-linear-to-r from-blue-600 via-blue-500 to-cyan-400 py-2.5 font-prompt text-sm font-medium text-white shadow-[0_0_20px_rgba(59,130,246,0.45)] transition-all active:scale-95"
+                    className="mt-2 flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0F172A] text-white font-prompt text-sm font-semibold"
                   >
-                    <LogIn className="h-4 w-4" /> เข้าสู่ระบบ
+                    <LogIn className="w-4 h-4" />
+                    เข้าสู่ระบบ / คอนโซล
                   </Link>
                 )}
               </div>
             </SheetContent>
           </Sheet>
         </div>
-
       </div>
-    </nav>
+
+      {/* Desktop 2-Column Floating Mega Menu Panel */}
+      {activeGroup && (
+        <div
+          id={`mega-menu-${activeGroup.id}`}
+          onMouseEnter={() => openDesktopMenu(activeGroup.id)}
+          onMouseLeave={scheduleCloseDesktopMenu}
+          className="hidden lg:block absolute left-0 right-0 top-full pt-2 px-6 pointer-events-none"
+        >
+          <div className="max-w-[820px] mx-auto pointer-events-auto bg-white border border-[#E2E8F0] rounded-[20px] shadow-[0_20px_50px_rgba(15,23,42,0.10)] p-5 animate-in fade-in slide-in-from-top-1 duration-150">
+            <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#F1F5F9]">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono font-bold text-[#94A3B8]">
+                  {activeGroup.number}
+                </span>
+                <span className="font-prompt text-sm font-bold text-[#0F172A]">
+                  {activeGroup.label}
+                </span>
+                <span className="text-xs font-prompt text-[#64748B]">
+                  · {activeGroup.thaiLabel}
+                </span>
+              </div>
+              <span className="text-[11px] font-prompt text-[#64748B]">
+                AiAon Creative Studio
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2.5">
+              {activeGroup.items.map((item) => {
+                const IconComp = ICON_MAP[item.icon];
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    onClick={() => setActivePillarId(null)}
+                    className="group flex items-start gap-3.5 p-3 rounded-2xl border border-transparent hover:border-[#E2E8F0] hover:bg-[#FAF8F5] transition-all"
+                  >
+                    <div
+                      className={cn(
+                        "w-[42px] h-[42px] rounded-[13px] border flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105",
+                        getPillarIconStyles(activeGroup.pillar)
+                      )}
+                    >
+                      <IconComp className="w-5 h-5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-prompt text-sm font-semibold text-[#0F172A] group-hover:text-[#2563EB] transition-colors truncate">
+                          {item.label}
+                        </span>
+                        {item.badge && (
+                          <span
+                            className={cn(
+                              "text-[10px] font-prompt font-semibold px-2 py-0.5 rounded-full border shrink-0",
+                              getBadgeStyles(item.badgeTone)
+                            )}
+                          >
+                            {item.badge}
+                          </span>
+                        )}
+                      </div>
+                      <p className="font-prompt text-xs text-[#475569] line-clamp-1 mt-0.5">
+                        {item.description}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
   );
 }
