@@ -24,7 +24,7 @@ import { FaLine } from "react-icons/fa6";
 import { EDU_CATALOG, getEduOrderLineUrl } from "@/lib/eduCatalog";
 
 type AudienceMode = "home" | "class";
-type GoalFilterId = "all" | "bb01" | "rt01" | "ef01" | "mu01" | "vl01";
+type GoalFilterId = "all" | "bb01" | "rt01" | "ef01" | "mu01" | "vl01" | "ac01";
 
 const GOAL_FILTERS: {
   id: GoalFilterId;
@@ -36,9 +36,16 @@ const GOAL_FILTERS: {
   {
     id: "all",
     age: "ทุกช่วงวัย 3–6 ปี",
-    goal: "ดูครบทั้ง 5 เล่ม Live",
-    emoji: "🐾",
-    desc: "แสดงสื่อการสอน Hybrid QR ครบทั้ง 5 ชุดพร้อมใช้งานในจักรวาลแก๊ง 6 แมว",
+    goal: "ครบทั้ง 6/6 เล่ม Live!",
+    emoji: "👑",
+    desc: "แสดงสื่อการสอน Hybrid QR ครบสมบูรณ์ทั้ง 6 ชุดในจักรวาลแก๊ง 6 แมว (192 หน้า)",
+  },
+  {
+    id: "ac01",
+    age: "วัย 3–6 ปี",
+    goal: "ศิลปะ & พลังใจ SEL / เด็กขี้อาย",
+    emoji: "🎨",
+    desc: "จานสี 6 อารมณ์ + วาดรูป 4 ขั้น + ผสมแม่สี + หุ่นนิ้วมือ & แอนิเมชันหายใจ 4-4-4 กับน้องดำ",
   },
   {
     id: "vl01",
@@ -83,7 +90,7 @@ const HOW_IT_WORKS = [
     icon: Download,
     colorBg: "bg-amber-100 text-amber-800 border-amber-200",
     title: "โหลดไฟล์ PDF ทันที",
-    desc: "รับลิงก์ไฟล์ความละเอียดสูงทันทีหลังโอน หรือกดโหลดชุดทดลองฟรี 25 หน้า (ครบ 5 เล่ม) ไปลองปริ้นท์ดูก่อน 0 ฿",
+    desc: "รับลิงก์ไฟล์ความละเอียดสูงทันทีหลังโอน หรือกดโหลดชุดทดลองฟรี 30 หน้า (ครบ 6 เล่ม) ไปลองปริ้นท์ดูก่อน 0 ฿",
   },
   {
     step: "02",
@@ -186,14 +193,14 @@ export function EduHubClient() {
                   className="inline-flex items-center gap-1.5 text-amber-800 hover:text-amber-950 underline underline-offset-4"
                 >
                   <Download className="w-4 h-4 text-amber-600" />
-                  <span>ทดลองโหลดฟรีครบ 5 เล่ม รวม 25 หน้า (0 ฿ ไม่ต้องสมัคร)</span>
+                  <span>ทดลองโหลดฟรีครบ 6 เล่ม รวม 30 หน้า (0 ฿ ไม่ต้องสมัคร)</span>
                 </a>
                 <a
                   href="#mega-bundle"
                   className="inline-flex items-center gap-1.5 text-emerald-700 hover:text-emerald-900 underline underline-offset-4"
                 >
                   <Gift className="w-4 h-4 text-emerald-600" />
-                  <span>โปรเหมาสุดคุ้ม 249฿ / 399฿ (ครบ 5 เล่ม)</span>
+                  <span>โปรเหมาสุดคุ้ม 249฿ / 449฿ (ครบ 6 เล่ม)</span>
                 </a>
               </div>
             </div>
@@ -207,10 +214,10 @@ export function EduHubClient() {
                 />
                 <div className="bg-white/95 backdrop-blur-sm border-t border-amber-100 px-4 py-2.5 flex items-center justify-between gap-2 text-xs">
                   <span className="font-bold text-slate-800">
-                    🐾 แก๊ง 6 แมว • 5/6 เล่ม Live เต็มระบบ (160 หน้า)
+                    👑 แก๊ง 6 แมว • 6/6 เล่ม Live ครบสมบูรณ์ (192 หน้า)
                   </span>
                   <span className="rounded-full bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 font-bold text-emerald-800 shrink-0">
-                    ฟรี 25 หน้า!
+                    ฟรี 30 หน้า!
                   </span>
                 </div>
               </div>
@@ -374,10 +381,10 @@ export function EduHubClient() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B]">
-                คลังสื่อการสอน 5/6 เล่ม Live (iAon Edu-Verse)
+                คลังสื่อการสอนครบจักรวาล 6/6 เล่ม Live (iAon Edu-Verse)
               </h2>
               <p className="text-sm text-slate-600 mt-1">
-                คลิกเข้าหน้าแต่ละเล่มเพื่อใช้งานเครื่องมือ Hybrid QR และดาวน์โหลดชุดทดลองฟรี (ครบ 5 เล่ม รวม 25 หน้า!)
+                คลิกเข้าหน้าแต่ละเล่มเพื่อใช้งานเครื่องมือ Hybrid QR และดาวน์โหลดชุดทดลองฟรี (ครบ 6 เล่ม รวม 30 หน้า!)
               </p>
             </div>
 
@@ -423,7 +430,9 @@ export function EduHubClient() {
                       ? "border-pink-200 bg-white hover:border-pink-400"
                       : item.accent === "teal"
                         ? "border-teal-200 bg-white hover:border-teal-400"
-                        : "border-purple-200 bg-white hover:border-purple-400";
+                        : item.accent === "indigo"
+                          ? "border-indigo-200 bg-white hover:border-indigo-400"
+                          : "border-purple-200 bg-white hover:border-purple-400";
 
               const topTint =
                 item.accent === "amber"
@@ -434,7 +443,9 @@ export function EduHubClient() {
                       ? "bg-pink-50/70 border-pink-100"
                       : item.accent === "teal"
                         ? "bg-[#F0FDFA] border-teal-100"
-                        : "bg-purple-50/70 border-purple-100";
+                        : item.accent === "indigo"
+                          ? "bg-[#EEF2FF] border-indigo-100"
+                          : "bg-purple-50/70 border-purple-100";
 
               const ringAccent =
                 item.accent === "amber"
@@ -445,7 +456,9 @@ export function EduHubClient() {
                       ? "ring-pink-400"
                       : item.accent === "teal"
                         ? "ring-teal-500"
-                        : "ring-purple-400";
+                        : item.accent === "indigo"
+                          ? "ring-indigo-500"
+                          : "ring-purple-400";
 
               const ctaBg =
                 item.accent === "rose"
@@ -454,9 +467,11 @@ export function EduHubClient() {
                     ? "bg-pink-600 hover:bg-pink-700 text-white"
                     : item.accent === "teal"
                       ? "bg-teal-600 hover:bg-teal-700 text-white"
-                      : item.accent === "fuchsia"
-                        ? "bg-purple-600 hover:bg-purple-700 text-white"
-                        : "bg-amber-400 hover:bg-amber-500 text-slate-950";
+                      : item.accent === "indigo"
+                        ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+                        : item.accent === "fuchsia"
+                          ? "bg-purple-600 hover:bg-purple-700 text-white"
+                          : "bg-amber-400 hover:bg-amber-500 text-slate-950";
 
               const activePrice =
                 audience === "home" ? item.priceHomeThb : item.priceClassThb;
@@ -763,41 +778,41 @@ export function EduHubClient() {
               </a>
             </div>
 
-            {/* Option 2: All-5 Universe Bundle (399 THB — Save 126 THB!) */}
+            {/* Option 2: Complete 6-Book Universe Bundle (449 THB — Save 175 THB!) */}
             <div className="rounded-2xl border-2 border-amber-300 bg-white p-5 sm:p-6 flex flex-col justify-between gap-5 shadow-md">
               <div className="space-y-4">
                 <div className="flex items-center justify-between gap-2 flex-wrap">
                   <span className="rounded-full bg-amber-400 px-3 py-1 text-xs font-extrabold text-slate-950">
-                    🔥 เหมาครบจักรวาล 5 เล่ม Live (ประหยัด 126 ฿)
+                    👑 เหมาครบจักรวาล 6/6 เล่ม Live (ประหยัด 175 ฿)
                   </span>
                   <span className="text-xs font-mono font-bold text-amber-900 bg-amber-50 border border-amber-200 rounded-full px-2.5 py-0.5">
-                    160 หน้า • 20 PDF
+                    192 หน้า • 24 PDF
                   </span>
                 </div>
 
                 <div>
                   <h3 className="text-xl font-extrabold text-[#1E293B]">
-                    All-5 Universe Bundle (EF01 + RT01 + BB01 + MU01 + VL01)
+                    All-6 Complete Universe Bundle (แก๊ง 6 แมวครบทุกเล่ม!)
                   </h3>
                   <div className="mt-2 flex items-baseline gap-2.5 flex-wrap">
                     <span className="text-4xl font-extrabold text-amber-700">
-                      399 ฿
+                      449 ฿
                     </span>
                     <span className="text-sm text-slate-400 line-through">
-                      525 ฿
+                      624 ฿
                     </span>
                     <span className="text-xs font-semibold text-slate-600">
-                      (เฉลี่ยเพียงเล่มละ 79.8 ฿!)
+                      (เฉลี่ยเพียงเล่มละ 74.8 ฿!)
                     </span>
                   </div>
                 </div>
 
                 <ul className="space-y-2 text-sm text-slate-700">
                   {[
-                    "ได้ครบทั้ง 5 เล่ม Live เต็มระบบ (EF01 + RT01 + BB01 + MU01 + VL01 = 160 หน้า)",
-                    "รวมเล่มใหม่ EDU-VL01 น้องบ๊อบ Phonics A–Z + 27 แฟลชการ์ด + กระดานเสียง A–Z!",
-                    "ครบทั้ง 5/5 เว็บแอป Hybrid QR ไร้โฆษณา (Focus, Routine, Brush, Music Studio, Phonics)",
-                    "ครบ 20 ไฟล์ PDF (TH/EN × สี/ขาวดำ) ปริ้นท์ซ้ำได้ตลอดชีพในครอบครัว",
+                    "ได้ครบสมบูรณ์ทั้ง 6 เล่ม (EF01 + RT01 + BB01 + MU01 + VL01 + AC01 = 192 หน้า)",
+                    "รวมเล่มปิดจักรวาล EDU-AC01 น้องดำศิลปะ & พลังใจ SEL + ห้องผสมสี & หายใจ 4-4-4!",
+                    "ครบทั้ง 6/6 เว็บแอป Hybrid QR ไร้โฆษณา ใช้ได้ตลอดชีพทุกอุปกรณ์",
+                    "ครบ 24 ไฟล์ PDF (TH/EN × สี/ขาวดำประหยัดหมึก) ปริ้นท์ซ้ำได้ไม่จำกัดในครอบครัว",
                   ].map((line) => (
                     <li key={line} className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
@@ -809,8 +824,8 @@ export function EduHubClient() {
 
               <a
                 href={getEduOrderLineUrl({
-                  sku: "EDU-VL01",
-                  edition: "ALL5_BUNDLE",
+                  sku: "EDU-AC01",
+                  edition: "ALL6_BUNDLE",
                   lang: "th",
                 })}
                 target="_blank"
@@ -818,7 +833,7 @@ export function EduHubClient() {
                 className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-amber-400 hover:bg-amber-500 px-5 py-3.5 text-base font-bold text-slate-950 shadow-sm transition-colors"
               >
                 <FaLine className="w-5 h-5 text-[#047857] shrink-0" />
-                <span>สั่งซื้อ All-5 Bundle ครบ 5 เล่ม (399 ฿) ทาง LINE</span>
+                <span>สั่งซื้อ All-6 Bundle ครบ 6 เล่ม (449 ฿) ทาง LINE</span>
               </a>
             </div>
           </div>

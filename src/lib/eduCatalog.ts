@@ -6,7 +6,7 @@ export interface EduSkuItem {
   sku: string;
   slug: string;
   status: "live" | "coming_soon";
-  accent: "amber" | "rose" | "pink" | "fuchsia" | "teal";
+  accent: "amber" | "rose" | "pink" | "fuchsia" | "teal" | "indigo";
   characterNameTh: string;
   characterNameEn: string;
   titleTh: string;
@@ -164,6 +164,33 @@ export const EDU_CATALOG: EduSkuItem[] = [
     badgeTh: "พร้อมใช้งาน • กระดานเสียง A–Z",
     badgeEn: "Live Now • A–Z Soundboard",
   },
+  {
+    sku: "EDU-AC01",
+    slug: "ac01",
+    status: "live",
+    accent: "indigo",
+    characterNameTh: "น้องดำ (มิดไนท์)",
+    characterNameEn: "Midnight",
+    titleTh: "สตูดิโอศิลปะ & พลังใจอ่อนโยนกับน้องดำ — เล่ม 1",
+    titleEn: "Midnight's Art, Craft & Gentle Feelings Studio — Level 1",
+    subtitleTh:
+      "จานสี 6 อารมณ์ SEL + วาดรูป 4 ขั้น 6 ภาพ + ผสมแม่สี + มงกุฎ/หุ่นนิ้วมือ + การ์ด SEL 9 ใบ + เว็บผสมสี & หายใจ 4-4-4 (ขอบ 20mm)",
+    subtitleEn:
+      "6-Feeling Wheel + 4-Step Drawing + Color Mixing + Puppets & 9 SEL Cards + Live Color Mixer & Breathing Studio",
+    ageRangeTh: "อายุ 3–6 ปี (อนุบาล 1 – เตรียม ป.1)",
+    ageRangeEn: "Ages 3–6 (Pre-K to Grade 1)",
+    pages: 32,
+    heroImage: "/edu/midnight-3d.webp",
+    coverImage: "/edu/ac01/mockup-01-cover.webp",
+    freebieThUrl: "/edu/ac01/EDU-AC01_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/ac01/EDU-AC01_Freebie_5Pages_EN.pdf",
+    priceHomeThb: 99,
+    priceHomeUsd: "$4.99",
+    priceClassThb: 199,
+    priceClassUsd: "$9.99",
+    badgeTh: "พร้อมใช้งาน • ผสมสี & หายใจ 4-4-4",
+    badgeEn: "Live Now • Color Mixer & SEL",
+  },
 ];
 
 export type EduOrderEdition =
@@ -173,6 +200,7 @@ export type EduOrderEdition =
   | "TRIO_LIVE"
   | "ALL4_BUNDLE"
   | "ALL5_BUNDLE"
+  | "ALL6_BUNDLE"
   | "MEGA_BUNDLE"
   | "BUNDLE";
 
@@ -184,6 +212,14 @@ export function getEduOrderLineUrl(params: {
   const { sku, edition, lang } = params;
   const item =
     EDU_CATALOG.find((entry) => entry.sku === sku) ?? EDU_CATALOG[0];
+
+  if (edition === "ALL6_BUNDLE") {
+    const msg =
+      lang === "th"
+        ? `สวัสดีครับครูอ้น สนใจสั่งซื้อโปรเหมาครบจักรวาลแก๊ง 6 แมว 6/6 เล่ม Live iAon Edu-Verse (Home Edition):\n👑 1) EDU-EF01 น้องแซลมอน EF (32 หน้า + Focus Timer)\n👑 2) EDU-RT01 แม่ใหญ่สร้างวินัย 30 วัน (32 หน้า + Routine Timer)\n👑 3) EDU-BB01 น้องชาบู Busy Book 45 การ์ด (32 หน้า + Brush Timer)\n👑 4) EDU-MU01 น้องข้าวต้มดนตรี (32 หน้า + ห้องซ้อม 6 แทร็ก)\n👑 5) EDU-VL01 น้องบ๊อบภาษา & Phonics (32 หน้า + กระดานเสียง A–Z)\n👑 6) EDU-AC01 น้องดำศิลปะ & พลังใจ SEL (32 หน้า + ผสมสี & หายใจ 4-4-4)\n💰 ราคาโปรเหมาครบ 6 เล่ม: 449 ฿ (จากปกติ 624 ฿ • ประหยัด 175 ฿ • ครบ 192 หน้า 24 ไฟล์ TH/EN สี+ขาวดำ)\nรบกวนขอเลขพร้อมเพย์เพื่อรับไฟล์ PDF ทันทีครับ 🙏`
+        : `Hi Teacher Aon! I'd like to order the Complete 6-Book Universe Bundle (Home Edition — 192 Pages / 24 PDFs):\n👑 EF01 + RT01 + BB01 + MU01 + VL01 + AC01 (All 6 Live Hybrid QR Kits!)\n💰 Bundle Price: 449 THB ($21.99)\nPlease share payment & download instructions!`;
+    return getLineOrderUrl(msg);
+  }
 
   if (edition === "ALL5_BUNDLE") {
     const msg =
