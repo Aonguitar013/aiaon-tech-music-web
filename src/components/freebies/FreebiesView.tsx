@@ -404,6 +404,30 @@ function renderFreebie3DMockup(freebie: Freebie) {
   );
 }
 
+const TONES: Record<string, { text: string; border: string; bg: string; groupHover: string }> = {
+  emerald: { text: "text-emerald-700", border: "border-emerald-300", bg: "bg-emerald-50", groupHover: "group-hover:text-emerald-700" },
+  rose: { text: "text-rose-700", border: "border-rose-300", bg: "bg-rose-50", groupHover: "group-hover:text-rose-700" },
+  cyan: { text: "text-cyan-700", border: "border-cyan-300", bg: "bg-cyan-50", groupHover: "group-hover:text-cyan-700" },
+  purple: { text: "text-purple-700", border: "border-purple-300", bg: "bg-purple-50", groupHover: "group-hover:text-purple-700" },
+  amber: { text: "text-amber-700", border: "border-amber-300", bg: "bg-amber-50", groupHover: "group-hover:text-amber-700" },
+  pink: { text: "text-pink-700", border: "border-pink-300", bg: "bg-pink-50", groupHover: "group-hover:text-pink-700" },
+  blue: { text: "text-blue-700", border: "border-blue-300", bg: "bg-blue-50", groupHover: "group-hover:text-blue-700" },
+  orange: { text: "text-orange-700", border: "border-orange-300", bg: "bg-orange-50", groupHover: "group-hover:text-orange-700" },
+  teal: { text: "text-teal-700", border: "border-teal-300", bg: "bg-teal-50", groupHover: "group-hover:text-teal-700" },
+  sky: { text: "text-sky-700", border: "border-sky-300", bg: "bg-sky-50", groupHover: "group-hover:text-sky-700" },
+  indigo: { text: "text-indigo-700", border: "border-indigo-300", bg: "bg-indigo-50", groupHover: "group-hover:text-indigo-700" },
+  violet: { text: "text-violet-700", border: "border-violet-300", bg: "bg-violet-50", groupHover: "group-hover:text-violet-700" },
+  red: { text: "text-red-700", border: "border-red-300", bg: "bg-red-50", groupHover: "group-hover:text-red-700" },
+  slate: { text: "text-slate-700", border: "border-slate-300", bg: "bg-slate-50", groupHover: "group-hover:text-slate-700" },
+};
+
+/** Light-surface tone for a freebie (Brand Bible V2.0: AA contrast on white) */
+function toneFor(f: { text_color: string }) {
+  const m = /text-([a-z]+)-\d+/.exec(f.text_color || "");
+  return TONES[m?.[1] ?? "slate"] ?? TONES.slate;
+}
+
+
 function FreebieCard({
   freebie,
   onUnlockPrompt,
@@ -415,6 +439,7 @@ function FreebieCard({
 }) {
   const Icon = (Icons as unknown as Record<string, React.ElementType>)[freebie.icon_name || "Gift"] || Icons.Gift;
   const freebieDetail = getFreebieDetail(freebie);
+  const t = toneFor(freebie);
 
   return (
     <motion.div
@@ -430,7 +455,7 @@ function FreebieCard({
         style={{ background: `radial-gradient(ellipse at center, ${freebie.glow_color}, transparent 70%)` }}
       />
 
-      <div className="relative glass-card border-white/8 group-hover:border-white/20 p-6 sm:p-7 rounded-3xl flex flex-col gap-5 h-full transition-all duration-300 bg-slate-900/80 backdrop-blur-md">
+      <div className="relative bg-white shadow-sm border-[#E2E8F0] group-hover:border-[#CBD5E1] p-6 sm:p-7 rounded-3xl flex flex-col gap-5 h-full transition-all duration-300 ">
 
         {/* Header row with badges */}
         <div className="flex items-start justify-between gap-3">
@@ -443,13 +468,13 @@ function FreebieCard({
 
           {/* Badges */}
           <div className="flex flex-wrap gap-1.5 justify-end">
-            <span className={`text-[11px] font-prompt font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${freebie.border_color} ${freebie.text_color} bg-white/5`}>
+            <span className={`text-[11px] font-prompt font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${t.border} ${t.text} ${t.bg}`}>
               {freebie.file_type}
             </span>
-            <span className="text-[11px] font-prompt font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-white/10 text-white/50 bg-black/30">
+            <span className="text-[11px] font-prompt font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-[#E2E8F0] text-[#64748B] bg-[#FAF8F5]">
               {freebie.file_size}
             </span>
-            <span className="text-[11px] font-prompt font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.25)]">
+            <span className="text-[11px] font-prompt font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 shadow-[0_0_12px_rgba(16,185,129,0.25)]">
               🎁 ฟรี 100%
             </span>
           </div>
@@ -468,48 +493,48 @@ function FreebieCard({
         <div className="flex-1 space-y-2">
           <h3 
             onClick={() => onViewDetails(freebie)}
-            className={`font-prompt text-lg sm:text-xl font-bold text-white group-hover:${freebie.text_color} transition-colors duration-300 leading-snug cursor-pointer flex items-center justify-between gap-2`}
+            className={`font-prompt text-lg sm:text-xl font-bold text-[#0F172A] ${t.groupHover} transition-colors duration-300 leading-snug cursor-pointer flex items-center justify-between gap-2`}
           >
             <span>{freebie.title}</span>
-            <span className="shrink-0 text-white/40 group-hover:text-cyan-400 transition-colors text-xs font-normal font-prompt flex items-center gap-1">
+            <span className="shrink-0 text-[#64748B] group-hover:text-cyan-700 transition-colors text-xs font-normal font-prompt flex items-center gap-1">
               <Eye className="w-3.5 h-3.5" />
               <span>ดูข้อมูล</span>
             </span>
           </h3>
-          <p className="font-prompt text-xs sm:text-sm text-white/70 leading-relaxed">
+          <p className="font-prompt text-xs sm:text-sm text-[#475569] leading-relaxed">
             {freebie.description}
           </p>
         </div>
 
         {/* Tag & Category Metadata */}
-        <div className="flex items-center justify-between pt-2 border-t border-white/5 text-xs font-prompt">
-          <span className={`${freebie.text_color} font-semibold flex items-center gap-1.5`}>
+        <div className="flex items-center justify-between pt-2 border-t border-[#E2E8F0] text-xs font-prompt">
+          <span className={`${t.text} font-semibold flex items-center gap-1.5`}>
             <Sparkles className="w-3.5 h-3.5" />
             <span>{freebie.tag}</span>
           </span>
-          <span className="text-white/40 font-mono text-[11px]">
+          <span className="text-[#64748B] font-mono text-[11px]">
             FREE RESOURCE
           </span>
         </div>
 
         {/* Prominent Price Tag: 0 บาท */}
-        <div className="flex items-center justify-between pt-3 pb-1 px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/10 shadow-inner">
+        <div className="flex items-center justify-between pt-3 pb-1 px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] shadow-inner">
           <div>
-            <div className="text-[11px] font-prompt text-white/40 line-through">
+            <div className="text-[11px] font-prompt text-[#64748B] line-through">
               ราคาปกติ ฿{freebieDetail.originalPrice.toLocaleString()}
             </div>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-2xl sm:text-3xl font-black font-prompt text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 drop-shadow-[0_0_15px_rgba(52,211,153,0.35)]">
+              <span className="text-2xl sm:text-3xl font-black font-prompt text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-teal-600">
                 0 บาท
               </span>
-              <span className="text-xs font-bold font-prompt text-emerald-400">
+              <span className="text-xs font-bold font-prompt text-emerald-700">
                 (แจกฟรี)
               </span>
             </div>
           </div>
           <div className="text-right">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-prompt text-xs font-extrabold shadow-[0_0_14px_rgba(16,185,129,0.3)]">
-              <Tag className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-700 font-prompt text-xs font-extrabold shadow-[0_0_14px_rgba(16,185,129,0.3)]">
+              <Tag className="w-3.5 h-3.5 text-emerald-700" />
               <span>ราคา 0 บาท</span>
             </span>
           </div>
@@ -520,9 +545,9 @@ function FreebieCard({
           <button
             type="button"
             onClick={() => onViewDetails(freebie)}
-            className="py-3 px-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 hover:border-white/30 text-white font-bold font-prompt text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer hover:scale-[1.02] active:scale-95 shadow-md"
+            className="py-3 px-3.5 rounded-2xl bg-[#FAF8F5] hover:bg-[#F1ECE4] border border-[#E2E8F0] hover:border-[#CBD5E1] text-[#0F172A] font-bold font-prompt text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer hover:scale-[1.02] active:scale-95 shadow-md"
           >
-            <Eye className="w-4 h-4 text-cyan-400" />
+            <Eye className="w-4 h-4 text-cyan-700" />
             <span>ดูรายละเอียด</span>
           </button>
           
@@ -530,9 +555,9 @@ function FreebieCard({
             type="button"
             onClick={() => onUnlockPrompt(freebie)}
             className={`py-3 px-3.5 rounded-2xl border flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold font-prompt tracking-wide transition-all duration-300 cursor-pointer shadow-lg active:scale-95
-              ${freebie.border_color} ${freebie.text_color} ${freebie.bg_color}
-              hover:brightness-125`}
-            style={{ boxShadow: `0 0 10px ${freebie.glow_color}` }}
+              ${t.border} ${t.text} ${t.bg}
+              hover:brightness-95`}
+            style={{ boxShadow: `0 6px 16px -8px ${freebie.glow_color}` }}
           >
             <Download className="w-4 h-4" />
             <span>ดาวน์โหลดฟรี (0 ฿)</span>
@@ -658,7 +683,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-purple-500/30 bg-purple-500/5 text-purple-400 text-sm font-medium"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border-purple-300 bg-purple-50 text-purple-700 text-sm font-medium"
             >
               <Gift className="w-4 h-4" />
               <span>Free Resources — ดาวน์โหลดฟรี ไม่มีค่าใช้จ่าย</span>
@@ -668,10 +693,10 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-prompt text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight"
+              className="font-prompt text-4xl md:text-6xl font-bold tracking-tight text-[#0F172A] leading-tight"
             >
               คลัง
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-400 to-rose-400 drop-shadow-[0_0_20px_rgba(168,85,247,0.35)]">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-700 via-pink-600 to-rose-600">
                 {" "}ของแจกฟรี
               </span>
             </motion.h1>
@@ -680,7 +705,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base md:text-lg text-white/55 font-prompt leading-relaxed max-w-xl mx-auto"
+              className="text-base md:text-lg text-[#64748B] font-prompt leading-relaxed max-w-xl mx-auto"
             >
               รวบรวมทรัพยากรดิจิทัลคุณภาพสูงทั้งด้านเทคโนโลยีและดนตรี
               ดาวน์โหลดโค้ดและทรัพยากรฟรีทันทีเพียงแอด LINE OA
@@ -699,8 +724,8 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
                 { value: "4.9★", label: "คะแนนจากผู้ใช้" },
               ].map((s) => (
                 <div key={s.label} className="flex flex-col items-center gap-0.5">
-                  <span className="font-prompt text-xl font-bold text-white">{s.value}</span>
-                  <span className="font-prompt text-xs text-white/35 uppercase tracking-wider">{s.label}</span>
+                  <span className="font-prompt text-xl font-bold text-[#0F172A]">{s.value}</span>
+                  <span className="font-prompt text-xs text-[#64748B] uppercase tracking-wider">{s.label}</span>
                 </div>
               ))}
             </motion.div>
@@ -713,7 +738,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
             transition={{ duration: 0.5, delay: 0.35 }}
             className="flex items-center justify-center gap-2 mb-12"
           >
-            <Filter className="w-4 h-4 text-white/30 mr-1" />
+            <Filter className="w-4 h-4 text-[#64748B] mr-1" />
             {TABS.map((tab) => {
               const TabIcon = tab.icon;
               const isActive = activeTab === tab.value;
@@ -724,7 +749,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
                   className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-prompt font-medium transition-all duration-250 ${
                     isActive
                       ? "bg-linear-to-r from-purple-600 to-pink-500 text-white shadow-[0_0_20px_rgba(168,85,247,0.35)]"
-                      : "glass-card border-white/8 text-white/50 hover:text-white hover:border-white/15"
+                      : "bg-white shadow-sm border-[#E2E8F0] text-[#64748B] hover:text-[#0F172A] hover:border-[#CBD5E1]"
                   }`}
                 >
                   <TabIcon className="w-3.5 h-3.5" />
@@ -756,7 +781,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
           </AnimatePresence>
 
           {/* ── Permanent Bottom Impulse Upgrade Section ───── */}
-          <FreebieUpsellSection className="mt-16 sm:mt-24" />
+          <div className="mt-16 sm:mt-24 rounded-[2rem] bg-[#0B1220] text-white p-4 sm:p-8"><FreebieUpsellSection className="" /></div>
 
           {/* ── CTA for LINE Community ─────────────────────── */}
           <motion.div
@@ -764,17 +789,17 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.2 }}
-            className="mt-20 glass-card border-[#06C755]/20 p-8 md:p-12 text-center relative overflow-hidden"
+            className="mt-20 bg-white shadow-sm border-[#E2E8F0] p-8 md:p-12 text-center relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-linear-to-br from-[#06C755]/5 to-emerald-500/5 pointer-events-none" />
             <div className="relative z-10 space-y-5 max-w-lg mx-auto">
               <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-[#06C755] to-emerald-600 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(6,199,85,0.4)]">
                 <RiLineLine className="w-8 h-8 text-white" />
               </div>
-              <h3 className="font-prompt text-2xl font-bold text-white">
+              <h3 className="font-prompt text-2xl font-bold text-[#0F172A]">
                 แอด LINE OA @deu6776s รับอัปเดตโค้ดฟรีทุกสัปดาห์
               </h3>
-              <p className="text-white/60 font-prompt text-sm leading-relaxed">
+              <p className="text-[#64748B] font-prompt text-sm leading-relaxed">
                 รับการแจ้งเตือนสคริปต์ใหม่ บทเรียนการสอนฟรี และรหัสส่วนลดพิเศษเฉพาะใน LINE
               </p>
               <a

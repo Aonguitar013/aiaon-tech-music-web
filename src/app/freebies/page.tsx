@@ -182,5 +182,5 @@ export default async function FreebiesPage() {
   // Merge built-in real systems with optional database freebies (controlled non-destructively via SHOW_DB_FREEBIES)
   const combinedFreebies = [...REAL_BUILTIN_FREEBIES, ...dbFreebies];
 
-  return <PillarThemeWrapper pillar="studio" surface="dark"><FreebiesView initialFreebies={combinedFreebies} /></PillarThemeWrapper>;
+  return <PillarThemeWrapper pillar="studio"><FreebiesView initialFreebies={combinedFreebies} /></PillarThemeWrapper>;
 }
