@@ -42,5 +42,5 @@ export default async function DigitalVaultPage() {
 
   const universalProducts = transformDigitalVaultProducts(products || []);
 
-  return <PillarThemeWrapper pillar="tech" surface="dark"><DigitalVaultView initialProducts={universalProducts} /></PillarThemeWrapper>;
+  return <PillarThemeWrapper pillar="tech"><DigitalVaultView initialProducts={universalProducts} /></PillarThemeWrapper>;
 }

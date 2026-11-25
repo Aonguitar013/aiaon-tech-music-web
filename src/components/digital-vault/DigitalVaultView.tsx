@@ -131,27 +131,24 @@ function HardwareGadgetsSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="mt-28 border-t border-white/10 pt-20 relative"
+      className="mt-24 border-t border-[#E2E8F0] pt-16 relative"
       id="hardware-gadgets"
     >
-      {/* Glow backgrounds */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-500/5 blur-[150px] rounded-full pointer-events-none" />
-
       {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-amber-500/30 bg-amber-500/8 text-amber-400 text-sm font-prompt font-semibold">
-          <Cpu className="w-4 h-4 text-amber-400" />
+      <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FEF9EF] border border-[#FDE68A] text-[#92400E] text-sm font-prompt font-semibold">
+          <Cpu className="w-4 h-4 text-[#D97706]" />
           <span>iAon Tech Approved Hardware &amp; Studio Gadgets</span>
         </div>
 
-        <h2 className="font-prompt text-3xl md:text-5xl font-extrabold text-white leading-tight">
+        <h2 className="font-prompt text-3xl md:text-5xl font-extrabold text-[#0F172A] leading-tight">
           อุปกรณ์ไอที &amp; สตูดิโอที่{" "}
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-orange-400 to-yellow-300 drop-shadow-[0_0_20px_rgba(245,158,11,0.4)]">
+          <span className="text-[#D97706]">
             ครูอ้นใช้และแนะนำจริง
           </span>
         </h2>
 
-        <p className="text-white/60 font-prompt text-base leading-relaxed max-w-xl mx-auto">
+        <p className="text-[#475569] font-prompt text-base leading-relaxed max-w-xl mx-auto">
           คัดสรรเฉพาะอุปกรณ์คุณภาพสูงสำหรับจัดโต๊ะทำงาน อัดคลิป อบรมออนไลน์ และทำคอนเทนต์ เพื่อประสิทธิภาพที่ดีที่สุดในการทำงาน
         </p>
       </div>
@@ -169,75 +166,64 @@ function HardwareGadgetsSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group relative h-full flex flex-col"
             >
-              {/* Glow overlay on hover */}
               <div
-                className="absolute -inset-0.5 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: `radial-gradient(ellipse at center, ${item.glowColor}, transparent 70%)`,
-                }}
-              />
-
-              <div
-                className={cn(
-                  "relative glass-card flex flex-col h-full p-6 bg-zinc-950/80 border transition-all duration-300 group-hover:border-white/20 group-hover:translate-y-[-4px]",
-                  item.borderColor
-                )}
+                className="relative flex flex-col h-full p-6 rounded-3xl bg-white border border-[#E2E8F0] shadow-sm transition-all duration-300 group-hover:border-[#CBD5E1] group-hover:shadow-md group-hover:-translate-y-1"
               >
                 {/* Badge */}
                 <div className="flex justify-between items-center mb-4">
                   <span
                     className={cn(
-                      "px-3 py-1 rounded-full text-[11px] font-prompt font-bold text-white bg-linear-to-r shadow-md",
+                      "px-3 py-1 rounded-full text-[11px] font-prompt font-bold text-white bg-linear-to-r shadow-xs",
                       item.badgeGradient
                     )}
                   >
                     {item.badge}
                   </span>
-                  <span className="text-[11px] font-prompt text-white/40 uppercase tracking-wider">
+                  <span className="text-[11px] font-prompt text-[#64748B] uppercase tracking-wider">
                     {item.category}
                   </span>
                 </div>
 
                 {/* Header Icon + Title */}
                 <div className="flex items-start gap-3 mb-3">
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-white shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <IconComp className={cn("w-6 h-6", item.textColor)} />
+                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] shrink-0 group-hover:scale-105 transition-transform duration-300">
+                    <IconComp className="w-6 h-6 text-[#2563EB]" />
                   </div>
                   <div>
-                    <h3 className="font-prompt text-lg font-bold text-white leading-snug group-hover:text-amber-300 transition-colors">
+                    <h3 className="font-prompt text-lg font-bold text-[#0F172A] leading-snug group-hover:text-[#2563EB] transition-colors">
                       {item.title}
                     </h3>
                   </div>
                 </div>
 
-                <div className="mb-4 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-amber-300 text-xs font-prompt font-medium flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 shrink-0 text-amber-400" />
+                <div className="mb-4 px-3 py-1.5 rounded-lg bg-[#FEF9EF] border border-[#FDE68A] text-[#92400E] text-xs font-prompt font-medium flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 shrink-0 text-[#D97706]" />
                   <span>{item.tag}</span>
                 </div>
 
-                <p className="font-prompt text-xs text-white/70 leading-relaxed mb-4">
+                <p className="font-prompt text-xs text-[#475569] leading-relaxed mb-4">
                   {item.description}
                 </p>
 
                 <ul className="space-y-2 mb-6 flex-1">
                   {item.highlights.map((hl, i) => (
-                    <li key={i} className="flex items-start gap-2 text-xs font-prompt text-white/80">
-                      <CheckCircle2 className={cn("w-3.5 h-3.5 shrink-0 mt-0.5", item.textColor)} />
+                    <li key={i} className="flex items-start gap-2 text-xs font-prompt text-[#1E293B]">
+                      <CheckCircle2 className="w-3.5 h-3.5 shrink-0 mt-0.5 text-[#0F766E]" />
                       <span>{hl}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-auto pt-4 border-t border-white/10">
+                <div className="mt-auto pt-4 border-t border-[#F1F5F9]">
                   <a
                     href={item.shopeeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3 px-4 rounded-xl bg-linear-to-r from-[#FF5722] to-[#EE4D2D] hover:from-[#f04812] hover:to-[#d83c1c] text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(255,87,34,0.35)] hover:shadow-[0_0_30px_rgba(255,87,34,0.5)] border border-amber-400/20 cursor-pointer"
+                    className="w-full py-3 px-4 rounded-xl bg-linear-to-r from-[#FF5722] to-[#EE4D2D] hover:from-[#f04812] hover:to-[#d83c1c] text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-sm cursor-pointer"
                   >
                     <ShoppingBag className="w-4 h-4 fill-white/20 text-white shrink-0" />
                     <span>เช็กราคาบน Shopee</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-white/80 shrink-0" />
+                    <ExternalLink className="w-3.5 h-3.5 text-white/90 shrink-0" />
                   </a>
                 </div>
               </div>
@@ -349,10 +335,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
   });
 
   return (
-    <div className="min-h-screen text-white pt-8 md:pt-12 pb-20 relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto font-prompt">
-      
-      {/* Background Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-purple-500/10 blur-[140px] rounded-full pointer-events-none" />
+    <div className="min-h-screen text-[#1E293B] pt-8 md:pt-12 pb-20 relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto font-prompt">
 
       {/* Main Content Area */}
       <div className="relative z-10">
@@ -363,9 +346,9 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border-purple-500/30 bg-purple-500/10 text-purple-300 text-xs font-prompt font-semibold"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] text-xs font-prompt font-semibold"
           >
-            <ShoppingBag className="w-4 h-4 text-purple-400" />
+            <ShoppingBag className="w-4 h-4 text-[#2563EB]" />
             <span>DIGITAL VAULT — คลัง {initialProducts.length} ระบบโรงเรียนมาตรฐานสากล (ใช้ได้ทุกวิชา ทุกระดับชั้น)</span>
           </motion.div>
 
@@ -373,10 +356,10 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-prompt text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight"
+            className="font-prompt text-4xl md:text-6xl font-extrabold tracking-tight text-[#0F172A] leading-tight"
           >
             คลังระบบอัตโนมัติ{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 via-pink-400 to-amber-300 drop-shadow-[0_0_25px_rgba(168,85,247,0.35)]">
+            <span className="text-[#2563EB]">
               ช่วยผ่อนแรงครู
             </span>
           </motion.h1>
@@ -385,23 +368,23 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base md:text-lg text-white/70 font-prompt leading-relaxed max-w-2xl mx-auto"
+            className="text-base md:text-lg text-[#475569] font-prompt leading-relaxed max-w-2xl mx-auto"
           >
             รวบรวมระบบ Google Apps Script พร้อมคู่มือภาษาไทย 2 นาที รันบน Google Workspace ตัวเอง ปลอดภัย 100% ไร้ค่าบริการรายเดือน
           </motion.p>
 
           {/* Value Highlights Pill Bar */}
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-xs font-prompt">
-            <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2 text-xs font-prompt">
+            <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
               <span>ตรวจสลิปผ่าน AI อนุมัติใน 2 วิ</span>
             </span>
-            <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800 font-medium flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-blue-600" />
               <span>ดาวน์โหลดไฟล์ผ่าน OneDrive ทันที</span>
             </span>
-            <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+            <span className="px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-900 font-medium flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-amber-600" />
               <span>มีออปชันให้ครูอ้นติดตั้งให้ (VIP Setup)</span>
             </span>
           </div>
@@ -416,28 +399,28 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
         >
           <Link 
             href="/bundles" 
-            className="block p-4 sm:p-5 rounded-2xl bg-linear-to-r from-purple-950/70 via-indigo-950/50 to-pink-950/70 border border-purple-500/40 hover:border-purple-400 shadow-[0_0_30px_rgba(168,85,247,0.2)] hover:shadow-[0_0_40px_rgba(168,85,247,0.35)] transition-all group"
+            className="block p-5 sm:p-6 rounded-3xl bg-white border border-[#BFDBFE] hover:border-[#2563EB] shadow-sm hover:shadow-md transition-all group"
           >
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-300 shrink-0 group-hover:scale-110 transition-transform">
-                  <Sparkles className="w-6 h-6 text-purple-300 animate-pulse" />
+                <div className="w-12 h-12 rounded-2xl bg-[#EFF6FF] border border-[#BFDBFE] flex items-center justify-center text-[#2563EB] shrink-0 group-hover:scale-105 transition-transform">
+                  <Sparkles className="w-6 h-6 text-[#2563EB]" />
                 </div>
                 <div>
                   <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
-                    <span className="px-2 py-0.5 rounded text-[11px] font-prompt font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                    <span className="px-2 py-0.5 rounded text-[11px] font-prompt font-bold bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]">
                       👑 LIFETIME DEAL
                     </span>
-                    <p className="font-prompt text-sm sm:text-base font-extrabold text-white group-hover:text-purple-300 transition-colors">
+                    <p className="font-prompt text-sm sm:text-base font-extrabold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
                       เหมาคลัง 20 ระบบตลอดชีพ (ประหยัดสูงสุด 51%)
                     </p>
                   </div>
-                  <p className="font-prompt text-xs text-white/60">
+                  <p className="font-prompt text-xs text-[#475569]">
                     จ่ายเพียง 4,990 ฿ ได้ครบทั้ง 20 ระบบ + สิทธิ์รับทุกระบบใหม่ตลอดชีพ พร้อมซัพพอร์ต VIP
                   </p>
                 </div>
               </div>
-              <span className="px-5 py-2.5 rounded-xl bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-prompt text-xs font-bold shrink-0 inline-flex items-center gap-1.5 shadow-lg group-hover:scale-105 transition-transform">
+              <span className="px-5 py-2.5 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] text-white font-prompt text-xs font-bold shrink-0 inline-flex items-center gap-1.5 shadow-sm group-hover:scale-105 transition-transform">
                 <span>ดูแพ็กเกจ Bundle</span>
                 <ArrowRight className="w-4 h-4" />
               </span>
@@ -445,11 +428,11 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
           </Link>
         </motion.div>
 
-        {/* --- ZERO-TECH NO-BRAINER BUNDLES (3 มหาบันเดิลสุดคุ้ม) --- */}
-        <NoBrainerBundles className="py-4 sm:py-6 mb-4" />
-
-        {/* --- STUDENT VAULT PROMOTION (อาวุธลับวัยเรียน ม.ปลาย & ป.ตรี) --- */}
-        <StudentVaultPromotionSection className="py-2 sm:py-4 mb-6" />
+        {/* --- ZERO-TECH NO-BRAINER BUNDLES & STUDENT VAULT (Dark Showcase Tray) --- */}
+        <div className="rounded-[2rem] bg-[#0B1220] text-white p-4 sm:p-8 mb-10 border border-[#E2E8F0] shadow-sm space-y-6">
+          <NoBrainerBundles className="py-2 sm:py-4" />
+          <StudentVaultPromotionSection className="py-2" />
+        </div>
 
         {/* --- SETUP DIFFICULTY TIER FILTER --- */}
         <motion.div
@@ -459,8 +442,8 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
           className="mb-8 max-w-4xl mx-auto px-2"
         >
           <div className="flex flex-col items-center gap-3">
-            <div className="text-xs font-prompt font-bold text-white/70 uppercase tracking-wider flex items-center gap-1.5 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full shadow-inner">
-              <Zap className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="text-xs font-prompt font-bold text-[#475569] uppercase tracking-wider flex items-center gap-1.5 bg-white border border-[#E2E8F0] px-3.5 py-1.5 rounded-full shadow-2xs">
+              <Zap className="w-3.5 h-3.5 text-[#0F766E]" />
               <span>เลือกระดับความง่ายในการติดตั้ง &amp; ใช้งาน (Setup Difficulty Tier)</span>
             </div>
 
@@ -475,17 +458,17 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
                     onClick={() => setSetupTierFilter(tier.id)}
                     className={cn(
                       "py-2.5 px-4 sm:px-5 rounded-2xl font-prompt text-xs sm:text-sm font-bold transition-all duration-300 active:scale-95 cursor-pointer flex items-center gap-2 border",
-                      isZeroTech && !isActive && "border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.25)] hover:border-emerald-400 hover:scale-[1.02]",
+                      isZeroTech && !isActive && "border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100",
                       isActive
                         ? tier.activeClass
-                        : !isZeroTech && "bg-white/5 border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20"
+                        : !isZeroTech && "bg-white border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:border-[#CBD5E1] shadow-2xs"
                     )}
                   >
                     <span>{tier.label}</span>
                     <span
                       className={cn(
                         "text-[10px] font-mono px-1.5 py-0.2 rounded-full",
-                        isActive ? "bg-white/20 text-white" : isZeroTech ? "bg-emerald-500/20 text-emerald-300" : "bg-white/10 text-white/50"
+                        isActive ? "bg-white/20 text-white" : isZeroTech ? "bg-emerald-200/70 text-emerald-900" : "bg-[#FAF8F5] text-[#64748B] border border-[#E2E8F0]"
                       )}
                     >
                       {tier.count}
@@ -510,14 +493,14 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
               <button
                 key={cat.id}
                 onClick={() => handleCategoryClick(cat.id)}
-                className={`py-2.5 px-4 sm:px-5 rounded-2xl font-prompt text-xs sm:text-sm font-semibold transition-all duration-300 active:scale-95 cursor-pointer flex items-center gap-2 ${
+                className={`py-2.5 px-4 sm:px-5 rounded-2xl font-prompt text-xs sm:text-sm font-semibold transition-all duration-300 active:scale-95 cursor-pointer flex items-center gap-2 border ${
                   isActive
-                    ? "bg-linear-to-r from-purple-600 via-pink-600 to-rose-500 text-white border border-purple-400/40 shadow-[0_0_25px_rgba(168,85,247,0.45)] scale-105"
-                    : "bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20"
+                    ? "bg-[#1D4ED8] text-white border-[#1D4ED8] shadow-sm scale-105"
+                    : "bg-white border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:border-[#CBD5E1] shadow-2xs"
                 }`}
               >
                 <span>{cat.label}</span>
-                <span className={`text-[11px] font-mono px-1.5 py-0.2 rounded-full ${isActive ? "bg-white/20 text-white" : "bg-white/10 text-white/50"}`}>
+                <span className={`text-[11px] font-mono px-1.5 py-0.2 rounded-full ${isActive ? "bg-white/20 text-white" : "bg-[#FAF8F5] text-[#64748B]"}`}>
                   {cat.count}
                 </span>
               </button>
@@ -530,15 +513,15 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.35 }}
-          className="max-w-3xl mx-auto mb-12"
+          className="max-w-3xl mx-auto mb-10"
         >
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <Search className="w-5 h-5 text-white/40" />
+              <Search className="w-5 h-5 text-[#64748B]" />
             </div>
             <input
               type="text"
-              className="w-full bg-black/40 border border-white/10 hover:border-white/20 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 rounded-2xl py-3.5 pl-12 pr-12 text-white placeholder-white/40 transition-all font-prompt text-sm outline-none shadow-inner"
+              className="w-full bg-white border border-[#E2E8F0] hover:border-[#CBD5E1] focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20 rounded-2xl py-3.5 pl-12 pr-16 text-[#0F172A] placeholder-[#94A3B8] transition-all font-prompt text-sm outline-none shadow-2xs"
               placeholder="ค้นหาชื่อระบบ (เช่น เช็คชื่อ, เกียรติบัตร, ยานพาหนะ, รถโรงเรียน, ลูกเสือ, ดนตรี)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -546,7 +529,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm("")}
-                className="absolute inset-y-0 right-0 pr-4 flex items-center text-xs font-prompt text-white/40 hover:text-white"
+                className="absolute inset-y-0 right-0 pr-4 flex items-center text-xs font-prompt text-[#64748B] hover:text-[#0F172A] cursor-pointer"
               >
                 ล้างคำค้น
               </button>
@@ -554,28 +537,30 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
           </div>
         </motion.div>
 
-        {/* Product Cards Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product, index) => (
-              <ProductCard key={product.id || index} product={product} index={index} />
-            ))
-          ) : (
-            <div className="col-span-full flex flex-col items-center justify-center py-20 text-white/40 glass-card border-white/5">
-              <ShoppingBag className="w-16 h-16 mb-4 opacity-20" />
-              <p className="font-prompt text-lg">ไม่พบระบบที่ตรงกับคำค้นหา</p>
-              <button
-                onClick={() => { setSearchTerm(""); setFilterCategory("All"); setSetupTierFilter("all"); }}
-                className="mt-4 px-5 py-2.5 bg-purple-600/30 border border-purple-500/40 text-purple-300 rounded-xl hover:bg-purple-600/50 font-prompt text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-lg"
-              >
-                ดูระบบทั้งหมด (20 ระบบ)
-              </button>
-            </div>
-          )}
-        </motion.div>
+        {/* Product Cards Grid (Dark Studio Tray for rich product cards) */}
+        <div className="rounded-[2rem] bg-[#0B1220] text-white p-5 sm:p-8 border border-[#E2E8F0] shadow-sm">
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            {filteredProducts.length > 0 ? (
+              filteredProducts.map((product, index) => (
+                <ProductCard key={product.id || index} product={product} index={index} />
+              ))
+            ) : (
+              <div className="col-span-full flex flex-col items-center justify-center py-20 text-white/60">
+                <ShoppingBag className="w-16 h-16 mb-4 opacity-30" />
+                <p className="font-prompt text-lg">ไม่พบระบบที่ตรงกับคำค้นหา</p>
+                <button
+                  onClick={() => { setSearchTerm(""); setFilterCategory("All"); setSetupTierFilter("all"); }}
+                  className="mt-4 px-5 py-2.5 bg-[#2563EB] text-white rounded-xl hover:bg-[#1D4ED8] font-prompt text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-sm"
+                >
+                  ดูระบบทั้งหมด (20 ระบบ)
+                </button>
+              </div>
+            )}
+          </motion.div>
+        </div>
 
         {/* Hardware & Studio Gadgets Section */}
         <HardwareGadgetsSection />

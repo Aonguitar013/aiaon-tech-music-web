@@ -25,5 +25,5 @@ export const metadata: Metadata = {
 };
 
 export default function LineStickersServicePage() {
-  return <PillarThemeWrapper pillar="studio" surface="dark"><LineStickersView /></PillarThemeWrapper>;
+  return <PillarThemeWrapper pillar="studio"><LineStickersView /></PillarThemeWrapper>;
 }

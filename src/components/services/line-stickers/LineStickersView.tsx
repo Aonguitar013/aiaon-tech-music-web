@@ -983,21 +983,16 @@ export function LineStickersView() {
   const activeCaptions = activePortfolio.captions;
 
   return (
-    <div className="min-h-screen bg-[#070913] text-white overflow-x-hidden relative pb-28">
-      {/* Ambient Background Glows */}
-      <div className="absolute top-0 left-1/4 w-[650px] h-[550px] bg-[#06C755]/10 blur-[170px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-[550px] h-[550px] bg-cyan-500/10 blur-[170px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-20 left-1/3 w-[550px] h-[550px] bg-amber-500/10 blur-[170px] rounded-full pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 relative z-10">
+    <div className="min-h-screen text-[#1E293B] overflow-x-hidden relative pb-28">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 relative z-10">
         {/* ─── HERO SECTION ─── */}
-        <div className="text-center max-w-4xl mx-auto mb-16 space-y-6">
+        <div className="text-center max-w-4xl mx-auto mb-14 space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#06C755]/40 bg-[#06C755]/15 text-[#4ade80] font-prompt text-xs sm:text-sm font-bold tracking-wide shadow-[0_0_25px_rgba(6,199,85,0.25)]"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#DDD6FE] bg-[#FAF5FF] text-[#6D28D9] font-prompt text-xs sm:text-sm font-bold tracking-wide"
           >
-            <Sparkles className="w-4 h-4 text-[#4ade80] animate-pulse" />
+            <Sparkles className="w-4 h-4 text-[#7C3AED]" />
             <span>3D LINE STICKER STUDIO • บริการรับทำสติกเกอร์ LINE คาแรกเตอร์ 3D ครบวงจร</span>
           </motion.div>
 
@@ -1005,10 +1000,10 @@ export function LineStickersView() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.08 }}
-            className="font-prompt text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight"
+            className="font-prompt text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0F172A] leading-tight"
           >
             เปลี่ยนรูปถ่ายของคุณ เป็น{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#06C755] via-emerald-300 to-cyan-300 drop-shadow-[0_0_35px_rgba(6,199,85,0.35)]">
+            <span className="text-[#7C3AED]">
               สติกเกอร์ LINE คาแรกเตอร์ 3D สุดเท่
             </span>
           </motion.h1>
@@ -1017,10 +1012,10 @@ export function LineStickersView() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.16 }}
-            className="font-prompt text-base sm:text-lg text-white/75 leading-relaxed max-w-3xl mx-auto"
+            className="font-prompt text-base sm:text-lg text-[#475569] leading-relaxed max-w-3xl mx-auto"
           >
-            รองรับทุกสายอาชีพ! ทั้ง <strong className="text-white">พนักงานออฟฟิศ • แม่ค้าออนไลน์/แบรนด์ร้านค้า • คุณหมอ/พยาบาล • คู่รัก/ลูกน้อย/สัตว์เลี้ยง • นักเรียน • และคุณครู</strong> แค่ส่งรูปถ่าย 1 รูป + จิ้มเลือกโพยคำพูดฮิตบนหน้าเว็บนี้ ครูอ้นดูแลครบวงจรจนขึ้น{" "}
-            <strong className="text-[#4ade80]">LINE STORE</strong> พร้อมแถมไฟล์ PNG พื้นหลังใสความละเอียดสูงเอาไปแต่งปกร้านและสื่อโซเชียลได้ทันที!
+            รองรับทุกสายอาชีพ! ทั้ง <strong className="text-[#0F172A]">พนักงานออฟฟิศ • แม่ค้าออนไลน์/แบรนด์ร้านค้า • คุณหมอ/พยาบาล • คู่รัก/ลูกน้อย/สัตว์เลี้ยง • นักเรียน • และคุณครู</strong> แค่ส่งรูปถ่าย 1 รูป + จิ้มเลือกโพยคำพูดฮิตบนหน้าเว็บนี้ ครูอ้นดูแลครบวงจรจนขึ้น{" "}
+            <strong className="text-[#007A36]">LINE STORE</strong> พร้อมแถมไฟล์ PNG พื้นหลังใสความละเอียดสูงเอาไปแต่งปกร้านและสื่อโซเชียลได้ทันที!
           </motion.p>
 
           <motion.div
@@ -1031,7 +1026,7 @@ export function LineStickersView() {
           >
             <a
               href="#brief-form"
-              className="px-8 py-4 rounded-2xl bg-linear-to-r from-[#06C755] to-emerald-500 hover:from-[#05b34c] hover:to-emerald-400 text-zinc-950 font-prompt font-black text-base flex items-center gap-2.5 shadow-[0_0_30px_rgba(6,199,85,0.4)] transition-all duration-300 hover:scale-105"
+              className="px-8 py-4 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-prompt font-black text-base flex items-center gap-2.5 shadow-sm transition-all duration-300 hover:scale-105"
             >
               <Wand2 className="w-5 h-5" />
               <span>กรอกบรีฟ &amp; อัปโหลดรูปสั่งทำทันที (เริ่ม 990 ฿)</span>
@@ -1041,14 +1036,16 @@ export function LineStickersView() {
               href="https://line.me/S/sticker/38143374"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-7 py-4 rounded-2xl bg-white/5 border border-white/15 hover:border-[#06C755]/50 hover:bg-white/10 text-white font-prompt font-semibold text-sm sm:text-base flex items-center gap-2 transition-all"
+              className="px-7 py-4 rounded-2xl bg-white border border-[#E2E8F0] hover:border-[#7C3AED] hover:bg-[#FAF5FF] text-[#0F172A] font-prompt font-semibold text-sm sm:text-base flex items-center gap-2 transition-all shadow-2xs"
             >
-              <ExternalLink className="w-4 h-4 text-[#4ade80]" />
+              <ExternalLink className="w-4 h-4 text-[#6D28D9]" />
               <span>ดูของจริงบน LINE STORE (ชุดที่ 1 On Sale)</span>
             </a>
           </motion.div>
         </div>
 
+        {/* ─── STUDIO SHOWCASE + PRICING + INTERACTIVE BRIEF BUILDER (Dark Studio Container) ─── */}
+        <div className="mb-20 rounded-[2rem] bg-[#0B1220] text-white p-4 sm:p-8 border border-[#E2E8F0] shadow-sm">
         {/* ─── LIVE PORTFOLIO SHOWCASE (5 REAL PRODUCTION SETS) ─── */}
         <div className="mb-24 rounded-3xl border border-white/10 bg-slate-900/75 backdrop-blur-xl p-6 sm:p-10 shadow-[0_0_60px_rgba(0,0,0,0.5)]">
           <div className="flex flex-col gap-6 mb-8 pb-6 border-b border-white/10">
@@ -1819,43 +1816,44 @@ export function LineStickersView() {
             </form>
           )}
         </div>
+        </div>
 
         {/* ─── WHY CUSTOMERS LOVE THIS (3 VALUE PILLARS) ─── */}
-        <div className="mb-24 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mb-20 grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
               icon: Palette,
               title: "1. คาแรกเตอร์ 3D เอกลักษณ์เฉพาะตัวคุณ",
               desc: "ปั้นจากใบหน้าและบุคลิกจริงของคุณ เลือกใส่ชุดสูทออฟฟิศ ชุดแม่ค้าออนไลน์ ชุดหมอ-พยาบาล ชุดคู่รัก หรือชุดคุณครู พร้อมระบุสีแบรนด์ (CI) และโลโก้บนอกเสื้อได้ตามสั่ง",
-              color: "border-cyan-500/30 bg-cyan-500/5 text-cyan-300",
+              iconClass: "bg-[#FAF5FF] border-[#DDD6FE] text-[#6D28D9]",
             },
             {
               icon: ShieldCheck,
               title: "2. ดูแลส่งตรวจ LINE STORE จนผ่าน 100%",
               desc: "ไม่ต้องปวดหัวกับกฎรูปตกขอบ พื้นหลังไม่ใส หรือการตั้งค่าภาษาอังกฤษใน LINE Creators Market ครูอ้นจัดการแพ็กไฟล์และส่งตรวจให้ครบวงจร (เลือกเปิดสาธารณะหรือซ่อนลิงก์ส่วนตัวได้)",
-              color: "border-[#06C755]/30 bg-[#06C755]/5 text-[#4ade80]",
+              iconClass: "bg-emerald-50 border-emerald-200 text-emerald-700",
             },
             {
               icon: Gift,
               title: "3. ได้ทั้งสติกเกอร์ LINE + คลังภาพ PNG คมชัดสูง",
               desc: "นอกจากได้สติกเกอร์ไว้กดส่งในแชทแล้ว ยังได้รับไฟล์ภาพ PNG พื้นหลังใสความละเอียดสูงครบทุกท่า เอาไปทำปกร้านค้า ป้ายโฆษณา สไลด์นำเสนอ หรือทำคลิป TikTok เชิงพาณิชย์ได้ทันที",
-              color: "border-amber-500/30 bg-amber-500/5 text-amber-300",
+              iconClass: "bg-[#FEF9EF] border-[#FDE68A] text-[#92400E]",
             },
           ].map((item, i) => {
             const IconComp = item.icon;
             return (
               <div
                 key={i}
-                className={`p-6 sm:p-7 rounded-3xl border ${item.color} flex flex-col justify-between`}
+                className="p-6 sm:p-7 rounded-3xl bg-white border border-[#E2E8F0] shadow-sm flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-4">
+                  <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center mb-4 ${item.iconClass}`}>
                     <IconComp className="w-6 h-6" />
                   </div>
-                  <h3 className="font-prompt text-lg sm:text-xl font-extrabold text-white mb-2">
+                  <h3 className="font-prompt text-lg sm:text-xl font-extrabold text-[#0F172A] mb-2">
                     {item.title}
                   </h3>
-                  <p className="font-prompt text-xs sm:text-sm text-white/70 leading-relaxed">
+                  <p className="font-prompt text-xs sm:text-sm text-[#475569] leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -1867,7 +1865,7 @@ export function LineStickersView() {
         {/* ─── FAQ SECTION ─── */}
         <div className="max-w-3xl mx-auto mb-12">
           <div className="text-center mb-8">
-            <h3 className="font-prompt text-2xl sm:text-3xl font-extrabold text-white">
+            <h3 className="font-prompt text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
               คำถามที่พบบ่อย (FAQ)
             </h3>
           </div>
@@ -1899,19 +1897,19 @@ export function LineStickersView() {
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden"
+                  className="rounded-2xl border border-[#E2E8F0] bg-white shadow-2xs overflow-hidden"
                 >
                   <button
                     type="button"
                     onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-white/5 transition-colors"
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#FAF8F5] transition-colors"
                   >
-                    <span className="font-prompt text-sm sm:text-base font-bold text-white flex items-center gap-2.5">
-                      <HelpCircle className="w-4 h-4 text-[#4ade80] shrink-0" />
+                    <span className="font-prompt text-sm sm:text-base font-bold text-[#0F172A] flex items-center gap-2.5">
+                      <HelpCircle className="w-4 h-4 text-[#6D28D9] shrink-0" />
                       <span>{faq.q}</span>
                     </span>
                     <ChevronDown
-                      className={`w-4 h-4 text-white/60 shrink-0 transition-transform ${
+                      className={`w-4 h-4 text-[#64748B] shrink-0 transition-transform ${
                         isOpen ? "rotate-180" : ""
                       }`}
                     />
@@ -1922,7 +1920,7 @@ export function LineStickersView() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="px-5 pb-5 font-prompt text-xs sm:text-sm text-white/70 leading-relaxed border-t border-white/5 pt-3"
+                        className="px-5 pb-5 font-prompt text-xs sm:text-sm text-[#475569] leading-relaxed border-t border-[#F1F5F9] pt-3"
                       >
                         {faq.a}
                       </motion.div>

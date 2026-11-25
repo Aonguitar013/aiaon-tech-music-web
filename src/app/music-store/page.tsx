@@ -24,5 +24,5 @@ export const metadata: Metadata = {
 };
 
 export default function MusicStorePage() {
-  return <PillarThemeWrapper pillar="audio" surface="dark"><MusicStoreView /></PillarThemeWrapper>;
+  return <PillarThemeWrapper pillar="audio"><MusicStoreView /></PillarThemeWrapper>;
 }
