@@ -179,7 +179,7 @@ export function EduHubClient() {
                   className="inline-flex items-center gap-1.5 text-amber-800 hover:text-amber-950 underline underline-offset-4"
                 >
                   <Download className="w-4 h-4 text-amber-600" />
-                  <span>ทดลองโหลดฟรี 15 หน้า (0 ฿ ไม่ต้องสมัคร)</span>
+                  <span>ทดลองโหลดฟรีครบ 4 เล่ม รวม 20 หน้า (0 ฿ ไม่ต้องสมัคร)</span>
                 </a>
                 <a
                   href="#mega-bundle"
@@ -200,10 +200,10 @@ export function EduHubClient() {
                 />
                 <div className="bg-white/95 backdrop-blur-sm border-t border-amber-100 px-4 py-2.5 flex items-center justify-between gap-2 text-xs">
                   <span className="font-bold text-slate-800">
-                    🐾 แก๊ง 6 แมว • 4 เล่มเปิดตัว (128 หน้า)
+                    🐾 แก๊ง 6 แมว • 4/4 เล่ม Live เต็มระบบ (128 หน้า)
                   </span>
                   <span className="rounded-full bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 font-bold text-emerald-800 shrink-0">
-                    ฟรี 15 หน้า!
+                    ฟรี 20 หน้า!
                   </span>
                 </div>
               </div>
@@ -370,7 +370,7 @@ export function EduHubClient() {
                 คลังสื่อการสอนครบ 4 เล่มเปิดตัว (iAon Edu-Verse)
               </h2>
               <p className="text-sm text-slate-600 mt-1">
-                คลิกเข้าหน้าแต่ละเล่มเพื่อใช้งานนาฬิกา Hybrid QR และดาวน์โหลดชุดทดลองฟรี (รวม 15 หน้า)
+                คลิกเข้าหน้าแต่ละเล่มเพื่อใช้งานเครื่องมือ Hybrid QR และดาวน์โหลดชุดทดลองฟรี (ครบ 4 เล่ม รวม 20 หน้า!)
               </p>
             </div>
 
@@ -439,7 +439,9 @@ export function EduHubClient() {
                   ? "bg-rose-600 hover:bg-rose-700 text-white"
                   : item.accent === "pink"
                     ? "bg-pink-600 hover:bg-pink-700 text-white"
-                    : "bg-amber-400 hover:bg-amber-500 text-slate-950";
+                    : item.accent === "fuchsia"
+                      ? "bg-purple-600 hover:bg-purple-700 text-white"
+                      : "bg-amber-400 hover:bg-amber-500 text-slate-950";
 
               const activePrice =
                 audience === "home" ? item.priceHomeThb : item.priceClassThb;
@@ -778,8 +780,8 @@ export function EduHubClient() {
                 <ul className="space-y-2 text-sm text-slate-700">
                   {[
                     "ได้ครบทั้ง 3 เล่มพร้อมใช้ทันที (EF01 + RT01 + BB01 = 96 หน้า)",
-                    "บวกเล่มที่ 4 EDU-MU01 น้องข้าวต้มดนตรี 32 หน้า รับไฟล์ PDF ทันที",
-                    "ปลดล็อก 6 แทร็กเสียงจริงของ MU01 ฟรีอัตโนมัติบนเว็บเมื่อเปิดระบบ",
+                    "บวกเล่มที่ 4 EDU-MU01 น้องข้าวต้มดนตรี 32 หน้า + ห้องซ้อม 6 แทร็ก QR ใช้ได้ทันที!",
+                    "ครบทั้ง 4/4 เว็บแอป Hybrid QR ไร้โฆษณา (Focus, Routine, Brush, 6-Track Music Studio)",
                     "ครบ 16 ไฟล์ PDF (TH/EN × สี/ขาวดำ) ปริ้นท์ซ้ำได้ตลอดชีพในครอบครัว",
                   ].map((line) => (
                     <li key={line} className="flex items-start gap-2">

@@ -113,7 +113,7 @@ export const EDU_CATALOG: EduSkuItem[] = [
   {
     sku: "EDU-MU01",
     slug: "mu01",
-    status: "coming_soon",
+    status: "live",
     accent: "fuchsia",
     characterNameTh: "น้องข้าวต้ม",
     characterNameEn: "Khao Tom",
@@ -128,12 +128,14 @@ export const EDU_CATALOG: EduSkuItem[] = [
     pages: 32,
     heroImage: "/edu/khaotom-3d.webp",
     coverImage: "/edu/mu01/mockup-01-cover.webp",
+    freebieThUrl: "/edu/mu01/EDU-MU01_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/mu01/EDU-MU01_Freebie_5Pages_EN.pdf",
     priceHomeThb: 129,
     priceHomeUsd: "$5.99",
     priceClassThb: 249,
     priceClassUsd: "$12.99",
-    badgeTh: "ไฟล์ 32 หน้าพร้อม • รออัป 6 แทร็กเสียง",
-    badgeEn: "32 Pages Ready • 6 Audio Tracks Soon",
+    badgeTh: "พร้อมใช้งาน • 6 แทร็กเสียง & จังหวะ",
+    badgeEn: "Live Now • 6 Audio Tracks & Beat",
   },
 ];
 
