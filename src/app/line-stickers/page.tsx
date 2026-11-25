@@ -1,3 +1,4 @@
+import { PillarThemeWrapper } from "@/components/layout/PillarThemeWrapper";
 import { LineStickersView } from "@/components/services/line-stickers/LineStickersView";
 import type { Metadata } from "next";
 
@@ -24,5 +25,5 @@ export const metadata: Metadata = {
 };
 
 export default function LineStickersServicePage() {
-  return <LineStickersView />;
+  return <PillarThemeWrapper pillar="studio" surface="dark"><LineStickersView /></PillarThemeWrapper>;
 }

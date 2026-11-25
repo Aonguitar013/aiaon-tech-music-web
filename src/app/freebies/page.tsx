@@ -1,3 +1,4 @@
+import { PillarThemeWrapper } from "@/components/layout/PillarThemeWrapper";
 import { createClient } from "@/utils/supabase/server";
 import { FreebiesView, Freebie } from "@/components/freebies/FreebiesView";
 import type { Metadata } from "next";
@@ -181,5 +182,5 @@ export default async function FreebiesPage() {
   // Merge built-in real systems with optional database freebies (controlled non-destructively via SHOW_DB_FREEBIES)
   const combinedFreebies = [...REAL_BUILTIN_FREEBIES, ...dbFreebies];
 
-  return <FreebiesView initialFreebies={combinedFreebies} />;
+  return <PillarThemeWrapper pillar="studio" surface="dark"><FreebiesView initialFreebies={combinedFreebies} /></PillarThemeWrapper>;
 }

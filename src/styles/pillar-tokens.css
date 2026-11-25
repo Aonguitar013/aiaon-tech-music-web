@@ -211,3 +211,11 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Dark surface variant for legacy white-text pages (opt-in via <PillarThemeWrapper surface="dark">) */
+[data-aiaon-shell][data-surface="dark"] {
+  color-scheme: dark;
+  background-color: #0B1220;
+  color: #FFFFFF;
+  overflow-x: clip;
+}

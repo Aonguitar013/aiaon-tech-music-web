@@ -1,3 +1,4 @@
+import { PillarThemeWrapper } from "@/components/layout/PillarThemeWrapper";
 import { AboutMasterView } from "@/components/about/AboutMasterView";
 import type { Metadata } from "next";
 
@@ -27,5 +28,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <AboutMasterView />;
+  return <PillarThemeWrapper pillar="tech" surface="dark"><AboutMasterView /></PillarThemeWrapper>;
 }

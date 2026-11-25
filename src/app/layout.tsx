@@ -254,7 +254,7 @@ export default function RootLayout({
                 </div>
 
                 {/* Copyright & Legal Links Bar */}
-                <div className="border-t border-[#E2E8F0] mt-10 pt-6 text-[#64748B] font-prompt text-xs relative z-10 flex flex-col md:flex-row items-center justify-between gap-4 max-w-[1240px] mx-auto px-4 sm:px-6">
+                <div className="border-t border-[#E2E8F0] mt-10 pt-6 pb-20 pr-20 text-[#64748B] font-prompt text-xs relative z-10 flex flex-col md:flex-row items-center justify-between gap-4 max-w-[1240px] mx-auto px-4 sm:px-6">
                   <p suppressHydrationWarning>
                     © {new Date().getFullYear()} AiAon Tech Ecosystem · One Universe, Different Worlds.
                   </p>

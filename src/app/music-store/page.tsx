@@ -1,3 +1,4 @@
+import { PillarThemeWrapper } from "@/components/layout/PillarThemeWrapper";
 import { MusicStoreView } from "@/components/music-store/MusicStoreView";
 import type { Metadata } from "next";
 
@@ -23,5 +24,5 @@ export const metadata: Metadata = {
 };
 
 export default function MusicStorePage() {
-  return <MusicStoreView />;
+  return <PillarThemeWrapper pillar="audio" surface="dark"><MusicStoreView /></PillarThemeWrapper>;
 }

@@ -1,3 +1,4 @@
+import { PillarThemeWrapper } from "@/components/layout/PillarThemeWrapper";
 import React from "react";
 import type { Metadata } from "next";
 import { createClient } from "@/utils/supabase/server";
@@ -41,5 +42,5 @@ export default async function DigitalVaultPage() {
 
   const universalProducts = transformDigitalVaultProducts(products || []);
 
-  return <DigitalVaultView initialProducts={universalProducts} />;
+  return <PillarThemeWrapper pillar="tech" surface="dark"><DigitalVaultView initialProducts={universalProducts} /></PillarThemeWrapper>;
 }

@@ -10,7 +10,6 @@ import {
   Code2, FileCheck2, Layers, Disc, Play, Pause, Radio, RefreshCw
 } from "lucide-react";
 import Link from "next/link";
-import { HeroSection } from "@/components/sections/HeroSection";
 import { MultiVaultCarousel } from "@/components/home/MultiVaultCarousel";
 import { NoBrainerBundles } from "@/components/marketplace/NoBrainerBundles";
 import { VinylRecordMockup } from "@/components/music-store/VinylRecordMockup";
@@ -244,8 +243,8 @@ export function HomeView() {
   return (
     <div className="w-full relative overflow-hidden min-h-screen pb-28 font-prompt text-white">
       
-      {/* ── 1. HERO SECTION & TRUST BADGES ───────────────────────── */}
-      <HeroSection />
+      {/* ── 1. Hero moved to BrandHomeIntro (Brand Bible V2.0) ── */}
+      <div className="h-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 sm:space-y-32 relative z-10">
 

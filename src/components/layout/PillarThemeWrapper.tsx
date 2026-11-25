@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 interface PillarThemeWrapperProps {
   pillar: PillarId;
   eduWorld?: string;
+  surface?: "light" | "dark";
   children: React.ReactNode;
   className?: string;
 }
@@ -17,6 +18,7 @@ interface PillarThemeWrapperProps {
 export function PillarThemeWrapper({
   pillar,
   eduWorld,
+  surface = "light",
   children,
   className,
 }: PillarThemeWrapperProps) {
@@ -25,6 +27,7 @@ export function PillarThemeWrapper({
     <div
       data-aiaon-shell=""
       data-pillar={pillar}
+      {...(surface === "dark" ? { "data-surface": "dark" } : {})}
       {...(isEdu ? { "data-edu-theme": "" } : {})}
       {...(eduWorld ? { "data-edu-world": eduWorld } : {})}
       className={cn(
