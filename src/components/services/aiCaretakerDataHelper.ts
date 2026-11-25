@@ -36,7 +36,7 @@ export const AI_CARETAKER_PACKAGES_DATA: AICaretakerPackageItem[] = [
     monthlyFeeText: "990 ฿/เดือน",
     dailyCost: "เฉลี่ยเพียงวันละ 33 บาท!",
     badge: "🟢 เริ่มต้นคุ้มค่า • วันละ 33 ฿",
-    badgeClass: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+    badgeClass: "bg-emerald-50 text-emerald-800 border-emerald-200",
     accentColor: "emerald",
     isPopular: false,
     includes: [

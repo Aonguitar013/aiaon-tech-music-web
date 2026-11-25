@@ -37,7 +37,7 @@ export const BUNDLE_PACKAGES_DATA: BundleItem[] = [
   {
     id: "classroom-pro",
     badge: "🌟 ยอดนิยมสำหรับครูประจำชั้น",
-    badgeColor: "text-cyan-300 border-cyan-500/30 bg-cyan-500/10",
+    badgeColor: "text-cyan-800 border-cyan-200 bg-cyan-50",
     themeColor: "cyan",
     title: "แพ็กครูที่ปรึกษาครบวงจร (Homeroom Pro Pack)",
     tagline: "ชุด 3 ระบบบริหารชั้นเรียน ตรวจระเบียบ & สร้างเล่มห้องเรียนสีขาว 37 หน้า",
@@ -124,7 +124,7 @@ export const BUNDLE_PACKAGES_DATA: BundleItem[] = [
   {
     id: "admin-suite",
     badge: "🏢 ครบเครื่องงานบริหารโรงเรียน",
-    badgeColor: "text-amber-300 border-amber-500/30 bg-amber-500/10",
+    badgeColor: "text-amber-800 border-amber-200 bg-amber-50",
     themeColor: "amber",
     title: "แพ็กบริหารสถานศึกษาไร้กระดาษ (School Admin Suite)",
     tagline: "ชุด 3 ระบบงานบริหาร ยานพาหนะ พัสดุ QR และเกียรติบัตรกันปลอม",
@@ -300,7 +300,7 @@ export const BUNDLE_PACKAGES_DATA: BundleItem[] = [
   {
     id: "scout-activity",
     badge: "🎪 กิจกรรม & ลูกเสือสุดคุ้ม",
-    badgeColor: "text-emerald-300 border-emerald-500/30 bg-emerald-500/10",
+    badgeColor: "text-emerald-800 border-emerald-200 bg-emerald-50",
     themeColor: "emerald",
     title: "Activity & Scout Master Pack",
     tagline: "ชุด 3 ระบบบริหารงานลูกเสือ เช็คเครื่องแบบ และห้องกิจกรรม",
