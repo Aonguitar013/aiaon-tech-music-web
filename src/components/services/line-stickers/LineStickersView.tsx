@@ -984,72 +984,110 @@ export function LineStickersView() {
 
   return (
     <div className="min-h-screen text-[#1E293B] overflow-x-hidden relative pb-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 relative z-10">
-        {/* ─── HERO SECTION ─── */}
-        <div className="text-center max-w-4xl mx-auto mb-14 space-y-6">
-          <div className="flex justify-center">
-            <img
-              src="/brand/svg/aiaon-studio_lockup_horizontal_fullcolor-on-light.svg"
-              alt="AiAon Studio by AiAon Tech"
-              className="h-10 sm:h-12 w-auto"
-            />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 relative z-10">
+        {/* ─── PLAYFUL 3D TOY & CREATIVE GALLERY HERO (AIAON STUDIO) ─── */}
+        <section className="mb-14 rounded-3xl bg-white border border-[#E2E8F0] p-6 sm:p-10 lg:p-12 shadow-sm relative overflow-hidden">
+          <div className="absolute -top-24 -right-24 w-80 h-80 bg-[#7C3AED]/[0.07] blur-3xl rounded-full pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#DB2777]/[0.06] blur-3xl rounded-full pointer-events-none" />
+
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Left: Brand Lockup, Copy & 3-Step Order Journey */}
+            <div className="lg:col-span-7 space-y-5 text-left">
+              <div className="flex flex-wrap items-center gap-3">
+                <img
+                  src="/brand/svg/aiaon-studio_lockup_horizontal_fullcolor-on-light.svg"
+                  alt="AiAon Studio by AiAon Tech"
+                  className="h-9 sm:h-11 w-auto"
+                />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#DDD6FE] bg-[#FAF5FF] text-[#6D28D9] font-prompt text-xs font-bold">
+                  <Sparkles className="w-3.5 h-3.5 text-[#7C3AED]" />
+                  <span>30+ LINE STORE ON SALE</span>
+                </span>
+              </div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45 }}
+                className="font-prompt text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0F172A] leading-[1.15]"
+              >
+                เปลี่ยนรูปถ่ายของคุณ เป็น{" "}
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-[#7C3AED] to-[#DB2777]">
+                  สติกเกอร์ LINE 3D สุดน่ารัก
+                </span>
+              </motion.h1>
+
+              <p className="font-prompt text-sm sm:text-base text-[#475569] leading-relaxed max-w-2xl">
+                ปั้นคาแรกเตอร์ 3D จากรูปถ่ายจริง รองรับทุกสายอาชีพ ทั้ง{" "}
+                <strong className="text-[#0F172A]">คุณครู • ออฟฟิศ • ร้านค้า • คู่รัก • ลูกน้อย • สัตว์เลี้ยง</strong>{" "}
+                ดูแลครบจนอนุมัติขึ้น LINE STORE พร้อมแถมไฟล์ PNG พื้นใสแต่งปกร้านฟรี!
+              </p>
+
+              {/* 3-Step Playful Order Journey */}
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-3 pt-1">
+                {[
+                  { step: "01", title: "ส่งรูปถ่าย 1 ใบ", bg: "bg-[#FAF5FF] border-[#DDD6FE] text-[#6D28D9]" },
+                  { step: "02", title: "จิ้มโพยคำพูดฮิต", bg: "bg-[#FDF2F8] border-[#FBCFE8] text-[#BE185D]" },
+                  { step: "03", title: "รอรับ Gift ใน LINE", bg: "bg-emerald-50 border-emerald-200 text-emerald-800" },
+                ].map((s) => (
+                  <div key={s.step} className={`rounded-2xl border p-3 text-center ${s.bg}`}>
+                    <div className="text-[10px] font-mono font-black opacity-75">STEP {s.step}</div>
+                    <div className="text-xs sm:text-sm font-bold mt-0.5 leading-snug">{s.title}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-2">
+                <a
+                  href="#brief-form"
+                  className="px-7 py-4 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-prompt font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-sm transition-all hover:scale-[1.02]"
+                >
+                  <Wand2 className="w-5 h-5" />
+                  <span>กรอกบรีฟสั่งทำทันที (เริ่ม 990 ฿)</span>
+                </a>
+
+                <a
+                  href="https://line.me/S/sticker/38143374"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-4 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] hover:border-[#7C3AED] hover:bg-[#FAF5FF] text-[#0F172A] font-prompt font-bold text-sm flex items-center justify-center gap-2 transition-all"
+                >
+                  <ExternalLink className="w-4 h-4 text-[#6D28D9]" />
+                  <span>ดูของจริงบน LINE STORE</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Right: 2x2 Playful 3D Toy Pedestal Showcase */}
+            <div className="lg:col-span-5">
+              <div className="grid grid-cols-2 gap-3.5">
+                {[
+                  { src: "/edu/shabu-3d.webp", label: "น้องชาบู 3D", tag: "Sticker + Emoji + Theme", bg: "bg-[#FAF5FF] border-[#DDD6FE]" },
+                  { src: "/edu/salmon-3d.webp", label: "น้องแซลมอน 3D", tag: "3D Plush Vinyl", bg: "bg-[#FEF9EF] border-[#FDE68A]" },
+                  { src: "/edu/khaotom-3d.webp", label: "น้องข้าวต้ม 3D", tag: "On Sale • LINE Store", bg: "bg-[#FDF2F8] border-[#FBCFE8]" },
+                  { src: "/edu/bob-3d.webp", label: "น้องบ๊อบ 3D", tag: "Custom Character", bg: "bg-[#F0FDFA] border-[#99F6E4]" },
+                ].map((toy) => (
+                  <div
+                    key={toy.label}
+                    className={`group rounded-3xl border p-3.5 flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${toy.bg}`}
+                  >
+                    <div className="w-full aspect-square flex items-center justify-center p-1">
+                      <img
+                        src={toy.src}
+                        alt={toy.label}
+                        className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(15,23,42,0.14)] group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="mt-2">
+                      <div className="text-xs font-extrabold text-[#0F172A]">{toy.label}</div>
+                      <div className="text-[10px] font-semibold text-[#64748B]">{toy.tag}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#DDD6FE] bg-[#FAF5FF] text-[#6D28D9] font-prompt text-xs sm:text-sm font-bold tracking-wide"
-          >
-            <Sparkles className="w-4 h-4 text-[#7C3AED]" />
-            <span>บริการรับทำสติกเกอร์ LINE คาแรกเตอร์ 3D ครบวงจร</span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.08 }}
-            className="font-prompt text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0F172A] leading-tight"
-          >
-            เปลี่ยนรูปถ่ายของคุณ เป็น{" "}
-            <span className="text-[#7C3AED]">
-              สติกเกอร์ LINE คาแรกเตอร์ 3D สุดเท่
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.16 }}
-            className="font-prompt text-base sm:text-lg text-[#475569] leading-relaxed max-w-3xl mx-auto"
-          >
-            รองรับทุกสายอาชีพ! ทั้ง <strong className="text-[#0F172A]">พนักงานออฟฟิศ • แม่ค้าออนไลน์/แบรนด์ร้านค้า • คุณหมอ/พยาบาล • คู่รัก/ลูกน้อย/สัตว์เลี้ยง • นักเรียน • และคุณครู</strong> แค่ส่งรูปถ่าย 1 รูป + จิ้มเลือกโพยคำพูดฮิตบนหน้าเว็บนี้ ครูอ้นดูแลครบวงจรจนขึ้น{" "}
-            <strong className="text-[#007A36]">LINE STORE</strong> พร้อมแถมไฟล์ PNG พื้นหลังใสความละเอียดสูงเอาไปแต่งปกร้านและสื่อโซเชียลได้ทันที!
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.24 }}
-            className="flex flex-wrap items-center justify-center gap-4 pt-2"
-          >
-            <a
-              href="#brief-form"
-              className="px-8 py-4 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-prompt font-black text-base flex items-center gap-2.5 shadow-sm transition-all duration-300 hover:scale-105"
-            >
-              <Wand2 className="w-5 h-5" />
-              <span>กรอกบรีฟ &amp; อัปโหลดรูปสั่งทำทันที (เริ่ม 990 ฿)</span>
-            </a>
-
-            <a
-              href="https://line.me/S/sticker/38143374"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-7 py-4 rounded-2xl bg-white border border-[#E2E8F0] hover:border-[#7C3AED] hover:bg-[#FAF5FF] text-[#0F172A] font-prompt font-semibold text-sm sm:text-base flex items-center gap-2 transition-all shadow-2xs"
-            >
-              <ExternalLink className="w-4 h-4 text-[#6D28D9]" />
-              <span>ดูของจริงบน LINE STORE (ชุดที่ 1 On Sale)</span>
-            </a>
-          </motion.div>
-        </div>
+        </section>
 
         {/* ─── LIVE PORTFOLIO SHOWCASE (5 REAL PRODUCTION SETS) ─── */}
         <div className="mb-20 rounded-3xl border border-[#E2E8F0] bg-white p-6 sm:p-10 shadow-sm">
