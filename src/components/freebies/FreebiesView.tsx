@@ -644,7 +644,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
             onClick={() => setSelectedFreebieForDetails(null)}
           >
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-black/85 backdrop-blur-md" />
+            <div className="absolute inset-0 bg-[#0F172A]/50 backdrop-blur-sm" />
 
             {/* Modal Body Container */}
             <motion.div
@@ -652,7 +652,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative z-10 w-full max-w-5xl my-6 bg-slate-950/95 border border-white/10 rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] max-h-[92vh] overflow-y-auto"
+              className="relative z-10 w-full max-w-5xl my-6 bg-[#FAF8F5] border border-[#E2E8F0] rounded-3xl overflow-hidden shadow-2xl max-h-[92vh] overflow-y-auto p-4 sm:p-6"
               onClick={(e) => e.stopPropagation()}
             >
               <FreebieDetailSection
@@ -669,95 +669,143 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
         )}
       </AnimatePresence>
 
-      <div className="w-full relative overflow-hidden min-h-screen pb-24">
+      <div className="w-full relative overflow-hidden min-h-screen bg-[#FAF8F5] pb-24">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 pt-8 sm:pt-12">
 
-        {/* Background glows */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-500/8 blur-[130px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/3" />
-        <div className="absolute top-[40%] right-[-80px] w-[400px] h-[400px] bg-pink-600/8 blur-[120px] rounded-full pointer-events-none" />
+          {/* ── 0-BAHT GIFT BOUTIQUE HERO ────────────────────────── */}
+          <section className="mb-12 rounded-3xl bg-white border border-[#FDE68A] p-6 sm:p-10 lg:p-12 shadow-sm relative overflow-hidden">
+            <div className="absolute -top-24 -right-24 w-80 h-80 bg-amber-400/10 blur-3xl rounded-full pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-emerald-400/10 blur-3xl rounded-full pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-12 md:pt-16">
-
-          {/* ── Hero banner ─────────────────────────────────── */}
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border-purple-300 bg-purple-50 text-purple-700 text-sm font-medium"
-            >
-              <Gift className="w-4 h-4" />
-              <span>Free Resources — ดาวน์โหลดฟรี ไม่มีค่าใช้จ่าย</span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-prompt text-4xl md:text-6xl font-bold tracking-tight text-[#0F172A] leading-tight"
-            >
-              คลัง
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-700 via-pink-600 to-rose-600">
-                {" "}ของแจกฟรี
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base md:text-lg text-[#64748B] font-prompt leading-relaxed max-w-xl mx-auto"
-            >
-              รวบรวมทรัพยากรดิจิทัลคุณภาพสูงทั้งด้านเทคโนโลยีและดนตรี
-              ดาวน์โหลดโค้ดและทรัพยากรฟรีทันทีเพียงแอด LINE OA
-            </motion.p>
-
-            {/* Stats row */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex items-center justify-center gap-8 pt-2"
-            >
-              {[
-                { value: `${initialFreebies.length}`, label: "ไฟล์ให้ดาวน์โหลด" },
-                { value: "100%", label: "ฟรี ไม่มีค่าใช้จ่าย" },
-                { value: "4.9★", label: "คะแนนจากผู้ใช้" },
-              ].map((s) => (
-                <div key={s.label} className="flex flex-col items-center gap-0.5">
-                  <span className="font-prompt text-xl font-bold text-[#0F172A]">{s.value}</span>
-                  <span className="font-prompt text-xs text-[#64748B] uppercase tracking-wider">{s.label}</span>
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              {/* Left Copy */}
+              <div className="lg:col-span-7 space-y-5 text-left">
+                <div className="flex flex-wrap items-center gap-3">
+                  <img
+                    src="/brand/svg/aiaon-tech_lockup_horizontal_fullcolor-on-light.svg"
+                    alt="AiAon Tech"
+                    className="h-8 sm:h-9 w-auto"
+                  />
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FEF3C7] border border-[#FDE68A] text-[#92400E] text-xs font-prompt font-bold">
+                    <Gift className="w-3.5 h-3.5 text-[#D97706]" />
+                    <span>0-BAHT GIFT BOUTIQUE • แจกฟรี 100%</span>
+                  </span>
                 </div>
-              ))}
-            </motion.div>
-          </div>
 
-          {/* ── Filter Tabs ──────────────────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
-            className="flex items-center justify-center gap-2 mb-12"
-          >
-            <Filter className="w-4 h-4 text-[#64748B] mr-1" />
-            {TABS.map((tab) => {
-              const TabIcon = tab.icon;
-              const isActive = activeTab === tab.value;
-              return (
-                <button
-                  key={tab.value}
-                  onClick={() => setActiveTab(tab.value)}
-                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-prompt font-medium transition-all duration-250 ${
-                    isActive
-                      ? "bg-linear-to-r from-purple-600 to-pink-500 text-white shadow-[0_0_20px_rgba(168,85,247,0.35)]"
-                      : "bg-white shadow-sm border-[#E2E8F0] text-[#64748B] hover:text-[#0F172A] hover:border-[#CBD5E1]"
-                  }`}
+                <motion.h1
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45 }}
+                  className="font-prompt text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0F172A] leading-[1.15]"
                 >
-                  <TabIcon className="w-3.5 h-3.5" />
-                  {tab.label}
-                </button>
-              );
-            })}
-          </motion.div>
+                  คลังของแจกฟรี{" "}
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-[#D97706] via-[#EA580C] to-[#E11D48]">
+                    หยิบไปใช้ได้จริง 0 ฿
+                  </span>
+                </motion.h1>
+
+                <p className="text-sm sm:text-base text-[#475569] font-prompt leading-relaxed max-w-2xl">
+                  ลองของจริงก่อนตัดสินใจซื้อ! ครูอ้นแจกฟรีทั้ง{" "}
+                  <strong className="text-[#0F172A]">ซอร์สโค้ดระบบครู Google Apps Script</strong>,{" "}
+                  <strong className="text-[#0F172A]">ชุดคำสั่ง AI</strong>,{" "}
+                  <strong className="text-[#0F172A]">เพลง BGM ปลอดลิขสิทธิ์</strong> และ{" "}
+                  <strong className="text-[#0F172A]">ใบงานเด็กเล็กฟรี 30 หน้า</strong> ไม่มีข้อผูกมัด
+                </p>
+
+                {/* Verified Stats */}
+                <div className="grid grid-cols-3 gap-3 pt-2 max-w-md">
+                  {[
+                    { value: `${initialFreebies.length}+`, label: "ไฟล์ระบบ & เพลงฟรี" },
+                    { value: "30 หน้า", label: "ใบงานเด็กเล็กฟรี" },
+                    { value: "0 ฿", label: "ไม่มีค่าใช้จ่าย" },
+                  ].map((s) => (
+                    <div key={s.label} className="rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] px-3.5 py-2.5">
+                      <div className="font-prompt text-lg sm:text-xl font-extrabold text-[#0F172A]">{s.value}</div>
+                      <div className="font-prompt text-[11px] text-[#64748B]">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right: Visual Gift Trio */}
+              <div className="lg:col-span-5 grid grid-cols-2 gap-3">
+                <Link
+                  href="/edu"
+                  className="col-span-2 group relative rounded-2xl overflow-hidden border border-amber-200 bg-[#FEF9EF] aspect-[16/9] block shadow-2xs hover:shadow-md transition-all"
+                >
+                  <img
+                    src="/edu/hero-banner-6cats.webp"
+                    alt="แจกฟรีใบงานเด็กเล็ก 30 หน้า"
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/85 via-[#0F172A]/35 to-transparent p-3.5 flex items-end justify-between gap-2">
+                    <div>
+                      <span className="inline-block px-2 py-0.5 rounded-full bg-amber-400 text-[#0F172A] text-[10px] font-extrabold mb-1">
+                        🎁 ฟรี 30 หน้า (ครบ 6 เล่ม)
+                      </span>
+                      <div className="text-white font-bold text-xs sm:text-sm">
+                        ใบงานเด็กเล็ก AiAon Edu-Verse
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-white shrink-0 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+
+                <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] bg-[#FAF8F5] aspect-[4/3]">
+                  <img
+                    src="/images/mockups/aona09_repair_telegram_mockup.jpg"
+                    alt="ระบบครู GAS แจกฟรี"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/85 to-transparent p-2.5">
+                    <span className="text-white text-[11px] font-bold block">ระบบครู &amp; โค้ดฟรี</span>
+                  </div>
+                </div>
+
+                <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] bg-[#FAF8F5] aspect-[4/3]">
+                  <img
+                    src="/images/mockups/indie_folk_guitar_cover.png"
+                    alt="เพลง BGM แจกฟรี"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/85 to-transparent p-2.5">
+                    <span className="text-white text-[11px] font-bold block">BGM &amp; แทร็กฟรี</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ── Clean Filter Toolbar ─────────────────────────────── */}
+          <div className="rounded-2xl bg-white border border-[#E2E8F0] p-3.5 sm:p-4 shadow-2xs mb-8 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#64748B] mr-1">
+                <Filter className="w-3.5 h-3.5" />
+                <span>หมวดของฟรี:</span>
+              </span>
+              {TABS.map((tab) => {
+                const TabIcon = tab.icon;
+                const isActive = activeTab === tab.value;
+                return (
+                  <button
+                    key={tab.value}
+                    onClick={() => setActiveTab(tab.value)}
+                    className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-prompt font-bold transition-all cursor-pointer border ${
+                      isActive
+                        ? "bg-[#0F172A] text-white border-[#0F172A]"
+                        : "bg-[#FAF8F5] border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:bg-slate-100"
+                    }`}
+                  >
+                    <TabIcon className="w-3.5 h-3.5" />
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
+            <span className="text-xs font-mono text-[#64748B]">
+              พบ <strong className="text-[#0F172A]">{filteredFreebies.length}</strong> รายการแจกฟรี
+            </span>
+          </div>
 
           {/* ── Cards Grid ────────────────────────────────────── */}
           <AnimatePresence mode="wait">
