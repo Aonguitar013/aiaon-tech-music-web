@@ -156,18 +156,15 @@ export default function RootLayout({
                 <div className="max-w-[1240px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-4 gap-10 text-left relative z-10 w-full">
                   {/* Brand */}
                   <div className="space-y-3.5 md:col-span-1">
-                    <div className="inline-flex items-center gap-2.5">
-                      <svg aria-hidden="true" width="30" height="24" viewBox="0 0 64 52" className="shrink-0">
-                        <circle cx="15" cy="8" r="6" fill="#22D3EE" />
-                        <path d="M10 19h13L10 49H0zm6 30L36 5q5-7 10 0l18 44H50L40 24 29 49z" fill="#2563EB" />
-                        <path d="M34 36h13l6 13H43z" fill="#0EA5E9" />
-                      </svg>
-                      <h2 className="font-prompt text-xl font-bold tracking-tight text-[#0F172A]">
-                        AiAon <span className="text-[#2563EB]">Tech</span>
-                      </h2>
-                    </div>
+                    <a href="/" aria-label="AiAon Tech" className="inline-block">
+                      <img
+                        src="/brand/svg/aiaon-tech_lockup_tagline_fullcolor-on-light.svg"
+                        alt="AiAon Tech — Intelligent Technology. More Human Life."
+                        className="h-11 w-auto"
+                      />
+                    </a>
                     <p className="text-[#475569] text-sm font-prompt leading-relaxed">
-                      Intelligent Technology. More Human Life. — สตูดิโอนวัตกรรม สื่อการสอน และงานดนตรี โดย ครูอ้น (Teacher · Musician · Maker)
+                      สตูดิโอนวัตกรรม สื่อการสอน และงานดนตรี โดย ครูอ้น (Teacher · Musician · Maker)
                     </p>
                   </div>
 
@@ -179,10 +176,10 @@ export default function RootLayout({
                     <ul className="space-y-2 text-[#475569] text-sm font-prompt">
                       <li><a href="/digital-vault" className="hover:text-[#2563EB] transition-colors">01 คลังระบบโรงเรียน (Digital Vault)</a></li>
                       <li><a href="/krurank" className="hover:text-[#2563EB] transition-colors">01 ทำเนียบครูผู้ช่วย (KruRank AI)</a></li>
-                      <li><a href="/edu" className="hover:text-[#92400E] font-medium text-[#0F172A] transition-colors">02 สื่อเด็กเล็ก Hybrid QR (iAon Edu-Verse)</a></li>
+                      <li><a href="/edu" className="hover:text-[#92400E] font-medium text-[#0F172A] transition-colors">02 สื่อเด็กเล็ก Hybrid QR (AiAon Edu-Verse)</a></li>
                       <li><a href="/ebooks" className="hover:text-[#92400E] transition-colors">02 คลัง E-Book ครูไทย &amp; ติวสอบ</a></li>
-                      <li><a href="/line-stickers" className="hover:text-[#6D28D9] transition-colors">03 สติกเกอร์ LINE 3D &amp; อิโมจิ</a></li>
-                      <li><a href="/music-store" className="hover:text-[#0F766E] transition-colors">03 ร้านเพลงช่วยจำ &amp; BGM คลิป ว.PA</a></li>
+                      <li><a href="/line-stickers" className="hover:text-[#6D28D9] transition-colors">03 สติกเกอร์ LINE 3D &amp; อิโมจิ (AiAon Studio)</a></li>
+                      <li><a href="/music-store" className="hover:text-[#0F766E] transition-colors">03 ร้านเพลงช่วยจำ &amp; BGM (AiAon Audio)</a></li>
                     </ul>
                   </div>
 
@@ -194,7 +191,8 @@ export default function RootLayout({
                     <ul className="space-y-2 text-[#475569] text-sm font-prompt">
                       <li><a href="/bundles" className="hover:text-[#2563EB] transition-colors">แพ็กเกจเหมาสุดคุ้ม (Bundles)</a></li>
                       <li><a href="/freebies" className="hover:text-[#92400E] transition-colors">ของแจกฟรี (Freebies)</a></li>
-                      <li><a href="/about" className="hover:text-[#0F172A] transition-colors">เกี่ยวกับครูอ้น (About iAon)</a></li>
+                      <li><a href="/about" className="hover:text-[#0F172A] transition-colors">เกี่ยวกับครูอ้น (About AiAon)</a></li>
+                      <li><a href="/brand/AiAon_Brand_Kit_v2.0.zip" download className="hover:text-[#2563EB] transition-colors">ดาวน์โหลด Brand Kit V2.0 (.ZIP)</a></li>
                       <li><a href="/terms" className="hover:text-[#0F172A] transition-colors">เงื่อนไขการใช้งาน (Terms)</a></li>
                       <li><a href="/privacy" className="hover:text-[#0F172A] transition-colors">นโยบายความเป็นส่วนตัว (PDPA)</a></li>
                       <li><a href="/refund" className="hover:text-[#0F172A] transition-colors">นโยบายการคืนเงิน (Refund)</a></li>

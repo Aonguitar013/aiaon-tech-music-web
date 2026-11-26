@@ -221,29 +221,17 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
       )}
     >
       <div className="max-w-[1240px] mx-auto flex h-[66px] lg:h-[74px] items-center justify-between gap-3 px-4 sm:px-6">
-        {/* Master Brand Logo (Geometric iA Monogram + AiAon Tech) */}
+        {/* Master Brand Logo (Official Outlined SVG — AiAon Brand Kit V2.0) */}
         <Link
           href="/"
           aria-label="AiAon Tech — หน้าแรก"
-          className="shrink-0 inline-flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] rounded-xl py-1 pr-2"
+          className="shrink-0 inline-flex items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] rounded-xl py-1 pr-2"
         >
-          <svg
-            aria-hidden="true"
-            width="34"
-            height="28"
-            viewBox="0 0 64 52"
-            className="shrink-0 transition-transform duration-200 group-hover:scale-105"
-          >
-            <circle cx="15" cy="8" r="6" fill="#22D3EE" />
-            <path
-              d="M10 19h13L10 49H0zm6 30L36 5q5-7 10 0l18 44H50L40 24 29 49z"
-              fill="#2563EB"
-            />
-            <path d="M34 36h13l6 13H43z" fill="#0EA5E9" />
-          </svg>
-          <span className="font-prompt text-[19px] font-bold tracking-tight text-[#0F172A] whitespace-nowrap">
-            AiAon <span className="text-[#2563EB]">Tech</span>
-          </span>
+          <img
+            src="/brand/svg/aiaon-tech_lockup_horizontal_fullcolor-on-light.svg"
+            alt="AiAon Tech"
+            className="h-8 sm:h-9 w-auto transition-transform duration-200 group-hover:scale-[1.02]"
+          />
         </Link>
 
         {/* Desktop 4-Pillar Mega Navigation (>= 1024px) */}

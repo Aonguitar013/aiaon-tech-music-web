@@ -137,9 +137,16 @@ export function EduHubClient() {
         <section className="relative rounded-3xl border border-amber-200/90 bg-gradient-to-br from-[#FEF9EF] via-white to-[#FFF5F5] overflow-hidden shadow-lg shadow-amber-900/5">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
             <div className="lg:col-span-7 p-6 sm:p-10 space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-3.5 py-1 text-xs font-bold text-amber-900">
-                <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                <span>iAon EDU-VERSE • สื่อเด็กเล็ก 3–6 ปี มาตรฐานครูตัวจริง</span>
+              <div className="flex flex-wrap items-center gap-3">
+                <img
+                  src="/brand/svg/aiaon-edu_lockup_horizontal_fullcolor-on-light.svg"
+                  alt="AiAon Edu-Verse by AiAon Tech"
+                  className="h-9 sm:h-11 w-auto"
+                />
+                <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-amber-50 px-3 py-1 text-xs font-bold text-amber-900">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                  <span>สื่อเด็กเล็ก 3–6 ปี มาตรฐานครูตัวจริง</span>
+                </div>
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold text-[#1E293B] leading-[1.2] tracking-tight">

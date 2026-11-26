@@ -176,13 +176,20 @@ export function MusicStoreView() {
 
         {/* ── 1. HERO BANNER ───────────────────────────────────────── */}
         <section className="text-center max-w-4xl mx-auto space-y-6">
+          <div className="flex justify-center">
+            <img
+              src="/brand/svg/aiaon-audio_lockup_horizontal_fullcolor-on-light.svg"
+              alt="AiAon Audio by AiAon Tech"
+              className="h-10 sm:h-12 w-auto"
+            />
+          </div>
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F0FDFA] border border-[#99F6E4] text-[#0F766E] text-xs sm:text-sm font-semibold"
           >
             <Music className="w-4 h-4 text-[#0D9488]" />
-            <span>AIAON AUDIO • สตูดิโอเพลงช่วยจำ &amp; เพลง BGM ปลอดลิขสิทธิ์</span>
+            <span>สตูดิโอเพลงช่วยจำ &amp; เพลง BGM ปลอดลิขสิทธิ์</span>
           </motion.div>
 
           <motion.h1

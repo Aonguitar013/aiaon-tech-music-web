@@ -987,13 +987,20 @@ export function LineStickersView() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 relative z-10">
         {/* ─── HERO SECTION ─── */}
         <div className="text-center max-w-4xl mx-auto mb-14 space-y-6">
+          <div className="flex justify-center">
+            <img
+              src="/brand/svg/aiaon-studio_lockup_horizontal_fullcolor-on-light.svg"
+              alt="AiAon Studio by AiAon Tech"
+              className="h-10 sm:h-12 w-auto"
+            />
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#DDD6FE] bg-[#FAF5FF] text-[#6D28D9] font-prompt text-xs sm:text-sm font-bold tracking-wide"
           >
             <Sparkles className="w-4 h-4 text-[#7C3AED]" />
-            <span>3D LINE STICKER STUDIO • บริการรับทำสติกเกอร์ LINE คาแรกเตอร์ 3D ครบวงจร</span>
+            <span>บริการรับทำสติกเกอร์ LINE คาแรกเตอร์ 3D ครบวงจร</span>
           </motion.div>
 
           <motion.h1
