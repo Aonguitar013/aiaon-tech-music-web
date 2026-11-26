@@ -3,10 +3,25 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Music, Headphones, Play, Pause, ShoppingBag, Sparkles,
-  CheckCircle2, ShieldCheck, FileAudio, Disc, Mic2, Sliders,
-  ArrowRight, MessageCircle, GraduationCap, Film,
-  Guitar, Plus, Check, BookOpen, Volume2
+  Headphones,
+  Play,
+  Pause,
+  ShoppingBag,
+  Sparkles,
+  CheckCircle2,
+  ShieldCheck,
+  FileAudio,
+  Disc,
+  Mic2,
+  Sliders,
+  ArrowRight,
+  MessageCircle,
+  GraduationCap,
+  Film,
+  Plus,
+  Check,
+  BookOpen,
+  Volume2,
 } from "lucide-react";
 import Link from "next/link";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
@@ -19,21 +34,21 @@ import { VinylRecordMockup } from "@/components/music-store/VinylRecordMockup";
 import { MusicDetailSection } from "@/components/music-store/MusicDetailSection";
 import { HIDDEN_MUSIC_STORE_CODES } from "@/config/catalogVisibility";
 
-/* ─────────────────────────────────────────────────────────────
-   TYPES & DATA: IAONTECH x MUSIC COMMERCIAL STORE
-───────────────────────────────────────────────────────────── */
-
 type MusicCategory = "ALL" | "MNEMONIC" | "BGM_PA" | "BACKING_STUDIO" | "CUSTOM";
 
 const MUSIC_PRODUCTS = MUSIC_STORE_PRODUCTS_DATA.filter(
   (p) => !HIDDEN_MUSIC_STORE_CODES.includes(p.code)
 );
 
-const CATEGORIES: { id: MusicCategory; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
-  { id: "ALL", label: "🎵 สินค้าเพลงทั้งหมด", icon: Disc },
-  { id: "MNEMONIC", label: "🎓 เพลงช่วยจำสอบครูผู้ช่วย", icon: GraduationCap },
-  { id: "BGM_PA", label: "🎬 เพลง BGM คลิป ว.PA (ปลอดลิขสิทธิ์)", icon: Film },
-  { id: "CUSTOM", label: "✨ รับแต่งเพลงตามสั่ง", icon: Mic2 },
+const CATEGORIES: {
+  id: MusicCategory;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}[] = [
+  { id: "ALL", label: "ทั้งหมด", icon: Disc },
+  { id: "MNEMONIC", label: "เพลงช่วยจำสอบครู", icon: GraduationCap },
+  { id: "BGM_PA", label: "BGM คลิป ว.PA", icon: Film },
+  { id: "CUSTOM", label: "รับแต่งเพลงตามสั่ง", icon: Mic2 },
 ];
 
 export function MusicStoreView() {
@@ -52,7 +67,8 @@ export function MusicStoreView() {
       ? MUSIC_PRODUCTS
       : MUSIC_PRODUCTS.filter((p) => p.category === selectedCategory);
 
-  // Stop audio preview cleanly
+  const featuredDeckTrack = playingTrack || MUSIC_PRODUCTS[0];
+
   const stopAudioPreview = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -67,7 +83,6 @@ export function MusicStoreView() {
     };
   }, []);
 
-  // Play pleasant Web Audio chord arpeggio preview for any track
   const handleTogglePlay = (track: MusicStoreProductItem) => {
     if (playingTrack?.id === track.id && isPlaying) {
       stopAudioPreview();
@@ -80,7 +95,8 @@ export function MusicStoreView() {
 
     try {
       const AudioContextClass =
-        window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!audioCtxRef.current) {
         audioCtxRef.current = new AudioContextClass();
       }
@@ -117,7 +133,6 @@ export function MusicStoreView() {
       playStep();
       intervalRef.current = setInterval(playStep, track.tempoMs);
     } catch {
-      // Fallback visual-only mode if browser blocks audio
       setTimeout(() => setIsPlaying(false), 5000);
     }
   };
@@ -161,7 +176,8 @@ export function MusicStoreView() {
   const handleBundleBuyClick = (e: React.MouseEvent) => {
     if (!isMobileDevice()) {
       e.preventDefault();
-      const bundleMsg = "สวัสดีครับครูอ้น สนใจโปรโมชันเหมา '🎵 Super Audio Bundle (เพลงช่วยจำ 10 เพลง + BGM ปลอดลิขสิทธิ์ 27 แทร็ก + Backing Track)' ราคาพิเศษ 590 บาทครับ รบกวนขอ QR พร้อมเพย์ด้วยครับ 🙏";
+      const bundleMsg =
+        "สวัสดีครับครูอ้น สนใจโปรโมชันเหมา '🎵 Super Audio Bundle (เพลงช่วยจำ 10 เพลง + BGM ปลอดลิขสิทธิ์ 27 แทร็ก + Backing Track)' ราคาพิเศษ 590 บาทครับ รบกวนขอ QR พร้อมเพย์ด้วยครับ 🙏";
       openLineModal({
         title: "Super Audio Bundle (เหมาคลังเพลง 590 ฿)",
         price: 590,
@@ -171,91 +187,169 @@ export function MusicStoreView() {
   };
 
   return (
-    <div className="w-full relative overflow-hidden min-h-screen pt-8 md:pt-12 pb-36 text-[#1E293B] font-prompt">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
+    <div className="w-full min-h-screen bg-[#FAF8F5] text-[#1E293B] font-prompt overflow-x-hidden pb-36">
+      {/* =================================================================
+          1. BOUTIQUE VINYL & RECORDING STUDIO HERO (NOW-PLAYING DECK)
+      ================================================================= */}
+      <section className="relative pt-8 pb-14 sm:pt-12 sm:pb-16 border-b border-[#E2E8F0] bg-[#FFFDF9]">
+        <div className="absolute top-0 right-0 w-[440px] h-[440px] bg-[#EA580C]/[0.05] blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[360px] h-[360px] bg-[#0D9488]/[0.05] blur-3xl rounded-full pointer-events-none" />
 
-        {/* ── 1. HERO BANNER ───────────────────────────────────────── */}
-        <section className="text-center max-w-4xl mx-auto space-y-6">
-          <div className="flex justify-center">
-            <img
-              src="/brand/svg/aiaon-audio_lockup_horizontal_fullcolor-on-light.svg"
-              alt="AiAon Audio by AiAon Tech"
-              className="h-10 sm:h-12 w-auto"
-            />
-          </div>
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F0FDFA] border border-[#99F6E4] text-[#0F766E] text-xs sm:text-sm font-semibold"
-          >
-            <Music className="w-4 h-4 text-[#0D9488]" />
-            <span>สตูดิโอเพลงช่วยจำ &amp; เพลง BGM ปลอดลิขสิทธิ์</span>
-          </motion.div>
+        <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Left Copy */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45 }}
+              className="lg:col-span-7 space-y-5"
+            >
+              <div className="flex flex-wrap items-center gap-3">
+                <img
+                  src="/brand/svg/aiaon-audio_lockup_horizontal_fullcolor-on-light.svg"
+                  alt="AiAon Audio by AiAon Tech"
+                  className="h-9 sm:h-10 w-auto"
+                />
+                <span className="px-3 py-1 rounded-full bg-[#FFF7ED] border border-[#FED7AA] text-[#C2410C] text-xs font-mono font-bold">
+                  CUBASE 12 STUDIO • 100% ROYALTY-FREE
+                </span>
+              </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05 }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0F172A] leading-tight"
-          >
-            เปลี่ยนเรื่องยากให้จำติดหู{" "}
-            <span className="text-[#EA580C]">
-              และใส่เพลงคลิป ว.PA แบบไม่ติดลิขสิทธิ์ 100%
-            </span>
-          </motion.h1>
+              <h1 className="text-3xl sm:text-5xl font-extrabold text-[#0F172A] leading-[1.15] tracking-tight">
+                เพลงช่วยจำติดหู &amp;{" "}
+                <span className="text-[#EA580C]">BGM คลิป ว.PA ปลอดลิขสิทธิ์</span>
+              </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-sm sm:text-base lg:text-lg text-[#475569] max-w-3xl mx-auto leading-relaxed"
-          >
-            สร้างสรรค์และบันทึกเสียงจากสตูดิโอจริงบน <strong className="text-[#0F172A]">Steinberg Cubase 12</strong> โดย{" "}
-            <strong className="text-[#0F766E]">ครูอ้น (ครูดนตรีสากล ค.ศ.2 โรงเรียนหาดใหญ่วิทยาลัย)</strong>{" "}
-            ครบทั้งเพลงช่วยจำสอบครูผู้ช่วย, เพลงบรรเลงกีตาร์โปร่งใส่คลิปการสอน 60 นาทีส่ง ว.PA พร้อมใบรับรองลิขสิทธิ์ และบริการรับแต่งเพลงตามสั่ง
-          </motion.p>
+              <p className="text-sm sm:text-base text-[#475569] leading-relaxed max-w-2xl">
+                บันทึกเสียงและมิกซ์มาสเตอร์จริงบน <strong className="text-[#0F172A]">Steinberg Cubase 12</strong> โดยครูอ้น (ครูดนตรีสากล ค.ศ.2 ร.ร.หาดใหญ่วิทยาลัย) ออกแบบย่านความถี่หลบเสียงพูดครูโดยเฉพาะ ใส่คลิปส่ง ว.PA ลง YouTube / TikTok ได้สบายใจไม่โดนเคลมเสียง
+              </p>
 
-          {/* Trust Highlights */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-left">
-            {[
-              {
-                icon: ShieldCheck,
-                title: "ปลอดลิขสิทธิ์ 100% ตลอดชีพ",
-                desc: "ทุกแพ็กเกจเพลง BGM มีใบรับรองสิทธิ์ ใส่คลิปส่ง ว.PA ลง YouTube/TikTok ไม่โดนเคลมเสียง",
-                iconClass: "bg-emerald-50 border-emerald-200 text-emerald-700",
-              },
-              {
-                icon: Headphones,
-                title: "กดฟังตัวอย่างได้ทุกอัลบั้ม",
-                desc: "ทดลองฟังเมโลดี้สดผ่าน Web Audio Synth และอ่านท่อนฮุกตัวอย่างบนหน้าเว็บได้ทันทีก่อนตัดสินใจซื้อ",
-                iconClass: "bg-amber-50 border-amber-200 text-amber-700",
-              },
-              {
-                icon: Sliders,
-                title: "มาตรฐานห้องอัด Cubase 12",
-                desc: "มิกซ์เสียงหลบย่านความถี่เสียงพูดครูไว้เรียบร้อย เปิดคลอเบาๆ เสียงพูดครูยังคมชัด 100%",
-                iconClass: "bg-teal-50 border-teal-200 text-teal-700",
-              },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl p-4 bg-white border border-[#E2E8F0] shadow-xs flex items-start gap-3.5"
-              >
-                <div className={`p-2.5 rounded-xl border shrink-0 ${item.iconClass}`}>
-                  <item.icon className="w-5 h-5" />
+              {/* 3 Studio Spec Pills */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white border border-[#E2E8F0] shadow-2xs">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span className="text-xs font-semibold text-[#0F172A]">มีใบรับรองลิขสิทธิ์ 100%</span>
                 </div>
-                <div>
-                  <h3 className="text-sm font-bold text-[#0F172A]">{item.title}</h3>
-                  <p className="text-xs text-[#475569] mt-1 leading-relaxed">{item.desc}</p>
+                <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white border border-[#E2E8F0] shadow-2xs">
+                  <Sliders className="w-4 h-4 text-[#0D9488] shrink-0" />
+                  <span className="text-xs font-semibold text-[#0F172A]">มิกซ์หลบเสียงพูดครู</span>
+                </div>
+                <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white border border-[#E2E8F0] shadow-2xs">
+                  <Headphones className="w-4 h-4 text-[#EA580C] shrink-0" />
+                  <span className="text-xs font-semibold text-[#0F172A]">กดฟังตัวอย่างสดได้ทุกชุด</span>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* ── 2. CATEGORY FILTER TABS ──────────────────────────────── */}
-        <section className="space-y-8">
-          <div className="flex flex-wrap items-center justify-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <a
+                  href="#tracklist"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#EA580C] hover:bg-[#C2410C] text-white font-bold text-sm shadow-sm transition-all"
+                >
+                  <Play className="w-4 h-4 fill-current" />
+                  <span>ทดลองฟังแทร็กทั้งหมด</span>
+                </a>
+                <a
+                  href={getLineOrderUrl(
+                    "สวัสดีครับครูอ้น สนใจโปรโมชันเหมา '🎵 Super Audio Bundle (เพลงช่วยจำ 10 เพลง + BGM ปลอดลิขสิทธิ์ 27 แทร็ก + Backing Track)' ราคาพิเศษ 590 บาทครับ รบกวนขอ QR พร้อมเพย์ด้วยครับ 🙏"
+                  )}
+                  onClick={handleBundleBuyClick}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white hover:bg-orange-50 text-[#0F172A] border border-[#FED7AA] font-bold text-sm transition-all"
+                >
+                  <Sparkles className="w-4 h-4 text-[#EA580C]" />
+                  <span>เหมาคลังเพลงทั้งหมด 590 ฿</span>
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Right: Interactive Live Turntable Studio Deck */}
+            {featuredDeckTrack && (
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.08 }}
+                className="lg:col-span-5"
+              >
+                <div className="rounded-3xl bg-white border border-[#E2E8F0] p-5 shadow-md space-y-4">
+                  {/* Deck Top Bar */}
+                  <div className="flex items-center justify-between gap-2 text-xs">
+                    <span className="inline-flex items-center gap-2 font-mono font-bold text-[#0F172A]">
+                      <span
+                        className={`w-2.5 h-2.5 rounded-full ${
+                          isPlaying ? "bg-[#EA580C] animate-pulse" : "bg-emerald-500"
+                        }`}
+                      />
+                      <span>{isPlaying ? "NOW PLAYING • LIVE SYNTH" : "STUDIO TURNTABLE DECK"}</span>
+                    </span>
+                    <span className="font-mono text-[#64748B]">
+                      {featuredDeckTrack.code} • {featuredDeckTrack.bpm}
+                    </span>
+                  </div>
+
+                  {/* Warm Vinyl Stage */}
+                  <div className="rounded-2xl bg-linear-to-br from-[#FAF6EF] via-[#F4EDE2] to-[#ECE3D4] border border-[#E5DDD0] py-5 px-4 flex items-center justify-center overflow-hidden">
+                    <VinylRecordMockup
+                      code={featuredDeckTrack.code}
+                      title={featuredDeckTrack.title}
+                      categoryLabel={featuredDeckTrack.categoryLabel}
+                      bpm={featuredDeckTrack.bpm}
+                      duration={featuredDeckTrack.duration}
+                      accentColor={featuredDeckTrack.accentColor}
+                      isPlaying={isPlaying}
+                      size="md"
+                      isInteractive={true}
+                      onPlayClick={() => handleTogglePlay(featuredDeckTrack)}
+                    />
+                  </div>
+
+                  {/* Tactile Transport Controls */}
+                  <div className="flex items-center justify-between gap-3 pt-1">
+                    <div className="min-w-0">
+                      <div className="text-sm font-extrabold text-[#0F172A] truncate">
+                        {featuredDeckTrack.title}
+                      </div>
+                      <div className="text-xs text-[#64748B] truncate">
+                        {featuredDeckTrack.duration} • {featuredDeckTrack.format}
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => handleTogglePlay(featuredDeckTrack)}
+                      className={`shrink-0 px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all cursor-pointer shadow-xs ${
+                        isPlaying
+                          ? "bg-rose-600 hover:bg-rose-700 text-white"
+                          : "bg-[#0F172A] hover:bg-[#EA580C] text-white"
+                      }`}
+                    >
+                      {isPlaying ? (
+                        <>
+                          <Pause className="w-4 h-4 fill-current" />
+                          <span>หยุดฟัง</span>
+                        </>
+                      ) : (
+                        <>
+                          <Play className="w-4 h-4 fill-current" />
+                          <span>กดฟังสด</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* =================================================================
+          2. QUICK-LISTEN ALBUM TRACKLIST + CATEGORY FILTER BAR
+      ================================================================= */}
+      <section id="tracklist" className="max-w-[1240px] mx-auto px-4 sm:px-6 pt-10 sm:pt-14 space-y-10 scroll-mt-20">
+        {/* Clean Category Bar */}
+        <div className="rounded-3xl bg-white border border-[#E2E8F0] p-4 sm:p-5 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-2">
             {CATEGORIES.map((cat) => {
               const Icon = cat.icon;
               const isActive = selectedCategory === cat.id;
@@ -264,10 +358,10 @@ export function MusicStoreView() {
                   key={cat.id}
                   type="button"
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer border ${
+                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer border ${
                     isActive
-                      ? "bg-[#0F766E] text-white border-[#0F766E] shadow-sm scale-105"
-                      : "bg-white text-[#475569] border-[#E2E8F0] hover:border-[#0D9488] hover:text-[#0F172A]"
+                      ? "bg-[#0F766E] text-white border-[#0F766E]"
+                      : "bg-[#FAF8F5] text-[#475569] border-[#E2E8F0] hover:text-[#0F172A] hover:bg-slate-100"
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -276,226 +370,299 @@ export function MusicStoreView() {
               );
             })}
           </div>
+          <div className="text-xs font-mono text-[#64748B] flex items-center gap-1.5">
+            <Volume2 className="w-4 h-4 text-[#EA580C]" />
+            <span>{filteredProducts.length} อัลบั้มพร้อมดาวน์โหลด</span>
+          </div>
+        </div>
 
-          {/* ── 3. MUSIC CATALOG GRID ────────────────────────────────── */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {filteredProducts.map((item) => {
+        {/* Apple Music / Bandcamp Style Quick-Listen Tracklist */}
+        <div className="rounded-3xl bg-white border border-[#E2E8F0] overflow-hidden shadow-2xs">
+          <div className="px-5 py-3.5 bg-[#FAF8F5] border-b border-[#E2E8F0] flex items-center justify-between text-[11px] font-mono font-bold text-[#64748B] uppercase tracking-wider">
+            <span>QUICK AUDITION TRACKLIST (กดฟังเทียบทุกชุดในคลิกเดียว)</span>
+            <span className="hidden sm:inline">BPM / DURATION / PRICE</span>
+          </div>
+          <div className="divide-y divide-[#F1F5F9]">
+            {filteredProducts.map((item, idx) => {
               const isThisPlaying = playingTrack?.id === item.id && isPlaying;
               const inCart = cart.some((x) => x.id === item.id);
-
               return (
-                <motion.div
-                  key={item.id}
-                  layout
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="rounded-3xl p-6 sm:p-8 bg-white border border-[#E2E8F0] hover:border-[#0D9488] transition-all flex flex-col justify-between space-y-6 shadow-sm hover:shadow-md"
+                <div
+                  key={`row-${item.id}`}
+                  className={`px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3 transition-colors ${
+                    isThisPlaying ? "bg-[#FFF7ED]" : "hover:bg-[#FAF8F5]"
+                  }`}
                 >
-                  <div className="space-y-4">
-                    {/* Top Badges */}
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="text-[11px] font-bold px-3 py-1 rounded-full border bg-[#FFF7ED] border-[#FED7AA] text-[#C2410C]">
-                        {item.badge}
-                      </span>
-                      <span className="text-xs font-mono text-[#475569] bg-[#FAF8F5] px-2.5 py-1 rounded-lg border border-[#E2E8F0]">
-                        {item.code} • {item.bpm}
-                      </span>
-                    </div>
-
-                    {/* ──────────────── 3D Holographic Vinyl Record Mockup ──────────────── */}
-                    <div
-                      onClick={() => setSelectedProduct(item)}
-                      className="relative w-full my-4 cursor-pointer flex justify-center py-5 px-4 rounded-2xl bg-gradient-to-br from-[#FAF6EF] via-[#F4EDE2] to-[#ECE3D4] border border-[#E5DDD0] shadow-inner overflow-hidden"
-                      title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของผลงานนี้"
+                  <div className="flex items-center gap-3.5 min-w-0">
+                    <span className="text-xs font-mono text-[#94A3B8] w-5 shrink-0 hidden sm:inline">
+                      0{idx + 1}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleTogglePlay(item)}
+                      aria-label={`ฟังตัวอย่าง ${item.title}`}
+                      className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-all cursor-pointer ${
+                        isThisPlaying
+                          ? "bg-[#EA580C] text-white shadow-sm"
+                          : "bg-[#FAF8F5] hover:bg-[#0F172A] text-[#0F172A] hover:text-white border border-[#E2E8F0]"
+                      }`}
                     >
-                      <VinylRecordMockup
-                        code={item.code}
-                        title={item.title}
-                        categoryLabel={item.categoryLabel}
-                        bpm={item.bpm}
-                        duration={item.duration}
-                        accentColor={item.accentColor}
-                        isPlaying={isThisPlaying}
-                        size="md"
-                        isInteractive={true}
-                        onPlayClick={() => handleTogglePlay(item)}
-                      />
-                    </div>
-
-                    {/* Title & Subtitle */}
-                    <div>
-                      <div className="text-xs font-semibold text-[#0F766E] mb-1">
-                        {item.categoryLabel}
-                      </div>
-                      <h2
+                      {isThisPlaying ? (
+                        <Pause className="w-4 h-4 fill-current" />
+                      ) : (
+                        <Play className="w-4 h-4 fill-current ml-0.5" />
+                      )}
+                    </button>
+                    <div className="min-w-0">
+                      <button
+                        type="button"
                         onClick={() => setSelectedProduct(item)}
-                        className="text-xl sm:text-2xl font-extrabold text-[#0F172A] leading-snug cursor-pointer hover:text-[#EA580C] transition-colors"
+                        className="text-sm font-bold text-[#0F172A] hover:text-[#EA580C] truncate block text-left cursor-pointer"
                       >
                         {item.title}
-                      </h2>
-                      <p className="text-xs sm:text-sm text-[#475569] mt-1.5 leading-relaxed">
-                        {item.subtitle}
-                      </p>
-                    </div>
-
-                    {/* Interactive Audio Sample Player Box */}
-                    <div className="rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] p-4 space-y-3">
-                      <div className="flex flex-wrap items-center justify-between gap-3">
-                        <button
-                          type="button"
-                          onClick={() => handleTogglePlay(item)}
-                          className={`px-4 py-2 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 transition-all cursor-pointer shadow-xs ${
-                            isThisPlaying
-                              ? "bg-[#E11D48] text-white"
-                              : "bg-[#EA580C] hover:bg-[#C2410C] text-white"
-                          }`}
-                        >
-                          {isThisPlaying ? (
-                            <>
-                              <Pause className="w-4 h-4 fill-current" />
-                              <span>หยุดฟังตัวอย่าง</span>
-                            </>
-                          ) : (
-                            <>
-                              <Play className="w-4 h-4 fill-current" />
-                              <span>ฟังเมโลดี้ตัวอย่าง 🎵</span>
-                            </>
-                          )}
-                        </button>
-
-                        <div className="flex items-center gap-2 text-[11px] text-[#475569]">
-                          <FileAudio className="w-3.5 h-3.5 text-[#0F766E]" />
-                          <span>{item.duration}</span>
-                        </div>
-                      </div>
-
-                      <div className="text-xs text-[#1E293B] bg-white rounded-xl p-3 border border-[#E2E8F0] leading-relaxed">
-                        {item.sampleHook}
+                      </button>
+                      <div className="text-[11px] text-[#64748B] truncate">
+                        {item.code} • {item.categoryLabel}
                       </div>
                     </div>
-
-                    {/* Highlights */}
-                    <ul className="space-y-2 pt-1">
-                      {item.highlights.map((hl, hIdx) => (
-                        <li key={hIdx} className="flex items-start gap-2 text-xs text-[#1E293B] leading-relaxed">
-                          <CheckCircle2 className="w-4 h-4 text-[#0F766E] shrink-0 mt-0.5" />
-                          <span>{hl}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
 
-                  {/* Price & Action Footer */}
-                  <div className="pt-4 border-t border-[#F1F5F9] space-y-4">
-                    <div className="flex items-baseline justify-between">
-                      <div>
-                        <span className="text-[11px] text-[#64748B] block">รูปแบบไฟล์ที่ได้รับ: {item.format}</span>
-                        <div className="flex items-baseline gap-2.5 mt-0.5">
-                          <span className="text-2xl sm:text-3xl font-black text-[#0F172A]">
-                            {item.price.toLocaleString()} ฿
-                          </span>
-                          {item.originalPrice && (
-                            <span className="text-xs text-[#94A3B8] line-through">
-                              {item.originalPrice.toLocaleString()} ฿
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => toggleCartItem(item)}
-                        className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
-                          inCart
-                            ? "bg-emerald-50 border-emerald-300 text-emerald-800"
-                            : "bg-[#FAF8F5] border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:border-[#CBD5E1]"
-                        }`}
-                      >
-                        {inCart ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                        <span>{inCart ? "อยู่ในตะกร้าแล้ว" : "เลือกใส่ตะกร้า"}</span>
-                      </button>
-                    </div>
-
-                    {/* Cross-sell banner for MUS-01 */}
-                    {item.id === "album-mnemonic-vol1" && (
-                      <div className="rounded-xl p-2.5 bg-[#FEF9EF] border border-[#FDE68A] flex items-center justify-between gap-2">
-                        <span className="text-[11px] text-[#92400E]">
-                          👑 <strong>คุ้มกว่าเมื่อซื้อคู่:</strong> รับเพลงนี้ฟรีทันทีเมื่อสมัครกลุ่ม Telegram ติวสอบบอท AI{" "}
-                          <span className="whitespace-nowrap">(390 ฿)</span>
-                        </span>
-                        <Link
-                          href="/teacher-prep#join-telegram"
-                          className="shrink-0 whitespace-nowrap text-[11px] font-bold text-[#92400E] hover:text-[#0F172A] underline"
-                        >
-                          ดูบันเดิล 390 ฿ ➔
-                        </Link>
-                      </div>
-                    )}
-
-                    {/* Dual Action Buttons: เจาะลึก 7 ข้อ & สั่งซื้อรับไฟล์ทันที (WCAG AA LINE Green) */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      <button
-                        type="button"
-                        onClick={() => setSelectedProduct(item)}
-                        className="py-3 px-3.5 rounded-2xl bg-[#FAF8F5] hover:bg-[#F1F5F9] text-[#0F172A] font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition border border-[#E2E8F0] cursor-pointer"
-                      >
-                        <BookOpen className="w-4 h-4 text-[#0F766E]" />
-                        <span>เจาะลึก 7 ข้อ</span>
-                      </button>
-
-                      <a
-                        href={getLineOrderUrl(item.lineOrderMsg)}
-                        onClick={(e) => handleSingleBuyClick(e, item)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="py-3 px-4 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition-all hover:scale-[1.02] cursor-pointer"
-                      >
-                        <ShoppingBag className="w-4 h-4" />
-                        <span>สั่งซื้อรับไฟล์ทันที ({item.price.toLocaleString()} ฿)</span>
-                      </a>
-                    </div>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span className="hidden md:inline text-xs font-mono text-[#64748B]">
+                      {item.bpm} • {item.duration}
+                    </span>
+                    <span className="text-sm font-extrabold text-[#0F172A] font-mono">
+                      ฿{item.price.toLocaleString()}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => toggleCartItem(item)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
+                        inCart
+                          ? "bg-emerald-50 border-emerald-300 text-emerald-800"
+                          : "bg-white border-[#E2E8F0] text-[#475569] hover:border-[#0F172A] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      {inCart ? "✓ ในตะกร้า" : "+ ตะกร้า"}
+                    </button>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
-        </section>
+        </div>
 
-        {/* ── 4. ALL-IN-ONE STUDIO AUDIO BUNDLE BANNER ─────────────── */}
-        <section className="rounded-3xl p-8 sm:p-12 border border-[#FDE68A] bg-white relative overflow-hidden shadow-sm">
-          <div className="max-w-3xl mx-auto text-center space-y-5 relative z-10">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FEF3C7] border border-[#FDE68A] text-[#92400E] text-xs font-bold">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>SUPER AUDIO BUNDLE • เหมาคลังเพลงสุดคุ้ม</span>
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
-              เหมารวมเพลงช่วยจำ + แพ็กเกจ BGM คลิป ว.PA ปลอดลิขสิทธิ์ทั้งหมด{" "}
-              <span className="text-[#EA580C]">เพียง 590 ฿!</span> (จากปกติ 1,468 ฿)
-            </h2>
-            <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-              ได้ครบทั้งอัลบั้มเพลงช่วยจำสอบครูผู้ช่วย 10 เพลง + เพลงบรรเลง Acoustic &amp; Lo-Fi BGM 27 แทร็กพร้อมใบรับรองลิขสิทธิ์ + ชุด Backing Track ซ้อมวงดนตรี ดาวน์โหลดเก็บไว้ใช้ได้ตลอดชีพ
-            </p>
-            <div className="pt-2">
-              <a
-                href={getLineOrderUrl(
-                  "สวัสดีครับครูอ้น สนใจโปรโมชันเหมา '🎵 Super Audio Bundle (เพลงช่วยจำ 10 เพลง + BGM ปลอดลิขสิทธิ์ 27 แทร็ก + Backing Track)' ราคาพิเศษ 590 บาทครับ รบกวนขอ QR พร้อมเพย์ด้วยครับ 🙏"
-                )}
-                onClick={handleBundleBuyClick}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#0F172A] hover:bg-[#1E293B] text-white font-extrabold text-sm sm:text-base shadow-sm transition-all hover:scale-105 cursor-pointer"
+        {/* =================================================================
+            3. BOUTIQUE VINYL ALBUM SHELF (DETAILED 2-COL CARDS)
+        ================================================================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
+          {filteredProducts.map((item) => {
+            const isThisPlaying = playingTrack?.id === item.id && isPlaying;
+            const inCart = cart.some((x) => x.id === item.id);
+
+            return (
+              <motion.article
+                key={item.id}
+                layout
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="rounded-3xl p-6 sm:p-7 bg-white border border-[#E2E8F0] hover:border-[#EA580C]/50 transition-all flex flex-col justify-between space-y-5 shadow-2xs hover:shadow-md"
               >
-                <Disc className="w-5 h-5" />
-                <span>รับโปรเหมาคลังเพลง 590 ฿ ทันที</span>
-                <ArrowRight className="w-5 h-5" />
-              </a>
-            </div>
+                <div className="space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-[11px] font-bold px-3 py-1 rounded-full border bg-[#FFF7ED] border-[#FED7AA] text-[#C2410C]">
+                      {item.badge}
+                    </span>
+                    <span className="text-xs font-mono text-[#475569] bg-[#FAF8F5] px-2.5 py-1 rounded-lg border border-[#E2E8F0]">
+                      {item.code} • {item.bpm}
+                    </span>
+                  </div>
+
+                  {/* 3D Vinyl Stage */}
+                  <div
+                    onClick={() => setSelectedProduct(item)}
+                    className="relative w-full cursor-pointer flex justify-center py-5 px-4 rounded-2xl bg-linear-to-br from-[#FAF6EF] via-[#F4EDE2] to-[#ECE3D4] border border-[#E5DDD0] overflow-hidden"
+                    title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของผลงานนี้"
+                  >
+                    <VinylRecordMockup
+                      code={item.code}
+                      title={item.title}
+                      categoryLabel={item.categoryLabel}
+                      bpm={item.bpm}
+                      duration={item.duration}
+                      accentColor={item.accentColor}
+                      isPlaying={isThisPlaying}
+                      size="md"
+                      isInteractive={true}
+                      onPlayClick={() => handleTogglePlay(item)}
+                    />
+                  </div>
+
+                  <div>
+                    <div className="text-xs font-semibold text-[#0F766E] mb-1">
+                      {item.categoryLabel}
+                    </div>
+                    <h2
+                      onClick={() => setSelectedProduct(item)}
+                      className="text-xl font-extrabold text-[#0F172A] leading-snug cursor-pointer hover:text-[#EA580C] transition-colors"
+                    >
+                      {item.title}
+                    </h2>
+                    <p className="text-xs sm:text-sm text-[#475569] mt-1 leading-relaxed">
+                      {item.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Sample Hook Preview */}
+                  <div className="rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] p-3.5 space-y-2.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <button
+                        type="button"
+                        onClick={() => handleTogglePlay(item)}
+                        className={`px-3.5 py-2 rounded-xl font-bold text-xs flex items-center gap-2 transition-all cursor-pointer ${
+                          isThisPlaying
+                            ? "bg-rose-600 text-white"
+                            : "bg-[#EA580C] hover:bg-[#C2410C] text-white"
+                        }`}
+                      >
+                        {isThisPlaying ? (
+                          <>
+                            <Pause className="w-3.5 h-3.5 fill-current" />
+                            <span>หยุดฟัง</span>
+                          </>
+                        ) : (
+                          <>
+                            <Play className="w-3.5 h-3.5 fill-current" />
+                            <span>ฟังตัวอย่างเสียง</span>
+                          </>
+                        )}
+                      </button>
+                      <span className="text-[11px] font-mono text-[#64748B] flex items-center gap-1">
+                        <FileAudio className="w-3.5 h-3.5 text-[#0F766E]" />
+                        {item.duration}
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#1E293B] bg-white rounded-xl p-3 border border-[#E2E8F0] leading-relaxed">
+                      {item.sampleHook}
+                    </p>
+                  </div>
+
+                  <ul className="space-y-1.5">
+                    {item.highlights.map((hl, hIdx) => (
+                      <li key={hIdx} className="flex items-start gap-2 text-xs text-[#1E293B]">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#0F766E] shrink-0 mt-0.5" />
+                        <span>{hl}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Price & Actions */}
+                <div className="pt-4 border-t border-[#F1F5F9] space-y-3.5">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <div>
+                      <span className="text-[11px] text-[#64748B] block">ไฟล์ที่ได้รับ: {item.format}</span>
+                      <div className="flex items-baseline gap-2 mt-0.5">
+                        <span className="text-2xl font-black text-[#0F172A]">
+                          {item.price.toLocaleString()} ฿
+                        </span>
+                        {item.originalPrice && (
+                          <span className="text-xs text-[#94A3B8] line-through">
+                            {item.originalPrice.toLocaleString()} ฿
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => toggleCartItem(item)}
+                      className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
+                        inCart
+                          ? "bg-emerald-50 border-emerald-300 text-emerald-800"
+                          : "bg-[#FAF8F5] border-[#E2E8F0] text-[#475569] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      {inCart ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+                      <span>{inCart ? "อยู่ในตะกร้า" : "ใส่ตะกร้า"}</span>
+                    </button>
+                  </div>
+
+                  {item.id === "album-mnemonic-vol1" && (
+                    <div className="rounded-xl p-2.5 bg-[#FEF9EF] border border-[#FDE68A] flex items-center justify-between gap-2">
+                      <span className="text-[11px] text-[#92400E]">
+                        👑 <strong>คุ้มกว่าเมื่อซื้อคู่:</strong> รับเพลงนี้ฟรีเมื่อสมัครกลุ่มติวสอบ AI (390 ฿)
+                      </span>
+                      <Link
+                        href="/teacher-prep#join-telegram"
+                        className="shrink-0 whitespace-nowrap text-[11px] font-bold text-[#92400E] hover:text-[#0F172A] underline"
+                      >
+                        ดูบันเดิล ➔
+                      </Link>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedProduct(item)}
+                      className="py-3 px-3.5 rounded-2xl bg-[#FAF8F5] hover:bg-slate-100 text-[#0F172A] font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition border border-[#E2E8F0] cursor-pointer"
+                    >
+                      <BookOpen className="w-4 h-4 text-[#0F766E]" />
+                      <span>เจาะลึก 7 ข้อ</span>
+                    </button>
+
+                    <a
+                      href={getLineOrderUrl(item.lineOrderMsg)}
+                      onClick={(e) => handleSingleBuyClick(e, item)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-3 px-4 rounded-2xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-2xs transition-all cursor-pointer"
+                    >
+                      <ShoppingBag className="w-4 h-4" />
+                      <span>สั่งซื้อ ({item.price.toLocaleString()} ฿)</span>
+                    </a>
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+
+        {/* =================================================================
+            4. SUPER AUDIO BUNDLE BANNER
+        ================================================================= */}
+        <section className="rounded-3xl p-8 sm:p-12 border border-[#FED7AA] bg-linear-to-r from-[#FFF7ED] via-white to-[#F0FDFA] text-center space-y-5 shadow-2xs">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>SUPER AUDIO BUNDLE • เหมาคลังเพลงสุดคุ้ม</span>
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A] max-w-3xl mx-auto leading-tight">
+            เหมารวมเพลงช่วยจำ + BGM คลิป ว.PA ปลอดลิขสิทธิ์ทั้งหมด{" "}
+            <span className="text-[#EA580C]">เพียง 590 ฿</span> (ปกติ 1,468 ฿)
+          </h2>
+          <p className="text-xs sm:text-sm text-[#475569] max-w-2xl mx-auto leading-relaxed">
+            ได้ครบทั้งอัลบั้มเพลงช่วยจำสอบครู 10 เพลง + เพลงบรรเลง Acoustic &amp; Lo-Fi BGM 27 แทร็กพร้อมใบรับรองลิขสิทธิ์ + Backing Track ดาวน์โหลดเก็บใช้ได้ตลอดชีพ
+          </p>
+          <div className="pt-2">
+            <a
+              href={getLineOrderUrl(
+                "สวัสดีครับครูอ้น สนใจโปรโมชันเหมา '🎵 Super Audio Bundle (เพลงช่วยจำ 10 เพลง + BGM ปลอดลิขสิทธิ์ 27 แทร็ก + Backing Track)' ราคาพิเศษ 590 บาทครับ รบกวนขอ QR พร้อมเพย์ด้วยครับ 🙏"
+              )}
+              onClick={handleBundleBuyClick}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl bg-[#0F172A] hover:bg-[#EA580C] text-white font-extrabold text-sm sm:text-base shadow-sm transition-all cursor-pointer"
+            >
+              <Disc className="w-5 h-5" />
+              <span>รับโปรเหมาคลังเพลง 590 ฿ ทันที</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         </section>
+      </section>
 
-      </div>
-
-      {/* ── STICKY BOTTOM BAR (NOW PLAYING / CART CHECKOUT) ────────── */}
+      {/* STICKY NOW-PLAYING & CART BAR */}
       <AnimatePresence>
         {(isPlaying || cart.length > 0) && (
           <motion.div
@@ -504,7 +671,6 @@ export function MusicStoreView() {
             exit={{ y: 100, opacity: 0 }}
             className="fixed bottom-4 left-4 right-4 z-40 max-w-5xl mx-auto rounded-2xl bg-white/95 backdrop-blur-xl border border-[#E2E8F0] p-4 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 font-prompt"
           >
-            {/* Left: Now Playing Info */}
             {playingTrack && isPlaying ? (
               <div className="flex items-center gap-3.5 min-w-0">
                 <button
@@ -544,7 +710,6 @@ export function MusicStoreView() {
               </div>
             )}
 
-            {/* Right: Checkout Action */}
             <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
               {cart.length > 0 && (
                 <>
@@ -558,8 +723,10 @@ export function MusicStoreView() {
                   <a
                     href={getLineOrderUrl(
                       `สวัสดีครับครูอ้น สนใจสั่งซื้อแพ็กเกจเพลง/สื่อเสียงรวม ${cart.length} รายการครับ 🎵\n` +
-                      cart.map((item, idx) => `${idx + 1}. [${item.code}] ${item.title} (${item.price.toLocaleString()} ฿)`).join("\n") +
-                      `\n\n💵 ยอดรวมทั้งหมด: ${totalCartPrice.toLocaleString()} บาท\nรบกวนขอ QR พร้อมเพย์สำหรับชำระเงินด้วยครับ 🙏`
+                        cart
+                          .map((item, idx) => `${idx + 1}. [${item.code}] ${item.title} (${item.price.toLocaleString()} ฿)`)
+                          .join("\n") +
+                        `\n\n💵 ยอดรวมทั้งหมด: ${totalCartPrice.toLocaleString()} บาท\nรบกวนขอ QR พร้อมเพย์สำหรับชำระเงินด้วยครับ 🙏`
                     )}
                     onClick={handleCartCheckoutClick}
                     target="_blank"
@@ -567,7 +734,9 @@ export function MusicStoreView() {
                     className="px-5 py-2.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-sm cursor-pointer"
                   >
                     <MessageCircle className="w-4 h-4" />
-                    <span>สั่งซื้อ {cart.length} เพลงที่เลือก ({totalCartPrice.toLocaleString()} ฿)</span>
+                    <span>
+                      สั่งซื้อ {cart.length} เพลง ({totalCartPrice.toLocaleString()} ฿)
+                    </span>
                   </a>
                 </>
               )}
@@ -576,9 +745,7 @@ export function MusicStoreView() {
         )}
       </AnimatePresence>
 
-      {/* ─────────────────────────────────────────────────────────────
-          7-PILLARS MUSIC PRODUCT DETAIL MODAL
-      ───────────────────────────────────────────────────────────── */}
+      {/* 7-PILLARS MUSIC PRODUCT DETAIL MODAL */}
       <AnimatePresence>
         {selectedProduct && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#0F172A]/50 backdrop-blur-sm overflow-y-auto">
@@ -591,7 +758,9 @@ export function MusicStoreView() {
               <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-[#FAF8F5]/95 backdrop-blur-sm border-b border-[#E2E8F0] mb-6">
                 <span className="text-xs sm:text-sm font-bold text-[#0F172A] flex items-center gap-2">
                   <Disc className="w-4 h-4 text-amber-600 animate-spin" style={{ animationDuration: "8s" }} />
-                  <span>[{selectedProduct.code}] เจาะลึก 7 องค์ประกอบหลัก • {selectedProduct.title}</span>
+                  <span>
+                    [{selectedProduct.code}] เจาะลึก 7 องค์ประกอบหลัก • {selectedProduct.title}
+                  </span>
                 </span>
                 <button
                   onClick={() => setSelectedProduct(null)}
