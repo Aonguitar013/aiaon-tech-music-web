@@ -2,14 +2,29 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { 
-  Search, ShoppingBag, Mic, Sliders, Keyboard, Headphones, 
-  ExternalLink, Sparkles, CheckCircle2, Cpu, ArrowRight, Zap } from "lucide-react";
+import Image from "next/image";
+import {
+  Search,
+  ShoppingBag,
+  Mic,
+  Sliders,
+  Keyboard,
+  Headphones,
+  ExternalLink,
+  Sparkles,
+  CheckCircle2,
+  Cpu,
+  ArrowRight,
+  Zap,
+  ShieldCheck,
+  Clock,
+  SlidersHorizontal,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { ProductCard } from "@/components/marketplace/ProductCard";
 import { NoBrainerBundles } from "@/components/marketplace/NoBrainerBundles";
 import { StudentVaultPromotionSection } from "@/components/student-vault/StudentVaultPromotionSection";
-import { getProductSetupTier, getSetupTierInfo, SetupTier } from "@/components/marketplace/setupTierHelper";
+import { getProductSetupTier, SetupTier } from "@/components/marketplace/setupTierHelper";
 import { cn } from "@/lib/utils";
 
 interface Product {
@@ -35,10 +50,7 @@ interface HardwareGadget {
   shopeeUrl: string;
   badge: string;
   icon: React.ElementType;
-  glowColor: string;
-  borderColor: string;
-  textColor: string;
-  badgeGradient: string;
+  badgeClass: string;
 }
 
 const HARDWARE_ITEMS: HardwareGadget[] = [
@@ -47,191 +59,151 @@ const HARDWARE_ITEMS: HardwareGadget[] = [
     title: "ไมโครโฟน SHURE SM27",
     category: "Microphone / Voice-over",
     description:
-      "ไมโครโฟนคอนเดนเซอร์ระดับโปร ให้เสียงพากย์ นุ่ม ลึก คมชัด มิติเสียงกว้าง เหมาะสำหรับการอัดวิดีโอ สตรีมมิ่ง สอนออนไลน์ และแคสต์เกม",
+      "ไมโครโฟนคอนเดนเซอร์ระดับโปร ให้เสียงพากย์นุ่ม ลึก คมชัด เหมาะสำหรับอัดคลิปสอนออนไลน์ สตรีมมิ่ง และงานเสียง",
     highlights: [
       "Diaphragm ขนาดใหญ่ ตอบสนองความถี่กว้าง",
       "Low-pass Filter 3 ระดับ ตัดเสียงรบกวนยอดเยี่ยม",
-      "โครงสร้างโลหะแข็งแกร่ง มาตรฐาน SHURE ระดับโลก",
+      "โครงสร้างโลหะแข็งแกร่ง มาตรฐาน SHURE",
     ],
     tag: "เสียงพากย์นุ่มคมชัดระดับสตูดิโอ",
     shopeeUrl: "https://shopee.co.th/search?keyword=SHURE%20SM27",
-    badge: "iAon Approved",
+    badge: "AiAon Approved",
     icon: Mic,
-    glowColor: "rgba(239, 68, 68, 0.25)",
-    borderColor: "border-red-500/30",
-    textColor: "text-red-400",
-    badgeGradient: "from-red-500 to-rose-600",
+    badgeClass: "bg-rose-50 text-rose-800 border-rose-200",
   },
   {
     id: "steinberg-ur44",
-    title: "ออดิโออินเทอร์เฟซ Steinberg UR44",
+    title: "Steinberg UR44 Audio Interface",
     category: "Audio Interface",
     description:
-      "Audio Interface 6x4 ช่องสัญญาณ พร้อม D-PRE Preamps คุณภาพสูง รองรับ 24-bit/192kHz ให้สัญญาณเสียงสะอาด ไร้เสียงรบกวน และไม่มี Latency",
+      "Audio Interface 6x4 ช่องสัญญาณ พร้อม D-PRE Preamps 24-bit/192kHz สัญญาณเสียงสะอาด ไร้ดีเลย์",
     highlights: [
-      "4 D-PRE Class-A Mic Preamps พร้อม 48V Phantom",
-      "DSP Monitoring ในตัว ฟังสัญญาณสดไร้ดีเลย์",
-      "พอร์ต MIDI In/Out + เชื่อมต่อได้ทั้ง PC, Mac, iPad",
+      "4 D-PRE Class-A Mic Preamps + 48V Phantom",
+      "DSP Monitoring ในตัว ฟังเสียงสดไร้ดีเลย์",
+      "รองรับทั้ง PC, Mac และ iPad",
     ],
     tag: "กล่องปรับแต่งเสียงใสสะอาด ไร้ดีเลย์",
     shopeeUrl: "https://shopee.co.th/search?keyword=Steinberg%20UR44",
     badge: "Studio Choice",
     icon: Sliders,
-    glowColor: "rgba(59, 130, 246, 0.25)",
-    borderColor: "border-blue-500/30",
-    textColor: "text-blue-400",
-    badgeGradient: "from-blue-500 to-cyan-600",
+    badgeClass: "bg-blue-50 text-blue-800 border-blue-200",
   },
   {
     id: "tech-keyboard-desk",
     title: "Mechanical Keyboard & Studio Setup",
-    category: "Desk Setup & Productivity",
+    category: "Desk Setup",
     description:
-      "คีย์บอร์ดแมคคานิคอลและอุปกรณ์จัดโต๊ะทำงานไอที ช่วยเพิ่มความสบายในการพิมพ์ ลดอาการเมื่อยล้าจากการเขียนโค้ดและตัดต่อยาวนาน",
+      "คีย์บอร์ดแมคคานิคอลและอุปกรณ์จัดโต๊ะทำงานไอที ช่วยพิมพ์โค้ดและทำเอกสารได้สบายมือตลอดวัน",
     highlights: [
-      "Custom Switches สัมผัสนุ่ม พิมพ์สบายมือ ไม่เมื่อยล้า",
-      "รองรับการเชื่อมต่อไร้สาย Tri-mode (BT / 2.4G / Type-C)",
-      "ดีไซน์ Ergonomic สวยงาม พรีเมียม เข้ากับโต๊ะทำงาน",
+      "Custom Switches สัมผัสนุ่ม ไม่เมื่อยนิ้ว",
+      "เชื่อมต่อไร้สาย Tri-mode (BT / 2.4G / Type-C)",
+      "ดีไซน์ Ergonomic เข้ากับโต๊ะทำงาน",
     ],
-    tag: "พิมพ์งานลื่นไหล สบายมือ ตอบโจทย์สาย Code & Content",
+    tag: "พิมพ์งานลื่นไหล ตอบโจทย์สาย Code & Content",
     shopeeUrl: "https://shopee.co.th/search?keyword=Mechanical%20Keyboard%20Desk%20Setup",
     badge: "Daily Essential",
     icon: Keyboard,
-    glowColor: "rgba(168, 85, 247, 0.25)",
-    borderColor: "border-purple-500/30",
-    textColor: "text-purple-400",
-    badgeGradient: "from-purple-500 to-pink-600",
+    badgeClass: "bg-purple-50 text-purple-800 border-purple-200",
   },
   {
     id: "ath-m50x",
     title: "หูฟังมอนิเตอร์ Audio-Technica ATH-M50x",
     category: "Studio Headphones",
     description:
-      "หูฟังมอนิเตอร์ระดับมืออาชีพที่ครีเอเตอร์ทั่วโลกเลือกใช้ ให้ย่านเสียงแม่นยำ ไร้การปรุงแต่ง เพื่อการตรวจเช็คเสียงวิดีโอและงานเพลงที่สมบูรณ์แบบ",
+      "หูฟังมอนิเตอร์ระดับมืออาชีพ ให้ย่านเสียงแม่นยำ ไร้การปรุงแต่ง สำหรับตรวจเช็คเสียงวิดีโอและงานเพลง",
     highlights: [
-      "ไดรเวอร์ขนาด 45 mm ตอบสนองเบสแน่นและเสียงแหลมใส",
-      "กันเสียงรบกวนรอบข้างยอดเยี่ยม (Sound Isolation)",
-      "สายถอดเปลี่ยนได้ 3 แบบ พับเก็บได้ พกพาสะดวก",
+      "ไดรเวอร์ 45 mm เบสแน่น เสียงแหลมใส",
+      "กันเสียงรบกวนรอบข้างยอดเยี่ยม",
+      "สายถอดเปลี่ยนได้ 3 แบบ พับเก็บพกพาสะดวก",
     ],
     tag: "ฟังเก็บรายละเอียดเสียง ตัดต่อวิดีโอแม่นยำ",
     shopeeUrl: "https://shopee.co.th/search?keyword=Audio-Technica%20ATH-M50x",
     badge: "Pro Audio",
     icon: Headphones,
-    glowColor: "rgba(245, 158, 11, 0.25)",
-    borderColor: "border-amber-500/30",
-    textColor: "text-amber-400",
-    badgeGradient: "from-amber-500 to-orange-600",
+    badgeClass: "bg-amber-50 text-amber-900 border-amber-200",
   },
 ];
 
 function HardwareGadgetsSection() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="mt-24 border-t border-[#E2E8F0] pt-16 relative"
+    <section
+      className="mt-20 pt-16 border-t border-[#E2E8F0]"
       id="hardware-gadgets"
     >
-      {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FEF9EF] border border-[#FDE68A] text-[#92400E] text-sm font-prompt font-semibold">
-          <Cpu className="w-4 h-4 text-[#D97706]" />
-          <span>iAon Tech Approved Hardware &amp; Studio Gadgets</span>
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+        <div className="space-y-2 max-w-2xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold">
+            <Cpu className="w-3.5 h-3.5 text-amber-700" />
+            <span>APPROVED HARDWARE &amp; STUDIO DESK</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
+            อุปกรณ์ไอที &amp; สตูดิโอที่ครูอ้นใช้ทำงานจริง
+          </h2>
+          <p className="text-sm text-[#475569]">
+            คัดเฉพาะอุปกรณ์ที่ทนและคุ้มค่าสำหรับอัดคลิป อบรมออนไลน์ และเขียนโค้ด
+          </p>
         </div>
-
-        <h2 className="font-prompt text-3xl md:text-5xl font-extrabold text-[#0F172A] leading-tight">
-          อุปกรณ์ไอที &amp; สตูดิโอที่{" "}
-          <span className="text-[#D97706]">
-            ครูอ้นใช้และแนะนำจริง
-          </span>
-        </h2>
-
-        <p className="text-[#475569] font-prompt text-base leading-relaxed max-w-xl mx-auto">
-          คัดสรรเฉพาะอุปกรณ์คุณภาพสูงสำหรับจัดโต๊ะทำงาน อัดคลิป อบรมออนไลน์ และทำคอนเทนต์ เพื่อประสิทธิภาพที่ดีที่สุดในการทำงาน
-        </p>
       </div>
 
-      {/* Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {HARDWARE_ITEMS.map((item, index) => {
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {HARDWARE_ITEMS.map((item) => {
           const IconComp = item.icon;
           return (
-            <motion.div
+            <div
               key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative h-full flex flex-col"
+              className="flex flex-col p-6 rounded-3xl bg-white border border-[#E2E8F0] hover:border-[#2563EB]/40 shadow-2xs hover:shadow-md transition-all"
             >
-              <div
-                className="relative flex flex-col h-full p-6 rounded-3xl bg-white border border-[#E2E8F0] shadow-sm transition-all duration-300 group-hover:border-[#CBD5E1] group-hover:shadow-md group-hover:-translate-y-1"
-              >
-                {/* Badge */}
-                <div className="flex justify-between items-center mb-4">
-                  <span
-                    className={cn(
-                      "px-3 py-1 rounded-full text-[11px] font-prompt font-bold text-white bg-linear-to-r shadow-xs",
-                      item.badgeGradient
-                    )}
-                  >
-                    {item.badge}
-                  </span>
-                  <span className="text-[11px] font-prompt text-[#64748B] uppercase tracking-wider">
-                    {item.category}
-                  </span>
-                </div>
-
-                {/* Header Icon + Title */}
-                <div className="flex items-start gap-3 mb-3">
-                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] shrink-0 group-hover:scale-105 transition-transform duration-300">
-                    <IconComp className="w-6 h-6 text-[#2563EB]" />
-                  </div>
-                  <div>
-                    <h3 className="font-prompt text-lg font-bold text-[#0F172A] leading-snug group-hover:text-[#2563EB] transition-colors">
-                      {item.title}
-                    </h3>
-                  </div>
-                </div>
-
-                <div className="mb-4 px-3 py-1.5 rounded-lg bg-[#FEF9EF] border border-[#FDE68A] text-[#92400E] text-xs font-prompt font-medium flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 shrink-0 text-[#D97706]" />
-                  <span>{item.tag}</span>
-                </div>
-
-                <p className="font-prompt text-xs text-[#475569] leading-relaxed mb-4">
-                  {item.description}
-                </p>
-
-                <ul className="space-y-2 mb-6 flex-1">
-                  {item.highlights.map((hl, i) => (
-                    <li key={i} className="flex items-start gap-2 text-xs font-prompt text-[#1E293B]">
-                      <CheckCircle2 className="w-3.5 h-3.5 shrink-0 mt-0.5 text-[#0F766E]" />
-                      <span>{hl}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-auto pt-4 border-t border-[#F1F5F9]">
-                  <a
-                    href={item.shopeeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-3 px-4 rounded-xl bg-linear-to-r from-[#FF5722] to-[#EE4D2D] hover:from-[#f04812] hover:to-[#d83c1c] text-white font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-sm cursor-pointer"
-                  >
-                    <ShoppingBag className="w-4 h-4 fill-white/20 text-white shrink-0" />
-                    <span>เช็กราคาบน Shopee</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-white/90 shrink-0" />
-                  </a>
-                </div>
+              <div className="flex justify-between items-center gap-2 mb-4">
+                <span
+                  className={cn(
+                    "px-2.5 py-0.5 rounded-full text-[11px] font-bold border",
+                    item.badgeClass
+                  )}
+                >
+                  {item.badge}
+                </span>
+                <span className="text-[11px] text-[#64748B] font-mono truncate">
+                  {item.category}
+                </span>
               </div>
-            </motion.div>
+
+              <div className="flex items-start gap-3 mb-3">
+                <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] shrink-0">
+                  <IconComp className="w-5 h-5 text-[#2563EB]" />
+                </div>
+                <h3 className="text-base font-bold text-[#0F172A] leading-snug">
+                  {item.title}
+                </h3>
+              </div>
+
+              <p className="text-xs text-[#475569] leading-relaxed mb-4">
+                {item.description}
+              </p>
+
+              <ul className="space-y-1.5 mb-5 flex-1">
+                {item.highlights.map((hl, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs text-[#1E293B]">
+                    <CheckCircle2 className="w-3.5 h-3.5 shrink-0 mt-0.5 text-[#0F766E]" />
+                    <span>{hl}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={item.shopeeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto w-full py-2.5 px-4 rounded-xl bg-[#FAF8F5] hover:bg-[#0F172A] text-[#0F172A] hover:text-white border border-[#E2E8F0] font-bold text-xs flex items-center justify-center gap-2 transition-colors"
+              >
+                <ShoppingBag className="w-3.5 h-3.5" />
+                <span>เช็กราคาบน Shopee</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
           );
         })}
       </div>
-    </motion.div>
+    </section>
   );
 }
 
@@ -250,56 +222,52 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
     (p) => (p.setupTier || getProductSetupTier(p.id, p.title)) === "vip-enterprise"
   ).length;
 
-  const setupTiers: { id: "all" | SetupTier; label: string; count: number; activeClass: string }[] = [
-    {
-      id: "all",
-      label: "✨ ทั้งหมด",
-      count: initialProducts.length || 20,
-      activeClass: "bg-linear-to-r from-purple-600 to-indigo-600 text-white border-purple-400 shadow-[0_0_20px_rgba(168,85,247,0.4)] scale-105",
-    },
-    {
-      id: "zero-tech",
-      label: "🟢 ก๊อปปี้ใช้ได้ทันที (Zero-Tech)",
-      count: zeroTechCount,
-      activeClass: "bg-linear-to-r from-emerald-500 via-teal-500 to-emerald-600 text-white border-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.55)] scale-105",
-    },
-    {
-      id: "easy-setup",
-      label: "🟡 ตั้งค่าใน 3 นาที",
-      count: easySetupCount,
-      activeClass: "bg-linear-to-r from-amber-500 to-yellow-600 text-white border-amber-300 shadow-[0_0_20px_rgba(245,158,11,0.4)] scale-105",
-    },
-    {
-      id: "vip-enterprise",
-      label: "🔴 ระบบระดับโรงเรียน / VIP",
-      count: vipEnterpriseCount,
-      activeClass: "bg-linear-to-r from-purple-600 via-pink-600 to-rose-600 text-white border-pink-400 shadow-[0_0_20px_rgba(236,72,153,0.4)] scale-105",
-    },
+  const setupTiers: { id: "all" | SetupTier; label: string; count: number }[] = [
+    { id: "all", label: "ทุกระดับ", count: initialProducts.length || 20 },
+    { id: "zero-tech", label: "ก๊อปปี้ใช้ทันที (Zero-Tech)", count: zeroTechCount },
+    { id: "easy-setup", label: "ตั้งค่าใน 3 นาที", count: easySetupCount },
+    { id: "vip-enterprise", label: "ระดับโรงเรียน / VIP", count: vipEnterpriseCount },
   ];
 
   const academicCount = initialProducts.filter((p) => {
     const t = (p.title || "").toLowerCase();
-    return t.includes("aone") || t.includes("นักเรียน") || t.includes("คะแนน") || t.includes("เช็คชื่อ") || t.includes("พฤติกรรม") || t.includes("ห้องเรียนสีขาว") || t.includes("สอบ");
+    return (
+      t.includes("aone") ||
+      t.includes("นักเรียน") ||
+      t.includes("คะแนน") ||
+      t.includes("เช็คชื่อ") ||
+      t.includes("พฤติกรรม") ||
+      t.includes("ห้องเรียนสีขาว") ||
+      t.includes("สอบ")
+    );
   }).length;
   const adminCount = initialProducts.filter((p) => {
     const t = (p.title || "").toLowerCase();
-    return t.includes("aona") || t.includes("บริหาร") || t.includes("ยานพาหนะ") || t.includes("เกียรติบัตร") || t.includes("พัสดุ") || t.includes("การลา") || t.includes("แจ้งซ่อม") || t.includes("สุขาภิบาล") || t.includes("แม่บ้าน");
+    return (
+      t.includes("aona") ||
+      t.includes("บริหาร") ||
+      t.includes("ยานพาหนะ") ||
+      t.includes("เกียรติบัตร") ||
+      t.includes("พัสดุ") ||
+      t.includes("การลา") ||
+      t.includes("แจ้งซ่อม") ||
+      t.includes("สุขาภิบาล") ||
+      t.includes("แม่บ้าน")
+    );
   }).length;
 
   const categories = [
     { id: "All", label: "ทั้งหมด", count: initialProducts.length },
-    { id: "Academic", label: "🎓 ครูผู้สอน & ห้องเรียน", count: academicCount },
-    { id: "Admin", label: "🏢 บริหารโรงเรียน & อาคารสถานที่", count: adminCount },
-    { id: "Hardware", label: "🎙️ สตูดิโอ & Gadgets", count: 4 },
+    { id: "Academic", label: "ครูผู้สอน & ห้องเรียน", count: academicCount },
+    { id: "Admin", label: "บริหารโรงเรียน & อาคาร", count: adminCount },
+    { id: "Hardware", label: "สตูดิโอ & Gadgets", count: 4 },
   ];
 
   const handleCategoryClick = (catId: string) => {
     setFilterCategory(catId);
     if (catId === "Hardware") {
       const el = document.getElementById("hardware-gadgets");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -309,263 +277,307 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
     const matchesSearch =
       title.includes(searchTerm.toLowerCase()) ||
       desc.includes(searchTerm.toLowerCase());
-    
+
     let matchesFilter = false;
     if (filterCategory === "All" || filterCategory === "Hardware") {
       matchesFilter = true;
     } else if (filterCategory === "Academic") {
-      matchesFilter = title.includes("aone") || title.includes("นักเรียน") || title.includes("คะแนน") || title.includes("เช็คชื่อ") || title.includes("พฤติกรรม") || title.includes("เครื่องแต่งกาย") || title.includes("ห้องเรียนสีขาว") || title.includes("สอบ");
+      matchesFilter =
+        title.includes("aone") ||
+        title.includes("นักเรียน") ||
+        title.includes("คะแนน") ||
+        title.includes("เช็คชื่อ") ||
+        title.includes("พฤติกรรม") ||
+        title.includes("เครื่องแต่งกาย") ||
+        title.includes("ห้องเรียนสีขาว") ||
+        title.includes("สอบ");
     } else if (filterCategory === "Admin") {
-      matchesFilter = title.includes("aona") || title.includes("บริหาร") || title.includes("ยานพาหนะ") || title.includes("เกียรติบัตร") || title.includes("พัสดุ") || title.includes("สมุดติดต่อ") || title.includes("การลา") || title.includes("แจ้งซ่อม") || title.includes("สุขาภิบาล") || title.includes("แม่บ้าน");
-    } else if (filterCategory === "Activity") {
-      matchesFilter = title.includes("aonm") || title.includes("ลูกเสือ") || title.includes("ดนตรี") || title.includes("ซ้อมดนตรี");
-    } else if (filterCategory === "Free") {
-      matchesFilter = product.price === "แจกฟรี" || product.price === "0" || title.includes("แจกฟรี") || title.includes("aone10");
+      matchesFilter =
+        title.includes("aona") ||
+        title.includes("บริหาร") ||
+        title.includes("ยานพาหนะ") ||
+        title.includes("เกียรติบัตร") ||
+        title.includes("พัสดุ") ||
+        title.includes("สมุดติดต่อ") ||
+        title.includes("การลา") ||
+        title.includes("แจ้งซ่อม") ||
+        title.includes("สุขาภิบาล") ||
+        title.includes("แม่บ้าน");
     } else {
       matchesFilter = product.category === filterCategory;
     }
 
     const productTier = product.setupTier || getProductSetupTier(product.id, product.title);
-    let matchesTier = true;
-    if (setupTierFilter !== "all") {
-      matchesTier = productTier === setupTierFilter;
-    }
-    
+    const matchesTier = setupTierFilter === "all" || productTier === setupTierFilter;
+
     return matchesSearch && matchesFilter && matchesTier;
   });
 
   return (
-    <div className="min-h-screen text-[#1E293B] pt-8 md:pt-12 pb-20 relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto font-prompt">
+    <div className="min-h-screen bg-[#FAF8F5] text-[#1E293B] font-prompt overflow-x-hidden pb-20">
+      {/* =================================================================
+          1. PRECISION PRODUCT STUDIO HERO (LINEAR + STRIPE PERSONALITY)
+      ================================================================= */}
+      <section className="relative pt-8 pb-14 sm:pt-12 sm:pb-16 border-b border-[#E2E8F0] bg-[#FFFDF9]">
+        {/* Subtle Precision Blueprint Grid */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-35 pointer-events-none"
+        />
 
-      {/* Main Content Area */}
-      <div className="relative z-10">
-        
-        {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-8 space-y-4">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] text-xs font-prompt font-semibold"
-          >
-            <ShoppingBag className="w-4 h-4 text-[#2563EB]" />
-            <span>DIGITAL VAULT — คลัง {initialProducts.length} ระบบโรงเรียนมาตรฐานสากล (ใช้ได้ทุกวิชา ทุกระดับชั้น)</span>
-          </motion.div>
+        <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Left Copy */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45 }}
+              className="lg:col-span-7 space-y-5"
+            >
+              <div className="flex flex-wrap items-center gap-3">
+                <img
+                  src="/brand/svg/aiaon-tech_lockup_horizontal_fullcolor-on-light.svg"
+                  alt="AiAon Tech"
+                  className="h-8 sm:h-9 w-auto"
+                />
+                <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#1D4ED8] text-xs font-mono font-bold">
+                  DIGITAL VAULT • {initialProducts.length} SYSTEMS
+                </span>
+              </div>
 
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-prompt text-4xl md:text-6xl font-extrabold tracking-tight text-[#0F172A] leading-tight"
-          >
-            คลังระบบอัตโนมัติ{" "}
-            <span className="text-[#2563EB]">
-              ช่วยผ่อนแรงครู
-            </span>
-          </motion.h1>
+              <h1 className="text-3xl sm:text-5xl font-extrabold text-[#0F172A] leading-[1.15] tracking-tight">
+                คลังระบบโรงเรียนอัตโนมัติ{" "}
+                <span className="text-[#2563EB]">พร้อมติดตั้งใน 3 นาที</span>
+              </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base md:text-lg text-[#475569] font-prompt leading-relaxed max-w-2xl mx-auto"
-          >
-            รวบรวมระบบ Google Apps Script พร้อมคู่มือภาษาไทย 2 นาที รันบน Google Workspace ตัวเอง ปลอดภัย 100% ไร้ค่าบริการรายเดือน
-          </motion.p>
+              <p className="text-sm sm:text-base text-[#475569] leading-relaxed max-w-2xl">
+                รวบรวมซอร์สโค้ด Google Apps Script ที่ผ่านสนามจริงกับนักเรียนกว่า 4,000 คน รันบน Google Workspace ของโรงเรียนเอง 100% ปลอดภัยตาม PDPA และไม่มีค่ารายเดือนตลอดชีพ
+              </p>
 
-          {/* Value Highlights Pill Bar */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2 text-xs font-prompt">
-            <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              <span>ตรวจสลิปผ่าน AI อนุมัติใน 2 วิ</span>
-            </span>
-            <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800 font-medium flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-blue-600" />
-              <span>ดาวน์โหลดไฟล์ผ่าน OneDrive ทันที</span>
-            </span>
-            <span className="px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-900 font-medium flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-amber-600" />
-              <span>มีออปชันให้ครูอ้นติดตั้งให้ (VIP Setup)</span>
-            </span>
-          </div>
-        </div>
-
-        {/* --- VIP BUNDLE PROMO BANNER --- */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          className="mb-10 max-w-4xl mx-auto"
-        >
-          <Link 
-            href="/bundles" 
-            className="block p-5 sm:p-6 rounded-3xl bg-white border border-[#BFDBFE] hover:border-[#2563EB] shadow-sm hover:shadow-md transition-all group"
-          >
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-              <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-2xl bg-[#EFF6FF] border border-[#BFDBFE] flex items-center justify-center text-[#2563EB] shrink-0 group-hover:scale-105 transition-transform">
-                  <Sparkles className="w-6 h-6 text-[#2563EB]" />
+              {/* Technical Spec Strip */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white border border-[#E2E8F0] shadow-2xs">
+                  <Clock className="w-4 h-4 text-[#2563EB] shrink-0" />
+                  <span className="text-xs font-semibold text-[#0F172A]">ลดภาระงาน 20+ ชม./เดือน</span>
                 </div>
-                <div>
-                  <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
-                    <span className="px-2 py-0.5 rounded text-[11px] font-prompt font-bold bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]">
-                      👑 LIFETIME DEAL
-                    </span>
-                    <p className="font-prompt text-sm sm:text-base font-extrabold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
-                      เหมาคลัง 20 ระบบตลอดชีพ (ประหยัดสูงสุด 51%)
-                    </p>
-                  </div>
-                  <p className="font-prompt text-xs text-[#475569]">
-                    จ่ายเพียง 4,990 ฿ ได้ครบทั้ง 20 ระบบ + สิทธิ์รับทุกระบบใหม่ตลอดชีพ พร้อมซัพพอร์ต VIP
-                  </p>
+                <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white border border-[#E2E8F0] shadow-2xs">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span className="text-xs font-semibold text-[#0F172A]">ข้อมูลอยู่บน Drive ตัวเอง</span>
+                </div>
+                <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white border border-[#E2E8F0] shadow-2xs">
+                  <Zap className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span className="text-xs font-semibold text-[#0F172A]">จ่ายครั้งเดียว ใช้ตลอดชีพ</span>
                 </div>
               </div>
-              <span className="px-5 py-2.5 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] text-white font-prompt text-xs font-bold shrink-0 inline-flex items-center gap-1.5 shadow-sm group-hover:scale-105 transition-transform">
-                <span>ดูแพ็กเกจ Bundle</span>
-                <ArrowRight className="w-4 h-4" />
-              </span>
-            </div>
-          </Link>
-        </motion.div>
 
-        {/* --- ZERO-TECH NO-BRAINER BUNDLES & STUDENT VAULT --- */}
-        <div className="mb-10 space-y-6">
-          <NoBrainerBundles className="py-4 sm:py-6" />
-          <StudentVaultPromotionSection className="py-4" />
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <a
+                  href="#vault-catalog"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#1D4ED8] hover:bg-[#1E40AF] text-white font-bold text-sm shadow-sm transition-all"
+                >
+                  <span>เลือกดูระบบทั้งหมด ({initialProducts.length})</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <Link
+                  href="/bundles"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white hover:bg-blue-50 text-[#0F172A] border border-[#CBD5E1] font-bold text-sm transition-all"
+                >
+                  <Sparkles className="w-4 h-4 text-amber-600" />
+                  <span>เหมา 20 ระบบตลอดชีพ (4,990 ฿)</span>
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Right: Crisp Product Preview Frame */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.08 }}
+              className="lg:col-span-5"
+            >
+              <div className="rounded-3xl bg-white border border-[#E2E8F0] p-3 shadow-md space-y-3">
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#E2E8F0]">
+                  <Image
+                    src="/images/mockups/aona09_repair_telegram_mockup.jpg"
+                    alt="ระบบแจ้งซ่อมอัจฉริยะ Telegram 2 ทาง"
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 480px"
+                  />
+                </div>
+                <div className="flex items-center justify-between gap-3 px-2 py-1">
+                  <div>
+                    <div className="text-[11px] font-mono font-bold text-[#2563EB]">
+                      FIELD-TESTED ARCHITECTURE
+                    </div>
+                    <div className="text-xs sm:text-sm font-bold text-[#0F172A]">
+                      Web App + Google Sheets + Telegram 2 ทาง
+                    </div>
+                  </div>
+                  <span className="shrink-0 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold">
+                    0 ฿/เดือน
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
+      </section>
 
-        {/* --- SETUP DIFFICULTY TIER FILTER --- */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.28 }}
-          className="mb-8 max-w-4xl mx-auto px-2"
-        >
-          <div className="flex flex-col items-center gap-3">
-            <div className="text-xs font-prompt font-bold text-[#475569] uppercase tracking-wider flex items-center gap-1.5 bg-white border border-[#E2E8F0] px-3.5 py-1.5 rounded-full shadow-2xs">
-              <Zap className="w-3.5 h-3.5 text-[#0F766E]" />
-              <span>เลือกระดับความง่ายในการติดตั้ง &amp; ใช้งาน (Setup Difficulty Tier)</span>
+      {/* =================================================================
+          2. UNIFIED PRECISION COMMAND BAR + PRODUCT CATALOG
+      ================================================================= */}
+      <section id="vault-catalog" className="max-w-[1240px] mx-auto px-4 sm:px-6 pt-10 sm:pt-12 scroll-mt-20">
+        {/* Sleek Linear-Style Filter Toolbar */}
+        <div className="rounded-3xl bg-white border border-[#E2E8F0] p-4 sm:p-5 shadow-2xs mb-8 space-y-4">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-3.5">
+            {/* Search Box */}
+            <div className="relative flex-1">
+              <Search className="w-4 h-4 text-[#64748B] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                className="w-full bg-[#FAF8F5] border border-[#E2E8F0] focus:bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 rounded-2xl py-3 pl-11 pr-16 text-[#0F172A] placeholder-[#94A3B8] text-sm outline-none transition-all"
+                placeholder="ค้นหาระบบ (เช่น แจ้งซ่อม, สุขาภิบาล, เช็คชื่อ, ห้องเรียนสีขาว, คะแนน)..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm("")}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-[#64748B] hover:text-[#0F172A] cursor-pointer"
+                >
+                  ล้าง
+                </button>
+              )}
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-              {setupTiers.map((tier) => {
-                const isActive = setupTierFilter === tier.id;
-                const isZeroTech = tier.id === "zero-tech";
-
+            {/* Category Segmented Tabs */}
+            <div className="flex flex-wrap items-center gap-1.5">
+              {categories.map((cat) => {
+                const isActive = filterCategory === cat.id;
                 return (
                   <button
-                    key={tier.id}
-                    onClick={() => setSetupTierFilter(tier.id)}
+                    key={cat.id}
+                    onClick={() => handleCategoryClick(cat.id)}
                     className={cn(
-                      "py-2.5 px-4 sm:px-5 rounded-2xl font-prompt text-xs sm:text-sm font-bold transition-all duration-300 active:scale-95 cursor-pointer flex items-center gap-2 border",
-                      isZeroTech && !isActive && "border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100",
+                      "px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 border",
                       isActive
-                        ? tier.activeClass
-                        : !isZeroTech && "bg-white border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:border-[#CBD5E1] shadow-2xs"
+                        ? "bg-[#0F172A] text-white border-[#0F172A]"
+                        : "bg-[#FAF8F5] text-[#475569] border-[#E2E8F0] hover:text-[#0F172A] hover:bg-slate-100"
                     )}
                   >
-                    <span>{tier.label}</span>
+                    <span>{cat.label}</span>
                     <span
                       className={cn(
-                        "text-[10px] font-mono px-1.5 py-0.2 rounded-full",
-                        isActive ? "bg-white/20 text-white" : isZeroTech ? "bg-emerald-200/70 text-emerald-900" : "bg-[#FAF8F5] text-[#64748B] border border-[#E2E8F0]"
+                        "text-[10px] font-mono px-1.5 py-0.5 rounded-full",
+                        isActive ? "bg-white/20 text-white" : "bg-white text-[#64748B]"
                       )}
                     >
-                      {tier.count}
+                      {cat.count}
                     </span>
                   </button>
                 );
               })}
             </div>
           </div>
-        </motion.div>
 
-        {/* Categories Pills - Responsive Flex Wrap */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-8 max-w-5xl mx-auto"
-        >
-          {categories.map((cat) => {
-            const isActive = filterCategory === cat.id;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => handleCategoryClick(cat.id)}
-                className={`py-2.5 px-4 sm:px-5 rounded-2xl font-prompt text-xs sm:text-sm font-semibold transition-all duration-300 active:scale-95 cursor-pointer flex items-center gap-2 border ${
-                  isActive
-                    ? "bg-[#1D4ED8] text-white border-[#1D4ED8] shadow-sm scale-105"
-                    : "bg-white border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:border-[#CBD5E1] shadow-2xs"
-                }`}
-              >
-                <span>{cat.label}</span>
-                <span className={`text-[11px] font-mono px-1.5 py-0.2 rounded-full ${isActive ? "bg-white/20 text-white" : "bg-[#FAF8F5] text-[#64748B]"}`}>
-                  {cat.count}
-                </span>
-              </button>
-            );
-          })}
-        </motion.div>
-
-        {/* Search Input */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="max-w-3xl mx-auto mb-10"
-        >
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <Search className="w-5 h-5 text-[#64748B]" />
+          {/* Setup Difficulty Sub-bar */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#F1F5F9]">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#64748B] mr-1">
+                <SlidersHorizontal className="w-3.5 h-3.5" />
+                <span>ความยากการติดตั้ง:</span>
+              </span>
+              {setupTiers.map((tier) => {
+                const isActive = setupTierFilter === tier.id;
+                return (
+                  <button
+                    key={tier.id}
+                    onClick={() => setSetupTierFilter(tier.id)}
+                    className={cn(
+                      "px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 border",
+                      isActive
+                        ? "bg-[#EFF6FF] text-[#1D4ED8] border-[#93C5FD]"
+                        : "bg-white text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1]"
+                    )}
+                  >
+                    <span>{tier.label}</span>
+                    <span className="text-[10px] font-mono opacity-75">({tier.count})</span>
+                  </button>
+                );
+              })}
             </div>
-            <input
-              type="text"
-              className="w-full bg-white border border-[#E2E8F0] hover:border-[#CBD5E1] focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20 rounded-2xl py-3.5 pl-12 pr-16 text-[#0F172A] placeholder-[#94A3B8] transition-all font-prompt text-sm outline-none shadow-2xs"
-              placeholder="ค้นหาชื่อระบบ (เช่น เช็คชื่อ, เกียรติบัตร, ยานพาหนะ, รถโรงเรียน, ลูกเสือ, ดนตรี)..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            {searchTerm && (
-              <button
-                onClick={() => setSearchTerm("")}
-                className="absolute inset-y-0 right-0 pr-4 flex items-center text-xs font-prompt text-[#64748B] hover:text-[#0F172A] cursor-pointer"
-              >
-                ล้างคำค้น
-              </button>
-            )}
-          </div>
-        </motion.div>
 
-        {/* Product Cards Grid */}
-        <div>
-          <motion.div
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-          >
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((product, index) => (
-                <ProductCard key={product.id || index} product={product} index={index} />
-              ))
-            ) : (
-              <div className="col-span-full flex flex-col items-center justify-center py-20 text-[#64748B] bg-white rounded-3xl border border-[#E2E8F0]">
-                <ShoppingBag className="w-16 h-16 mb-4 opacity-30" />
-                <p className="font-prompt text-lg text-[#0F172A] font-semibold">ไม่พบระบบที่ตรงกับคำค้นหา</p>
-                <button
-                  onClick={() => { setSearchTerm(""); setFilterCategory("All"); setSetupTierFilter("all"); }}
-                  className="mt-4 px-5 py-2.5 bg-[#2563EB] text-white rounded-xl hover:bg-[#1D4ED8] font-prompt text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-sm"
-                >
-                  ดูระบบทั้งหมด (20 ระบบ)
-                </button>
-              </div>
-            )}
-          </motion.div>
+            <div className="text-xs font-mono text-[#64748B]">
+              แสดง <strong className="text-[#0F172A]">{filteredProducts.length}</strong> / {initialProducts.length} ระบบ
+            </div>
+          </div>
         </div>
 
-        {/* Hardware & Studio Gadgets Section */}
-        <HardwareGadgetsSection />
+        {/* Clean 3-Column Product Grid */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product, index) => (
+              <ProductCard key={product.id || index} product={product} index={index} />
+            ))
+          ) : (
+            <div className="col-span-full flex flex-col items-center justify-center py-20 text-[#64748B] bg-white rounded-3xl border border-[#E2E8F0]">
+              <ShoppingBag className="w-14 h-14 mb-3 opacity-25" />
+              <p className="text-lg text-[#0F172A] font-bold">ไม่พบระบบที่ตรงกับคำค้นหา</p>
+              <button
+                onClick={() => {
+                  setSearchTerm("");
+                  setFilterCategory("All");
+                  setSetupTierFilter("all");
+                }}
+                className="mt-4 px-5 py-2.5 bg-[#1D4ED8] text-white rounded-xl hover:bg-[#1E40AF] text-xs sm:text-sm font-bold transition-all cursor-pointer"
+              >
+                รีเซ็ตตัวกรองทั้งหมด
+              </button>
+            </div>
+          )}
+        </motion.div>
 
-      </div>
+        {/* =================================================================
+            3. LIFETIME DEAL & VALUE BUNDLES (CLEAN UPSELL BELOW CATALOG)
+        ================================================================= */}
+        <div className="mt-20 space-y-8">
+          <Link
+            href="/bundles"
+            className="block p-6 sm:p-8 rounded-3xl bg-white border border-[#BFDBFE] hover:border-[#2563EB] shadow-2xs hover:shadow-md transition-all group"
+          >
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
+              <div className="space-y-1.5">
+                <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FEF3C7] text-[#92400E] border border-[#FDE68A]">
+                  👑 ALL-IN-ONE LIFETIME DEAL • ประหยัดสูงสุด 51%
+                </span>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] group-hover:text-[#2563EB] transition-colors">
+                  เหมาคลัง 20 ระบบตลอดชีพ เพียง 4,990 ฿
+                </h2>
+                <p className="text-xs sm:text-sm text-[#475569]">
+                  ได้ครบทั้ง 20 ระบบ + สิทธิ์รับทุกระบบใหม่ในอนาคตตลอดชีพ พร้อมซัปพอร์ต VIP จากครูอ้นโดยตรง
+                </p>
+              </div>
+              <span className="px-6 py-3.5 rounded-2xl bg-[#0F172A] group-hover:bg-[#1D4ED8] text-white text-sm font-bold shrink-0 inline-flex items-center gap-2 transition-colors">
+                <span>ดูแพ็กเกจเหมาทั้งหมด</span>
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </div>
+          </Link>
+
+          <NoBrainerBundles className="py-2" />
+          <StudentVaultPromotionSection className="py-2" />
+        </div>
+
+        {/* =================================================================
+            4. APPROVED HARDWARE & STUDIO GADGETS
+        ================================================================= */}
+        <HardwareGadgetsSection />
+      </section>
     </div>
   );
 }
