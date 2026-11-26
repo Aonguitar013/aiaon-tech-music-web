@@ -45,50 +45,50 @@ export function FreebieDetailSection({
     emerald: {
       border: "border-emerald-500/40",
       glow: "bg-emerald-500/15",
-      text: "text-emerald-400",
-      badge: "text-emerald-300 border-emerald-500/40 bg-emerald-500/20",
+      text: "text-emerald-700",
+      badge: "text-emerald-700 border-emerald-500/40 bg-emerald-500/20",
       btn: "from-emerald-500 via-teal-600 to-green-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 shadow-[0_0_25px_rgba(16,185,129,0.35)]",
     },
     rose: {
       border: "border-rose-500/40",
       glow: "bg-rose-500/15",
-      text: "text-rose-400",
-      badge: "text-rose-300 border-rose-500/40 bg-rose-500/20",
+      text: "text-rose-700",
+      badge: "text-rose-700 border-rose-500/40 bg-rose-500/20",
       btn: "from-rose-500 via-red-600 to-orange-600 hover:from-rose-400 hover:to-red-500 text-white shadow-[0_0_25px_rgba(244,63,94,0.35)]",
     },
     cyan: {
       border: "border-cyan-500/40",
       glow: "bg-cyan-500/15",
-      text: "text-cyan-400",
-      badge: "text-cyan-300 border-cyan-500/40 bg-cyan-500/20",
+      text: "text-sky-700",
+      badge: "text-sky-700 border-cyan-500/40 bg-cyan-500/20",
       btn: "from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-[0_0_25px_rgba(6,182,212,0.35)]",
     },
     purple: {
       border: "border-purple-500/40",
       glow: "bg-purple-500/15",
-      text: "text-purple-400",
-      badge: "text-purple-300 border-purple-500/40 bg-purple-500/20",
+      text: "text-purple-700",
+      badge: "text-purple-700 border-purple-500/40 bg-purple-500/20",
       btn: "from-purple-600 via-pink-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white shadow-[0_0_25px_rgba(168,85,247,0.35)]",
     },
     amber: {
       border: "border-amber-500/40",
       glow: "bg-amber-500/15",
-      text: "text-amber-400",
-      badge: "text-amber-300 border-amber-500/40 bg-amber-500/20",
+      text: "text-amber-700",
+      badge: "text-amber-700 border-amber-500/40 bg-amber-500/20",
       btn: "from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 shadow-[0_0_25px_rgba(245,158,11,0.35)]",
     },
     pink: {
       border: "border-pink-500/40",
       glow: "bg-pink-500/15",
-      text: "text-pink-400",
-      badge: "text-pink-300 border-pink-500/40 bg-pink-500/20",
+      text: "text-pink-700",
+      badge: "text-pink-700 border-pink-500/40 bg-pink-500/20",
       btn: "from-pink-500 via-rose-600 to-purple-600 hover:from-pink-400 hover:to-rose-500 text-white shadow-[0_0_25px_rgba(244,114,182,0.35)]",
     },
   }[freebie.themeColor] || {
     border: "border-emerald-500/40",
     glow: "bg-emerald-500/15",
-    text: "text-emerald-400",
-    badge: "text-emerald-300 border-emerald-500/40 bg-emerald-500/20",
+    text: "text-emerald-700",
+    badge: "text-emerald-700 border-emerald-500/40 bg-emerald-500/20",
     btn: "from-emerald-500 via-teal-600 to-green-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950",
   };
 
@@ -150,12 +150,12 @@ export function FreebieDetailSection({
   };
 
   return (
-    <div className="w-full flex flex-col gap-10 font-prompt text-white">
+    <div className="w-full flex flex-col gap-10 font-prompt text-[#1E293B]">
 
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 1: OUTCOME HEADLINE, PRICE TAG 0 ฿ & 3D MOCKUP HERO
       ───────────────────────────────────────────────────────────── */}
-      <div className={`relative rounded-3xl bg-slate-950/90 border ${accentStyles.border} p-6 sm:p-10 overflow-hidden shadow-2xl`}>
+      <div className={`relative rounded-3xl bg-white border ${accentStyles.border} p-6 sm:p-10 overflow-hidden shadow-sm`}>
         {/* Ambient Top Glow */}
         <div className={`absolute top-0 right-0 w-96 h-96 ${accentStyles.glow} blur-3xl rounded-full pointer-events-none -mr-20 -mt-20`} />
 
@@ -164,48 +164,48 @@ export function FreebieDetailSection({
           <span className={`px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider border ${accentStyles.badge}`}>
             {freebie.badge}
           </span>
-          <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/10 text-white/80 border border-white/20">
+          <span className="px-3 py-1 rounded-full text-xs font-mono bg-slate-100 text-[#475569] border border-[#E2E8F0]">
             {freebie.fileType}
           </span>
-          <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/10 text-white/80 border border-white/20">
+          <span className="px-3 py-1 rounded-full text-xs font-mono bg-slate-100 text-[#475569] border border-[#E2E8F0]">
             {freebie.fileSize}
           </span>
-          <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+          <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-700 border border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
             🎁 แจกฟรี 100% ไม่มีข้อผูกมัด
           </span>
         </div>
 
         {/* Outcome Headline */}
-        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">
+        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] leading-tight mb-4">
           {freebie.headline}
         </h1>
 
-        <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-4xl">
+        <p className="text-base sm:text-lg text-[#475569] leading-relaxed mb-8 max-w-4xl">
           {freebie.subheadline}
         </p>
 
         {/* 3D Mockup Stage Hero */}
-        <div className="w-full flex justify-center py-6 sm:py-8 my-4 bg-slate-900/60 rounded-2xl border border-white/10 backdrop-blur-sm">
+        <div className="w-full flex justify-center py-6 sm:py-8 my-4 bg-[#FAF8F5] rounded-2xl border border-[#E2E8F0] backdrop-blur-sm">
           {renderMockup()}
         </div>
 
         {/* ── PRICE TAG: เขียนป้ายราคาเป็น 0 บาท อย่างเด่นชัด ── */}
-        <div className="mt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-emerald-950/60 via-slate-900 to-teal-950/60 border border-emerald-500/40 shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+        <div className="mt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6 sm:p-8 rounded-2xl bg-emerald-50/70 border border-emerald-500/40 shadow-[0_0_40px_rgba(16,185,129,0.2)]">
           <div>
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-400 font-prompt mb-1">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-[#475569] font-prompt mb-1">
               <span>ราคาปกติทั่วไป:</span>
               <span className="line-through text-slate-500 font-bold">฿{freebie.originalPrice.toLocaleString()} บาท</span>
-              <span className="text-emerald-400 font-bold">ประหยัด 100%</span>
+              <span className="text-emerald-700 font-bold">ประหยัด 100%</span>
             </div>
             <div className="flex items-baseline gap-3">
-              <span className="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-200">
+              <span className="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-600">
                 0 บาท
               </span>
-              <span className="text-base sm:text-xl font-extrabold text-emerald-400 bg-emerald-500/20 px-3 py-1 rounded-xl border border-emerald-500/40">
+              <span className="text-base sm:text-xl font-extrabold text-emerald-700 bg-emerald-500/20 px-3 py-1 rounded-xl border border-emerald-500/40">
                 (แจกฟรี 0 ฿)
               </span>
             </div>
-            <p className="text-xs text-slate-400 mt-2 font-prompt">
+            <p className="text-xs text-[#475569] mt-2 font-prompt">
               💡 รับสิทธิ์การใช้งานถาวร • ไม่ต้องกรอกบัตรเครดิต • ไม่มีสัญญาผูกมัดใดๆ ทั้งสิ้น
             </p>
           </div>
@@ -215,7 +215,7 @@ export function FreebieDetailSection({
             <button
               type="button"
               onClick={onOpenUnlockModal}
-              className={`px-7 py-4 rounded-xl bg-gradient-to-r ${accentStyles.btn} font-black text-base shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer`}
+              className={`px-7 py-4 rounded-xl bg-gradient-to-r ${accentStyles.btn} font-black text-base shadow-xs transition-all duration-300 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 cursor-pointer`}
             >
               <Download className="w-5 h-5" />
               <span>ปลดล็อก &amp; ดาวน์โหลดฟรี (0 ฿)</span>
@@ -226,9 +226,9 @@ export function FreebieDetailSection({
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleLineChatClick}
-              className="px-6 py-4 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-black text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] cursor-pointer"
+              className="px-6 py-4 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-black text-sm flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-[1.02] cursor-pointer"
             >
-              <RiLineLine className="w-5 h-5 fill-white" />
+              <RiLineLine className="w-5 h-5 fill-[#052E16]" />
               <span>ขอรับไฟล์ทาง LINE OA</span>
             </a>
           </div>
@@ -238,36 +238,36 @@ export function FreebieDetailSection({
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 2: BEFORE VS AFTER COMPARISON
       ───────────────────────────────────────────────────────────── */}
-      <div className="rounded-3xl bg-slate-950/70 border border-white/10 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 sm:p-10 shadow-xs">
         <div className="flex items-center gap-2 mb-2">
-          <Clock className="w-5 h-5 text-amber-400" />
-          <span className="text-xs font-bold text-amber-400 uppercase tracking-wider font-mono">
+          <Clock className="w-5 h-5 text-amber-700" />
+          <span className="text-xs font-bold text-amber-700 uppercase tracking-wider font-mono">
             {freebie.timeSaved}
           </span>
         </div>
-        <h2 className="text-xl sm:text-3xl font-extrabold text-white mb-6">
+        <h2 className="text-xl sm:text-3xl font-extrabold text-[#0F172A] mb-6">
           ทำไมการใช้ไฟล์ชุดนี้ จึงเปลี่ยนผลลัพธ์การทำงานของคุณไปตลอดกาล
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Before: ปัญหาเดิม */}
-          <div className="p-6 rounded-2xl bg-rose-950/20 border border-rose-500/20">
-            <div className="flex items-center gap-2 text-rose-400 font-bold text-sm mb-3">
+          <div className="p-6 rounded-2xl bg-rose-50/70 border border-rose-500/20">
+            <div className="flex items-center gap-2 text-rose-700 font-bold text-sm mb-3">
               <span className="w-2 h-2 rounded-full bg-rose-500" />
               <span>ชีวิตการทำงานแบบเดิม (ก่อนมีระบบนี้)</span>
             </div>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm text-[#475569] leading-relaxed">
               {freebie.beforePain}
             </p>
           </div>
 
           {/* After: ชีวิตใหม่ */}
-          <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/30">
-            <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm mb-3">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <div className="p-6 rounded-2xl bg-emerald-50/70 border border-emerald-500/30">
+            <div className="flex items-center gap-2 text-emerald-700 font-bold text-sm mb-3">
+              <CheckCircle2 className="w-4 h-4 text-emerald-700" />
               <span>ชีวิตการทำงานยุคใหม่ (เมื่อใช้ระบบนี้ฟรี)</span>
             </div>
-            <p className="text-sm text-slate-200 leading-relaxed font-semibold">
+            <p className="text-sm text-[#0F172A] leading-relaxed font-semibold">
               {freebie.afterBenefit}
             </p>
           </div>
@@ -277,14 +277,14 @@ export function FreebieDetailSection({
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 3: 3 CORE BREAKTHROUGHS
       ───────────────────────────────────────────────────────────── */}
-      <div className="rounded-3xl bg-slate-950/70 border border-white/10 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 sm:p-10 shadow-xs">
         <div className="flex items-center gap-2 mb-2">
-          <Zap className="w-5 h-5 text-cyan-400" />
-          <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">
+          <Zap className="w-5 h-5 text-sky-700" />
+          <span className="text-xs font-bold text-sky-700 uppercase tracking-wider font-mono">
             3 CORE HIGHLIGHTS
           </span>
         </div>
-        <h2 className="text-xl sm:text-3xl font-extrabold text-white mb-6">
+        <h2 className="text-xl sm:text-3xl font-extrabold text-[#0F172A] mb-6">
           3 จุดเด่นและนวัตกรรมสำคัญของทรัพยากรชุดนี้
         </h2>
 
@@ -292,15 +292,15 @@ export function FreebieDetailSection({
           {freebie.features.map((feature, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-slate-900/60 border border-white/5 hover:border-white/15 transition-all space-y-3"
+              className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] hover:border-[#E2E8F0] transition-all space-y-3"
             >
-              <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white font-mono font-bold text-sm">
+              <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] flex items-center justify-center text-[#0F172A] font-mono font-bold text-sm">
                 0{idx + 1}
               </div>
-              <h3 className="font-bold text-base text-white">
+              <h3 className="font-bold text-base text-[#0F172A]">
                 {feature.title}
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-[#475569] leading-relaxed">
                 {feature.desc}
               </p>
             </div>
@@ -311,14 +311,14 @@ export function FreebieDetailSection({
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 4: UNBOXING DELIVERABLES (สิ่งที่คุณจะได้รับทันที)
       ───────────────────────────────────────────────────────────── */}
-      <div className="rounded-3xl bg-slate-950/70 border border-white/10 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 sm:p-10 shadow-xs">
         <div className="flex items-center gap-2 mb-2">
-          <Gift className="w-5 h-5 text-purple-400" />
-          <span className="text-xs font-bold text-purple-400 uppercase tracking-wider font-mono">
+          <Gift className="w-5 h-5 text-purple-700" />
+          <span className="text-xs font-bold text-purple-700 uppercase tracking-wider font-mono">
             DELIVERABLES INCLUDED
           </span>
         </div>
-        <h2 className="text-xl sm:text-3xl font-extrabold text-white mb-6">
+        <h2 className="text-xl sm:text-3xl font-extrabold text-[#0F172A] mb-6">
           สิ่งที่คุณจะได้รับในชุดดาวน์โหลดนี้ (ไม่มีค่าใช้จ่าย)
         </h2>
 
@@ -326,12 +326,12 @@ export function FreebieDetailSection({
           {freebie.deliverables.map((item, idx) => (
             <div
               key={idx}
-              className="p-4 rounded-xl bg-slate-900/50 border border-white/5 flex items-start gap-3"
+              className="p-4 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] flex items-start gap-3"
             >
               <div className="w-6 h-6 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center shrink-0 mt-0.5">
-                <Check className="w-4 h-4 text-emerald-400" />
+                <Check className="w-4 h-4 text-emerald-700" />
               </div>
-              <span className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed">
+              <span className="text-xs sm:text-sm text-[#475569] font-medium leading-relaxed">
                 {item}
               </span>
             </div>
@@ -342,14 +342,14 @@ export function FreebieDetailSection({
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 5: HOW TO UNLOCK & USE (วิธีนำไปใช้ใน 3 ขั้นตอน)
       ───────────────────────────────────────────────────────────── */}
-      <div className="rounded-3xl bg-slate-950/70 border border-white/10 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 sm:p-10 shadow-xs">
         <div className="flex items-center gap-2 mb-2">
-          <Laptop className="w-5 h-5 text-emerald-400" />
-          <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono">
+          <Laptop className="w-5 h-5 text-emerald-700" />
+          <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider font-mono">
             EASY SETUP
           </span>
         </div>
-        <h2 className="text-xl sm:text-3xl font-extrabold text-white mb-6">
+        <h2 className="text-xl sm:text-3xl font-extrabold text-[#0F172A] mb-6">
           วิธีปลดล็อกและเริ่มใช้งานง่ายๆ ใน 3 สเต็ป
         </h2>
 
@@ -357,15 +357,15 @@ export function FreebieDetailSection({
           {freebie.howToUseSteps.map((step, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-white/5 border border-white/10 relative overflow-hidden"
+              className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] relative overflow-hidden"
             >
-              <span className="text-5xl font-black text-white/5 absolute top-3 right-3 font-mono">
+              <span className="text-5xl font-black text-slate-900/5 absolute top-3 right-3 font-mono">
                 #{idx + 1}
               </span>
-              <div className="text-xs font-bold text-emerald-400 mb-2 font-mono">
+              <div className="text-xs font-bold text-emerald-700 mb-2 font-mono">
                 STEP 0{idx + 1}
               </div>
-              <p className="text-sm text-slate-200 leading-relaxed font-semibold relative z-10">
+              <p className="text-sm text-[#0F172A] leading-relaxed font-semibold relative z-10">
                 {step}
               </p>
             </div>
@@ -376,14 +376,14 @@ export function FreebieDetailSection({
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 6: SMART FAQ & BOTTOM ACTION BAR
       ───────────────────────────────────────────────────────────── */}
-      <div className="rounded-3xl bg-slate-950/70 border border-white/10 p-6 sm:p-10 shadow-xl">
+      <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 sm:p-10 shadow-xs">
         <div className="flex items-center gap-2 mb-2">
-          <HelpCircle className="w-5 h-5 text-amber-400" />
-          <span className="text-xs font-bold text-amber-400 uppercase tracking-wider font-mono">
+          <HelpCircle className="w-5 h-5 text-amber-700" />
+          <span className="text-xs font-bold text-amber-700 uppercase tracking-wider font-mono">
             FREQUENTLY ASKED QUESTIONS
           </span>
         </div>
-        <h2 className="text-xl sm:text-3xl font-extrabold text-white mb-6">
+        <h2 className="text-xl sm:text-3xl font-extrabold text-[#0F172A] mb-6">
           คำถามที่พบบ่อยเกี่ยวกับทรัพยากรนี้
         </h2>
 
@@ -393,18 +393,18 @@ export function FreebieDetailSection({
             return (
               <div
                 key={idx}
-                className="rounded-xl bg-slate-900/60 border border-white/5 overflow-hidden transition-all"
+                className="rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] overflow-hidden transition-all"
               >
                 <button
                   type="button"
                   onClick={() => setActiveFaq(isOpen ? null : idx)}
-                  className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-3 text-sm font-bold text-slate-200 hover:text-white cursor-pointer"
+                  className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-3 text-sm font-bold text-[#0F172A] hover:text-[#0F172A] cursor-pointer"
                 >
                   <span>{faq.q}</span>
-                  <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${isOpen ? "rotate-180 text-amber-400" : "text-slate-500"}`} />
+                  <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${isOpen ? "rotate-180 text-amber-700" : "text-slate-500"}`} />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-400 leading-relaxed border-t border-white/5">
+                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-[#475569] leading-relaxed border-t border-[#E2E8F0]">
                     {faq.a}
                   </div>
                 )}
@@ -414,13 +414,13 @@ export function FreebieDetailSection({
         </div>
 
         {/* Bottom Dual Action Bar */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-center sm:text-left">
-            <div className="flex items-center justify-center sm:justify-start gap-2 text-xs text-emerald-400 font-bold mb-1">
+            <div className="flex items-center justify-center sm:justify-start gap-2 text-xs text-emerald-700 font-bold mb-1">
               <Sparkles className="w-4 h-4" />
               <span>ราคาพิเศษ: 0 บาท (แจกฟรี 100%)</span>
             </div>
-            <div className="text-base sm:text-lg font-bold text-white">
+            <div className="text-base sm:text-lg font-bold text-[#0F172A]">
               พร้อมดาวน์โหลดและนำไปใช้งานแล้วหรือยัง?
             </div>
           </div>
@@ -430,7 +430,7 @@ export function FreebieDetailSection({
               <button
                 type="button"
                 onClick={onClose}
-                className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-sm border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-[#0F172A] font-bold text-sm border border-[#E2E8F0] transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>กลับหน้ารวม</span>
@@ -440,7 +440,7 @@ export function FreebieDetailSection({
             <button
               type="button"
               onClick={onOpenUnlockModal}
-              className={`flex-1 sm:flex-initial px-8 py-4 rounded-xl bg-gradient-to-r ${accentStyles.btn} font-black text-base shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer`}
+              className={`flex-1 sm:flex-initial px-8 py-4 rounded-xl bg-gradient-to-r ${accentStyles.btn} font-black text-base shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer`}
             >
               <Download className="w-5 h-5" />
               <span>ดาวน์โหลดฟรี (0 บาท)</span>

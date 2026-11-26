@@ -331,13 +331,13 @@ export function AoneProductDetailSection({
       {/* ══════════════════════════════════════════════════════════
           1. ABOVE THE FOLD: 3D DVD MOCKUP & OUTCOME HEADLINE
           ══════════════════════════════════════════════════════════ */}
-      <div className="glass-card p-6 md:p-10 border-white/10 rounded-3xl bg-slate-950/80 relative overflow-hidden shadow-2xl">
+      <div className="glass-card p-6 md:p-10 border-[#E2E8F0] rounded-3xl bg-white relative overflow-hidden shadow-sm">
         <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 blur-[80px] rounded-full pointer-events-none -mr-24 -mt-24" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
           
           {/* Left: 3D DVD Acrylic Case Mockup */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center p-4 rounded-2xl bg-gradient-to-b from-slate-900/60 to-black/60 border border-white/10 shadow-inner">
+          <div className="lg:col-span-5 flex flex-col items-center justify-center p-4 rounded-2xl bg-gradient-to-b from-slate-900/60 to-black/60 border border-[#E2E8F0] shadow-inner">
             <DvdCaseMockup
               code={data.code}
               title={title}
@@ -353,7 +353,7 @@ export function AoneProductDetailSection({
                       : "SMART APP"
               }
             />
-            <span className="text-[11px] text-cyan-300 font-mono mt-3 flex items-center gap-1.5 opacity-80">
+            <span className="text-[11px] text-sky-700 font-mono mt-3 flex items-center gap-1.5 opacity-80">
               <span>💿</span> คลิกที่แผ่นดิสก์เพื่อดึงเข้า/ออก
             </span>
           </div>
@@ -361,38 +361,38 @@ export function AoneProductDetailSection({
           {/* Right: Outcome Headline & Key Highlights */}
           <div className="lg:col-span-7 flex flex-col justify-between">
             <div className="flex items-center gap-2 mb-3">
-              <span className="px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-mono text-xs font-bold tracking-wider">
+              <span className="px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-sky-700 font-mono text-xs font-bold tracking-wider">
                 [{data.code}] {meta.shortName}
               </span>
-              <span className="px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-semibold">
+              <span className="px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-700 text-xs font-semibold">
                 ⏱️ {data.timeSaved}
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-4">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] leading-tight mb-4">
               {data.headline}
             </h1>
 
-            <p className="text-slate-300/80 text-sm sm:text-base leading-relaxed mb-6">
+            <p className="text-[#475569]/80 text-sm sm:text-base leading-relaxed mb-6">
               {data.subheadline}
             </p>
 
             {/* Trust Badges Bar */}
-            <div className="grid grid-cols-3 gap-2 py-3 border-y border-white/10 text-center mb-6">
-              <div className="p-2 rounded-xl bg-white/5 border border-white/5 flex flex-col items-center">
-                <ShieldCheck className="w-4 h-4 text-emerald-400 mb-1" />
-                <span className="text-[11px] font-bold text-white">Google Drive 100%</span>
-                <span className="text-[9px] text-slate-400">ข้อมูลไม่รั่วไหล</span>
+            <div className="grid grid-cols-3 gap-2 py-3 border-y border-[#E2E8F0] text-center mb-6">
+              <div className="p-2 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col items-center">
+                <ShieldCheck className="w-4 h-4 text-emerald-700 mb-1" />
+                <span className="text-[11px] font-bold text-[#0F172A]">Google Drive 100%</span>
+                <span className="text-[9px] text-[#475569]">ข้อมูลไม่รั่วไหล</span>
               </div>
-              <div className="p-2 rounded-xl bg-white/5 border border-white/5 flex flex-col items-center">
-                <RefreshCw className="w-4 h-4 text-cyan-400 mb-1" />
-                <span className="text-[11px] font-bold text-white">ไม่มีรายเดือน</span>
-                <span className="text-[9px] text-slate-400">จ่ายครั้งเดียวตลอดชีพ</span>
+              <div className="p-2 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col items-center">
+                <RefreshCw className="w-4 h-4 text-sky-700 mb-1" />
+                <span className="text-[11px] font-bold text-[#0F172A]">ไม่มีรายเดือน</span>
+                <span className="text-[9px] text-[#475569]">จ่ายครั้งเดียวตลอดชีพ</span>
               </div>
-              <div className="p-2 rounded-xl bg-white/5 border border-white/5 flex flex-col items-center">
-                <Sparkles className="w-4 h-4 text-amber-400 mb-1" />
-                <span className="text-[11px] font-bold text-white">VIP Setup พร้อมใช้</span>
-                <span className="text-[9px] text-slate-400">ครูอ้นติดตั้งให้</span>
+              <div className="p-2 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col items-center">
+                <Sparkles className="w-4 h-4 text-amber-700 mb-1" />
+                <span className="text-[11px] font-bold text-[#0F172A]">VIP Setup พร้อมใช้</span>
+                <span className="text-[9px] text-[#475569]">ครูอ้นติดตั้งให้</span>
               </div>
             </div>
 
@@ -407,13 +407,13 @@ export function AoneProductDetailSection({
                 data-line-price={cleanPrice}
                 data-line-code={data.code}
                 className={cn(
-                  "w-full sm:flex-1 py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex items-center justify-center gap-2 group shadow-xl cursor-pointer",
+                  "w-full sm:flex-1 py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex items-center justify-center gap-2 group shadow-xs cursor-pointer",
                   isFree
                     ? "bg-linear-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.35)]"
                     : "bg-linear-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:via-[#049b42] hover:to-[#05b34c] text-white shadow-[0_0_30px_rgba(6,199,85,0.4)] hover:shadow-[0_0_40px_rgba(6,199,85,0.6)] hover:scale-[1.01]"
                 )}
               >
-                {isFree ? <Gift className="w-5 h-5 text-zinc-950" /> : <ShoppingCart className="w-5 h-5 text-white" />}
+                {isFree ? <Gift className="w-5 h-5 text-zinc-950" /> : <ShoppingCart className="w-5 h-5 text-[#0F172A]" />}
                 <span>{isFree ? "รับระบบและโค้ดฟรีทาง LINE ทันที" : `สั่งซื้อรับระบบทันที ${cleanPrice} (LINE)`}</span>
                 <ArrowRight className={cn("w-4 h-4 group-hover:translate-x-1 transition-transform", isFree ? "text-zinc-950" : "text-white")} />
               </a>
@@ -427,7 +427,7 @@ export function AoneProductDetailSection({
                   data-line-title={`[${data.code}] ${title} (VIP Setup)`}
                   data-line-price={`${cleanPrice} + ${vipPrice}`}
                   data-line-code={data.code}
-                  className="w-full sm:w-auto py-4 px-5 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold text-sm transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer shadow-sm hover:scale-[1.01]"
+                  className="w-full sm:w-auto py-4 px-5 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/40 text-amber-700 font-bold text-sm transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer shadow-sm hover:scale-[1.01]"
                 >
                   <span>🛠️ ครูอ้นติดตั้งให้ ({vipPrice})</span>
                 </a>
@@ -435,16 +435,16 @@ export function AoneProductDetailSection({
             </div>
 
             {/* Frictionless Trust Badges */}
-            <div className="pt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-400 font-prompt">
-              <span className="flex items-center gap-1.5 text-amber-300/90">
+            <div className="pt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#475569] font-prompt">
+              <span className="flex items-center gap-1.5 text-amber-700">
                 <span>⚡</span>
                 <span>ส่งมอบลิงก์อัตโนมัติใน 10 วินาทีหลังส่งสลิป (AI Slip Verification)</span>
               </span>
-              <span className="flex items-center gap-1.5 text-emerald-300/90">
+              <span className="flex items-center gap-1.5 text-emerald-700">
                 <span>🛡️</span>
                 <span>ระบบมาตรฐานพร้อมใช้ ไม่ต้องเขียนโค้ดเอง</span>
               </span>
-              <span className="flex items-center gap-1.5 text-cyan-300/90">
+              <span className="flex items-center gap-1.5 text-sky-700">
                 <span>♾️</span>
                 <span>ชำระครั้งเดียว ใช้งานได้ตลอดชีพ ไม่มีค่ารายเดือน</span>
               </span>
@@ -458,20 +458,20 @@ export function AoneProductDetailSection({
           1.5 LIVE DEVICE MOCKUP PREVIEW (LAPTOP + MOBILE + TELEGRAM)
           ══════════════════════════════════════════════════════════ */}
       {mockupImageUrl && (
-        <div className="glass-card p-5 sm:p-7 border-cyan-400/30 rounded-3xl bg-slate-950/85 relative overflow-hidden shadow-[0_0_45px_rgba(6,182,212,0.18)]">
+        <div className="glass-card p-5 sm:p-7 border-cyan-400/30 rounded-3xl bg-white relative overflow-hidden shadow-[0_0_45px_rgba(6,182,212,0.18)]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
             <div className="flex items-center gap-2">
-              <Laptop className="w-5 h-5 text-cyan-400 shrink-0" />
-              <h2 className="text-lg sm:text-xl font-extrabold text-white">
+              <Laptop className="w-5 h-5 text-sky-700 shrink-0" />
+              <h2 className="text-lg sm:text-xl font-extrabold text-[#0F172A]">
                 ภาพตัวอย่างหน้าจอระบบจริง (Desktop Dashboard + Mobile &amp; Telegram 2 ทาง)
               </h2>
             </div>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-bold self-start sm:self-auto">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-700 text-xs font-bold self-start sm:self-auto">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Responsive 100%</span>
             </span>
           </div>
-          <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#060b18]">
+          <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] bg-[#FAF8F5]">
             <img
               src={mockupImageUrl}
               alt={`ภาพตัวอย่างหน้าจอระบบ ${title}`}
@@ -487,29 +487,29 @@ export function AoneProductDetailSection({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         {/* Pain: แบบเดิมที่ต้องทนเหนื่อย */}
-        <div className="p-6 md:p-8 rounded-3xl bg-red-950/20 border border-red-500/30 relative overflow-hidden flex flex-col justify-between">
-          <div className="flex items-center gap-2 text-red-400 font-bold text-base mb-4">
+        <div className="p-6 md:p-8 rounded-3xl bg-rose-50/70 border border-red-500/30 relative overflow-hidden flex flex-col justify-between">
+          <div className="flex items-center gap-2 text-rose-700 font-bold text-base mb-4">
             <AlertTriangle className="w-5 h-5 shrink-0" />
             <span>ก่อนมีระบบ (วิธีเดิมที่เหนื่อยล้า):</span>
           </div>
-          <p className="text-slate-300 text-sm leading-relaxed mb-4">
+          <p className="text-[#475569] text-sm leading-relaxed mb-4">
             {data.beforePain}
           </p>
-          <div className="pt-3 border-t border-red-500/20 text-xs text-red-300/80 font-mono">
+          <div className="pt-3 border-t border-red-500/20 text-xs text-rose-700 font-mono">
             ❌ เสียเวลา &bull; ผิดพลาดง่าย &bull; เครียดสะสม
           </div>
         </div>
 
         {/* Relief: แบบใหม่ด้วย iAon Tech */}
-        <div className="p-6 md:p-8 rounded-3xl bg-emerald-950/20 border border-emerald-500/40 relative overflow-hidden flex flex-col justify-between shadow-[0_0_30px_rgba(16,185,129,0.1)]">
-          <div className="flex items-center gap-2 text-emerald-400 font-bold text-base mb-4">
+        <div className="p-6 md:p-8 rounded-3xl bg-emerald-50/70 border border-emerald-500/40 relative overflow-hidden flex flex-col justify-between shadow-[0_0_30px_rgba(16,185,129,0.1)]">
+          <div className="flex items-center gap-2 text-emerald-700 font-bold text-base mb-4">
             <CheckCircle2 className="w-5 h-5 shrink-0" />
             <span>เมื่อใช้ระบบ iAon Tech (ทางรอดแบบอัตโนมัติ):</span>
           </div>
-          <p className="text-white text-sm leading-relaxed mb-4 font-medium">
+          <p className="text-[#0F172A] text-sm leading-relaxed mb-4 font-medium">
             {data.afterBenefit}
           </p>
-          <div className="pt-3 border-t border-emerald-500/20 text-xs text-emerald-300 font-bold font-mono">
+          <div className="pt-3 border-t border-emerald-500/20 text-xs text-emerald-700 font-bold font-mono">
             ✅ 1 คลิกเสร็จ &bull; สรุปผล Real-time &bull; ปลอดภัย 100%
           </div>
         </div>
@@ -519,23 +519,23 @@ export function AoneProductDetailSection({
       {/* ══════════════════════════════════════════════════════════
           3. VISUAL PROOF & 3 CORE CAPABILITIES
           ══════════════════════════════════════════════════════════ */}
-      <div className="glass-card p-6 md:p-10 border-white/10 rounded-3xl bg-slate-950/70">
-        <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono font-bold uppercase tracking-wider mb-2">
+      <div className="glass-card p-6 md:p-10 border-[#E2E8F0] rounded-3xl bg-white">
+        <div className="flex items-center gap-2 text-sky-700 text-xs font-mono font-bold uppercase tracking-wider mb-2">
           <Zap className="w-4 h-4" />
           <span>Core Capabilities</span>
         </div>
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-6">
           3 ฟีเจอร์ทรงพลังที่ออกแบบมาเพื่อคุณครูโดยเฉพาะ
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {data.features.map((feat, idx) => (
-            <div key={idx} className="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/40 transition-colors">
-              <div className="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center text-cyan-300 font-bold font-mono text-sm mb-3">
+            <div key={idx} className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] hover:border-cyan-400/40 transition-colors">
+              <div className="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center text-sky-700 font-bold font-mono text-sm mb-3">
                 0{idx + 1}
               </div>
-              <h3 className="text-base font-bold text-white mb-2">{feat.title}</h3>
-              <p className="text-slate-400 text-xs leading-relaxed">{feat.desc}</p>
+              <h3 className="text-base font-bold text-[#0F172A] mb-2">{feat.title}</h3>
+              <p className="text-[#475569] text-xs leading-relaxed">{feat.desc}</p>
             </div>
           ))}
         </div>
@@ -544,12 +544,12 @@ export function AoneProductDetailSection({
       {/* ══════════════════════════════════════════════════════════
           4. UNBOXING: WHAT YOU GET IN THE ZIP PACKAGE
           ══════════════════════════════════════════════════════════ */}
-      <div className="glass-card p-6 md:p-10 border-white/10 rounded-3xl bg-slate-950/70">
-        <div className="flex items-center gap-2 text-amber-400 text-xs font-mono font-bold uppercase tracking-wider mb-2">
+      <div className="glass-card p-6 md:p-10 border-[#E2E8F0] rounded-3xl bg-white">
+        <div className="flex items-center gap-2 text-amber-700 text-xs font-mono font-bold uppercase tracking-wider mb-2">
           <FileText className="w-4 h-4" />
           <span>Unboxing The Package</span>
         </div>
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-6">
           สิ่งที่คุณครูจะได้รับในแพ็กเกจดาวน์โหลด .ZIP:
         </h2>
 
@@ -561,10 +561,10 @@ export function AoneProductDetailSection({
             { step: "4", title: "2-Min Setup Guide", desc: "คู่มือการติดตั้ง 3 สเต็ปเสร็จใน 2 นาที" },
             { step: "5", title: "Lifetime License", desc: "สิทธิ์การใช้งานตลอดชีพ ไม่จำกัดจำนวนเด็ก" },
           ].map((item, i) => (
-            <div key={i} className="p-4 rounded-xl bg-black/40 border border-white/10 flex flex-col justify-between">
-              <span className="text-cyan-400 font-mono font-bold text-sm mb-1">ITEM #{item.step}</span>
-              <div className="font-bold text-white text-xs mb-1">{item.title}</div>
-              <div className="text-[11px] text-slate-400 leading-tight">{item.desc}</div>
+            <div key={i} className="p-4 rounded-xl bg-white/80 border border-[#E2E8F0] flex flex-col justify-between">
+              <span className="text-sky-700 font-mono font-bold text-sm mb-1">ITEM #{item.step}</span>
+              <div className="font-bold text-[#0F172A] text-xs mb-1">{item.title}</div>
+              <div className="text-[11px] text-[#475569] leading-tight">{item.desc}</div>
             </div>
           ))}
         </div>
@@ -574,32 +574,32 @@ export function AoneProductDetailSection({
           5. ELIMINATING 3 BIG FEARS (NO CODE / PRIVACY / NO FEES)
           ══════════════════════════════════════════════════════════ */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div className="p-6 rounded-3xl bg-slate-900/60 border border-white/10 flex flex-col justify-between">
-          <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300 mb-4">
+        <div className="p-6 rounded-3xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col justify-between">
+          <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-700 mb-4">
             <Laptop className="w-5 h-5" />
           </div>
-          <h3 className="font-bold text-white text-base mb-2">1. เขียนโค้ดไม่เป็น ใช้ได้ไหม?</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">
-            ไม่ต้องแตะโค้ดแม้แต่บรรทัดเดียวครับ เพียงทำตามคู่มือ 3 ขั้นตอน หรือเลือกบริการ <strong className="text-amber-300">VIP Setup</strong> ให้ครูอ้นติดตั้งให้พร้อมใช้งานได้ทันที
+          <h3 className="font-bold text-[#0F172A] text-base mb-2">1. เขียนโค้ดไม่เป็น ใช้ได้ไหม?</h3>
+          <p className="text-[#475569] text-xs leading-relaxed">
+            ไม่ต้องแตะโค้ดแม้แต่บรรทัดเดียวครับ เพียงทำตามคู่มือ 3 ขั้นตอน หรือเลือกบริการ <strong className="text-amber-700">VIP Setup</strong> ให้ครูอ้นติดตั้งให้พร้อมใช้งานได้ทันที
           </p>
         </div>
 
-        <div className="p-6 rounded-3xl bg-slate-900/60 border border-white/10 flex flex-col justify-between">
-          <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300 mb-4">
+        <div className="p-6 rounded-3xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col justify-between">
+          <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-sky-700 mb-4">
             <Lock className="w-5 h-5" />
           </div>
-          <h3 className="font-bold text-white text-base mb-2">2. ข้อมูลนักเรียนปลอดภัยไหม?</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">
-            ปลอดภัย 100% ครับ ข้อมูลทั้งหมดบันทึกอยู่บน <strong className="text-cyan-300">Google Drive ของคุณครูเอง</strong> ไม่มีเซิร์ฟเวอร์คนกลางแอบเก็บข้อมูลนักเรียนเด็ดขาด
+          <h3 className="font-bold text-[#0F172A] text-base mb-2">2. ข้อมูลนักเรียนปลอดภัยไหม?</h3>
+          <p className="text-[#475569] text-xs leading-relaxed">
+            ปลอดภัย 100% ครับ ข้อมูลทั้งหมดบันทึกอยู่บน <strong className="text-sky-700">Google Drive ของคุณครูเอง</strong> ไม่มีเซิร์ฟเวอร์คนกลางแอบเก็บข้อมูลนักเรียนเด็ดขาด
           </p>
         </div>
 
-        <div className="p-6 rounded-3xl bg-slate-900/60 border border-white/10 flex flex-col justify-between">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 mb-4">
+        <div className="p-6 rounded-3xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col justify-between">
+          <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-700 mb-4">
             <ShieldCheck className="w-5 h-5" />
           </div>
-          <h3 className="font-bold text-white text-base mb-2">3. มีค่าบริการรายเดือนไหม?</h3>
-          <p className="text-slate-400 text-xs leading-relaxed">
+          <h3 className="font-bold text-[#0F172A] text-base mb-2">3. มีค่าบริการรายเดือนไหม?</h3>
+          <p className="text-[#475569] text-xs leading-relaxed">
             ไม่มีค่าธรรมเนียมรายเดือนหรือรายปี จ่ายครั้งเดียวจบ ได้สิทธิ์ใช้งานตลอดชีพ รองรับการใช้งานของโรงเรียนได้ไม่จำกัดจำนวนห้อง
           </p>
         </div>
@@ -608,9 +608,9 @@ export function AoneProductDetailSection({
       {/* ══════════════════════════════════════════════════════════
           6. CREATOR PROFILE & AUTHORITY: ครูอ้น ญ.ว.
           ══════════════════════════════════════════════════════════ */}
-      <div className="glass-card p-6 md:p-8 rounded-3xl border border-cyan-500/30 bg-gradient-to-r from-slate-950 via-cyan-950/30 to-slate-950 flex flex-col sm:flex-row items-center gap-6 shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+      <div className="glass-card p-6 md:p-8 rounded-3xl border border-cyan-500/30 bg-white flex flex-col sm:flex-row items-center gap-6 shadow-[0_0_30px_rgba(6,182,212,0.15)]">
         <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-cyan-400 to-indigo-600 p-1 shrink-0 shadow-lg">
-          <div className="w-full h-full rounded-full bg-slate-900 overflow-hidden relative shadow-inner">
+          <div className="w-full h-full rounded-full bg-[#FAF8F5] overflow-hidden relative shadow-inner">
             <Image
               src="/images/kru_aon_profile.png"
               alt="ครูจิรวัฒน์ เดชเส้ง (ครูอ้น)"
@@ -623,15 +623,15 @@ export function AoneProductDetailSection({
 
         <div className="flex-1 text-center sm:text-left">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
-            <span className="font-bold text-lg text-white">ครูจิรวัฒน์ เดชเส้ง (ครูอ้น)</span>
-            <span className="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-bold border border-cyan-400/40">
+            <span className="font-bold text-lg text-[#0F172A]">ครูจิรวัฒน์ เดชเส้ง (ครูอ้น)</span>
+            <span className="px-2 py-0.5 rounded-full bg-cyan-500/20 text-sky-700 text-[10px] font-bold border border-cyan-400/40">
               ผู้พัฒนา &bull; โรงเรียนหาดใหญ่วิทยาลัย
             </span>
           </div>
-          <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-3">
+          <p className="text-[#475569] text-xs sm:text-sm leading-relaxed mb-3">
             ครูกลุ่มสาระการเรียนรู้ศิลปะ (ดนตรีสากล) โรงเรียนหาดใหญ่วิทยาลัย (ญ.ว.) ผู้พัฒนาระบบ Google Apps Script มากกว่า 59+ ระบบเพื่อทุ่นแรงคุณครูไทย
           </p>
-          <div className="flex items-center justify-center sm:justify-start gap-2 text-xs text-emerald-400 font-semibold">
+          <div className="flex items-center justify-center sm:justify-start gap-2 text-xs text-emerald-700 font-semibold">
             <UserCheck className="w-4 h-4" />
             <span>ครูอ้นตอบเองทุกข้อความ &bull; มีปัญหาการใช้งานปรึกษาได้ตลอดเวลา</span>
           </div>
@@ -641,35 +641,35 @@ export function AoneProductDetailSection({
       {/* ══════════════════════════════════════════════════════════
           7. SMART OBJECTIONS & FAQS
           ══════════════════════════════════════════════════════════ */}
-      <div className="glass-card p-6 md:p-8 rounded-3xl border-white/10 bg-slate-950/70">
-        <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono font-bold uppercase tracking-wider mb-2">
+      <div className="glass-card p-6 md:p-8 rounded-3xl border-[#E2E8F0] bg-white">
+        <div className="flex items-center gap-2 text-sky-700 text-xs font-mono font-bold uppercase tracking-wider mb-2">
           <HelpCircle className="w-4 h-4" />
           <span>Frequently Asked Questions</span>
         </div>
-        <h2 className="text-lg sm:text-xl font-bold text-white mb-5">
+        <h2 className="text-lg sm:text-xl font-bold text-[#0F172A] mb-5">
           คำถามที่พบบ่อยเกี่ยวกับระบบ [{data.code}]
         </h2>
 
         <div className="space-y-4">
           {data.faqs.map((faq, fIdx) => (
-            <div key={fIdx} className="p-4 rounded-2xl bg-white/5 border border-white/5">
-              <h4 className="text-sm font-bold text-white mb-1.5 flex items-start gap-2">
-                <span className="text-cyan-400">Q:</span>
+            <div key={fIdx} className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]">
+              <h4 className="text-sm font-bold text-[#0F172A] mb-1.5 flex items-start gap-2">
+                <span className="text-sky-700">Q:</span>
                 <span>{faq.q}</span>
               </h4>
-              <p className="text-xs text-slate-400 leading-relaxed pl-5">
-                <span className="text-emerald-400 font-bold">A:</span> {faq.a}
+              <p className="text-xs text-[#475569] leading-relaxed pl-5">
+                <span className="text-emerald-700 font-bold">A:</span> {faq.a}
               </p>
             </div>
           ))}
 
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
-            <h4 className="text-sm font-bold text-white mb-1.5 flex items-start gap-2">
-              <span className="text-cyan-400">Q:</span>
+          <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]">
+            <h4 className="text-sm font-bold text-[#0F172A] mb-1.5 flex items-start gap-2">
+              <span className="text-sky-700">Q:</span>
               <span>ใช้กับอีเมลองค์กรหรือเมลโรงเรียน (@obec.go.th / @school.ac.th) ได้ไหม?</span>
             </h4>
-            <p className="text-xs text-slate-400 leading-relaxed pl-5">
-              <span className="text-emerald-400 font-bold">A:</span> ใช้ได้ทั้งอีเมลโรงเรียน (Google Workspace for Education) และอีเมล Gmail ทั่วไป 100% ครับ
+            <p className="text-xs text-[#475569] leading-relaxed pl-5">
+              <span className="text-emerald-700 font-bold">A:</span> ใช้ได้ทั้งอีเมลโรงเรียน (Google Workspace for Education) และอีเมล Gmail ทั่วไป 100% ครับ
             </p>
           </div>
         </div>
@@ -678,12 +678,12 @@ export function AoneProductDetailSection({
       {/* ══════════════════════════════════════════════════════════
           FINAL BOTTOM CTA BAR
           ══════════════════════════════════════════════════════════ */}
-      <div className="p-6 rounded-3xl bg-gradient-to-r from-cyan-950 via-slate-950 to-indigo-950 border border-cyan-500/40 text-center flex flex-col items-center justify-center gap-4 shadow-[0_0_40px_rgba(6,182,212,0.2)]">
+      <div className="p-6 rounded-3xl bg-[#FAF8F5] border border-cyan-500/40 text-center flex flex-col items-center justify-center gap-4 shadow-[0_0_40px_rgba(6,182,212,0.2)]">
         <div>
-          <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-1">
+          <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] mb-1">
             พร้อมเปลี่ยนงานเอกสารให้เสร็จในคลิกเดียวแล้วหรือยัง?
           </h3>
-          <p className="text-slate-300 text-xs sm:text-sm">
+          <p className="text-[#475569] text-xs sm:text-sm">
             รับระบบ [{data.code}] วันนี้ ประหยัดเวลาทำงานทันที ปรึกษาและสั่งซื้อกับครูอ้นโดยตรง
           </p>
         </div>
@@ -698,7 +698,7 @@ export function AoneProductDetailSection({
             data-line-price={cleanPrice}
             data-line-code={data.code}
             className={cn(
-              "w-full py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex items-center justify-center gap-2 group shadow-xl cursor-pointer",
+              "w-full py-4 px-6 rounded-2xl font-prompt font-extrabold text-base transition-all duration-300 flex items-center justify-center gap-2 group shadow-xs cursor-pointer",
               isFree
                 ? "bg-linear-to-r from-emerald-400 to-teal-400 text-zinc-950 shadow-[0_0_25px_rgba(16,185,129,0.4)]"
                 : "bg-linear-to-r from-[#06C755] via-[#05b34c] to-[#06C755] hover:from-[#05b34c] hover:via-[#049b42] hover:to-[#05b34c] text-white shadow-[0_0_30px_rgba(6,199,85,0.4)]"
@@ -710,16 +710,16 @@ export function AoneProductDetailSection({
           </a>
 
           {/* Frictionless Trust Badges */}
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-400 font-prompt text-center">
-            <span className="flex items-center gap-1.5 text-amber-300/90">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-[#475569] font-prompt text-center">
+            <span className="flex items-center gap-1.5 text-amber-700">
               <span>⚡</span>
               <span>ส่งลิงก์ใน 10 วินาทีหลังส่งสลิป</span>
             </span>
-            <span className="flex items-center gap-1.5 text-emerald-300/90">
+            <span className="flex items-center gap-1.5 text-emerald-700">
               <span>🛡️</span>
               <span>พร้อมใช้ ไม่ต้องแก้โค้ด</span>
             </span>
-            <span className="flex items-center gap-1.5 text-cyan-300/90">
+            <span className="flex items-center gap-1.5 text-sky-700">
               <span>♾️</span>
               <span>จ่ายครั้งเดียว ตลอดชีพ</span>
             </span>

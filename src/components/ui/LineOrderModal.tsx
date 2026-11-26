@@ -242,7 +242,7 @@ export function LineOrderModal({
           role="dialog"
           aria-modal="true"
           aria-labelledby="line-order-modal-title"
-          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md overflow-y-auto"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-[#0F172A]/50 backdrop-blur-sm overflow-y-auto"
           onClick={onClose}
         >
           <motion.div
@@ -251,27 +251,27 @@ export function LineOrderModal({
             exit={{ opacity: 0, scale: 0.94, y: 15 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-3xl shadow-[0_0_50px_rgba(6,199,85,0.18)] overflow-hidden font-prompt text-slate-100 my-auto"
+            className="relative w-full max-w-2xl bg-white border border-[#E2E8F0] rounded-3xl shadow-2xl overflow-hidden font-prompt text-[#1E293B] my-auto"
           >
-            {/* Top Glowing Bar */}
-            <div className="h-1.5 w-full bg-gradient-to-r from-[#06C755] via-teal-400 to-indigo-500" />
+            {/* Top Brand Bar */}
+            <div className="h-1.5 w-full bg-gradient-to-r from-[#06C755] via-emerald-500 to-teal-500" />
 
             {/* Modal Header */}
-            <div className="p-5 sm:p-6 border-b border-slate-800 flex items-start justify-between gap-4 bg-slate-950/40">
+            <div className="p-5 sm:p-6 border-b border-[#E2E8F0] flex items-start justify-between gap-4 bg-[#FAF8F5]">
               <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl bg-[#06C755] text-white flex items-center justify-center shrink-0 shadow-lg shadow-[#06C755]/25">
+                <div className="w-11 h-11 rounded-2xl bg-[#06C755] text-white flex items-center justify-center shrink-0 shadow-md shadow-[#06C755]/25">
                   <FaLine className="w-7 h-7" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-[#06C755]/20 text-[#06C755] border border-[#06C755]/30 uppercase tracking-wider">
+                    <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 uppercase tracking-wider">
                       LINE Official Account
                     </span>
-                    <span className="text-xs text-slate-400 font-mono">@deu6776s</span>
+                    <span className="text-xs text-[#475569] font-mono font-semibold">@deu6776s</span>
                   </div>
                   <h2
                     id="line-order-modal-title"
-                    className="text-base sm:text-lg font-bold text-white mt-1 leading-snug"
+                    className="text-base sm:text-lg font-bold text-[#0F172A] mt-1 leading-snug"
                   >
                     {title || "สั่งซื้อและติดต่อผ่าน LINE OA ครูอ้น"}
                   </h2>
@@ -282,23 +282,23 @@ export function LineOrderModal({
                 type="button"
                 onClick={onClose}
                 aria-label="ปิดหน้าต่าง"
-                className="w-9 h-9 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center shrink-0 transition"
+                className="w-9 h-9 rounded-xl bg-white hover:bg-slate-100 border border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] flex items-center justify-center shrink-0 transition cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Modal Body */}
-            <div className="p-5 sm:p-6 grid grid-cols-1 md:grid-cols-5 gap-6">
+            <div className="p-5 sm:p-6 grid grid-cols-1 md:grid-cols-5 gap-6 bg-white">
               {/* Left Column: QR Code (2 of 5 cols) */}
-              <div className="md:col-span-2 flex flex-col items-center justify-center text-center p-4 rounded-2xl bg-slate-950/70 border border-slate-800/80">
-                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 mb-3">
-                  <QrCode className="w-4 h-4 text-[#06C755]" />
+              <div className="md:col-span-2 flex flex-col items-center justify-center text-center p-4 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]">
+                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0F172A] mb-3">
+                  <QrCode className="w-4 h-4 text-emerald-600" />
                   <span>สแกนด้วยมือถือเพื่อแชต</span>
                 </div>
 
                 {/* QR Code Container */}
-                <div className="p-3 bg-white rounded-2xl shadow-inner inline-flex items-center justify-center">
+                <div className="p-3 bg-white rounded-2xl border border-[#E2E8F0] shadow-xs inline-flex items-center justify-center">
                   <QRCodeSVG
                     value={LINE_ADD_FRIEND_URL}
                     size={160}
@@ -312,34 +312,34 @@ export function LineOrderModal({
                   type="button"
                   onClick={handleCopyId}
                   title="คลิกเพื่อคัดลอก LINE ID"
-                  className="mt-3.5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-700 hover:border-[#06C755]/50 text-xs text-slate-200 transition group"
+                  className="mt-3.5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#E2E8F0] hover:border-emerald-500 text-xs text-[#1E293B] transition group cursor-pointer shadow-2xs"
                 >
-                  <span className="text-slate-400">ID:</span>
-                  <span className="font-mono font-bold text-white">{LINE_ACCOUNT_ID}</span>
+                  <span className="text-[#475569]">ID:</span>
+                  <span className="font-mono font-bold text-[#0F172A]">{LINE_ACCOUNT_ID}</span>
                   {copiedId ? (
-                    <span className="text-[11px] text-[#06C755] font-semibold flex items-center gap-1">
+                    <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
                       <Check className="w-3 h-3" /> คัดลอกแล้ว
                     </span>
                   ) : (
-                    <Copy className="w-3 h-3 text-slate-400 group-hover:text-white" />
+                    <Copy className="w-3 h-3 text-[#475569] group-hover:text-[#0F172A]" />
                   )}
                 </button>
 
-                <p className="text-[11px] text-slate-400 mt-2 leading-relaxed">
+                <p className="text-[11px] text-[#475569] mt-2 leading-relaxed">
                   เปิดกล้องมือถือหรือแอป LINE สแกน QR เพื่อเริ่มแชตกับครูอ้นได้ทันที
                 </p>
 
                 {/* Frictionless Trust Badges below QR */}
-                <div className="mt-3.5 pt-3 border-t border-slate-800/80 w-full text-left space-y-2 text-[11px] font-prompt">
-                  <div className="flex items-start gap-1.5 text-amber-300/95 leading-snug">
+                <div className="mt-3.5 pt-3 border-t border-[#E2E8F0] w-full text-left space-y-2 text-[11px] font-prompt">
+                  <div className="flex items-start gap-1.5 text-amber-800 leading-snug">
                     <span className="text-xs shrink-0 mt-0.5">⚡</span>
                     <span>ส่งมอบลิงก์อัตโนมัติใน 10 วินาทีหลังส่งสลิป (AI Slip Verification)</span>
                   </div>
-                  <div className="flex items-start gap-1.5 text-emerald-300/95 leading-snug">
+                  <div className="flex items-start gap-1.5 text-emerald-800 leading-snug">
                     <span className="text-xs shrink-0 mt-0.5">🛡️</span>
                     <span>ระบบมาตรฐานพร้อมใช้ ไม่ต้องเขียนโค้ดเอง</span>
                   </div>
-                  <div className="flex items-start gap-1.5 text-cyan-300/95 leading-snug">
+                  <div className="flex items-start gap-1.5 text-sky-800 leading-snug">
                     <span className="text-xs shrink-0 mt-0.5">♾️</span>
                     <span>ชำระครั้งเดียว ใช้งานได้ตลอดชีพ ไม่มีค่ารายเดือน</span>
                   </div>
@@ -351,25 +351,25 @@ export function LineOrderModal({
                 {/* Header info */}
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-                      <Smartphone className="w-3.5 h-3.5 text-indigo-400" />
+                    <span className="text-xs font-bold text-[#0F172A] flex items-center gap-1.5">
+                      <Smartphone className="w-3.5 h-3.5 text-blue-600" />
                       <span>ขั้นตอน: คัดลอกข้อความแล้วส่งใน LINE</span>
                     </span>
                     {price && (
-                      <span className="text-xs font-black text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+                      <span className="text-xs font-black text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
                         ยอดชำระ ฿{price}
                       </span>
                     )}
                   </div>
 
                   {itemCode && (
-                    <div className="text-[11px] text-indigo-300 font-mono mb-1.5">
+                    <div className="text-[11px] text-blue-700 font-mono font-semibold mb-1.5">
                       รหัสสินค้า: [{itemCode}]
                     </div>
                   )}
 
                   {/* Message Preview Box */}
-                  <div className="relative rounded-2xl bg-slate-950 border border-slate-800 p-3.5 text-xs text-slate-200 font-mono whitespace-pre-wrap max-h-40 overflow-y-auto leading-relaxed select-all">
+                  <div className="relative rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] p-3.5 text-xs text-[#0F172A] font-mono whitespace-pre-wrap max-h-40 overflow-y-auto leading-relaxed select-all">
                     {message}
                   </div>
                 </div>
@@ -380,10 +380,10 @@ export function LineOrderModal({
                   <button
                     type="button"
                     onClick={handleCopyMessage}
-                    className={`w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-lg ${
+                    className={`w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-md cursor-pointer ${
                       copiedMessage
-                        ? "bg-emerald-600 text-white shadow-emerald-600/30 ring-2 ring-emerald-400/50"
-                        : "bg-[#06C755] hover:bg-[#05b34c] text-white shadow-[#06C755]/25 hover:scale-[1.01] active:scale-[0.99]"
+                        ? "bg-emerald-700 text-white shadow-emerald-600/20 ring-2 ring-emerald-400/50"
+                        : "bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] shadow-[#06C755]/20 hover:scale-[1.01] active:scale-[0.99]"
                     }`}
                   >
                     {copiedMessage ? (
@@ -400,8 +400,8 @@ export function LineOrderModal({
                   </button>
 
                   {/* Secondary: Open via LINE PC */}
-                  <div className="pt-2 border-t border-slate-800/80">
-                    <div className="text-[11px] text-slate-400 text-center mb-1.5">
+                  <div className="pt-2 border-t border-[#E2E8F0]">
+                    <div className="text-[11px] text-[#475569] text-center mb-1.5">
                       หรือหากติดตั้งแอป LINE บนคอมพิวเตอร์เครื่องนี้:
                     </div>
                     <a
@@ -409,9 +409,9 @@ export function LineOrderModal({
                       target="_blank"
                       rel="noopener noreferrer"
                       data-no-line-modal="true"
-                      className="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold flex items-center justify-center gap-2 border border-slate-700/70 transition"
+                      className="w-full py-2.5 px-3 rounded-xl bg-[#FAF8F5] hover:bg-slate-100 text-[#0F172A] text-xs font-semibold flex items-center justify-center gap-2 border border-[#E2E8F0] transition"
                     >
-                      <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                      <ExternalLink className="w-3.5 h-3.5 text-[#475569]" />
                       <span>เปิดแชตด้วยแอป LINE PC</span>
                     </a>
                   </div>
@@ -420,8 +420,8 @@ export function LineOrderModal({
             </div>
 
             {/* Modal Footer Reassurance */}
-            <div className="px-6 py-3.5 bg-slate-950/70 border-t border-slate-800 flex items-center justify-center gap-2 text-xs text-slate-400 text-center">
-              <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+            <div className="px-6 py-3.5 bg-[#FAF8F5] border-t border-[#E2E8F0] flex items-center justify-center gap-2 text-xs text-[#475569] text-center">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>ครูอ้นตอบเองทุกข้อความ ได้รับไฟล์และคำแนะนำโดยตรง ปลอดภัย 100%</span>
             </div>
           </motion.div>

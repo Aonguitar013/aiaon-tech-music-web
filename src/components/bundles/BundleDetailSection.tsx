@@ -41,45 +41,45 @@ export function BundleDetailSection({
     cyan: {
       border: "border-cyan-500/30",
       glow: "bg-cyan-500/10",
-      text: "text-cyan-400",
-      badge: "text-cyan-300 border-cyan-500/30 bg-cyan-500/10",
+      text: "text-sky-700",
+      badge: "text-sky-700 border-cyan-500/30 bg-cyan-500/10",
       btn: "from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-blue-500 text-white",
     },
     amber: {
       border: "border-amber-500/30",
       glow: "bg-amber-500/10",
-      text: "text-amber-400",
-      badge: "text-amber-300 border-amber-500/30 bg-amber-500/10",
+      text: "text-amber-700",
+      badge: "text-amber-700 border-amber-500/30 bg-amber-500/10",
       btn: "from-amber-500 via-orange-600 to-amber-700 hover:from-amber-400 hover:to-orange-500 text-slate-950",
     },
     purple: {
       border: "border-purple-500/40",
       glow: "bg-purple-500/15",
-      text: "text-purple-400",
-      badge: "text-purple-300 border-purple-500/40 bg-purple-500/20",
+      text: "text-purple-700",
+      badge: "text-purple-700 border-purple-500/40 bg-purple-500/20",
       btn: "from-purple-600 via-pink-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white shadow-[0_0_30px_rgba(168,85,247,0.4)]",
     },
     emerald: {
       border: "border-emerald-500/30",
       glow: "bg-emerald-500/10",
-      text: "text-emerald-400",
-      badge: "text-emerald-300 border-emerald-500/30 bg-emerald-500/10",
+      text: "text-emerald-700",
+      badge: "text-emerald-700 border-emerald-500/30 bg-emerald-500/10",
       btn: "from-emerald-500 via-teal-600 to-green-700 hover:from-emerald-400 hover:to-teal-500 text-slate-950",
     },
   }[bundle.themeColor] || {
     border: "border-purple-500/40",
     glow: "bg-purple-500/15",
-    text: "text-purple-400",
-    badge: "text-purple-300 border-purple-500/40 bg-purple-500/20",
+    text: "text-purple-700",
+    badge: "text-purple-700 border-purple-500/40 bg-purple-500/20",
     btn: "from-purple-600 via-pink-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white",
   };
 
   return (
-    <div className="w-full flex flex-col gap-10 font-prompt text-white">
+    <div className="w-full flex flex-col gap-10 font-prompt text-[#1E293B]">
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 1: OUTCOME HEADLINE & 3D CYBER VAULT CRATE HERO
       ───────────────────────────────────────────────────────────── */}
-      <div className={`relative rounded-3xl bg-slate-950/85 border ${accentStyles.border} p-6 sm:p-10 overflow-hidden shadow-2xl`}>
+      <div className={`relative rounded-3xl bg-white border ${accentStyles.border} p-6 sm:p-10 overflow-hidden shadow-sm`}>
         {/* Ambient Top Glow */}
         <div className={`absolute top-0 right-0 w-96 h-96 ${accentStyles.glow} blur-3xl rounded-full pointer-events-none -mr-20 -mt-20`} />
 
@@ -88,27 +88,27 @@ export function BundleDetailSection({
           <span className={`px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider border ${bundle.badgeColor}`}>
             {bundle.badge}
           </span>
-          <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/10 text-white/80 border border-white/20">
+          <span className="px-3 py-1 rounded-full text-xs font-mono bg-slate-100 text-[#475569] border border-[#E2E8F0]">
             {bundle.systems.length} SYSTEMS PACK
           </span>
-          <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-300 border border-amber-500/30">
+          <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-700 border border-amber-500/30">
             {bundle.discountText}
           </span>
         </div>
 
         {/* Outcome Headline */}
-        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">
+        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] leading-tight mb-4">
           {bundle.headline}
         </h1>
 
-        <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed font-light mb-8 max-w-3xl">
+        <p className="text-[#475569] text-sm sm:text-base lg:text-lg leading-relaxed font-light mb-8 max-w-3xl">
           {bundle.subheadline}
         </p>
 
         {/* 3D Cyber Vault Crate Showcase Stage */}
-        <div className="relative my-8 p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-slate-900/90 via-slate-950 to-slate-900/80 border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.6)] flex flex-col items-center justify-center">
-          <div className="text-[11px] font-mono font-bold tracking-widest text-slate-400 uppercase mb-4 flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+        <div className="relative my-8 p-6 sm:p-8 rounded-3xl bg-[#FAF8F5] border border-[#E2E8F0] shadow-xs flex flex-col items-center justify-center">
+          <div className="text-[11px] font-mono font-bold tracking-widest text-[#475569] uppercase mb-4 flex items-center gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-amber-700" />
             <span>3D CYBER VAULT CRATE (เอาเมาส์ชี้เพื่อเปิดฝาหีบและพวยพุ่งแสงโฮโลแกรม)</span>
           </div>
 
@@ -124,20 +124,20 @@ export function BundleDetailSection({
           />
 
           {/* Included Systems Chips */}
-          <div className="w-full max-w-3xl mt-6 p-4 rounded-2xl bg-slate-950/80 border border-white/10">
-            <div className="text-xs font-mono font-bold text-slate-400 uppercase mb-3 flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5 text-amber-400" />
+          <div className="w-full max-w-3xl mt-6 p-4 rounded-2xl bg-white border border-[#E2E8F0]">
+            <div className="text-xs font-mono font-bold text-[#475569] uppercase mb-3 flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5 text-amber-700" />
               <span>ระบบที่รวมอยู่ในหีบชุดนี้ ({bundle.systems.length} รายการ):</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {bundle.systems.map((sys, sIdx) => (
-                <div key={sIdx} className="p-3 rounded-xl bg-white/[0.03] border border-white/5 flex flex-col justify-between">
+                <div key={sIdx} className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono text-amber-300 font-bold block mb-0.5">{sys.code}</span>
-                    <h5 className="text-xs font-bold text-white line-clamp-1">{sys.name}</h5>
-                    <p className="text-[11px] text-slate-400 line-clamp-2 mt-1">{sys.description}</p>
+                    <span className="text-[10px] font-mono text-amber-700 font-bold block mb-0.5">{sys.code}</span>
+                    <h5 className="text-xs font-bold text-[#0F172A] line-clamp-1">{sys.name}</h5>
+                    <p className="text-[11px] text-[#475569] line-clamp-2 mt-1">{sys.description}</p>
                   </div>
-                  <div className="text-[10px] text-slate-500 mt-2 pt-1 border-t border-white/5">
+                  <div className="text-[10px] text-slate-500 mt-2 pt-1 border-t border-[#E2E8F0]">
                     มูลค่าปกติ ฿{sys.originalPrice.toLocaleString()}
                   </div>
                 </div>
@@ -147,17 +147,17 @@ export function BundleDetailSection({
         </div>
 
         {/* Pricing & CTA Banner */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 rounded-2xl bg-white/[0.03] border border-white/10">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]">
           <div>
-            <div className="text-xs text-slate-400 mb-1">ราคาโปรโมชันเหมาชุดพิเศษ (สิทธิ์ใช้งานตลอดชีพ)</div>
+            <div className="text-xs text-[#475569] mb-1">ราคาโปรโมชันเหมาชุดพิเศษ (สิทธิ์ใช้งานตลอดชีพ)</div>
             <div className="flex items-baseline gap-3">
-              <span className="text-3xl sm:text-5xl font-black text-amber-300">฿{bundle.bundlePrice.toLocaleString()}</span>
+              <span className="text-3xl sm:text-5xl font-black text-amber-700">฿{bundle.bundlePrice.toLocaleString()}</span>
               <span className="text-slate-500 line-through text-lg">฿{bundle.originalPrice.toLocaleString()}</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 border border-emerald-500/30 font-bold">
                 {bundle.discountText}
               </span>
             </div>
-            <div className="text-xs text-slate-400 mt-1">{bundle.targetAudience}</div>
+            <div className="text-xs text-[#475569] mt-1">{bundle.targetAudience}</div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
@@ -182,34 +182,34 @@ export function BundleDetailSection({
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 2: BEFORE / AFTER PAIN RELIEF & TIME SAVED
       ───────────────────────────────────────────────────────────── */}
-      <div className="rounded-3xl bg-slate-950/80 border border-white/10 p-6 sm:p-10">
-        <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-400 uppercase tracking-widest mb-3">
+      <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 sm:p-10">
+        <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-700 uppercase tracking-widest mb-3">
           <Clock className="w-4 h-4" />
           <span>เปรียบเทียบความคุ้มค่า & ผลลัพธ์ชัดเจน</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-6">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] mb-6">
           ทำไมการเหมาหีบแพ็กเกจชุดนี้ถึงคุ้มค่ากว่าการแยกซื้อ?
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           {/* Before */}
-          <div className="p-6 rounded-2xl bg-rose-950/20 border border-rose-500/30">
-            <div className="flex items-center gap-2 text-rose-400 font-bold text-sm mb-3">
+          <div className="p-6 rounded-2xl bg-rose-50/70 border border-rose-500/30">
+            <div className="flex items-center gap-2 text-rose-700 font-bold text-sm mb-3">
               <AlertTriangle className="w-4 h-4" />
               <span>ก่อนใช้งาน (ความยุ่งยากเดิมๆ)</span>
             </div>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-[#475569] text-sm sm:text-base leading-relaxed">
               {bundle.beforePain}
             </p>
           </div>
 
           {/* After */}
-          <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/30">
-            <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm mb-3">
+          <div className="p-6 rounded-2xl bg-emerald-50/70 border border-emerald-500/30">
+            <div className="flex items-center gap-2 text-emerald-700 font-bold text-sm mb-3">
               <CheckCircle2 className="w-4 h-4" />
               <span>หลังใช้งาน (ผลลัพธ์และความสำเร็จ)</span>
             </div>
-            <p className="text-emerald-100 text-sm sm:text-base leading-relaxed">
+            <p className="text-[#1E293B] text-sm sm:text-base leading-relaxed">
               {bundle.afterBenefit}
             </p>
           </div>
@@ -217,8 +217,8 @@ export function BundleDetailSection({
 
         {/* Time Saved Highlight */}
         <div className="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/30 flex items-center justify-center gap-3 text-center">
-          <Sparkles className="w-5 h-5 text-amber-400 flex-shrink-0" />
-          <span className="text-amber-200 font-bold text-sm sm:text-base">
+          <Sparkles className="w-5 h-5 text-amber-700 flex-shrink-0" />
+          <span className="text-amber-700 font-bold text-sm sm:text-base">
             🚀 คุณค่าที่ได้รับ: {bundle.timeSaved}
           </span>
         </div>
@@ -229,10 +229,10 @@ export function BundleDetailSection({
       ───────────────────────────────────────────────────────────── */}
       <div>
         <div className="text-center max-w-2xl mx-auto mb-8">
-          <div className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest mb-2">
+          <div className="text-xs font-mono font-bold text-sky-700 uppercase tracking-widest mb-2">
             CORE BREAKTHROUGHS
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
             3 จุดเด่นสำคัญที่ออกแบบมาเพื่อสถานศึกษาของคุณ
           </h2>
         </div>
@@ -241,14 +241,14 @@ export function BundleDetailSection({
           {bundle.breakthroughs.map((b, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-slate-900/60 border border-white/10 hover:border-cyan-500/40 transition-all flex flex-col justify-between"
+              className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] hover:border-cyan-500/40 transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-mono font-bold mb-4">
+                <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-sky-700 font-mono font-bold mb-4">
                   0{idx + 1}
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2">{b.title}</h3>
-                <p className="text-slate-300 text-sm leading-relaxed">{b.desc}</p>
+                <h3 className="text-lg font-bold text-[#0F172A] mb-2">{b.title}</h3>
+                <p className="text-[#475569] text-sm leading-relaxed">{b.desc}</p>
               </div>
             </div>
           ))}
@@ -258,12 +258,12 @@ export function BundleDetailSection({
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 4: UNBOXING DELIVERABLES (สิ่งที่คุณจะได้รับทันที)
       ───────────────────────────────────────────────────────────── */}
-      <div className="rounded-3xl bg-slate-950/80 border border-white/10 p-6 sm:p-10">
-        <div className="flex items-center gap-2 text-xs font-mono font-bold text-purple-400 uppercase tracking-widest mb-3">
+      <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 sm:p-10">
+        <div className="flex items-center gap-2 text-xs font-mono font-bold text-purple-700 uppercase tracking-widest mb-3">
           <Gift className="w-4 h-4" />
           <span>WHAT YOU WILL GET (แกะกล่องสิ่งที่จะได้รับในหีบสมบัตินี้)</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-6">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] mb-6">
           รับชุดซอร์สโค้ดและเทมเพลตดิจิทัลครบชุด พร้อมใช้งานทันที
         </h2>
 
@@ -271,14 +271,14 @@ export function BundleDetailSection({
           {bundle.deliverables.map((item, idx) => (
             <div
               key={idx}
-              className="p-5 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-purple-500/30 transition-all flex items-start gap-4"
+              className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] hover:border-purple-500/30 transition-all flex items-start gap-4"
             >
-              <div className="w-7 h-7 rounded-full bg-purple-500/20 text-purple-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="w-7 h-7 rounded-full bg-purple-500/20 text-purple-700 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <Check className="w-4 h-4 stroke-[3]" />
               </div>
               <div>
-                <h4 className="text-base font-bold text-white mb-1">{item.title}</h4>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+                <h4 className="text-base font-bold text-[#0F172A] mb-1">{item.title}</h4>
+                <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -288,12 +288,12 @@ export function BundleDetailSection({
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 5: ELIMINATING 3 MAIN FEARS (ทลาย 3 ข้อกังวลใจ)
       ───────────────────────────────────────────────────────────── */}
-      <div className="rounded-3xl bg-slate-950/80 border border-white/10 p-6 sm:p-10">
-        <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-400 uppercase tracking-widest mb-3">
+      <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 sm:p-10">
+        <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-700 uppercase tracking-widest mb-3">
           <ShieldCheck className="w-4 h-4" />
           <span>RISK REVERSAL & ZERO DOUBT</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-6">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] mb-6">
           ทลาย 3 ข้อกังวลใจในการใช้งานระดับสถานศึกษา
         </h2>
 
@@ -301,16 +301,16 @@ export function BundleDetailSection({
           {bundle.fears.map((fear, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-slate-900/40 border border-white/10 flex flex-col justify-between"
+              className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center gap-2 text-amber-400 font-bold text-sm mb-3">
+                <div className="flex items-center gap-2 text-amber-700 font-bold text-sm mb-3">
                   <HelpCircle className="w-4 h-4 flex-shrink-0" />
                   <span>คำถาม: {fear.question}</span>
                 </div>
-                <p className="text-slate-300 text-sm leading-relaxed">{fear.answer}</p>
+                <p className="text-[#475569] text-sm leading-relaxed">{fear.answer}</p>
               </div>
-              <div className="mt-4 pt-3 border-t border-white/10 flex items-center gap-2 text-xs text-emerald-400 font-medium">
+              <div className="mt-4 pt-3 border-t border-[#E2E8F0] flex items-center gap-2 text-xs text-emerald-700 font-medium">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 <span>ยืนยันความปลอดภัย 100%</span>
               </div>
@@ -322,9 +322,9 @@ export function BundleDetailSection({
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 6: CREATOR AUTHORITY & TRACK RECORD
       ───────────────────────────────────────────────────────────── */}
-      <div className="rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-cyan-500/30 p-6 sm:p-10">
+      <div className="rounded-3xl bg-white border border-cyan-500/30 p-6 sm:p-10">
         <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-cyan-400/50 shadow-[0_0_30px_rgba(6,182,212,0.3)] flex-shrink-0 bg-slate-900">
+          <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-cyan-400/50 shadow-[0_0_30px_rgba(6,182,212,0.3)] flex-shrink-0 bg-[#FAF8F5]">
             <Image
               src="/images/kru_aon_profile.png"
               alt="ครูจิรวัฒน์ เดชเส้ง (ครูอ้น)"
@@ -336,30 +336,30 @@ export function BundleDetailSection({
 
           <div className="flex-1 text-center md:text-left">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-2">
-              <span className="px-3 py-0.5 rounded-full text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+              <span className="px-3 py-0.5 rounded-full text-xs font-bold bg-cyan-500/20 text-sky-700 border border-cyan-500/40">
                 SYSTEM ARCHITECT & TEACHER
               </span>
-              <span className="text-xs text-slate-400 font-mono">
+              <span className="text-xs text-[#475569] font-mono">
                 โรงเรียนหาดใหญ่วิทยาลัย (ญ.ว.)
               </span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-black text-white mb-2">
+            <h3 className="text-xl sm:text-2xl font-black text-[#0F172A] mb-2">
               ครูจิรวัฒน์ เดชเส้ง (ครูอ้น)
             </h3>
-            <p className="text-sm text-slate-300 leading-relaxed font-light mb-4">
+            <p className="text-sm text-[#475569] leading-relaxed font-light mb-4">
               ครูชำนาญการ (ค.ศ.2) โรงเรียนหาดใหญ่วิทยาลัย, ผู้พัฒนาและบุกเบิกระบบ Google Apps Script สำหรับการศึกษาไทย 
               ออกแบบระบบที่ใช้งานจริงกับนักเรียนกว่า 4,000 คน และครูกว่า 200 คนในโรงเรียนขนาดใหญ่พิเศษ 
               ทุกระบบผ่านการทดสอบภาคสนาม (Field-Tested) ใช้งานง่าย เสถียรสูง และพร้อมให้คำปรึกษาดูแลโดยตรง
             </p>
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-slate-400 font-mono">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-[#475569] font-mono">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" /> Google Apps Script Gold Standard
+                <CheckCircle2 className="w-3.5 h-3.5 text-sky-700" /> Google Apps Script Gold Standard
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" /> มีระบบใช้งานจริงกว่า 20+ โรงเรียน
+                <CheckCircle2 className="w-3.5 h-3.5 text-sky-700" /> มีระบบใช้งานจริงกว่า 20+ โรงเรียน
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" /> ออกใบเสร็จรับเงินเบิกงบประมาณได้
+                <CheckCircle2 className="w-3.5 h-3.5 text-sky-700" /> ออกใบเสร็จรับเงินเบิกงบประมาณได้
               </span>
             </div>
           </div>
@@ -369,12 +369,12 @@ export function BundleDetailSection({
       {/* ─────────────────────────────────────────────────────────────
           ELEMENT 7: SMART FAQ & DUAL CTA BAR
       ───────────────────────────────────────────────────────────── */}
-      <div className="rounded-3xl bg-slate-950/80 border border-white/10 p-6 sm:p-10">
+      <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 sm:p-10">
         <div className="text-center max-w-2xl mx-auto mb-8">
-          <div className="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest mb-2">
+          <div className="text-xs font-mono font-bold text-amber-700 uppercase tracking-widest mb-2">
             SMART FAQ
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
             คำถามที่พบบ่อยเกี่ยวกับแพ็กเกจเหมา
           </h2>
         </div>
@@ -383,22 +383,22 @@ export function BundleDetailSection({
           {bundle.faqs.map((faq, idx) => (
             <div
               key={idx}
-              className="rounded-2xl bg-white/[0.02] border border-white/10 overflow-hidden"
+              className="rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] overflow-hidden"
             >
               <button
                 type="button"
                 onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-white hover:text-amber-300 transition-colors"
+                className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-[#0F172A] hover:text-amber-700 transition-colors"
               >
                 <span className="text-sm sm:text-base">{faq.q}</span>
                 <ChevronDown
-                  className={`w-5 h-5 text-slate-400 transition-transform ${
-                    activeFaq === idx ? "rotate-180 text-amber-400" : ""
+                  className={`w-5 h-5 text-[#475569] transition-transform ${
+                    activeFaq === idx ? "rotate-180 text-amber-700" : ""
                   }`}
                 />
               </button>
               {activeFaq === idx && (
-                <div className="px-4 pb-5 sm:px-5 sm:pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
+                <div className="px-4 pb-5 sm:px-5 sm:pb-5 text-xs sm:text-sm text-[#475569] leading-relaxed border-t border-[#E2E8F0] pt-3">
                   {faq.a}
                 </div>
               )}
@@ -407,10 +407,10 @@ export function BundleDetailSection({
         </div>
 
         {/* Dual CTA Bottom Bar */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
-            <div className="text-xs text-slate-400 mb-1">สั่งซื้อและรับไฟล์ดิจิทัลพร้อมใช้งานทันที</div>
-            <div className="text-xl sm:text-2xl font-black text-white">
+            <div className="text-xs text-[#475569] mb-1">สั่งซื้อและรับไฟล์ดิจิทัลพร้อมใช้งานทันที</div>
+            <div className="text-xl sm:text-2xl font-black text-[#0F172A]">
               {bundle.title}
             </div>
           </div>
@@ -420,7 +420,7 @@ export function BundleDetailSection({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-sm border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="px-5 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-[#0F172A] font-bold text-sm border border-[#E2E8F0] transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>กลับหน้ารวม</span>
