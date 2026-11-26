@@ -56,15 +56,6 @@ export const NAVIGATION_PILLARS: NavPillarGroup[] = [
     accentHex: "#2563EB",
     items: [
       {
-        id: "krurank",
-        label: "KruRank AI",
-        description: "ซ้อมสอบ AI วิเคราะห์จุดหลอก + ทำเนียบว่าที่ครูผู้ช่วย",
-        href: "/krurank",
-        badge: "AI App",
-        badgeTone: "blue",
-        icon: "crown",
-      },
-      {
         id: "digital-vault",
         label: "Digital Vault (20 ระบบ)",
         description: "คลังระบบงานโรงเรียน Google Apps Script 0-Baht",
@@ -72,6 +63,15 @@ export const NAVIGATION_PILLARS: NavPillarGroup[] = [
         badge: "Popular",
         badgeTone: "amber",
         icon: "database",
+      },
+      {
+        id: "krurank",
+        label: "KruRank AI",
+        description: "ซ้อมสอบ AI วิเคราะห์จุดหลอก + ทำเนียบว่าที่ครูผู้ช่วย",
+        href: "/krurank",
+        badge: "AI App",
+        badgeTone: "blue",
+        icon: "crown",
       },
       {
         id: "bundles",
@@ -110,7 +110,7 @@ export const NAVIGATION_PILLARS: NavPillarGroup[] = [
     items: [
       {
         id: "edu-verse",
-        label: "iAon Edu-Verse",
+        label: "AiAon Edu-Verse",
         description: "สื่อเด็กเล็ก Hybrid QR 6 โลกการเรียนรู้ (แจกฟรี 30 หน้า!)",
         href: "/edu",
         badge: "ใหม่! 99฿",
@@ -169,7 +169,7 @@ export const NAVIGATION_PILLARS: NavPillarGroup[] = [
     items: [
       {
         id: "line-stickers",
-        label: "3D Mascots & LINE Stickers",
+        label: "AiAon Studio • สติกเกอร์ LINE 3D",
         description: "ปั้นสติกเกอร์ LINE 3D จากรูปจริง & คลัง 30+ On Sale",
         href: "/line-stickers",
         badge: "🔥 ฮิต! 990฿+",
@@ -178,7 +178,7 @@ export const NAVIGATION_PILLARS: NavPillarGroup[] = [
       },
       {
         id: "music-store",
-        label: "Music & BGM Store",
+        label: "AiAon Audio • ร้านเพลง & BGM ว.PA",
         description: "ร้านเพลงช่วยจำกฎหมายครู & BGM คลิป ว.PA ปลอดลิขสิทธิ์",
         href: "/music-store",
         badge: "ปลอดลิขสิทธิ์",
@@ -211,7 +211,7 @@ export const NAVIGATION_PILLARS: NavPillarGroup[] = [
     items: [
       {
         id: "story",
-        label: "The Story of iAon",
+        label: "The Story of AiAon",
         description: "เรื่องราวของครูอ้น: Teacher · Musician · Maker",
         href: "/about",
         icon: "user-round",
@@ -222,6 +222,15 @@ export const NAVIGATION_PILLARS: NavPillarGroup[] = [
         description: "สร้างระบบ AI อัตโนมัติ เพื่อคืนเวลาให้ชีวิต",
         href: "/about#philosophy",
         icon: "zap",
+      },
+      {
+        id: "brand-kit",
+        label: "Brand Kit V2.0 (Press Kit)",
+        description: "ดาวน์โหลดโลโก้ Outlined SVG & PNG ทั้ง 4 เสา (.ZIP)",
+        href: "/brand/AiAon_Brand_Kit_v2.0.zip",
+        badge: "V2.0",
+        badgeTone: "blue",
+        icon: "sparkles",
       },
       {
         id: "legal",
