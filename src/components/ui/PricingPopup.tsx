@@ -110,7 +110,7 @@ export function PricingPopup() {
                   {/* Close button */}
                   <button
                     onClick={dismiss}
-                    className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-[#FAF8F5] hover:bg-slate-100 border border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] transition-all active:scale-90 cursor-pointer"
+                    className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-[#F8FAFC] hover:bg-slate-100 border border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] transition-all active:scale-90 cursor-pointer"
                     aria-label="ปิด"
                   >
                     <X className="w-4 h-4" />
@@ -140,7 +140,7 @@ export function PricingPopup() {
                   </p>
 
                   {/* Price */}
-                  <div className="flex items-baseline gap-1.5 mb-6 bg-[#FAF8F5] border border-[#E2E8F0] rounded-2xl px-5 py-4">
+                  <div className="flex items-baseline gap-1.5 mb-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl px-5 py-4">
                     <Zap className="w-5 h-5 text-blue-600 shrink-0 mb-0.5" />
                     <span className="font-prompt text-5xl font-extrabold text-[#0F172A]">
                       290
@@ -174,7 +174,7 @@ export function PricingPopup() {
                     </Link>
 
                     <Link href="/saas#pricing" onClick={dismiss} className="block">
-                      <button className="w-full py-3 rounded-2xl border border-[#E2E8F0] hover:border-slate-300 bg-[#FAF8F5] hover:bg-slate-100 text-[#0F172A] font-prompt font-medium text-sm active:scale-[0.98] transition-all cursor-pointer">
+                      <button className="w-full py-3 rounded-2xl border border-[#E2E8F0] hover:border-slate-300 bg-[#F8FAFC] hover:bg-slate-100 text-[#0F172A] font-prompt font-medium text-sm active:scale-[0.98] transition-all cursor-pointer">
                         ดูแผนบริการทั้งหมด
                       </button>
                     </Link>

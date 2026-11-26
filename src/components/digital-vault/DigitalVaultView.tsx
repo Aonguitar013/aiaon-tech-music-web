@@ -168,7 +168,7 @@ function HardwareGadgetsSection() {
               </div>
 
               <div className="flex items-start gap-3 mb-3">
-                <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] shrink-0">
+                <div className="p-2.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] shrink-0">
                   <IconComp className="w-5 h-5 text-[#2563EB]" />
                 </div>
                 <h3 className="text-base font-bold text-[#0F172A] leading-snug">
@@ -193,7 +193,7 @@ function HardwareGadgetsSection() {
                 href={item.shopeeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-auto w-full py-2.5 px-4 rounded-xl bg-[#FAF8F5] hover:bg-[#0F172A] text-[#0F172A] hover:text-white border border-[#E2E8F0] font-bold text-xs flex items-center justify-center gap-2 transition-colors"
+                className="mt-auto w-full py-2.5 px-4 rounded-xl bg-[#F8FAFC] hover:bg-[#0F172A] text-[#0F172A] hover:text-white border border-[#E2E8F0] font-bold text-xs flex items-center justify-center gap-2 transition-colors"
               >
                 <ShoppingBag className="w-3.5 h-3.5" />
                 <span>เช็กราคาบน Shopee</span>
@@ -314,11 +314,11 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
   });
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-[#1E293B] font-prompt overflow-x-hidden pb-20">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#1E293B] font-prompt overflow-x-hidden pb-20">
       {/* =================================================================
           1. PRECISION PRODUCT STUDIO HERO (LINEAR + STRIPE PERSONALITY)
       ================================================================= */}
-      <section className="relative pt-8 pb-14 sm:pt-12 sm:pb-16 border-b border-[#E2E8F0] bg-[#FFFDF9]">
+      <section className="relative pt-8 pb-14 sm:pt-12 sm:pb-16 border-b border-[#E2E8F0] bg-[#FFFFFF]">
         {/* Subtle Precision Blueprint Grid */}
         <div
           aria-hidden="true"
@@ -396,7 +396,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
               className="lg:col-span-5"
             >
               <div className="rounded-3xl bg-white border border-[#E2E8F0] p-3 shadow-md space-y-3">
-                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#E2E8F0]">
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#F8FAFC] border border-[#E2E8F0]">
                   <Image
                     src="/brand/visuals/hero_aiaon_tech.webp"
                     alt="AiAon Tech — ระบบโรงเรียนอัตโนมัติ"
@@ -437,7 +437,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
               <Search className="w-4 h-4 text-[#64748B] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="text"
-                className="w-full bg-[#FAF8F5] border border-[#E2E8F0] focus:bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 rounded-2xl py-3 pl-11 pr-16 text-[#0F172A] placeholder-[#94A3B8] text-sm outline-none transition-all"
+                className="w-full bg-[#F8FAFC] border border-[#E2E8F0] focus:bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/15 rounded-2xl py-3 pl-11 pr-16 text-[#0F172A] placeholder-[#94A3B8] text-sm outline-none transition-all"
                 placeholder="ค้นหาระบบ (เช่น แจ้งซ่อม, สุขาภิบาล, เช็คชื่อ, ห้องเรียนสีขาว, คะแนน)..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -464,7 +464,7 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
                       "px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 border",
                       isActive
                         ? "bg-[#0F172A] text-white border-[#0F172A]"
-                        : "bg-[#FAF8F5] text-[#475569] border-[#E2E8F0] hover:text-[#0F172A] hover:bg-slate-100"
+                        : "bg-[#F8FAFC] text-[#475569] border-[#E2E8F0] hover:text-[#0F172A] hover:bg-slate-100"
                     )}
                   >
                     <span>{cat.label}</span>

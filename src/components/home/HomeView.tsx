@@ -152,7 +152,7 @@ export function HomeView() {
   };
 
   return (
-    <div className="w-full bg-[#FAF8F5] text-[#1E293B] font-prompt overflow-x-hidden">
+    <div className="w-full bg-[#F8FAFC] text-[#1E293B] font-prompt overflow-x-hidden">
       {/* =================================================================
           BLOCK 1: CINEMATIC EDITORIAL HERO (ABOVE THE FOLD)
       ================================================================= */}
@@ -347,7 +347,7 @@ export function HomeView() {
                 {/* Top Visual Preview */}
                 <Link
                   href={p.href}
-                  className="relative aspect-[16/9] w-full bg-[#FAF8F5] overflow-hidden border-b border-[#E2E8F0] block"
+                  className="relative aspect-[16/9] w-full bg-[#F8FAFC] overflow-hidden border-b border-[#E2E8F0] block"
                 >
                   <Image
                     src={p.image}
@@ -391,7 +391,7 @@ export function HomeView() {
                         <Link
                           key={ql.href}
                           href={ql.href}
-                          className="text-xs font-semibold px-3 py-1.5 rounded-xl bg-[#FAF8F5] hover:bg-slate-100 border border-[#E2E8F0] text-[#1E293B] transition-colors"
+                          className="text-xs font-semibold px-3 py-1.5 rounded-xl bg-[#F8FAFC] hover:bg-slate-100 border border-[#E2E8F0] text-[#1E293B] transition-colors"
                         >
                           {ql.label}
                         </Link>
@@ -416,7 +416,7 @@ export function HomeView() {
       {/* =================================================================
           BLOCK 3: FEATURED FLAGSHIPS (3 ตัวท็อปขายดี)
       ================================================================= */}
-      <section className="py-16 sm:py-20 bg-[#FFFDF9] border-y border-[#E2E8F0]">
+      <section className="py-16 sm:py-20 bg-[#FFFFFF] border-y border-[#E2E8F0]">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-10">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-xs font-mono font-bold tracking-widest uppercase text-[#92400E]">
@@ -438,7 +438,7 @@ export function HomeView() {
               >
                 <Link
                   href={item.href}
-                  className="relative aspect-[16/10] bg-[#FAF8F5] overflow-hidden border-b border-[#E2E8F0] block"
+                  className="relative aspect-[16/10] bg-[#F8FAFC] overflow-hidden border-b border-[#E2E8F0] block"
                 >
                   <Image
                     src={item.image}
@@ -474,7 +474,7 @@ export function HomeView() {
                     </div>
                     <Link
                       href={item.href}
-                      className="w-full py-3 px-4 rounded-xl bg-[#FAF8F5] hover:bg-[#0F172A] text-[#0F172A] hover:text-white border border-[#E2E8F0] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors"
+                      className="w-full py-3 px-4 rounded-xl bg-[#F8FAFC] hover:bg-[#0F172A] text-[#0F172A] hover:text-white border border-[#E2E8F0] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors"
                     >
                       <span>{item.cta}</span>
                       <ArrowRight className="w-4 h-4" />
@@ -536,7 +536,7 @@ export function HomeView() {
           <div className="rounded-3xl bg-white border border-[#E2E8F0] p-7 sm:p-10 lg:p-12 shadow-2xs grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Founder Portrait */}
             <div className="lg:col-span-4 flex flex-col items-center">
-              <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-3xl overflow-hidden border-4 border-[#FAF8F5] shadow-lg bg-[#FAF8F5]">
+              <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-3xl overflow-hidden border-4 border-[#F8FAFC] shadow-lg bg-[#F8FAFC]">
                 <Image
                   src="/images/kru_aon_profile.png"
                   alt="ครูจิรวัฒน์ เดชเส้ง (ครูอ้น)"
@@ -553,7 +553,7 @@ export function HomeView() {
 
             {/* Editorial Story */}
             <div className="lg:col-span-8 space-y-5 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF8F5] border border-[#E2E8F0] text-xs font-bold text-[#0F172A]">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-bold text-[#0F172A]">
                 <span>FOUNDER • TEACHER · MUSICIAN · MAKER</span>
               </div>
 
@@ -634,7 +634,7 @@ export function HomeView() {
 
               <Link
                 href="/services"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl bg-[#FAF8F5] hover:bg-slate-100 text-[#0F172A] border border-[#E2E8F0] font-bold text-sm sm:text-base transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl bg-[#F8FAFC] hover:bg-slate-100 text-[#0F172A] border border-[#E2E8F0] font-bold text-sm sm:text-base transition-all"
               >
                 <span>ประเมินราคาสั่งทำระบบเฉพาะทาง</span>
                 <ArrowRight className="w-4 h-4" />

@@ -471,7 +471,7 @@ function FreebieCard({
             <span className={`text-[11px] font-prompt font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${t.border} ${t.text} ${t.bg}`}>
               {freebie.file_type}
             </span>
-            <span className="text-[11px] font-prompt font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-[#E2E8F0] text-[#64748B] bg-[#FAF8F5]">
+            <span className="text-[11px] font-prompt font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-[#E2E8F0] text-[#64748B] bg-[#F8FAFC]">
               {freebie.file_size}
             </span>
             <span className="text-[11px] font-prompt font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 shadow-[0_0_12px_rgba(16,185,129,0.25)]">
@@ -518,7 +518,7 @@ function FreebieCard({
         </div>
 
         {/* Prominent Price Tag: 0 บาท */}
-        <div className="flex items-center justify-between pt-3 pb-1 px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] shadow-inner">
+        <div className="flex items-center justify-between pt-3 pb-1 px-4 py-3 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] shadow-inner">
           <div>
             <div className="text-[11px] font-prompt text-[#64748B] line-through">
               ราคาปกติ ฿{freebieDetail.originalPrice.toLocaleString()}
@@ -545,7 +545,7 @@ function FreebieCard({
           <button
             type="button"
             onClick={() => onViewDetails(freebie)}
-            className="py-3 px-3.5 rounded-2xl bg-[#FAF8F5] hover:bg-[#F1ECE4] border border-[#E2E8F0] hover:border-[#CBD5E1] text-[#0F172A] font-bold font-prompt text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer hover:scale-[1.02] active:scale-95 shadow-md"
+            className="py-3 px-3.5 rounded-2xl bg-[#F8FAFC] hover:bg-[#F1ECE4] border border-[#E2E8F0] hover:border-[#CBD5E1] text-[#0F172A] font-bold font-prompt text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer hover:scale-[1.02] active:scale-95 shadow-md"
           >
             <Eye className="w-4 h-4 text-cyan-700" />
             <span>ดูรายละเอียด</span>
@@ -652,7 +652,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative z-10 w-full max-w-5xl my-6 bg-[#FAF8F5] border border-[#E2E8F0] rounded-3xl overflow-hidden shadow-2xl max-h-[92vh] overflow-y-auto p-4 sm:p-6"
+              className="relative z-10 w-full max-w-5xl my-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-3xl overflow-hidden shadow-2xl max-h-[92vh] overflow-y-auto p-4 sm:p-6"
               onClick={(e) => e.stopPropagation()}
             >
               <FreebieDetailSection
@@ -669,7 +669,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
         )}
       </AnimatePresence>
 
-      <div className="w-full relative overflow-hidden min-h-screen bg-[#FAF8F5] pb-24">
+      <div className="w-full relative overflow-hidden min-h-screen bg-[#FAF8FF] pb-24">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 pt-8 sm:pt-12">
 
           {/* ── 0-BAHT GIFT BOUTIQUE HERO ────────────────────────── */}
@@ -719,7 +719,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
                     { value: "30 หน้า", label: "ใบงานเด็กเล็กฟรี" },
                     { value: "0 ฿", label: "ไม่มีค่าใช้จ่าย" },
                   ].map((s) => (
-                    <div key={s.label} className="rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] px-3.5 py-2.5">
+                    <div key={s.label} className="rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] px-3.5 py-2.5">
                       <div className="font-prompt text-lg sm:text-xl font-extrabold text-[#0F172A]">{s.value}</div>
                       <div className="font-prompt text-[11px] text-[#64748B]">{s.label}</div>
                     </div>
@@ -751,7 +751,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
                   </div>
                 </Link>
 
-                <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] bg-[#FAF8F5] aspect-[4/3]">
+                <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] bg-[#F8FAFC] aspect-[4/3]">
                   <img
                     src="/images/mockups/aona09_repair_telegram_mockup.jpg"
                     alt="ระบบครู GAS แจกฟรี"
@@ -762,7 +762,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
                   </div>
                 </div>
 
-                <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] bg-[#FAF8F5] aspect-[4/3]">
+                <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] bg-[#F8FAFC] aspect-[4/3]">
                   <img
                     src="/images/mockups/indie_folk_guitar_cover.png"
                     alt="เพลง BGM แจกฟรี"
@@ -793,7 +793,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
                     className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-prompt font-bold transition-all cursor-pointer border ${
                       isActive
                         ? "bg-[#0F172A] text-white border-[#0F172A]"
-                        : "bg-[#FAF8F5] border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:bg-slate-100"
+                        : "bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:bg-slate-100"
                     }`}
                   >
                     <TabIcon className="w-3.5 h-3.5" />

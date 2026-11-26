@@ -151,7 +151,7 @@ export default function RootLayout({
               <footer
                 id="footer"
                 data-aiaon-shell=""
-                className="border-t border-[#E2E8F0] bg-[#FAF8F5] text-[#1E293B] mt-24 py-14 relative overflow-hidden z-10"
+                className="border-t border-[#E2E8F0] bg-[#F8FAFC] text-[#1E293B] mt-24 py-14 relative overflow-hidden z-10"
               >
                 <div className="max-w-[1240px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-4 gap-10 text-left relative z-10 w-full">
                   {/* Brand */}

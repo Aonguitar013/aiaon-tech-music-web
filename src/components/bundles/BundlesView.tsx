@@ -44,11 +44,11 @@ export function BundlesView() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-[#1E293B] overflow-x-hidden relative pb-24 font-prompt">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#1E293B] overflow-x-hidden relative pb-24 font-prompt">
       {/* =================================================================
           1. EXECUTIVE VALUE VAULT HERO (STRIPE PRICING PERSONALITY)
       ================================================================= */}
-      <section className="relative pt-8 pb-14 sm:pt-12 sm:pb-16 border-b border-[#E2E8F0] bg-[#FFFDF9]">
+      <section className="relative pt-8 pb-14 sm:pt-12 sm:pb-16 border-b border-[#E2E8F0] bg-[#FFFFFF]">
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-30 pointer-events-none"
@@ -126,7 +126,7 @@ export function BundlesView() {
               className="lg:col-span-5"
             >
               <div className="rounded-3xl bg-white border border-[#FDE68A] p-4 shadow-md space-y-3.5">
-                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#E2E8F0]">
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#F8FAFC] border border-[#E2E8F0]">
                   <Image
                     src="/images/mockups/aona10_hygiene_matrix_mockup.jpg"
                     alt="AiAon Tech All-in-One School Systems"
@@ -187,7 +187,7 @@ export function BundlesView() {
 
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-4 pt-1">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold border bg-[#FAF8F5] border-[#E2E8F0] text-[#0F172A]">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold border bg-[#F8FAFC] border-[#E2E8F0] text-[#0F172A]">
                       {bundle.badge}
                     </span>
                     <span className="text-emerald-800 text-xs font-bold bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full shrink-0">
@@ -198,7 +198,7 @@ export function BundlesView() {
                   {/* 3D Crate Preview */}
                   <div
                     onClick={() => setSelectedBundle(bundle)}
-                    className="relative w-full my-3 cursor-pointer flex justify-center py-3 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]"
+                    className="relative w-full my-3 cursor-pointer flex justify-center py-3 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0]"
                     title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของหีบสมบัตินี้"
                   >
                     <CyberVaultCrateMockup
@@ -224,7 +224,7 @@ export function BundlesView() {
                   </p>
 
                   {/* Pricing Box */}
-                  <div className="flex flex-wrap items-baseline gap-2 mb-5 p-4 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]">
+                  <div className="flex flex-wrap items-baseline gap-2 mb-5 p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0]">
                     <span className="text-3xl sm:text-4xl font-black text-[#0F172A]">
                       {bundle.bundlePrice.toLocaleString()} ฿
                     </span>
@@ -236,7 +236,7 @@ export function BundlesView() {
                     </span>
                   </div>
 
-                  <div className="text-xs text-[#475569] bg-[#FFFDF9] px-3.5 py-2.5 rounded-xl border border-[#E2E8F0] mb-5">
+                  <div className="text-xs text-[#475569] bg-[#FFFFFF] px-3.5 py-2.5 rounded-xl border border-[#E2E8F0] mb-5">
                     {bundle.targetAudience}
                   </div>
 
@@ -249,7 +249,7 @@ export function BundlesView() {
                     {bundle.systems.map((sys, sIdx) => (
                       <div
                         key={sIdx}
-                        className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0]"
+                        className="p-3 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]"
                       >
                         <div className="flex items-center justify-between gap-2 mb-0.5">
                           <span className="text-xs sm:text-sm font-bold text-[#0F172A] flex items-center gap-1.5">
@@ -289,7 +289,7 @@ export function BundlesView() {
                     <button
                       type="button"
                       onClick={() => setSelectedBundle(bundle)}
-                      className="w-full py-3 px-3.5 rounded-2xl bg-[#FAF8F5] hover:bg-slate-100 text-[#0F172A] font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition border border-[#E2E8F0] cursor-pointer"
+                      className="w-full py-3 px-3.5 rounded-2xl bg-[#F8FAFC] hover:bg-slate-100 text-[#0F172A] font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition border border-[#E2E8F0] cursor-pointer"
                     >
                       <BookOpen className="w-4 h-4 text-[#2563EB]" />
                       <span>เจาะลึก 7 ข้อ</span>
@@ -446,9 +446,9 @@ export function BundlesView() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-[#FAF8F5] border border-[#E2E8F0] rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
+              className="relative bg-[#F8FAFC] border border-[#E2E8F0] rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
             >
-              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-[#FAF8F5]/95 backdrop-blur-sm border-b border-[#E2E8F0] mb-6">
+              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-[#F8FAFC]/95 backdrop-blur-sm border-b border-[#E2E8F0] mb-6">
                 <span className="text-xs sm:text-sm font-bold text-[#0F172A] flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-[#D97706]" />
                   <span>เจาะลึก 7 องค์ประกอบหลัก • {selectedBundle.title}</span>

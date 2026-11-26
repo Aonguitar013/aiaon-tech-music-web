@@ -6,14 +6,14 @@
 
 [data-aiaon-shell] {
   color-scheme: light;
-  --aiaon-canvas: #FAF8F5;
-  --aiaon-alternate-canvas: #FFFDF9;
+  --aiaon-canvas: #F8FAFC;
+  --aiaon-alternate-canvas: #FFFFFF;
   --aiaon-card: #FFFFFF;
   --aiaon-heading: #0F172A;
   --aiaon-body: #1E293B;
   --aiaon-muted: #475569;
   --aiaon-border: #E2E8F0;
-  --aiaon-shadow: 0 8px 22px rgba(48, 39, 24, 0.035);
+  --aiaon-shadow: 0 8px 22px rgba(15,23,42,0.04);
   --aiaon-focus: #2563EB;
   --aiaon-radius: 24px;
   --aiaon-button-radius: 12px;
@@ -25,14 +25,16 @@
   color: var(--aiaon-body);
 }
 
-/* Layer 2: 4-Pillar Chromatic Tokens (15% Differentiation) */
+/* Layer 2: 4-Room Subtle Territory Tinting & Chromatic Tokens */
 [data-aiaon-shell] [data-pillar="tech"],
 [data-aiaon-shell][data-pillar="tech"] {
+  --pillar-canvas: #F8FAFC;
   --pillar-accent: #2563EB;
   --pillar-secondary: #22D3EE;
   --pillar-text: #1D4ED8;
   --pillar-tint: #EFF6FF;
   --pillar-border: #BFDBFE;
+  background-color: var(--pillar-canvas);
 }
 
 [data-aiaon-shell] [data-pillar="edu"],
@@ -43,33 +45,40 @@
   --pillar-text: #92400E;
   --pillar-tint: #FEF9EF;
   --pillar-border: #FDE68A;
+  background-color: var(--pillar-canvas);
 }
 
 [data-aiaon-shell] [data-pillar="audio"],
 [data-aiaon-shell][data-pillar="audio"] {
+  --pillar-canvas: #F5FAF9;
   --pillar-accent: #EA580C;
   --pillar-secondary: #0D9488;
   --pillar-text: #0F766E;
   --pillar-tint: #F0FDFA;
   --pillar-border: #99F6E4;
+  background-color: var(--pillar-canvas);
 }
 
 [data-aiaon-shell] [data-pillar="studio"],
 [data-aiaon-shell][data-pillar="studio"] {
+  --pillar-canvas: #FAF8FF;
   --pillar-accent: #7C3AED;
   --pillar-secondary: #DB2777;
   --pillar-text: #6D28D9;
   --pillar-tint: #FAF5FF;
   --pillar-border: #DDD6FE;
+  background-color: var(--pillar-canvas);
 }
 
 [data-aiaon-shell] [data-pillar="about"],
 [data-aiaon-shell][data-pillar="about"] {
-  --pillar-accent: #D97706;
+  --pillar-canvas: #F8FAFC;
+  --pillar-accent: #2563EB;
   --pillar-secondary: #475569;
-  --pillar-text: #92400E;
-  --pillar-tint: #FEF3C7;
-  --pillar-border: #FDE68A;
+  --pillar-text: #1D4ED8;
+  --pillar-tint: #EFF6FF;
+  --pillar-border: #BFDBFE;
+  background-color: var(--pillar-canvas);
 }
 
 /* Editorial Cards & WCAG AA Accessible Buttons */
@@ -222,7 +231,7 @@
 
 /* Light-shell pages: page canvas follows warm paper so gaps around the shell never show the dark body */
 body:has([data-aiaon-shell]:not([data-surface="dark"])) {
-  background-color: #FAF8F5;
+  background-color: #F8FAFC;
 }
 
 body:has([data-aiaon-shell]:not([data-surface="dark"])) [data-bg-grid] {

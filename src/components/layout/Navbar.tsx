@@ -216,8 +216,8 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
       ref={navRef}
       data-aiaon-shell=""
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-200 border-b border-[#E2E8F0] bg-[#FAF8F5]/95 backdrop-blur-md text-[#0F172A]",
-        isScrolled && "shadow-[0_8px_24px_rgba(48,39,24,0.06)] bg-[#FAF8F5]/98"
+        "sticky top-0 z-50 w-full transition-all duration-200 border-b border-[#E2E8F0] bg-[#F8FAFC]/95 backdrop-blur-md text-[#0F172A]",
+        isScrolled && "shadow-[0_8px_24px_rgba(15,23,42,0.07)] bg-[#F8FAFC]/98"
       )}
     >
       <div className="max-w-[1240px] mx-auto flex h-[66px] lg:h-[74px] items-center justify-between gap-3 px-4 sm:px-6">
@@ -285,11 +285,11 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
             type="button"
             onClick={openCommandMenu}
             aria-label="ค้นหาด่วน (Ctrl+K)"
-            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white hover:bg-[#FFFDF9] border border-[#E2E8F0] hover:border-[#2563EB]/40 text-[#475569] hover:text-[#0F172A] text-xs font-prompt transition-all cursor-pointer shadow-2xs"
+            className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white hover:bg-[#FFFFFF] border border-[#E2E8F0] hover:border-[#2563EB]/40 text-[#475569] hover:text-[#0F172A] text-xs font-prompt transition-all cursor-pointer shadow-2xs"
           >
             <Search className="w-3.5 h-3.5 text-[#2563EB]" />
             <span className="hidden xl:inline">ค้นหา...</span>
-            <kbd className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono text-[#64748B] bg-[#FAF8F5] border border-[#E2E8F0] rounded-md">
+            <kbd className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono text-[#64748B] bg-[#F8FAFC] border border-[#E2E8F0] rounded-md">
               ⌘K
             </kbd>
           </button>
@@ -340,7 +340,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
             type="button"
             onClick={openCommandMenu}
             aria-label="ค้นหาด่วน (Ctrl+K)"
-            className="p-2.5 rounded-xl bg-white border border-[#E2E8F0] text-[#0F172A] hover:bg-[#FFFDF9] transition-colors cursor-pointer"
+            className="p-2.5 rounded-xl bg-white border border-[#E2E8F0] text-[#0F172A] hover:bg-[#FFFFFF] transition-colors cursor-pointer"
           >
             <Search className="h-4 w-4 text-[#2563EB]" />
           </button>
@@ -356,13 +356,13 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger
               aria-label="เปิดเมนูหลัก"
-              className="p-2.5 rounded-xl bg-white border border-[#E2E8F0] text-[#0F172A] hover:bg-[#FFFDF9] transition-colors cursor-pointer"
+              className="p-2.5 rounded-xl bg-white border border-[#E2E8F0] text-[#0F172A] hover:bg-[#FFFFFF] transition-colors cursor-pointer"
             >
               <Menu className="h-5 w-5" />
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[88vw] max-w-[380px] bg-[#FAF8F5] text-[#0F172A] border-l border-[#E2E8F0] overflow-y-auto px-5 pt-6 pb-24"
+              className="w-[88vw] max-w-[380px] bg-[#F8FAFC] text-[#0F172A] border-l border-[#E2E8F0] overflow-y-auto px-5 pt-6 pb-24"
               onClick={(e) => {
                 if ((e.target as HTMLElement).closest("a")) setMobileOpen(false);
               }}
@@ -418,7 +418,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                               <Link
                                 key={item.id}
                                 href={item.href}
-                                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#FAF8F5] transition-colors"
+                                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-[#F8FAFC] transition-colors"
                               >
                                 <div
                                   className={cn(
@@ -536,7 +536,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                     key={item.id}
                     href={item.href}
                     onClick={() => setActivePillarId(null)}
-                    className="group flex items-start gap-3.5 p-3 rounded-2xl border border-transparent hover:border-[#E2E8F0] hover:bg-[#FAF8F5] transition-all"
+                    className="group flex items-start gap-3.5 p-3 rounded-2xl border border-transparent hover:border-[#E2E8F0] hover:bg-[#F8FAFC] transition-all"
                   >
                     <div
                       className={cn(

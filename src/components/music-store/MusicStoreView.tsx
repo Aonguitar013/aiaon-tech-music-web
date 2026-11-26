@@ -187,11 +187,11 @@ export function MusicStoreView() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#FAF8F5] text-[#1E293B] font-prompt overflow-x-hidden pb-36">
+    <div className="w-full min-h-screen bg-[#F5FAF9] text-[#1E293B] font-prompt overflow-x-hidden pb-36">
       {/* =================================================================
           1. BOUTIQUE VINYL & RECORDING STUDIO HERO (NOW-PLAYING DECK)
       ================================================================= */}
-      <section className="relative pt-8 pb-14 sm:pt-12 sm:pb-16 border-b border-[#E2E8F0] bg-[#FFFDF9]">
+      <section className="relative pt-8 pb-14 sm:pt-12 sm:pb-16 border-b border-[#E2E8F0] bg-[#FFFFFF]">
         <div className="absolute top-0 right-0 w-[440px] h-[440px] bg-[#EA580C]/[0.05] blur-3xl rounded-full pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[360px] h-[360px] bg-[#0D9488]/[0.05] blur-3xl rounded-full pointer-events-none" />
 
@@ -361,7 +361,7 @@ export function MusicStoreView() {
                   className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer border ${
                     isActive
                       ? "bg-[#0F766E] text-white border-[#0F766E]"
-                      : "bg-[#FAF8F5] text-[#475569] border-[#E2E8F0] hover:text-[#0F172A] hover:bg-slate-100"
+                      : "bg-[#F8FAFC] text-[#475569] border-[#E2E8F0] hover:text-[#0F172A] hover:bg-slate-100"
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -378,7 +378,7 @@ export function MusicStoreView() {
 
         {/* Apple Music / Bandcamp Style Quick-Listen Tracklist */}
         <div className="rounded-3xl bg-white border border-[#E2E8F0] overflow-hidden shadow-2xs">
-          <div className="px-5 py-3.5 bg-[#FAF8F5] border-b border-[#E2E8F0] flex items-center justify-between text-[11px] font-mono font-bold text-[#64748B] uppercase tracking-wider">
+          <div className="px-5 py-3.5 bg-[#F8FAFC] border-b border-[#E2E8F0] flex items-center justify-between text-[11px] font-mono font-bold text-[#64748B] uppercase tracking-wider">
             <span>QUICK AUDITION TRACKLIST (กดฟังเทียบทุกชุดในคลิกเดียว)</span>
             <span className="hidden sm:inline">BPM / DURATION / PRICE</span>
           </div>
@@ -390,7 +390,7 @@ export function MusicStoreView() {
                 <div
                   key={`row-${item.id}`}
                   className={`px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3 transition-colors ${
-                    isThisPlaying ? "bg-[#FFF7ED]" : "hover:bg-[#FAF8F5]"
+                    isThisPlaying ? "bg-[#FFF7ED]" : "hover:bg-[#F8FAFC]"
                   }`}
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
@@ -404,7 +404,7 @@ export function MusicStoreView() {
                       className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-all cursor-pointer ${
                         isThisPlaying
                           ? "bg-[#EA580C] text-white shadow-sm"
-                          : "bg-[#FAF8F5] hover:bg-[#0F172A] text-[#0F172A] hover:text-white border border-[#E2E8F0]"
+                          : "bg-[#F8FAFC] hover:bg-[#0F172A] text-[#0F172A] hover:text-white border border-[#E2E8F0]"
                       }`}
                     >
                       {isThisPlaying ? (
@@ -473,7 +473,7 @@ export function MusicStoreView() {
                     <span className="text-[11px] font-bold px-3 py-1 rounded-full border bg-[#FFF7ED] border-[#FED7AA] text-[#C2410C]">
                       {item.badge}
                     </span>
-                    <span className="text-xs font-mono text-[#475569] bg-[#FAF8F5] px-2.5 py-1 rounded-lg border border-[#E2E8F0]">
+                    <span className="text-xs font-mono text-[#475569] bg-[#F8FAFC] px-2.5 py-1 rounded-lg border border-[#E2E8F0]">
                       {item.code} • {item.bpm}
                     </span>
                   </div>
@@ -514,7 +514,7 @@ export function MusicStoreView() {
                   </div>
 
                   {/* Sample Hook Preview */}
-                  <div className="rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] p-3.5 space-y-2.5">
+                  <div className="rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] p-3.5 space-y-2.5">
                     <div className="flex items-center justify-between gap-2">
                       <button
                         type="button"
@@ -580,7 +580,7 @@ export function MusicStoreView() {
                       className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
                         inCart
                           ? "bg-emerald-50 border-emerald-300 text-emerald-800"
-                          : "bg-[#FAF8F5] border-[#E2E8F0] text-[#475569] hover:text-[#0F172A]"
+                          : "bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:text-[#0F172A]"
                       }`}
                     >
                       {inCart ? <Check className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
@@ -606,7 +606,7 @@ export function MusicStoreView() {
                     <button
                       type="button"
                       onClick={() => setSelectedProduct(item)}
-                      className="py-3 px-3.5 rounded-2xl bg-[#FAF8F5] hover:bg-slate-100 text-[#0F172A] font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition border border-[#E2E8F0] cursor-pointer"
+                      className="py-3 px-3.5 rounded-2xl bg-[#F8FAFC] hover:bg-slate-100 text-[#0F172A] font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition border border-[#E2E8F0] cursor-pointer"
                     >
                       <BookOpen className="w-4 h-4 text-[#0F766E]" />
                       <span>เจาะลึก 7 ข้อ</span>
@@ -716,7 +716,7 @@ export function MusicStoreView() {
                   <button
                     type="button"
                     onClick={() => setCart([])}
-                    className="px-3 py-2.5 rounded-xl bg-[#FAF8F5] hover:bg-slate-100 border border-[#E2E8F0] text-xs text-[#475569] hover:text-[#0F172A] cursor-pointer"
+                    className="px-3 py-2.5 rounded-xl bg-[#F8FAFC] hover:bg-slate-100 border border-[#E2E8F0] text-xs text-[#475569] hover:text-[#0F172A] cursor-pointer"
                   >
                     ล้างตะกร้า
                   </button>
@@ -753,9 +753,9 @@ export function MusicStoreView() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-[#FAF8F5] border border-[#E2E8F0] rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
+              className="relative bg-[#F8FAFC] border border-[#E2E8F0] rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
             >
-              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-[#FAF8F5]/95 backdrop-blur-sm border-b border-[#E2E8F0] mb-6">
+              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-[#F8FAFC]/95 backdrop-blur-sm border-b border-[#E2E8F0] mb-6">
                 <span className="text-xs sm:text-sm font-bold text-[#0F172A] flex items-center gap-2">
                   <Disc className="w-4 h-4 text-amber-600 animate-spin" style={{ animationDuration: "8s" }} />
                   <span>

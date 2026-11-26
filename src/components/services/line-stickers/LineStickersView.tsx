@@ -983,7 +983,7 @@ export function LineStickersView() {
   const activeCaptions = activePortfolio.captions;
 
   return (
-    <div className="min-h-screen text-[#1E293B] overflow-x-hidden relative pb-28">
+    <div className="min-h-screen bg-[#FAF8FF] text-[#1E293B] overflow-x-hidden relative pb-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 relative z-10">
         {/* ─── PLAYFUL 3D TOY & CREATIVE GALLERY HERO (AIAON STUDIO) ─── */}
         <section className="mb-14 rounded-3xl bg-white border border-[#E2E8F0] p-6 sm:p-10 lg:p-12 shadow-sm relative overflow-hidden">

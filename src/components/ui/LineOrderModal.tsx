@@ -257,7 +257,7 @@ export function LineOrderModal({
             <div className="h-1.5 w-full bg-gradient-to-r from-[#06C755] via-emerald-500 to-teal-500" />
 
             {/* Modal Header */}
-            <div className="p-5 sm:p-6 border-b border-[#E2E8F0] flex items-start justify-between gap-4 bg-[#FAF8F5]">
+            <div className="p-5 sm:p-6 border-b border-[#E2E8F0] flex items-start justify-between gap-4 bg-[#F8FAFC]">
               <div className="flex items-center gap-3">
                 <div className="w-11 h-11 rounded-2xl bg-[#06C755] text-white flex items-center justify-center shrink-0 shadow-md shadow-[#06C755]/25">
                   <FaLine className="w-7 h-7" />
@@ -291,7 +291,7 @@ export function LineOrderModal({
             {/* Modal Body */}
             <div className="p-5 sm:p-6 grid grid-cols-1 md:grid-cols-5 gap-6 bg-white">
               {/* Left Column: QR Code (2 of 5 cols) */}
-              <div className="md:col-span-2 flex flex-col items-center justify-center text-center p-4 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]">
+              <div className="md:col-span-2 flex flex-col items-center justify-center text-center p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0]">
                 <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0F172A] mb-3">
                   <QrCode className="w-4 h-4 text-emerald-600" />
                   <span>สแกนด้วยมือถือเพื่อแชต</span>
@@ -369,7 +369,7 @@ export function LineOrderModal({
                   )}
 
                   {/* Message Preview Box */}
-                  <div className="relative rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] p-3.5 text-xs text-[#0F172A] font-mono whitespace-pre-wrap max-h-40 overflow-y-auto leading-relaxed select-all">
+                  <div className="relative rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] p-3.5 text-xs text-[#0F172A] font-mono whitespace-pre-wrap max-h-40 overflow-y-auto leading-relaxed select-all">
                     {message}
                   </div>
                 </div>
@@ -409,7 +409,7 @@ export function LineOrderModal({
                       target="_blank"
                       rel="noopener noreferrer"
                       data-no-line-modal="true"
-                      className="w-full py-2.5 px-3 rounded-xl bg-[#FAF8F5] hover:bg-slate-100 text-[#0F172A] text-xs font-semibold flex items-center justify-center gap-2 border border-[#E2E8F0] transition"
+                      className="w-full py-2.5 px-3 rounded-xl bg-[#F8FAFC] hover:bg-slate-100 text-[#0F172A] text-xs font-semibold flex items-center justify-center gap-2 border border-[#E2E8F0] transition"
                     >
                       <ExternalLink className="w-3.5 h-3.5 text-[#475569]" />
                       <span>เปิดแชตด้วยแอป LINE PC</span>
@@ -420,7 +420,7 @@ export function LineOrderModal({
             </div>
 
             {/* Modal Footer Reassurance */}
-            <div className="px-6 py-3.5 bg-[#FAF8F5] border-t border-[#E2E8F0] flex items-center justify-center gap-2 text-xs text-[#475569] text-center">
+            <div className="px-6 py-3.5 bg-[#F8FAFC] border-t border-[#E2E8F0] flex items-center justify-center gap-2 text-xs text-[#475569] text-center">
               <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>ครูอ้นตอบเองทุกข้อความ ได้รับไฟล์และคำแนะนำโดยตรง ปลอดภัย 100%</span>
             </div>
