@@ -61,18 +61,18 @@ export function LessonSidebar({
   };
 
   return (
-    <div className="flex flex-col h-full bg-white/5 backdrop-blur-md border-l border-white/10 rounded-none md:rounded-r-2xl overflow-hidden flex-shrink-0 w-full md:w-[35%] lg:w-[30%]">
+    <div className="flex flex-col h-full bg-white backdrop-blur-md border-l border-amber-200/70 rounded-none md:rounded-r-2xl overflow-hidden flex-shrink-0 w-full md:w-[35%] lg:w-[30%]">
       {/* Sidebar Header */}
-      <div className="p-6 border-b border-white/10 bg-black/20">
-        <h2 className="text-xl font-bold text-white mb-2 font-prompt">เนื้อหาบทเรียน</h2>
+      <div className="p-6 border-b border-amber-200/70 bg-[#FEF9EF]">
+        <h2 className="text-xl font-bold text-[#1E293B] mb-2 font-prompt">เนื้อหาบทเรียน</h2>
         
         {/* Progress Bar */}
         <div className="space-y-2">
-          <div className="flex justify-between text-sm text-gray-400 font-prompt">
+          <div className="flex justify-between text-sm text-slate-600 font-prompt">
             <span>ความคืบหน้า</span>
-            <span className="text-cyan-400">{progressPercent}%</span>
+            <span className="text-teal-800">{progressPercent}%</span>
           </div>
-          <div className="w-full bg-white/10 rounded-full h-2">
+          <div className="w-full bg-white rounded-full h-2">
             <div 
               className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full transition-all duration-500" 
               style={{ width: `${progressPercent}%` }}
@@ -86,8 +86,8 @@ export function LessonSidebar({
       <div className="flex-1 overflow-y-auto custom-scrollbar">
         {groupedLessons.map((group, groupIndex) => (
           <div key={groupIndex} className="mb-4">
-            <div className="sticky top-0 bg-[#090D16]/95 backdrop-blur-md px-6 py-3 border-b border-white/5 z-10">
-              <h3 className="text-sm font-semibold text-cyan-400 font-prompt uppercase tracking-wider">
+            <div className="sticky top-0 bg-[#FFFDF7]/95 backdrop-blur-md px-6 py-3 border-b border-amber-200/70 z-10">
+              <h3 className="text-sm font-semibold text-teal-800 font-prompt uppercase tracking-wider">
                 {group.moduleName}
               </h3>
             </div>
@@ -102,8 +102,8 @@ export function LessonSidebar({
                     key={lesson.id}
                     onClick={() => onLessonSelect(lesson.id)}
                     className={cn(
-                      "flex items-start gap-4 px-6 py-4 text-left transition-all font-prompt border-b border-white/5 last:border-0 hover:bg-white/5",
-                      isActive ? "bg-white/10 border-l-4 border-l-cyan-500" : "border-l-4 border-l-transparent",
+                      "flex items-start gap-4 px-6 py-4 text-left transition-all font-prompt border-b border-amber-200/70 last:border-0 hover:bg-amber-50",
+                      isActive ? "bg-white border-l-4 border-l-cyan-500" : "border-l-4 border-l-transparent",
                       isLocked ? "opacity-75 cursor-pointer" : "cursor-pointer" // Even if locked, clicking can show overlay
                     )}
                   >
@@ -111,17 +111,17 @@ export function LessonSidebar({
                       {isLocked ? (
                         <Lock className="w-5 h-5 text-gray-500" />
                       ) : isCompleted ? (
-                        <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                        <CheckCircle2 className="w-5 h-5 text-emerald-800" />
                       ) : isActive ? (
-                        <PlayCircle className="w-5 h-5 text-cyan-400" />
+                        <PlayCircle className="w-5 h-5 text-teal-800" />
                       ) : (
-                        <PlayCircle className="w-5 h-5 text-gray-400" />
+                        <PlayCircle className="w-5 h-5 text-slate-600" />
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className={cn(
                         "text-sm font-medium line-clamp-2",
-                        isActive ? "text-white" : "text-gray-300"
+                        isActive ? "text-[#1E293B]" : "text-slate-700"
                       )}>
                         {lesson.lesson_order}. {lesson.title}
                       </p>
@@ -130,7 +130,7 @@ export function LessonSidebar({
                           {formatDuration(lesson.duration_seconds)}
                         </span>
                         {lesson.is_free_preview && !isCoursePurchased && (
-                          <span className="text-[11px] px-1.5 py-0.5 bg-emerald-500/20 text-emerald-400 rounded border border-emerald-500/20">
+                          <span className="text-[11px] px-1.5 py-0.5 bg-emerald-500/20 text-emerald-800 rounded border border-emerald-500/20">
                             ดูฟรี
                           </span>
                         )}

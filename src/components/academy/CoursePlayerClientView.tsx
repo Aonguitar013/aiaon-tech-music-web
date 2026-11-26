@@ -22,14 +22,14 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
   return (
     <div className="w-full max-w-[1600px] mx-auto min-h-screen flex flex-col">
       <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">
-          <Link href="/academy" className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors font-prompt text-sm bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl border border-white/10">
+          <Link href="/academy" className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors font-prompt text-sm bg-white hover:bg-amber-50 px-4 py-2 rounded-xl border border-amber-200/70">
              <ArrowLeft className="w-4 h-4" /> กลับสู่คลังคอร์สเรียน (Academy)
           </Link>
           <a
             href={lineCourseUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[#06C755] hover:text-white hover:bg-[#06C755] transition-all font-prompt text-sm px-4 py-2 rounded-xl border border-[#06C755]/30 bg-[#06C755]/10 shadow-[0_0_15px_rgba(6,199,85,0.15)]"
+            className="inline-flex items-center gap-2 text-[#06C755] hover:text-slate-900 hover:bg-[#FFFDF7] transition-all font-prompt text-sm px-4 py-2 rounded-xl border border-[#06C755]/30 bg-[#FFFDF7]/10 shadow-[0_0_15px_rgba(6,199,85,0.15)]"
           >
             <RiLineLine className="w-4 h-4" /> ปรึกษาครูอ้นเรื่องคอร์สนี้ทาง LINE
           </a>
@@ -38,37 +38,37 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 flex-1">
           {/* Main Video Area */}
           <div className="lg:col-span-3 flex flex-col gap-6">
-             <div className={`aspect-video w-full bg-black/80 border rounded-2xl overflow-hidden relative group flex items-center justify-center shadow-2xl transition-colors ${
+             <div className={`aspect-video w-full bg-[#FEF9EF] border rounded-2xl overflow-hidden relative group flex items-center justify-center shadow-2xl transition-colors ${
                  isPurchased 
                    ? (isMusic ? "border-amber-500/20" : "border-emerald-500/20") 
-                   : "border-white/10"
+                   : "border-amber-200/70"
              }`}>
                  <div className={`absolute inset-0 bg-linear-to-br pointer-events-none ${isMusic ? "from-amber-900/20 to-orange-900/20" : "from-blue-900/20 to-purple-900/20"}`}></div>
 
                  {/* Lock overlay for unpurchased */}
                  {!isPurchased && (
-                   <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-20 flex flex-col items-center justify-center gap-4">
-                     <div className="w-16 h-16 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mb-2">
-                       <ShoppingCart className="w-8 h-8 text-white/60" />
+                   <div className="absolute inset-0 bg-[#FEF9EF] backdrop-blur-sm z-20 flex flex-col items-center justify-center gap-4">
+                     <div className="w-16 h-16 rounded-full bg-white border border-amber-200/70 flex items-center justify-center mb-2">
+                       <ShoppingCart className="w-8 h-8 text-slate-600" />
                      </div>
-                     <p className="font-prompt text-white/70 text-center text-sm max-w-[220px]">
+                     <p className="font-prompt text-slate-600 text-center text-sm max-w-[220px]">
                        ซื้อคอร์สนี้เพื่อเข้าถึงเนื้อหาทั้งหมด
                      </p>
                    </div>
                  )}
 
-                 <button className={`w-20 h-20 rounded-full backdrop-blur-md border flex items-center justify-center text-white z-10 shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all ${
+                 <button className={`w-20 h-20 rounded-full backdrop-blur-md border flex items-center justify-center text-[#1E293B] z-10 shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all ${
                      isPurchased 
                        ? (isMusic ? "bg-amber-600/30 border-amber-500/40 group-hover:bg-amber-600 group-hover:scale-110 cursor-pointer" : "bg-emerald-600/30 border-emerald-500/40 group-hover:bg-emerald-600 group-hover:scale-110 cursor-pointer")
-                       : "bg-white/10 border-white/20 cursor-not-allowed opacity-40"
+                       : "bg-white border-amber-200/70 cursor-not-allowed opacity-40"
                  }`}>
                     <PlayCircle className="w-10 h-10 ml-1" />
                  </button>
-                 <div className="absolute bottom-4 left-4 right-4 h-1 bg-white/20 rounded-full overflow-hidden">
+                 <div className="absolute bottom-4 left-4 right-4 h-1 bg-white rounded-full overflow-hidden">
                     <div className={`h-full rounded-full relative ${
                         isPurchased 
                           ? (isMusic ? "bg-amber-500 w-[30%]" : "bg-emerald-500 w-[30%]") 
-                          : "bg-white/20 w-0"
+                          : "bg-white w-0"
                     }`}>
                         {isPurchased && <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-md"></div>}
                     </div>
@@ -78,18 +78,18 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
              <div className={`glass-card p-6 md:p-8 transition-colors ${
                  isPurchased 
                    ? (isMusic ? "border-amber-500/15" : "border-emerald-500/15") 
-                   : "border-white/10"
+                   : "border-amber-200/70"
              }`}>
                  {isPurchased && (
                    <div className={`flex items-center gap-2 border rounded-xl px-4 py-2.5 mb-5 w-fit ${
-                       isMusic ? "text-amber-400 bg-amber-500/10 border-amber-500/20" : "text-emerald-400 bg-emerald-500/10 border-emerald-500/20"
+                       isMusic ? "text-amber-800 bg-amber-500/10 border-amber-500/20" : "text-emerald-800 bg-emerald-500/10 border-emerald-500/20"
                    }`}>
                      <BadgeCheck className="w-4 h-4 shrink-0" />
                      <span className="text-sm font-prompt font-medium">คุณเป็นเจ้าของคอร์สนี้แล้ว</span>
                    </div>
                  )}
-                 <h1 className="text-2xl md:text-3xl font-bold font-prompt text-white mb-4">{course.title}</h1>
-                 <p className="text-white/70 font-prompt text-lg leading-relaxed">
+                 <h1 className="text-2xl md:text-3xl font-bold font-prompt text-[#1E293B] mb-4">{course.title}</h1>
+                 <p className="text-slate-600 font-prompt text-lg leading-relaxed">
                      {isPurchased
                        ? "ยินดีต้อนรับเข้าสู่บทเรียน! นี่คือพื้นที่สำหรับเรียนรู้เนื้อหาของคอร์ส กดปุ่มเล่นด้านบนเพื่อเริ่มต้นเรียนรู้ได้เลย"
                        : "ตัวอย่างเนื้อหาคอร์สเรียน กรุณาซื้อคอร์สเพื่อเข้าถึงบทเรียนทั้งหมดและเริ่มเรียนรู้ได้ทันที"}
@@ -98,21 +98,21 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
           </div>
 
           {/* Sidebar */}
-          <div className={`lg:col-span-1 border bg-black/40 rounded-2xl overflow-hidden flex flex-col h-[600px] lg:h-auto transition-colors ${
+          <div className={`lg:col-span-1 border bg-[#FEF9EF] rounded-2xl overflow-hidden flex flex-col h-[600px] lg:h-auto transition-colors ${
               isPurchased 
                 ? (isMusic ? "border-amber-500/20" : "border-emerald-500/20") 
-                : "border-white/10"
+                : "border-amber-200/70"
           }`}>
-              <div className="p-4 border-b border-white/10 bg-white/5 shrink-0">
-                  <h3 className="font-prompt font-bold text-white mb-2">เนื้อหาหลักสูตร</h3>
-                  <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden mb-1">
+              <div className="p-4 border-b border-amber-200/70 bg-white shrink-0">
+                  <h3 className="font-prompt font-bold text-[#1E293B] mb-2">เนื้อหาหลักสูตร</h3>
+                  <div className="w-full bg-white h-2 rounded-full overflow-hidden mb-1">
                       <div className={`h-full rounded-full ${
                           isPurchased 
                             ? (isMusic ? "bg-amber-500 w-[30%]" : "bg-emerald-500 w-[30%]") 
-                            : "bg-white/10 w-0"
+                            : "bg-white w-0"
                       }`}></div>
                   </div>
-                  <p className="text-xs text-white/50 font-prompt text-right mb-4">
+                  <p className="text-xs text-slate-500 font-prompt text-right mb-4">
                     {isPurchased ? `เรียนแล้ว 0/${lessons.length} บท` : `0/${lessons.length} บท`}
                   </p>
 
@@ -123,10 +123,10 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
                       <div className={`flex items-center gap-2 border rounded-xl px-3 py-2 mb-1 ${
                           isMusic ? "bg-amber-500/10 border-amber-500/20" : "bg-emerald-500/10 border-emerald-500/20"
                       }`}>
-                        <BadgeCheck className={`w-4 h-4 shrink-0 ${isMusic ? "text-amber-400" : "text-emerald-400"}`} />
-                        <p className={`text-xs font-prompt font-medium ${isMusic ? "text-amber-300" : "text-emerald-300"}`}>ซื้อแล้ว — เข้าถึงได้ทันที</p>
+                        <BadgeCheck className={`w-4 h-4 shrink-0 ${isMusic ? "text-amber-800" : "text-emerald-800"}`} />
+                        <p className={`text-xs font-prompt font-medium ${isMusic ? "text-amber-800" : "text-emerald-800"}`}>ซื้อแล้ว — เข้าถึงได้ทันที</p>
                       </div>
-                      <button className={`w-full py-2.5 rounded-xl text-white text-sm font-prompt font-bold flex items-center justify-center gap-2 transition-colors shadow-lg cursor-pointer ${
+                      <button className={`w-full py-2.5 rounded-xl text-[#1E293B] text-sm font-prompt font-bold flex items-center justify-center gap-2 transition-colors shadow-lg cursor-pointer ${
                           isMusic ? "bg-amber-600 hover:bg-amber-500 shadow-amber-900/30" : "bg-emerald-600 hover:bg-emerald-500 shadow-emerald-900/30"
                       }`}>
                         <PlayCircle className="w-4 h-4" /> เริ่มเรียนตอนนี้
@@ -136,7 +136,7 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
                     <div className="flex flex-col gap-2.5">
                       <Link
                         href={`/dashboard/marketplace/checkout/${course.id}`}
-                        className={`w-full py-3 rounded-xl text-white text-sm font-prompt font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:scale-[1.02] active:scale-95 ${
+                        className={`w-full py-3 rounded-xl text-[#1E293B] text-sm font-prompt font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:scale-[1.02] active:scale-95 ${
                             isMusic ? "bg-amber-600 hover:bg-amber-500 shadow-amber-900/30" : "bg-blue-600 hover:bg-blue-500 shadow-blue-900/30"
                         }`}
                       >
@@ -147,7 +147,7 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
                         href={lineCourseUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full py-2.5 px-3 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-prompt font-bold flex items-center justify-center gap-2 transition-all shadow-md hover:scale-[1.01] active:scale-95"
+                        className="w-full py-2.5 px-3 rounded-xl bg-[#FFFDF7] hover:bg-[#FFFDF7] text-[#1E293B] text-xs font-prompt font-bold flex items-center justify-center gap-2 transition-all shadow-md hover:scale-[1.01] active:scale-95"
                       >
                         <RiLineLine className="w-4 h-4" /> สมัครผ่าน LINE OA @deu6776s
                       </a>
@@ -169,22 +169,22 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
                                    ? (isMusic ? "bg-amber-500/10 border-amber-500/30 shadow-[0_0_10px_rgba(245,158,11,0.1)] cursor-pointer" : "bg-blue-500/10 border-blue-500/30 shadow-[0_0_10px_rgba(59,130,246,0.1)] cursor-pointer")
                                    : isLocked
                                    ? "border-transparent opacity-40 cursor-not-allowed"
-                                   : "border-transparent hover:bg-white/5 cursor-pointer"
+                                   : "border-transparent hover:bg-amber-50 cursor-pointer"
                              }`}
                           >
                               {isCompleted ? (
-                                  <CheckCircle className={`w-5 h-5 shrink-0 mt-0.5 ${isMusic ? "text-amber-500" : "text-emerald-400"}`} />
+                                  <CheckCircle className={`w-5 h-5 shrink-0 mt-0.5 ${isMusic ? "text-amber-500" : "text-emerald-800"}`} />
                               ) : isActive ? (
-                                  <PlayCircle className={`w-5 h-5 shrink-0 mt-0.5 ${isMusic ? "text-amber-400" : "text-blue-400"}`} />
+                                  <PlayCircle className={`w-5 h-5 shrink-0 mt-0.5 ${isMusic ? "text-amber-800" : "text-blue-800"}`} />
                               ) : (
-                                  <div className="w-5 h-5 rounded-full border border-white/30 shrink-0 mt-0.5" />
+                                  <div className="w-5 h-5 rounded-full border border-amber-200/70 shrink-0 mt-0.5" />
                               )}
   
                               <div>
-                                  <p className={`font-prompt text-sm ${isActive ? "text-white font-medium" : isCompleted ? "text-white/60" : "text-white/80"}`}>
+                                  <p className={`font-prompt text-sm ${isActive ? "text-[#1E293B] font-medium" : isCompleted ? "text-slate-600" : "text-slate-800"}`}>
                                       {i + 1}. {lesson.title}
                                   </p>
-                                  <div className="flex items-center gap-1 mt-1 text-white/40">
+                                  <div className="flex items-center gap-1 mt-1 text-slate-500">
                                       <Clock className="w-3 h-3" />
                                       <span className="text-[11px] font-prompt">{lesson.duration || "10:00"}</span>
                                   </div>
@@ -193,7 +193,7 @@ export function CoursePlayerClientView({ course, isPurchased, lessons }: { cours
                       );
                     })
                   ) : (
-                    <div className="py-10 text-center text-white/30 font-prompt text-sm">
+                    <div className="py-10 text-center text-slate-500 font-prompt text-sm">
                       กำลังเตรียมบทเรียน...
                     </div>
                   )}

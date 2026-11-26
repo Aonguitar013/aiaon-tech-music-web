@@ -426,7 +426,7 @@ export function SaaSView() {
                       <p className="text-[11px] text-slate-500">แจ้งเตือนผู้ปกครองอัตโนมัติ</p>
                     </div>
                   </div>
-                  <span className="text-[11px] text-[#00c300] font-bold border border-[#00c300]/40 px-2 py-0.5 rounded-full bg-[#FFFDF7]/10 select-none">
+                  <span className="text-[11px] text-emerald-700 font-bold border border-emerald-600/40 px-2 py-0.5 rounded-full bg-emerald-50 select-none">
                     ONLINE
                   </span>
                 </div>

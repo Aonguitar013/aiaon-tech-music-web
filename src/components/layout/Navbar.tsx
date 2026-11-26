@@ -274,7 +274,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                       : "text-[#475569] hover:text-[#0F172A] hover:bg-white/70"
                   )}
                 >
-                  <span className="text-[11px] font-mono font-semibold text-[#94A3B8]">
+                  <span className="text-[11px] font-mono font-semibold text-[#475569]">
                     {group.number}
                   </span>
                   <span>{group.label}</span>

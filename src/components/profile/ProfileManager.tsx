@@ -58,26 +58,26 @@ export function ProfileManager({ user, initialProfile }: { user: SupabaseUser, i
     };
 
     return (
-        <div className="glass-card p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center md:items-start relative overflow-hidden border-white/10 group">
+        <div className="glass-card p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center md:items-start relative overflow-hidden border-amber-200/70 group">
              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-3xl rounded-full pointer-events-none -mr-20 -mt-20"></div>
 
              {/* Avatar Area */}
              <div className="relative shrink-0">
-                 <div className="w-32 h-32 rounded-full border-4 border-white/5 bg-black/50 flex items-center justify-center overflow-hidden relative shadow-2xl">
+                 <div className="w-32 h-32 rounded-full border-4 border-amber-200/70 bg-[#FEF9EF] flex items-center justify-center overflow-hidden relative shadow-2xl">
                      {avatarUrl ? (
                          <Image src={avatarUrl} alt="Avatar" fill sizes="128px" className="object-cover" />
                      ) : (
-                         <UserIcon className="w-16 h-16 text-white/20" />
+                         <UserIcon className="w-16 h-16 text-slate-500" />
                      )}
                      
                      {uploading && (
-                         <div className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-sm">
-                             <div className="w-6 h-6 border-2 border-white/20 border-t-blue-500 rounded-full animate-spin"></div>
+                         <div className="absolute inset-0 bg-[#FEF9EF] flex items-center justify-center backdrop-blur-sm">
+                             <div className="w-6 h-6 border-2 border-amber-200/70 border-t-blue-500 rounded-full animate-spin"></div>
                          </div>
                      )}
                  </div>
                  
-                 <label className="absolute bottom-0 right-0 w-10 h-10 bg-blue-500 hover:bg-blue-600 cursor-pointer rounded-full flex items-center justify-center text-white shadow-lg border-2 border-black transition-colors">
+                 <label className="absolute bottom-0 right-0 w-10 h-10 bg-blue-500 hover:bg-blue-600 cursor-pointer rounded-full flex items-center justify-center text-white shadow-lg border-2 border-white transition-colors">
                      <Camera className="w-5 h-5" />
                      <input type="file" className="hidden" accept="image/*" onChange={uploadAvatar} disabled={uploading} />
                  </label>
@@ -86,30 +86,30 @@ export function ProfileManager({ user, initialProfile }: { user: SupabaseUser, i
              {/* Form Area */}
              <div className="flex-1 w-full flex flex-col gap-4">
                  <div>
-                     <label className="text-sm font-prompt text-white/50 mb-1 block">อีเมล (Email)</label>
+                     <label className="text-sm font-prompt text-slate-500 mb-1 block">อีเมล (Email)</label>
                      <input 
                          type="text" 
                          value={user.email} 
                          disabled 
-                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white/50 font-prompt cursor-not-allowed"
+                         className="w-full bg-white border border-amber-200/70 rounded-xl px-4 py-3 text-slate-500 font-prompt cursor-not-allowed"
                      />
                  </div>
                  
                  <div>
-                     <label className="text-sm font-prompt text-white/50 mb-1 block">ชื่อที่แสดงผล (Display Name)</label>
+                     <label className="text-sm font-prompt text-slate-500 mb-1 block">ชื่อที่แสดงผล (Display Name)</label>
                      <input 
                          type="text" 
                          value={displayName}
                          onChange={(e) => setDisplayName(e.target.value)}
                          placeholder="New Scholar"
-                         className="w-full bg-black/40 border border-white/20 focus:border-blue-500 outline-none rounded-xl px-4 py-3 text-white font-prompt transition-colors"
+                         className="w-full bg-[#FEF9EF] border border-amber-200/70 focus:border-blue-500 outline-none rounded-xl px-4 py-3 text-[#1E293B] font-prompt transition-colors"
                      />
                  </div>
 
                  <button 
                      onClick={saveProfile}
                      disabled={saving}
-                     className="mt-2 w-full md:w-auto self-start bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-prompt font-medium transition-colors flex items-center justify-center gap-2"
+                     className="mt-2 w-full md:w-auto self-start bg-white hover:bg-amber-50 text-[#1E293B] px-6 py-3 rounded-lg font-prompt font-medium transition-colors flex items-center justify-center gap-2"
                  >
                      <Save className="w-4 h-4" />
                      {saving ? "กำลังบันทึก..." : "บันทึกโปรไฟล์"}

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -72,7 +72,7 @@ export function SocialProofFAQSection() {
   };
 
   return (
-    <section className="relative py-24 border-t border-white/5 bg-zinc-950/20">
+    <section className="relative py-24 border-t border-amber-200/70 bg-white">
       {/* Glow Orbs */}
       <div className="absolute top-[10%] left-[-150px] w-96 h-96 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[10%] right-[-100px] w-[500px] h-[500px] bg-cyan-600/5 blur-[130px] rounded-full pointer-events-none" />
@@ -84,16 +84,16 @@ export function SocialProofFAQSection() {
            ============================================================ */}
         <div className="space-y-16">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold font-prompt">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-800 text-xs font-semibold font-prompt">
               TESTIMONIALS
             </span>
-            <h2 className="font-prompt text-3xl sm:text-4xl font-bold text-white leading-tight">
+            <h2 className="font-prompt text-3xl sm:text-4xl font-bold text-[#1E293B] leading-tight">
               เสียงตอบรับจาก{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-green-400">
                 คุณครูผู้ผ่านเกณฑ์ประเมินจริง
               </span>
             </h2>
-            <p className="text-white/60 font-prompt text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 font-prompt text-sm sm:text-base leading-relaxed">
               ร่วมงานกับเราและก้าวสู่ความก้าวหน้าทางวิชาชีพอย่างไร้กังวล
             </p>
           </div>
@@ -102,37 +102,37 @@ export function SocialProofFAQSection() {
             {TESTIMONIALS.map((testimonial) => (
               <div 
                 key={testimonial.name}
-                className="relative glass-card border border-white/5 p-6.5 sm:p-8 flex flex-col justify-between hover:border-white/10 transition-colors duration-300 rounded-2xl"
+                className="relative glass-card border border-amber-200/70 p-6.5 sm:p-8 flex flex-col justify-between hover:border-amber-300 transition-colors duration-300 rounded-2xl"
               >
                 {/* Quote Icon */}
-                <div className="absolute top-6 right-6 text-white/5 pointer-events-none">
-                  <Quote className="w-12 h-12 rotate-180 fill-white/5" />
+                <div className="absolute top-6 right-6 text-slate-900/5 pointer-events-none">
+                  <Quote className="w-12 h-12 rotate-180 fill-slate-900/5" />
                 </div>
 
                 <div className="space-y-4 relative z-10">
                   {/* Rating Stars */}
                   <div className="flex gap-1">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400 shrink-0" />
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-800 shrink-0" />
                     ))}
                   </div>
 
                   {/* Review Text */}
-                  <p className="font-prompt text-xs sm:text-sm text-white/80 leading-relaxed font-light italic">
+                  <p className="font-prompt text-xs sm:text-sm text-slate-800 leading-relaxed font-light italic">
                     &quot;{testimonial.text}&quot;
                   </p>
                 </div>
 
                 {/* Profile Detail */}
-                <div className="mt-6 pt-5 border-t border-white/8 flex items-center gap-3">
+                <div className="mt-6 pt-5 border-t border-amber-200/70 flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-prompt font-semibold text-sm">
                     {testimonial.name.slice(6, 8) || "ครู"}
                   </div>
                   <div>
-                    <h4 className="font-prompt text-sm font-bold text-white leading-tight">
+                    <h4 className="font-prompt text-sm font-bold text-[#1E293B] leading-tight">
                       {testimonial.name}
                     </h4>
-                    <p className="font-prompt text-[11px] sm:text-xs text-white/40 mt-0.5">
+                    <p className="font-prompt text-[11px] sm:text-xs text-slate-500 mt-0.5">
                       {testimonial.role} | {testimonial.subject}
                     </p>
                   </div>
@@ -147,16 +147,16 @@ export function SocialProofFAQSection() {
            ============================================================ */}
         <div className="space-y-16 max-w-4xl mx-auto">
           <div className="text-center space-y-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-semibold font-prompt">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-800 text-xs font-semibold font-prompt">
               QUESTIONS & ANSWERS
             </span>
-            <h2 className="font-prompt text-3xl sm:text-4xl font-bold text-white leading-tight">
+            <h2 className="font-prompt text-3xl sm:text-4xl font-bold text-[#1E293B] leading-tight">
               คำถามที่พบบ่อยเกี่ยวกับการประเมิน{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-green-400">
                 และวิดีโอวิทยฐานะ PA
               </span>
             </h2>
-            <p className="text-white/60 font-prompt text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 font-prompt text-sm sm:text-base leading-relaxed">
               ไขข้อสงสัยในหลักเกณฑ์ ก.ค.ศ. และรูปแบบการบริการของเรา
             </p>
           </div>
@@ -167,18 +167,18 @@ export function SocialProofFAQSection() {
               return (
                 <div
                   key={index}
-                  className="rounded-2xl border border-white/5 glass-card overflow-hidden transition-all duration-300"
+                  className="rounded-2xl border border-amber-200/70 glass-card overflow-hidden transition-all duration-300"
                 >
                   {/* FAQ Header */}
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full text-left p-5 sm:p-6 flex justify-between items-center gap-4 hover:bg-white/2 transition-colors focus:outline-none"
+                    className="w-full text-left p-5 sm:p-6 flex justify-between items-center gap-4 hover:bg-amber-50 transition-colors focus:outline-none"
                   >
-                    <span className="font-prompt text-sm sm:text-base font-semibold text-white leading-snug pr-2">
+                    <span className="font-prompt text-sm sm:text-base font-semibold text-[#1E293B] leading-snug pr-2">
                       {faq.question}
                     </span>
-                    <div className={`w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 bg-blue-500/10" : ""}`}>
-                      <ChevronDown className={`w-4 h-4 transition-colors ${isOpen ? "text-blue-400" : "text-white/50"}`} />
+                    <div className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 bg-blue-500/10" : ""}`}>
+                      <ChevronDown className={`w-4 h-4 transition-colors ${isOpen ? "text-blue-800" : "text-slate-500"}`} />
                     </div>
                   </button>
 
@@ -191,7 +191,7 @@ export function SocialProofFAQSection() {
                         exit={{ height: 0 }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                       >
-                        <div className="p-5 sm:p-6 pt-0 border-t border-white/4 bg-white/1 font-prompt text-xs sm:text-sm text-white/70 leading-relaxed font-light space-y-2">
+                        <div className="p-5 sm:p-6 pt-0 border-t border-amber-200/70 bg-white font-prompt text-xs sm:text-sm text-slate-600 leading-relaxed font-light space-y-2">
                           <p className="whitespace-pre-line">{faq.answer}</p>
                         </div>
                       </motion.div>

@@ -85,13 +85,13 @@ export function HeroSection() {
       >
         {/* Animated Badge */}
         <motion.div variants={fadeUp}>
-          <span className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full glass-card text-xs font-medium text-white/80 select-none border border-blue-500/20">
+          <span className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full glass-card text-xs font-medium text-slate-800 select-none border border-blue-500/20">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-[#06C755] opacity-75 animate-ping" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#06C755]" />
+              <span className="absolute inline-flex h-full w-full rounded-full bg-[#FFFDF7] opacity-75 animate-ping" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#FFFDF7]" />
             </span>
-            <span className="text-blue-400 font-bold tracking-wide font-prompt">AiAon Tech</span>
-            <span className="text-white/20">|</span>
+            <span className="text-blue-800 font-bold tracking-wide font-prompt">AiAon Tech</span>
+            <span className="text-slate-500">|</span>
             <span className="text-[#06C755] font-bold tracking-wide font-prompt">ที่ปรึกษาและผลิตสื่อวิทยฐานะ (PA)</span>
           </span>
         </motion.div>
@@ -99,7 +99,7 @@ export function HeroSection() {
         {/* Main Title */}
         <motion.h1
           variants={headingVariant}
-          className="font-prompt text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.15] max-w-4xl"
+          className="font-prompt text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-[#1E293B] leading-[1.15] max-w-4xl"
         >
           เปลี่ยนการทำ
           <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-400 to-blue-500 drop-shadow-[0_0_24px_rgba(59,130,246,0.3)] mx-2">
@@ -115,11 +115,11 @@ export function HeroSection() {
         {/* Sub-headline */}
         <motion.p
           variants={fadeUp}
-          className="text-base sm:text-lg md:text-xl text-white/70 max-w-3xl mx-auto font-prompt font-light leading-relaxed"
+          className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto font-prompt font-light leading-relaxed"
         >
           ที่ปรึกษาวางแผนแผนการสอน ผลิตวิดีโอ คลิปแนะนำสภาพปัญหา และระบบเทคโนโลยีห้องเรียน 
           <br className="hidden md:inline" />
-          <span className="text-blue-400 font-medium">ถูกต้องตามหลักเกณฑ์ ก.ค.ศ. (PA) ล่าสุด</span> 
+          <span className="text-blue-800 font-medium">ถูกต้องตามหลักเกณฑ์ ก.ค.ศ. (PA) ล่าสุด</span> 
           {" "}ดูแลใกล้ชิดโดยเพื่อนร่วมวิชาชีพผู้เชี่ยวชาญด้านนวัตกรรม
         </motion.p>
 
@@ -141,8 +141,8 @@ export function HeroSection() {
               className="absolute inset-0 rounded-full bg-linear-to-r from-[#06C755] to-emerald-500 blur-md opacity-40 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500 pointer-events-none"
               aria-hidden="true"
             />
-            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_20px_rgba(6,199,85,0.35)]">
-              <FaLine className="w-5.5 h-5.5 text-white" />
+            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full bg-[#FFFDF7] hover:bg-[#FFFDF7] text-[#1E293B] font-prompt font-semibold text-base transition-all duration-300 group-hover:scale-105 shadow-[0_0_20px_rgba(6,199,85,0.35)]">
+              <FaLine className="w-5.5 h-5.5 text-[#1E293B]" />
               ปรึกษาและประเมินผลงานฟรี
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
@@ -153,7 +153,7 @@ export function HeroSection() {
             href="#services"
             className="group relative w-full sm:w-auto"
           >
-            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full glass-card border border-white/10 text-white hover:text-blue-400 font-prompt font-normal text-base transition-all duration-300 group-hover:scale-105 hover:bg-white/5">
+            <span className="relative inline-flex items-center justify-center gap-2.5 w-full px-8 py-4 rounded-full glass-card border border-amber-200/70 text-[#1E293B] hover:text-blue-400 font-prompt font-normal text-base transition-all duration-300 group-hover:scale-105 hover:bg-amber-50">
               ดูรายละเอียดบริการ
             </span>
           </a>
@@ -169,9 +169,9 @@ export function HeroSection() {
             { value: "100+", label: "คุณครูร่วมงานทั่วประเทศ" },
             { value: "ก.ค.ศ.", label: "ตรงตามเกณฑ์ใหม่ 100%" },
           ].map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center gap-1.5 p-3 rounded-2xl glass-card bg-white/2 border border-white/5">
-              <span className="font-prompt text-lg sm:text-2xl font-bold text-white bg-clip-text bg-linear-to-r from-white to-white/70">{stat.value}</span>
-              <span className="font-prompt text-[11px] sm:text-xs text-white/50 tracking-wide font-light">{stat.label}</span>
+            <div key={stat.label} className="flex flex-col items-center gap-1.5 p-3 rounded-2xl glass-card bg-white border border-amber-200/70">
+              <span className="font-prompt text-lg sm:text-2xl font-bold text-[#0F172A]">{stat.value}</span>
+              <span className="font-prompt text-[11px] sm:text-xs text-slate-500 tracking-wide font-light">{stat.label}</span>
             </div>
           ))}
         </motion.div>
@@ -179,12 +179,12 @@ export function HeroSection() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1">
-        <span className="font-prompt text-[11px] uppercase tracking-[0.25em] text-white/30 select-none">
+        <span className="font-prompt text-[11px] uppercase tracking-[0.25em] text-slate-500 select-none">
           เลื่อนเพื่อดูข้อมูล
         </span>
-        <div className="w-5.5 h-8.5 rounded-full border border-white/25 flex items-start justify-center pt-1.5 relative overflow-hidden">
+        <div className="w-5.5 h-8.5 rounded-full border border-amber-200/70 flex items-start justify-center pt-1.5 relative overflow-hidden">
           <motion.div
-            className="w-1 h-1.5 rounded-full bg-white/60"
+            className="w-1 h-1.5 rounded-full bg-white"
             animate={{
               y: [0, 8, 0],
               opacity: [0.8, 0.2, 0.8],
@@ -201,7 +201,7 @@ export function HeroSection() {
           initial="initial"
           animate="animate"
         >
-          <ChevronDown className="w-3.5 h-3.5 text-white/30" />
+          <ChevronDown className="w-3.5 h-3.5 text-slate-500" />
         </motion.div>
       </div>
     </section>
