@@ -20,7 +20,7 @@
     "iconName": "Award",
     "shortCategory": "ว.PA & วิทยฐานะ",
     "discountPct": 51,
-    "coverImage": null
+    "coverImage": "/images/ebooks/eb01_pa_mastery.jpg"
   },
   {
     "rank": 2,
@@ -43,7 +43,7 @@
     "iconName": "Sparkles",
     "shortCategory": "AI & Digital Ed",
     "discountPct": 51,
-    "coverImage": null
+    "coverImage": "/images/ebooks/eb02_ai_prompts.jpg"
   },
   {
     "rank": 3,
@@ -66,7 +66,7 @@
     "iconName": "FileText",
     "shortCategory": "วิจัยในชั้นเรียน (CAR)",
     "discountPct": 49,
-    "coverImage": null
+    "coverImage": "/images/ebooks/eb03_car_research.jpg"
   },
   {
     "rank": 4,
@@ -89,7 +89,7 @@
     "iconName": "Laptop",
     "shortCategory": "Google Sheets & ระบบ",
     "discountPct": 51,
-    "coverImage": null
+    "coverImage": "/images/ebooks/eb04_google_sheets.jpg"
   },
   {
     "rank": 5,
@@ -112,7 +112,7 @@
     "iconName": "BookOpen",
     "shortCategory": "Active Learning",
     "discountPct": 51,
-    "coverImage": null
+    "coverImage": "/images/ebooks/eb05_active_learning.jpg"
   },
   {
     "rank": 6,
@@ -204,7 +204,7 @@
     "iconName": "Palette",
     "shortCategory": "Canva For Education",
     "discountPct": 49,
-    "coverImage": null
+    "coverImage": "/images/ebooks/eb09_canva_teachers.jpg"
   },
   {
     "rank": 10,

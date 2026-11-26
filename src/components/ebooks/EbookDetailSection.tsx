@@ -68,10 +68,10 @@ export function EbookDetailSection({
         </p>
 
         {/* 3D Book Showcase Stage */}
-        <div className="relative my-8 p-6 sm:p-8 rounded-3xl bg-[#FAF8F5] border border-[#E2E8F0] flex flex-col items-center justify-center">
-          <div className="text-[11px] font-mono font-bold tracking-widest text-[#1D4ED8] uppercase mb-4 flex items-center gap-2">
+        <div className="relative my-8 p-6 sm:p-8 rounded-3xl bg-[#FEF9EF] border border-[#FDE68A] flex flex-col items-center justify-center">
+          <div className="text-[11px] font-bold tracking-wider text-[#92400E] uppercase mb-4 flex items-center gap-2">
             <Sparkles className="w-3.5 h-3.5 text-[#D97706]" />
-            <span>FUTURISTIC 3D HARDCOVER BOOK PREVIEW (คลิกหรือชี้เพื่อหมุน 3D)</span>
+            <span>EDITORIAL 3D HARDCOVER PREVIEW (คลิกหรือชี้เพื่อดูมุม 3D)</span>
           </div>
 
           <Book3DMockup
@@ -80,6 +80,7 @@ export function EbookDetailSection({
             category={ebook.category}
             themeColor={ebook.themeColor}
             rank={ebook.rank}
+            coverImage={ebook.coverImage}
             size="lg"
             isInteractive={true}
           />
