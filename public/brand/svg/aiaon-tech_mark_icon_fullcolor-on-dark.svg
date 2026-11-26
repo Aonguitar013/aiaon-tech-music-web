@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-65 -40.125 650 401.25" width="650" height="401.25" role="img" aria-labelledby="title description" color-interpolation="sRGB">
+<title id="title">AiAon Tech — iA monogram</title>
+<desc id="description">AiAon Tech icon mark. fullcolor-on-dark.</desc>
+<defs><linearGradient id="i-cyan" gradientUnits="userSpaceOnUse" x1="144" y1="75" x2="-45" y2="570">
+  <stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#2563EB"/>
+</linearGradient>
+<linearGradient id="a-cobalt" gradientUnits="userSpaceOnUse" x1="370" y1="1" x2="280" y2="355">
+  <stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#2563EB"/>
+</linearGradient></defs>
+<circle cx="158" cy="45" r="45" fill="url(#i-cyan)"/>
+<path d="M0 321 L92 132 Q104 107 130 108 H184 Q188 108 186 113 L99 297 Q88 321 62 321 Z" fill="url(#i-cyan)"/>
+<path d="M276 237 C269 225 278 221 291 221 H386 L439 321 H365 C327 321 306 301 293 275 Z" fill="#2563EB"/>
+<path d="M119 321 L262 36 C274 12 294 0 319 0 C344 0 365 12 377 36 L520 321 H431 C423 321 419 314 415 305 L327 114 C324 107 318 107 314 114 L224 299 Q214 321 189 321 Z" fill="url(#a-cobalt)"/>
+</svg>
