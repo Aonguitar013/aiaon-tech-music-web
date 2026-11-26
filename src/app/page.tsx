@@ -1,5 +1,4 @@
 import { HomeView } from "@/components/home/HomeView";
-import { BrandHomeIntro } from "@/components/home/BrandHomeIntro";
 import { PillarThemeWrapper } from "@/components/layout/PillarThemeWrapper";
 import type { Metadata } from "next";
 
@@ -36,14 +35,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <PillarThemeWrapper pillar="tech">
-      <BrandHomeIntro />
-      {/* Flagship showcase — preserved 100% (simulators, bundles, LINE order links); explicit dark panel guarantees contrast */}
-      <section
-        aria-label="Flagship showcase"
-        className="bg-[#FFFDF7] text-[#1E293B] rounded-t-[2.5rem] overflow-hidden"
-      >
-        <HomeView />
-      </section>
+      <HomeView />
     </PillarThemeWrapper>
   );
 }
