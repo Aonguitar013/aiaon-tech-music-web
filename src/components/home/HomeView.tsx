@@ -302,7 +302,7 @@ export function HomeView() {
 
             {/* BENTO 1: Google Apps Script 20+ Systems (Flagship) */}
             {(activeFilter === "ALL" || activeFilter === "TEACHER") && (
-              <div id="bento-gas" className="lg:col-span-2 rounded-3xl p-7 sm:p-8 bg-linear-to-br from-blue-950/40 via-white to-[#FFF5F5] border border-blue-500/40 hover:border-blue-400 hover:shadow-[0_0_45px_rgba(59,130,246,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-gas" className="lg:col-span-2 rounded-3xl p-7 sm:p-8 bg-linear-to-br from-blue-50/70 via-white to-[#FFF5F5] border border-blue-500/40 hover:border-blue-400 hover:shadow-[0_0_45px_rgba(59,130,246,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-72 h-72 bg-blue-500/10 blur-[100px] pointer-events-none" />
                 
                 <div>
@@ -376,7 +376,7 @@ export function HomeView() {
 
             {/* BENTO 2: AI Caretaker & 24/7 Watchdog (Business & SME) */}
             {(activeFilter === "ALL" || activeFilter === "BUSINESS") && (
-              <div id="bento-caretaker" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-emerald-950/40 via-white to-teal-950/40 border border-emerald-500/40 hover:border-emerald-400 hover:shadow-[0_0_45px_rgba(16,185,129,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-caretaker" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-emerald-50/70 via-white to-teal-50/70 border border-emerald-200 hover:border-emerald-400 hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-emerald-500/10 blur-[90px] pointer-events-none" />
 
                 <div>
@@ -431,7 +431,7 @@ export function HomeView() {
 
             {/* BENTO 3: 30 Teacher E-Books 3D Hardcovers */}
             {(activeFilter === "ALL" || activeFilter === "TEACHER") && (
-              <div id="bento-ebooks" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-purple-950/40 via-white to-indigo-950/40 border border-purple-500/40 hover:border-purple-400 hover:shadow-[0_0_45px_rgba(168,85,247,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-ebooks" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-purple-50/70 via-white to-indigo-50/70 border border-purple-200 hover:border-purple-400 hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-purple-500/10 blur-[90px] pointer-events-none" />
 
                 <div>
@@ -486,7 +486,7 @@ export function HomeView() {
 
             {/* BENTO 4: AiAon Prep — Teacher Exam Prep & 100 Questions */}
             {(activeFilter === "ALL" || activeFilter === "EXAM_PREP" || activeFilter === "TEACHER") && (
-              <div id="bento-prep" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-cyan-950/40 via-white to-blue-950/40 border border-cyan-500/40 hover:border-cyan-400 hover:shadow-[0_0_45px_rgba(6,182,212,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-prep" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-sky-50/70 via-white to-blue-50/70 border border-sky-200 hover:border-sky-400 hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-cyan-500/10 blur-[90px] pointer-events-none" />
 
                 <div>
@@ -537,7 +537,7 @@ export function HomeView() {
 
             {/* BENTO 5: iAon Music Store & Audio Production */}
             {(activeFilter === "ALL" || activeFilter === "MUSIC" || activeFilter === "TEACHER") && (
-              <div id="bento-music" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-pink-950/40 via-white to-purple-950/40 border border-pink-500/40 hover:border-pink-400 hover:shadow-[0_0_45px_rgba(236,72,153,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-music" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-pink-50/70 via-white to-purple-50/70 border border-pink-200 hover:border-pink-400 hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-pink-500/10 blur-[90px] pointer-events-none" />
 
                 <div>
@@ -588,7 +588,7 @@ export function HomeView() {
 
             {/* BENTO 6: Custom Web App & AI Speaker */}
             {(activeFilter === "ALL" || activeFilter === "CUSTOM") && (
-              <div id="bento-custom" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-amber-950/40 via-white to-yellow-950/40 border border-amber-500/40 hover:border-amber-400 hover:shadow-[0_0_45px_rgba(245,158,11,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-custom" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-amber-50/70 via-white to-yellow-50/70 border border-amber-200 hover:border-amber-400 hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-amber-500/10 blur-[90px] pointer-events-none" />
 
                 <div>
@@ -639,7 +639,7 @@ export function HomeView() {
 
             {/* BENTO 7: Student Vault & TCAS 3D */}
             {(activeFilter === "ALL" || activeFilter === "STUDENT") && (
-              <div id="bento-student" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-pink-950/30 via-white to-purple-950/30 border border-pink-500/40 hover:border-pink-400 hover:shadow-[0_0_45px_rgba(236,72,153,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-student" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-pink-50/70 via-white to-purple-50/70 border border-pink-200 hover:border-pink-400 hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-pink-500/20 text-pink-700 border border-pink-500/30 flex items-center gap-1.5">
@@ -1337,7 +1337,7 @@ export function HomeView() {
         </section>
 
         {/* ── 9. FINAL VIP LINE OA CTA (ปิดการขาย 24 ชม.) ─────────── */}
-        <section className="rounded-3xl p-8 sm:p-14 border border-emerald-500/40 bg-linear-to-r from-emerald-950/50 via-white to-teal-950/50 text-center relative overflow-hidden shadow-[0_0_60px_rgba(16,185,129,0.2)]">
+        <section className="rounded-3xl p-8 sm:p-14 border border-emerald-200 bg-linear-to-r from-emerald-50 via-white to-teal-50 text-center relative overflow-hidden shadow-sm">
           <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-emerald-500/15 blur-[120px] rounded-full pointer-events-none" />
 
           <div className="max-w-2xl mx-auto space-y-6 relative z-10">

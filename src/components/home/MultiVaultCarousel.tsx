@@ -293,41 +293,38 @@ export function MultiVaultCarousel() {
 
   return (
     <section 
-      className="relative py-12 sm:py-16 overflow-hidden rounded-3xl border border-amber-200/70 bg-linear-to-b from-slate-950/80 via-white to-slate-950/90 backdrop-blur-xl shadow-2xl"
+      className="relative py-12 sm:py-16 overflow-hidden rounded-3xl border border-[#E2E8F0] bg-linear-to-b from-[#FAF8F5] via-[#FFFDF9] to-[#FAF8F5] shadow-sm"
       onMouseEnter={() => setIsAutoPlay(false)}
       onMouseLeave={() => setIsAutoPlay(true)}
       aria-label="3D Multi-Vault Ecosystem Carousel"
     >
       {/* Background Ambient Aura */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-cyan-500/10 blur-[180px] rounded-full pointer-events-none" />
-      <div className="absolute top-0 right-10 w-80 h-80 bg-purple-500/10 blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-10 w-80 h-80 bg-amber-500/10 blur-[140px] rounded-full pointer-events-none" />
-
-      {/* Cyber Grid Lines */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-blue-500/5 blur-[180px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-10 w-80 h-80 bg-purple-500/5 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-10 w-80 h-80 bg-amber-500/8 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-teal-700 text-xs sm:text-sm font-prompt font-bold shadow-[0_0_25px_rgba(6,182,212,0.3)]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs sm:text-sm font-prompt font-bold shadow-2xs">
             <Sparkles className="w-4 h-4 text-teal-700 animate-pulse" />
             <span>3D INTERACTIVE ECOSYSTEM COMMAND CENTER</span>
           </div>
 
-          <h2 className="font-prompt text-3xl sm:text-5xl font-black text-[#1E293B] leading-tight">
+          <h2 className="font-prompt text-3xl sm:text-5xl font-black text-[#0F172A] leading-tight">
             สำรวจ 8 มหาคลังนวัตกรรม{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-purple-400 to-amber-300 drop-shadow-[0_0_35px_rgba(6,182,212,0.4)]">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 via-violet-600 to-amber-600">
               สไตล์ 3D ล้ำยุค
             </span>
           </h2>
-          <p className="font-prompt text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
+          <p className="font-prompt text-sm sm:text-base text-[#475569] max-w-2xl mx-auto">
             ทุกโซลูชันถูกออกแบบเป็นวัตถุ 3 มิติพร้อมให้คุณสัมผัส หมุนดูรายละเอียด หรือคลิกเปิดเข้าสู่คลังเจาะลึก 7 ข้อก่อนตัดสินใจได้ทันที
           </p>
         </div>
 
         {/* ── INTERACTIVE 3D STAGE & CAROUSEL VIEWPORT ── */}
-        <div className="relative rounded-3xl p-6 sm:p-10 border border-amber-200/70 bg-white shadow-2xl backdrop-blur-md overflow-hidden">
+        <div className="relative rounded-3xl p-6 sm:p-10 border border-[#E2E8F0] bg-white shadow-sm overflow-hidden">
           
           <AnimatePresence mode="wait">
             <motion.div
@@ -344,7 +341,7 @@ export function MultiVaultCarousel() {
                   <span className={`px-3.5 py-1 rounded-full text-xs font-bold border shadow-sm ${activeItem.badgeClass}`}>
                     {activeItem.badge}
                   </span>
-                  <span className="text-xs font-mono text-teal-700 font-bold bg-cyan-950/60 border border-cyan-500/30 px-3 py-1 rounded-full">
+                  <span className="text-xs font-mono text-teal-800 font-bold bg-teal-50 border border-teal-200 px-3 py-1 rounded-full">
                     {activeItem.category}
                   </span>
                   <span className="text-xs font-mono text-slate-500">
@@ -375,7 +372,7 @@ export function MultiVaultCarousel() {
                 <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-amber-200/70">
                   <div>
                     <span className="text-[11px] font-prompt text-slate-500 uppercase tracking-wider block">ข้อเสนอและราคา:</span>
-                    <span className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-linear-to-r from-white via-cyan-200 to-amber-300 font-mono">
+                    <span className="text-xl sm:text-2xl font-black text-[#0F172A] font-mono">
                       {activeItem.priceTag}
                     </span>
                   </div>
@@ -419,8 +416,8 @@ export function MultiVaultCarousel() {
                   }}
                   className={`h-2.5 rounded-full transition-all cursor-pointer ${
                     currentIndex === idx
-                      ? "w-8 bg-gradient-to-r from-cyan-400 to-emerald-400 shadow-[0_0_12px_rgba(6,182,212,0.6)]"
-                      : "w-2.5 bg-white hover:bg-amber-50"
+                      ? "w-8 bg-linear-to-r from-blue-600 to-teal-600 shadow-xs"
+                      : "w-2.5 bg-slate-300 hover:bg-slate-400"
                   }`}
                   title={vault.title}
                   aria-label={`Go to slide ${idx + 1}`}

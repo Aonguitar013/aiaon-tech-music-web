@@ -97,14 +97,12 @@ export function PricingPopup() {
             <div className="relative w-full max-w-md pointer-events-auto">
 
               {/* Outer glow halo */}
-              <div className="absolute -inset-1 rounded-3xl bg-linear-to-br from-cyan-500/30 via-blue-500/20 to-purple-500/20 blur-2xl pointer-events-none" />
+              <div className="absolute -inset-1 rounded-3xl bg-linear-to-br from-blue-500/15 via-amber-400/10 to-purple-500/15 blur-2xl pointer-events-none" />
 
               {/* Card */}
-              <div className="relative border-glow-premium rounded-3xl overflow-hidden bg-[#09090b] shadow-[0_0_80px_rgba(6,182,212,0.18)]">
-                <FloatingStars />
-
+              <div className="relative rounded-3xl overflow-hidden bg-white border border-[#E2E8F0] shadow-2xl">
                 {/* Top gradient stripe */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-cyan-500 via-blue-500 to-purple-500 z-10" />
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-linear-to-r from-blue-600 via-cyan-500 to-violet-600 z-10" />
 
                 {/* Content wrapper */}
                 <div className="relative z-10 p-7 sm:p-8">
@@ -112,7 +110,7 @@ export function PricingPopup() {
                   {/* Close button */}
                   <button
                     onClick={dismiss}
-                    className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white/50 hover:text-white transition-all active:scale-90 cursor-pointer"
+                    className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-[#FAF8F5] hover:bg-slate-100 border border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] transition-all active:scale-90 cursor-pointer"
                     aria-label="ปิด"
                   >
                     <X className="w-4 h-4" />
@@ -120,35 +118,35 @@ export function PricingPopup() {
 
                   {/* Header badge */}
                   <div className="flex items-center gap-2 mb-5">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-linear-to-r from-cyan-500 to-blue-600 text-[11px] text-white font-bold tracking-wider uppercase badge-glow-pulse font-prompt">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-linear-to-r from-blue-600 to-cyan-600 text-[11px] text-white font-bold tracking-wider uppercase font-prompt">
                       <Sparkles className="w-3 h-3 animate-pulse" />
                       RECOMMENDED
                     </span>
-                    <span className="text-white/30 text-[11px] font-prompt">สำหรับผู้เยี่ยมชมใหม่</span>
+                    <span className="text-[#475569] text-[11px] font-prompt">สำหรับผู้เยี่ยมชมใหม่</span>
                   </div>
 
                   {/* Headline */}
                   <h2
                     id="pricing-popup-title"
-                    className="font-prompt text-2xl sm:text-3xl font-bold leading-snug text-white mb-1"
+                    className="font-prompt text-2xl sm:text-3xl font-bold leading-snug text-[#0F172A] mb-1"
                   >
                     อัปเกรดสู่{" "}
-                    <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-blue-400 to-purple-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]">
+                    <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 via-indigo-600 to-violet-600">
                       VIP Pro Academy
                     </span>
                   </h2>
-                  <p className="font-prompt text-white/50 text-sm leading-relaxed mb-6">
+                  <p className="font-prompt text-[#475569] text-sm leading-relaxed mb-6">
                     ปลดล็อกเข้าถึงคอร์สเรียนพรีเมียมและแม่แบบระบบทั้งหมด
                   </p>
 
                   {/* Price */}
-                  <div className="flex items-baseline gap-1.5 mb-6 bg-white/3 border border-white/8 rounded-2xl px-5 py-4">
-                    <Zap className="w-5 h-5 text-cyan-400 shrink-0 mb-0.5" />
-                    <span className="font-prompt text-5xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-white to-cyan-300">
+                  <div className="flex items-baseline gap-1.5 mb-6 bg-[#FAF8F5] border border-[#E2E8F0] rounded-2xl px-5 py-4">
+                    <Zap className="w-5 h-5 text-blue-600 shrink-0 mb-0.5" />
+                    <span className="font-prompt text-5xl font-extrabold text-[#0F172A]">
                       290
                     </span>
-                    <span className="font-prompt text-white/50 text-sm pb-1">บาท / เดือน</span>
-                    <span className="ml-auto font-prompt text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full font-semibold whitespace-nowrap">
+                    <span className="font-prompt text-[#475569] text-sm pb-1">บาท / เดือน</span>
+                    <span className="ml-auto font-prompt text-xs text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full font-semibold whitespace-nowrap">
                       ทดลองฟรีก่อนได้
                     </span>
                   </div>
@@ -156,9 +154,9 @@ export function PricingPopup() {
                   {/* Feature list */}
                   <ul className="space-y-2.5 mb-7">
                     {features.map((feat) => (
-                      <li key={feat} className="flex items-center gap-3 font-prompt text-sm text-white/80">
-                        <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/10 border border-cyan-500/30 shadow-[0_0_8px_rgba(6,182,212,0.25)] shrink-0">
-                          <Check className="w-3 h-3 text-cyan-400" />
+                      <li key={feat} className="flex items-center gap-3 font-prompt text-sm text-[#1E293B]">
+                        <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-50 border border-blue-200 shrink-0">
+                          <Check className="w-3 h-3 text-blue-700" />
                         </span>
                         {feat}
                       </li>
@@ -168,7 +166,7 @@ export function PricingPopup() {
                   {/* CTA Buttons */}
                   <div className="flex flex-col gap-3">
                     <Link href="/login" onClick={dismiss} className="block">
-                      <button className="btn-shimmer w-full py-4 rounded-2xl bg-linear-to-r from-blue-600 via-cyan-500 to-indigo-600 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-500 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(6,182,212,0.35)] hover:shadow-[0_0_36px_rgba(6,182,212,0.55)] active:scale-[0.98] transition-all cursor-pointer">
+                      <button className="btn-shimmer w-full py-4 rounded-2xl bg-[#0F172A] hover:bg-slate-800 text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-all cursor-pointer">
                         <Sparkles className="w-4 h-4" />
                         สมัครใช้งาน VIP Pro เลย
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -176,7 +174,7 @@ export function PricingPopup() {
                     </Link>
 
                     <Link href="/saas#pricing" onClick={dismiss} className="block">
-                      <button className="w-full py-3 rounded-2xl border border-white/10 hover:border-white/20 bg-white/3 hover:bg-white/6 text-white/60 hover:text-white font-prompt text-sm active:scale-[0.98] transition-all cursor-pointer">
+                      <button className="w-full py-3 rounded-2xl border border-[#E2E8F0] hover:border-slate-300 bg-[#FAF8F5] hover:bg-slate-100 text-[#0F172A] font-prompt font-medium text-sm active:scale-[0.98] transition-all cursor-pointer">
                         ดูแผนบริการทั้งหมด
                       </button>
                     </Link>

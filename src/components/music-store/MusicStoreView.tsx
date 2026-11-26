@@ -495,7 +495,7 @@ export function MusicStoreView() {
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className="fixed bottom-4 left-4 right-4 z-40 max-w-5xl mx-auto rounded-2xl bg-slate-950/95 backdrop-blur-2xl border border-amber-500/40 p-4 shadow-[0_10px_50px_rgba(0,0,0,0.85)] flex flex-col sm:flex-row items-center justify-between gap-4 font-prompt"
+            className="fixed bottom-4 left-4 right-4 z-40 max-w-5xl mx-auto rounded-2xl bg-white/95 backdrop-blur-xl border border-[#E2E8F0] p-4 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 font-prompt"
           >
             {/* Left: Now Playing Info */}
             {playingTrack && isPlaying ? (
@@ -503,34 +503,34 @@ export function MusicStoreView() {
                 <button
                   type="button"
                   onClick={stopAudioPreview}
-                  className="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center shrink-0 cursor-pointer"
+                  className="w-10 h-10 rounded-xl bg-rose-600 text-white flex items-center justify-center shrink-0 cursor-pointer"
                 >
                   <Pause className="w-5 h-5 fill-current" />
                 </button>
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 animate-pulse">
+                    <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800 animate-pulse">
                       กำลังเล่นตัวอย่างเสียง 🎵
                     </span>
-                    <span className="text-xs font-bold text-white truncate">
+                    <span className="text-xs font-bold text-[#0F172A] truncate">
                       {playingTrack.title}
                     </span>
                   </div>
-                  <p className="text-[11px] text-white/60 truncate mt-0.5">
+                  <p className="text-[11px] text-[#475569] truncate mt-0.5">
                     {playingTrack.sampleHook}
                   </p>
                 </div>
               </div>
             ) : (
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300">
+                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700">
                   <ShoppingBag className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs sm:text-sm font-bold text-white">
+                  <div className="text-xs sm:text-sm font-bold text-[#0F172A]">
                     เลือกไว้ในตะกร้า {cart.length} รายการ
                   </div>
-                  <div className="text-xs text-amber-300 font-semibold">
+                  <div className="text-xs text-amber-700 font-semibold">
                     ยอดรวมทั้งหมด: {totalCartPrice.toLocaleString()} บาท
                   </div>
                 </div>
@@ -544,7 +544,7 @@ export function MusicStoreView() {
                   <button
                     type="button"
                     onClick={() => setCart([])}
-                    className="px-3 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-white/60 hover:text-white cursor-pointer"
+                    className="px-3 py-2.5 rounded-xl bg-[#FAF8F5] hover:bg-slate-100 border border-[#E2E8F0] text-xs text-[#475569] hover:text-[#0F172A] cursor-pointer"
                   >
                     ล้างตะกร้า
                   </button>
@@ -557,7 +557,7 @@ export function MusicStoreView() {
                     onClick={handleCartCheckoutClick}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#06C755] to-[#05b34c] hover:from-[#05b34c] hover:to-[#049b42] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-[0_0_20px_rgba(6,199,85,0.35)] cursor-pointer"
+                    className="px-5 py-2.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-sm cursor-pointer"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>สั่งซื้อ {cart.length} เพลงที่เลือก ({totalCartPrice.toLocaleString()} ฿)</span>
@@ -574,21 +574,21 @@ export function MusicStoreView() {
       ───────────────────────────────────────────────────────────── */}
       <AnimatePresence>
         {selectedProduct && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#0F172A]/50 backdrop-blur-sm overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-slate-950 border border-amber-500/30 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
+              className="relative bg-[#FAF8F5] border border-[#E2E8F0] rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
             >
-              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-slate-950/90 backdrop-blur-sm border-b border-white/10 mb-6">
-                <span className="text-xs sm:text-sm font-bold text-amber-300 flex items-center gap-2">
-                  <Disc className="w-4 h-4 text-amber-400 animate-spin" style={{ animationDuration: "8s" }} />
+              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-[#FAF8F5]/95 backdrop-blur-sm border-b border-[#E2E8F0] mb-6">
+                <span className="text-xs sm:text-sm font-bold text-[#0F172A] flex items-center gap-2">
+                  <Disc className="w-4 h-4 text-amber-600 animate-spin" style={{ animationDuration: "8s" }} />
                   <span>[{selectedProduct.code}] เจาะลึก 7 องค์ประกอบหลัก • {selectedProduct.title}</span>
                 </span>
                 <button
                   onClick={() => setSelectedProduct(null)}
-                  className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl bg-white border border-[#E2E8F0] hover:bg-slate-100 text-[#475569] hover:text-[#0F172A] text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
                 >
                   ✕ ปิดหน้าต่าง
                 </button>
