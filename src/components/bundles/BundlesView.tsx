@@ -3,11 +3,20 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Sparkles, CheckCircle2, Crown, Zap, ShieldCheck,
-  ArrowRight, MessageCircle, Award,
-  ExternalLink, BookOpen, Layers
+  Sparkles,
+  CheckCircle2,
+  Crown,
+  Zap,
+  ShieldCheck,
+  ArrowRight,
+  MessageCircle,
+  Award,
+  ExternalLink,
+  BookOpen,
+  Layers,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 import { BUNDLE_PACKAGES_DATA, BundleItem } from "@/components/bundles/bundleDataHelper";
 import { CyberVaultCrateMockup } from "@/components/bundles/CyberVaultCrateMockup";
@@ -35,80 +44,161 @@ export function BundlesView() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-[#1E293B] overflow-hidden relative pb-28 font-prompt">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 relative z-10">
+    <div className="min-h-screen bg-[#FAF8F5] text-[#1E293B] overflow-x-hidden relative pb-24 font-prompt">
+      {/* =================================================================
+          1. EXECUTIVE VALUE VAULT HERO (STRIPE PRICING PERSONALITY)
+      ================================================================= */}
+      <section className="relative pt-8 pb-14 sm:pt-12 sm:pb-16 border-b border-[#E2E8F0] bg-[#FFFDF9]">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-30 pointer-events-none"
+        />
 
-        {/* --- SECTION HEADER --- */}
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-5">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#DDD6FE] bg-[#F5F3FF] text-[#6D28D9] font-prompt text-sm font-semibold tracking-wide"
-          >
-            <Sparkles className="w-4 h-4 text-[#7C3AED]" />
-            <span>EXCLUSIVE BUNDLE PACKAGES — คุ้มค่าที่สุด</span>
-          </motion.div>
+        <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Left Copy */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45 }}
+              className="lg:col-span-7 space-y-5"
+            >
+              <div className="flex flex-wrap items-center gap-3">
+                <img
+                  src="/brand/svg/aiaon-tech_lockup_horizontal_fullcolor-on-light.svg"
+                  alt="AiAon Tech"
+                  className="h-8 sm:h-9 w-auto"
+                />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FEF3C7] border border-[#FDE68A] text-[#92400E] text-xs font-mono font-bold">
+                  <Crown className="w-3.5 h-3.5 text-[#D97706]" />
+                  <span>EXECUTIVE BUNDLES • SAVE UP TO 51%</span>
+                </span>
+              </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="font-prompt text-4xl sm:text-6xl font-extrabold tracking-tight text-[#0F172A] leading-tight"
-          >
-            แพ็กเกจเหมาหีบสมบัติ{" "}
-            <span className="text-[#2563EB]">
-              ลดภาระงานครู
-            </span>
-          </motion.h1>
+              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0F172A] leading-[1.15]">
+                เหมาคลังระบบโรงเรียน{" "}
+                <span className="text-[#2563EB]">จ่ายครั้งเดียว ใช้ตลอดชีพ</span>
+              </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="font-prompt text-base sm:text-lg text-[#475569] leading-relaxed"
-          >
-            ยกระดับการทำงานด้วยชุดระบบ Google Apps Script สำเร็จรูป ซื้อเป็นแพ็กเกจประหยัดสูงสุดกว่า 50% รันบน Google Sheets ของตัวเอง ปลอดภัย 100%
-          </motion.p>
+              <p className="text-sm sm:text-base text-[#475569] leading-relaxed max-w-2xl">
+                ปลดล็อกชุดระบบ Google Apps Script ระดับมาตรฐานโรงเรียนใหญ่แบบยกเซ็ต ประหยัดกว่าซื้อแยกสูงสุดกว่า{" "}
+                <strong className="text-[#0F172A]">5,200 ฿</strong> ข้อมูลเก็บใน Google Drive ของโรงเรียนเอง 100% ไร้ค่ารายเดือนตลอดชีพ
+              </p>
+
+              {/* 3 Value Metrics */}
+              <div className="grid grid-cols-3 gap-3 pt-1 max-w-lg">
+                <div className="rounded-2xl bg-white border border-[#E2E8F0] px-3.5 py-2.5 shadow-2xs">
+                  <div className="text-lg sm:text-xl font-black text-[#0F172A]">51%</div>
+                  <div className="text-[11px] text-[#64748B]">ประหยัดสูงสุด</div>
+                </div>
+                <div className="rounded-2xl bg-white border border-[#E2E8F0] px-3.5 py-2.5 shadow-2xs">
+                  <div className="text-lg sm:text-xl font-black text-[#2563EB]">20 ระบบ</div>
+                  <div className="text-[11px] text-[#64748B]">ครบทุกฝ่ายงาน</div>
+                </div>
+                <div className="rounded-2xl bg-white border border-[#E2E8F0] px-3.5 py-2.5 shadow-2xs">
+                  <div className="text-lg sm:text-xl font-black text-emerald-700">0 ฿/ด.</div>
+                  <div className="text-[11px] text-[#64748B]">ไร้ค่ารายเดือน</div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <a
+                  href="#bundle-tiers"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#0F172A] hover:bg-[#1D4ED8] text-white font-bold text-sm shadow-sm transition-all"
+                >
+                  <span>เลือกแพ็กเกจที่เหมาะกับคุณ</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <a
+                  href="#compare-table"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white hover:bg-slate-50 text-[#0F172A] border border-[#CBD5E1] font-bold text-sm transition-all"
+                >
+                  <span>ดูตารางเปรียบเทียบ</span>
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Right: Executive Lifetime Highlight Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.08 }}
+              className="lg:col-span-5"
+            >
+              <div className="rounded-3xl bg-white border border-[#FDE68A] p-4 shadow-md space-y-3.5">
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#E2E8F0]">
+                  <Image
+                    src="/images/mockups/aona10_hygiene_matrix_mockup.jpg"
+                    alt="AiAon Tech All-in-One School Systems"
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 480px"
+                  />
+                  <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#0F172A]/90 text-amber-300 text-[11px] font-bold">
+                    👑 ALL-IN-ONE LIFETIME
+                  </span>
+                </div>
+                <div className="flex items-center justify-between gap-3 px-1">
+                  <div>
+                    <div className="text-xs font-bold text-[#92400E]">เหมาครบ 20 ระบบ + อัปเดตฟรีตลอดชีพ</div>
+                    <div className="flex items-baseline gap-2 mt-0.5">
+                      <span className="text-2xl font-black text-[#0F172A]">4,990 ฿</span>
+                      <span className="text-xs text-[#94A3B8] line-through">10,190 ฿</span>
+                    </div>
+                  </div>
+                  <a
+                    href="#bundle-tiers"
+                    className="shrink-0 px-4 py-2.5 rounded-xl bg-[#FEF3C7] hover:bg-amber-200 text-[#78350F] font-bold text-xs transition-colors"
+                  >
+                    ดูรายละเอียด ↓
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
+      </section>
 
-        {/* --- BUNDLES GRID --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
-          {BUNDLE_PACKAGES.map((bundle, idx) => {
-            return (
-              <motion.div
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 pt-12 sm:pt-16 space-y-16">
+        {/* =================================================================
+            2. 3-COLUMN PRICING TIER CARDS
+        ================================================================= */}
+        <section id="bundle-tiers" className="scroll-mt-20">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-7 items-stretch">
+            {BUNDLE_PACKAGES.map((bundle, idx) => (
+              <motion.article
                 key={bundle.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className={`relative rounded-3xl p-7 sm:p-8 transition-all duration-300 border flex flex-col justify-between bg-white shadow-sm hover:shadow-md ${
+                transition={{ duration: 0.45, delay: idx * 0.08 }}
+                className={`relative rounded-3xl p-6 sm:p-7 transition-all duration-300 border flex flex-col justify-between bg-white ${
                   bundle.isFeatured
-                    ? "border-[#7C3AED] ring-2 ring-[#7C3AED]/20 lg:scale-[1.02]"
-                    : "border-[#E2E8F0] hover:border-[#CBD5E1]"
+                    ? "border-[#2563EB] ring-2 ring-[#2563EB]/15 shadow-lg"
+                    : "border-[#E2E8F0] hover:border-[#CBD5E1] shadow-2xs hover:shadow-md"
                 }`}
               >
-                {/* Featured Highlight */}
                 {bundle.isFeatured && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-linear-to-r from-[#7C3AED] to-[#DB2777] text-white font-prompt text-xs font-bold shadow-sm flex items-center gap-1.5 uppercase tracking-wider whitespace-nowrap">
-                    <Crown className="w-3.5 h-3.5 fill-white text-white" />
-                    <span>👑 แนะนำมากที่สุด — ประหยัดกว่า 5,200 ฿</span>
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#0F172A] text-amber-300 text-xs font-bold shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+                    <Crown className="w-3.5 h-3.5 text-amber-400" />
+                    <span>คุ้มที่สุด — ประหยัดกว่า 5,200 ฿</span>
                   </div>
                 )}
 
                 <div>
-                  {/* Top Badge */}
                   <div className="flex items-center justify-between gap-2 mb-4 pt-1">
-                    <span className={`px-3 py-1 rounded-full text-xs font-prompt font-semibold border ${bundle.badgeColor}`}>
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold border bg-[#FAF8F5] border-[#E2E8F0] text-[#0F172A]">
                       {bundle.badge}
                     </span>
-                    <span className="text-emerald-800 font-prompt text-xs font-bold bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full shrink-0">
+                    <span className="text-emerald-800 text-xs font-bold bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full shrink-0">
                       {bundle.discountText}
                     </span>
                   </div>
 
-                  {/* 3D Cyber Vault Crate Mockup */}
+                  {/* 3D Crate Preview */}
                   <div
                     onClick={() => setSelectedBundle(bundle)}
-                    className="relative w-full my-4 cursor-pointer flex justify-center py-3 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]"
+                    className="relative w-full my-3 cursor-pointer flex justify-center py-3 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]"
                     title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของหีบสมบัตินี้"
                   >
                     <CyberVaultCrateMockup
@@ -123,84 +213,85 @@ export function BundlesView() {
                     />
                   </div>
 
-                  {/* Title & Tagline */}
-                  <h3
+                  <h2
                     onClick={() => setSelectedBundle(bundle)}
-                    className="font-prompt text-2xl sm:text-3xl font-extrabold text-[#0F172A] mb-2 cursor-pointer hover:text-[#2563EB] transition-colors"
+                    className="text-xl sm:text-2xl font-extrabold text-[#0F172A] mb-1.5 cursor-pointer hover:text-[#2563EB] transition-colors"
                   >
                     {bundle.title}
-                  </h3>
-                  <p className="font-prompt text-sm text-[#475569] mb-6">
+                  </h2>
+                  <p className="text-xs sm:text-sm text-[#475569] mb-5 leading-relaxed">
                     {bundle.tagline}
                   </p>
 
-                  {/* Pricing Display */}
-                  <div className="flex flex-wrap items-baseline gap-2.5 mb-6 p-4 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]">
-                    <span className="font-prompt text-4xl sm:text-5xl font-black text-[#0F172A]">
+                  {/* Pricing Box */}
+                  <div className="flex flex-wrap items-baseline gap-2 mb-5 p-4 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0]">
+                    <span className="text-3xl sm:text-4xl font-black text-[#0F172A]">
                       {bundle.bundlePrice.toLocaleString()} ฿
                     </span>
-                    <span className="font-prompt text-lg text-[#94A3B8] line-through">
+                    <span className="text-sm text-[#94A3B8] line-through">
                       {bundle.originalPrice.toLocaleString()} ฿
                     </span>
-                    <span className="text-xs font-prompt font-semibold text-[#0E7490] ml-auto bg-[#ECFEFF] px-2.5 py-1 rounded-lg border border-[#A5F3FC]">
-                      จ่ายครั้งเดียวใช้ได้ตลอดชีพ
+                    <span className="text-[11px] font-bold text-[#1D4ED8] ml-auto bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">
+                      จ่ายครั้งเดียวตลอดชีพ
                     </span>
                   </div>
 
-                  {/* Target Audience */}
-                  <div className="text-xs font-prompt text-[#475569] bg-[#FAF8F5] px-3.5 py-2.5 rounded-xl border border-[#E2E8F0] mb-6">
+                  <div className="text-xs text-[#475569] bg-[#FFFDF9] px-3.5 py-2.5 rounded-xl border border-[#E2E8F0] mb-5">
                     {bundle.targetAudience}
                   </div>
 
-                  {/* Included Systems List */}
-                  <div className="space-y-3 mb-8">
-                    <h4 className="font-prompt text-xs font-bold text-[#64748B] uppercase tracking-wider flex items-center gap-1.5">
-                      <Layers className="w-3.5 h-3.5 text-[#D97706]" />
-                      <span>ระบบที่รวมในหีบนี้:</span>
-                    </h4>
+                  {/* Included Systems */}
+                  <div className="space-y-2.5 mb-6">
+                    <h3 className="text-xs font-bold text-[#64748B] uppercase tracking-wider flex items-center gap-1.5">
+                      <Layers className="w-3.5 h-3.5 text-[#2563EB]" />
+                      <span>ระบบที่รวมในแพ็กเกจ:</span>
+                    </h3>
                     {bundle.systems.map((sys, sIdx) => (
-                      <div key={sIdx} className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0] hover:border-[#CBD5E1] transition-colors">
-                        <div className="flex items-center justify-between gap-2 mb-1">
-                          <span className="font-prompt text-sm font-bold text-[#0F172A] flex items-center gap-2">
-                            <span className="px-1.5 py-0.5 rounded text-[11px] font-mono bg-[#EFF6FF] text-[#1D4ED8] border border-[#BFDBFE]">
+                      <div
+                        key={sIdx}
+                        className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E2E8F0]"
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-0.5">
+                          <span className="text-xs sm:text-sm font-bold text-[#0F172A] flex items-center gap-1.5">
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-blue-50 text-[#1D4ED8] border border-blue-200">
                               {sys.code}
                             </span>
                             {sys.name}
                           </span>
-                          <span className="text-xs font-prompt text-[#94A3B8] line-through shrink-0">
+                          <span className="text-[11px] text-[#94A3B8] line-through shrink-0">
                             {sys.originalPrice} ฿
                           </span>
                         </div>
-                        <p className="font-prompt text-xs text-[#475569] leading-relaxed">
+                        <p className="text-[11px] text-[#475569] leading-relaxed">
                           {sys.description}
                         </p>
                       </div>
                     ))}
                   </div>
 
-                  {/* Bonuses Checklist */}
-                  <div className="space-y-2.5 mb-8 pt-4 border-t border-[#F1F5F9]">
-                    <h4 className="font-prompt text-xs font-bold text-[#64748B] uppercase tracking-wider mb-3">
-                      สิทธิประโยชน์พิเศษที่ได้รับ:
-                    </h4>
+                  {/* Bonuses */}
+                  <div className="space-y-2 mb-6 pt-4 border-t border-[#F1F5F9]">
+                    <h3 className="text-xs font-bold text-[#64748B] uppercase tracking-wider mb-2">
+                      สิทธิพิเศษที่ได้รับ:
+                    </h3>
                     {bundle.bonuses.map((bonus, bIdx) => (
-                      <div key={bIdx} className="flex items-start gap-2.5 text-xs font-prompt text-[#1E293B]">
-                        <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+                      <div key={bIdx} className="flex items-start gap-2 text-xs text-[#1E293B]">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                         <span>{bonus}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Call To Action Buttons */}
-                <div className="space-y-3 pt-4 border-t border-[#F1F5F9]">
+                {/* CTAs */}
+                <div className="space-y-2.5 pt-4 border-t border-[#F1F5F9]">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <button
                       type="button"
                       onClick={() => setSelectedBundle(bundle)}
-                      className="w-full py-3.5 px-4 rounded-2xl bg-[#FAF8F5] hover:bg-[#F1ECE4] text-[#0F172A] font-prompt font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition border border-[#E2E8F0] cursor-pointer"
+                      className="w-full py-3 px-3.5 rounded-2xl bg-[#FAF8F5] hover:bg-slate-100 text-[#0F172A] font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition border border-[#E2E8F0] cursor-pointer"
                     >
-                      <BookOpen className="w-4 h-4 text-[#D97706]" />
+                      <BookOpen className="w-4 h-4 text-[#2563EB]" />
                       <span>เจาะลึก 7 ข้อ</span>
                     </button>
 
@@ -212,149 +303,159 @@ export function BundlesView() {
                       data-line-title={`แพ็กเกจเหมา: ${bundle.title}`}
                       data-line-price={bundle.bundlePrice}
                       data-line-code={bundle.id}
-                      className="w-full py-3.5 px-4 rounded-2xl text-[#052E16] font-prompt font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] shadow-xs cursor-pointer bg-[#06C755] hover:bg-[#05b34c]"
+                      className="w-full py-3 px-3.5 rounded-2xl text-[#052E16] font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all shadow-2xs cursor-pointer bg-[#06C755] hover:bg-[#05b34c]"
                     >
-                      <MessageCircle className="w-4 h-4 text-[#052E16]" />
+                      <MessageCircle className="w-4 h-4" />
                       <span>สั่งซื้อทาง LINE</span>
-                      <ArrowRight className="w-4 h-4" />
                     </a>
                   </div>
 
                   <div className="text-center pt-1">
                     <Link
                       href="/digital-vault"
-                      className="text-xs font-prompt text-[#64748B] hover:text-[#0F172A] transition-colors hover:underline inline-flex items-center gap-1"
+                      className="text-xs text-[#64748B] hover:text-[#0F172A] hover:underline inline-flex items-center gap-1"
                     >
-                      <span>หรือดูรายละเอียดรายระบบใน Digital Vault</span>
+                      <span>ดูรายระบบใน Digital Vault</span>
                       <ExternalLink className="w-3 h-3" />
                     </Link>
                   </div>
                 </div>
-              </motion.div>
-            );
-          })}
-        </div>
+              </motion.article>
+            ))}
+          </div>
+        </section>
 
-        {/* --- BUNDLE COMPARISON TABLE --- */}
-        <div className="rounded-3xl p-6 sm:p-10 border border-[#E2E8F0] bg-white shadow-sm max-w-5xl mx-auto mb-20 space-y-6">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="inline-block text-xs font-prompt font-bold text-[#6D28D9] px-3 py-1 rounded-full bg-[#F5F3FF] border border-[#DDD6FE]">
-              📊 COMPARISON TABLE — ตารางเปรียบเทียบแพ็กเกจ
-            </span>
-            <h3 className="font-prompt text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
-              เลือกแพ็กเกจที่เหมาะกับภาระงานของคุณ
-            </h3>
+        {/* =================================================================
+            3. CLEAN EXECUTIVE COMPARISON TABLE
+        ================================================================= */}
+        <section
+          id="compare-table"
+          className="rounded-3xl p-6 sm:p-10 border border-[#E2E8F0] bg-white shadow-2xs space-y-6 scroll-mt-20"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div>
+              <span className="text-xs font-mono font-bold text-[#2563EB] uppercase tracking-wider">
+                COMPARISON MATRIX
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] mt-1">
+                เปรียบเทียบแพ็กเกจให้เลือกง่ายใน 10 วินาที
+              </h2>
+            </div>
+            <span className="text-xs text-[#64748B]">ทุกแพ็กเกจออกใบเสร็จรับเงินได้</span>
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left font-prompt text-xs sm:text-sm">
+            <table className="w-full text-left text-xs sm:text-sm">
               <thead>
                 <tr className="border-b border-[#E2E8F0] text-[#64748B]">
-                  <th className="py-3 px-4">คุณสมบัติ / แพ็กเกจ</th>
-                  <th className="py-3 px-4 text-[#0E7490]">Homeroom Pro</th>
-                  <th className="py-3 px-4 text-[#B45309]">Admin Suite</th>
-                  <th className="py-3 px-4 text-[#6D28D9] font-bold bg-[#F5F3FF] rounded-t-xl">All-in-One Lifetime 👑</th>
+                  <th className="py-3.5 px-4">คุณสมบัติ / แพ็กเกจ</th>
+                  <th className="py-3.5 px-4 text-[#0F172A] font-bold">Homeroom Pro</th>
+                  <th className="py-3.5 px-4 text-[#0F172A] font-bold">Admin Suite</th>
+                  <th className="py-3.5 px-4 text-[#92400E] font-extrabold bg-[#FEF9EF] rounded-t-xl border-x border-t border-[#FDE68A]">
+                    All-in-One Lifetime 👑
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#F1F5F9] text-[#475569]">
                 <tr>
-                  <td className="py-3 px-4 font-semibold text-[#0F172A]">จำนวนระบบที่ได้รับ</td>
-                  <td className="py-3 px-4">3 ระบบ (งานชั้นเรียน &amp; สีขาว)</td>
-                  <td className="py-3 px-4">3 ระบบ (ยานพาหนะ &amp; พัสดุ)</td>
-                  <td className="py-3 px-4 font-bold text-[#6D28D9] bg-[#F5F3FF]/60">ครบทั้ง 20 ระบบ ⚡</td>
+                  <td className="py-3.5 px-4 font-semibold text-[#0F172A]">จำนวนระบบที่ได้รับ</td>
+                  <td className="py-3.5 px-4">3 ระบบ (ชั้นเรียน &amp; สีขาว)</td>
+                  <td className="py-3.5 px-4">3 ระบบ (ยานพาหนะ &amp; พัสดุ)</td>
+                  <td className="py-3.5 px-4 font-bold text-[#0F172A] bg-[#FEF9EF]/70 border-x border-[#FDE68A]">
+                    ครบทั้ง 20 ระบบ ⚡
+                  </td>
                 </tr>
                 <tr>
-                  <td className="py-3 px-4 font-semibold text-[#0F172A]">สิทธิ์ใช้งานตลอดชีพ</td>
-                  <td className="py-3 px-4 text-[#059669] font-semibold">✓ มี</td>
-                  <td className="py-3 px-4 text-[#059669] font-semibold">✓ มี</td>
-                  <td className="py-3 px-4 text-[#059669] font-bold bg-[#F5F3FF]/60">✓ มีตลอดชีพ</td>
+                  <td className="py-3.5 px-4 font-semibold text-[#0F172A]">สิทธิ์ใช้งานตลอดชีพ</td>
+                  <td className="py-3.5 px-4 text-emerald-700 font-semibold">✓ มี</td>
+                  <td className="py-3.5 px-4 text-emerald-700 font-semibold">✓ มี</td>
+                  <td className="py-3.5 px-4 text-emerald-700 font-bold bg-[#FEF9EF]/70 border-x border-[#FDE68A]">
+                    ✓ มีตลอดชีพ
+                  </td>
                 </tr>
                 <tr>
-                  <td className="py-3 px-4 font-semibold text-[#0F172A]">สิทธิ์รับระบบใหม่ในอนาคตฟรี</td>
-                  <td className="py-3 px-4 text-[#94A3B8]">-</td>
-                  <td className="py-3 px-4 text-[#94A3B8]">-</td>
-                  <td className="py-3 px-4 text-[#059669] font-bold bg-[#F5F3FF]/60">✓ ฟรีตลอดชีพ 🚀</td>
+                  <td className="py-3.5 px-4 font-semibold text-[#0F172A]">สิทธิ์รับระบบใหม่ในอนาคตฟรี</td>
+                  <td className="py-3.5 px-4 text-[#94A3B8]">—</td>
+                  <td className="py-3.5 px-4 text-[#94A3B8]">—</td>
+                  <td className="py-3.5 px-4 text-emerald-700 font-bold bg-[#FEF9EF]/70 border-x border-[#FDE68A]">
+                    ✓ ฟรีตลอดชีพ 🚀
+                  </td>
                 </tr>
                 <tr>
-                  <td className="py-3 px-4 font-semibold text-[#0F172A]">สิทธิ์ปรึกษาครูอ้นผ่าน LINE OA</td>
-                  <td className="py-3 px-4 text-[#059669] font-semibold">✓ มี</td>
-                  <td className="py-3 px-4 text-[#059669] font-semibold">✓ มี</td>
-                  <td className="py-3 px-4 text-[#059669] font-bold bg-[#F5F3FF]/60">✓ VIP Priority Support</td>
+                  <td className="py-3.5 px-4 font-semibold text-[#0F172A]">ซัปพอร์ตโดยครูอ้น (LINE OA)</td>
+                  <td className="py-3.5 px-4 text-emerald-700 font-semibold">✓ มี</td>
+                  <td className="py-3.5 px-4 text-emerald-700 font-semibold">✓ มี</td>
+                  <td className="py-3.5 px-4 text-emerald-700 font-bold bg-[#FEF9EF]/70 border-x border-[#FDE68A]">
+                    ✓ VIP Priority Support
+                  </td>
                 </tr>
                 <tr>
-                  <td className="py-3 px-4 font-semibold text-[#0F172A]">ราคาพิเศษ</td>
-                  <td className="py-3 px-4 font-bold text-[#0E7490]">1,490 ฿</td>
-                  <td className="py-3 px-4 font-bold text-[#B45309]">1,990 ฿</td>
-                  <td className="py-3 px-4 font-black text-[#6D28D9] bg-[#F5F3FF] rounded-b-xl text-base">4,990 ฿ (ลด 51%)</td>
+                  <td className="py-3.5 px-4 font-semibold text-[#0F172A]">ราคาพิเศษ</td>
+                  <td className="py-3.5 px-4 font-bold text-[#0F172A]">1,490 ฿</td>
+                  <td className="py-3.5 px-4 font-bold text-[#0F172A]">1,990 ฿</td>
+                  <td className="py-3.5 px-4 font-black text-[#92400E] bg-[#FEF9EF] rounded-b-xl border-x border-b border-[#FDE68A] text-base">
+                    4,990 ฿ (ลด 51%)
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
+        </section>
 
-        {/* --- WHY BUY BUNDLE SECTION --- */}
-        <div className="rounded-3xl p-8 sm:p-12 border border-[#E2E8F0] bg-white shadow-sm max-w-5xl mx-auto mb-12">
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
-            <h3 className="font-prompt text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
-              ทำไมถึงควรเลือกซื้อแบบ <span className="text-[#2563EB]">แพ็กเกจ Bundle?</span>
-            </h3>
-            <p className="font-prompt text-sm text-[#475569]">
-              ทุกระบบเชื่อมต่อข้อมูลกันได้อย่างลื่นไหล รันบน Google Account ของคุณครูเอง 100%
+        {/* =================================================================
+            4. 3-PILLAR WHY BUNDLE STRIP
+        ================================================================= */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-6 rounded-3xl bg-white border border-[#E2E8F0] space-y-3 shadow-2xs">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#2563EB]">
+              <Zap className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-extrabold text-[#0F172A]">ประหยัดสูงสุด 51%</h3>
+            <p className="text-xs text-[#475569] leading-relaxed">
+              ซื้อแยกทีละระบบราคารวมกว่าหมื่นบาท เหมายกชุดจ่ายเพียง 4,990 ฿ ได้ครบ 20 ระบบพร้อมอัปเดตฟรีตลอดชีพ
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] space-y-3 text-left">
-              <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] border border-[#BFDBFE] flex items-center justify-center text-[#2563EB]">
-                <Zap className="w-5 h-5" />
-              </div>
-              <h4 className="font-prompt text-lg font-bold text-[#0F172A]">ประหยัดสูงสุด 51%</h4>
-              <p className="font-prompt text-xs text-[#475569] leading-relaxed">
-                ซื้อแยกทีละระบบราคารวมกว่าหมื่นบาท เหมายกชุดจ่ายเพียง 4,990 บาท ได้ครบ 20 ระบบพร้อมอัปเดตฟรีตลอดชีพ
-              </p>
+          <div className="p-6 rounded-3xl bg-white border border-[#E2E8F0] space-y-3 shadow-2xs">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
+              <ShieldCheck className="w-5 h-5" />
             </div>
-
-            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] space-y-3 text-left">
-              <div className="w-10 h-10 rounded-xl bg-[#F5F3FF] border border-[#DDD6FE] flex items-center justify-center text-[#6D28D9]">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h4 className="font-prompt text-lg font-bold text-[#0F172A]">ปลอดภัย &amp; ไม่มีรายเดือน</h4>
-              <p className="font-prompt text-xs text-[#475569] leading-relaxed">
-                ข้อมูลนักเรียนและเอกสารทั้งหมดจัดเก็บใน Google Drive ของคุณครูเอง ไม่ผ่านเซิร์ฟเวอร์คนกลาง ปลอดภัยตาม พ.ร.บ. คุ้มครองข้อมูล
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] space-y-3 text-left">
-              <div className="w-10 h-10 rounded-xl bg-[#FEF9EF] border border-[#FDE68A] flex items-center justify-center text-[#D97706]">
-                <Award className="w-5 h-5" />
-              </div>
-              <h4 className="font-prompt text-lg font-bold text-[#0F172A]">ซัพพอร์ตโดยครูอ้นโดยตรง</h4>
-              <p className="font-prompt text-xs text-[#475569] leading-relaxed">
-                มีปัญหาสามารถทักปรึกษาผ่าน LINE OA ได้ตลอด มีคลิปสอนติดตั้งและแนะนำการใช้งานอย่างละเอียดทุกขั้นตอน
-              </p>
-            </div>
+            <h3 className="text-base font-extrabold text-[#0F172A]">ปลอดภัย &amp; ไม่มีรายเดือน</h3>
+            <p className="text-xs text-[#475569] leading-relaxed">
+              ข้อมูลนักเรียนและเอกสารจัดเก็บใน Google Drive ของคุณครูเอง 100% ไม่ผ่านเซิร์ฟเวอร์คนกลาง ปลอดภัยตาม PDPA
+            </p>
           </div>
-        </div>
+
+          <div className="p-6 rounded-3xl bg-white border border-[#E2E8F0] space-y-3 shadow-2xs">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700">
+              <Award className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-extrabold text-[#0F172A]">ซัปพอร์ตโดยครูอ้นโดยตรง</h3>
+            <p className="text-xs text-[#475569] leading-relaxed">
+              มีปัญหาทักปรึกษาทาง LINE OA ได้ตลอด พร้อมคู่มือติดตั้งภาษาไทย 3 นาทีเสร็จ
+            </p>
+          </div>
+        </section>
       </div>
 
-      {/* 7-PILLARS BUNDLE DETAIL MODAL */}
+      {/* 7-PILLARS BUNDLE DETAIL MODAL (WARM CREAM EDITORIAL) */}
       <AnimatePresence>
         {selectedBundle && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#0F172A]/70 backdrop-blur-sm overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#0F172A]/50 backdrop-blur-sm overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-slate-950 border border-purple-500/40 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
+              className="relative bg-[#FAF8F5] border border-[#E2E8F0] rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-8 shadow-2xl"
             >
-              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-slate-950/90 backdrop-blur-sm border-b border-white/10 mb-6">
-                <span className="text-xs sm:text-sm font-bold text-purple-300 flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-amber-400" />
+              <div className="sticky top-0 z-50 flex items-center justify-between pb-3 bg-[#FAF8F5]/95 backdrop-blur-sm border-b border-[#E2E8F0] mb-6">
+                <span className="text-xs sm:text-sm font-bold text-[#0F172A] flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#D97706]" />
                   <span>เจาะลึก 7 องค์ประกอบหลัก • {selectedBundle.title}</span>
                 </span>
                 <button
                   onClick={() => setSelectedBundle(null)}
-                  className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl bg-white border border-[#E2E8F0] hover:bg-slate-100 text-[#475569] hover:text-[#0F172A] text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
                 >
                   ✕ ปิดหน้าต่าง
                 </button>
