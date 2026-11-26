@@ -36,10 +36,10 @@ export default async function EbookReaderPage({ params }: { params: Promise<{ id
     return (
       <div className="w-full min-h-[70vh] flex flex-col items-center justify-center text-center px-4 font-prompt">
         <div className="w-20 h-20 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-4 animate-bounce">
-          <Lock className="w-10 h-10 text-red-400" />
+          <Lock className="w-10 h-10 text-red-700" />
         </div>
-        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">เนื้อหานี้ถูกล็อกไว้</h1>
-        <p className="text-white/50 max-w-md text-sm mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-[#1E293B] mb-2">เนื้อหานี้ถูกล็อกไว้</h1>
+        <p className="text-slate-500 max-w-md text-sm mb-6">
           คุณต้องซื้อสินค้านี้ก่อนจึงจะสามารถเข้าอ่าน E-Book คู่มือการใช้งานนี้ได้
         </p>
         <Link
@@ -67,7 +67,7 @@ export default async function EbookReaderPage({ params }: { params: Promise<{ id
       <div className="mb-6">
         <Link
           href={`/dashboard/marketplace/${id}`}
-          className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors font-prompt text-sm"
+          className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors font-prompt text-sm"
         >
           <ArrowLeft className="w-4 h-4" /> กลับหน้าข้อมูลสินค้า
         </Link>
@@ -76,9 +76,9 @@ export default async function EbookReaderPage({ params }: { params: Promise<{ id
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
         {/* Left Side: Table of Contents / Navigation */}
         <div className="lg:col-span-1 lg:sticky lg:top-24 hidden lg:block">
-          <div className="glass-card p-5 border-white/10 flex flex-col max-h-[75vh]">
-            <h3 className="font-prompt font-bold text-white text-base mb-4 flex items-center gap-2 pb-3 border-b border-white/10">
-              <BookOpen className="w-4 h-4 text-cyan-400" /> สารบัญคู่มือ
+          <div className="glass-card p-5 border-amber-200/70 flex flex-col max-h-[75vh]">
+            <h3 className="font-prompt font-bold text-[#1E293B] text-base mb-4 flex items-center gap-2 pb-3 border-b border-amber-200/70">
+              <BookOpen className="w-4 h-4 text-teal-700" /> สารบัญคู่มือ
             </h3>
             <div className="overflow-y-auto pr-1 space-y-2 flex-1 scrollbar-thin">
               {headings.length > 0 ? (
@@ -86,21 +86,21 @@ export default async function EbookReaderPage({ params }: { params: Promise<{ id
                   <a
                     key={index}
                     href={`#${h.id}`}
-                    className={`block font-prompt text-xs transition-colors hover:text-cyan-400 py-1 ${
+                    className={`block font-prompt text-xs transition-colors hover:text-teal-700 py-1 ${
                       h.isH1
-                        ? "text-white/80 font-semibold"
-                        : "text-white/50 pl-3 font-normal"
+                        ? "text-slate-800 font-semibold"
+                        : "text-slate-500 pl-3 font-normal"
                     }`}
                   >
                     {h.title}
                   </a>
                 ))
               ) : (
-                <span className="text-white/30 text-xs font-prompt">ไม่มีหัวข้อเรื่อง</span>
+                <span className="text-slate-500 text-xs font-prompt">ไม่มีหัวข้อเรื่อง</span>
               )}
             </div>
-            <div className="mt-5 pt-3 border-t border-white/10 flex items-center gap-1.5 text-[11px] text-white/40 font-prompt">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> ระบบอ่านแบบปลอดภัย
+            <div className="mt-5 pt-3 border-t border-amber-200/70 flex items-center gap-1.5 text-[11px] text-slate-500 font-prompt">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" /> ระบบอ่านแบบปลอดภัย
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@ export default async function EbookReaderPage({ params }: { params: Promise<{ id
         {/* Right Side: Web-Book Reader Area */}
         <div className="lg:col-span-3">
           <div
-            className="glass-card p-6 md:p-12 border-white/10 relative overflow-hidden select-none"
+            className="glass-card p-6 md:p-12 border-amber-200/70 relative overflow-hidden select-none"
             style={{
               WebkitUserSelect: "none",
               msUserSelect: "none",

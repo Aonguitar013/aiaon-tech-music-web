@@ -23,11 +23,11 @@ export default async function MarketplacePage() {
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
             <div className="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/50 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-                <ShoppingCart className="w-6 h-6 text-blue-400" />
+                <ShoppingCart className="w-6 h-6 text-blue-700" />
             </div>
-            <h1 className="font-prompt text-3xl md:text-4xl font-bold text-white">สินค้าและบริการ (Marketplace)</h1>
+            <h1 className="font-prompt text-3xl md:text-4xl font-bold text-[#1E293B]">สินค้าและบริการ (Marketplace)</h1>
         </div>
-        <p className="text-white/60 font-prompt">
+        <p className="text-slate-600 font-prompt">
             ค้นหาระบบอัตโนมัติ เทมเพลต และบริการพิเศษ ที่พร้อมช่วยลดเวลาการทำงานของคุณ
         </p>
       </div>

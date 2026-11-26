@@ -45,22 +45,22 @@ export function DesktopNavLink({ href, label, iconName }: DesktopNavLinkProps) {
       href={href}
       className={`flex items-center justify-between gap-3 px-3 py-3 rounded-lg font-prompt font-normal transition-all group ${
         isActive
-          ? "bg-blue-500/15 text-white border border-blue-500/20 shadow-[0_0_12px_rgba(59,130,246,0.1)]"
-          : "text-white/70 hover:text-white hover:bg-white/10 border border-transparent"
+          ? "bg-blue-50 text-blue-900 border border-blue-200 shadow-sm"
+          : "text-slate-600 hover:text-slate-900 hover:bg-amber-50 border border-transparent"
       }`}
     >
       <div className="flex items-center gap-3">
         <Icon
           className={`w-5 h-5 transition-colors ${
             isActive
-              ? "text-blue-400"
-              : "text-blue-400/60 group-hover:text-blue-300"
+              ? "text-blue-700"
+              : "text-blue-700/60 group-hover:text-blue-700"
           }`}
         />
         <span>{label}</span>
       </div>
       {isActive && (
-        <ChevronRight className="w-4 h-4 text-blue-400/50 shrink-0" />
+        <ChevronRight className="w-4 h-4 text-blue-700/50 shrink-0" />
       )}
     </Link>
   );

@@ -241,7 +241,7 @@ export function HomeView() {
   };
 
   return (
-    <div className="w-full relative overflow-hidden min-h-screen pb-28 font-prompt text-white">
+    <div className="w-full relative overflow-hidden min-h-screen pb-28 font-prompt text-[#1E293B]">
       
       {/* ── 1. Hero moved to BrandHomeIntro (Brand Bible V2.0) ── */}
       <div className="h-10" />
@@ -257,17 +257,17 @@ export function HomeView() {
         {/* ── 3. INTERACTIVE ROLE NAVIGATOR (ค้นหาตามโจทย์ของคุณ) ─── */}
         <section id="everything-i-can-do" className="scroll-mt-28">
           <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">
-              <Layers className="w-4 h-4 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-teal-700 text-xs font-semibold">
+              <Layers className="w-4 h-4 text-teal-700" />
               <span>THE ALL-IN-ONE SOLUTION MATRIX — ทุกความเชี่ยวชาญของครูอ้น</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1E293B]">
               คุณต้องการโซลูชันด้านไหน?{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-purple-400 to-pink-400">
                 เรามีคำตอบพร้อมใช้ทันที
               </span>
             </h2>
-            <p className="text-sm sm:text-base text-white/60">
+            <p className="text-sm sm:text-base text-slate-600">
               คลิกเลือกบทบาทของคุณ เพื่อเจาะลึกระบบ นวัตกรรม E-Book เพลง หรือบริการที่ออกแบบมาเพื่อคุณโดยเฉพาะ
             </p>
           </div>
@@ -275,13 +275,13 @@ export function HomeView() {
           {/* Filter Pills */}
           <div className="flex flex-wrap items-center justify-center gap-2 max-w-5xl mx-auto mb-10">
             {[
-              { id: "ALL", label: "🌟 ทั้งหมด (All Portals)", color: "border-white/20 hover:border-white/40" },
-              { id: "TEACHER", label: "👨‍🏫 ครู & โรงเรียน (GAS + E-Books)", color: "border-blue-500/40 text-blue-300" },
-              { id: "BUSINESS", label: "🤖 ร้านค้า & SME (AI Caretaker 24 ชม.)", color: "border-emerald-500/40 text-emerald-300" },
-              { id: "EXAM_PREP", label: "🎓 ติวสอบครูผู้ช่วย (Telegram + เพลงจำ)", color: "border-cyan-500/40 text-cyan-300" },
-              { id: "MUSIC", label: "🎵 ดนตรี & BGM ว.PA 60 นาที", color: "border-pink-500/40 text-pink-300" },
-              { id: "STUDENT", label: "🎒 นักเรียน ม.ปลาย (พอร์ต TCAS 3D)", color: "border-purple-500/40 text-purple-300" },
-              { id: "CUSTOM", label: "🛠️ สั่งทำระบบ & วิทยากรบรรยาย", color: "border-amber-500/40 text-amber-300" },
+              { id: "ALL", label: "🌟 ทั้งหมด (All Portals)", color: "border-amber-200/70 hover:border-amber-300" },
+              { id: "TEACHER", label: "👨‍🏫 ครู & โรงเรียน (GAS + E-Books)", color: "border-blue-500/40 text-blue-700" },
+              { id: "BUSINESS", label: "🤖 ร้านค้า & SME (AI Caretaker 24 ชม.)", color: "border-emerald-500/40 text-emerald-700" },
+              { id: "EXAM_PREP", label: "🎓 ติวสอบครูผู้ช่วย (Telegram + เพลงจำ)", color: "border-cyan-500/40 text-teal-700" },
+              { id: "MUSIC", label: "🎵 ดนตรี & BGM ว.PA 60 นาที", color: "border-pink-500/40 text-pink-700" },
+              { id: "STUDENT", label: "🎒 นักเรียน ม.ปลาย (พอร์ต TCAS 3D)", color: "border-purple-500/40 text-purple-700" },
+              { id: "CUSTOM", label: "🛠️ สั่งทำระบบ & วิทยากรบรรยาย", color: "border-amber-500/40 text-amber-700" },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -289,7 +289,7 @@ export function HomeView() {
                 className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition-all cursor-pointer border ${
                   activeFilter === tab.id
                     ? "bg-linear-to-r from-cyan-500 to-blue-600 text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] border-cyan-400 scale-105"
-                    : "bg-white/5 hover:bg-white/10 text-white/70"
+                    : "bg-white hover:bg-amber-50 text-slate-600"
                 }`}
               >
                 {tab.label}
@@ -302,54 +302,54 @@ export function HomeView() {
 
             {/* BENTO 1: Google Apps Script 20+ Systems (Flagship) */}
             {(activeFilter === "ALL" || activeFilter === "TEACHER") && (
-              <div id="bento-gas" className="lg:col-span-2 rounded-3xl p-7 sm:p-8 bg-linear-to-br from-blue-950/40 via-slate-900/90 to-slate-900 border border-blue-500/40 hover:border-blue-400 hover:shadow-[0_0_45px_rgba(59,130,246,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-gas" className="lg:col-span-2 rounded-3xl p-7 sm:p-8 bg-linear-to-br from-blue-950/40 via-white to-[#FFF5F5] border border-blue-500/40 hover:border-blue-400 hover:shadow-[0_0_45px_rgba(59,130,246,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-72 h-72 bg-blue-500/10 blur-[100px] pointer-events-none" />
                 
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center gap-1.5">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-blue-500/20 text-blue-700 border border-blue-500/30 flex items-center gap-1.5">
                       <Package className="w-3.5 h-3.5" />
                       <span>👑 เรือธงยอดนิยม • สำหรับครู &amp; โรงเรียน</span>
                     </span>
-                    <span className="text-xs font-bold text-amber-300 bg-amber-500/15 border border-amber-500/30 px-2.5 py-0.5 rounded-full">
+                    <span className="text-xs font-bold text-amber-700 bg-amber-500/15 border border-amber-500/30 px-2.5 py-0.5 rounded-full">
                       ลดสูงสุด 51%
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B] mb-3">
                     คลัง 20+ ระบบอัตโนมัติ Google Apps Script &amp; Sheets
                   </h3>
-                  <p className="text-xs sm:text-sm text-white/70 leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
                     เปลี่ยนงานเอกสารซ้ำซากให้กลายเป็นระบบออโตเมชันบน Google Workspace ของโรงเรียนคุณเอง <strong>ปลอดภัย 100% ไม่มีค่าบริการรายเดือน</strong> ข้อมูลทั้งหมดถูกจัดเก็บบน Google Drive ส่วนตัวของคุณ
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                    <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 flex items-start gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                    <div className="p-3.5 rounded-2xl bg-white border border-amber-200/70 flex items-start gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-teal-700 shrink-0 mt-0.5" />
                       <div>
-                        <h4 className="text-xs font-bold text-white">ระบบเช็คชื่อ LINE V2</h4>
-                        <p className="text-[11px] text-white/50">สแกนบาร์โค้ด แจ้งเตือนผู้ปกครองอัตโนมัติ</p>
+                        <h4 className="text-xs font-bold text-[#1E293B]">ระบบเช็คชื่อ LINE V2</h4>
+                        <p className="text-[11px] text-slate-500">สแกนบาร์โค้ด แจ้งเตือนผู้ปกครองอัตโนมัติ</p>
                       </div>
                     </div>
-                    <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 flex items-start gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                    <div className="p-3.5 rounded-2xl bg-white border border-amber-200/70 flex items-start gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-teal-700 shrink-0 mt-0.5" />
                       <div>
-                        <h4 className="text-xs font-bold text-white">Smart Vehicle ยานพาหนะ</h4>
-                        <p className="text-[11px] text-white/50">จองรถ ขอใช้รถ บันทึกน้ำมันผ่านเว็บแอป</p>
+                        <h4 className="text-xs font-bold text-[#1E293B]">Smart Vehicle ยานพาหนะ</h4>
+                        <p className="text-[11px] text-slate-500">จองรถ ขอใช้รถ บันทึกน้ำมันผ่านเว็บแอป</p>
                       </div>
                     </div>
-                    <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 flex items-start gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                    <div className="p-3.5 rounded-2xl bg-white border border-amber-200/70 flex items-start gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-teal-700 shrink-0 mt-0.5" />
                       <div>
-                        <h4 className="text-xs font-bold text-white">ระบบเกียรติบัตร QR Verify</h4>
-                        <p className="text-[11px] text-white/50">ออกเกียรติบัตร PDF ส่งเมล + ตรวจสอบ QR ได้จริง</p>
+                        <h4 className="text-xs font-bold text-[#1E293B]">ระบบเกียรติบัตร QR Verify</h4>
+                        <p className="text-[11px] text-slate-500">ออกเกียรติบัตร PDF ส่งเมล + ตรวจสอบ QR ได้จริง</p>
                       </div>
                     </div>
-                    <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 flex items-start gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                    <div className="p-3.5 rounded-2xl bg-white border border-amber-200/70 flex items-start gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-teal-700 shrink-0 mt-0.5" />
                       <div>
-                        <h4 className="text-xs font-bold text-white">ระบบตรวจชุด &amp; เบิกพัสดุ</h4>
-                        <p className="text-[11px] text-white/50">บันทึกพฤติกรรม และระบบเบิกพัสดุโรงเรียน</p>
+                        <h4 className="text-xs font-bold text-[#1E293B]">ระบบตรวจชุด &amp; เบิกพัสดุ</h4>
+                        <p className="text-[11px] text-slate-500">บันทึกพฤติกรรม และระบบเบิกพัสดุโรงเรียน</p>
                       </div>
                     </div>
                   </div>
@@ -365,7 +365,7 @@ export function HomeView() {
                   </Link>
                   <Link
                     href="/bundles"
-                    className="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all"
+                    className="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all"
                   >
                     <span>ดูแพ็กเหมา 20 ระบบตลอดชีพ (4,990 ฿)</span>
                     <ArrowRight className="w-4 h-4" />
@@ -376,38 +376,38 @@ export function HomeView() {
 
             {/* BENTO 2: AI Caretaker & 24/7 Watchdog (Business & SME) */}
             {(activeFilter === "ALL" || activeFilter === "BUSINESS") && (
-              <div id="bento-caretaker" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-emerald-950/40 via-slate-900/90 to-teal-950/40 border border-emerald-500/40 hover:border-emerald-400 hover:shadow-[0_0_45px_rgba(16,185,129,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-caretaker" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-emerald-950/40 via-white to-teal-950/40 border border-emerald-500/40 hover:border-emerald-400 hover:shadow-[0_0_45px_rgba(16,185,129,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-emerald-500/10 blur-[90px] pointer-events-none" />
 
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-700 border border-emerald-500/30 flex items-center gap-1.5">
                       <Bot className="w-3.5 h-3.5" />
                       <span>🤖 AI ออโตเมชัน • สำหรับร้านค้า &amp; SME</span>
                     </span>
-                    <span className="text-[11px] font-mono bg-emerald-500/30 text-emerald-200 px-2 py-0.5 rounded border border-emerald-500/40">
+                    <span className="text-[11px] font-mono bg-emerald-500/30 text-emerald-800 px-2 py-0.5 rounded border border-emerald-500/40">
                       24/7 WATCHDOG
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-extrabold text-white mb-2">
+                  <h3 className="text-2xl font-extrabold text-[#1E293B] mb-2">
                     AI Caretaker &amp; ยามเฝ้าระบบ 24 ชม.
                   </h3>
-                  <p className="text-xs text-white/70 leading-relaxed mb-5">
+                  <p className="text-xs text-slate-600 leading-relaxed mb-5">
                     เปลี่ยนร้านค้าให้เป็น <strong>&ldquo;บ้านหลังเล็ก&rdquo;</strong> ด้วย AI อัจฉริยะ ตอบแชท LINE OA + ตรวจสลิปโอนเงินปลอม 100% ใน 2 วินาที พร้อมระบบ Self-Healing ซ่อมแซมตัวเองเมื่อแผ่นงานพัง
                   </p>
 
-                  <ul className="space-y-2 mb-6 text-xs text-white/80">
+                  <ul className="space-y-2 mb-6 text-xs text-slate-800">
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
                       <span>Gemini 2.5 Flash ตรวจสลิปแม่นยำ ไม่ผ่านยอดผิด</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
                       <span>ดึงราคาสินค้าจาก Google Sheets ตอบลูกค้า 24 ชม.</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
                       <span>รายงานยอดและสถิติเข้า LINE เจ้าของร้านทุกสัปดาห์</span>
                     </li>
                   </ul>
@@ -415,8 +415,8 @@ export function HomeView() {
 
                 <div className="space-y-2 pt-2">
                   <div className="flex items-baseline justify-between text-xs px-1">
-                    <span className="text-white/50">ค่าดูแลระบบรายเดือน:</span>
-                    <span className="text-emerald-300 font-bold text-sm">990 ฿/ด. (วันละ 33 บาท)</span>
+                    <span className="text-slate-500">ค่าดูแลระบบรายเดือน:</span>
+                    <span className="text-emerald-700 font-bold text-sm">990 ฿/ด. (วันละ 33 บาท)</span>
                   </div>
                   <Link
                     href="/ai-caretaker"
@@ -431,47 +431,47 @@ export function HomeView() {
 
             {/* BENTO 3: 30 Teacher E-Books 3D Hardcovers */}
             {(activeFilter === "ALL" || activeFilter === "TEACHER") && (
-              <div id="bento-ebooks" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-purple-950/40 via-slate-900/90 to-indigo-950/40 border border-purple-500/40 hover:border-purple-400 hover:shadow-[0_0_45px_rgba(168,85,247,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-ebooks" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-purple-950/40 via-white to-indigo-950/40 border border-purple-500/40 hover:border-purple-400 hover:shadow-[0_0_45px_rgba(168,85,247,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-purple-500/10 blur-[90px] pointer-events-none" />
 
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1.5">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-purple-500/20 text-purple-700 border border-purple-500/30 flex items-center gap-1.5">
                       <BookOpen className="w-3.5 h-3.5" />
                       <span>📚 คลังความรู้ • 30 เล่มฉบับสมบูรณ์</span>
                     </span>
-                    <span className="text-[11px] font-bold text-purple-200 bg-purple-500/20 px-2 py-0.5 rounded border border-purple-500/30">
+                    <span className="text-[11px] font-bold text-purple-800 bg-purple-500/20 px-2 py-0.5 rounded border border-purple-500/30">
                       3D COVERS
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-extrabold text-white mb-2">
+                  <h3 className="text-2xl font-extrabold text-[#1E293B] mb-2">
                     คลัง 30 E-Book นวัตกรรม &amp; คู่มือครูไทย
                   </h3>
-                  <p className="text-xs text-white/70 leading-relaxed mb-5">
+                  <p className="text-xs text-slate-600 leading-relaxed mb-5">
                     คลังอีบุ๊ก 3 มิติล้ำยุค รวมสุดยอดคัมภีร์ ว.PA 15 ตัวชี้วัด, 100 คำสั่ง AI ลับเสกงานครู, สูตรลับวิจัยในชั้นเรียน CAR 5 บท, เทคนิค Google Sheets และ Active Learning
                   </p>
 
                   <div className="space-y-2 mb-6">
-                    <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-xs">
-                      <span className="font-semibold text-white/90">คัมภีร์ ว.PA ผ่านฉลุย 100%</span>
-                      <span className="text-purple-300 font-bold">390 ฿</span>
+                    <div className="p-2.5 rounded-xl bg-white border border-amber-200/70 flex items-center justify-between text-xs">
+                      <span className="font-semibold text-slate-800">คัมภีร์ ว.PA ผ่านฉลุย 100%</span>
+                      <span className="text-purple-700 font-bold">390 ฿</span>
                     </div>
-                    <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-xs">
-                      <span className="font-semibold text-white/90">100 คำสั่ง AI ลับ เสกงานครู</span>
-                      <span className="text-cyan-300 font-bold">290 ฿</span>
+                    <div className="p-2.5 rounded-xl bg-white border border-amber-200/70 flex items-center justify-between text-xs">
+                      <span className="font-semibold text-slate-800">100 คำสั่ง AI ลับ เสกงานครู</span>
+                      <span className="text-teal-700 font-bold">290 ฿</span>
                     </div>
-                    <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-xs">
-                      <span className="font-semibold text-white/90">วิจัยชั้นเรียน CAR 5 บท</span>
-                      <span className="text-emerald-300 font-bold">350 ฿</span>
+                    <div className="p-2.5 rounded-xl bg-white border border-amber-200/70 flex items-center justify-between text-xs">
+                      <span className="font-semibold text-slate-800">วิจัยชั้นเรียน CAR 5 บท</span>
+                      <span className="text-emerald-700 font-bold">350 ฿</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="space-y-2 pt-2">
                   <div className="flex items-baseline justify-between text-xs px-1">
-                    <span className="text-white/50">แพ็กเกจเหมา 30 เล่มจบ:</span>
-                    <span className="text-amber-300 font-bold text-sm">2,990 ฿ (เฉลี่ย 99 ฿/เล่ม)</span>
+                    <span className="text-slate-500">แพ็กเกจเหมา 30 เล่มจบ:</span>
+                    <span className="text-amber-700 font-bold text-sm">2,990 ฿ (เฉลี่ย 99 ฿/เล่ม)</span>
                   </div>
                   <Link
                     href="/ebooks"
@@ -486,38 +486,38 @@ export function HomeView() {
 
             {/* BENTO 4: AiAon Prep — Teacher Exam Prep & 100 Questions */}
             {(activeFilter === "ALL" || activeFilter === "EXAM_PREP" || activeFilter === "TEACHER") && (
-              <div id="bento-prep" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-cyan-950/40 via-slate-900/90 to-blue-950/40 border border-cyan-500/40 hover:border-cyan-400 hover:shadow-[0_0_45px_rgba(6,182,212,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-prep" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-cyan-950/40 via-white to-blue-950/40 border border-cyan-500/40 hover:border-cyan-400 hover:shadow-[0_0_45px_rgba(6,182,212,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-cyan-500/10 blur-[90px] pointer-events-none" />
 
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1.5">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-cyan-500/20 text-teal-700 border border-cyan-500/30 flex items-center gap-1.5">
                       <GraduationCap className="w-3.5 h-3.5" />
                       <span>🎓 สอบบรรจุครูผู้ช่วย • กลุ่ม Telegram ฟรี</span>
                     </span>
-                    <span className="text-[11px] font-bold text-cyan-200 bg-cyan-500/20 px-2 py-0.5 rounded border border-cyan-500/30">
+                    <span className="text-[11px] font-bold text-cyan-800 bg-cyan-500/20 px-2 py-0.5 rounded border border-cyan-500/30">
                       100 ข้อสอบ AI
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-extrabold text-white mb-2">
+                  <h3 className="text-2xl font-extrabold text-[#1E293B] mb-2">
                     AiAon Prep ติวสอบครูผู้ช่วย &amp; เพลงช่วยจำ
                   </h3>
-                  <p className="text-xs text-white/70 leading-relaxed mb-5">
+                  <p className="text-xs text-slate-600 leading-relaxed mb-5">
                     บอทติวข้อสอบผ่าน Telegram Native Poll ยิงตรง 3 เวลาชีวิต (07:30 / 12:15 / 20:00 น.) พร้อมบทวิเคราะห์เฉลยสไตล์ AI และ <strong>ท่อนฮุกเพลงช่วยจำ</strong> คล้องจองติดหู จำแม่นโดยไม่ต้องท่องเครียด
                   </p>
 
-                  <ul className="space-y-2 mb-6 text-xs text-white/80">
+                  <ul className="space-y-2 mb-6 text-xs text-slate-800">
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-teal-700 shrink-0" />
                       <span>คลังข้อสอบ 100 ข้อ ครบ 5 หมวดหลักภาค ข</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-teal-700 shrink-0" />
                       <span>ทำโพลผ่านมือถือได้ทันที ไม่ต้องโหลดแอปเพิ่ม</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-teal-700 shrink-0" />
                       <span>จำลองระบบสอบเสมือนจริงบนหน้าเว็บ</span>
                     </li>
                   </ul>
@@ -537,39 +537,39 @@ export function HomeView() {
 
             {/* BENTO 5: iAon Music Store & Audio Production */}
             {(activeFilter === "ALL" || activeFilter === "MUSIC" || activeFilter === "TEACHER") && (
-              <div id="bento-music" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-pink-950/40 via-slate-900/90 to-purple-950/40 border border-pink-500/40 hover:border-pink-400 hover:shadow-[0_0_45px_rgba(236,72,153,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-music" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-pink-950/40 via-white to-purple-950/40 border border-pink-500/40 hover:border-pink-400 hover:shadow-[0_0_45px_rgba(236,72,153,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-pink-500/10 blur-[90px] pointer-events-none" />
 
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30 flex items-center gap-1.5">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-pink-500/20 text-pink-700 border border-pink-500/30 flex items-center gap-1.5">
                       <Music className="w-3.5 h-3.5" />
                       <span>🎵 เพลงเพื่อการศึกษา &amp; ลิขสิทธิ์ 100%</span>
                     </span>
-                    <span className="text-[11px] font-bold text-pink-200 bg-pink-500/20 px-2 py-0.5 rounded border border-pink-500/30">
+                    <span className="text-[11px] font-bold text-pink-800 bg-pink-500/20 px-2 py-0.5 rounded border border-pink-500/30">
                       AUDIO VAULT
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-extrabold text-white mb-2">
+                  <h3 className="text-2xl font-extrabold text-[#1E293B] mb-2">
                     iAon Music Store &amp; Audio Production
                   </h3>
-                  <p className="text-xs text-white/70 leading-relaxed mb-5">
+                  <p className="text-xs text-slate-600 leading-relaxed mb-5">
                     สตูดิโอดนตรีสร้างสรรค์โดยครูอ้น: เพลงช่วยจำสอบครูผู้ช่วย, ดนตรี BGM ปลอดลิขสิทธิ์สำหรับคลิปสอน 60 นาที ส่งประเมิน ว.PA (หมดปัญหาคลิปโดนแบนเสียง), Backing Track วงดุริยางค์ และรับแต่งเพลงโรงเรียน
                   </p>
 
                   <div className="space-y-2 mb-6 text-xs">
-                    <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between">
-                      <span className="font-semibold text-white/90">เพลงช่วยจำกฎหมายครู (10 เพลงเต็ม)</span>
-                      <span className="text-amber-300 font-bold">199 ฿</span>
+                    <div className="p-2.5 rounded-xl bg-white border border-amber-200/70 flex items-center justify-between">
+                      <span className="font-semibold text-slate-800">เพลงช่วยจำกฎหมายครู (10 เพลงเต็ม)</span>
+                      <span className="text-amber-700 font-bold">199 ฿</span>
                     </div>
-                    <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between">
-                      <span className="font-semibold text-white/90">BGM คลื่นสมอง คลิปสอน 60 นาที ว.PA</span>
-                      <span className="text-pink-300 font-bold">290 ฿</span>
+                    <div className="p-2.5 rounded-xl bg-white border border-amber-200/70 flex items-center justify-between">
+                      <span className="font-semibold text-slate-800">BGM คลื่นสมอง คลิปสอน 60 นาที ว.PA</span>
+                      <span className="text-pink-700 font-bold">290 ฿</span>
                     </div>
-                    <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between">
-                      <span className="font-semibold text-white/90">รับแต่งเพลงประจำโรงเรียน/องค์กร</span>
-                      <span className="text-cyan-300 font-bold">เริ่มต้น 1,900 ฿</span>
+                    <div className="p-2.5 rounded-xl bg-white border border-amber-200/70 flex items-center justify-between">
+                      <span className="font-semibold text-slate-800">รับแต่งเพลงประจำโรงเรียน/องค์กร</span>
+                      <span className="text-teal-700 font-bold">เริ่มต้น 1,900 ฿</span>
                     </div>
                   </div>
                 </div>
@@ -588,38 +588,38 @@ export function HomeView() {
 
             {/* BENTO 6: Custom Web App & AI Speaker */}
             {(activeFilter === "ALL" || activeFilter === "CUSTOM") && (
-              <div id="bento-custom" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-amber-950/40 via-slate-900/90 to-yellow-950/40 border border-amber-500/40 hover:border-amber-400 hover:shadow-[0_0_45px_rgba(245,158,11,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-custom" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-amber-950/40 via-white to-yellow-950/40 border border-amber-500/40 hover:border-amber-400 hover:shadow-[0_0_45px_rgba(245,158,11,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-60 h-60 bg-amber-500/10 blur-[90px] pointer-events-none" />
 
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1.5">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-700 border border-amber-500/30 flex items-center gap-1.5">
                       <Code2 className="w-3.5 h-3.5" />
                       <span>🛠️ สั่งทำระบบ &amp; วิทยากรบรรยาย</span>
                     </span>
-                    <span className="text-[11px] font-bold text-amber-200 bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30">
+                    <span className="text-[11px] font-bold text-amber-800 bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30">
                       BESPOKE DEV
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-extrabold text-white mb-2">
+                  <h3 className="text-2xl font-extrabold text-[#1E293B] mb-2">
                     รับเขียนระบบตามสั่ง &amp; อบรม AI เชิงปฏิบัติการ
                   </h3>
-                  <p className="text-xs text-white/70 leading-relaxed mb-5">
+                  <p className="text-xs text-slate-600 leading-relaxed mb-5">
                     สตูดิโอรับออกแบบและพัฒนาระบบตามแบบฟอร์มเฉพาะของโรงเรียนและองค์กรคุณ (Next.js, Supabase, GAS) พร้อมบริการวิทยากรบรรยายและจัด Workshop AI นวัตกรรมครูไทย
                   </p>
 
-                  <ul className="space-y-2 mb-6 text-xs text-white/80">
+                  <ul className="space-y-2 mb-6 text-xs text-slate-800">
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
                       <span>Custom Full-stack Web App + LINE OA</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
                       <span>เครื่องคำนวณราคาประเมินสดก่อนตัดสินใจ</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
                       <span>วิทยากรบรรยาย ถ่ายทอดเข้าใจง่าย ได้งานจริงทันที</span>
                     </li>
                   </ul>
@@ -639,34 +639,34 @@ export function HomeView() {
 
             {/* BENTO 7: Student Vault & TCAS 3D */}
             {(activeFilter === "ALL" || activeFilter === "STUDENT") && (
-              <div id="bento-student" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-pink-950/30 via-slate-900/90 to-purple-950/30 border border-pink-500/40 hover:border-pink-400 hover:shadow-[0_0_45px_rgba(236,72,153,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
+              <div id="bento-student" className="rounded-3xl p-7 sm:p-8 bg-linear-to-b from-pink-950/30 via-white to-purple-950/30 border border-pink-500/40 hover:border-pink-400 hover:shadow-[0_0_45px_rgba(236,72,153,0.25)] transition-all flex flex-col justify-between group relative overflow-hidden">
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30 flex items-center gap-1.5">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-pink-500/20 text-pink-700 border border-pink-500/30 flex items-center gap-1.5">
                       <GraduationCap className="w-3.5 h-3.5" />
                       <span>🎒 ไอเทม ม.ปลาย • นักเรียน Gen Z</span>
                     </span>
-                    <span className="text-xs font-bold text-pink-300">เริ่มต้น 69 ฿</span>
+                    <span className="text-xs font-bold text-pink-700">เริ่มต้น 69 ฿</span>
                   </div>
 
-                  <h3 className="text-2xl font-extrabold text-white mb-2">
+                  <h3 className="text-2xl font-extrabold text-[#1E293B] mb-2">
                     คลังไอเทมช่วยเรียน &amp; TCAS 3D
                   </h3>
-                  <p className="text-xs text-white/70 leading-relaxed mb-5">
+                  <p className="text-xs text-slate-600 leading-relaxed mb-5">
                     เว็บ Portfolio TCAS 3D แปะ QR Code หน้าปกพอร์ต กรรมการสแกนแล้วเปิดดูผลงานบนเว็บได้ทันที, ระบบเช็คการบ้านประจำห้อง และคัมภีร์ AI Prompts ทำรายงานใน 3 นาที
                   </p>
 
-                  <ul className="space-y-2 mb-6 text-xs text-white/80">
+                  <ul className="space-y-2 mb-6 text-xs text-slate-800">
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-pink-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-pink-700 shrink-0" />
                       <span>เว็บ Portfolio TCAS 3D (129 ฿)</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-pink-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-pink-700 shrink-0" />
                       <span>ระบบเช็คการบ้านประจำห้อง (290 ฿/ห้อง)</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-pink-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-pink-700 shrink-0" />
                       <span>Student AI Prompts Kit (69 ฿)</span>
                     </li>
                   </ul>
@@ -690,22 +690,22 @@ export function HomeView() {
         {/* ── 4. DUAL INTERACTIVE LIVE PLAYGROUND (พิสูจน์ความเจ๋งจริง) ── */}
         <section className="relative">
           <div className="text-center max-w-2xl mx-auto mb-8 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">
-              <Zap className="w-4 h-4 text-cyan-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-teal-700 text-xs font-semibold">
+              <Zap className="w-4 h-4 text-teal-700 animate-pulse" />
               <span>INTERACTIVE PLAYGROUND — ทดลองระบบจริงก่อนตัดสินใจ</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1E293B]">
               เห็นการทำงานจริง{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-teal-300 to-emerald-400">
                 สัมผัสความง่ายด้วยตัวคุณเอง
               </span>
             </h2>
-            <p className="text-xs sm:text-sm text-white/60">
+            <p className="text-xs sm:text-sm text-slate-600">
               ทดสอบ 3 เอนจินยอดนิยม: ระบบเช็คชื่อส่ง LINE อัตโนมัติ, AI ตรวจสลิปโอนเงิน หรือแผ่นเสียง 3D ฟังเพลงช่วยจำสดๆ
             </p>
 
             {/* Switch Tabs */}
-            <div className="inline-flex p-1 rounded-2xl bg-slate-900 border border-white/10 mt-3 flex-wrap justify-center gap-1">
+            <div className="inline-flex p-1 rounded-2xl bg-white border border-amber-200/70 mt-3 flex-wrap justify-center gap-1">
               <button
                 type="button"
                 onClick={() => {
@@ -715,7 +715,7 @@ export function HomeView() {
                 className={`px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                   playgroundTab === "attendance"
                     ? "bg-cyan-500 text-slate-950 font-bold shadow-md"
-                    : "text-white/60 hover:text-white"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 🕹️ จำลองระบบเช็คชื่อ (AONE01)
@@ -729,7 +729,7 @@ export function HomeView() {
                 className={`px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                   playgroundTab === "slip"
                     ? "bg-emerald-500 text-slate-950 font-bold shadow-md"
-                    : "text-white/60 hover:text-white"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 🤖 จำลอง AI ตรวจสลิป (Gemini)
@@ -740,7 +740,7 @@ export function HomeView() {
                 className={`px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                   playgroundTab === "vinyl"
                     ? "bg-amber-500 text-slate-950 font-bold shadow-md"
-                    : "text-white/60 hover:text-white"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 🎵 หมุนแผ่นเสียง 3D (ฟังเพลงสด)
@@ -749,49 +749,49 @@ export function HomeView() {
           </div>
 
           {/* Playground Box */}
-          <div className="max-w-4xl mx-auto rounded-3xl border border-cyan-500/30 bg-slate-900/80 p-6 sm:p-8 shadow-[0_0_50px_rgba(6,182,212,0.15)] relative overflow-hidden">
+          <div className="max-w-4xl mx-auto rounded-3xl border border-cyan-500/30 bg-white p-6 sm:p-8 shadow-[0_0_50px_rgba(6,182,212,0.15)] relative overflow-hidden">
             
             {/* MODE 1: ATTENDANCE CHECK-IN */}
             {playgroundTab === "attendance" ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 {/* Left Controller */}
                 <div className="space-y-5">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                    <span className="text-sm font-bold text-cyan-300 flex items-center gap-2">
+                  <div className="flex items-center justify-between border-b border-amber-200/70 pb-3">
+                    <span className="text-sm font-bold text-teal-700 flex items-center gap-2">
                       <Cpu className="w-4 h-4" /> แผงควบคุมเช็คชื่อจำลอง
                     </span>
-                    <span className="text-[11px] font-mono bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/30">
+                    <span className="text-[11px] font-mono bg-cyan-500/20 text-teal-700 px-2 py-0.5 rounded border border-cyan-500/30">
                       AONE01 ENGINE
                     </span>
                   </div>
 
                   <div>
-                    <label className="block text-xs text-white/60 mb-1.5">เลือกนักเรียน:</label>
+                    <label className="block text-xs text-slate-600 mb-1.5">เลือกนักเรียน:</label>
                     <select
                       value={simStudent}
                       onChange={(e) => setSimStudent(e.target.value)}
-                      className="w-full bg-black/40 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-cyan-400 outline-none"
+                      className="w-full bg-[#FEF9EF] border border-amber-200/70 rounded-xl px-3.5 py-2.5 text-xs text-[#1E293B] focus:border-cyan-400 outline-none"
                     >
-                      <option value="ด.ช. สมศักดิ์ ใจดี (ม.3/1 เลขที่ 1)" className="bg-slate-900">ด.ช. สมศักดิ์ ใจดี (ม.3/1 เลขที่ 1)</option>
-                      <option value="ด.ญ. พิมพ์ใจ รักเรียน (ม.3/1 เลขที่ 2)" className="bg-slate-900">ด.ญ. พิมพ์ใจ รักเรียน (ม.3/1 เลขที่ 2)</option>
-                      <option value="นายกิตติคุณ นวัตกรรม (ม.3/1 เลขที่ 3)" className="bg-slate-900">นายกิตติคุณ นวัตกรรม (ม.3/1 เลขที่ 3)</option>
+                      <option value="ด.ช. สมศักดิ์ ใจดี (ม.3/1 เลขที่ 1)" className="bg-white">ด.ช. สมศักดิ์ ใจดี (ม.3/1 เลขที่ 1)</option>
+                      <option value="ด.ญ. พิมพ์ใจ รักเรียน (ม.3/1 เลขที่ 2)" className="bg-white">ด.ญ. พิมพ์ใจ รักเรียน (ม.3/1 เลขที่ 2)</option>
+                      <option value="นายกิตติคุณ นวัตกรรม (ม.3/1 เลขที่ 3)" className="bg-white">นายกิตติคุณ นวัตกรรม (ม.3/1 เลขที่ 3)</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-xs text-white/60 mb-1.5">สถานะการมาเรียน:</label>
+                    <label className="block text-xs text-slate-600 mb-1.5">สถานะการมาเรียน:</label>
                     <div className="grid grid-cols-3 gap-2 text-xs font-medium">
                       {[
-                        { id: "present", label: "✓ ตรงเวลา", color: "bg-emerald-500/20 border-emerald-500/40 text-emerald-300" },
-                        { id: "late", label: "⏳ สาย", color: "bg-amber-500/20 border-amber-500/40 text-amber-300" },
-                        { id: "leave", label: "🏥 ลา", color: "bg-blue-500/20 border-blue-500/40 text-blue-300" },
+                        { id: "present", label: "✓ ตรงเวลา", color: "bg-emerald-500/20 border-emerald-500/40 text-emerald-700" },
+                        { id: "late", label: "⏳ สาย", color: "bg-amber-500/20 border-amber-500/40 text-amber-700" },
+                        { id: "leave", label: "🏥 ลา", color: "bg-blue-500/20 border-blue-500/40 text-blue-700" },
                       ].map((st) => (
                         <button
                           key={st.id}
                           type="button"
                           onClick={() => setSimStatus(st.id as "present" | "late" | "leave")}
                           className={`py-2 px-3 rounded-xl border text-center transition-all cursor-pointer ${
-                            simStatus === st.id ? `${st.color} ring-1` : "bg-white/5 border-white/10 text-white/50 hover:text-white"
+                            simStatus === st.id ? `${st.color} ring-1` : "bg-white border-amber-200/70 text-slate-500 hover:text-slate-900"
                           }`}
                         >
                           {st.label}
@@ -813,13 +813,13 @@ export function HomeView() {
                 </div>
 
                 {/* Right Feed */}
-                <div className="rounded-2xl bg-black/50 border border-white/10 p-4 space-y-3">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-                    <div className="flex items-center gap-2 text-xs font-bold text-emerald-400">
+                <div className="rounded-2xl bg-[#FEF9EF] border border-amber-200/70 p-4 space-y-3">
+                  <div className="flex items-center justify-between border-b border-amber-200/70 pb-2.5">
+                    <div className="flex items-center gap-2 text-xs font-bold text-emerald-700">
                       <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                       <span>LINE Notify Real-time Feed</span>
                     </div>
-                    <span className="text-[11px] text-white/40">เชื่อมต่อแล้ว</span>
+                    <span className="text-[11px] text-slate-500">เชื่อมต่อแล้ว</span>
                   </div>
 
                   <div className="space-y-2 min-h-[160px]">
@@ -830,16 +830,16 @@ export function HomeView() {
                           initial={{ opacity: 0, x: 20 }}
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0 }}
-                          className="p-3 rounded-xl bg-white/5 border border-white/5 text-xs text-white/80 leading-relaxed"
+                          className="p-3 rounded-xl bg-white border border-amber-200/70 text-xs text-slate-800 leading-relaxed"
                         >
-                          <span className="text-emerald-400 font-mono font-bold mr-1.5">[{log.time}]</span>
+                          <span className="text-emerald-700 font-mono font-bold mr-1.5">[{log.time}]</span>
                           {log.text}
                         </motion.div>
                       ))}
                     </AnimatePresence>
                   </div>
 
-                  <p className="text-[11px] text-center text-white/40 pt-1">
+                  <p className="text-[11px] text-center text-slate-500 pt-1">
                     💡 ระบบจริงทำงานบน Google Apps Script รันบน Google Sheets ตัวเอง 100%
                   </p>
                 </div>
@@ -848,29 +848,29 @@ export function HomeView() {
               /* MODE 2: AI SLIP VERIFICATION */
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="space-y-5">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                    <span className="text-sm font-bold text-emerald-300 flex items-center gap-2">
+                  <div className="flex items-center justify-between border-b border-amber-200/70 pb-3">
+                    <span className="text-sm font-bold text-emerald-700 flex items-center gap-2">
                       <Bot className="w-4 h-4" /> AI Slip Verifier จำลอง
                     </span>
-                    <span className="text-[11px] font-mono bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30">
+                    <span className="text-[11px] font-mono bg-emerald-500/20 text-emerald-700 px-2 py-0.5 rounded border border-emerald-500/30">
                       GEMINI 2.5 FLASH
                     </span>
                   </div>
 
                   <div>
-                    <label className="block text-xs text-white/60 mb-2">เลือกเคสสลิปโอนเงินที่ต้องการทดสอบ:</label>
+                    <label className="block text-xs text-slate-600 mb-2">เลือกเคสสลิปโอนเงินที่ต้องการทดสอบ:</label>
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         type="button"
                         onClick={() => setSlipTestCase("valid")}
                         className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                           slipTestCase === "valid"
-                            ? "bg-emerald-500/20 border-emerald-400 text-emerald-200 ring-1"
-                            : "bg-white/5 border-white/10 text-white/60"
+                            ? "bg-emerald-500/20 border-emerald-400 text-emerald-800 ring-1"
+                            : "bg-white border-amber-200/70 text-slate-600"
                         }`}
                       >
                         <div className="font-bold text-xs">✅ สลิปถูกต้อง (490 ฿)</div>
-                        <div className="text-[11px] text-white/40 mt-1">ยอดตรง + Mini-QR แท้</div>
+                        <div className="text-[11px] text-slate-500 mt-1">ยอดตรง + Mini-QR แท้</div>
                       </button>
 
                       <button
@@ -878,12 +878,12 @@ export function HomeView() {
                         onClick={() => setSlipTestCase("invalid")}
                         className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                           slipTestCase === "invalid"
-                            ? "bg-rose-500/20 border-rose-400 text-rose-200 ring-1"
-                            : "bg-white/5 border-white/10 text-white/60"
+                            ? "bg-rose-500/20 border-rose-400 text-rose-800 ring-1"
+                            : "bg-white border-amber-200/70 text-slate-600"
                         }`}
                       >
                         <div className="font-bold text-xs">❌ สลิปยอดไม่ตรง (10 ฿)</div>
-                        <div className="text-[11px] text-white/40 mt-1">โอนไม่ครบบิล (ทดสอบบล็อก)</div>
+                        <div className="text-[11px] text-slate-500 mt-1">โอนไม่ครบบิล (ทดสอบบล็อก)</div>
                       </button>
                     </div>
                   </div>
@@ -900,35 +900,35 @@ export function HomeView() {
                 </div>
 
                 {/* Right Result Display */}
-                <div className="rounded-2xl bg-black/50 border border-white/10 p-5 space-y-3 min-h-[220px] flex flex-col justify-between">
+                <div className="rounded-2xl bg-[#FEF9EF] border border-amber-200/70 p-5 space-y-3 min-h-[220px] flex flex-col justify-between">
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-                      <span className="text-xs font-bold text-white/80 flex items-center gap-1.5">
-                        <FileCheck2 className="w-4 h-4 text-emerald-400" />
+                    <div className="flex items-center justify-between border-b border-amber-200/70 pb-2.5">
+                      <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                        <FileCheck2 className="w-4 h-4 text-emerald-700" />
                         ผลการตรวจสอบโดย AI
                       </span>
-                      <span className="text-[11px] text-white/40">BOT Verification API</span>
+                      <span className="text-[11px] text-slate-500">BOT Verification API</span>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-white/5 border border-white/5 space-y-2">
+                    <div className="p-4 rounded-xl bg-white border border-amber-200/70 space-y-2">
                       <p className={`text-xs font-bold leading-relaxed ${
                         slipScanResult.status === "success"
-                          ? "text-emerald-300"
+                          ? "text-emerald-700"
                           : slipScanResult.status === "error"
-                          ? "text-rose-300"
-                          : "text-white/60"
+                          ? "text-rose-700"
+                          : "text-slate-600"
                       }`}>
                         {slipScanResult.message}
                       </p>
                       {slipScanResult.details && (
-                        <p className="text-[11px] text-white/70 leading-relaxed border-t border-white/10 pt-2">
+                        <p className="text-[11px] text-slate-600 leading-relaxed border-t border-amber-200/70 pt-2">
                           {slipScanResult.details}
                         </p>
                       )}
                     </div>
                   </div>
 
-                  <p className="text-[11px] text-center text-white/40">
+                  <p className="text-[11px] text-center text-slate-500">
                     💡 ระบบจริงเชื่อมต่อเว็บฮุก LINE OA + ส่งมอบไฟล์ .ZIP อัตโนมัติ 24 ชม.
                   </p>
                 </div>
@@ -937,10 +937,10 @@ export function HomeView() {
               /* MODE 3: 3D VINYL AUDIO PLAYER SIMULATOR */
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 {/* Left: 3D Interactive Vinyl Stage */}
-                <div className="flex flex-col items-center justify-center p-4 bg-black/40 rounded-2xl border border-amber-500/30 relative overflow-hidden group">
+                <div className="flex flex-col items-center justify-center p-4 bg-[#FEF9EF] rounded-2xl border border-amber-500/30 relative overflow-hidden group">
                   <div className="absolute top-3 left-3 flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
-                    <span className="text-[11px] font-mono font-bold text-amber-300">
+                    <span className="text-[11px] font-mono font-bold text-amber-700">
                       3D TURNTABLE STAGE
                     </span>
                   </div>
@@ -960,7 +960,7 @@ export function HomeView() {
                     />
                   </div>
 
-                  <p className="text-[11px] font-prompt text-white/50 text-center mt-2">
+                  <p className="text-[11px] font-prompt text-slate-500 text-center mt-2">
                     {isVinylPlaying
                       ? "🔊 กำลังเล่นตัวอย่างเสียงสดผ่าน Web Audio Synth... (คลิกเพื่อหยุด)"
                       : "👆 คลิกที่แผ่นเสียง หรือปุ่มด้านขวา เพื่อหมุนแผ่นและฟังเสียงดนตรีสด"}
@@ -969,18 +969,18 @@ export function HomeView() {
 
                 {/* Right: Audio Control & Track Selector */}
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                    <span className="text-sm font-bold text-amber-300 flex items-center gap-2">
-                      <Music className="w-4 h-4 text-amber-400" />
+                  <div className="flex items-center justify-between border-b border-amber-200/70 pb-3">
+                    <span className="text-sm font-bold text-amber-700 flex items-center gap-2">
+                      <Music className="w-4 h-4 text-amber-700" />
                       <span>เครื่องเล่นแผ่นเสียงจำลอง &amp; เพลงช่วยจำ</span>
                     </span>
-                    <span className="text-[11px] font-mono bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/30">
+                    <span className="text-[11px] font-mono bg-amber-500/20 text-amber-700 px-2 py-0.5 rounded border border-amber-500/30">
                       WEB AUDIO SYNTH
                     </span>
                   </div>
 
                   <div>
-                    <label className="block text-xs text-white/60 mb-2">เลือกเพลงที่ต้องการฟังตัวอย่าง:</label>
+                    <label className="block text-xs text-slate-600 mb-2">เลือกเพลงที่ต้องการฟังตัวอย่าง:</label>
                     <div className="space-y-2">
                       {[
                         {
@@ -1038,15 +1038,15 @@ export function HomeView() {
                           }}
                           className={`w-full p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
                             selectedVinylTrack.id === track.id
-                              ? "bg-amber-500/20 border-amber-400 text-amber-200 ring-1"
-                              : "bg-white/5 border-white/10 text-white/70 hover:bg-white/10"
+                              ? "bg-amber-500/20 border-amber-400 text-amber-800 ring-1"
+                              : "bg-white border-amber-200/70 text-slate-600 hover:bg-amber-50"
                           }`}
                         >
                           <div className="truncate mr-2">
                             <div className="text-xs font-bold truncate">{track.title}</div>
-                            <div className="text-[11px] text-white/40 truncate">{track.desc} • {track.bpm}</div>
+                            <div className="text-[11px] text-slate-500 truncate">{track.desc} • {track.bpm}</div>
                           </div>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/40 border border-white/10 shrink-0">
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#FEF9EF] border border-amber-200/70 shrink-0">
                             {track.code}
                           </span>
                         </button>
@@ -1080,7 +1080,7 @@ export function HomeView() {
 
                     <Link
                       href="/music-store"
-                      className="py-3.5 px-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-prompt font-semibold flex items-center justify-center gap-1.5 transition-all text-center"
+                      className="py-3.5 px-4 rounded-2xl bg-white hover:bg-amber-50 border border-amber-200/70 text-[#1E293B] text-xs font-prompt font-semibold flex items-center justify-center gap-1.5 transition-all text-center"
                     >
                       <span>ดูคลังเพลงเต็ม</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -1096,11 +1096,11 @@ export function HomeView() {
         {/* ── 5. WHY CHOOSE IAON TECH? (5 ข้อได้เปรียบที่ไม่มีใครเหมือน) ── */}
         <section className="space-y-10">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-semibold">
-              <ShieldCheck className="w-4 h-4 text-blue-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-700 text-xs font-semibold">
+              <ShieldCheck className="w-4 h-4 text-blue-700" />
               <span>THE IAON ADVANTAGE — ทำไมผู้ใช้กว่า 2,390 คนถึงไว้วางใจ</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1E293B]">
               5 เหตุผลที่นวัตกรรมของครูอ้น{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300">
                 ตอบโจทย์ชีวิตคุณที่สุด
@@ -1109,62 +1109,62 @@ export function HomeView() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-3xl p-6 bg-slate-900/60 border border-white/10 hover:border-blue-500/40 transition-all space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-blue-500/20 text-blue-300 flex items-center justify-center font-black text-sm">
+            <div className="rounded-3xl p-6 bg-white border border-amber-200/70 hover:border-blue-500/40 transition-all space-y-3">
+              <div className="w-10 h-10 rounded-2xl bg-blue-500/20 text-blue-700 flex items-center justify-center font-black text-sm">
                 1
               </div>
-              <h3 className="text-lg font-bold text-white">ไร้ค่าบริการรายเดือน (Lifetime)</h3>
-              <p className="text-xs text-white/70 leading-relaxed">
+              <h3 className="text-lg font-bold text-[#1E293B]">ไร้ค่าบริการรายเดือน (Lifetime)</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
                 จ่ายครั้งเดียวได้สิทธิ์เป็นเจ้าของระบบตลอดชีพ รันบน Google Workspace ฟรีของคุณเอง ไม่ต้องผูกบัตรเครดิต ไม่เสี่ยงโดนตัดระบบกะทันหัน
               </p>
             </div>
 
-            <div className="rounded-3xl p-6 bg-slate-900/60 border border-white/10 hover:border-emerald-500/40 transition-all space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-black text-sm">
+            <div className="rounded-3xl p-6 bg-white border border-amber-200/70 hover:border-emerald-500/40 transition-all space-y-3">
+              <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-700 flex items-center justify-center font-black text-sm">
                 2
               </div>
-              <h3 className="text-lg font-bold text-white">ปลอดภัย ข้อมูลอยู่กับคุณ 100%</h3>
-              <p className="text-xs text-white/70 leading-relaxed">
+              <h3 className="text-lg font-bold text-[#1E293B]">ปลอดภัย ข้อมูลอยู่กับคุณ 100%</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
                 ข้อมูลนักเรียน โรงเรียน หรือร้านค้า ถูกจัดเก็บใน Google Drive และ Sheets ของคุณเอง ทางเราไม่มีการดึงข้อมูลส่วนบุคคลใดๆ ออกมาภายนอก
               </p>
             </div>
 
-            <div className="rounded-3xl p-6 bg-slate-900/60 border border-white/10 hover:border-purple-500/40 transition-all space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-300 flex items-center justify-center font-black text-sm">
+            <div className="rounded-3xl p-6 bg-white border border-amber-200/70 hover:border-purple-500/40 transition-all space-y-3">
+              <div className="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-700 flex items-center justify-center font-black text-sm">
                 3
               </div>
-              <h3 className="text-lg font-bold text-white">สร้างจากหน้างานจริง โดยครูจริง</h3>
-              <p className="text-xs text-white/70 leading-relaxed">
+              <h3 className="text-lg font-bold text-[#1E293B]">สร้างจากหน้างานจริง โดยครูจริง</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
                 พัฒนาโดย ครู ค.ศ.2 โรงเรียนหาดใหญ่วิทยาลัย ทุกฟังก์ชันผ่านการทดสอบใช้งานจริงกับนักเรียน 279 คน แก้ปัญหาตรงจุด ไม่ใช่ทฤษฎีในห้องแอร์
               </p>
             </div>
 
-            <div className="rounded-3xl p-6 bg-slate-900/60 border border-white/10 hover:border-cyan-500/40 transition-all space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-black text-sm">
+            <div className="rounded-3xl p-6 bg-white border border-amber-200/70 hover:border-cyan-500/40 transition-all space-y-3">
+              <div className="w-10 h-10 rounded-2xl bg-cyan-500/20 text-teal-700 flex items-center justify-center font-black text-sm">
                 4
               </div>
-              <h3 className="text-lg font-bold text-white">ตรวจสลิป &amp; ส่งมอบระบบอัตโนมัติ 24 ชม.</h3>
-              <p className="text-xs text-white/70 leading-relaxed">
+              <h3 className="text-lg font-bold text-[#1E293B]">ตรวจสลิป &amp; ส่งมอบระบบอัตโนมัติ 24 ชม.</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
                 สั่งซื้อและโอนเงินเวลาไหนก็ได้รับไฟล์ทันที ด้วยเอนจิน Gemini 2.5 Flash Vision ตรวจสลิปและเปิดลิงก์ดาวน์โหลด Secure ZIP ให้ใน 2 วินาที
               </p>
             </div>
 
-            <div className="rounded-3xl p-6 bg-slate-900/60 border border-white/10 hover:border-pink-500/40 transition-all space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-pink-500/20 text-pink-300 flex items-center justify-center font-black text-sm">
+            <div className="rounded-3xl p-6 bg-white border border-amber-200/70 hover:border-pink-500/40 transition-all space-y-3">
+              <div className="w-10 h-10 rounded-2xl bg-pink-500/20 text-pink-700 flex items-center justify-center font-black text-sm">
                 5
               </div>
-              <h3 className="text-lg font-bold text-white">ให้ Source Code ครบ ปรับแต่งได้</h3>
-              <p className="text-xs text-white/70 leading-relaxed">
+              <h3 className="text-lg font-bold text-[#1E293B]">ให้ Source Code ครบ ปรับแต่งได้</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
                 เปิดเผยซอร์สโค้ดพร้อมคู่มือคลิปสอนภาษาไทยทีละสเต็ป ติดตั้งเสร็จใน 3 นาที หรือเลือกรับบริการ VIP Setup ให้ครูอ้นช่วยติดตั้งให้
               </p>
             </div>
 
-            <div className="rounded-3xl p-6 bg-slate-900/60 border border-white/10 hover:border-amber-500/40 transition-all space-y-3">
-              <div className="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center font-black text-sm">
+            <div className="rounded-3xl p-6 bg-white border border-amber-200/70 hover:border-amber-500/40 transition-all space-y-3">
+              <div className="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-700 flex items-center justify-center font-black text-sm">
                 6
               </div>
-              <h3 className="text-lg font-bold text-white">ดูแลใกล้ชิดผ่าน LINE OA สไตล์พี่สอนน้อง</h3>
-              <p className="text-xs text-white/70 leading-relaxed">
+              <h3 className="text-lg font-bold text-[#1E293B]">ดูแลใกล้ชิดผ่าน LINE OA สไตล์พี่สอนน้อง</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
                 มีข้อสงสัยหรือติดขัดการใช้งาน สามารถทักปรึกษาครูอ้นโดยตรงผ่าน LINE Official Account (@deu6776s) อบอุ่น จริงใจ พร้อมช่วยเหลือเสมอครับ
               </p>
             </div>
@@ -1174,11 +1174,11 @@ export function HomeView() {
         {/* ── 6. TESTIMONIALS & SOCIAL PROOF ──────────────────────── */}
         <section className="space-y-10">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-semibold">
-              <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-700 text-xs font-semibold">
+              <Star className="w-4 h-4 text-amber-700 fill-amber-400" />
               <span>REAL USER VOICES — ประสบการณ์จริงจากผู้ใช้งาน</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1E293B]">
               เสียงตอบรับจาก{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 to-orange-400">
                 คุณครู เจ้าของธุรกิจ และนักเรียน
@@ -1194,7 +1194,7 @@ export function HomeView() {
                 quote: "ระบบเช็คชื่อ LINE V2 ช่วยลดเวลาเช็คแถวหน้าเสาธงไปเยอะมาก ผปค. ได้รับข้อความทันที ไม่ต้องโทรตามเด็กรายคนอีกต่อไป เลิกงานตรงเวลาจริงค่ะ",
                 stars: 5,
                 badge: "ระบบเช็คชื่อ AONE01",
-                badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30"
+                badgeColor: "bg-cyan-500/20 text-teal-700 border-cyan-500/30"
               },
               {
                 name: "ครูธีรพัฒน์ สุขสำราญ",
@@ -1202,7 +1202,7 @@ export function HomeView() {
                 quote: "ระบบ Smart Vehicle ช่วยให้งานขอใช้รถและบันทึกบิลค่าน้ำมันมีความโปร่งใส ตรวจสอบง่าย เลิกปวดหัวกับเอกสารกระดาษหาย 100%",
                 stars: 5,
                 badge: "Smart Vehicle AONA02",
-                badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30"
+                badgeColor: "bg-amber-500/20 text-amber-700 border-amber-500/30"
               },
               {
                 name: "น้องก้องภพ (ก้อง)",
@@ -1210,13 +1210,13 @@ export function HomeView() {
                 quote: "เว็บ Portfolio 3D เท่มากครับ อาจารย์สัมภาษณ์สแกน QR Code หน้าปกแล้วชมว่าพอร์ตแปลกใหม่ ไม่เหมือนใคร ติดรอบ 1 เรียบร้อย!",
                 stars: 5,
                 badge: "เว็บพอร์ต 3D STU01",
-                badgeColor: "bg-pink-500/20 text-pink-300 border-pink-500/30"
+                badgeColor: "bg-pink-500/20 text-pink-700 border-pink-500/30"
               }
             ].map((review, rIdx) => (
-              <div key={rIdx} className="rounded-3xl p-6 bg-slate-900/60 border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between space-y-4">
+              <div key={rIdx} className="rounded-3xl p-6 bg-white border border-amber-200/70 hover:border-amber-300 transition-all flex flex-col justify-between space-y-4">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1 text-amber-400">
+                    <div className="flex items-center gap-1 text-amber-700">
                       {[...Array(review.stars)].map((_, s) => (
                         <Star key={s} className="w-4 h-4 fill-amber-400" />
                       ))}
@@ -1225,17 +1225,17 @@ export function HomeView() {
                       {review.badge}
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-white/80 leading-relaxed italic">
+                  <p className="text-xs sm:text-sm text-slate-800 leading-relaxed italic">
                     &ldquo;{review.quote}&rdquo;
                   </p>
                 </div>
-                <div className="border-t border-white/10 pt-3 flex items-center gap-3">
+                <div className="border-t border-amber-200/70 pt-3 flex items-center gap-3">
                   <div className="w-9 h-9 rounded-full bg-linear-to-br from-cyan-500 to-purple-600 flex items-center justify-center font-bold text-xs text-white">
                     {review.name.charAt(0)}
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-white">{review.name}</h4>
-                    <p className="text-[11px] text-white/50">{review.role}</p>
+                    <h4 className="text-xs font-bold text-[#1E293B]">{review.name}</h4>
+                    <p className="text-[11px] text-slate-500">{review.role}</p>
                   </div>
                 </div>
               </div>
@@ -1244,45 +1244,45 @@ export function HomeView() {
         </section>
 
         {/* ── 7. MEET THE CREATOR (ตัวตน & ความจริงใจ) ─────────────── */}
-        <section className="rounded-3xl p-8 sm:p-12 border border-white/10 bg-slate-900/60 relative overflow-hidden">
+        <section className="rounded-3xl p-8 sm:p-12 border border-amber-200/70 bg-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
 
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 relative z-10">
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-linear-to-br from-blue-500 via-purple-600 to-pink-500 p-1 shrink-0 shadow-[0_0_40px_rgba(59,130,246,0.3)]">
-              <div className="w-full h-full rounded-[22px] bg-slate-950 flex flex-col items-center justify-center text-center p-3">
+              <div className="w-full h-full rounded-[22px] bg-white flex flex-col items-center justify-center text-center p-3">
                 <span className="text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-pink-400">
                   iAon
                 </span>
-                <span className="text-[11px] text-white/50 uppercase tracking-widest mt-1">Tech Studio</span>
+                <span className="text-[11px] text-slate-500 uppercase tracking-widest mt-1">Tech Studio</span>
               </div>
             </div>
 
             <div className="space-y-4 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-bold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-700 text-xs font-bold">
                 <Award className="w-3.5 h-3.5" />
                 <span>MEET THE CREATOR — ผู้พัฒนาและส่งมอบระบบ</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B]">
                 นายจิรวัฒน์ เดชเส้ง{" "}
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-300 to-orange-400">
                   (ครูอ้น / iAon Tech)
                 </span>
               </h3>
-              <p className="text-sm text-white/70 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed">
                 ครู ค.ศ.2 (ชำนาญการ) โรงเรียนหาดใหญ่วิทยาลัย ผู้พัฒนานวัตกรรม Google Apps Script, AI Automation และสื่อดนตรีเพื่อการศึกษา ภายใต้สโลแกน 
-                <strong className="text-white"> &ldquo;ไอทีง่ายๆ สไตล์ iAon — ให้ AI ทำงานแทนคุณ แล้วเอาเวลาไปใช้ชีวิตนะครับ&rdquo;</strong> ผมมุ่งมั่นสร้างระบบที่เสถียร ใช้งานง่าย และไม่สร้างภาระค่าใช้จ่ายรายเดือนให้แก่ครู โรงเรียน และผู้ประกอบการไทย
+                <strong className="text-[#1E293B]"> &ldquo;ไอทีง่ายๆ สไตล์ iAon — ให้ AI ทำงานแทนคุณ แล้วเอาเวลาไปใช้ชีวิตนะครับ&rdquo;</strong> ผมมุ่งมั่นสร้างระบบที่เสถียร ใช้งานง่าย และไม่สร้างภาระค่าใช้จ่ายรายเดือนให้แก่ครู โรงเรียน และผู้ประกอบการไทย
               </p>
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2 text-xs text-white/60">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2 text-xs text-slate-600">
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-700" />
                   เปิดเผย Source Code ปรับแต่งได้ 100%
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-700" />
                   มีคลิปสอนติดตั้งและดูแลโดยตรง
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-700" />
                   รันบน Google Drive ส่วนตัว ปลอดภัย
                 </span>
               </div>
@@ -1291,12 +1291,12 @@ export function HomeView() {
         </section>
 
         {/* ── 8. FAQ ACCORDION ────────────────────────────────────── */}
-        <section className="rounded-3xl p-8 sm:p-12 border border-white/10 bg-slate-900/50 space-y-8">
+        <section className="rounded-3xl p-8 sm:p-12 border border-amber-200/70 bg-white space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B]">
               คำถามที่พบบ่อย (FAQ)
             </h2>
-            <p className="text-xs sm:text-sm text-white/60">
+            <p className="text-xs sm:text-sm text-slate-600">
               ทุกข้อสงสัยเกี่ยวกับระบบ สิทธิ์การใช้งาน และการติดตั้ง
             </p>
           </div>
@@ -1324,11 +1324,11 @@ export function HomeView() {
                 a: "มีครูอ้นคอยให้คำปรึกษาและซัพพอร์ตโดยตรงผ่าน LINE Official Account (@deu6776s) ท่านสามารถทักแชตมาสอบถามหรือขอคำแนะนำได้ตลอดเวลาครับ"
               }
             ].map((faq, fIdx) => (
-              <div key={fIdx} className="rounded-2xl bg-white/5 border border-white/10 p-5 space-y-2 hover:bg-white/8 transition-colors">
-                <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                  <span className="text-cyan-400">❓</span> {faq.q}
+              <div key={fIdx} className="rounded-2xl bg-white border border-amber-200/70 p-5 space-y-2 hover:bg-amber-50 transition-colors">
+                <h3 className="text-sm sm:text-base font-bold text-[#1E293B] flex items-center gap-2">
+                  <span className="text-teal-700">❓</span> {faq.q}
                 </h3>
-                <p className="text-xs sm:text-sm text-white/70 leading-relaxed pl-6">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-6">
                   {faq.a}
                 </p>
               </div>
@@ -1337,23 +1337,23 @@ export function HomeView() {
         </section>
 
         {/* ── 9. FINAL VIP LINE OA CTA (ปิดการขาย 24 ชม.) ─────────── */}
-        <section className="rounded-3xl p-8 sm:p-14 border border-emerald-500/40 bg-linear-to-r from-emerald-950/50 via-slate-900 to-teal-950/50 text-center relative overflow-hidden shadow-[0_0_60px_rgba(16,185,129,0.2)]">
+        <section className="rounded-3xl p-8 sm:p-14 border border-emerald-500/40 bg-linear-to-r from-emerald-950/50 via-white to-teal-950/50 text-center relative overflow-hidden shadow-[0_0_60px_rgba(16,185,129,0.2)]">
           <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-emerald-500/15 blur-[120px] rounded-full pointer-events-none" />
 
           <div className="max-w-2xl mx-auto space-y-6 relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold tracking-wide">
-              <MessageCircle className="w-4 h-4 fill-emerald-300 text-emerald-300" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-700 text-xs font-bold tracking-wide">
+              <MessageCircle className="w-4 h-4 fill-emerald-300 text-emerald-700" />
               <span>OFFICIAL LINE VIP SUPPORT (2,390+ FRIENDS)</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[#1E293B] leading-tight">
               พร้อมเสกงานเอกสาร &amp; ระบบของคุณให้{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-300 via-teal-200 to-cyan-300">
                 เสร็จในคลิกเดียวแล้วหรือยัง?
               </span>
             </h2>
 
-            <p className="text-sm sm:text-base text-white/70 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
               แอด LINE ครูอ้นเพื่อรับโค้ดฟรี ปรึกษาโจทย์โรงเรียน ออกแบบระบบธุรกิจ หรือสอบถามรายละเอียดการสั่งซื้อได้ตลอด 24 ชั่วโมงครับ
             </p>
 
@@ -1373,7 +1373,7 @@ export function HomeView() {
 
               <Link
                 href="/freebies"
-                className="w-full sm:w-auto px-8 py-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-semibold text-base transition-all"
+                className="w-full sm:w-auto px-8 py-5 rounded-2xl bg-white border border-amber-200/70 hover:bg-amber-50 text-[#1E293B] font-semibold text-base transition-all"
               >
                 <span>🎁 ดูของแจกฟรีพร้อมใช้ (0 ฿)</span>
               </Link>

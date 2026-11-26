@@ -39,7 +39,7 @@ export const ECOSYSTEM_VAULTS: EcosystemVaultItem[] = [
   {
     id: "digital-vault",
     badge: "👑 เรือธงสำหรับครูไทย",
-    badgeClass: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
+    badgeClass: "bg-cyan-500/20 text-teal-700 border-cyan-500/40",
     category: "Google Apps Script 20+ Systems",
     title: "คลังกล่องซอฟต์แวร์โรงเรียน 3D",
     tagline: "ระบบเช็คชื่อ, ลา, ตรวจชุด, ยานพาหนะ, พัสดุ รันบน Google Workspace ตัวเอง 100%",
@@ -67,7 +67,7 @@ export const ECOSYSTEM_VAULTS: EcosystemVaultItem[] = [
   {
     id: "ebooks",
     badge: "📚 คัมภีร์ครูยุคใหม่",
-    badgeClass: "bg-purple-500/20 text-purple-300 border-purple-500/40",
+    badgeClass: "bg-purple-500/20 text-purple-700 border-purple-500/40",
     category: "30 Futuristic E-Books 3D",
     title: "คลัง 30 E-Book นวัตกรรมครูไทย",
     tagline: "เจาะลึก ว.PA, จัดการชั้นเรียน, สื่อ AI Gen, เกมห้องเรียน เล่ม 3 มิติพร้อมเปิดอ่าน",
@@ -81,7 +81,7 @@ export const ECOSYSTEM_VAULTS: EcosystemVaultItem[] = [
   {
     id: "ai-caretaker",
     badge: "🤖 นวัตกรรมใหม่ SMEs",
-    badgeClass: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+    badgeClass: "bg-emerald-500/20 text-emerald-700 border-emerald-500/40",
     category: "24/7 AI Watchdog Core",
     title: "SME AI Caretaker เฝ้าร้าน 24 ชม.",
     tagline: "แอดมิน AI ตอบแชท + ตรวจสลิปปลอมใน 2 วินาที + บันทึกชีต พร้อมครูอ้นเฝ้าดูแลระบบให้",
@@ -95,7 +95,7 @@ export const ECOSYSTEM_VAULTS: EcosystemVaultItem[] = [
   {
     id: "teacher-prep",
     badge: "🎫 บัตรผ่านข้าราชการ",
-    badgeClass: "bg-amber-400/25 text-amber-300 border-amber-400/50",
+    badgeClass: "bg-amber-400/25 text-amber-700 border-amber-400/50",
     category: "Holographic VIP Golden Ticket",
     title: "บอทติวสอบครูผู้ช่วย + เพลงช่วยจำ",
     tagline: "กลุ่ม Telegram VIP บอทส่งข้อสอบ 3 เวลา พร้อม AI วิเคราะห์ชอยส์ลวงและอัลบั้มเพลงจำมาตรา",
@@ -109,7 +109,7 @@ export const ECOSYSTEM_VAULTS: EcosystemVaultItem[] = [
   {
     id: "student-vault",
     badge: "🎒 อนาคตเด็กไทย",
-    badgeClass: "bg-pink-500/20 text-pink-300 border-pink-500/40",
+    badgeClass: "bg-pink-500/20 text-pink-700 border-pink-500/40",
     category: "Holographic Cyber Collector Pass",
     title: "คลังเด็ก ม.ปลาย Portfolio TCAS 3D",
     tagline: "บัตรสะสมไซเบอร์ 3 มิติ เว็บพอร์ตโฟลิโอ Interactive สำหรับยื่นมหาวิทยาลัยรอบที่ 1",
@@ -123,7 +123,7 @@ export const ECOSYSTEM_VAULTS: EcosystemVaultItem[] = [
   {
     id: "music-store",
     badge: "💿 เพื่อการศึกษา & ว.PA",
-    badgeClass: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+    badgeClass: "bg-rose-500/20 text-rose-700 border-rose-500/40",
     category: "3D Vinyl Record & Sleeve",
     title: "แผ่นเสียงไวนิล 3D & เพลงช่วยจำ",
     tagline: "เพลงสรุปเนื้อหากฎหมายครู และ BGM บรรเลงไร้ลิขสิทธิ์ความยาว 60 นาทีสำหรับคลิปสอน ว.PA",
@@ -137,7 +137,7 @@ export const ECOSYSTEM_VAULTS: EcosystemVaultItem[] = [
   {
     id: "services",
     badge: "🛠️ งานสั่งทำระดับองค์กร",
-    badgeClass: "bg-blue-500/20 text-blue-300 border-blue-500/40",
+    badgeClass: "bg-blue-500/20 text-blue-700 border-blue-500/40",
     category: "Cyber Blueprint HUD Tablet",
     title: "รับสั่งทำ Web App & วิทยากร",
     tagline: "พัฒนาเว็บแอปพลิเคชันตามสั่งตรงบริบทโรงเรียน มีหนังสือราชการ และจัดอบรมครู On-site",
@@ -293,7 +293,7 @@ export function MultiVaultCarousel() {
 
   return (
     <section 
-      className="relative py-12 sm:py-16 overflow-hidden rounded-3xl border border-white/10 bg-linear-to-b from-slate-950/80 via-slate-900/90 to-slate-950/90 backdrop-blur-xl shadow-2xl"
+      className="relative py-12 sm:py-16 overflow-hidden rounded-3xl border border-amber-200/70 bg-linear-to-b from-slate-950/80 via-white to-slate-950/90 backdrop-blur-xl shadow-2xl"
       onMouseEnter={() => setIsAutoPlay(false)}
       onMouseLeave={() => setIsAutoPlay(true)}
       aria-label="3D Multi-Vault Ecosystem Carousel"
@@ -310,24 +310,24 @@ export function MultiVaultCarousel() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 text-xs sm:text-sm font-prompt font-bold shadow-[0_0_25px_rgba(6,182,212,0.3)]">
-            <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-teal-700 text-xs sm:text-sm font-prompt font-bold shadow-[0_0_25px_rgba(6,182,212,0.3)]">
+            <Sparkles className="w-4 h-4 text-teal-700 animate-pulse" />
             <span>3D INTERACTIVE ECOSYSTEM COMMAND CENTER</span>
           </div>
 
-          <h2 className="font-prompt text-3xl sm:text-5xl font-black text-white leading-tight">
+          <h2 className="font-prompt text-3xl sm:text-5xl font-black text-[#1E293B] leading-tight">
             สำรวจ 8 มหาคลังนวัตกรรม{" "}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-purple-400 to-amber-300 drop-shadow-[0_0_35px_rgba(6,182,212,0.4)]">
               สไตล์ 3D ล้ำยุค
             </span>
           </h2>
-          <p className="font-prompt text-sm sm:text-base text-white/70 max-w-2xl mx-auto">
+          <p className="font-prompt text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
             ทุกโซลูชันถูกออกแบบเป็นวัตถุ 3 มิติพร้อมให้คุณสัมผัส หมุนดูรายละเอียด หรือคลิกเปิดเข้าสู่คลังเจาะลึก 7 ข้อก่อนตัดสินใจได้ทันที
           </p>
         </div>
 
         {/* ── INTERACTIVE 3D STAGE & CAROUSEL VIEWPORT ── */}
-        <div className="relative rounded-3xl p-6 sm:p-10 border border-white/10 bg-slate-900/60 shadow-2xl backdrop-blur-md overflow-hidden">
+        <div className="relative rounded-3xl p-6 sm:p-10 border border-amber-200/70 bg-white shadow-2xl backdrop-blur-md overflow-hidden">
           
           <AnimatePresence mode="wait">
             <motion.div
@@ -344,37 +344,37 @@ export function MultiVaultCarousel() {
                   <span className={`px-3.5 py-1 rounded-full text-xs font-bold border shadow-sm ${activeItem.badgeClass}`}>
                     {activeItem.badge}
                   </span>
-                  <span className="text-xs font-mono text-cyan-300 font-bold bg-cyan-950/60 border border-cyan-500/30 px-3 py-1 rounded-full">
+                  <span className="text-xs font-mono text-teal-700 font-bold bg-cyan-950/60 border border-cyan-500/30 px-3 py-1 rounded-full">
                     {activeItem.category}
                   </span>
-                  <span className="text-xs font-mono text-white/40">
+                  <span className="text-xs font-mono text-slate-500">
                     PORTAL {currentIndex + 1} OF {ECOSYSTEM_VAULTS.length}
                   </span>
                 </div>
 
-                <h3 className="font-prompt text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+                <h3 className="font-prompt text-2xl sm:text-4xl font-extrabold text-[#1E293B] leading-tight">
                   {activeItem.title}
                 </h3>
 
-                <p className="font-prompt text-sm sm:text-base text-white/80 leading-relaxed">
+                <p className="font-prompt text-sm sm:text-base text-slate-800 leading-relaxed">
                   {activeItem.tagline}
                 </p>
 
                 {/* Highlight Benefit Box */}
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3">
-                  <Zap className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                <div className="p-4 rounded-2xl bg-white border border-amber-200/70 flex items-start gap-3">
+                  <Zap className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-xs font-bold text-amber-300 uppercase tracking-wider block">ผลลัพธ์ที่พิสูจน์แล้ว:</span>
-                    <p className="text-xs sm:text-sm text-white/90 font-medium mt-0.5">
+                    <span className="text-xs font-bold text-amber-700 uppercase tracking-wider block">ผลลัพธ์ที่พิสูจน์แล้ว:</span>
+                    <p className="text-xs sm:text-sm text-slate-800 font-medium mt-0.5">
                       {activeItem.highlightBenefit}
                     </p>
                   </div>
                 </div>
 
                 {/* Pricing & Portal Access CTA */}
-                <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/10">
+                <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-amber-200/70">
                   <div>
-                    <span className="text-[11px] font-prompt text-white/50 uppercase tracking-wider block">ข้อเสนอและราคา:</span>
+                    <span className="text-[11px] font-prompt text-slate-500 uppercase tracking-wider block">ข้อเสนอและราคา:</span>
                     <span className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-linear-to-r from-white via-cyan-200 to-amber-300 font-mono">
                       {activeItem.priceTag}
                     </span>
@@ -397,8 +397,8 @@ export function MultiVaultCarousel() {
                   {render3DMockup(activeItem)}
                 </div>
 
-                <div className="mt-3 flex items-center gap-1.5 text-[11px] font-prompt text-white/50">
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="mt-3 flex items-center gap-1.5 text-[11px] font-prompt text-slate-500">
+                  <Sparkles className="w-3.5 h-3.5 text-teal-700" />
                   <span>แตะหรือวางเมาส์เพื่อหมุนวัตถุ 3 มิติในพื้นที่นี้</span>
                 </div>
               </div>
@@ -406,7 +406,7 @@ export function MultiVaultCarousel() {
           </AnimatePresence>
 
           {/* Carousel Navigation Buttons & Indicators */}
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="mt-8 pt-6 border-t border-amber-200/70 flex flex-col sm:flex-row items-center justify-between gap-4">
             
             {/* Dots Navigator */}
             <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 sm:pb-0">
@@ -420,7 +420,7 @@ export function MultiVaultCarousel() {
                   className={`h-2.5 rounded-full transition-all cursor-pointer ${
                     currentIndex === idx
                       ? "w-8 bg-gradient-to-r from-cyan-400 to-emerald-400 shadow-[0_0_12px_rgba(6,182,212,0.6)]"
-                      : "w-2.5 bg-white/20 hover:bg-white/40"
+                      : "w-2.5 bg-white hover:bg-amber-50"
                   }`}
                   title={vault.title}
                   aria-label={`Go to slide ${idx + 1}`}
@@ -433,7 +433,7 @@ export function MultiVaultCarousel() {
               <button
                 type="button"
                 onClick={handlePrev}
-                className="p-3 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-white transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                className="p-3 rounded-xl bg-white hover:bg-amber-50 border border-amber-200/70 text-[#1E293B] transition-all hover:scale-105 active:scale-95 cursor-pointer"
                 title="ย้อนกลับ"
                 aria-label="Previous Portal"
               >
@@ -443,7 +443,7 @@ export function MultiVaultCarousel() {
               <button
                 type="button"
                 onClick={handleNext}
-                className="p-3 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.25)]"
+                className="p-3 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-teal-700 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.25)]"
                 title="ถัดไป"
                 aria-label="Next Portal"
               >
@@ -469,7 +469,7 @@ export function MultiVaultCarousel() {
                 className={`p-3 rounded-2xl border text-center transition-all cursor-pointer flex flex-col items-center justify-center gap-1.5 ${
                   isSelected
                     ? "bg-cyan-500/15 border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.3)] scale-105"
-                    : "bg-slate-900/40 border-white/10 hover:bg-white/5 hover:border-white/20 text-white/70"
+                    : "bg-white border-amber-200/70 hover:bg-amber-50 hover:border-amber-300 text-slate-600"
                 }`}
               >
                 <span className="text-xl">
@@ -482,7 +482,7 @@ export function MultiVaultCarousel() {
                   {vault.id === "music-store" && "💿"}
                   {vault.id === "services" && "📐"}
                 </span>
-                <span className={`text-[11px] font-prompt font-bold line-clamp-1 ${isSelected ? "text-cyan-300" : "text-white"}`}>
+                <span className={`text-[11px] font-prompt font-bold line-clamp-1 ${isSelected ? "text-teal-700" : "text-[#1E293B]"}`}>
                   {vault.id === "digital-vault" && "คลังครู DVD"}
                   {vault.id === "bundles" && "หีบเหมา Crate"}
                   {vault.id === "ebooks" && "คลัง 30 E-Book"}
@@ -492,7 +492,7 @@ export function MultiVaultCarousel() {
                   {vault.id === "music-store" && "ไวนิล & BGM"}
                   {vault.id === "services" && "รับสั่งทำ Web"}
                 </span>
-                <span className="text-[9px] font-mono text-white/40">
+                <span className="text-[9px] font-mono text-slate-500">
                   {vault.stats}
                 </span>
               </button>

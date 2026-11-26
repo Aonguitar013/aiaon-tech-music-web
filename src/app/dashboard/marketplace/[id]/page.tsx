@@ -77,9 +77,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   if (!product) {
     return (
-        <div className="w-full min-h-[50vh] flex flex-col items-center justify-center text-white/50">
+        <div className="w-full min-h-[50vh] flex flex-col items-center justify-center text-slate-500">
             <p className="font-prompt text-xl mb-4">ไม่พบสินค้านี้</p>
-            <Link href="/dashboard/marketplace" className="text-blue-400 hover:text-blue-300 font-prompt underline">
+            <Link href="/dashboard/marketplace" className="text-blue-700 hover:text-blue-700 font-prompt underline">
                 กลับสู่หน้ารวมสินค้า
             </Link>
         </div>
@@ -114,7 +114,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   const IconComponent = (Icons as unknown as Record<string, React.ElementType>)[product.icon_name || "Package"] || Icons.Package;
   const isService = product.category === "Service" || product.category === "Creative";
-  const colorClass = product.color_classes || "text-amber-400 bg-amber-500/10 border-amber-500/20";
+  const colorClass = product.color_classes || "text-amber-700 bg-amber-500/10 border-amber-500/20";
 
   const priceStr = (product.price || "").trim().toLowerCase();
   const isFree =
@@ -135,7 +135,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   return (
     <div className="w-full max-w-[1200px] mx-auto min-h-screen flex flex-col pb-20">
       <div className="mb-6">
-          <Link href="/dashboard/marketplace" className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors font-prompt text-sm">
+          <Link href="/dashboard/marketplace" className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors font-prompt text-sm">
              <ArrowLeft className="w-4 h-4" /> กลับหน้าคลังสินค้า
           </Link>
       </div>
@@ -147,12 +147,12 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
              {isPurchased && (
                <div className="p-5 rounded-3xl bg-emerald-950/40 border border-emerald-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-[0_0_30px_rgba(16,185,129,0.15)]">
                  <div className="flex items-center gap-3">
-                   <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 shrink-0">
+                   <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-700 shrink-0">
                      <BadgeCheck className="w-6 h-6" />
                    </div>
                    <div>
-                     <p className="text-white font-bold font-prompt text-sm sm:text-base">คุณเป็นเจ้าของระบบนี้แล้ว</p>
-                     <p className="text-emerald-300/80 font-prompt text-xs">เข้าถึงซอร์สโค้ดและไฟล์เทมเพลตได้ตลอดชีพ ไม่มีวันหมดอายุ</p>
+                     <p className="text-[#1E293B] font-bold font-prompt text-sm sm:text-base">คุณเป็นเจ้าของระบบนี้แล้ว</p>
+                     <p className="text-emerald-700/80 font-prompt text-xs">เข้าถึงซอร์สโค้ดและไฟล์เทมเพลตได้ตลอดชีพ ไม่มีวันหมดอายุ</p>
                    </div>
                  </div>
                  <a
@@ -182,7 +182,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                />
              ) : (
                /* ── Standard Product Detail Layout for Non-AONE Systems ── */
-               <div className="glass-card p-8 md:p-10 border-white/10 relative overflow-hidden bg-slate-950/80 rounded-3xl">
+               <div className="glass-card p-8 md:p-10 border-amber-200/70 relative overflow-hidden bg-white rounded-3xl">
                    <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 blur-3xl rounded-full pointer-events-none -mr-20 -mt-20"></div>
                    
                    <div className="flex items-start justify-between gap-4 mb-6">
@@ -190,22 +190,22 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                            <IconComponent className="w-10 h-10" />
                        </div>
                        {isPurchased && (
-                           <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-4 py-2 rounded-full text-sm font-prompt font-semibold shadow-[0_0_20px_rgba(16,185,129,0.15)] shrink-0">
+                           <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 px-4 py-2 rounded-full text-sm font-prompt font-semibold shadow-[0_0_20px_rgba(16,185,129,0.15)] shrink-0">
                                <BadgeCheck className="w-4 h-4" />
                                คุณเป็นเจ้าของแล้ว
                            </div>
                        )}
                    </div>
 
-                   <div className="bg-white/10 text-white/80 border border-white/20 inline-block px-3 py-1 rounded-full text-xs font-prompt font-medium uppercase tracking-wider mb-4 shadow">
+                   <div className="bg-white text-slate-800 border border-amber-200/70 inline-block px-3 py-1 rounded-full text-xs font-prompt font-medium uppercase tracking-wider mb-4 shadow">
                        {product.category === "Template" ? "Google Apps Script" : product.category === "Service" ? "บริการพัฒนา" : "เทมเพลตอัตโนมัติ"}
                    </div>
 
-                   <h1 className="text-3xl md:text-5xl font-bold font-prompt text-white mb-6 leading-tight">
+                   <h1 className="text-3xl md:text-5xl font-bold font-prompt text-[#1E293B] mb-6 leading-tight">
                        {product.title}
                    </h1>
 
-                   <div className="mb-8 p-4 rounded-3xl bg-slate-900/60 border border-cyan-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+                   <div className="mb-8 p-4 rounded-3xl bg-white border border-cyan-500/30 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.15)]">
                      <DvdCaseMockup
                        code={coverTheme.code}
                        title={product.title}
@@ -215,25 +215,25 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                      />
                    </div>
                    
-                   <div className="prose prose-invert max-w-none font-prompt text-white/70 leading-relaxed text-base sm:text-lg">
+                   <div className="prose prose-invert max-w-none font-prompt text-slate-600 leading-relaxed text-base sm:text-lg">
                       <p>{rawDesc}</p>
                       
                       {/* 2 Package Options Box */}
                       {!isFree && (
                         <div className="my-8 p-6 rounded-2xl border border-cyan-500/30 bg-cyan-950/20 space-y-4">
-                          <h3 className="text-lg font-bold font-prompt text-white flex items-center gap-2 m-0">
-                            <Sparkles className="w-5 h-5 text-cyan-400" />
+                          <h3 className="text-lg font-bold font-prompt text-[#1E293B] flex items-center gap-2 m-0">
+                            <Sparkles className="w-5 h-5 text-teal-700" />
                             <span>เลือกรูปแบบการรับระบบที่เหมาะกับคุณ:</span>
                           </h3>
 
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1 not-prose">
                             {/* Option 1: DIY */}
-                            <div className="p-4 rounded-xl border border-white/10 bg-black/40 space-y-2">
+                            <div className="p-4 rounded-xl border border-amber-200/70 bg-[#FEF9EF] space-y-2">
                               <div className="flex items-center justify-between">
-                                <span className="font-prompt font-bold text-white text-sm">📦 1. แพ็กเกจติดตั้งเอง (DIY)</span>
-                                <span className="font-prompt text-cyan-400 font-bold text-sm">{product.price}</span>
+                                <span className="font-prompt font-bold text-[#1E293B] text-sm">📦 1. แพ็กเกจติดตั้งเอง (DIY)</span>
+                                <span className="font-prompt text-teal-700 font-bold text-sm">{product.price}</span>
                               </div>
-                              <p className="font-prompt text-xs text-white/60 leading-relaxed">
+                              <p className="font-prompt text-xs text-slate-600 leading-relaxed">
                                 รับไฟล์โค้ดคลีนแล้ว + ตาราง CSV + คู่มือ 3 สเต็ปเสร็จใน 2 นาที รันบนชีตตัวเองได้ทันที
                               </p>
                             </div>
@@ -244,10 +244,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                 {vipSetup.badge}
                               </div>
                               <div className="flex items-center justify-between pr-20">
-                                <span className="font-prompt font-bold text-amber-300 text-sm">👑 2. แพ็กเกจ VIP Setup</span>
-                                <span className="font-prompt text-amber-300 font-bold text-sm">{vipSetup.priceText}</span>
+                                <span className="font-prompt font-bold text-amber-700 text-sm">👑 2. แพ็กเกจ VIP Setup</span>
+                                <span className="font-prompt text-amber-700 font-bold text-sm">{vipSetup.priceText}</span>
                               </div>
-                              <p className="font-prompt text-xs text-white/60 leading-relaxed">
+                              <p className="font-prompt text-xs text-slate-600 leading-relaxed">
                                 {vipSetup.description}
                               </p>
                             </div>
@@ -255,22 +255,22 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                         </div>
                       )}
 
-                      <h3 className="text-xl text-white font-bold mt-10 mb-4 border-b border-white/10 pb-2">สิ่งที่คุณจะได้รับ</h3>
+                      <h3 className="text-xl text-[#1E293B] font-bold mt-10 mb-4 border-b border-amber-200/70 pb-2">สิ่งที่คุณจะได้รับ</h3>
                       <ul className="space-y-3 mt-4 list-none pl-0">
                           <li className="flex items-start gap-3">
-                              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-1" />
+                              <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0 mt-1" />
                               <span>สิทธิ์การใช้งานแบบตลอดชีพ (Lifetime License) โดยไม่มีค่าเรียกเก็บรายเดือน</span>
                           </li>
                           <li className="flex items-start gap-3">
-                              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-1" />
+                              <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0 mt-1" />
                               <span>โฟลเดอร์ภาษาไทยระดับ Gold Standard พร้อมคู่มือการติดตั้ง 3 สเต็ปอย่างละเอียด</span>
                           </li>
                           <li className="flex items-start gap-3">
-                              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-1" />
+                              <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0 mt-1" />
                               <span>โครงสร้าง Google Sheets ตัวอย่าง และซอร์สโค้ด Apps Script พร้อม Deploy ทันที</span>
                           </li>
                           <li className="flex items-start gap-3">
-                              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-1" />
+                              <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0 mt-1" />
                               <span>Support ตอบคำถามและให้คำปรึกษาทางเทคนิคโดยครูอ้นผ่าน LINE OA @deu6776s</span>
                           </li>
                       </ul>
@@ -281,43 +281,43 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
           {/* Sticky Checkout Sidebar */}
           <div className="lg:col-span-1 relative">
-              <div className={`sticky top-8 glass-card p-6 flex flex-col shadow-2xl transition-all rounded-3xl bg-slate-950/90 ${isPurchased ? "border-emerald-500/30" : "border-white/10"}`}>
+              <div className={`sticky top-8 glass-card p-6 flex flex-col shadow-2xl transition-all rounded-3xl bg-white ${isPurchased ? "border-emerald-500/30" : "border-amber-200/70"}`}>
                   
                   {/* Purchased banner inside sidebar */}
                   {isPurchased && (
                       <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3 mb-6">
-                          <BadgeCheck className="w-5 h-5 text-emerald-400 shrink-0" />
-                          <p className="text-sm font-prompt text-emerald-300 font-medium leading-tight">
+                          <BadgeCheck className="w-5 h-5 text-emerald-700 shrink-0" />
+                          <p className="text-sm font-prompt text-emerald-700 font-medium leading-tight">
                               คุณซื้อสินค้านี้แล้ว<br />
-                              <span className="text-emerald-400/70 text-xs font-normal">คลิกด้านล่างเพื่อเข้าถึงไฟล์</span>
+                              <span className="text-emerald-700/70 text-xs font-normal">คลิกด้านล่างเพื่อเข้าถึงไฟล์</span>
                           </p>
                       </div>
                   )}
 
-                  <p className="text-xs text-white/50 font-prompt mb-1">ราคาเริ่มต้น (แพ็กเกจไฟล์โค้ด)</p>
-                  <div className={`text-4xl font-black font-prompt mb-4 ${isPurchased ? "text-emerald-400" : "text-white"}`}>
+                  <p className="text-xs text-slate-500 font-prompt mb-1">ราคาเริ่มต้น (แพ็กเกจไฟล์โค้ด)</p>
+                  <div className={`text-4xl font-black font-prompt mb-4 ${isPurchased ? "text-emerald-700" : "text-[#1E293B]"}`}>
                       {product.price}
                   </div>
 
                   {!isPurchased && !isFree && (
-                    <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-prompt text-xs mb-6 space-y-1">
+                    <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-700 font-prompt text-xs mb-6 space-y-1">
                       <div className="flex items-center justify-between font-bold">
                         <span className="flex items-center gap-1.5">
                           <Wrench className="w-4 h-4 shrink-0" />
                           <span>ออปชัน VIP Setup ({vipSetup.priceText}):</span>
                         </span>
-                        <span className="text-[11px] text-amber-400/70">{vipSetup.badge}</span>
+                        <span className="text-[11px] text-amber-700/70">{vipSetup.badge}</span>
                       </div>
-                      <p className="text-white/70 text-[11px] leading-relaxed">
+                      <p className="text-slate-600 text-[11px] leading-relaxed">
                         {vipSetup.description} แจ้งรับบริการใน LINE ตอนส่งสลิปได้เลยครับ
                       </p>
                     </div>
                   )}
 
                   {parsedType && (
-                      <div className="bg-black/30 rounded-lg p-3 mb-6 border border-white/5">
-                          <p className="text-[11px] text-white/40 font-prompt mb-0.5">รูปแบบการส่งมอบ / ประเภท</p>
-                          <p className="text-xs text-white/80 font-prompt font-medium">{parsedType}</p>
+                      <div className="bg-[#FEF9EF] rounded-lg p-3 mb-6 border border-amber-200/70">
+                          <p className="text-[11px] text-slate-500 font-prompt mb-0.5">รูปแบบการส่งมอบ / ประเภท</p>
+                          <p className="text-xs text-slate-800 font-prompt font-medium">{parsedType}</p>
                       </div>
                   )}
 
@@ -337,7 +337,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                           {product.ebook_content ? (
                               <Link
                                   href={`/dashboard/marketplace/${product.id}/reader`}
-                                  className="w-full py-3 rounded-2xl text-emerald-400 font-prompt font-medium text-sm transition-all border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/5 hover:bg-emerald-500/10 flex items-center justify-center gap-2 group"
+                                  className="w-full py-3 rounded-2xl text-emerald-700 font-prompt font-medium text-sm transition-all border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/5 hover:bg-emerald-500/10 flex items-center justify-center gap-2 group"
                               >
                                   <BookOpen className="w-4 h-4 group-hover:scale-110 transition-transform" />
                                   เริ่มอ่านคู่มือออนไลน์
@@ -348,7 +348,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                       href={product.ebook_url}
                                       target="_blank"
                                       rel="noopener noreferrer"
-                                      className="w-full py-3 rounded-2xl text-emerald-400 font-prompt font-medium text-sm transition-all border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/5 hover:bg-emerald-500/10 flex items-center justify-center gap-2 group"
+                                      className="w-full py-3 rounded-2xl text-emerald-700 font-prompt font-medium text-sm transition-all border border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-500/5 hover:bg-emerald-500/10 flex items-center justify-center gap-2 group"
                                   >
                                       <BookOpen className="w-4 h-4 group-hover:scale-110 transition-transform" />
                                       คู่มือการใช้งาน
@@ -388,7 +388,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
                             <div className={cn(
                               "flex items-center justify-center gap-2 text-base sm:text-lg font-black tracking-tight relative z-10 whitespace-nowrap",
-                              isFree ? "text-zinc-950" : "text-white"
+                              isFree ? "text-zinc-950" : "text-[#1E293B]"
                             )}>
                               {isService ? (
                                 <>
@@ -411,8 +411,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                             </div>
 
                             {!isService && !isFree && (
-                              <span className="text-[11px] font-bold text-white/90 tracking-tight relative z-10 flex items-center gap-1 whitespace-nowrap">
-                                <ShieldCheck className="w-3.5 h-3.5 text-white" />
+                              <span className="text-[11px] font-bold text-slate-800 tracking-tight relative z-10 flex items-center gap-1 whitespace-nowrap">
+                                <ShieldCheck className="w-3.5 h-3.5 text-[#1E293B]" />
                                 ตอบกลับโดยครูอ้น • รับไฟล์ระบบทันที • ปลอดภัย 100%
                               </span>
                             )}
@@ -421,20 +421,20 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                         {/* Secondary Web Checkout Option */}
                         <Link
                           href={`/dashboard/marketplace/checkout/${product.id}`}
-                          className="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white font-prompt text-xs flex items-center justify-center gap-2 transition"
+                          className="w-full py-2.5 rounded-xl bg-white hover:bg-amber-50 border border-amber-200/70 text-slate-600 hover:text-slate-900 font-prompt text-xs flex items-center justify-center gap-2 transition"
                         >
                           <span>หรือชำระผ่านระบบหน้าเว็บ / บัตรเครดิต</span>
                         </Link>
                       </div>
                   )}
 
-                  <div className="pt-4 border-t border-white/5 space-y-2 text-white/50 text-[11px] font-prompt">
+                  <div className="pt-4 border-t border-amber-200/70 space-y-2 text-slate-500 text-[11px] font-prompt">
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-teal-700 shrink-0" />
                       <span>รันบน Google Workspace ตัวเอง 100%</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-teal-700 shrink-0" />
                       <span>ไม่มีค่าธรรมเนียมรายเดือน จ่ายครั้งเดียวตลอดชีพ</span>
                     </div>
                   </div>

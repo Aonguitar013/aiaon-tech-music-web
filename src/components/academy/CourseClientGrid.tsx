@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -60,7 +60,7 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
 
   return (
     <div className="w-full flex flex-col min-h-0">
-      <div className="flex bg-white/5 p-1 rounded-xl w-full max-w-sm mb-6 border border-white/10 mx-auto md:mx-0">
+      <div className="flex bg-white p-1 rounded-xl w-full max-w-sm mb-6 border border-amber-200/70 mx-auto md:mx-0">
           {categories.map((cat) => (
               <button
                   key={cat}
@@ -68,7 +68,7 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
                   className={`flex-1 py-2 rounded-lg font-prompt text-sm font-medium transition-all ${
                       filterCategory === cat
                           ? (cat === 'Music' ? "bg-amber-600 text-white shadow-lg shadow-amber-900/30" : "bg-blue-500 text-white shadow-lg shadow-blue-900/30")
-                          : "text-white/50 hover:text-white hover:bg-white/5"
+                          : "text-slate-500 hover:text-slate-900 hover:bg-amber-50"
                   }`}
               >
                   {cat === "All" ? "ทั้งหมด" : cat === "Technology" ? "Tech" : cat}
@@ -80,11 +80,11 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <Search className="w-5 h-5 text-white/40" />
+            <Search className="w-5 h-5 text-slate-500" />
           </div>
           <input
             type="text"
-            className="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all font-prompt"
+            className="w-full bg-[#FEF9EF] border border-amber-200/70 rounded-xl py-3 pl-12 pr-4 text-[#1E293B] placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all font-prompt"
             placeholder="ค้นหาคอร์สเรียน (เช่น Apps Script, React)..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -93,7 +93,7 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
         
         <div className="flex flex-col xl:flex-row xl:items-center gap-4 overflow-x-auto pb-2 md:pb-0 custom-scrollbar">
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2 text-white/50 px-2 shrink-0 xl:ml-2">
+            <div className="flex items-center gap-2 text-slate-500 px-2 shrink-0 xl:ml-2">
                <Filter className="w-4 h-4" />
                <span className="font-prompt text-sm mr-2 whitespace-nowrap">ระดับ:</span>
             </div>
@@ -104,7 +104,7 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
                 className={`px-4 py-2 rounded-lg border font-prompt text-sm transition-all shrink-0 ${
                   filterLevel === level
                     ? "bg-blue-500 text-white border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]"
-                    : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white"
+                    : "bg-white text-slate-600 border-amber-200/70 hover:bg-amber-50 hover:text-slate-900"
                 }`}
               >
                 {level === "All" ? "ทั้งหมด" : level}
@@ -142,7 +142,7 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
              const isCourseActuallyMusic = course.category === "Music";
              const isMusic = isCourseActuallyMusic || brandTheme === "music";
              const themeColorHover = isMusic ? "hover:border-amber-500/40" : "hover:border-blue-500/30";
-             const themeTextHover = isMusic ? "group-hover:text-amber-400" : "group-hover:text-blue-400";
+             const themeTextHover = isMusic ? "group-hover:text-amber-700" : "group-hover:text-blue-700";
              const fallbackGradient = isMusic 
                 ? (course.color_gradient || "from-amber-600 to-orange-400")
                 : (course.color_gradient || "from-blue-500 to-cyan-400");
@@ -151,10 +151,10 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
 
              return (
               <Link key={course.id} href={`/dashboard/academy/${course.id}`} className="group block h-full">
-                <div className={`glass-card h-full flex flex-col border-white/10 ${themeColorHover} transition-all duration-300 relative overflow-hidden bg-white/5 shadow-2xl`}>
+                <div className={`glass-card h-full flex flex-col border-amber-200/70 ${themeColorHover} transition-all duration-300 relative overflow-hidden bg-white shadow-2xl`}>
                   
                   {/* 16:9 Course Cover */}
-                  <div className={`relative w-full aspect-video shrink-0 bg-black/40 border-b border-white/10 overflow-hidden ${themeColorHover} transition-colors`}>
+                  <div className={`relative w-full aspect-video shrink-0 bg-[#FEF9EF] border-b border-amber-200/70 overflow-hidden ${themeColorHover} transition-colors`}>
                     {(() => {
                       const lowerTitle = course.title.toLowerCase();
                       let mockImage = course.image_url;
@@ -222,7 +222,7 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
                         />
                       ) : (
                         <div className={`w-full h-full bg-linear-to-br ${fallbackGradient} flex items-center justify-center opacity-40 group-hover:opacity-70 transition-opacity duration-500`}>
-                          <FallbackIcon className="w-12 h-12 text-white/50 group-hover:scale-110 group-hover:text-white/80 transition-all duration-500" />
+                          <FallbackIcon className="w-12 h-12 text-slate-500 group-hover:scale-110 group-hover:text-slate-900/80 transition-all duration-500" />
                         </div>
                       );
                     })()}
@@ -232,61 +232,61 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
                   <div className={`absolute bottom-0 right-0 w-40 h-40 bg-linear-to-br ${fallbackGradient} opacity-5 group-hover:opacity-15 blur-[40px] rounded-full transition-opacity duration-500 pointer-events-none`}></div>
                   
                   <div className="p-5 flex flex-col flex-1 z-10 bg-linear-to-b from-black/0 to-black/40">
-                    <h3 className={`text-lg font-bold font-prompt text-white mb-2 transition-colors line-clamp-2 leading-tight ${themeTextHover}`}>
+                    <h3 className={`text-lg font-bold font-prompt text-[#1E293B] mb-2 transition-colors line-clamp-2 leading-tight ${themeTextHover}`}>
                         {course.title}
                     </h3>
-                    <p className="text-sm font-prompt text-white/50 mb-4 flex-1 line-clamp-3 leading-relaxed">
+                    <p className="text-sm font-prompt text-slate-500 mb-4 flex-1 line-clamp-3 leading-relaxed">
                         {rawDesc}
                     </p>
 
                     {/* Meta info (above divider) */}
-                    <div className="flex items-center gap-4 text-xs font-prompt text-white/40 mb-4">
+                    <div className="flex items-center gap-4 text-xs font-prompt text-slate-500 mb-4">
                         <div className="flex items-center gap-1.5 transition-colors">
                             {isMusic && instrument ? (
                                 <>
-                                  <Music className={`w-3.5 h-3.5 ${isMusic ? 'text-amber-400' : 'text-blue-400'}`} />
+                                  <Music className={`w-3.5 h-3.5 ${isMusic ? 'text-amber-700' : 'text-blue-700'}`} />
                                   <span className="truncate max-w-[120px]" title={instrument}>{instrument}</span>
                                 </>
                             ) : (
                                 <>
-                                  <Clock className={`w-3.5 h-3.5 ${isMusic ? 'text-amber-400' : 'text-blue-400'}`} />
+                                  <Clock className={`w-3.5 h-3.5 ${isMusic ? 'text-amber-700' : 'text-blue-700'}`} />
                                   <span>{lessons} บทเรียน</span>
                                 </>
                             )}
                         </div>
                         <div className="flex items-center gap-1.5 transition-colors">
                             {isMusic ? (
-                                <Star className="w-3.5 h-3.5 text-orange-400" />
+                                <Star className="w-3.5 h-3.5 text-orange-700" />
                             ) : (
-                                <Signal className="w-3.5 h-3.5 text-purple-400" />
+                                <Signal className="w-3.5 h-3.5 text-purple-700" />
                             )}
                             <span>{level}</span>
                         </div>
                     </div>
 
                     {/* Footer: Price and CTA Button */}
-                    <div className="flex items-end justify-between pt-4 border-t border-white/10 mt-auto">
+                    <div className="flex items-end justify-between pt-4 border-t border-amber-200/70 mt-auto">
                       <div>
-                        <p className="text-[11px] text-white/40 font-prompt uppercase tracking-wider mb-0.5">ราคาคอร์ส</p>
+                        <p className="text-[11px] text-slate-500 font-prompt uppercase tracking-wider mb-0.5">ราคาคอร์ส</p>
                         {(() => {
                           const isFree = course.price === "0" || course.price === "0 THB" || course.price === "0 thb" || !course.price || course.price.trim() === "" || course.price.trim() === "-" || course.price.trim() === "—";
                           if (isFree) {
                             return (
-                              <p className="text-xl font-bold font-prompt text-emerald-400 flex items-center gap-1.5">
+                              <p className="text-xl font-bold font-prompt text-emerald-700 flex items-center gap-1.5">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                                 ฟรี
                               </p>
                             );
                           }
                           return (
-                            <p className={`text-xl font-bold font-prompt ${isMusic ? 'text-amber-400' : 'text-blue-400'}`}>
+                            <p className={`text-xl font-bold font-prompt ${isMusic ? 'text-amber-700' : 'text-blue-700'}`}>
                               {course.price}
                             </p>
                           );
                         })()}
                       </div>
                       <div
-                        className={`px-4 py-2 rounded-lg text-white font-prompt text-sm shadow-lg shadow-black/20 transition-all duration-300 font-semibold ${
+                        className={`px-4 py-2 rounded-lg text-[#1E293B] font-prompt text-sm shadow-lg shadow-black/20 transition-all duration-300 font-semibold ${
                           isMusic 
                             ? "bg-amber-600 hover:bg-amber-500 shadow-amber-600/10" 
                             : "bg-blue-500 hover:bg-blue-600 shadow-blue-500/10"
@@ -302,12 +302,12 @@ export function CourseClientGrid({ initialCourses }: { initialCourses: Course[] 
           })}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-20 text-white/40 glass-card border-white/5">
+        <div className="flex flex-col items-center justify-center py-20 text-slate-500 glass-card border-amber-200/70">
            <Search className="w-16 h-16 mb-4 opacity-20" />
            <p className="font-prompt text-lg">ไม่พบคอร์สเรียนที่ตรงกับการค้นหา</p>
            <button 
              onClick={() => {setSearchTerm(""); setFilterLevel("All");}}
-             className="mt-4 px-4 py-2 border border-blue-500/30 text-blue-400 rounded-lg hover:bg-blue-500/10 font-prompt text-sm transition-colors"
+             className="mt-4 px-4 py-2 border border-blue-500/30 text-blue-700 rounded-lg hover:bg-blue-500/10 font-prompt text-sm transition-colors"
            >
              ล้างการค้นหา
            </button>

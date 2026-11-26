@@ -44,14 +44,14 @@ export default async function DashboardLayout({
   const userInitial = user?.email?.charAt(0).toUpperCase() ?? "U";
 
   return (
-    <div className="flex min-h-screen bg-black">
+    <div className="flex min-h-screen bg-[#FFFDF7]">
       {/* ─── Desktop Sidebar ──────────────────────────────────── */}
-      <aside className="hidden md:flex w-72 flex-col bg-black/60 border-r border-white/10 backdrop-blur-xl relative z-20 shrink-0">
+      <aside className="hidden md:flex w-72 flex-col bg-[#FEF9EF] border-r border-amber-200/70 backdrop-blur-xl relative z-20 shrink-0">
         {/* Logo */}
-        <div className="h-16 flex items-center px-6 border-b border-white/10 shrink-0">
+        <div className="h-16 flex items-center px-6 border-b border-amber-200/70 shrink-0">
           <Link
             href="/"
-            className="font-prompt text-xl font-normal text-white flex items-center gap-1 hover:opacity-80 transition-opacity"
+            className="font-prompt text-xl font-normal text-[#1E293B] flex items-center gap-1 hover:opacity-80 transition-opacity"
           >
             iAonTech<span className="text-blue-500">xMusic</span>
           </Link>
@@ -59,7 +59,7 @@ export default async function DashboardLayout({
 
         {/* Nav links */}
         <div className="flex-1 overflow-y-auto py-5 px-4 space-y-1">
-          <div className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-3 px-3 font-prompt">
+          <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3 px-3 font-prompt">
             เมนูหลัก
           </div>
 
@@ -75,7 +75,7 @@ export default async function DashboardLayout({
           {/* Admin section — only visible to admin users */}
           {isAdmin && (
             <>
-              <div className="text-xs font-semibold text-orange-400/60 uppercase tracking-wider mt-5 mb-3 px-3 font-prompt flex items-center gap-1.5">
+              <div className="text-xs font-semibold text-orange-700/60 uppercase tracking-wider mt-5 mb-3 px-3 font-prompt flex items-center gap-1.5">
                 <ShieldCheck className="w-3 h-3" />
                 Admin
               </div>
@@ -92,23 +92,23 @@ export default async function DashboardLayout({
         </div>
 
         {/* User footer */}
-        <div className="p-4 border-t border-white/10 shrink-0">
-          <div className="flex items-center gap-3 px-3 py-2 mb-3 rounded-lg hover:bg-white/5 transition-colors">
-            <div className="w-9 h-9 rounded-full bg-blue-500/20 border border-blue-500/50 flex items-center justify-center text-blue-400 font-bold uppercase shrink-0 text-sm">
+        <div className="p-4 border-t border-amber-200/70 shrink-0">
+          <div className="flex items-center gap-3 px-3 py-2 mb-3 rounded-lg hover:bg-amber-50 transition-colors">
+            <div className="w-9 h-9 rounded-full bg-blue-500/20 border border-blue-500/50 flex items-center justify-center text-blue-700 font-bold uppercase shrink-0 text-sm">
               {userInitial}
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-medium text-white truncate font-prompt">
+              <p className="text-sm font-medium text-[#1E293B] truncate font-prompt">
                 {user ? "ผู้ใช้งานระบบ" : "ผู้เยี่ยมชม"}
               </p>
-              <p className="text-xs text-white/40 truncate">{user?.email || "guest@aiaon.tech"}</p>
+              <p className="text-xs text-slate-500 truncate">{user?.email || "guest@aiaon.tech"}</p>
             </div>
           </div>
           {user ? (
             <form action={logout}>
               <button
                 type="submit"
-                className="w-full flex items-center gap-2 justify-center px-4 py-2.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20 transition-all font-prompt text-sm cursor-pointer"
+                className="w-full flex items-center gap-2 justify-center px-4 py-2.5 rounded-lg bg-red-500/10 text-red-700 hover:bg-red-500/20 border border-red-500/20 transition-all font-prompt text-sm cursor-pointer"
               >
                 <LogOut className="w-4 h-4" /> ออกจากระบบ
               </button>
@@ -116,7 +116,7 @@ export default async function DashboardLayout({
           ) : (
             <Link
               href="/login"
-              className="w-full flex items-center gap-2 justify-center px-4 py-2.5 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 border border-cyan-500/20 transition-all font-prompt text-sm"
+              className="w-full flex items-center gap-2 justify-center px-4 py-2.5 rounded-lg bg-cyan-500/10 text-teal-700 hover:bg-cyan-500/20 border border-teal-200 transition-all font-prompt text-sm"
             >
               เข้าสู่ระบบ
             </Link>
@@ -131,7 +131,7 @@ export default async function DashboardLayout({
         <div className="absolute bottom-0 left-[-200px] w-[500px] h-[500px] bg-purple-500/5 blur-[150px] rounded-full pointer-events-none" />
 
         {/* ─── Mobile Header ──────────────────────────────────── */}
-        <header className="md:hidden h-16 flex items-center justify-between px-4 border-b border-white/10 bg-black/80 backdrop-blur-xl shrink-0 z-30 sticky top-0">
+        <header className="md:hidden h-16 flex items-center justify-between px-4 border-b border-amber-200/70 bg-[#FEF9EF] backdrop-blur-xl shrink-0 z-30 sticky top-0">
           <div className="flex items-center gap-3">
             {/* MobileSidebar only receives serializable primitives */}
             <MobileSidebar
@@ -141,13 +141,13 @@ export default async function DashboardLayout({
             />
             <Link
               href="/"
-              className="font-prompt text-lg font-normal text-white flex items-center gap-1"
+              className="font-prompt text-lg font-normal text-[#1E293B] flex items-center gap-1"
             >
               iAonTech<span className="text-blue-500">xMusic</span>
             </Link>
           </div>
 
-          <div className="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/50 flex items-center justify-center text-blue-400 font-bold uppercase text-sm select-none">
+          <div className="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/50 flex items-center justify-center text-blue-700 font-bold uppercase text-sm select-none">
             {userInitial}
           </div>
         </header>

@@ -43,7 +43,7 @@ export default async function PublicAcademyPage() {
   const musicCount = allCourses.filter((c) => c.category === "Music").length;
 
   return (
-    <div className="w-full relative overflow-hidden min-h-screen pb-24">
+    <div className="w-full relative overflow-hidden min-h-screen pb-24 bg-[#FFFDF7] text-[#1E293B]">
       {/* Background Ambient Glows */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/10 blur-[140px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/3" />
       <div className="absolute top-[35%] right-[-100px] w-[450px] h-[450px] bg-amber-500/10 blur-[130px] rounded-full pointer-events-none" />
@@ -53,46 +53,46 @@ export default async function PublicAcademyPage() {
         
         {/* ── Hero Header ─────────────────────────────────── */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-blue-500/30 bg-blue-500/10 text-blue-300 text-sm font-prompt font-semibold shadow-[0_0_20px_rgba(59,130,246,0.2)]">
-            <GraduationCap className="w-4 h-4 text-blue-400" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-blue-500/30 bg-blue-500/10 text-blue-700 text-sm font-prompt font-semibold shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+            <GraduationCap className="w-4 h-4 text-blue-700" />
             <span>AiAon Academy Hub — เปิดคลังหลักสูตรวิชาชีพแห่งอนาคต</span>
           </div>
 
-          <h1 className="font-prompt text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-tight">
+          <h1 className="font-prompt text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#1E293B] leading-tight">
             คลังคอร์สเรียน{" "}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-300 to-amber-300 drop-shadow-[0_0_25px_rgba(59,130,246,0.35)]">
               ออนไลน์ 24 ชม.
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-white/70 font-prompt leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-slate-600 font-prompt leading-relaxed max-w-2xl mx-auto">
             เรียนรู้ทักษะที่นำไปใช้สร้างสรรค์ผลงานได้จริง ทั้งสายเทคโนโลยี AI Automation, 
-            เว็บแอปพลิเคชันยุคใหม่ และคอร์สดนตรีเฉพาะทาง สอนตรงโดย <span className="text-amber-300 font-bold">ครูอ้น (จิรวัฒน์ เดชเส้ง)</span>
+            เว็บแอปพลิเคชันยุคใหม่ และคอร์สดนตรีเฉพาะทาง สอนตรงโดย <span className="text-amber-700 font-bold">ครูอ้น (จิรวัฒน์ เดชเส้ง)</span>
           </p>
 
           {/* Quick Stats Badges */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 max-w-2xl mx-auto">
-            <div className="glass-card p-3 rounded-2xl border-white/10 bg-white/5 text-center">
-              <div className="text-2xl font-black font-prompt text-blue-400">{allCourses.length}</div>
-              <div className="text-[11px] font-prompt text-white/50">หลักสูตรคุณภาพ</div>
+            <div className="glass-card p-3 rounded-2xl border-amber-200/70 bg-white text-center">
+              <div className="text-2xl font-black font-prompt text-blue-700">{allCourses.length}</div>
+              <div className="text-[11px] font-prompt text-slate-500">หลักสูตรคุณภาพ</div>
             </div>
-            <div className="glass-card p-3 rounded-2xl border-white/10 bg-white/5 text-center">
-              <div className="text-2xl font-black font-prompt text-cyan-300">{techCount}</div>
-              <div className="text-[11px] font-prompt text-white/50">คอร์ส Tech &amp; AI</div>
+            <div className="glass-card p-3 rounded-2xl border-amber-200/70 bg-white text-center">
+              <div className="text-2xl font-black font-prompt text-teal-700">{techCount}</div>
+              <div className="text-[11px] font-prompt text-slate-500">คอร์ส Tech &amp; AI</div>
             </div>
-            <div className="glass-card p-3 rounded-2xl border-white/10 bg-white/5 text-center">
-              <div className="text-2xl font-black font-prompt text-amber-400">{musicCount}</div>
-              <div className="text-[11px] font-prompt text-white/50">คอร์ส Music Pro</div>
+            <div className="glass-card p-3 rounded-2xl border-amber-200/70 bg-white text-center">
+              <div className="text-2xl font-black font-prompt text-amber-700">{musicCount}</div>
+              <div className="text-[11px] font-prompt text-slate-500">คอร์ส Music Pro</div>
             </div>
-            <div className="glass-card p-3 rounded-2xl border-white/10 bg-white/5 text-center">
-              <div className="text-2xl font-black font-prompt text-emerald-400">ตลอดชีพ</div>
-              <div className="text-[11px] font-prompt text-white/50">ทบทวนซ้ำได้ 24 ชม.</div>
+            <div className="glass-card p-3 rounded-2xl border-amber-200/70 bg-white text-center">
+              <div className="text-2xl font-black font-prompt text-emerald-700">ตลอดชีพ</div>
+              <div className="text-[11px] font-prompt text-slate-500">ทบทวนซ้ำได้ 24 ชม.</div>
             </div>
           </div>
         </div>
 
         {/* ── Courses Client Grid with Category & Level Filters ─── */}
-        <Suspense fallback={<div className="animate-pulse h-96 bg-white/5 rounded-3xl mt-8 border border-white/10" />}>
+        <Suspense fallback={<div className="animate-pulse h-96 bg-white rounded-3xl mt-8 border border-amber-200/70" />}>
           <CourseClientGrid initialCourses={allCourses} />
         </Suspense>
 
@@ -101,12 +101,12 @@ export default async function PublicAcademyPage() {
           <div className="absolute inset-0 bg-linear-to-r from-blue-500/5 via-cyan-500/5 to-amber-500/5 pointer-events-none" />
           <div className="relative z-10 max-w-xl mx-auto space-y-4">
             <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-blue-500 to-cyan-500 flex items-center justify-center mx-auto shadow-[0_0_25px_rgba(59,130,246,0.4)]">
-              <ShieldCheck className="w-8 h-8 text-white" />
+              <ShieldCheck className="w-8 h-8 text-[#1E293B]" />
             </div>
-            <h3 className="font-prompt text-2xl font-bold text-white">
+            <h3 className="font-prompt text-2xl font-bold text-[#1E293B]">
               ต้องการจัดอบรมภายในองค์กร หรือหลักสูตรเฉพาะทาง?
             </h3>
-            <p className="text-white/60 font-prompt text-sm leading-relaxed">
+            <p className="text-slate-600 font-prompt text-sm leading-relaxed">
               ครูอ้นมีบริการวิทยากรบรรยาย จัด Workshop และวางระบบเฉพาะสำหรับสถานศึกษาและบริษัท สนใจติดต่อพูดคุยได้โดยตรง
             </p>
             <div className="pt-2">

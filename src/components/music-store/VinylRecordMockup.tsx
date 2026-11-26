@@ -287,17 +287,17 @@ export function VinylRecordMockup({
 
             {/* ── Top Bar: Code, Category & Audio Pulse ── */}
             <div className="relative z-10">
-              <div className="flex items-center justify-between mb-1">
+              <div className="flex items-center justify-between gap-1 mb-1">
                 <span
                   className={cn(
-                    "px-2 py-0.5 rounded-md text-[8px] sm:text-[9px] font-mono font-black uppercase tracking-wider border shadow-sm",
+                    "px-1.5 py-0.5 rounded-md text-[8px] font-mono font-black uppercase tracking-tight border shadow-sm whitespace-nowrap truncate max-w-[70%]",
                     activeColor.pill
                   )}
                 >
                   {code} • {bpm}
                 </span>
 
-                <div className="flex items-center gap-1 text-[8px] font-mono text-amber-400">
+                <div className="flex items-center gap-0.5 text-[8px] font-mono text-amber-400 shrink-0 whitespace-nowrap">
                   <Sparkles className="w-2.5 h-2.5" />
                   <span>24-BIT</span>
                 </div>
@@ -348,10 +348,10 @@ export function VinylRecordMockup({
             </div>
 
             {/* ── Bottom: Hologram Seal & Format Pill ── */}
-            <div className="relative z-10 pt-1.5 border-t border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-1 text-[7px] text-slate-300 font-medium truncate">
+            <div className="relative z-10 pt-1.5 border-t border-white/10 flex items-center justify-between gap-1.5">
+              <div className="flex items-center gap-1 text-[7px] text-slate-300 font-medium min-w-0">
                 <ShieldCheck className="w-3 h-3 text-emerald-400 shrink-0" />
-                <span>WAV 24-bit + สิทธิ์ตลอดชีพ</span>
+                <span className="truncate">WAV 24-bit • ตลอดชีพ</span>
               </div>
 
               {/* Gold Hologram Certified Master Seal */}

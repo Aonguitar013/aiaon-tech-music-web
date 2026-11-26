@@ -52,10 +52,10 @@ const BASE_PRICE = 450;
 const SHIPPING_FEE = 50;
 
 const COLORS: TShirtColor[] = [
-  { id: "cyber-black", name: "Cyber Black", hex: "#121316", bgClass: "bg-[#121316]", textColor: "text-white" },
-  { id: "space-grey", name: "Space Grey", hex: "#374151", bgClass: "bg-[#374151]", textColor: "text-white" },
-  { id: "neon-purple", name: "Neon Purple", hex: "#3B0764", bgClass: "bg-[#3B0764]", textColor: "text-purple-300" },
-  { id: "tech-white", name: "Tech White", hex: "#F8F9FA", bgClass: "bg-[#F8F9FA] border border-white/10", textColor: "text-neutral-900" },
+  { id: "cyber-black", name: "Cyber Black", hex: "#121316", bgClass: "bg-[#121316]", textColor: "text-[#1E293B]" },
+  { id: "space-grey", name: "Space Grey", hex: "#374151", bgClass: "bg-[#374151]", textColor: "text-[#1E293B]" },
+  { id: "neon-purple", name: "Neon Purple", hex: "#3B0764", bgClass: "bg-[#3B0764]", textColor: "text-purple-700" },
+  { id: "tech-white", name: "Tech White", hex: "#F8F9FA", bgClass: "bg-[#F8F9FA] border border-amber-200/70", textColor: "text-neutral-900" },
 ];
 
 const GRAPHICS: GraphicStyle[] = [
@@ -1263,7 +1263,7 @@ LINE ID: ${form.lineId}
   };
 
   return (
-    <div className="w-full relative overflow-hidden min-h-screen pb-24">
+    <div className="w-full relative overflow-hidden min-h-screen pb-24 bg-[#FFFDF7] text-[#1E293B]">
       {/* Background glow effects */}
       <div className="absolute top-[10%] left-[-100px] w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute top-[40%] right-[-100px] w-[500px] h-[500px] bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
@@ -1272,19 +1272,19 @@ LINE ID: ${form.lineId}
         
         {/* --- HEADER --- */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border-purple-500/30 bg-purple-500/5 text-purple-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border-purple-500/30 bg-purple-500/5 text-purple-700 text-xs font-semibold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5 animate-pulse" />
             <span>AiAonTech Cyber Merch v1.0</span>
           </div>
 
-          <h1 className="font-prompt text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight">
+          <h1 className="font-prompt text-4xl md:text-6xl font-bold tracking-tight text-[#1E293B] leading-tight">
             {selectedProduct === "cap" ? "ออกแบบหมวกแก๊ป" : "ออกแบบเสื้อยืด"}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-blue-500 to-purple-500 drop-shadow-[0_0_20px_rgba(34,211,238,0.35)]">
               {" "}AiAonTech
             </span>
           </h1>
 
-          <p className="text-white/60 font-prompt text-sm md:text-base leading-relaxed max-w-xl mx-auto">
+          <p className="text-slate-600 font-prompt text-sm md:text-base leading-relaxed max-w-xl mx-auto">
             {selectedProduct === "cap" 
               ? "ปรับแต่งหมวกแก๊ปสไตล์สตูดิโอของคุณ เลือกสี สายปรับระดับ พร้อมปักชื่อด้านหลังแบบพรีเมียมเท่ๆ"
               : "แต่งตัวตามสไตล์สายเดฟและการทำเพลงของคุณ เลือกสี ปรับลายสกรีน พร้อมสลักชื่อส่วนตัวของคุณบนแขนเสื้อด้วยระบบจำลองแบบเรียลไทม์"}
@@ -1298,7 +1298,7 @@ LINE ID: ${form.lineId}
           <div className="lg:col-span-5 flex flex-col gap-4">
             
             {/* Product Category Selector */}
-            <div className="flex gap-1.5 p-1 bg-black/40 border border-white/5 rounded-2xl w-full">
+            <div className="flex gap-1.5 p-1 bg-[#FEF9EF] border border-amber-200/70 rounded-2xl w-full">
               <button
                 onClick={() => {
                   setSelectedProduct("tshirt");
@@ -1310,7 +1310,7 @@ LINE ID: ${form.lineId}
                   "flex-1 py-2.5 rounded-xl font-prompt text-xs font-semibold transition-all flex items-center justify-center gap-1.5",
                   selectedProduct === "tshirt"
                     ? "bg-linear-to-r from-cyan-500 to-blue-600 text-black shadow-lg"
-                    : "text-white/60 hover:text-white hover:bg-white/3"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-amber-50"
                 )}
               >
                 <Shirt className="w-3.5 h-3.5 shrink-0" />
@@ -1327,7 +1327,7 @@ LINE ID: ${form.lineId}
                   "flex-1 py-2.5 rounded-xl font-prompt text-xs font-semibold transition-all flex items-center justify-center gap-1.5",
                   selectedProduct === "cap"
                     ? "bg-linear-to-r from-cyan-500 to-blue-600 text-black shadow-lg"
-                    : "text-white/60 hover:text-white hover:bg-white/3"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-amber-50"
                 )}
               >
                 <Sparkles className="w-3.5 h-3.5 shrink-0" />
@@ -1337,15 +1337,15 @@ LINE ID: ${form.lineId}
 
             {/* Toggle Preview Mode */}
             <div className="flex justify-between items-center px-1">
-              <span className="font-prompt text-xs text-white/50">การแสดงผลตัวอย่าง:</span>
-              <div className="flex gap-1 p-0.5 rounded-xl bg-black/40 border border-white/5">
+              <span className="font-prompt text-xs text-slate-500">การแสดงผลตัวอย่าง:</span>
+              <div className="flex gap-1 p-0.5 rounded-xl bg-[#FEF9EF] border border-amber-200/70">
                 <button
                   onClick={() => setPreviewMode("svg")}
                   className={cn(
                     "px-3 py-1 rounded-lg font-prompt text-xs transition-all",
                     previewMode === "svg"
-                      ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-                      : "text-white/60 hover:text-white"
+                      ? "bg-cyan-500/10 text-teal-700 border border-teal-200"
+                      : "text-slate-600 hover:text-slate-900"
                   )}
                 >
                   แบบจำลอง 2D
@@ -1357,8 +1357,8 @@ LINE ID: ${form.lineId}
                     "px-3 py-1 rounded-lg font-prompt text-xs transition-all",
                     selectedProduct === "tshirt" && selectedGraphic.id === "minimalist-dev" && "opacity-40 cursor-not-allowed",
                     previewMode === "mockup"
-                      ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-                      : "text-white/60 hover:text-white"
+                      ? "bg-cyan-500/10 text-teal-700 border border-teal-200"
+                      : "text-slate-600 hover:text-slate-900"
                   )}
                   title={selectedProduct === "tshirt" && selectedGraphic.id === "minimalist-dev" ? "แบบลายนี้ไม่มีภาพสินค้าจริง" : ""}
                 >
@@ -1368,7 +1368,7 @@ LINE ID: ${form.lineId}
             </div>
 
             {/* Visualizer Display Box */}
-            <div className="relative aspect-square rounded-3xl glass-card border-white/8 bg-black/40 overflow-hidden p-6 md:p-10 flex items-center justify-center group">
+            <div className="relative aspect-square rounded-3xl glass-card border-amber-200/70 bg-[#FEF9EF] overflow-hidden p-6 md:p-10 flex items-center justify-center group">
               {/* Outer glowing ambient reflection */}
               <div 
                 className="absolute inset-0 transition-opacity duration-700 opacity-20 group-hover:opacity-30 blur-2xl pointer-events-none" 
@@ -1462,15 +1462,15 @@ LINE ID: ${form.lineId}
               {previewMode === "svg" && (
                 <>
                   {/* View side badge */}
-                  <div className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white/70 text-xs font-prompt">
+                  <div className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FEF9EF] backdrop-blur-md border border-amber-200/70 text-slate-600 text-xs font-prompt">
                     <span>แสดงมุม:</span>
-                    <span className="font-bold text-cyan-400">{isBack ? (selectedProduct === "cap" ? "ด้านหลังปรับสาย" : "ด้านหลัง (Back)") : (selectedProduct === "cap" ? "ด้านหน้าหมวก" : "ด้านหน้า (Front)")}</span>
+                    <span className="font-bold text-teal-700">{isBack ? (selectedProduct === "cap" ? "ด้านหลังปรับสาย" : "ด้านหลัง (Back)") : (selectedProduct === "cap" ? "ด้านหน้าหมวก" : "ด้านหน้า (Front)")}</span>
                   </div>
 
                   {/* Quick Flip button */}
                   <button 
                     onClick={() => setIsBack(!isBack)}
-                    className="absolute bottom-4 right-4 p-2.5 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/20 text-cyan-400 hover:scale-105 active:scale-95 transition-all duration-200"
+                    className="absolute bottom-4 right-4 p-2.5 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 border border-teal-200 text-teal-700 hover:scale-105 active:scale-95 transition-all duration-200"
                     title="หมุนมุมมอง"
                   >
                     <RefreshCw className="w-4 h-4 animate-spin-slow" />
@@ -1479,7 +1479,7 @@ LINE ID: ${form.lineId}
               )}
 
               {previewMode === "mockup" && (
-                <div className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-cyan-500/20 text-cyan-400 text-[11px] font-prompt uppercase font-semibold tracking-wider">
+                <div className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FEF9EF] backdrop-blur-md border border-teal-200 text-teal-700 text-[11px] font-prompt uppercase font-semibold tracking-wider">
                   <span>ดีไซน์สินค้าจริงที่จะใช้จัดส่ง</span>
                 </div>
               )}
@@ -1487,24 +1487,24 @@ LINE ID: ${form.lineId}
 
             {/* Spec Quick Details Badge */}
             <div className="grid grid-cols-3 gap-2.5 text-center">
-              <div className="p-3 rounded-2xl glass-card border-white/5 bg-white/2 text-left">
-                <p className="text-[11px] text-white/40 font-prompt">MATERIAL</p>
-                <p className="text-xs text-white/80 font-prompt font-semibold mt-0.5">{selectedProduct === "cap" ? "Premium Twill" : "Comb #32 Cotton"}</p>
+              <div className="p-3 rounded-2xl glass-card border-amber-200/70 bg-white text-left">
+                <p className="text-[11px] text-slate-500 font-prompt">MATERIAL</p>
+                <p className="text-xs text-slate-800 font-prompt font-semibold mt-0.5">{selectedProduct === "cap" ? "Premium Twill" : "Comb #32 Cotton"}</p>
               </div>
-              <div className="p-3 rounded-2xl glass-card border-white/5 bg-white/2 text-left">
-                <p className="text-[11px] text-white/40 font-prompt">{selectedProduct === "cap" ? "VISOR" : "THICKNESS"}</p>
-                <p className="text-xs text-white/80 font-prompt font-semibold mt-0.5">{selectedProduct === "cap" ? "Curved Brim" : "Premium 230gsm"}</p>
+              <div className="p-3 rounded-2xl glass-card border-amber-200/70 bg-white text-left">
+                <p className="text-[11px] text-slate-500 font-prompt">{selectedProduct === "cap" ? "VISOR" : "THICKNESS"}</p>
+                <p className="text-xs text-slate-800 font-prompt font-semibold mt-0.5">{selectedProduct === "cap" ? "Curved Brim" : "Premium 230gsm"}</p>
               </div>
-              <div className="p-3 rounded-2xl glass-card border-white/5 bg-white/2 text-left">
-                <p className="text-[11px] text-white/40 font-prompt">EMB/PRINT</p>
-                <p className="text-xs text-white/80 font-prompt font-semibold mt-0.5">{selectedProduct === "cap" ? "3D Embroidery" : "Digital Screen"}</p>
+              <div className="p-3 rounded-2xl glass-card border-amber-200/70 bg-white text-left">
+                <p className="text-[11px] text-slate-500 font-prompt">EMB/PRINT</p>
+                <p className="text-xs text-slate-800 font-prompt font-semibold mt-0.5">{selectedProduct === "cap" ? "3D Embroidery" : "Digital Screen"}</p>
               </div>
             </div>
 
             {/* Download Print File Button */}
             <button
               onClick={() => downloadVectorDesign(isBack ? "back" : "front")}
-              className="w-full py-3 px-4 rounded-2xl border border-dashed border-cyan-500/30 hover:border-cyan-500/60 bg-cyan-500/5 hover:bg-cyan-500/10 text-cyan-400 font-prompt font-semibold text-xs transition-all flex items-center justify-center gap-2 active:scale-98 shadow-md"
+              className="w-full py-3 px-4 rounded-2xl border border-dashed border-cyan-500/30 hover:border-cyan-500/60 bg-cyan-500/5 hover:bg-cyan-500/10 text-teal-700 font-prompt font-semibold text-xs transition-all flex items-center justify-center gap-2 active:scale-98 shadow-md"
               title="ดาวน์โหลดลายสกรีนเวกเตอร์ SVG"
             >
               <ExternalLink className="w-3.5 h-3.5" />
@@ -1517,7 +1517,7 @@ LINE ID: ${form.lineId}
           <div className="lg:col-span-7 space-y-6">
             
             {/* Tabs Selector Bar */}
-            <div className="flex border-b border-white/10 gap-1 overflow-x-auto pb-px">
+            <div className="flex border-b border-amber-200/70 gap-1 overflow-x-auto pb-px">
               {(selectedProduct === "tshirt"
                 ? [
                     { id: "style", label: "เลือกลายสกรีน", icon: Sparkles },
@@ -1542,8 +1542,8 @@ LINE ID: ${form.lineId}
                     className={cn(
                       "flex items-center gap-1.5 px-4 py-3 border-b-2 font-prompt text-sm font-medium transition-all duration-200 shrink-0 whitespace-nowrap -mb-px",
                       isActive 
-                        ? "border-cyan-400 text-cyan-400 bg-cyan-400/5 shadow-[0_4px_10px_rgba(34,211,238,0.05)]" 
-                        : "border-transparent text-white/60 hover:text-white hover:border-white/10"
+                        ? "border-cyan-400 text-teal-700 bg-cyan-400/5 shadow-[0_4px_10px_rgba(34,211,238,0.05)]" 
+                        : "border-transparent text-slate-600 hover:text-slate-900 hover:border-amber-300"
                     )}
                   >
                     <TabIcon className="w-4 h-4" />
@@ -1554,14 +1554,14 @@ LINE ID: ${form.lineId}
             </div>
 
             {/* Configurator Card */}
-            <div className="glass-card border-white/8 bg-black/20 p-6 md:p-8 min-h-[350px] flex flex-col justify-between">
+            <div className="glass-card border-amber-200/70 bg-[#FEF9EF] p-6 md:p-8 min-h-[350px] flex flex-col justify-between">
               
               {/* TAB 1: GRAPHIC STYLES */}
               {activeTab === "style" && (
                 <div className="space-y-6">
                   <div>
-                    <h3 className="font-prompt text-lg font-bold text-white mb-1">เลือกสไตล์สกรีน</h3>
-                    <p className="text-white/50 text-xs font-prompt">แต่ละลายผ่านการออกแบบอย่างประณีตเพื่อให้เข้ากับสายไอทีและโปรดิวเซอร์</p>
+                    <h3 className="font-prompt text-lg font-bold text-[#1E293B] mb-1">เลือกสไตล์สกรีน</h3>
+                    <p className="text-slate-500 text-xs font-prompt">แต่ละลายผ่านการออกแบบอย่างประณีตเพื่อให้เข้ากับสายไอทีและโปรดิวเซอร์</p>
                   </div>
                   
                   <div className="space-y-3">
@@ -1580,25 +1580,25 @@ LINE ID: ${form.lineId}
                           "w-full text-left p-4 rounded-2xl border transition-all duration-200 flex flex-col md:flex-row md:items-center justify-between gap-4",
                           selectedGraphic.id === g.id
                             ? "bg-cyan-500/5 border-cyan-500/50 shadow-[0_0_20px_rgba(34,211,238,0.05)]"
-                            : "bg-white/3 border-white/5 hover:bg-white/5 hover:border-white/10"
+                            : "bg-white border-amber-200/70 hover:bg-amber-50 hover:border-amber-300"
                         )}
                       >
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
-                            <span className="font-prompt text-base font-bold text-white">{g.name}</span>
-                            <span className="text-[11px] font-prompt px-2 py-0.5 rounded-full border border-white/10 text-white/40 uppercase tracking-wider">
+                            <span className="font-prompt text-base font-bold text-[#1E293B]">{g.name}</span>
+                            <span className="text-[11px] font-prompt px-2 py-0.5 rounded-full border border-amber-200/70 text-slate-500 uppercase tracking-wider">
                               {g.badge}
                             </span>
                           </div>
-                          <p className="text-white/60 font-prompt text-xs leading-relaxed max-w-xl">{g.description}</p>
+                          <p className="text-slate-600 font-prompt text-xs leading-relaxed max-w-xl">{g.description}</p>
                         </div>
                         <div className="shrink-0 flex items-center gap-3">
-                          <span className="font-prompt font-bold text-white text-sm">
+                          <span className="font-prompt font-bold text-[#1E293B] text-sm">
                             {g.priceBonus > 0 ? `+${g.priceBonus} บาท` : "ราคาปกติ"}
                           </span>
                           <div className={cn(
                             "w-5 h-5 rounded-full border flex items-center justify-center shrink-0",
-                            selectedGraphic.id === g.id ? "border-cyan-400 bg-cyan-400 text-black" : "border-white/20"
+                            selectedGraphic.id === g.id ? "border-cyan-400 bg-cyan-400 text-black" : "border-amber-200/70"
                           )}>
                             {selectedGraphic.id === g.id && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                           </div>
@@ -1608,7 +1608,7 @@ LINE ID: ${form.lineId}
                   </div>
 
                   {selectedGraphic.id !== "minimalist-dev" && (
-                    <div className="p-3.5 rounded-xl border border-amber-500/20 bg-amber-500/5 flex items-start gap-2.5 text-amber-300/95 text-xs font-prompt">
+                    <div className="p-3.5 rounded-xl border border-amber-500/20 bg-amber-500/5 flex items-start gap-2.5 text-amber-700/95 text-xs font-prompt">
                       <Info className="w-4 h-4 shrink-0 mt-0.5" />
                       <span><strong>โน้ต:</strong> ลาย {selectedGraphic.name} จะพิมพ์ขนาดใหญ่อยู่ที่แผ่นหลังและมีโลโก้เล็กที่หน้าอกซ้าย ระบบได้หมุนตัวอย่างเสื้อไปทางด้านหลังให้ท่านโดยอัตโนมัติแล้ว</span>
                     </div>
@@ -1620,10 +1620,10 @@ LINE ID: ${form.lineId}
               {activeTab === "color" && (
                 <div className="space-y-6">
                   <div>
-                    <h3 className="font-prompt text-lg font-bold text-white mb-1">
+                    <h3 className="font-prompt text-lg font-bold text-[#1E293B] mb-1">
                       {selectedProduct === "cap" ? "เลือกสีหมวกแก๊ป" : "เลือกสีเสื้อยืด"}
                     </h3>
-                    <p className="text-white/50 text-xs font-prompt">
+                    <p className="text-slate-500 text-xs font-prompt">
                       {selectedProduct === "cap" 
                         ? "สีสันเรียบเท่ ทรงสปอร์ตและสตรีท ปักด้วยความประณีตสูง" 
                         : "สีสันเรียบเท่ ทนทานต่อการซัก ไม่ยืดไม่ย้วย ถักทอด้วยคอตตอนพรีเมียม"}
@@ -1639,24 +1639,24 @@ LINE ID: ${form.lineId}
                           "w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-center gap-3",
                           selectedColor.id === c.id
                             ? "bg-cyan-500/5 border-cyan-500/50 shadow-[0_0_20px_rgba(34,211,238,0.05)]"
-                            : "bg-white/3 border-white/5 hover:bg-white/5 hover:border-white/10"
+                            : "bg-white border-amber-200/70 hover:bg-amber-50 hover:border-amber-300"
                         )}
                       >
                         {/* Circle Color Indicator */}
                         <div 
                           className={cn(
                             "w-8 h-8 rounded-full shrink-0 border shadow-inner flex items-center justify-center",
-                            c.id === "tech-white" ? "border-neutral-300" : "border-white/10"
+                            c.id === "tech-white" ? "border-neutral-300" : "border-amber-200/70"
                           )}
                           style={{ backgroundColor: c.hex }}
                         >
                           {selectedColor.id === c.id && (
-                            <Check className={cn("w-4 h-4 stroke-[3]", c.id === "tech-white" ? "text-neutral-900" : "text-white")} />
+                            <Check className={cn("w-4 h-4 stroke-[3]", c.id === "tech-white" ? "text-neutral-900" : "text-[#1E293B]")} />
                           )}
                         </div>
                         <div>
-                          <p className="font-prompt text-base font-bold text-white leading-none">{c.name}</p>
-                          <p className="font-prompt text-[11px] text-white/40 mt-1">
+                          <p className="font-prompt text-base font-bold text-[#1E293B] leading-none">{c.name}</p>
+                          <p className="font-prompt text-[11px] text-slate-500 mt-1">
                             {selectedProduct === "cap" ? "Premium Twill Cotton" : "100% Premium Cotton"}
                           </p>
                         </div>
@@ -1664,8 +1664,8 @@ LINE ID: ${form.lineId}
                     ))}
                   </div>
 
-                  <div className="rounded-xl border border-white/5 bg-white/2 p-4 text-xs font-prompt text-white/60 space-y-2">
-                    <p className="font-bold text-white text-sm">
+                  <div className="rounded-xl border border-amber-200/70 bg-white p-4 text-xs font-prompt text-slate-600 space-y-2">
+                    <p className="font-bold text-[#1E293B] text-sm">
                       {selectedProduct === "cap" ? "ข้อมูลหมวกแก๊ปและคำแนะนำ:" : "ข้อมูลเนื้อผ้าและคำแนะนำการใช้งาน:"}
                     </p>
                     <ul className="list-disc pl-4 space-y-1">
@@ -1691,10 +1691,10 @@ LINE ID: ${form.lineId}
               {activeTab === "personalize" && (
                 <div className="space-y-6">
                   <div>
-                    <h3 className="font-prompt text-lg font-bold text-white mb-1">
+                    <h3 className="font-prompt text-lg font-bold text-[#1E293B] mb-1">
                       {selectedProduct === "cap" ? "ปักชื่อด้านหลังหมวกแก๊ป" : "พิมพ์ชื่อสลักที่แขนเสื้อด้านซ้าย"}
                     </h3>
-                    <p className="text-white/50 text-xs font-prompt">
+                    <p className="text-slate-500 text-xs font-prompt">
                       {selectedProduct === "cap"
                         ? "เพิ่มความพิเศษด้วยการปักชื่อหรือข้อความที่ด้านหลังหมวกแก๊ปเหนือสายปรับ"
                         : "เพิ่มความเป็นเจ้าของหรือใส่โค้ดแฮนเดิลของคุณในรูปแบบอักษร Matrix Glow เท่ๆ"}
@@ -1709,27 +1709,27 @@ LINE ID: ${form.lineId}
                         value={customText}
                         onChange={(e) => setCustomText(e.target.value.replace(/[^A-Za-z0-9_\- ]/g, ""))}
                         placeholder="พิมพ์อักษรภาษาอังกฤษ เช่น DEV-AON"
-                        className="w-full bg-black/40 border border-white/10 focus:border-cyan-500 rounded-xl px-4 py-3 text-white font-mono placeholder:text-white/25 focus:ring-1 focus:ring-cyan-500 transition-all font-semibold uppercase tracking-wider text-base"
+                        className="w-full bg-[#FEF9EF] border border-amber-200/70 focus:border-cyan-500 rounded-xl px-4 py-3 text-[#1E293B] font-mono placeholder:text-slate-400 focus:ring-1 focus:ring-cyan-500 transition-all font-semibold uppercase tracking-wider text-base"
                       />
-                      <div className="absolute right-3 top-3.5 text-xs text-white/30 font-mono">
+                      <div className="absolute right-3 top-3.5 text-xs text-slate-500 font-mono">
                         {customText.length}/12ตัว
                       </div>
                     </div>
 
                     <div className="flex flex-wrap gap-1.5">
-                      <span className="text-[11px] text-white/40 font-prompt shrink-0 mt-1 mr-1">แนะนำ:</span>
+                      <span className="text-[11px] text-slate-500 font-prompt shrink-0 mt-1 mr-1">แนะนำ:</span>
                       {["ADMIN", "DEV-MASTER", "STUDENT", "GUITARIST", "N8N-GOD", "PRODUCER"].map((word) => (
                         <button
                           key={word}
                           onClick={() => setCustomText(word)}
-                          className="text-[11px] font-mono px-2.5 py-1 rounded-lg border border-white/8 bg-white/2 text-cyan-400 hover:bg-white/5 hover:border-cyan-400/30 transition-all"
+                          className="text-[11px] font-mono px-2.5 py-1 rounded-lg border border-amber-200/70 bg-white text-teal-700 hover:bg-amber-50 hover:border-cyan-400/30 transition-all"
                         >
                           {word}
                         </button>
                       ))}
                     </div>
 
-                    <div className="p-3.5 rounded-xl border border-cyan-500/20 bg-cyan-500/5 flex items-start gap-2.5 text-cyan-300/90 text-xs font-prompt">
+                    <div className="p-3.5 rounded-xl border border-teal-200 bg-cyan-500/5 flex items-start gap-2.5 text-teal-700/90 text-xs font-prompt">
                       <Info className="w-4 h-4 shrink-0 mt-0.5" />
                       <span>
                         {selectedProduct === "cap" ? (
@@ -1748,8 +1748,8 @@ LINE ID: ${form.lineId}
                 selectedProduct === "cap" ? (
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-prompt text-lg font-bold text-white mb-1">สายปรับหลังหมวกแก๊ป</h3>
-                      <p className="text-white/50 text-xs font-prompt">เลือกประเภทสายรัดด้านหลังหมวกเพื่อให้เหมาะกับสไตล์การใช้งานของคุณ (ขนาดฟรีไซส์ปรับรอบหัวได้ 54-60 ซม.)</p>
+                      <h3 className="font-prompt text-lg font-bold text-[#1E293B] mb-1">สายปรับหลังหมวกแก๊ป</h3>
+                      <p className="text-slate-500 text-xs font-prompt">เลือกประเภทสายรัดด้านหลังหมวกเพื่อให้เหมาะกับสไตล์การใช้งานของคุณ (ขนาดฟรีไซส์ปรับรอบหัวได้ 54-60 ซม.)</p>
                     </div>
 
                     <div className="space-y-3">
@@ -1761,16 +1761,16 @@ LINE ID: ${form.lineId}
                             "w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between gap-4",
                             selectedStrap.id === st.id
                               ? "bg-cyan-500/5 border-cyan-500/50 shadow-[0_0_20px_rgba(34,211,238,0.05)]"
-                              : "bg-white/3 border-white/5 hover:bg-white/5 hover:border-white/10"
+                              : "bg-white border-amber-200/70 hover:bg-amber-50 hover:border-amber-300"
                           )}
                         >
                           <div className="space-y-1">
-                            <span className="font-prompt text-base font-bold text-white">{st.name}</span>
-                            <p className="text-white/60 font-prompt text-xs leading-relaxed">{st.description}</p>
+                            <span className="font-prompt text-base font-bold text-[#1E293B]">{st.name}</span>
+                            <p className="text-slate-600 font-prompt text-xs leading-relaxed">{st.description}</p>
                           </div>
                           <div className={cn(
                             "w-5 h-5 rounded-full border flex items-center justify-center shrink-0",
-                            selectedStrap.id === st.id ? "border-cyan-400 bg-cyan-400 text-black" : "border-white/20"
+                            selectedStrap.id === st.id ? "border-cyan-400 bg-cyan-400 text-black" : "border-amber-200/70"
                           )}>
                             {selectedStrap.id === st.id && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                           </div>
@@ -1778,8 +1778,8 @@ LINE ID: ${form.lineId}
                       ))}
                     </div>
 
-                    <div className="p-3.5 rounded-xl border border-white/5 bg-white/2 text-xs font-prompt text-white/60 space-y-2">
-                      <p className="font-bold text-white text-sm">การสวมใส่หมวกแก๊ป:</p>
+                    <div className="p-3.5 rounded-xl border border-amber-200/70 bg-white text-xs font-prompt text-slate-600 space-y-2">
+                      <p className="font-bold text-[#1E293B] text-sm">การสวมใส่หมวกแก๊ป:</p>
                       <ul className="list-disc pl-4 space-y-1">
                         <li>หมวกแก๊ปใช้แพทเทิร์นแบบ Unstructured Dad Hat มีรูปทรงที่โอบรับศีรษะได้ดี</li>
                         <li>ปรับขนาดได้ง่ายเพื่อให้สวมใส่กระชับและเบาสบายตลอดวัน</li>
@@ -1789,8 +1789,8 @@ LINE ID: ${form.lineId}
                 ) : (
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-prompt text-lg font-bold text-white mb-1">เลือกขนาดไซส์</h3>
-                      <p className="text-white/50 text-xs font-prompt">ทรงเสื้อ Semi-Oversize ใส่สบายพอดีตัว ใส่ได้ทั้งชายและหญิง</p>
+                      <h3 className="font-prompt text-lg font-bold text-[#1E293B] mb-1">เลือกขนาดไซส์</h3>
+                      <p className="text-slate-500 text-xs font-prompt">ทรงเสื้อ Semi-Oversize ใส่สบายพอดีตัว ใส่ได้ทั้งชายและหญิง</p>
                     </div>
                     
                     {/* Selectors */}
@@ -1802,34 +1802,34 @@ LINE ID: ${form.lineId}
                           className={cn(
                             "py-3.5 rounded-xl border transition-all text-center flex flex-col items-center justify-center font-prompt",
                             selectedSize.id === s.id
-                              ? "bg-cyan-500/10 border-cyan-400 text-cyan-400 font-bold shadow-[0_0_15px_rgba(34,211,238,0.1)]"
-                              : "bg-white/3 border-white/5 text-white/60 hover:bg-white/5 hover:text-white"
+                              ? "bg-cyan-500/10 border-cyan-400 text-teal-700 font-bold shadow-[0_0_15px_rgba(34,211,238,0.1)]"
+                              : "bg-white border-amber-200/70 text-slate-600 hover:bg-amber-50 hover:text-slate-900"
                           )}
                         >
                           <span className="text-base font-bold">{s.name}</span>
-                          <span className="text-[11px] text-white/40 font-normal mt-0.5">อก {s.chest}</span>
+                          <span className="text-[11px] text-slate-500 font-normal mt-0.5">อก {s.chest}</span>
                         </button>
                       ))}
                     </div>
 
                     {/* Size Guide Table */}
-                    <div className="rounded-2xl border border-white/5 overflow-hidden">
+                    <div className="rounded-2xl border border-amber-200/70 overflow-hidden">
                       <table className="w-full text-left font-prompt text-xs border-collapse">
                         <thead>
-                          <tr className="bg-white/3 border-b border-white/8 text-white/50">
+                          <tr className="bg-white border-b border-amber-200/70 text-slate-500">
                             <th className="p-3 font-semibold">ไซส์ (Size)</th>
                             <th className="p-3 font-semibold">รอบอก (Chest)</th>
                             <th className="p-3 font-semibold">ความยาว (Length)</th>
                             <th className="p-3 font-semibold">ความยาวแขน (Sleeve)</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-white/5 text-white/70">
+                        <tbody className="divide-y divide-white/5 text-slate-600">
                           {SIZES.map((s) => (
                             <tr 
                               key={s.id} 
                               className={cn(
                                 "transition-colors",
-                                selectedSize.id === s.id ? "bg-cyan-500/3 text-white" : "hover:bg-white/1"
+                                selectedSize.id === s.id ? "bg-teal-50 text-teal-900" : "hover:bg-amber-50"
                               )}
                             >
                               <td className="p-3 font-bold">{s.name}</td>
@@ -1849,16 +1849,16 @@ LINE ID: ${form.lineId}
               {activeTab === "order" && (
                 <div className="space-y-5" id="order-form-anchor">
                   <div>
-                    <h3 className="font-prompt text-lg font-bold text-white mb-1">
+                    <h3 className="font-prompt text-lg font-bold text-[#1E293B] mb-1">
                       {selectedProduct === "cap" ? "ข้อมูลผู้สั่งจองหมวกแก๊ป" : "ข้อมูลผู้สั่งจองเสื้อยืด"}
                     </h3>
-                    <p className="text-white/50 text-xs font-prompt">กรอกข้อมูลการจัดส่งและสร้างลิงก์ยืนยันผ่านแอปพลิเคชัน LINE</p>
+                    <p className="text-slate-500 text-xs font-prompt">กรอกข้อมูลการจัดส่งและสร้างลิงก์ยืนยันผ่านแอปพลิเคชัน LINE</p>
                   </div>
                   
                   {/* Form fields */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-xs text-white/50 font-prompt">ชื่อ-นามสกุล ผู้รับ *</label>
+                      <label className="text-xs text-slate-500 font-prompt">ชื่อ-นามสกุล ผู้รับ *</label>
                       <input 
                         type="text"
                         name="name"
@@ -1866,15 +1866,15 @@ LINE ID: ${form.lineId}
                         onChange={handleInputChange}
                         placeholder="กรอกชื่อจริงของคุณ"
                         className={cn(
-                          "w-full bg-black/40 border rounded-xl px-4 py-2.5 text-white text-sm font-prompt transition-all placeholder:text-white/20",
-                          formErrors.name ? "border-red-500/50" : "border-white/10 focus:border-cyan-500"
+                          "w-full bg-[#FEF9EF] border rounded-xl px-4 py-2.5 text-[#1E293B] text-sm font-prompt transition-all placeholder:text-slate-500",
+                          formErrors.name ? "border-red-500/50" : "border-amber-200/70 focus:border-cyan-500"
                         )}
                       />
-                      {formErrors.name && <p className="text-[11px] text-red-400 font-prompt">{formErrors.name}</p>}
+                      {formErrors.name && <p className="text-[11px] text-red-700 font-prompt">{formErrors.name}</p>}
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs text-white/50 font-prompt">เบอร์โทรติดต่อ *</label>
+                      <label className="text-xs text-slate-500 font-prompt">เบอร์โทรติดต่อ *</label>
                       <input 
                         type="text"
                         name="phone"
@@ -1882,15 +1882,15 @@ LINE ID: ${form.lineId}
                         onChange={handleInputChange}
                         placeholder="กรอกเบอร์โทร 10 หลัก"
                         className={cn(
-                          "w-full bg-black/40 border rounded-xl px-4 py-2.5 text-white text-sm font-prompt transition-all placeholder:text-white/20",
-                          formErrors.phone ? "border-red-500/50" : "border-white/10 focus:border-cyan-500"
+                          "w-full bg-[#FEF9EF] border rounded-xl px-4 py-2.5 text-[#1E293B] text-sm font-prompt transition-all placeholder:text-slate-500",
+                          formErrors.phone ? "border-red-500/50" : "border-amber-200/70 focus:border-cyan-500"
                         )}
                       />
-                      {formErrors.phone && <p className="text-[11px] text-red-400 font-prompt">{formErrors.phone}</p>}
+                      {formErrors.phone && <p className="text-[11px] text-red-700 font-prompt">{formErrors.phone}</p>}
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs text-white/50 font-prompt">LINE ID (สำหรับสิทธิ์ส่งสลิป) *</label>
+                      <label className="text-xs text-slate-500 font-prompt">LINE ID (สำหรับสิทธิ์ส่งสลิป) *</label>
                       <input 
                         type="text"
                         name="lineId"
@@ -1898,30 +1898,30 @@ LINE ID: ${form.lineId}
                         onChange={handleInputChange}
                         placeholder="เช่น aiaon_developer"
                         className={cn(
-                          "w-full bg-black/40 border rounded-xl px-4 py-2.5 text-white text-sm font-prompt transition-all placeholder:text-white/20",
-                          formErrors.lineId ? "border-red-500/50" : "border-white/10 focus:border-cyan-500"
+                          "w-full bg-[#FEF9EF] border rounded-xl px-4 py-2.5 text-[#1E293B] text-sm font-prompt transition-all placeholder:text-slate-500",
+                          formErrors.lineId ? "border-red-500/50" : "border-amber-200/70 focus:border-cyan-500"
                         )}
                       />
-                      {formErrors.lineId && <p className="text-[11px] text-red-400 font-prompt">{formErrors.lineId}</p>}
+                      {formErrors.lineId && <p className="text-[11px] text-red-700 font-prompt">{formErrors.lineId}</p>}
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs text-white/50 font-prompt">
+                      <label className="text-xs text-slate-500 font-prompt">
                         {selectedProduct === "cap" ? "จำนวนหมวกแก๊ป *" : "จำนวนเสื้อ *"}
                       </label>
-                      <div className="flex items-center h-10 border border-white/10 rounded-xl bg-black/40 overflow-hidden w-full max-w-[140px]">
+                      <div className="flex items-center h-10 border border-amber-200/70 rounded-xl bg-[#FEF9EF] overflow-hidden w-full max-w-[140px]">
                         <button 
                           onClick={() => qty > 1 && setQty(qty - 1)}
-                          className="w-10 h-full flex items-center justify-center hover:bg-white/5 text-white transition-colors"
+                          className="w-10 h-full flex items-center justify-center hover:bg-amber-50 text-[#1E293B] transition-colors"
                         >
                           <Minus className="w-3.5 h-3.5" />
                         </button>
-                        <span className="flex-1 text-center font-mono font-bold text-white text-sm">
+                        <span className="flex-1 text-center font-mono font-bold text-[#1E293B] text-sm">
                           {qty}
                         </span>
                         <button 
                           onClick={() => setQty(qty + 1)}
-                          className="w-10 h-full flex items-center justify-center hover:bg-white/5 text-white transition-colors"
+                          className="w-10 h-full flex items-center justify-center hover:bg-amber-50 text-[#1E293B] transition-colors"
                         >
                           <Plus className="w-3.5 h-3.5" />
                         </button>
@@ -1929,7 +1929,7 @@ LINE ID: ${form.lineId}
                     </div>
 
                     <div className="md:col-span-2 space-y-1.5">
-                      <label className="text-xs text-white/50 font-prompt">ที่อยู่สำหรับจัดส่งสินค้า *</label>
+                      <label className="text-xs text-slate-500 font-prompt">ที่อยู่สำหรับจัดส่งสินค้า *</label>
                       <textarea 
                         name="address"
                         value={form.address}
@@ -1937,25 +1937,25 @@ LINE ID: ${form.lineId}
                         rows={2}
                         placeholder="กรอก บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด รหัสไปรษณีย์"
                         className={cn(
-                          "w-full bg-black/40 border rounded-xl px-4 py-2.5 text-white text-sm font-prompt transition-all placeholder:text-white/20 resize-none",
-                          formErrors.address ? "border-red-500/50" : "border-white/10 focus:border-cyan-500"
+                          "w-full bg-[#FEF9EF] border rounded-xl px-4 py-2.5 text-[#1E293B] text-sm font-prompt transition-all placeholder:text-slate-500 resize-none",
+                          formErrors.address ? "border-red-500/50" : "border-amber-200/70 focus:border-cyan-500"
                         )}
                       />
-                      {formErrors.address && <p className="text-[11px] text-red-400 font-prompt">{formErrors.address}</p>}
+                      {formErrors.address && <p className="text-[11px] text-red-700 font-prompt">{formErrors.address}</p>}
                     </div>
                   </div>
                 </div>
               )}
 
               {/* NEXT / PREV BUTTON ROW */}
-              <div className="pt-8 mt-auto border-t border-white/5 flex items-center justify-between gap-4">
+              <div className="pt-8 mt-auto border-t border-amber-200/70 flex items-center justify-between gap-4">
                 {/* Active Info Tag */}
                 <div className="flex flex-col text-left">
-                  <span className="text-[11px] text-white/40 font-prompt leading-none uppercase">
+                  <span className="text-[11px] text-slate-500 font-prompt leading-none uppercase">
                     {selectedProduct === "cap" ? "ราคาต่อใบ" : "ราคาต่อตัว"}
                   </span>
-                  <span className="font-prompt font-bold text-white text-lg mt-0.5">
-                    {productUnitPrice} บาท <span className="text-xs text-white/50 font-normal">/ Qty: {qty}</span>
+                  <span className="font-prompt font-bold text-[#1E293B] text-lg mt-0.5">
+                    {productUnitPrice} บาท <span className="text-xs text-slate-500 font-normal">/ Qty: {qty}</span>
                   </span>
                 </div>
 
@@ -1990,29 +1990,29 @@ LINE ID: ${form.lineId}
             </div>
 
             {/* Price calculation list (always visible) */}
-            <div className="p-5 rounded-2xl glass-card border-white/5 bg-white/2 space-y-3.5">
-              <h4 className="font-prompt font-bold text-white text-sm flex items-center gap-1.5">
-                <ShoppingBag className="w-4 h-4 text-cyan-400" /> 
+            <div className="p-5 rounded-2xl glass-card border-amber-200/70 bg-white space-y-3.5">
+              <h4 className="font-prompt font-bold text-[#1E293B] text-sm flex items-center gap-1.5">
+                <ShoppingBag className="w-4 h-4 text-teal-700" /> 
                 {selectedProduct === "cap" ? "สรุปรายการออกแบบหมวกแก๊ป" : "สรุปรายการออกแบบเสื้อยืด"}
               </h4>
-              <div className="divide-y divide-white/5 text-xs font-prompt text-white/70 space-y-2">
+              <div className="divide-y divide-white/5 text-xs font-prompt text-slate-600 space-y-2">
                 <div className="flex justify-between pb-2">
                   {selectedProduct === "cap" ? (
                     <span>หมวกแก๊ปสตูดิโอ ({selectedStrap.name}) x {qty}</span>
                   ) : (
                     <span>เสื้อยืดพรีเมียม ({selectedSize.name}) x {qty}</span>
                   )}
-                  <span className="text-white">{productUnitPrice * qty} บาท</span>
+                  <span className="text-[#1E293B]">{productUnitPrice * qty} บาท</span>
                 </div>
                 {selectedProduct === "cap" ? (
                   <div className="flex justify-between py-2">
                     <span>งานปักหน้าหมวก (Studio Flagship Edition)</span>
-                    <span className="text-cyan-400">ฟรีงานปักพิเศษ</span>
+                    <span className="text-teal-700">ฟรีงานปักพิเศษ</span>
                   </div>
                 ) : (
                   <div className="flex justify-between py-2">
                     <span>ลายสกรีน ({selectedGraphic.name})</span>
-                    <span className="text-cyan-400">{selectedGraphic.priceBonus > 0 ? `+${selectedGraphic.priceBonus} บาท` : "ฟรีสกรีน"}</span>
+                    <span className="text-teal-700">{selectedGraphic.priceBonus > 0 ? `+${selectedGraphic.priceBonus} บาท` : "ฟรีสกรีน"}</span>
                   </div>
                 )}
                 {customText.trim() && (
@@ -2022,16 +2022,16 @@ LINE ID: ${form.lineId}
                         ? `ปักชื่อด้านหลังหมวก (${customText.toUpperCase()})`
                         : `พิมพ์ชื่อแขนเสื้อ (${customText.toUpperCase()})`}
                     </span>
-                    <span className="text-emerald-400">
+                    <span className="text-emerald-700">
                       {selectedProduct === "cap" ? "ฟรีงานปักชื่อพิเศษ" : "ฟรีพิมพ์ชื่อพิเศษ"}
                     </span>
                   </div>
                 )}
                 <div className="flex justify-between py-2">
                   <span>ค่าบริการจัดส่งพัสดุด่วน</span>
-                  <span className="text-white">{SHIPPING_FEE} บาท</span>
+                  <span className="text-[#1E293B]">{SHIPPING_FEE} บาท</span>
                 </div>
-                <div className="flex justify-between pt-2 text-sm font-bold border-t border-white/10 text-white">
+                <div className="flex justify-between pt-2 text-sm font-bold border-t border-amber-200/70 text-[#1E293B]">
                   <span>ยอดเงินรวมทั้งสิ้น</span>
                   <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-emerald-400 text-lg">
                     {totalPrice} บาท
@@ -2056,61 +2056,61 @@ LINE ID: ${form.lineId}
             className="fixed inset-0 z-[1000] flex items-center justify-center p-4"
           >
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-black/85 backdrop-blur-md" onClick={() => setPaymentStep("form")} />
+            <div className="absolute inset-0 bg-[#FEF9EF] backdrop-blur-md" onClick={() => setPaymentStep("form")} />
             
             {/* QR Code Container */}
             <motion.div 
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 10 }}
-              className="relative z-10 glass-card p-6 md:p-8 max-w-lg w-full text-center border-cyan-500/20 shadow-[0_0_50px_rgba(6,182,212,0.15)] flex flex-col gap-6"
+              className="relative z-10 glass-card p-6 md:p-8 max-w-lg w-full text-center border-teal-200 shadow-[0_0_50px_rgba(6,182,212,0.15)] flex flex-col gap-6"
             >
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center justify-between border-b border-amber-200/70 pb-4">
                 <div className="flex items-center gap-2">
-                  <CreditCard className="w-5 h-5 text-cyan-400" />
-                  <span className="font-prompt font-bold text-white text-base">ชำระเงินทาง PromptPay QR</span>
+                  <CreditCard className="w-5 h-5 text-teal-700" />
+                  <span className="font-prompt font-bold text-[#1E293B] text-base">ชำระเงินทาง PromptPay QR</span>
                 </div>
                 <button 
                   onClick={() => setPaymentStep("form")} 
-                  className="text-white/40 hover:text-white transition-colors font-prompt text-xs p-1"
+                  className="text-slate-500 hover:text-slate-900 transition-colors font-prompt text-xs p-1"
                 >
                   ย้อนกลับ
                 </button>
               </div>
 
               {/* Order Info Badge */}
-              <div className="bg-white/3 border border-white/5 rounded-2xl p-3.5 text-left text-xs font-prompt space-y-2">
-                <div className="flex justify-between text-white/55">
+              <div className="bg-white border border-amber-200/70 rounded-2xl p-3.5 text-left text-xs font-prompt space-y-2">
+                <div className="flex justify-between text-slate-600">
                   <span>เลขที่คำสั่งซื้อ:</span>
-                  <span className="font-mono font-bold text-white">{invoiceNumber}</span>
+                  <span className="font-mono font-bold text-[#1E293B]">{invoiceNumber}</span>
                 </div>
-                <div className="flex justify-between text-white/55">
+                <div className="flex justify-between text-slate-600">
                   <span>สินค้า:</span>
-                  <span className="font-semibold text-white">
+                  <span className="font-semibold text-[#1E293B]">
                     {selectedProduct === "cap" 
                       ? `หมวกแก๊ป ${selectedColor.name} (${selectedStrap.name})`
                       : `เสื้อ ${selectedColor.name} (${selectedSize.name}) [${selectedGraphic.name}]`}
                   </span>
                 </div>
                 {customText.trim() && (
-                  <div className="flex justify-between text-white/55">
+                  <div className="flex justify-between text-slate-600">
                     <span>{selectedProduct === "cap" ? "ปักชื่อหลังหมวก:" : "สกรีนชื่อ:"}</span>
-                    <span className="font-mono font-semibold text-emerald-400">{customText.toUpperCase()}</span>
+                    <span className="font-mono font-semibold text-emerald-700">{customText.toUpperCase()}</span>
                   </div>
                 )}
-                <div className="border-t border-white/5 pt-2 flex justify-between text-sm font-bold text-white">
+                <div className="border-t border-amber-200/70 pt-2 flex justify-between text-sm font-bold text-[#1E293B]">
                   <span>จำนวนเงินโอน:</span>
-                  <span className="text-cyan-400 text-base">{totalPrice}.00 บาท</span>
+                  <span className="text-teal-700 text-base">{totalPrice}.00 บาท</span>
                 </div>
               </div>
 
               {/* QR Code Renders */}
               <div className="mx-auto bg-white p-5 rounded-2xl flex flex-col items-center gap-3 w-fit shadow-2xl relative">
                 {/* PromptPay Header */}
-                <div className="w-[180px] h-[34px] relative bg-[#003d64] flex items-center justify-center rounded">
+                <div className="w-[180px] h-[34px] relative bg-[#FFFDF7] flex items-center justify-center rounded">
                   {/* PromptPay stylized text */}
-                  <span className="text-white font-bold tracking-wider text-[11px] font-sans">Prompt Pay</span>
-                  <span className="absolute -bottom-1 right-2 text-[6px] text-white/50">THAILAND</span>
+                  <span className="text-[#1E293B] font-bold tracking-wider text-[11px] font-sans">Prompt Pay</span>
+                  <span className="absolute -bottom-1 right-2 text-[6px] text-slate-500">THAILAND</span>
                 </div>
 
                 {qrCodePayload ? (
@@ -2132,21 +2132,21 @@ LINE ID: ${form.lineId}
               </div>
 
               <div className="space-y-1.5 font-prompt">
-                <p className="text-xs text-white/70">
+                <p className="text-xs text-slate-600">
                   สแกนรหัส QR ด้านบนเพื่อโอนเงินผ่านแอปธนาคารของคุณได้ทันที 
                 </p>
-                <p className="text-[11px] text-amber-300/80">
+                <p className="text-[11px] text-amber-700/80">
                   *สแกนเสร็จสิ้นกรุณาบันทึกรูปภาพสลิปชำระเงินไว้เพื่อใช้ยืนยันออเดอร์ในขั้นตอนถัดไป*
                 </p>
               </div>
 
               {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-2 pt-2 border-t border-white/5">
+              <div className="flex flex-col sm:flex-row gap-2 pt-2 border-t border-amber-200/70">
                 <button
                   onClick={copyOrderDetails}
-                  className="flex-1 py-3 px-4 rounded-xl border border-white/10 hover:border-white/20 bg-white/5 text-white font-prompt font-semibold text-xs transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                  className="flex-1 py-3 px-4 rounded-xl border border-amber-200/70 hover:border-amber-300 bg-white text-[#1E293B] font-prompt font-semibold text-xs transition-all flex items-center justify-center gap-1.5 active:scale-95"
                 >
-                  <Copy className="w-3.5 h-3.5 text-cyan-400" />
+                  <Copy className="w-3.5 h-3.5 text-teal-700" />
                   <span>{copiedInvoice ? "คัดลอกข้อมูลแล้ว!" : "คัดลอกข้อมูลใบสั่งซื้อ"}</span>
                 </button>
 
@@ -2170,7 +2170,7 @@ LINE ID: ${form.lineId}
             className="fixed inset-0 z-[1000] flex items-center justify-center p-4"
           >
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-black/85 backdrop-blur-md" />
+            <div className="absolute inset-0 bg-[#FEF9EF] backdrop-blur-md" />
             
             {/* Success Invoice receipt */}
             <motion.div 
@@ -2180,50 +2180,50 @@ LINE ID: ${form.lineId}
               className="relative z-10 glass-card p-8 max-w-md w-full text-center border-emerald-500/20 shadow-[0_0_50px_rgba(16,185,129,0.15)] flex flex-col items-center gap-5"
             >
               {/* Giant check icon */}
-              <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-2">
+              <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-700 mb-2">
                 <CheckCircle2 className="w-8 h-8 stroke-[2.5] animate-bounce" />
               </div>
 
-              <h2 className="font-prompt text-2xl font-bold text-white leading-tight">
+              <h2 className="font-prompt text-2xl font-bold text-[#1E293B] leading-tight">
                 จองสั่งซื้อเรียบร้อยแล้ว!
               </h2>
               
-              <p className="text-white/60 font-prompt text-xs leading-relaxed max-w-sm">
+              <p className="text-slate-600 font-prompt text-xs leading-relaxed max-w-sm">
                 การชำระเงินโอนได้รับการบันทึกในระบบจำลอง <strong>กรุณากดปุ่มด้านล่างเพื่อเปิด LINE ส่งสลิป</strong> และยืนยัน{selectedProduct === "cap" ? "รายละเอียดหมวก" : "ลายเสื้อ"}ที่ออกแบบกับแอดมินโดยตรงเพื่อผลิตสินค้า
               </p>
 
               {/* Receipt card info */}
-              <div className="w-full bg-white/3 border border-white/5 rounded-2xl p-4 text-left text-xs font-prompt space-y-2.5">
+              <div className="w-full bg-white border border-amber-200/70 rounded-2xl p-4 text-left text-xs font-prompt space-y-2.5">
                 <div className="flex justify-between">
-                  <span className="text-white/40">รหัสการโอนเงิน:</span>
-                  <span className="font-mono font-bold text-white">{invoiceNumber}</span>
+                  <span className="text-slate-500">รหัสการโอนเงิน:</span>
+                  <span className="font-mono font-bold text-[#1E293B]">{invoiceNumber}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-white/40">{selectedProduct === "cap" ? "สีหมวก / สายปรับ:" : "สีเสื้อ / ไซส์:"}</span>
-                  <span className="text-white">
+                  <span className="text-slate-500">{selectedProduct === "cap" ? "สีหมวก / สายปรับ:" : "สีเสื้อ / ไซส์:"}</span>
+                  <span className="text-[#1E293B]">
                     {selectedProduct === "cap" 
                       ? `${selectedColor.name} / ${selectedStrap.name}` 
                       : `${selectedColor.name} / ไซส์ ${selectedSize.name}`}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-white/40">{selectedProduct === "cap" ? "ดีไซน์หมวก:" : "ลายสกรีน:"}</span>
-                  <span className="text-cyan-400">
+                  <span className="text-slate-500">{selectedProduct === "cap" ? "ดีไซน์หมวก:" : "ลายสกรีน:"}</span>
+                  <span className="text-teal-700">
                     {selectedProduct === "cap" ? "AiAon Tech & Music Studio Flagship" : selectedGraphic.name}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-white/40">{selectedProduct === "cap" ? "ปักหลังหมวก:" : "สลักที่แขน:"}</span>
-                  <span className="font-mono font-bold text-emerald-400">{customText ? customText.toUpperCase() : "ไม่มี"}</span>
+                  <span className="text-slate-500">{selectedProduct === "cap" ? "ปักหลังหมวก:" : "สลักที่แขน:"}</span>
+                  <span className="font-mono font-bold text-emerald-700">{customText ? customText.toUpperCase() : "ไม่มี"}</span>
                 </div>
-                <div className="flex justify-between border-t border-white/5 pt-2.5 text-sm font-bold text-white">
+                <div className="flex justify-between border-t border-amber-200/70 pt-2.5 text-sm font-bold text-[#1E293B]">
                   <span>ชำระผ่าน PromptPay:</span>
-                  <span className="text-emerald-400">{totalPrice} บาท</span>
+                  <span className="text-emerald-700">{totalPrice} บาท</span>
                 </div>
               </div>
 
               {/* Copy message warning prompt */}
-              <div className="p-3.5 rounded-xl bg-cyan-500/5 border border-cyan-500/10 text-cyan-300 text-[11px] font-prompt text-left w-full leading-relaxed">
+              <div className="p-3.5 rounded-xl bg-cyan-500/5 border border-cyan-500/10 text-teal-700 text-[11px] font-prompt text-left w-full leading-relaxed">
                 📢 ลิงก์ด้านล่างจะเปิดโปรแกรม LINE เพื่อส่งสรุปคำสั่งซื้อให้แอดมินโดยอัตโนมัติ หากไม่มีไลน์เปิดได้กรุณากดปุ่ม <strong>&quot;คัดลอกข้อมูล&quot;</strong> เพื่อคัดลอกรายละเอียดไปแปะส่งให้แอดมินแทนครับ
               </div>
 
@@ -2233,18 +2233,18 @@ LINE ID: ${form.lineId}
                   href={generateLineUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-sm flex items-center justify-center gap-2 active:scale-95 transition-all shadow-[0_0_25px_rgba(6,199,85,0.2)]"
+                  className="w-full py-3.5 rounded-xl bg-[#FFFDF7] hover:bg-[#FFFDF7] text-[#1E293B] font-prompt font-bold text-sm flex items-center justify-center gap-2 active:scale-95 transition-all shadow-[0_0_25px_rgba(6,199,85,0.2)]"
                 >
-                  <RiLineLine className="w-5 h-5 text-white" />
+                  <RiLineLine className="w-5 h-5 text-[#1E293B]" />
                   <span>ส่งสลิป &amp; ยืนยันออเดอร์ผ่าน LINE</span>
                 </a>
 
                 <div className="flex gap-2 w-full">
                   <button
                     onClick={copyOrderDetails}
-                    className="flex-1 py-2.5 rounded-xl border border-white/10 hover:border-white/20 bg-white/5 text-white font-prompt font-semibold text-xs transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                    className="flex-1 py-2.5 rounded-xl border border-amber-200/70 hover:border-amber-300 bg-white text-[#1E293B] font-prompt font-semibold text-xs transition-all flex items-center justify-center gap-1.5 active:scale-95"
                   >
-                    <Copy className="w-3.5 h-3.5 text-cyan-400" />
+                    <Copy className="w-3.5 h-3.5 text-teal-700" />
                     <span>{copiedInvoice ? "คัดลอกแล้ว!" : "คัดลอกข้อมูลสรุป"}</span>
                   </button>
 
@@ -2255,7 +2255,7 @@ LINE ID: ${form.lineId}
                       setCustomText("");
                       setQty(1);
                     }}
-                    className="flex-1 py-2.5 rounded-xl border border-white/10 hover:border-white/20 bg-white/5 text-white/50 hover:text-white font-prompt font-semibold text-xs transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                    className="flex-1 py-2.5 rounded-xl border border-amber-200/70 hover:border-amber-300 bg-white text-slate-500 hover:text-slate-900 font-prompt font-semibold text-xs transition-all flex items-center justify-center gap-1.5 active:scale-95"
                   >
                     <span>{selectedProduct === "cap" ? "สั่งจองหมวกเพิ่ม" : "สั่งจองเสื้อเพิ่ม"}</span>
                   </button>

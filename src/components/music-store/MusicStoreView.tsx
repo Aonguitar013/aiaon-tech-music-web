@@ -298,7 +298,7 @@ export function MusicStoreView() {
                     {/* ──────────────── 3D Holographic Vinyl Record Mockup ──────────────── */}
                     <div
                       onClick={() => setSelectedProduct(item)}
-                      className="relative w-full my-4 cursor-pointer flex justify-center py-4 rounded-2xl bg-[#0F172A]"
+                      className="relative w-full my-4 cursor-pointer flex justify-center py-5 px-4 rounded-2xl bg-gradient-to-br from-[#FAF6EF] via-[#F4EDE2] to-[#ECE3D4] border border-[#E5DDD0] shadow-inner overflow-hidden"
                       title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของผลงานนี้"
                     >
                       <VinylRecordMockup
@@ -413,11 +413,12 @@ export function MusicStoreView() {
                     {item.id === "album-mnemonic-vol1" && (
                       <div className="rounded-xl p-2.5 bg-[#FEF9EF] border border-[#FDE68A] flex items-center justify-between gap-2">
                         <span className="text-[11px] text-[#92400E]">
-                          👑 <strong>คุ้มกว่าเมื่อซื้อคู่:</strong> รับเพลงนี้ฟรีทันทีเมื่อสมัครกลุ่ม Telegram ติวสอบบอท AI (390 ฿)
+                          👑 <strong>คุ้มกว่าเมื่อซื้อคู่:</strong> รับเพลงนี้ฟรีทันทีเมื่อสมัครกลุ่ม Telegram ติวสอบบอท AI{" "}
+                          <span className="whitespace-nowrap">(390 ฿)</span>
                         </span>
                         <Link
                           href="/teacher-prep#join-telegram"
-                          className="shrink-0 text-[11px] font-bold text-[#92400E] hover:text-[#0F172A] underline"
+                          className="shrink-0 whitespace-nowrap text-[11px] font-bold text-[#92400E] hover:text-[#0F172A] underline"
                         >
                           ดูบันเดิล 390 ฿ ➔
                         </Link>

@@ -225,14 +225,14 @@ export function NoBrainerBundles({ className }: { className?: string }) {
                 {/* Popular Corner Badge */}
                 {bundle.isBestValue && (
                   <div className="absolute -top-3.5 right-6 px-3.5 py-1 rounded-full bg-amber-500 text-white font-prompt font-extrabold text-[11px] uppercase tracking-wider shadow-sm flex items-center gap-1.5">
-                    <Star className="w-3.5 h-3.5 fill-white text-white" />
+                    <Star className="w-3.5 h-3.5 fill-white text-[#1E293B]" />
                     <span>แนะนำสูงสุด</span>
                   </div>
                 )}
 
                 {bundle.isHot && (
                   <div className="absolute -top-3.5 right-6 px-3.5 py-1 rounded-full bg-rose-600 text-white font-prompt font-extrabold text-[11px] uppercase tracking-wider shadow-sm flex items-center gap-1.5">
-                    <Flame className="w-3.5 h-3.5 fill-white text-white" />
+                    <Flame className="w-3.5 h-3.5 fill-white text-[#1E293B]" />
                     <span>ขายดีอันดับ 1</span>
                   </div>
                 )}
@@ -338,14 +338,14 @@ export function NoBrainerBundles({ className }: { className?: string }) {
                     data-line-price={`${bundle.price} ฿`}
                     data-line-code={bundle.itemCode}
                     title={`คลิกเพื่อสั่งซื้อ ${bundle.title} ผ่าน LINE OA`}
-                    className="w-full h-12 py-3 px-4 rounded-xl font-prompt font-extrabold text-sm sm:text-base flex items-center justify-between transition-all duration-300 hover:scale-[1.01] active:scale-[0.98] cursor-pointer bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] shadow-xs group/btn"
+                    className="w-full h-12 py-3 px-4 rounded-xl font-prompt font-extrabold text-sm sm:text-base flex items-center justify-between transition-all duration-300 hover:scale-[1.01] active:scale-[0.98] cursor-pointer bg-[#FFFDF7] hover:bg-[#FFFDF7] text-[#052E16] shadow-xs group/btn"
                   >
                     <div className="flex items-center gap-2">
                       <ShoppingCart className="w-4 h-4 text-[#052E16] shrink-0" />
                       <span>สั่งซื้อผ่าน LINE ({bundle.price} ฿)</span>
                     </div>
 
-                    <div className="w-6 h-6 rounded-lg bg-[#052E16]/12 flex items-center justify-center shrink-0">
+                    <div className="w-6 h-6 rounded-lg bg-[#FFFDF7]/12 flex items-center justify-center shrink-0">
                       <ArrowRight className="w-3.5 h-3.5 text-[#052E16] transition-transform group-hover/btn:translate-x-0.5" />
                     </div>
                   </a>

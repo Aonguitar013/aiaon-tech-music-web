@@ -40,7 +40,7 @@ export default function Home() {
       {/* Flagship showcase — preserved 100% (simulators, bundles, LINE order links); explicit dark panel guarantees contrast */}
       <section
         aria-label="Flagship showcase"
-        className="bg-[#0B1220] text-white rounded-t-[2.5rem] overflow-hidden"
+        className="bg-[#FFFDF7] text-[#1E293B] rounded-t-[2.5rem] overflow-hidden"
       >
         <HomeView />
       </section>

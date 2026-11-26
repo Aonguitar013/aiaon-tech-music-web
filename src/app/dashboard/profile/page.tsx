@@ -59,11 +59,11 @@ export default async function ProfilePage() {
       <div className="mb-10">
         <div className="flex items-center gap-3 mb-2">
             <div className="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500/50 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-                <User className="w-6 h-6 text-blue-400" />
+                <User className="w-6 h-6 text-blue-700" />
             </div>
-            <h1 className="font-prompt text-3xl md:text-4xl font-bold text-white">บัญชีและคอร์สเรียนของคุณ</h1>
+            <h1 className="font-prompt text-3xl md:text-4xl font-bold text-[#1E293B]">บัญชีและคอร์สเรียนของคุณ</h1>
         </div>
-        <p className="text-white/60 font-prompt">
+        <p className="text-slate-600 font-prompt">
             จัดการข้อมูลส่วนตัว ตรวจสอบสถานะการสั่งซื้อ และเข้าสู่ห้องเรียนได้ที่นี่
         </p>
       </div>
@@ -71,19 +71,19 @@ export default async function ProfilePage() {
       <div className="space-y-12">
           {/* Profile Section */}
           <section>
-              <h2 className="text-xl md:text-2xl font-bold font-prompt text-white mb-6 border-b border-white/10 pb-4">โปรไฟล์ส่วนตัว (Profile)</h2>
+              <h2 className="text-xl md:text-2xl font-bold font-prompt text-[#1E293B] mb-6 border-b border-amber-200/70 pb-4">โปรไฟล์ส่วนตัว (Profile)</h2>
               <ProfileManager user={user} initialProfile={profile} />
           </section>
 
           {/* My Learning Section */}
           <section>
-              <h2 className="text-xl md:text-2xl font-bold font-prompt text-white mb-6 border-b border-white/10 pb-4">สิ่งที่ฉันซื้อมา (My Purchases)</h2>
+              <h2 className="text-xl md:text-2xl font-bold font-prompt text-[#1E293B] mb-6 border-b border-amber-200/70 pb-4">สิ่งที่ฉันซื้อมา (My Purchases)</h2>
               <MyLearning items={learningItems} />
           </section>
 
           {/* Order History Section */}
           <section>
-              <h2 className="text-xl md:text-2xl font-bold font-prompt text-white mb-6 border-b border-white/10 pb-4">ประวัติการชำระเงิน (Order History)</h2>
+              <h2 className="text-xl md:text-2xl font-bold font-prompt text-[#1E293B] mb-6 border-b border-amber-200/70 pb-4">ประวัติการชำระเงิน (Order History)</h2>
               <OrderHistory orders={orders || []} />
           </section>
       </div>

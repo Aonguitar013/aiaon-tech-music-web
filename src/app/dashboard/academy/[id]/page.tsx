@@ -32,9 +32,9 @@ export default async function CoursePlayerPage({ params }: { params: Promise<{ i
 
   if (error || !course) {
     return (
-        <div className="w-full min-h-[50vh] flex flex-col items-center justify-center text-white/50">
+        <div className="w-full min-h-[50vh] flex flex-col items-center justify-center text-slate-500">
             <p className="font-prompt text-xl mb-4">ไม่พบคอร์สเรียนนี้</p>
-            <Link href="/dashboard/academy" className="text-blue-400 hover:text-blue-300 font-prompt underline">
+            <Link href="/dashboard/academy" className="text-blue-700 hover:text-blue-700 font-prompt underline">
                 กลับสู่หน้าหลัก
             </Link>
         </div>

@@ -27,8 +27,8 @@ export function DashboardChart({ data = [] }: { data?: ChartData[] }) {
        transition={{ duration: 0.5, delay: 0.2 }}
        className="glass-card p-6 border-blue-500/20 col-span-1 lg:col-span-2 flex flex-col min-h-[400px]"
     >
-        <h3 className="text-xl font-bold font-prompt text-white mb-2">สถิติยอดขายรวม (Verification Trends)</h3>
-        <p className="text-white/50 text-sm font-prompt mb-6">กราฟแสดงรายได้รวมจากการสั่งซื้อที่ตรวจสอบแล้ว</p>
+        <h3 className="text-xl font-bold font-prompt text-[#1E293B] mb-2">สถิติยอดขายรวม (Verification Trends)</h3>
+        <p className="text-slate-500 text-sm font-prompt mb-6">กราฟแสดงรายได้รวมจากการสั่งซื้อที่ตรวจสอบแล้ว</p>
         
         <div className="flex-1 w-full min-h-[300px] flex items-center justify-center">
             {!isMounted ? null : hasData ? (
@@ -51,8 +51,8 @@ export function DashboardChart({ data = [] }: { data?: ChartData[] }) {
                     </AreaChart>
                 </ResponsiveContainer>
             ) : (
-                <div className="flex flex-col items-center justify-center text-center text-white/20 gap-3">
-                    <div className="w-12 h-12 rounded-full border-2 border-dashed border-white/10 flex items-center justify-center">
+                <div className="flex flex-col items-center justify-center text-center text-slate-500 gap-3">
+                    <div className="w-12 h-12 rounded-full border-2 border-dashed border-amber-200/70 flex items-center justify-center">
                         <TrendingUp className="w-6 h-6" />
                     </div>
                     <p className="font-prompt text-sm">ยังไม่มีข้อมูลยอดขายในระบบ</p>

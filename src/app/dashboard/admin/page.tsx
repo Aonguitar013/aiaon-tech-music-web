@@ -58,17 +58,17 @@ export default async function AdminPage() {
     return (
       <div className="w-full min-h-[60vh] flex flex-col items-center justify-center gap-4 text-center px-4">
         <div className="w-20 h-20 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-2">
-          <ShieldAlert className="w-10 h-10 text-red-400" />
+          <ShieldAlert className="w-10 h-10 text-red-700" />
         </div>
-        <h1 className="text-2xl font-bold font-prompt text-white">
+        <h1 className="text-2xl font-bold font-prompt text-[#1E293B]">
           ไม่มีสิทธิ์เข้าถึง
         </h1>
-        <p className="text-white/50 font-prompt max-w-sm text-sm">
+        <p className="text-slate-500 font-prompt max-w-sm text-sm">
           หน้านี้สำหรับผู้ดูแลระบบเท่านั้น หากคิดว่าเกิดข้อผิดพลาด กรุณาติดต่อ Admin
         </p>
         <Link
           href="/dashboard"
-          className="mt-4 px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-full font-prompt text-sm transition-colors"
+          className="mt-4 px-6 py-2.5 bg-white hover:bg-amber-50 text-[#1E293B] rounded-full font-prompt text-sm transition-colors"
         >
           กลับหน้าหลัก
         </Link>
@@ -202,7 +202,7 @@ export default async function AdminPage() {
       <div className="mb-8">
         <Link
           href="/dashboard"
-          className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors font-prompt text-sm mb-6 group"
+          className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors font-prompt text-sm mb-6 group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
           กลับ Dashboard
@@ -211,20 +211,20 @@ export default async function AdminPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center shadow-[0_0_25px_rgba(6,182,212,0.2)] shrink-0">
-              <Receipt className="w-7 h-7 text-cyan-400" />
+              <Receipt className="w-7 h-7 text-teal-700" />
             </div>
             <div>
-              <h1 className="font-prompt text-3xl md:text-4xl font-extrabold text-white">
+              <h1 className="font-prompt text-3xl md:text-4xl font-extrabold text-[#1E293B]">
                 Admin — ศูนย์ควบคุม &amp; วิเคราะห์ลูกค้า CRM
               </h1>
-              <p className="text-white/50 font-prompt text-sm mt-1">
+              <p className="text-slate-500 font-prompt text-sm mt-1">
                 ตรวจอนุมัติสลิป, สถิติยอดขาย, ทำเนียบลูกค้า และประวัติการซื้อซ้ำแบบ Real-time
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-prompt font-semibold flex items-center gap-1.5 shadow-md">
+            <span className="px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-700 text-xs font-prompt font-semibold flex items-center gap-1.5 shadow-md">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>ระบบพร้อมรับออเดอร์ 24 ชม.</span>
             </span>
@@ -239,7 +239,7 @@ export default async function AdminPage() {
             label: "ยอดขายสะสมรวม",
             value: `฿${totalRevenue.toLocaleString()}`,
             icon: DollarSign,
-            color: "text-emerald-400",
+            color: "text-emerald-700",
             bg: "bg-emerald-500/10",
             border: "border-emerald-500/20",
           },
@@ -247,15 +247,15 @@ export default async function AdminPage() {
             label: "ลูกค้าทั้งหมด (Total Buyers)",
             value: `${totalBuyersCount} ท่าน`,
             icon: Users,
-            color: "text-cyan-400",
+            color: "text-teal-700",
             bg: "bg-cyan-500/10",
-            border: "border-cyan-500/20",
+            border: "border-teal-200",
           },
           {
             label: "ลูกค้าซื้อซ้ำ (Repeat VIP)",
             value: `${repeatBuyersCount} ท่าน (${repeatRate}%)`,
             icon: Crown,
-            color: "text-amber-400",
+            color: "text-amber-700",
             bg: "bg-amber-500/10",
             border: "border-amber-500/20",
           },
@@ -263,7 +263,7 @@ export default async function AdminPage() {
             label: "รอตรวจสลิป (Pending)",
             value: pendingOrders.length,
             icon: Clock,
-            color: "text-orange-400",
+            color: "text-orange-700",
             bg: "bg-orange-500/10",
             border: "border-orange-500/20",
             pulse: pendingOrders.length > 0,
@@ -271,7 +271,7 @@ export default async function AdminPage() {
         ].map((stat) => (
           <div
             key={stat.label}
-            className={`glass-card p-5 flex items-center gap-4 border ${stat.border} relative overflow-hidden bg-slate-950/80 rounded-2xl`}
+            className={`glass-card p-5 flex items-center gap-4 border ${stat.border} relative overflow-hidden bg-white rounded-2xl`}
           >
             <div
               className={`w-11 h-11 rounded-xl ${stat.bg} flex items-center justify-center shrink-0 shadow-md`}
@@ -282,7 +282,7 @@ export default async function AdminPage() {
               <p className={`text-xl md:text-2xl font-black font-prompt ${stat.color} truncate`}>
                 {stat.value}
               </p>
-              <p className="text-xs text-white/50 font-prompt truncate">{stat.label}</p>
+              <p className="text-xs text-slate-500 font-prompt truncate">{stat.label}</p>
             </div>
             {stat.pulse && Number(stat.value) > 0 && (
               <div className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-orange-400 animate-ping" />
@@ -296,43 +296,43 @@ export default async function AdminPage() {
         <DashboardChart data={chartData} />
 
         {/* Best Sellers */}
-        <div className="glass-card p-6 border-white/10 lg:col-span-1 flex flex-col min-h-[400px] bg-slate-950/80 rounded-2xl">
+        <div className="glass-card p-6 border-amber-200/70 lg:col-span-1 flex flex-col min-h-[400px] bg-white rounded-2xl">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
-              <Trophy className="w-5 h-5 text-yellow-400" />
+              <Trophy className="w-5 h-5 text-yellow-700" />
             </div>
             <div>
-              <h3 className="text-xl font-bold font-prompt text-white leading-tight">ระบบขายดีที่สุด</h3>
-              <p className="text-xs text-white/50 font-prompt">Top 5 Best Sellers</p>
+              <h3 className="text-xl font-bold font-prompt text-[#1E293B] leading-tight">ระบบขายดีที่สุด</h3>
+              <p className="text-xs text-slate-500 font-prompt">Top 5 Best Sellers</p>
             </div>
           </div>
 
           <div className="space-y-3 flex-1">
             {bestSellers.length > 0 ? (
               bestSellers.map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group">
+                <div key={idx} className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-amber-200/70 hover:bg-amber-50 transition-colors group">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 text-xs font-bold font-prompt ${idx === 0 ? 'bg-yellow-500/20 border-yellow-500/40 text-yellow-400 shadow-md' :
-                        idx === 1 ? 'bg-slate-300/20 border-slate-300/40 text-slate-300' :
-                          idx === 2 ? 'bg-orange-700/20 border-orange-700/40 text-orange-400' :
-                            'bg-white/5 border-white/10 text-white/40'
+                    <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 text-xs font-bold font-prompt ${idx === 0 ? 'bg-yellow-500/20 border-yellow-500/40 text-yellow-700 shadow-md' :
+                        idx === 1 ? 'bg-slate-300/20 border-slate-300/40 text-slate-700' :
+                          idx === 2 ? 'bg-orange-700/20 border-orange-700/40 text-orange-700' :
+                            'bg-white border-amber-200/70 text-slate-500'
                       }`}>
                       #{idx + 1}
                     </div>
                     <div className="min-w-0 pr-2">
-                      <h4 className="text-white font-prompt font-medium truncate text-sm leading-tight mb-0.5">{item.title}</h4>
-                      <p className="text-[11px] text-white/40 font-prompt">{item.type} • {item.count} orders</p>
+                      <h4 className="text-[#1E293B] font-prompt font-medium truncate text-sm leading-tight mb-0.5">{item.title}</h4>
+                      <p className="text-[11px] text-slate-500 font-prompt">{item.type} • {item.count} orders</p>
                     </div>
                   </div>
-                  <div className="text-right shrink-0 bg-white/5 px-2.5 py-1 rounded-lg border border-white/5 group-hover:border-emerald-500/20 transition-colors">
-                    <p className="text-sm font-bold text-emerald-400 font-prompt">฿{item.revenue.toLocaleString()}</p>
+                  <div className="text-right shrink-0 bg-white px-2.5 py-1 rounded-lg border border-amber-200/70 group-hover:border-emerald-500/20 transition-colors">
+                    <p className="text-sm font-bold text-emerald-700 font-prompt">฿{item.revenue.toLocaleString()}</p>
                   </div>
                 </div>
               ))
             ) : (
-              <div className="flex flex-col items-center justify-center h-full text-white/20 gap-3 py-10">
+              <div className="flex flex-col items-center justify-center h-full text-slate-500 gap-3 py-10">
                 <ShoppingBag className="w-10 h-10 opacity-30" />
-                <p className="font-prompt text-sm text-white/40">ยังไม่มีข้อมูลสินค้าขายดี</p>
+                <p className="font-prompt text-sm text-slate-500">ยังไม่มีข้อมูลสินค้าขายดี</p>
               </div>
             )}
           </div>
@@ -344,26 +344,26 @@ export default async function AdminPage() {
         <div className="flex items-center justify-between gap-4 mb-5">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center shadow-md">
-              <Crown className="w-5 h-5 text-amber-400" />
+              <Crown className="w-5 h-5 text-amber-700" />
             </div>
             <div>
-              <h2 className="text-xl font-bold font-prompt text-white flex items-center gap-2">
+              <h2 className="text-xl font-bold font-prompt text-[#1E293B] flex items-center gap-2">
                 <span>ทำเนียบลูกค้า &amp; สถิติการซื้อซ้ำ (Customer CRM)</span>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-700 border border-amber-500/30">
                   {customerList.length} ลูกค้า
                 </span>
               </h2>
-              <p className="text-xs text-white/50 font-prompt">
+              <p className="text-xs text-slate-500 font-prompt">
                 รายชื่อผู้สั่งซื้อทั้งหมด ยอดใช้จ่ายสะสม (LTV) และสถานะลูกค้าซื้อซ้ำ
               </p>
             </div>
           </div>
         </div>
 
-        <div className="glass-card overflow-hidden border-white/10 bg-slate-950/80 rounded-3xl shadow-xl">
+        <div className="glass-card overflow-hidden border-amber-200/70 bg-white rounded-3xl shadow-xl">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm font-prompt text-white whitespace-nowrap">
-              <thead className="bg-white/5 border-b border-white/10 text-white/50 text-xs uppercase tracking-wider">
+            <table className="w-full text-left text-sm font-prompt text-[#1E293B] whitespace-nowrap">
+              <thead className="bg-white border-b border-amber-200/70 text-slate-500 text-xs uppercase tracking-wider">
                 <tr>
                   <th className="px-5 py-4 font-medium">ลูกค้า / อีเมล</th>
                   <th className="px-5 py-4 font-medium text-center">สถานะความภักดี</th>
@@ -376,46 +376,46 @@ export default async function AdminPage() {
               <tbody className="divide-y divide-white/5">
                 {customerList.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="px-5 py-12 text-center text-white/30 font-prompt">
+                    <td colSpan={6} className="px-5 py-12 text-center text-slate-500 font-prompt">
                       ยังไม่มีข้อมูลลูกค้าที่อนุมัติสำเร็จ (พร้อมบันทึกทันทีเมื่อมีออเดอร์แรก!)
                     </td>
                   </tr>
                 ) : (
                   customerList.map((cust, cIdx) => (
-                    <tr key={cIdx} className="hover:bg-white/5 transition-colors">
+                    <tr key={cIdx} className="hover:bg-amber-50 transition-colors">
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-2.5">
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${
-                            cust.isRepeatBuyer ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
+                            cust.isRepeatBuyer ? 'bg-amber-500/20 text-amber-700 border border-amber-500/40' : 'bg-cyan-500/20 text-teal-700 border border-cyan-500/40'
                           }`}>
                             {cust.name.slice(0, 1).toUpperCase()}
                           </div>
                           <div>
-                            <p className="font-bold text-white text-sm">{cust.name}</p>
-                            <p className="text-[11px] text-white/40 font-mono">{cust.userId.slice(0, 12)}…</p>
+                            <p className="font-bold text-[#1E293B] text-sm">{cust.name}</p>
+                            <p className="text-[11px] text-slate-500 font-mono">{cust.userId.slice(0, 12)}…</p>
                           </div>
                         </div>
                       </td>
 
                       <td className="px-5 py-4 text-center">
                         {cust.isRepeatBuyer ? (
-                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-                            <Crown className="w-3.5 h-3.5 text-amber-400" />
+                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-500/20 text-amber-700 border border-amber-500/40 text-xs font-bold shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+                            <Crown className="w-3.5 h-3.5 text-amber-700" />
                             <span>👑 VIP ซื้อซ้ำ ({cust.ordersCount} ครั้ง)</span>
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 text-xs font-medium">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-cyan-500/10 text-teal-700 border border-teal-200 text-xs font-medium">
                             <span>🟢 ลูกค้าใหม่ (1 ครั้ง)</span>
                           </span>
                         )}
                       </td>
 
-                      <td className="px-5 py-4 text-center font-bold text-white">
+                      <td className="px-5 py-4 text-center font-bold text-[#1E293B]">
                         {cust.ordersCount} ระบบ
                       </td>
 
                       <td className="px-5 py-4">
-                        <span className="font-black text-emerald-400 text-base">
+                        <span className="font-black text-emerald-700 text-base">
                           ฿{cust.totalSpent.toLocaleString()}
                         </span>
                       </td>
@@ -423,14 +423,14 @@ export default async function AdminPage() {
                       <td className="px-5 py-4">
                         <div className="flex flex-wrap gap-1 max-w-[280px]">
                           {cust.items.map((it, iIdx) => (
-                            <span key={iIdx} className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] text-white/70 truncate max-w-[200px]" title={it}>
+                            <span key={iIdx} className="px-2 py-0.5 rounded-md bg-white border border-amber-200/70 text-[11px] text-slate-600 truncate max-w-[200px]" title={it}>
                               {it}
                             </span>
                           ))}
                         </div>
                       </td>
 
-                      <td className="px-5 py-4 text-white/40 text-xs">
+                      <td className="px-5 py-4 text-slate-500 text-xs">
                         {new Date(cust.lastOrderDate).toLocaleDateString("th-TH", {
                           day: "numeric",
                           month: "short",
@@ -452,11 +452,11 @@ export default async function AdminPage() {
           {pendingOrders.length > 0 && (
             <div className="w-2.5 h-2.5 rounded-full bg-orange-400 animate-pulse shrink-0" />
           )}
-          <h2 className="text-xl font-bold font-prompt text-white">
+          <h2 className="text-xl font-bold font-prompt text-[#1E293B]">
             รอการอนุมัติสลิป{" "}
             <span
               className={
-                pendingOrders.length > 0 ? "text-orange-400" : "text-white/30"
+                pendingOrders.length > 0 ? "text-orange-700" : "text-slate-500"
               }
             >
               ({pendingOrders.length})
@@ -465,12 +465,12 @@ export default async function AdminPage() {
         </div>
 
         {pendingOrders.length === 0 ? (
-          <div className="glass-card p-12 border-white/5 flex flex-col items-center justify-center text-center bg-slate-950/80 rounded-3xl">
-            <CheckCircle2 className="w-16 h-16 text-emerald-400/40 mb-4" />
-            <p className="font-prompt text-white/50 text-lg">
+          <div className="glass-card p-12 border-amber-200/70 flex flex-col items-center justify-center text-center bg-white rounded-3xl">
+            <CheckCircle2 className="w-16 h-16 text-emerald-700/40 mb-4" />
+            <p className="font-prompt text-slate-500 text-lg">
               ไม่มีคำสั่งซื้อที่รอการอนุมัติ 🎉
             </p>
-            <p className="font-prompt text-white/30 text-sm mt-1">
+            <p className="font-prompt text-slate-500 text-sm mt-1">
               ระบบจะแสดงคำสั่งซื้อใหม่และแจ้งเตือนโดยอัตโนมัติ
             </p>
           </div>
@@ -488,16 +488,16 @@ export default async function AdminPage() {
 
       {/* ── All Orders History ────────────────────────────────── */}
       <section>
-        <h2 className="text-xl font-bold font-prompt text-white mb-5 flex items-center gap-3">
-          <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
+        <h2 className="text-xl font-bold font-prompt text-[#1E293B] mb-5 flex items-center gap-3">
+          <div className="w-2.5 h-2.5 rounded-full bg-white" />
           ประวัติคำสั่งซื้อทั้งหมด{" "}
-          <span className="text-white/40">({allOrders.length})</span>
+          <span className="text-slate-500">({allOrders.length})</span>
         </h2>
 
-        <div className="glass-card overflow-hidden border-white/10 bg-slate-950/80 rounded-3xl">
+        <div className="glass-card overflow-hidden border-amber-200/70 bg-white rounded-3xl">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm font-prompt text-white whitespace-nowrap">
-              <thead className="bg-white/5 border-b border-white/10 text-white/50 text-xs uppercase tracking-wider">
+            <table className="w-full text-left text-sm font-prompt text-[#1E293B] whitespace-nowrap">
+              <thead className="bg-white border-b border-amber-200/70 text-slate-500 text-xs uppercase tracking-wider">
                 <tr>
                   <th className="px-5 py-4 font-medium">วันที่</th>
                   <th className="px-5 py-4 font-medium">ลูกค้า</th>
@@ -512,7 +512,7 @@ export default async function AdminPage() {
                   <tr>
                     <td
                       colSpan={6}
-                      className="px-5 py-10 text-center text-white/30 font-prompt"
+                      className="px-5 py-10 text-center text-slate-500 font-prompt"
                     >
                       ยังไม่มีคำสั่งซื้อในระบบ
                     </td>
@@ -536,18 +536,18 @@ export default async function AdminPage() {
                     return (
                       <tr
                         key={order.id}
-                        className="hover:bg-white/5 transition-colors group"
+                        className="hover:bg-amber-50 transition-colors group"
                       >
-                        <td className="px-5 py-3.5 text-white/40 text-xs" suppressHydrationWarning>
+                        <td className="px-5 py-3.5 text-slate-500 text-xs" suppressHydrationWarning>
                           {dateStr}
                         </td>
-                        <td className="px-5 py-3.5 text-white/80 max-w-[160px] truncate">
+                        <td className="px-5 py-3.5 text-slate-800 max-w-[160px] truncate">
                           {customerName}
                         </td>
                         <td className="px-5 py-3.5 font-medium max-w-[220px] truncate">
                           {itemName}
                         </td>
-                        <td className="px-5 py-3.5 font-bold text-emerald-400">
+                        <td className="px-5 py-3.5 font-bold text-emerald-700">
                           {order.amount}
                         </td>
                         <td className="px-5 py-3.5">
@@ -559,12 +559,12 @@ export default async function AdminPage() {
                               href={order.slip_url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 text-xs underline-offset-2 underline"
+                              className="inline-flex items-center gap-1 text-teal-700 hover:text-teal-700 text-xs underline-offset-2 underline"
                             >
                               <Eye className="w-3 h-3" /> ดูสลิป
                             </a>
                           ) : (
-                            <span className="text-white/20 text-xs">—</span>
+                            <span className="text-slate-500 text-xs">—</span>
                           )}
                         </td>
                       </tr>
@@ -586,24 +586,24 @@ function StatusBadge({ status }: { status: string }) {
   const map: Record<string, { label: string; cls: string; dot: string }> = {
     pending: {
       label: "รอตรวจสอบ",
-      cls: "bg-orange-500/10 text-orange-400 border-orange-500/20",
+      cls: "bg-orange-500/10 text-orange-700 border-orange-500/20",
       dot: "bg-orange-400",
     },
     completed: {
       label: "สำเร็จ",
-      cls: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+      cls: "bg-emerald-500/10 text-emerald-700 border-emerald-500/20",
       dot: "bg-emerald-400",
     },
     rejected: {
       label: "ปฏิเสธ",
-      cls: "bg-red-500/10 text-red-400 border-red-500/20",
+      cls: "bg-red-500/10 text-red-700 border-red-500/20",
       dot: "bg-red-400",
     },
   };
   const entry = map[status] ?? {
     label: status,
-    cls: "bg-white/10 text-white/60 border-white/20",
-    dot: "bg-white/40",
+    cls: "bg-white text-slate-600 border-amber-200/70",
+    dot: "bg-white",
   };
   return (
     <div
@@ -634,28 +634,28 @@ function OrderCard({
   });
 
   return (
-    <div className="glass-card border-orange-500/20 overflow-hidden bg-slate-950/90 rounded-2xl shadow-xl">
+    <div className="glass-card border-orange-500/20 overflow-hidden bg-white rounded-2xl shadow-xl">
       <div className="h-1 w-full bg-linear-to-r from-orange-500 to-amber-400" />
 
       <div className="p-6">
         <div className="flex flex-col lg:flex-row gap-6">
           <div className="flex-1 min-w-0 space-y-3 font-prompt">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs text-white/40">{dateStr}</span>
-              <span className="text-white/20">•</span>
-              <span className="text-xs bg-white/10 px-2 py-0.5 rounded text-white/70">
+              <span className="text-xs text-slate-500">{dateStr}</span>
+              <span className="text-slate-500">•</span>
+              <span className="text-xs bg-white px-2 py-0.5 rounded text-slate-600">
                 {itemType}
               </span>
             </div>
 
-            <h3 className="text-lg font-bold text-white truncate">{itemName}</h3>
+            <h3 className="text-lg font-bold text-[#1E293B] truncate">{itemName}</h3>
 
             <div className="flex flex-wrap items-center gap-4 text-sm">
-              <span className="text-white/50">
-                ลูกค้า: <strong className="text-white">{customerName}</strong>
+              <span className="text-slate-500">
+                ลูกค้า: <strong className="text-[#1E293B]">{customerName}</strong>
               </span>
-              <span className="text-white/50">
-                ยอดโอน: <strong className="text-emerald-400 font-bold">{order.amount}</strong>
+              <span className="text-slate-500">
+                ยอดโอน: <strong className="text-emerald-700 font-bold">{order.amount}</strong>
               </span>
             </div>
           </div>
@@ -666,9 +666,9 @@ function OrderCard({
                 href={order.slip_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-white font-prompt text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                className="px-4 py-2.5 rounded-xl border border-amber-200/70 bg-white hover:bg-amber-50 text-[#1E293B] font-prompt text-xs font-semibold flex items-center gap-1.5 transition-colors"
               >
-                <Eye className="w-4 h-4 text-cyan-400" />
+                <Eye className="w-4 h-4 text-teal-700" />
                 <span>ตรวจสลิป</span>
               </a>
             )}
@@ -679,7 +679,7 @@ function OrderCard({
             }}>
               <button
                 type="submit"
-                className="px-4 py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/30 font-prompt text-xs font-semibold transition-colors cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-700 border border-red-500/30 font-prompt text-xs font-semibold transition-colors cursor-pointer"
               >
                 ปฏิเสธ
               </button>
