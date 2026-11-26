@@ -803,7 +803,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
               })}
             </div>
             <span className="text-xs font-mono text-[#64748B]">
-              พบ <strong className="text-[#0F172A]">{filteredFreebies.length}</strong> รายการแจกฟรี
+              พบ <strong className="text-[#0F172A]">{filtered.length}</strong> รายการแจกฟรี
             </span>
           </div>
 
