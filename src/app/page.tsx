@@ -29,6 +29,14 @@ export const metadata: Metadata = {
     description:
       "รวมระบบอัตโนมัติ Google Apps Script 20+ ระบบ, คลัง 30 E-Book ครูไทย 3D, บอทติวสอบครูผู้ช่วย, AI Caretaker ดูแลร้านค้า 24 ชม. และคลังเพลงเพื่อการศึกษา",
     type: "website",
+    images: [
+      {
+        url: "/brand/og-main.jpg",
+        width: 1200,
+        height: 630,
+        alt: "AiAon Tech — Intelligent Technology. More Human Life.",
+      },
+    ],
   },
 };
 

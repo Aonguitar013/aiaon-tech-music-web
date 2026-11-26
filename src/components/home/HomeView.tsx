@@ -26,7 +26,7 @@ const PILLARS = [
     audience: "สำหรับครู โรงเรียน & องค์กร",
     title: "ระบบอัตโนมัติโรงเรียน & AI ติวเตอร์",
     desc: "รวม 20+ ระบบ Google Apps Script ใช้งานจริงในโรงเรียนใหญ่ (แจ้งซ่อม QR, สุขาภิบาล, เช็กชื่อ, ห้องเรียนสีขาว) พร้อม KruRank AI และรับพัฒนาเว็บแอป",
-    image: "/images/mockups/aona09_repair_telegram_mockup.jpg",
+    image: "/brand/visuals/hero_aiaon_tech.webp",
     accentBorder: "hover:border-[#2563EB]/50",
     pillBg: "bg-blue-50 text-[#1D4ED8] border-blue-200",
     ctaBg: "bg-[#1D4ED8] hover:bg-[#1E40AF] text-white",
@@ -46,7 +46,7 @@ const PILLARS = [
     audience: "สำหรับพ่อแม่ & ครูอนุบาล (วัย 3–6 ปี)",
     title: "สื่อกิจกรรมเด็กเล็กไร้จอ + Hybrid QR",
     desc: "6 เล่ม 192 หน้า โดยแก๊ง 6 แมว (ฝึกสมอง EF, ตารางวินัย 30 วัน, Busy Book แปรงฟัน, ดนตรีเสียงจริง, Phonics, ศิลปะ SEL) โหลดทดลองฟรี 30 หน้า",
-    image: "/edu/hero-banner-6cats.webp",
+    image: "/brand/visuals/hero_aiaon_edu.webp",
     accentBorder: "hover:border-[#F59E0B]/60",
     pillBg: "bg-amber-50 text-[#92400E] border-amber-200",
     ctaBg: "bg-[#92400E] hover:bg-[#78350F] text-white",
@@ -66,7 +66,7 @@ const PILLARS = [
     audience: "สำหรับผู้สอบครู นักดนตรี & ครีเอเตอร์",
     title: "เพลงช่วยจำสอบครู & BGM ปลอดลิขสิทธิ์",
     desc: "เพลงช่วยจำกฎหมายการศึกษา, ดนตรีประกอบคลิป ว.PA ปลอดลิขสิทธิ์ 100%, Backing Track วงดนตรี และเทมเพลตสตูดิโอ Cubase ระดับมืออาชีพ",
-    image: "/images/mockups/indie_folk_guitar_cover.png",
+    image: "/brand/visuals/hero_aiaon_audio.webp",
     accentBorder: "hover:border-[#EA580C]/50",
     pillBg: "bg-orange-50 text-[#C2410C] border-orange-200",
     ctaBg: "bg-[#0F766E] hover:bg-[#115E59] text-white",
@@ -86,7 +86,7 @@ const PILLARS = [
     audience: "สำหรับร้านค้า องค์กร ครู & บุคคลทั่วไป",
     title: "รับทำสติกเกอร์ LINE 3D & คาแรกเตอร์ส่วนตัว",
     desc: "ปั้นสติกเกอร์ 3D จากรูปถ่ายจริง ดูแลครบวงจรจนอนุมัติขึ้น LINE STORE พร้อมพอร์ตผลงานจริงกว่า 30+ ชุด On Sale และไฟล์ PNG พื้นใสแต่งปกร้าน",
-    image: "/edu/shabu-3d.webp",
+    image: "/brand/visuals/hero_aiaon_studio.webp",
     accentBorder: "hover:border-[#7C3AED]/50",
     pillBg: "bg-purple-50 text-[#6D28D9] border-purple-200",
     ctaBg: "bg-[#6D28D9] hover:bg-[#5B21B6] text-white",
@@ -269,7 +269,7 @@ export function HomeView() {
                   className="col-span-6 group relative rounded-3xl overflow-hidden bg-white border border-[#E2E8F0] shadow-sm hover:shadow-md transition-all aspect-[4/3]"
                 >
                   <Image
-                    src="/images/mockups/aona09_repair_telegram_mockup.jpg"
+                    src="/brand/visuals/hero_aiaon_tech.webp"
                     alt="AiAon Tech School Automation"
                     fill
                     className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
@@ -291,10 +291,10 @@ export function HomeView() {
                   className="col-span-6 group relative rounded-3xl overflow-hidden bg-[#FAF5FF] border border-[#E2E8F0] shadow-sm hover:shadow-md transition-all aspect-[4/3]"
                 >
                   <Image
-                    src="/edu/shabu-3d.webp"
+                    src="/brand/visuals/hero_aiaon_studio.webp"
                     alt="AiAon Studio 3D LINE Stickers"
                     fill
-                    className="object-contain p-3 group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
                     sizes="(max-width: 1024px) 50vw, 300px"
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/80 via-[#0F172A]/25 to-transparent p-3.5">
@@ -353,11 +353,7 @@ export function HomeView() {
                     src={p.image}
                     alt={p.title}
                     fill
-                    className={
-                      p.id === "studio"
-                        ? "object-contain p-4 group-hover:scale-105 transition-transform duration-500"
-                        : "object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                    }
+                    className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, 600px"
                   />
                   <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs border border-[#E2E8F0] text-xs font-mono font-bold text-[#0F172A] shadow-2xs">

@@ -398,8 +398,8 @@ export function DigitalVaultView({ initialProducts }: { initialProducts: Product
               <div className="rounded-3xl bg-white border border-[#E2E8F0] p-3 shadow-md space-y-3">
                 <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#E2E8F0]">
                   <Image
-                    src="/images/mockups/aona09_repair_telegram_mockup.jpg"
-                    alt="ระบบแจ้งซ่อมอัจฉริยะ Telegram 2 ทาง"
+                    src="/brand/visuals/hero_aiaon_tech.webp"
+                    alt="AiAon Tech — ระบบโรงเรียนอัตโนมัติ"
                     fill
                     priority
                     className="object-cover"
