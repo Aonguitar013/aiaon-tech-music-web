@@ -22,6 +22,8 @@ import {
   Zap,
   X,
   Library,
+  LayoutGrid,
+  Eye,
 } from "lucide-react";
 import rawEbooks from "@/data/ebooks-catalog.json";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
@@ -78,6 +80,7 @@ export function EbooksCatalogView() {
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
   const [detailEbook, setDetailEbook] = useState<EbookMetadata | null>(null);
+  const [viewMode, setViewMode] = useState<"shelf" | "grid">("shelf");
 
   const addToCart = (item: EbookItem) => {
     if (!cart.some((c) => c.code === item.code)) {
@@ -581,17 +584,55 @@ export function EbooksCatalogView() {
         ══════════════════════════════════════════════════════ */}
         <section className="px-4 sm:px-6 lg:px-8 max-w-[1240px] mx-auto mb-20">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-            <div className="text-sm text-[#475569]">
-              แสดงผล{" "}
-              <span className="text-[#0F172A] font-extrabold">
-                {filteredBooks.length}
-              </span>{" "}
-              จาก {EBOOKS_DATA.length} เล่ม
-              {searchQuery.trim() !== "" && (
-                <span className="ml-2 text-xs text-[#92400E] font-semibold">
-                  สำหรับคำค้น “{searchQuery}”
-                </span>
-              )}
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="text-sm text-[#475569]">
+                แสดงผล{" "}
+                <span className="text-[#0F172A] font-extrabold">
+                  {filteredBooks.length}
+                </span>{" "}
+                จาก {EBOOKS_DATA.length} เล่ม
+                {searchQuery.trim() !== "" && (
+                  <span className="ml-2 text-xs text-[#92400E] font-semibold">
+                    สำหรับคำค้น “{searchQuery}”
+                  </span>
+                )}
+              </div>
+
+              {/* View Mode Switcher: Architectural 3D Smart Shelf vs Detailed Grid */}
+              <div
+                role="tablist"
+                aria-label="เลือกรูปแบบการแสดงชั้นหนังสือ"
+                className="inline-flex items-center p-1 rounded-xl bg-white border border-[#E2E8F0] shadow-2xs"
+              >
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={viewMode === "shelf"}
+                  onClick={() => setViewMode("shelf")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5 transition cursor-pointer ${
+                    viewMode === "shelf"
+                      ? "bg-[#0F172A] text-white shadow-xs"
+                      : "text-[#475569] hover:text-[#0F172A]"
+                  }`}
+                >
+                  <Library className="w-3.5 h-3.5" />
+                  <span>ชั้นวาง 3D ล้ำๆ</span>
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={viewMode === "grid"}
+                  onClick={() => setViewMode("grid")}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5 transition cursor-pointer ${
+                    viewMode === "grid"
+                      ? "bg-[#0F172A] text-white shadow-xs"
+                      : "text-[#475569] hover:text-[#0F172A]"
+                  }`}
+                >
+                  <LayoutGrid className="w-3.5 h-3.5" />
+                  <span>การ์ดละเอียด</span>
+                </button>
+              </div>
             </div>
 
             {cart.length > 0 && (
@@ -627,6 +668,176 @@ export function EbooksCatalogView() {
               >
                 แสดงครบทั้งหมด 30 เล่ม
               </button>
+            </div>
+          ) : viewMode === "shelf" ? (
+            /* ── ARCHITECTURAL 3D SMART GALLERY BOOKSHELF (APPLE BOOKS × KINOKUNIYA STYLE) ── */
+            <div className="space-y-10">
+              {Array.from(
+                { length: Math.ceil(filteredBooks.length / 4) },
+                (_, shelfIdx) => {
+                  const shelfBooks = filteredBooks.slice(
+                    shelfIdx * 4,
+                    shelfIdx * 4 + 4
+                  );
+                  const shelfNum = String(shelfIdx + 1).padStart(2, "0");
+                  return (
+                    <div
+                      key={`shelf-${shelfIdx}`}
+                      className="relative rounded-[30px] bg-gradient-to-b from-[#FFFFFF] via-[#FFFDF7] to-[#F7F1E5] border border-[#E7DBC8] shadow-[0_12px_32px_rgba(15,23,42,0.05)] pt-5 pb-6 px-4 sm:px-7 overflow-hidden"
+                    >
+                      {/* Top Architectural Ambient Spotlight Bar */}
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute top-0 inset-x-10 h-1 bg-gradient-to-r from-transparent via-amber-400/70 to-transparent blur-[1px]"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute top-0 inset-x-16 h-16 bg-gradient-to-b from-amber-100/45 to-transparent"
+                      />
+
+                      {/* Shelf Header Label */}
+                      <div className="relative z-10 flex items-center justify-between gap-2 mb-5 pb-2.5 border-b border-[#EFE6D8]">
+                        <div className="flex items-center gap-2.5">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#0F172A] text-white font-mono text-[11px] font-bold tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                            <span>SHELF {shelfNum}</span>
+                          </span>
+                          <span className="text-xs font-bold text-[#64748B]">
+                            คลิกปกเพื่อเปิดอ่านสารบัญ &amp; เจาะลึก 7 ข้อ
+                          </span>
+                        </div>
+                        <span className="text-[11px] font-mono font-bold text-[#92400E] bg-[#FEF9EF] border border-[#FDE68A] px-2.5 py-0.5 rounded-full">
+                          {shelfBooks.length} เล่ม
+                        </span>
+                      </div>
+
+                      {/* Books Standing on the Shelf */}
+                      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
+                        {shelfBooks.map((book) => {
+                          const inCart = isInCart(book.code);
+                          return (
+                            <div
+                              key={book.code}
+                              className="group flex flex-col items-center min-w-0"
+                            >
+                              {/* 3D Book Pull-Out Stage */}
+                              <div
+                                onClick={() => openBookDetail(book.code)}
+                                title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของ E-Book เล่มนี้"
+                                className="relative w-full flex flex-col items-center justify-end pt-2 pb-3 cursor-pointer"
+                              >
+                                {/* Discount Floating Tag */}
+                                <span className="absolute top-0 right-1 z-20 px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-extrabold shadow-xs">
+                                  -{book.discountPct}%
+                                </span>
+
+                                {/* Standing 3D Book with Smooth Pull-Out Hover */}
+                                <div className="relative transition-all duration-300 ease-out group-hover:-translate-y-3 group-hover:scale-[1.04]">
+                                  <Book3DMockup
+                                    code={book.code}
+                                    title={book.title}
+                                    category={book.shortCategory || book.category}
+                                    themeColor={book.themeColor}
+                                    rank={book.rank}
+                                    coverImage={book.coverImage}
+                                    size="md"
+                                    isInteractive={true}
+                                  />
+                                </div>
+
+                                {/* Realistic Contact Shadow on Shelf Surface */}
+                                <div
+                                  aria-hidden="true"
+                                  className="w-36 h-3 -mt-1.5 rounded-full bg-slate-900/20 blur-sm transition-all duration-300 group-hover:w-28 group-hover:bg-slate-900/12"
+                                />
+
+                                {/* Quick Peek Pill on Hover */}
+                                <div className="pointer-events-none absolute bottom-5 z-20 opacity-0 translate-y-1.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
+                                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#0F172A]/90 text-white text-[11px] font-bold shadow-md backdrop-blur-sm">
+                                    <Eye className="w-3 h-3 text-amber-300" />
+                                    <span>เปิดดูสารบัญ</span>
+                                  </span>
+                                </div>
+                              </div>
+
+                              {/* Museum Placard Below Book */}
+                              <div className="w-full rounded-2xl bg-white/95 border border-[#E7DBC8] group-hover:border-[#F59E0B] p-3.5 shadow-2xs transition-all space-y-2.5">
+                                <div className="flex items-center justify-between gap-1.5">
+                                  <span className="font-mono text-[10.5px] font-bold text-[#92400E] bg-[#FEF9EF] border border-[#FDE68A] px-2 py-0.5 rounded-md truncate">
+                                    {book.code}
+                                  </span>
+                                  <div className="flex items-baseline gap-1 whitespace-nowrap">
+                                    <span className="text-base font-black text-[#B45309]">
+                                      ฿{book.earlyBirdPrice}
+                                    </span>
+                                    <span className="text-[10px] text-[#94A3B8] line-through">
+                                      ฿{book.regularPrice}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <h3
+                                  onClick={() => openBookDetail(book.code)}
+                                  className="text-xs sm:text-[13px] font-extrabold text-[#0F172A] group-hover:text-[#B45309] transition leading-snug line-clamp-2 min-h-[2.4rem] cursor-pointer"
+                                >
+                                  {book.title}
+                                </h3>
+
+                                <div className="grid grid-cols-2 gap-1.5 pt-1">
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      inCart
+                                        ? removeFromCart(book.code)
+                                        : addToCart(book)
+                                    }
+                                    className={`h-9 px-2 rounded-xl text-[11px] font-bold flex items-center justify-center gap-1 transition cursor-pointer border ${
+                                      inCart
+                                        ? "bg-emerald-50 text-emerald-800 border-emerald-300"
+                                        : "bg-[#FFFDF7] hover:bg-[#FEF9EF] text-[#0F172A] border-[#E2E8F0]"
+                                    }`}
+                                  >
+                                    {inCart ? (
+                                      <>
+                                        <Check className="w-3.5 h-3.5 shrink-0" />
+                                        <span>ในตะกร้า</span>
+                                      </>
+                                    ) : (
+                                      <>
+                                        <ShoppingCart className="w-3.5 h-3.5 shrink-0" />
+                                        <span>ใส่ตะกร้า</span>
+                                      </>
+                                    )}
+                                  </button>
+
+                                  <a
+                                    href={getLineOrderUrl(
+                                      `สวัสดีครับครูอ้น สนใจสั่งซื้อ E-Book [${book.code}] ${book.title} ราคา ${book.earlyBirdPrice} บาท ครับ`
+                                    )}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => handleSingleBookOrder(e, book)}
+                                    className="h-9 px-2 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] text-[11px] font-extrabold flex items-center justify-center gap-1 shadow-2xs transition cursor-pointer"
+                                  >
+                                    <span>สั่งซื้อ</span>
+                                    <ArrowRight className="w-3 h-3 shrink-0" />
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Architectural Oak & Acrylic Floating Shelf Plank + Warm LED Strip */}
+                      <div aria-hidden="true" className="relative mt-5">
+                        <div className="h-3.5 w-full rounded-xl bg-gradient-to-b from-[#EFE4D3] via-[#DFCDB4] to-[#CBB28F] border border-[#C7AE8B] shadow-[0_10px_20px_rgba(120,83,38,0.16)]" />
+                        <div className="mx-8 h-1 rounded-full bg-gradient-to-r from-transparent via-amber-400/75 to-transparent blur-[2px]" />
+                      </div>
+                    </div>
+                  );
+                }
+              )}
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
