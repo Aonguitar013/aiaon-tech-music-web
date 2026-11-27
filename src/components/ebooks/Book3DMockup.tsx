@@ -167,11 +167,11 @@ export function Book3DMockup({
 
   const dims = {
     sm: {
-      containerH: "h-[190px]",
-      bookW: 102,
+      containerH: "h-[186px]",
+      bookW: 104,
       bookH: 146,
-      spineW: 16,
-      topPageH: 10,
+      spineW: 8,
+      topPageH: 5,
       tabletW: 82,
       tabletH: 118,
       tabletChin: "pb-3.5 pt-1.5 px-1.5",
@@ -180,11 +180,11 @@ export function Book3DMockup({
       pageBody: "text-[6.2px]",
     },
     md: {
-      containerH: "h-[242px]",
-      bookW: 130,
+      containerH: "h-[236px]",
+      bookW: 132,
       bookH: 186,
-      spineW: 20,
-      topPageH: 13,
+      spineW: 10,
+      topPageH: 6,
       tabletW: 104,
       tabletH: 148,
       tabletChin: "pb-4 pt-2 px-2",
@@ -193,11 +193,11 @@ export function Book3DMockup({
       pageBody: "text-[7.5px]",
     },
     lg: {
-      containerH: "h-[330px] sm:h-[360px]",
-      bookW: 182,
+      containerH: "h-[322px] sm:h-[352px]",
+      bookW: 184,
       bookH: 258,
-      spineW: 26,
-      topPageH: 17,
+      spineW: 13,
+      topPageH: 8,
       tabletW: 144,
       tabletH: 204,
       tabletChin: "pb-6 pt-2.5 px-2.5",
@@ -350,19 +350,19 @@ export function Book3DMockup({
               borderBottomLeftRadius: "3px",
             }}
           >
-            <span className="text-[5.5px] font-bold tracking-wider text-amber-300">
-              AiAon
+            <span className="text-[4.5px] font-bold tracking-wider text-amber-300">
+              iA
             </span>
             <div
-              className="text-[6.5px] sm:text-[7.5px] font-bold tracking-wider text-white/90 whitespace-nowrap overflow-hidden text-ellipsis max-w-[115px]"
+              className="text-[5.5px] sm:text-[6px] font-bold tracking-wider text-white/90 whitespace-nowrap overflow-hidden text-ellipsis max-w-[115px]"
               style={{
                 writingMode: "vertical-rl",
                 transform: "rotate(180deg)",
               }}
             >
-              {code} • {title}
+              {code}
             </div>
-            <span className="text-[5.5px] font-mono text-white/65">#{rank}</span>
+            <span className="text-[4.5px] font-mono text-white/65">#{rank}</span>
           </div>
 
           {/* Front Hardcover Face (Sits flush at left=spineW, top=topPageH) */}
