@@ -113,7 +113,7 @@ const HOW_IT_WORKS = [
     icon: Download,
     colorBg: "bg-amber-100 text-amber-800 border-amber-200",
     title: "โหลดไฟล์ PDF ทันที",
-    desc: "รับลิงก์ไฟล์ความละเอียดสูงทันทีหลังโอน หรือกดโหลดชุดทดลองฟรี 30 หน้า (ครบ 6 เล่ม) ไปลองปริ้นท์ดูก่อน 0 ฿",
+    desc: "รับลิงก์ไฟล์ความละเอียดสูงทันทีหลังโอน หรือกดโหลดชุดทดลองฟรี 65 หน้า (ครบ 13 เล่ม) ไปลองปริ้นท์ดูก่อน 0 ฿",
   },
   {
     step: "02",
@@ -413,10 +413,10 @@ export function EduHubClient() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B]">
-                คลังสื่อการสอน &amp; นิทานภาพครบ 8 เล่ม Live (iAon Edu-Verse)
+                คลังสื่อการสอน &amp; นิทานภาพครบ 13 เล่ม Live (AiAon Edu-Verse)
               </h2>
               <p className="text-sm text-slate-600 mt-1">
-                คลิกเข้าหน้าแต่ละเล่มเพื่อใช้งานเครื่องมือ Hybrid QR และดาวน์โหลดชุดทดลองฟรี (ครบ 8 เล่ม รวม 40 หน้า!)
+                คลิกเข้าหน้าแต่ละเล่มเพื่อใช้งานเครื่องมือ Hybrid QR และดาวน์โหลดชุดทดลองฟรี (ครบ 13 เล่ม รวม 65 หน้า!)
               </p>
             </div>
 

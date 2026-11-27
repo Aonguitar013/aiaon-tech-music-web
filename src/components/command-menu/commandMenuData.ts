@@ -17,20 +17,23 @@ export interface CommandMenuItem {
 export const COMMAND_MENU_ITEMS: CommandMenuItem[] = [
   {
     "id": "edu-verse-hub",
-    "title": "iAon Edu-Verse — คลังสื่อการสอนเด็กเล็ก Hybrid QR (ครบ 4 ชุด)",
-    "description": "ใบงาน EF น้องแซลมอน, ชุดสร้างวินัย 30 วันแม่ใหญ่, Busy Book น้องชาบู 45 การ์ด และดนตรีน้องข้าวต้ม (แจกฟรี 15 หน้า!)",
+    "title": "AiAon Edu-Verse — คลังสื่อเด็ก & นิทานแก๊ง 6 แมว (ครบ 13 เล่ม Live!)",
+    "description": "ใบงาน 7 เล่ม (LV1 & LV2 ป.1) + นิทานภาพสีน้ำ Season 1 ครบ 6/6 เล่ม พร้อมเว็บเสียงอ่าน & นาฬิกา QR (แจกฟรี 65 หน้า!)",
     "category": "pages",
     "categoryLabel": "สื่อการสอนเด็กเล็ก",
     "url": "/edu",
     "code": "EDU-HUB",
-    "price": "99 - 319 ฿",
-    "badge": "NEW 🐾",
+    "price": "79 - 449 ฿",
+    "badge": "ฟรี 65 หน้า 🐾",
     "keywords": [
       "edu",
       "edu-verse",
       "สื่อการสอนเด็กเล็ก",
       "อนุบาล",
       "ใบงาน",
+      "นิทาน",
+      "นิทานก่อนนอน",
+      "boxset",
       "ef",
       "busy book",
       "สร้างวินัย",
@@ -38,7 +41,9 @@ export const COMMAND_MENU_ITEMS: CommandMenuItem[] = [
       "น้องแซลมอน",
       "แม่ใหญ่",
       "น้องชาบู",
-      "น้องข้าวต้ม"
+      "น้องข้าวต้ม",
+      "น้องบ๊อบ",
+      "น้องดำ"
     ]
   },
   {
@@ -76,6 +81,78 @@ export const COMMAND_MENU_ITEMS: CommandMenuItem[] = [
     "price": "99 / 199 ฿",
     "badge": "ฟรี 5 หน้า",
     "keywords": ["bb01", "น้องชาบู", "busy book", "ลีลามือ", "แปรงฟัน", "ล้างมือ", "สุขอนามัย", "ตีนตุ๊กแก"]
+  },
+  {
+    "id": "edu-st01",
+    "title": "EDU-ST01: นิทานคืนที่ก้อนเมฆสีเทาหายไป — น้องดำ (16 หน้า + Audio QR)",
+    "description": "นิทานก่อนนอน SEL เล่ม 1 สอนลูกคุมอารมณ์ด้วยหายใจ 4-4-4 + เสียงเล่านิทาน TH/EN ฟรี",
+    "category": "pages",
+    "categoryLabel": "นิทานแก๊ง 6 แมว",
+    "url": "/edu/st01",
+    "code": "EDU-ST01",
+    "price": "79 / 159 ฿",
+    "badge": "Book 1/6",
+    "keywords": ["st01", "นิทาน", "น้องดำ", "ก่อนนอน", "หายใจ 4-4-4", "sel"]
+  },
+  {
+    "id": "edu-st02",
+    "title": "EDU-ST02: นิทานภารกิจปราบแมงกินฟัน — น้องชาบู (16 หน้า + Brush Timer)",
+    "description": "นิทานวินัยแปรงฟัน เล่ม 2 เปลี่ยนการบังคับแปรงฟันเป็นเกมกัปตัน 2 นาที 3 ด่าน + เสียงเล่า TH/EN",
+    "category": "pages",
+    "categoryLabel": "นิทานแก๊ง 6 แมว",
+    "url": "/edu/st02",
+    "code": "EDU-ST02",
+    "price": "79 / 159 ฿",
+    "badge": "Book 2/6",
+    "keywords": ["st02", "นิทาน", "น้องชาบู", "แปรงฟัน", "2 นาที"]
+  },
+  {
+    "id": "edu-st03",
+    "title": "EDU-ST03: นิทานเช้าวันใหม่ใจเย็นของแม่ใหญ่ (16 หน้า + Routine Timer)",
+    "description": "นิทานกิจวัตรเช้า & เก็บของเล่น เล่ม 3 เวทมนตร์ 3 ก้าว + ขวดโหลดาวทอง & นาฬิกา 4 โหมด",
+    "category": "pages",
+    "categoryLabel": "นิทานแก๊ง 6 แมว",
+    "url": "/edu/st03",
+    "code": "EDU-ST03",
+    "price": "79 / 159 ฿",
+    "badge": "Book 3/6",
+    "keywords": ["st03", "นิทาน", "แม่ใหญ่", "กิจวัตรเช้า", "เก็บของเล่น"]
+  },
+  {
+    "id": "edu-st04",
+    "title": "EDU-ST04: นิทานจังหวะหัวใจของน้องข้าวต้ม (16 หน้า + กลอง 70 BPM)",
+    "description": "นิทานคุมพลังงานล้นด้วยดนตรี เล่ม 4 กลองจังหวะหัวใจ 3 สปีด 70/95/120 BPM + เสียงเล่า TH/EN",
+    "category": "pages",
+    "categoryLabel": "นิทานแก๊ง 6 แมว",
+    "url": "/edu/st04",
+    "code": "EDU-ST04",
+    "price": "79 / 159 ฿",
+    "badge": "Book 4/6",
+    "keywords": ["st04", "นิทาน", "น้องข้าวต้ม", "ดนตรี", "70 bpm", "พลังล้น"]
+  },
+  {
+    "id": "edu-st05",
+    "title": "EDU-ST05: นิทานวันแรกที่โรงเรียนของน้องบ๊อบ (16 หน้า + Hello Board)",
+    "description": "นิทานความกล้าไปโรงเรียน & เพื่อนใหม่ เล่ม 5 ตราหัวใจอุ่น + แผนที่ความกล้า 3 ก้าว & Phonics",
+    "category": "pages",
+    "categoryLabel": "นิทานแก๊ง 6 แมว",
+    "url": "/edu/st05",
+    "code": "EDU-ST05",
+    "price": "79 / 159 ฿",
+    "badge": "Book 5/6",
+    "keywords": ["st05", "นิทาน", "น้องบ๊อบ", "ไปโรงเรียน", "เพื่อนใหม่", "phonics"]
+  },
+  {
+    "id": "edu-st06",
+    "title": "EDU-ST06: นิทานนักสืบแซลมอนกับปริศนาที่หายไป (16 หน้า + Focus Timer)",
+    "description": "นิทานฝึกสมาธิ EF เล่มปิดซีซัน 6/6 สูตรนักสืบใจเย็น 3 ขั้น + นาฬิกา Focus Timer 5 นาที",
+    "category": "pages",
+    "categoryLabel": "นิทานแก๊ง 6 แมว",
+    "url": "/edu/st06",
+    "code": "EDU-ST06",
+    "price": "79 / 159 ฿",
+    "badge": "👑 Book 6/6",
+    "keywords": ["st06", "นิทาน", "น้องแซลมอน", "สมาธิ", "ef", "focus timer", "boxset"]
   },
   {
     "id": "service-line-stickers",

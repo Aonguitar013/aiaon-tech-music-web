@@ -14,6 +14,12 @@ export function MobileStickyActionBar() {
 
   // Dynamic context-aware LINE CTA button config
   const lineConfig = useMemo(() => {
+    if (pathname.startsWith("/edu")) {
+      return {
+        label: "สั่งสื่อเด็ก",
+        message: "สวัสดีครับครูอ้น สนใจสื่อกิจกรรมไร้จอ & นิทานภาพแก๊ง 6 แมว AiAon Edu-Verse ครับ รบกวนแนะนำชุดที่เหมาะกับวัยลูกด้วยครับ 🐾🙏",
+      };
+    }
     if (pathname.startsWith("/ebooks")) {
       return {
         label: "สั่ง E-Book",
@@ -70,11 +76,16 @@ export function MobileStickyActionBar() {
   }, [pathname]);
 
   const lineHref = getLineOrderUrl(lineConfig.message);
+  const isEdu = pathname.startsWith("/edu");
 
   return (
     <aside
       aria-label="เมนูลัดบนมือถือ"
-      className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-zinc-950/92 backdrop-blur-2xl border-t border-white/10 px-3 py-2 shadow-[0_-8px_30px_rgba(0,0,0,0.85)] font-prompt print:hidden"
+      className={`lg:hidden fixed bottom-0 left-0 right-0 z-40 backdrop-blur-xl border-t px-3 py-2 shadow-[0_-6px_24px_rgba(15,23,42,0.08)] font-prompt print:hidden ${
+        isEdu
+          ? "bg-[#FFFDF7]/95 border-amber-200/90"
+          : "bg-[#FAF8F5]/95 border-slate-200/90"
+      }`}
     >
       <div className="max-w-md mx-auto flex items-center justify-between gap-1.5">
         {/* 1. Home */}
@@ -82,12 +93,12 @@ export function MobileStickyActionBar() {
           href="/"
           className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all duration-200 active:scale-90 ${
             pathname === "/"
-              ? "text-cyan-400 font-bold bg-cyan-500/10"
-              : "text-white/60 hover:text-white"
+              ? "text-sky-700 font-bold bg-sky-100/80"
+              : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
           }`}
         >
           <Home className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5">หน้าแรก</span>
+          <span className="text-[10px] mt-0.5 font-medium">หน้าแรก</span>
         </Link>
 
         {/* 2. Quick Search (Command Menu Trigger) */}
@@ -95,13 +106,13 @@ export function MobileStickyActionBar() {
           type="button"
           onClick={openCommandMenu}
           aria-label="ค้นหาด่วน (Ctrl+K)"
-          className="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-white/60 hover:text-white transition-all duration-200 active:scale-90 cursor-pointer"
+          className="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 transition-all duration-200 active:scale-90 cursor-pointer"
         >
           <div className="relative">
-            <Search className="w-5 h-5 text-cyan-400" />
-            <span className="absolute -top-1 -right-1.5 w-2 h-2 rounded-full bg-cyan-400 animate-ping opacity-75" />
+            <Search className="w-5 h-5 text-sky-600" />
+            <span className="absolute -top-0.5 -right-1 w-2 h-2 rounded-full bg-sky-500 animate-ping opacity-75" />
           </div>
-          <span className="text-[10px] mt-0.5 text-cyan-300 font-medium">ค้นหา</span>
+          <span className="text-[10px] mt-0.5 text-sky-700 font-semibold">ค้นหา</span>
         </button>
 
         {/* 3. Freebies with FREE Badge */}
@@ -109,46 +120,51 @@ export function MobileStickyActionBar() {
           href="/freebies"
           className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all duration-200 active:scale-90 ${
             pathname.startsWith("/freebies")
-              ? "text-pink-400 font-bold bg-pink-500/10"
-              : "text-white/60 hover:text-white"
+              ? "text-rose-700 font-bold bg-rose-100/80"
+              : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
           }`}
         >
           <div className="relative">
-            <Gift className="w-5 h-5 text-pink-400" />
-            <span className="absolute -top-1 -right-2 px-1 py-[0.5px] rounded-full text-[8px] font-black bg-pink-500 text-white shadow-[0_0_8px_rgba(236,72,153,0.8)]">
+            <Gift className="w-5 h-5 text-rose-600" />
+            <span className="absolute -top-1 -right-2.5 px-1 py-[0.5px] rounded-full text-[8px] font-black bg-rose-600 text-white shadow-xs">
               FREE
             </span>
           </div>
-          <span className="text-[10px] mt-0.5">แจกฟรี</span>
+          <span className="text-[10px] mt-0.5 font-medium">แจกฟรี</span>
         </Link>
 
-        {/* 4. Digital Vault */}
+        {/* 4. Digital Vault / Edu Hub */}
         <Link
-          href="/digital-vault"
+          href={isEdu ? "/edu" : "/digital-vault"}
           className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all duration-200 active:scale-90 ${
-            pathname.startsWith("/digital-vault") || pathname.startsWith("/saas")
-              ? "text-blue-400 font-bold bg-blue-500/10"
-              : "text-white/60 hover:text-white"
+            pathname.startsWith("/digital-vault") ||
+            pathname.startsWith("/saas") ||
+            isEdu
+              ? isEdu
+                ? "text-amber-800 font-bold bg-amber-100/80"
+                : "text-blue-700 font-bold bg-blue-100/80"
+              : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
           }`}
         >
           <Database className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5">20 ระบบ</span>
+          <span className="text-[10px] mt-0.5 font-medium">
+            {isEdu ? "13 เล่ม" : "20 ระบบ"}
+          </span>
         </Link>
 
-        {/* 5. High-Converting LINE OA CTA Button */}
+        {/* 5. High-Converting LINE OA CTA Button (Brand V2.0 WCAG AA) */}
         <a
           href={lineHref}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={lineConfig.label}
-          className="relative inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#06C755] to-emerald-500 hover:from-[#05b34c] hover:to-emerald-600 text-white font-bold text-xs shadow-[0_0_20px_rgba(6,199,85,0.4)] active:scale-95 transition-all duration-200 shrink-0 select-none ml-1 cursor-pointer"
+          className="relative inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-extrabold text-xs shadow-sm shadow-emerald-600/20 active:scale-95 transition-all duration-200 shrink-0 select-none ml-1 cursor-pointer"
         >
-          {/* Online status indicator */}
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#052E16] opacity-50" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#052E16]" />
           </span>
-          <FaLine className="w-4 h-4 text-white" />
+          <FaLine className="w-4 h-4 text-[#052E16]" />
           <span className="whitespace-nowrap">{lineConfig.label}</span>
         </a>
       </div>

@@ -159,47 +159,47 @@ export function CommandMenuProvider({ children }: { children: React.ReactNode })
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              className="fixed inset-0 bg-black/75 backdrop-blur-md"
+              className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm"
               onClick={close}
             />
 
-            {/* Modal Dialog */}
+            {/* Modal Dialog — Brand V2.0 Warm Cream Editorial */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: -20 }}
+              initial={{ opacity: 0, scale: 0.96, y: -16 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 350 }}
-              className="relative w-full max-w-2xl rounded-2xl bg-zinc-950/95 border border-cyan-500/30 shadow-[0_0_60px_rgba(6,182,212,0.25)] overflow-hidden font-prompt flex flex-col z-10"
+              exit={{ opacity: 0, scale: 0.96, y: -16 }}
+              transition={{ type: "spring", damping: 26, stiffness: 360 }}
+              className="relative w-full max-w-2xl rounded-3xl bg-[#FFFDF7] border border-slate-200/90 shadow-2xl shadow-slate-900/15 overflow-hidden font-prompt flex flex-col z-10"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Search Bar Input */}
-              <div className="flex items-center gap-3 px-4 py-3.5 border-b border-white/10 bg-white/[0.03]">
-                <Search className="w-5 h-5 text-cyan-400 shrink-0" />
+              <div className="flex items-center gap-3 px-4 py-3.5 border-b border-slate-200/80 bg-white">
+                <Search className="w-5 h-5 text-sky-600 shrink-0" />
                 <input
                   ref={inputRef}
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleInputKeyDown}
-                  placeholder="พิมพ์เพื่อค้นหาระบบ, รหัส AONE, E-Book, ของแจกฟรี..."
-                  className="flex-1 bg-transparent text-white placeholder-white/40 text-sm sm:text-base outline-none font-prompt"
+                  placeholder="พิมพ์เพื่อค้นหานิทาน, ใบงาน, รหัส EDU/AONE, E-Book, ของแจกฟรี..."
+                  className="flex-1 bg-transparent text-[#0F172A] placeholder-slate-400 text-sm sm:text-base outline-none font-prompt"
                 />
                 {query && (
                   <button
                     type="button"
                     onClick={() => setQuery("")}
-                    className="p-1 rounded-md text-white/40 hover:text-white hover:bg-white/10 transition"
+                    className="p-1 rounded-md text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
                   >
                     <X className="w-4 h-4" />
                   </button>
                 )}
-                <kbd className="hidden sm:inline-flex items-center px-2 py-0.5 text-[11px] font-mono text-white/40 bg-white/5 border border-white/10 rounded-md">
+                <kbd className="hidden sm:inline-flex items-center px-2 py-0.5 text-[11px] font-mono text-slate-500 bg-slate-100 border border-slate-200 rounded-md">
                   ESC
                 </kbd>
               </div>
 
               {/* Category Filter Tabs */}
-              <div className="flex items-center gap-1.5 px-3 py-2 border-b border-white/5 bg-black/40 overflow-x-auto no-scrollbar">
+              <div className="flex items-center gap-1.5 px-3 py-2 border-b border-slate-200/70 bg-[#FAF8F5] overflow-x-auto no-scrollbar">
                 {CATEGORIES.map((cat) => {
                   const Icon = cat.icon;
                   const isActive = activeCategory === cat.id;
@@ -208,10 +208,10 @@ export function CommandMenuProvider({ children }: { children: React.ReactNode })
                       key={cat.id}
                       type="button"
                       onClick={() => setActiveCategory(cat.id)}
-                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 shrink-0 cursor-pointer ${
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all duration-200 shrink-0 cursor-pointer ${
                         isActive
-                          ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_12px_rgba(6,182,212,0.3)]"
-                          : "text-white/60 hover:text-white hover:bg-white/5 border border-transparent"
+                          ? "bg-sky-600 text-white border border-sky-600 shadow-xs"
+                          : "text-slate-600 hover:text-slate-900 hover:bg-white border border-transparent"
                       }`}
                     >
                       <Icon className="w-3.5 h-3.5" />
@@ -219,7 +219,7 @@ export function CommandMenuProvider({ children }: { children: React.ReactNode })
                     </button>
                   );
                 })}
-                <span className="ml-auto text-[11px] text-white/30 hidden sm:inline px-2">
+                <span className="ml-auto text-[11px] text-slate-500 hidden sm:inline px-2 font-medium">
                   พบ {filteredItems.length} รายการ
                 </span>
               </div>
@@ -227,14 +227,14 @@ export function CommandMenuProvider({ children }: { children: React.ReactNode })
               {/* Search Results List */}
               <div
                 ref={listRef}
-                className="max-h-[380px] sm:max-h-[440px] overflow-y-auto p-2 space-y-1 custom-scrollbar"
+                className="max-h-[380px] sm:max-h-[440px] overflow-y-auto p-2 space-y-1 custom-scrollbar bg-[#FFFDF7]"
               >
                 {filteredItems.length === 0 ? (
-                  <div className="py-12 text-center text-white/40 space-y-2">
+                  <div className="py-12 text-center text-slate-500 space-y-2">
                     <Search className="w-8 h-8 mx-auto opacity-30" />
-                    <p className="text-sm">ไม่พบผลการค้นหาสำหรับ &ldquo;{query}&rdquo;</p>
-                    <p className="text-xs text-white/30">
-                      ลองค้นหาด้วยรหัส เช่น AONE01, EB01 หรือคำว่า &ldquo;เช็คชื่อ&rdquo;, &ldquo;แจกฟรี&rdquo;
+                    <p className="text-sm font-medium text-slate-700">ไม่พบผลการค้นหาสำหรับ &ldquo;{query}&rdquo;</p>
+                    <p className="text-xs text-slate-500">
+                      ลองค้นหาด้วยรหัส เช่น EDU-ST06, AONE01, EB01 หรือคำว่า &ldquo;นิทาน&rdquo;, &ldquo;แจกฟรี&rdquo;
                     </p>
                   </div>
                 ) : (
@@ -248,18 +248,18 @@ export function CommandMenuProvider({ children }: { children: React.ReactNode })
                         data-index={index}
                         onClick={() => handleSelectItem(item)}
                         onMouseEnter={() => setSelectedIndex(index)}
-                        className={`group flex items-center justify-between gap-3 p-3 rounded-xl cursor-pointer transition-all duration-150 ${
+                        className={`group flex items-center justify-between gap-3 p-3 rounded-2xl cursor-pointer transition-all duration-150 ${
                           isSelected
-                            ? "bg-gradient-to-r from-cyan-500/15 via-blue-500/10 to-transparent border border-cyan-500/30 text-white"
-                            : "text-white/80 hover:bg-white/5 border border-transparent"
+                            ? "bg-white border border-sky-300 shadow-xs text-[#0F172A]"
+                            : "text-slate-700 hover:bg-white/80 border border-transparent"
                         }`}
                       >
                         <div className="flex items-center gap-3 min-w-0">
                           <div
-                            className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                            className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                               isSelected
-                                ? "bg-cyan-500/25 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.4)]"
-                                : "bg-white/5 text-white/50 group-hover:text-cyan-400 group-hover:bg-white/10"
+                                ? "bg-sky-100 text-sky-700"
+                                : "bg-slate-100 text-slate-500 group-hover:text-sky-700 group-hover:bg-sky-50"
                             }`}
                           >
                             <ItemIcon className="w-4 h-4" />
@@ -267,21 +267,21 @@ export function CommandMenuProvider({ children }: { children: React.ReactNode })
 
                           <div className="min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <span className="text-sm font-semibold text-white group-hover:text-cyan-300 transition-colors line-clamp-1">
+                              <span className="text-sm font-bold text-[#0F172A] group-hover:text-sky-700 transition-colors line-clamp-1">
                                 {item.title}
                               </span>
                               {item.badge && (
-                                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-white/5 text-white/60 border border-white/10">
+                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-200">
                                   {item.badge}
                                 </span>
                               )}
                               {item.price && (
-                                <span className="text-xs font-mono font-bold text-amber-400">
+                                <span className="text-xs font-mono font-bold text-rose-700">
                                   {item.price}
                                 </span>
                               )}
                             </div>
-                            <p className="text-xs text-white/50 line-clamp-1 mt-0.5 font-light">
+                            <p className="text-xs text-slate-500 line-clamp-1 mt-0.5">
                               {item.description}
                             </p>
                           </div>
@@ -289,9 +289,9 @@ export function CommandMenuProvider({ children }: { children: React.ReactNode })
 
                         <div className="flex items-center gap-2 shrink-0">
                           {isSelected && (
-                            <CornerDownLeft className="w-4 h-4 text-cyan-400 shrink-0 hidden sm:block animate-pulse" />
+                            <CornerDownLeft className="w-4 h-4 text-sky-600 shrink-0 hidden sm:block" />
                           )}
-                          <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all" />
+                          <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition-all" />
                         </div>
                       </div>
                     );
@@ -300,24 +300,24 @@ export function CommandMenuProvider({ children }: { children: React.ReactNode })
               </div>
 
               {/* Keyboard Navigation Footer */}
-              <div className="px-4 py-2.5 bg-black/60 border-t border-white/10 flex items-center justify-between text-[11px] text-white/40">
+              <div className="px-4 py-2.5 bg-[#FAF8F5] border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500">
                 <div className="flex items-center gap-3">
                   <span className="flex items-center gap-1">
-                    <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 font-mono text-[10px]">↑</kbd>
-                    <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 font-mono text-[10px]">↓</kbd>
+                    <kbd className="px-1.5 py-0.5 rounded bg-white border border-slate-200 font-mono text-[10px] text-slate-600">↑</kbd>
+                    <kbd className="px-1.5 py-0.5 rounded bg-white border border-slate-200 font-mono text-[10px] text-slate-600">↓</kbd>
                     <span className="hidden sm:inline">เลือก</span>
                   </span>
                   <span className="flex items-center gap-1">
-                    <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 font-mono text-[10px]">↵</kbd>
+                    <kbd className="px-1.5 py-0.5 rounded bg-white border border-slate-200 font-mono text-[10px] text-slate-600">↵</kbd>
                     <span>เปิด</span>
                   </span>
                   <span className="flex items-center gap-1 hidden sm:inline-flex">
-                    <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 font-mono text-[10px]">ESC</kbd>
+                    <kbd className="px-1.5 py-0.5 rounded bg-white border border-slate-200 font-mono text-[10px] text-slate-600">ESC</kbd>
                     <span>ปิด</span>
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1 text-cyan-400/80 font-medium">
+                <div className="flex items-center gap-1 text-sky-700 font-semibold">
                   <Sparkles className="w-3 h-3" />
                   <span>AiAon Quick Command</span>
                 </div>

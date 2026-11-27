@@ -311,203 +311,203 @@ export const ST01_CONFIG: StorybookConfig = {
   ],
   pages: [
     {
-      pageNo: 3,
-      image: "/edu/st01/02_p03.webp",
-      tagTh: "หน้า 1 • ก้อนเมฆปริศนา",
-      tagEn: "Page 1 • The Little Gray Cloud",
-      linesTh: [
+      "pageNo": 3,
+      "image": "/edu/st01/02_p03.webp",
+      "tagTh": "หน้า 1 • ก้อนเมฆปริศนา",
+      "tagEn": "Page 1 • The Little Gray Cloud",
+      "linesTh": [
         "เย็นวันหนึ่ง เมื่อท้องฟ้าเปลี่ยนเป็นสีส้มอ่อน",
         "น้องดำเดินกลับเข้าบ้านอย่างเงียบๆ...",
         "แต่เอ๊ะ! เหนือหมวกเบเรต์สีม่วงของน้องดำ",
-        'มี "ก้อนเมฆสีเทาจิ๋ว" ลอยตามมาด้วย!',
+        "มี \"ก้อนเมฆสีเทาจิ๋ว\" ลอยตามมาด้วย!"
       ],
-      linesEn: [
+      "linesEn": [
         "One evening, as the sky turned soft tangerine,",
         "little Midnight walked quietly through the front door...",
         "Wait! Floating right above her lavender beret",
-        "was a tiny gray cloud!",
-      ],
+        "was a tiny gray cloud!"
+      ]
     },
     {
-      pageNo: 4,
-      image: "/edu/st01/03_p04.webp",
-      tagTh: "หน้า 2 • ทำไมเมฆถึงมาอยู่ตรงนี้?",
-      tagEn: "Page 2 • Where Did It Come From?",
-      linesTh: [
+      "pageNo": 4,
+      "image": "/edu/st01/03_p04.webp",
+      "tagTh": "หน้า 2 • ทำไมเมฆถึงมาอยู่ตรงนี้?",
+      "tagEn": "Page 2 • Where Did It Come From?",
+      "linesTh": [
         "ก้อนเมฆสีเทาไม่ได้ตกลงมาจากท้องฟ้าหรอกนะ",
         "แต่มันเกิดขึ้นตอนแก้วน้ำล้างพู่กัน",
         "หกเลอะภาพวาดที่น้องดำตั้งใจทำ",
-        "หัวใจน้องดำทั้งเสียใจ หงุดหงิด จนเกือบร้องไห้",
+        "หัวใจน้องดำทั้งเสียใจ หงุดหงิด จนเกือบร้องไห้"
       ],
-      linesEn: [
+      "linesEn": [
         "The gray cloud didn't fall from the sky.",
         "It appeared when Midnight's paint cup spilled",
         "right across her favorite rainbow drawing.",
-        "Her little heart felt heavy and ready to cry.",
-      ],
+        "Her little heart felt heavy and ready to cry."
+      ]
     },
     {
-      pageNo: 5,
-      image: "/edu/st01/04_p05.webp",
-      tagTh: "หน้า 3 • ก้อนเมฆยิ่งพองโต",
-      tagEn: "Page 3 • Growing Bigger and Bigger",
-      linesTh: [
+      "pageNo": 5,
+      "image": "/edu/st01/04_p05.webp",
+      "tagTh": "หน้า 3 • ก้อนเมฆยิ่งพองโต",
+      "tagEn": "Page 3 • Growing Bigger and Bigger",
+      "linesTh": [
         "น้องดำกอดอก ก้มหน้า ไม่ยอมพูดกับใครเลย",
         "แต่ยิ่งน้องดำเก็บความหงุดหงิดไว้คนเดียว",
         "ก้อนเมฆสีเทาก็ยิ่งพองใหญ่ขึ้น... ใหญ่ขึ้น...",
-        "จนเกือบคับห้องนอนไปหมดแล้ว!",
+        "จนเกือบคับห้องนอนไปหมดแล้ว!"
       ],
-      linesEn: [
+      "linesEn": [
         "Midnight crossed her paws and didn't say a word.",
         "Yet the tighter she held her grumpy feelings inside,",
         "the bigger and puffier the gray cloud grew—",
-        "almost filling her whole cozy bedroom!",
-      ],
+        "almost filling her whole cozy bedroom!"
+      ]
     },
     {
-      pageNo: 6,
-      image: "/edu/st01/05_p06.webp",
-      tagTh: "หน้า 4 • แสงอุ่นจากแม่ใหญ่",
-      tagEn: "Page 4 • Mama Mami's Warm Glow",
-      linesTh: [
+      "pageNo": 6,
+      "image": "/edu/st01/05_p06.webp",
+      "tagTh": "หน้า 4 • แสงอุ่นจากแม่ใหญ่",
+      "tagEn": "Page 4 • Mama Mami's Warm Glow",
+      "linesTh": [
         "ก๊อก ก๊อก... แม่ใหญ่เดินเข้ามาพร้อมโคมไฟดวงจันทร์",
         "แม่ใหญ่ไม่ได้ดุ และไม่ได้ไล่ก้อนเมฆสีเทาหนีไป",
         "แม่ใหญ่ยิ้มอ่อนโยนแล้วกระซิบเบาๆ ว่า",
-        '"เมฆสีเทากำลังบอกว่าหัวใจหนูเหนื่อยอยู่นะลูก"',
+        "\"เมฆสีเทากำลังบอกว่าหัวใจหนูเหนื่อยอยู่นะลูก\""
       ],
-      linesEn: [
-        "Knock, knock... Mama Mami came in with a moon lantern.",
+      "linesEn": [
+        "Knock, knock... Mama Mami brought a moon lantern.",
         "She didn't scold Midnight or shoo the cloud away.",
         "She smiled softly and whispered,",
-        '"Gray clouds just mean your heart feels tired, sweetheart."',
-      ],
+        "\"Gray clouds mean your heart feels tired, dear.\""
+      ]
     },
     {
-      pageNo: 7,
-      image: "/edu/st01/06_p07.webp",
-      tagTh: "หน้า 5 • เวทมนตร์สายรุ้ง 4-4-4",
-      tagEn: "Page 5 • The 4-4-4 Rainbow Magic",
-      linesTh: [
+      "pageNo": 7,
+      "image": "/edu/st01/06_p07.webp",
+      "tagTh": "หน้า 5 • เวทมนตร์สายรุ้ง 4-4-4",
+      "tagEn": "Page 5 • The 4-4-4 Rainbow Magic",
+      "linesTh": [
         "แม่ใหญ่ชวนน้องดำมานั่งเคียงข้างกัน",
         "บนพรมนุ่มๆ ริมหน้าต่างใต้แสงดาว",
-        '"ลูกอยากลองใช้เวทมนตร์หายใจสายรุ้ง 4-4-4',
-        'คุยกับก้อนเมฆสีเทาไหมจ๊ะ? มาทำพร้อมแม่นะ"',
+        "\"ลูกอยากลองใช้เวทมนตร์หายใจสายรุ้ง 4-4-4",
+        "คุยกับก้อนเมฆสีเทาไหมจ๊ะ? มาทำพร้อมแม่นะ\""
       ],
-      linesEn: [
+      "linesEn": [
         "Mama Mami invited Midnight to sit beside her",
         "on the cozy rug by the starry window.",
-        '"Would you like to try our 4-4-4 Rainbow Breathing',
-        'to help your gray cloud feel lighter?"',
-      ],
+        "\"Would you like to try our 4-4-4 Rainbow Breathing",
+        "to help your gray cloud feel lighter?\""
+      ]
     },
     {
-      pageNo: 8,
-      image: "/edu/st01/07_p08.webp",
-      tagTh: "หน้า 6 • ขั้นที่ 1 สูดกลิ่นดอกไม้ (4 วิ)",
-      tagEn: "Page 6 • Step 1: Smell the Flower (4s)",
-      linesTh: [
+      "pageNo": 8,
+      "image": "/edu/st01/07_p08.webp",
+      "tagTh": "หน้า 6 • ขั้นที่ 1 สูดกลิ่นดอกไม้ (4 วินาที)",
+      "tagEn": "Page 6 • Step 1: Smell the Flower (4 sec)",
+      "linesTh": [
         "ขั้นที่ 1: สูดหายใจเข้าช้าๆ เหมือนดมดอกไม้หอม",
         "นับในใจเบาๆ... 1... 2... 3... 4...",
         "กลิ่นหอมละมุนในจินตนาการ",
-        "ทำให้ก้อนเมฆสีเทาเริ่มนุ่มฟูเหมือนสำลี",
+        "ทำให้ก้อนเมฆสีเทาเริ่มนุ่มฟูเหมือนสำลี"
       ],
-      linesEn: [
+      "linesEn": [
         "Step 1: Breathe in slowly like smelling a sweet flower.",
         "Count gently inside: 1... 2... 3... 4...",
         "The soft imaginary petals made the heavy cloud",
-        "turn light and fluffy as cotton.",
-      ],
+        "turn light and fluffy as cotton."
+      ]
     },
     {
-      pageNo: 9,
-      image: "/edu/st01/08_p09.webp",
-      tagTh: "หน้า 7 • ขั้นที่ 2 กอดลมไว้เบาๆ (4 วิ)",
-      tagEn: "Page 7 • Step 2: Hold Gently (4s)",
-      linesTh: [
+      "pageNo": 9,
+      "image": "/edu/st01/08_p09.webp",
+      "tagTh": "หน้า 7 • ขั้นที่ 2 กอดลมไว้เบาๆ (4 วินาที)",
+      "tagEn": "Page 7 • Step 2: Hold Gently (4 sec)",
+      "linesTh": [
         "ขั้นที่ 2: กอดลมหายใจอุ่นๆ ไว้ในพุงเบาๆ",
         "นับช้าๆ ไปด้วยกัน... 1... 2... 3... 4...",
         "ตึกตัก... ตึกตัก... หัวใจที่เต้นแรงของน้องดำ",
-        "เริ่มสงบลงเหมือนคลื่นทะเลใส",
+        "เริ่มสงบลงเหมือนคลื่นทะเลใส"
       ],
-      linesEn: [
+      "linesEn": [
         "Step 2: Hug that warm breath gently in your tummy.",
         "Count slowly together: 1... 2... 3... 4...",
         "Thump-thump... Midnight's racing heartbeat",
-        "began to calm like gentle ocean waves.",
-      ],
+        "began to calm like gentle ocean waves."
+      ]
     },
     {
-      pageNo: 10,
-      image: "/edu/st01/09_p10.webp",
-      tagTh: "หน้า 8 • ขั้นที่ 3 เป่าเทียนช้าๆ (4 วิ)",
-      tagEn: "Page 8 • Step 3: Blow the Candle (4s)",
-      linesTh: [
+      "pageNo": 10,
+      "image": "/edu/st01/09_p10.webp",
+      "tagTh": "หน้า 8 • ขั้นที่ 3 เป่าเทียนช้าๆ (4 วินาที)",
+      "tagEn": "Page 8 • Step 3: Blow the Candle (4 sec)",
+      "linesTh": [
         "ขั้นที่ 3: ผ่อนลมหายใจออกเหมือนเป่าเทียนวันเกิด",
         "ฟู่ววว... ช้าๆ... 1... 2... 3... 4...",
         "ว้าว! ละอองแสงสีรุ้งระยิบระยับ",
-        "ค่อยๆ ลอยออกมาจากลมหายใจของน้องดำ!",
+        "ค่อยๆ ลอยออกมาจากลมหายใจของน้องดำ!"
       ],
-      linesEn: [
+      "linesEn": [
         "Step 3: Breathe out slowly like a birthday candle.",
         "Whoooosh... 1... 2... 3... 4...",
         "Whoa! Sparkling rainbow mist floated gently",
-        "out from Midnight's breath!",
-      ],
+        "out from Midnight's breath!"
+      ]
     },
     {
-      pageNo: 11,
-      image: "/edu/st01/10_p11.webp",
-      tagTh: "หน้า 9 • ก้อนเมฆกลายเป็นดาวทอง",
-      tagEn: "Page 9 • From Cloud to Golden Stars",
-      linesTh: [
+      "pageNo": 11,
+      "image": "/edu/st01/10_p11.webp",
+      "tagTh": "หน้า 9 • ก้อนเมฆกลายเป็นดาวทอง",
+      "tagEn": "Page 9 • From Cloud to Golden Stars",
+      "linesTh": [
         "พอหายใจสายรุ้งครบ 3 รอบ ปาฏิหาริย์ก็เกิดขึ้น!",
         "ก้อนเมฆสีเทาค่อยๆ ละลายหายไปในอากาศ",
         "กลายเป็นดวงดาวสีทองจิ๋วๆ",
-        "ลอยวิบวับอบอุ่นไปทั่วทั้งห้องนอน",
+        "ลอยวิบวับอบอุ่นไปทั่วทั้งห้องนอน"
       ],
-      linesEn: [
+      "linesEn": [
         "After three slow rainbow breaths, magic happened!",
         "The heavy gray cloud softly melted away,",
         "turning into dozens of tiny golden stars",
-        "twinkling warmly across the whole room.",
-      ],
+        "twinkling warmly across the whole room."
+      ]
     },
     {
-      pageNo: 12,
-      image: "/edu/st01/11_p12.webp",
-      tagTh: "หน้า 10 • กอดอุ่นและเริ่มใหม่ได้เสมอ",
-      tagEn: "Page 10 • A Warm Hug & A Fresh Start",
-      linesTh: [
+      "pageNo": 12,
+      "image": "/edu/st01/11_p12.webp",
+      "tagTh": "หน้า 10 • กอดอุ่นและเริ่มใหม่ได้เสมอ",
+      "tagEn": "Page 10 • A Warm Hug & A Fresh Start",
+      "linesTh": [
         "น้องดำยิ้มกว้าง แล้วโผเข้ากอดแม่ใหญ่แน่นๆ",
-        '"ขอบคุณครับแม่ใหญ่! พรุ่งนี้หนูจะวาดสายรุ้งใหม่!"',
+        "\"ขอบคุณครับแม่ใหญ่! พรุ่งนี้หนูจะวาดสายรุ้งใหม่!\"",
         "แม่ใหญ่หอมหน้าผากเบาๆ แล้วบอกว่า",
-        '"เก่งมากลูก ทุกความผิดพลาดเริ่มใหม่ได้เสมอจ้ะ"',
+        "\"เก่งมากลูก ทุกความผิดพลาดเริ่มใหม่ได้เสมอจ้ะ\""
       ],
-      linesEn: [
+      "linesEn": [
         "Midnight beamed and gave Mama Mami a huge hug.",
-        '"Thank you, Mama! Tomorrow I\'ll paint a brighter rainbow!"',
+        "\"Thanks, Mama! Tomorrow I'll paint a new rainbow!\"",
         "Mama Mami kissed her forehead softly.",
-        '"I\'m so proud of you. We can always try again."',
-      ],
+        "\"I'm so proud of you. We can always try again.\""
+      ]
     },
     {
-      pageNo: 13,
-      image: "/edu/st01/12_p13.webp",
-      tagTh: "หน้า 11 • ฝันดีนะเจ้าแมวน้อย",
-      tagEn: "Page 11 • Sweet Dreams, Little Artist",
-      linesTh: [
+      "pageNo": 13,
+      "image": "/edu/st01/12_p13.webp",
+      "tagTh": "หน้า 11 • ฝันดีนะเจ้าแมวน้อย",
+      "tagEn": "Page 11 • Sweet Dreams, Little Artist",
+      "linesTh": [
         "คืนนี้น้องดำห่มผ้าลายดาวหลับปุ๋ยใต้แสงจันทร์",
         "เหนือหมอนไม่มีก้อนเมฆสีเทาอีกต่อไปแล้ว",
         "มีเพียงหัวใจที่โล่ง เบา และอุ่นสบาย",
-        "ฝันดีนะน้องดำ... และฝันดีนะเด็กเก่งของแม่",
+        "ฝันดีนะน้องดำ... และฝันดีนะเด็กเก่งของแม่"
       ],
-      linesEn: [
+      "linesEn": [
         "Tonight, Midnight slept cozily under her starry quilt.",
         "No gray cloud lingered above her pillow anymore—",
         "only a peaceful, light, and happy heart.",
-        "Goodnight, little Midnight... and sweet dreams to you.",
-      ],
-    },
+        "Goodnight, little Midnight... and sweet dreams to you."
+      ]
+    }
   ],
   dialogicQuestions: [
     {
@@ -607,203 +607,203 @@ export const ST02_CONFIG: StorybookConfig = {
   ],
   pages: [
     {
-      pageNo: 3,
-      image: "/edu/st02/02_p03.webp",
-      tagTh: "หน้า 1 • คุกกี้น้ำผึ้งแสนอร่อย",
-      tagEn: "Page 1 • The Yummy Honey Cookie",
-      linesTh: [
+      "pageNo": 3,
+      "image": "/edu/st02/02_p03.webp",
+      "tagTh": "หน้า 1 • คุกกี้น้ำผึ้งแสนอร่อย",
+      "tagEn": "Page 1 • The Yummy Honey Cookie",
+      "linesTh": [
         "หลังอาหารเย็นวันนี้ น้องชาบูยิ้มแก้มตุ่ย",
         "เพราะเพิ่งกินคุกกี้น้ำผึ้งกรอบๆ ไปตั้งสองชิ้น!",
-        '"อื้มมม... หวานอร่อยที่สุดเลย!"',
-        "น้องชาบูเลียปากแผล็บ แล้ววิ่งปรู๊ดไปเล่นต่อทันที",
+        "\"อื้มมม... หวานอร่อยที่สุดเลย!\"",
+        "น้องชาบูเลียปากแผล็บ แล้ววิ่งปรู๊ดไปเล่นต่อทันที"
       ],
-      linesEn: [
+      "linesEn": [
         "After dinner tonight, Shabu grinned from ear to ear.",
         "She had just munched two crunchy honey cookies!",
-        '"Mmm... so sweet and yummy!"',
-        "Shabu licked her whiskers and zoomed off to play.",
-      ],
+        "\"Mmm... so sweet and yummy!\"",
+        "Shabu licked her whiskers and zoomed off to play."
+      ]
     },
     {
-      pageNo: 4,
-      image: "/edu/st02/03_p04.webp",
-      tagTh: "หน้า 2 • ไม่อยากแปรงฟันเลย!",
-      tagEn: "Page 2 • Not Brush Time Yet!",
-      linesTh: [
+      "pageNo": 4,
+      "image": "/edu/st02/03_p04.webp",
+      "tagTh": "หน้า 2 • ไม่อยากแปรงฟันเลย!",
+      "tagEn": "Page 2 • Not Brush Time Yet!",
+      "linesTh": [
         "พอได้เวลาเข้านอน แม่ใหญ่เรียกเสียงนุ่ม",
-        '"ชาบูลูก มาแปรงฟันก่อนนอนกันจ้า"',
+        "\"ชาบูลูก มาแปรงฟันก่อนนอนกันจ้า\"",
         "แต่น้องชาบูรีบมุดไปซ่อนหลังหมอนอิงใบโต",
-        '"ไม่เอาๆ! หนูง่วงแล้ว แปรงฟันมันน่าเบื่อออก!"',
+        "\"ไม่เอาๆ! หนูง่วงแล้ว แปรงฟันมันน่าเบื่อออก!\""
       ],
-      linesEn: [
+      "linesEn": [
         "At bedtime, Mama Mami called in a gentle voice,",
-        '"Shabu sweetheart, time to brush our teeth!"',
+        "\"Shabu sweetheart, time to brush our teeth!\"",
         "But Shabu quickly hid behind a big fluffy cushion.",
-        '"Nooo! I\'m sleepy—brushing takes too long!"',
-      ],
+        "\"Nooo! I'm sleepy—brushing takes too long!\""
+      ]
     },
     {
-      pageNo: 5,
-      image: "/edu/st02/04_p05.webp",
-      tagTh: "หน้า 3 • แก๊งฝุ่นน้ำตาลจอมป่วน",
-      tagEn: "Page 3 • The Tiny Sugar-Bug Party",
-      linesTh: [
+      "pageNo": 5,
+      "image": "/edu/st02/04_p05.webp",
+      "tagTh": "หน้า 3 • แก๊งฝุ่นน้ำตาลจอมป่วน",
+      "tagEn": "Page 3 • The Tiny Sugar-Bug Party",
+      "linesTh": [
         "ทันใดนั้น น้องชาบูรู้สึกจั๊กจี้แปลกๆ ในปาก!",
         "เพราะเศษน้ำตาลหวานๆ ที่ติดอยู่ตามซอกฟัน",
-        'เรียก "แก๊งฝุ่นน้ำตาลจิ๋ว" ตัวป่วนสีม่วงกลมๆ',
-        "ออกมาจัดปาร์ตี้เต้นดึ๋งๆ เหนียวหนึบเต็มไปหมด!",
+        "เรียก \"แก๊งฝุ่นน้ำตาลจิ๋ว\" ตัวป่วนสีม่วงกลมๆ",
+        "ออกมาจัดปาร์ตี้เต้นดึ๋งๆ เหนียวหนึบเต็มไปหมด!"
       ],
-      linesEn: [
+      "linesEn": [
         "Suddenly, Shabu felt a funny tickle on her teeth!",
         "The sticky honey crumbs left behind",
         "had invited tiny, silly purple Sugar Bugs",
-        "to throw a bouncy sticky party inside her mouth!",
-      ],
+        "to throw a bouncy sticky party inside her mouth!"
+      ]
     },
     {
-      pageNo: 6,
-      image: "/edu/st02/05_p06.webp",
-      tagTh: "หน้า 4 • แปรงวิเศษฟองดาวของแม่ใหญ่",
-      tagEn: "Page 4 • Mama Mami's Star-Bubble Brush",
-      linesTh: [
+      "pageNo": 6,
+      "image": "/edu/st02/05_p06.webp",
+      "tagTh": "หน้า 4 • แปรงวิเศษฟองดาวของแม่ใหญ่",
+      "tagEn": "Page 4 • Mama Mami's Star-Bubble Brush",
+      "linesTh": [
         "แม่ใหญ่ไม่ได้ดุ และไม่ได้บังคับน้องชาบูเลย",
-        'แต่แม่ใหญ่ชู "แปรงวิเศษฟองดาว" สีชมพูวิบวับ',
+        "แต่แม่ใหญ่ชู \"แปรงวิเศษฟองดาว\" สีชมพูวิบวับ",
         "พร้อมนาฬิกาทรายสีทองที่ส่องแสงอุ่นๆ แล้วกระซิบว่า",
-        '"กัปตันชาบู... พร้อมออกภารกิจ 3 ด่านหรือยังจ๊ะ?"',
+        "\"กัปตันชาบู... พร้อมออกภารกิจ 3 ด่านหรือยังจ๊ะ?\""
       ],
-      linesEn: [
+      "linesEn": [
         "Mama Mami didn't scold or hurry Shabu at all.",
         "Instead, she held up a sparkling pink Star-Bubble Brush",
         "and a glowing golden two-minute sandglass.",
-        '"Captain Shabu... ready for our 3-Stage Mission?"',
-      ],
+        "\"Captain Shabu... ready for our 3-Stage Mission?\""
+      ]
     },
     {
-      pageNo: 7,
-      image: "/edu/st02/06_p07.webp",
-      tagTh: "หน้า 5 • แปลงร่างเป็นกัปตันชาบู!",
-      tagEn: "Page 5 • Captain Shabu Reporting!",
-      linesTh: [
+      "pageNo": 7,
+      "image": "/edu/st02/06_p07.webp",
+      "tagTh": "หน้า 5 • แปลงร่างเป็นกัปตันชาบู!",
+      "tagEn": "Page 5 • Captain Shabu Reporting!",
+      "linesTh": [
         "ตาน้องชาบูเป็นประกายวิ้ง! รีบกระโดดขึ้นเก้าอี้ไม้",
         "บีบยาสีฟันกลิ่นสตรอว์เบอร์รีจิ๋วเท่าเม็ดถั่วเขียว",
-        '"รับทราบครับแม่ใหญ่! กัปตันชาบูพร้อมลุยแล้ว!"',
-        "แม่ใหญ่พลิกนาฬิกาทราย 2 นาที... เริ่มภารกิจได้!",
+        "\"รับทราบครับแม่ใหญ่! กัปตันชาบูพร้อมลุยแล้ว!\"",
+        "แม่ใหญ่พลิกนาฬิกาทราย 2 นาที... เริ่มภารกิจได้!"
       ],
-      linesEn: [
-        "Shabu's eyes sparkled! She hopped onto her wooden stool",
+      "linesEn": [
+        "Shabu's eyes sparkled! She hopped on her stool",
         "and squeezed a tiny pea-sized dot of berry toothpaste.",
-        '"Aye-aye, Mama! Captain Shabu is ready!"',
-        "Mama flipped the 2-minute timer—mission start!",
-      ],
+        "\"Aye-aye, Mama! Captain Shabu is ready!\"",
+        "Mama flipped the 2-minute timer—mission start!"
+      ]
     },
     {
-      pageNo: 8,
-      image: "/edu/st02/07_p08.webp",
-      tagTh: "หน้า 6 • ด่านที่ 1 วนเป็นวงกลมข้างนอก!",
-      tagEn: "Page 6 • Stage 1: Sparkle Circles Outside!",
-      linesTh: [
+      "pageNo": 8,
+      "image": "/edu/st02/07_p08.webp",
+      "tagTh": "หน้า 6 • ด่านที่ 1 วนเป็นวงกลมข้างนอก!",
+      "tagEn": "Page 6 • Stage 1: Sparkle Circles Outside!",
+      "linesTh": [
         "ด่านที่ 1: ปราบแก๊งฝุ่นน้ำตาลที่ฟันหน้าและข้างนอก!",
-        '"ฉึก ฉึก ซ่าาา... วนเป็นวงกลมเบาๆ นะลูก"',
+        "\"ฉึก ฉึก ซ่าาา... วนเป็นวงกลมเบาๆ นะลูก\"",
         "ฟองสีชมพูวิ้งๆ แตกป๊อปแป๊ะหอมกลิ่นเบอร์รี",
-        "เจ้าฝุ่นน้ำตาลตัวแรกร้องจ๊าก กระเด็นไปเลย!",
+        "เจ้าฝุ่นน้ำตาลตัวแรกร้องจ๊าก กระเด็นไปเลย!"
       ],
-      linesEn: [
+      "linesEn": [
         "Stage 1: Sweep the front and outside teeth!",
-        '"Swish, swish, circle-round—gentle as a cloud!"',
+        "\"Swish, swish, circle-round—gentle as a cloud!\"",
         "Berry-scented star bubbles popped with a sparkle,",
-        "sending the first silly Sugar Bugs tumbling away!",
-      ],
+        "sending the first silly Sugar Bugs tumbling away!"
+      ]
     },
     {
-      pageNo: 9,
-      image: "/edu/st02/08_p09.webp",
-      tagTh: "หน้า 7 • ด่านที่ 2 ถูฟันกรามข้างในให้ครบ!",
-      tagEn: "Page 7 • Stage 2: Scrub the Back Molars!",
-      linesTh: [
-        'ด่านที่ 2: อ้าปากกว้างๆ เหมือนสิงโต "อ้าาา!"',
-        '"จิ๊ก จิ๊ก ฟู่... ถูไป-ถูมาที่ฟันกรามด้านใน!"',
+      "pageNo": 9,
+      "image": "/edu/st02/08_p09.webp",
+      "tagTh": "หน้า 7 • ด่านที่ 2 ถูฟันกรามข้างในให้ครบ!",
+      "tagEn": "Page 7 • Stage 2: Scrub the Back Molars!",
+      "linesTh": [
+        "ด่านที่ 2: อ้าปากกว้างๆ เหมือนสิงโต \"อ้าาา!\"",
+        "\"จิ๊ก จิ๊ก ฟู่... ถูไป-ถูมาที่ฟันกรามด้านใน!\"",
         "ไม่ว่าแก๊งฝุ่นน้ำตาลจะแอบซ่อนมุมไหนลึกแค่ไหน",
-        "แปรงวิเศษของกัปตันชาบูก็กวาดเกลี้ยงทุกซี่!",
+        "แปรงวิเศษของกัปตันชาบูก็กวาดเกลี้ยงทุกซี่!"
       ],
-      linesEn: [
-        'Stage 2: Open wide like a friendly lion—"Aaaah!"',
-        '"Scrub, scrub, back and forth on the sleepy back teeth!"',
+      "linesEn": [
+        "Stage 2: Open wide like a friendly lion—\"Aaaah!\"",
+        "\"Scrub, scrub, back and forth on the sleepy back teeth!\"",
         "No matter which cozy corner the Sugar Bugs hid in,",
-        "Captain Shabu's magic brush swept every single one!",
-      ],
+        "Captain Shabu's magic brush swept every single one!"
+      ]
     },
     {
-      pageNo: 10,
-      image: "/edu/st02/09_p10.webp",
-      tagTh: "หน้า 8 • ด่านที่ 3 แปรงลิ้นและบ้วนน้ำวิ้ง!",
-      tagEn: "Page 8 • Stage 3: Brush Tongue & Rinse Clean!",
-      linesTh: [
+      "pageNo": 10,
+      "image": "/edu/st02/09_p10.webp",
+      "tagTh": "หน้า 8 • ด่านที่ 3 แปรงลิ้นและบ้วนน้ำวิ้ง!",
+      "tagEn": "Page 8 • Stage 3: Brush Tongue & Rinse Clean!",
+      "linesTh": [
         "ด่านที่ 3: ปัดลิ้นเบาๆ 3 ที แล้วกลั้วน้ำใสๆ",
-        '"กลั้ว กลั้ว... บ้วนฟองดาวออกไปเลย ปิ๊ง!"',
+        "\"กลั้ว กลั้ว... บ้วนฟองดาวออกไปเลย ปิ๊ง!\"",
         "เม็ดทรายสีทองเม็ดสุดท้ายไหลลงครบ 2 นาทีพอดี",
-        "เจ้าแก๊งฝุ่นน้ำตาลปลิววับหายไปกับสายน้ำหมดแล้ว!",
+        "เจ้าแก๊งฝุ่นน้ำตาลปลิววับหายไปกับสายน้ำหมดแล้ว!"
       ],
-      linesEn: [
+      "linesEn": [
         "Stage 3: Three gentle sweeps on the tongue, then rinse!",
-        '"Swish, swish... whoosh go the starry bubbles!"',
+        "\"Swish, swish... whoosh go the starry bubbles!\"",
         "Just as the last golden grain of sand fell at 2 minutes,",
-        "every last Sugar Bug waved goodbye and vanished!",
-      ],
+        "every last Sugar Bug waved goodbye and vanished!"
+      ]
     },
     {
-      pageNo: 11,
-      image: "/edu/st02/10_p11.webp",
-      tagTh: "หน้า 9 • ยิ้มแฉ่งฟันขาวเป็นประกายดาว!",
-      tagEn: "Page 9 • A Sparkling Star-Bright Smile!",
-      linesTh: [
+      "pageNo": 11,
+      "image": "/edu/st02/10_p11.webp",
+      "tagTh": "หน้า 9 • ยิ้มแฉ่งฟันขาวเป็นประกายดาว!",
+      "tagEn": "Page 9 • A Sparkling Star-Bright Smile!",
+      "linesTh": [
         "น้องชาบูฉีกยิ้มกว้างส่องกระจกดูผลงานตัวเอง",
         "ว้าว! ฟันทุกซี่ขาวสะอาด ส่องประกายวิ้งงงเหมือนดาว!",
         "ปากหอมสดชื่น ไม่มีเจ้าฝุ่นน้ำตาลกวนใจอีกแล้ว",
-        '"แม่ใหญ่ดูสิ! ฟันหนูวิบวับเหมือนเพชรเลย!"',
+        "\"แม่ใหญ่ดูสิ! ฟันหนูวิบวับเหมือนเพชรเลย!\""
       ],
-      linesEn: [
+      "linesEn": [
         "Shabu beamed a giant smile into the bathroom mirror.",
         "Whoa! Every tooth shone bright and clean like stars!",
         "Her breath felt minty-fresh, with zero sticky bugs left.",
-        '"Look, Mama! My teeth sparkle like tiny diamonds!"',
-      ],
+        "\"Look, Mama! My teeth sparkle like tiny diamonds!\""
+      ]
     },
     {
-      pageNo: 12,
-      image: "/edu/st02/11_p12.webp",
-      tagTh: "หน้า 10 • กอดอุ่นและดาวรางวัลกัปตัน",
-      tagEn: "Page 10 • Warm Hug & Captain's Star",
-      linesTh: [
+      "pageNo": 12,
+      "image": "/edu/st02/11_p12.webp",
+      "tagTh": "หน้า 10 • กอดอุ่นและดาวรางวัลกัปตัน",
+      "tagEn": "Page 10 • Warm Hug & Captain's Star",
+      "linesTh": [
         "แม่ใหญ่ยิ้มปลื้มใจ โผเข้ากอดน้องชาบูแน่นๆ",
-        'แล้วติดสติกเกอร์ "ดาวทองกัปตันฟันสวย" ที่หน้าผาก',
-        '"เก่งมากลูก แปรงฟันเองครบ 2 นาทีโดยไม่ต้องบ่นเลย"',
-        "น้องชาบูหัวเราะคิกคัก ภูมิใจในตัวเองที่สุดในโลก!",
+        "แล้วติดสติกเกอร์ \"ดาวทองกัปตันฟันสวย\" ที่หน้าผาก",
+        "\"เก่งมากลูก แปรงฟันครบ 2 นาทีโดยไม่งอแงเลย!\"",
+        "น้องชาบูหัวเราะคิกคัก ภูมิใจในตัวเองที่สุดในโลก!"
       ],
-      linesEn: [
-        "Mama Mami beamed and wrapped Shabu in a big warm hug,",
-        "placing a shiny golden Sparkle-Captain star sticker by her ear.",
-        '"I\'m so proud of you—two whole minutes all by yourself!"',
-        "Shabu giggled, feeling like the bravest kitten in the world.",
-      ],
+      "linesEn": [
+        "Mama Mami beamed and gave Shabu a warm hug,",
+        "placing a shiny golden star sticker by her ear.",
+        "\"So proud of you—two full minutes all by yourself!\"",
+        "Shabu giggled—the bravest little kitten ever!"
+      ]
     },
     {
-      pageNo: 13,
-      image: "/edu/st02/12_p13.webp",
-      tagTh: "หน้า 11 • ฝันดีนะกัปตันฟันสวย",
-      tagEn: "Page 11 • Sweet Dreams, Sparkle Captain",
-      linesTh: [
+      "pageNo": 13,
+      "image": "/edu/st02/12_p13.webp",
+      "tagTh": "หน้า 11 • ฝันดีนะกัปตันฟันสวย",
+      "tagEn": "Page 11 • Sweet Dreams, Sparkle Captain",
+      "linesTh": [
         "คืนนี้น้องชาบูห่มผ้าสีชมพูหลับปุ๋ยอย่างสบายใจ",
         "ฟันสะอาดวิบวับ ลมหายใจหอมชื่นใจใต้แสงจันทร์",
-        "พรุ่งนี้เช้าและก่อนนอน เราจะมาปราบแมงกินฟันกันอีกนะ",
-        "ฝันดีนะน้องชาบู... และฝันดีนะกัปตันฟันสวยของแม่",
+        "พรุ่งนี้เรามาปราบแมงกินฟันกันอีกนะ กัปตัน!",
+        "ฝันดีนะน้องชาบู... และฝันดีนะกัปตันฟันสวยของแม่"
       ],
-      linesEn: [
-        "Tonight, Shabu curled cozily under her pink starry blanket,",
+      "linesEn": [
+        "Tonight, Shabu curled under her pink starry quilt,",
         "with sparkling clean teeth and sweet moonlit dreams.",
-        "Morning and night, our Sparkle Mission keeps smiles bright.",
-        "Goodnight, little Shabu... and sweet dreams to you.",
-      ],
-    },
+        "Morning and night, our mission keeps smiles bright.",
+        "Goodnight, little Shabu... and sweet dreams to you."
+      ]
+    }
   ],
   dialogicQuestions: [
     {
@@ -903,203 +903,203 @@ export const ST03_CONFIG: StorybookConfig = {
   ],
   pages: [
     {
-      pageNo: 3,
-      image: "/edu/st03/02_p03.webp",
-      tagTh: "หน้า 1 • เช้าวันใหม่ที่วุ่นวาย!",
-      tagEn: "Page 1 • A Topsy-Turvy Morning!",
-      linesTh: [
+      "pageNo": 3,
+      "image": "/edu/st03/02_p03.webp",
+      "tagTh": "หน้า 1 • เช้าวันใหม่ที่วุ่นวาย!",
+      "tagEn": "Page 1 • A Topsy-Turvy Morning!",
+      "linesTh": [
         "แสงแดดยามเช้าส่องเข้ามาในบ้านแก๊ง 6 แมว",
-        "แต่วันนี้ห้องนั่งเล่นวุ่นวายเหมือนพายุเพิ่งพัดผ่าน!",
+        "แต่วันนี้ห้องนั่งเล่นวุ่นเหมือนพายุพัดผ่าน!",
         "ตัวต่อไม้กระจายเต็มพรม ผ้าห่มกองเป็นภูเขา",
-        '"แม่ใหญ่จ๋า! รองเท้าข้างซ้ายของชาบูหายไปไหนก็ไม่รู้!"',
+        "\"แม่ใหญ่จ๋า! รองเท้าข้างซ้ายหนูหายไปไหน!\""
       ],
-      linesEn: [
-        "Golden morning sunshine peeked into the 6 Cats' home.",
-        "Whoa—the living room looked like a tiny tornado passed through!",
-        "Wooden blocks covered the rug and blankets piled like a mountain.",
-        '"Mama! Where did my left shoe hide?!" cried Shabu.',
-      ],
+      "linesEn": [
+        "Morning sunshine peeked into the 6 Cats' home.",
+        "Whoa—the playroom looked like a tiny tornado!",
+        "Blocks covered the rug and blankets piled high.",
+        "\"Mama! Where did my left shoe hide?!\""
+      ]
     },
     {
-      pageNo: 4,
-      image: "/edu/st03/03_p04.webp",
-      tagTh: "หน้า 2 • ทำไมเช้านี้ไม่ทันใจเลย!",
-      tagEn: "Page 2 • Everything Feels So Rushed!",
-      linesTh: [
+      "pageNo": 4,
+      "image": "/edu/st03/03_p04.webp",
+      "tagTh": "หน้า 2 • ทำไมเช้านี้ไม่ทันใจเลย!",
+      "tagEn": "Page 2 • Everything Feels So Rushed!",
+      "linesTh": [
         "น้องชาบูวิ่งวนหาถุงเท้าจนหางฟู",
-        "น้องแซลมอนกอดกระเป๋าเป้แน่น ยืนงงอยู่กลางกองของเล่น",
-        "เข็มนาฬิกาเดินติ๊กต็อก... ติ๊กต็อก... ใกล้เวลาออกเดินทางแล้ว",
-        "หัวใจน้อยๆ เริ่มร้อนรน จนเกือบจะงอแงทั้งบ้านเลย!",
+        "น้องแซลมอนกอดกระเป๋า ยืนงงกลางกองของเล่น",
+        "นาฬิกาเดินติ๊กต็อก... ใกล้เวลาออกจากบ้านแล้ว",
+        "หัวใจน้อยๆ เริ่มร้อนรน จนเกือบงอแงทั้งบ้าน!"
       ],
-      linesEn: [
-        "Shabu zoomed in circles looking for her socks with a puffy tail.",
-        "Salmon hugged her backpack tight, standing puzzled amid the toys.",
-        "Tick-tock went the wall clock—almost time to head out!",
-        "Their little hearts raced, ready to burst into morning grumbles.",
-      ],
+      "linesEn": [
+        "Shabu zoomed around looking for her socks.",
+        "Salmon hugged her bag amid the messy toys.",
+        "Tick-tock went the clock—almost time to go!",
+        "Their little hearts raced with morning grumbles."
+      ]
     },
     {
-      pageNo: 5,
-      image: "/edu/st03/04_p05.webp",
-      tagTh: "หน้า 3 • รอยยิ้มใจเย็นของแม่ใหญ่",
-      tagEn: "Page 3 • Mama Mami's Calm Smile",
-      linesTh: [
-        "แม่ใหญ่ไม่ได้ดุ และไม่ได้ตะโกนเร่งลูกๆ เลยสักคำ",
-        "แม่ใหญ่ยิ้มอุ่นๆ ย่อตัวลงกอดน้องชาบูกับน้องแซลมอนเบาๆ",
-        '"ไม่เป็นไรนะลูก หายใจเข้าลึกๆ ก่อนนะ..."',
-        '"วันนี้แม่มี \'กระดานเวทมนตร์ 3 ก้าว\' กับ \'ขวดโหลดาวทอง\' มาช่วยจ้ะ!"',
+      "pageNo": 5,
+      "image": "/edu/st03/04_p05.webp",
+      "tagTh": "หน้า 3 • รอยยิ้มใจเย็นของแม่ใหญ่",
+      "tagEn": "Page 3 • Mama Mami's Calm Smile",
+      "linesTh": [
+        "แม่ใหญ่ไม่ได้ดุ และไม่ตะโกนเร่งลูกๆ เลย",
+        "แม่ใหญ่ยิ้มอุ่นๆ ย่อตัวลงกอดน้องทั้งสองเบาๆ",
+        "\"ไม่เป็นไรนะลูก หายใจเข้าลึกๆ ก่อนนะ...\"",
+        "\"แม่มี 'กระดาน 3 ก้าว' กับขวดโหลดาวมาช่วยจ้ะ!\""
       ],
-      linesEn: [
-        "Mama Mami didn't scold or shout to hurry them up.",
-        "She smiled warmly and knelt down to hug Shabu and Salmon close.",
-        '"It\'s okay, sweethearts. Let\'s take one slow breath together..."',
-        '"Today, my 3-Step Magic Board and Golden Star Jar will help!"',
-      ],
+      "linesEn": [
+        "Mama Mami didn't scold or shout at all.",
+        "She knelt down to hug Shabu and Salmon close.",
+        "\"It's okay, sweethearts. One slow breath...\"",
+        "\"My 3-Step Board and Star Jar will help!\""
+      ]
     },
     {
-      pageNo: 6,
-      image: "/edu/st03/05_p06.webp",
-      tagTh: "หน้า 4 • เปิดกระดานกิจวัตรและขวดโหลดาว!",
-      tagEn: "Page 4 • The Routine Board & Star Jar!",
-      linesTh: [
-        "แม่ใหญ่ชูกระดานกิจวัตรสีชมพูแสนน่ารักพร้อมการ์ดภาพ 3 ใบ",
-        "ข้างๆ มีขวดโหลแก้วใสที่รอรับดวงดาวสีทองวิบวับ",
-        '"เราไม่ต้องรีบทำทุกอย่างพร้อมกันนะลูก"',
-        '"แค่ทำทีละก้าวตามการ์ด ครบ 3 ก้าว รับดาวทองไปหยอดขวดโหลเลย!"',
+      "pageNo": 6,
+      "image": "/edu/st03/05_p06.webp",
+      "tagTh": "หน้า 4 • เปิดกระดานกิจวัตรและขวดโหลดาว!",
+      "tagEn": "Page 4 • The Routine Board & Star Jar!",
+      "linesTh": [
+        "แม่ใหญ่ชูกระดานสีชมพู พร้อมการ์ดภาพ 3 ใบ",
+        "ข้างๆ มีขวดโหลแก้วใสรอรับดาวทองวิบวับ",
+        "\"เราไม่ต้องรีบทำทุกอย่างพร้อมกันนะลูก\"",
+        "\"ทำทีละก้าว ครบ 3 ก้าว รับดาวทองเลย!\""
       ],
-      linesEn: [
-        "Mama Mami showed a pretty rose-pink routine board with 3 picture cards",
-        "and a sparkling clear glass jar waiting for golden stars.",
-        '"We don\'t have to rush everything all at once," she said.',
-        '"Just one small step at a time—finish 3 steps and earn a golden star!"',
-      ],
+      "linesEn": [
+        "Mama held up a pink board with 3 picture cards",
+        "and a clear glass jar waiting for golden stars.",
+        "\"We don't have to rush all at once,\" she said.",
+        "\"Finish 3 easy steps and earn a golden star!\""
+      ]
     },
     {
-      pageNo: 7,
-      image: "/edu/st03/06_p07.webp",
-      tagTh: "หน้า 5 • ก้าวที่ 1 ส่งของเล่นกลับบ้าน!",
-      tagEn: "Page 5 • Step 1: Send Toys Back Home!",
-      linesTh: [
-        "ก้าวที่ 1: มาพับผ้าห่มและส่งของเล่นกลับบ้านกันเถอะ!",
-        '"บล็อกไม้กลับกล่อง... ตุ๊กตากลับชั้น... พรมสะอาดแล้ว!"',
-        "แม่ใหญ่เปิดนาฬิกาจับเวลา 5 นาที เป็นเกมแข่งสนุกๆ",
-        "ว้าว! พอเก็บของเล่นเข้าที่ ก็เจอรองเท้าสีแดงที่ซ่อนอยู่ใต้พรมทันที!",
+      "pageNo": 7,
+      "image": "/edu/st03/06_p07.webp",
+      "tagTh": "หน้า 5 • ก้าวที่ 1 ส่งของเล่นกลับบ้าน!",
+      "tagEn": "Page 5 • Step 1: Send Toys Back Home!",
+      "linesTh": [
+        "ก้าวที่ 1: พับผ้าห่ม ส่งของเล่นกลับบ้านกัน!",
+        "\"บล็อกลงกล่อง... ตุ๊กตาขึ้นชั้น... พรมสะอาด!\"",
+        "แม่ใหญ่จับเวลา 5 นาที เป็นเกมแข่งสุดสนุก",
+        "ว้าว! เจอรองเท้าสีแดงซ่อนใต้พรมพอดีเลย!"
       ],
-      linesEn: [
-        "Step 1: Fold the cozy blanket and send every toy back home!",
-        '"Blocks into the basket... plushies on the shelf... tidy rug!"',
-        "Mama started a cheerful 5-minute timer like a fun little game.",
-        "Whoa! As soon as the toys went home, Shabu's missing red shoe popped right out!",
-      ],
+      "linesEn": [
+        "Step 1: Fold the blanket and tidy the toys!",
+        "\"Blocks in the box... plushies on the shelf!\"",
+        "Mama set a fun 5-minute game timer.",
+        "Whoa! Shabu's missing red shoe popped right out!"
+      ]
     },
     {
-      pageNo: 8,
-      image: "/edu/st03/07_p08.webp",
-      tagTh: "หน้า 6 • ก้าวที่ 2 ล้างหน้า แปรงฟัน แต่งตัว!",
-      tagEn: "Page 6 • Step 2: Wash, Brush & Dress Up!",
-      linesTh: [
-        "ก้าวที่ 2: แปะการ์ดสีชมพูแล้วไปดูแลตัวเองให้สดชื่น!",
-        "น้องแซลมอนล้างหน้าเย็นฉ่ำ น้องชาบูแปรงฟันยิ้มแฉ่ง",
+      "pageNo": 8,
+      "image": "/edu/st03/07_p08.webp",
+      "tagTh": "หน้า 6 • ก้าวที่ 2 ล้างหน้า แปรงฟัน แต่งตัว!",
+      "tagEn": "Page 6 • Step 2: Wash, Brush & Dress Up!",
+      "linesTh": [
+        "ก้าวที่ 2: แปะการ์ดแล้วดูแลตัวเองให้สดชื่น!",
+        "น้องแซลมอนล้างหน้า น้องชาบูแปรงฟันยิ้มแฉ่ง",
         "สวมชุดเก่งและหวีขนเรียบร้อยด้วยมือตัวเอง",
-        '"เสร็จแล้วจ้าแม่ใหญ่! พวกหนูติดกระดุมเองได้ด้วยนะ!"',
+        "\"เสร็จแล้วจ้า! พวกหนูติดกระดุมเองได้ด้วย!\""
       ],
-      linesEn: [
-        "Step 2: Stick the pink card and get fresh and ready!",
-        "Salmon splashed cool water on her face; Shabu brushed with a big grin.",
-        "They put on their favorite morning outfits all by themselves.",
-        '"Ta-da, Mama! We even buttoned our own collars today!"',
-      ],
+      "linesEn": [
+        "Step 2: Stick the card and get fresh and ready!",
+        "Salmon washed up; Shabu brushed with a grin.",
+        "They put on their outfits all by themselves.",
+        "\"Ta-da, Mama! We buttoned our own collars!\""
+      ]
     },
     {
-      pageNo: 9,
-      image: "/edu/st03/08_p09.webp",
-      tagTh: "หน้า 7 • ก้าวที่ 3 เตรียมกระเป๋าและรองเท้า!",
-      tagEn: "Page 7 • Step 3: Pack Bag & Shoes Ready!",
-      linesTh: [
-        "ก้าวที่ 3: หยิบกระเป๋าเป้คู่ใจและวางรองเท้าเรียงคู่หน้าประตู",
-        "น้องแซลมอนเช็กสมุดวาดภาพกับกระติกน้ำครบทุกชิ้น",
-        "น้องชาบูสวมรองเท้าคู่เก่งเรียบร้อยไม่สลับข้างแล้ว!",
-        "ติ๊ง! นาฬิกาของแม่ใหญ่ดังขึ้น... ทำครบก่อนเวลาตั้งเยอะเลย!",
+      "pageNo": 9,
+      "image": "/edu/st03/08_p09.webp",
+      "tagTh": "หน้า 7 • ก้าวที่ 3 เตรียมกระเป๋าและรองเท้า!",
+      "tagEn": "Page 7 • Step 3: Pack Bag & Shoes Ready!",
+      "linesTh": [
+        "ก้าวที่ 3: เตรียมกระเป๋าเป้และรองเท้าหน้าประตู",
+        "น้องแซลมอนเช็กสมุดวาดภาพกับกระติกน้ำครบ",
+        "น้องชาบูสวมรองเท้าคู่เก่งไม่สลับข้างแล้ว!",
+        "ติ๊ง! นาฬิกาดัง... ทำเสร็จก่อนเวลาตั้งเยอะ!"
       ],
-      linesEn: [
-        "Step 3: Pack the cozy backpacks and line up shoes by the door!",
-        "Salmon tucked in her sketchbook and water bottle neatly.",
-        "Shabu slipped on both red shoes on the right feet—hooray!",
-        "Ding! Mama's gentle timer chimed with plenty of happy minutes to spare!",
-      ],
+      "linesEn": [
+        "Step 3: Pack backpacks and line up your shoes!",
+        "Salmon tucked in her sketchbook and bottle.",
+        "Shabu slipped on both red shoes—hooray!",
+        "Ding! The timer chimed with minutes to spare!"
+      ]
     },
     {
-      pageNo: 10,
-      image: "/edu/st03/09_p10.webp",
-      tagTh: "หน้า 8 • ว้าว! แปะการ์ดครบ 3 ก้าวแล้ว!",
-      tagEn: "Page 8 • Hooray! All 3 Routine Cards Done!",
-      linesTh: [
-        "น้องชาบูกับน้องแซลมอนแปะการ์ดใบสุดท้ายบนกระดานดัง ปุ๊!",
-        "บ้านทั้งหลังดูโล่ง สะอาด และสว่างสดใสขึ้นทันตา",
-        "ไม่มีเสียงบ่น ไม่มีน้ำตา มีแต่เสียงหัวเราะคิกคัก",
-        '"เวทมนตร์ 3 ก้าวของแม่ใหญ่ วิเศษจริงๆ ด้วย!"',
+      "pageNo": 10,
+      "image": "/edu/st03/09_p10.webp",
+      "tagTh": "หน้า 8 • ว้าว! แปะการ์ดครบ 3 ก้าวแล้ว!",
+      "tagEn": "Page 8 • Hooray! All 3 Routine Cards Done!",
+      "linesTh": [
+        "น้องๆ แปะการ์ดใบสุดท้ายบนกระดานดัง ปุ๊!",
+        "บ้านทั้งหลังดูโล่ง สะอาด และสว่างสดใส",
+        "ไม่มีเสียงบ่น ไม่มีน้ำตา มีแต่เสียงหัวเราะ",
+        "\"เวทมนตร์ 3 ก้าวของแม่ใหญ่ วิเศษจริงๆ!\""
       ],
-      linesEn: [
-        "Pop! Shabu and Salmon placed the third picture card onto the board.",
-        "The whole house looked bright, airy, and wonderfully tidy.",
-        "Zero grumbles, zero tears—only warm giggles filling the room!",
-        '"Mama Mami\'s 3-Step Magic really works!" cheered the kittens.',
-      ],
+      "linesEn": [
+        "Pop! The kittens placed the third card on top.",
+        "The whole house looked bright and super tidy.",
+        "Zero grumbles, zero tears—only warm giggles!",
+        "\"Mama Mami's 3-Step Magic really works!\""
+      ]
     },
     {
-      pageNo: 11,
-      image: "/edu/st03/10_p11.webp",
-      tagTh: "หน้า 9 • หยอดดาวทองลงขวดโหล!",
-      tagEn: "Page 9 • Drop a Golden Star in the Jar!",
-      linesTh: [
-        "แม่ใหญ่ส่งดวงดาวสีทองระยิบระยับให้ลูกๆ คนละดวง",
-        "กริ๊งงง! ดาวทองค่อยๆ ลอยลงไปในขวดโหลแก้วใส",
-        "แสงสีทองอบอุ่นเปล่งประกายเหมือนความภูมิใจในหัวใจน้อยๆ",
-        '"ดาวดวงนี้คือรางวัลของเด็กเก่งที่รับผิดชอบตัวเองนะลูก"',
+      "pageNo": 11,
+      "image": "/edu/st03/10_p11.webp",
+      "tagTh": "หน้า 9 • หยอดดาวทองลงขวดโหล!",
+      "tagEn": "Page 9 • Drop a Golden Star in the Jar!",
+      "linesTh": [
+        "แม่ใหญ่ส่งดาวทองระยิบระยับให้คนละดวง",
+        "กริ๊งงง! ดาวทองค่อยๆ ลอยลงขวดโหลแก้วใส",
+        "แสงสีทองอบอุ่นเปล่งประกายเหมือนใจภูมิใจ",
+        "\"ดาวนี้คือรางวัลของเด็กเก่งนะลูก\""
       ],
-      linesEn: [
-        "Mama Mami handed each kitten a shimmering golden star.",
-        "Clink! The stars dropped softly into the clear glass jar,",
-        "glowing with warm golden light just like their proud little hearts.",
-        '"This star celebrates how wonderfully you took care of your morning!"',
-      ],
+      "linesEn": [
+        "Mama handed each kitten a shiny golden star.",
+        "Clink! The stars dropped into the glass jar,",
+        "glowing warmly just like their proud hearts.",
+        "\"This star celebrates your calm morning!\""
+      ]
     },
     {
-      pageNo: 12,
-      image: "/edu/st03/11_p12.webp",
-      tagTh: "หน้า 10 • กอดอุ่นเติมพลังก่อนออกจากบ้าน",
-      tagEn: "Page 10 • Warm Morning Hug Power-Up!",
-      linesTh: [
-        "แม่ใหญ่กางแขนโอบกอดน้องชาบูกับน้องแซลมอนแน่นๆ",
-        '"ขอบคุณที่ช่วยกันทำเช้านี้ให้ใจเย็นและมีความสุขนะจ๊ะ"',
-        "น้องๆ หอมแก้มแม่ใหญ่ฟอดใหญ่ เติมพลังใจเต็มร้อย!",
-        "เมื่อเราทำทีละก้าว เช้าวันใหม่ก็ไม่น่ากลัวอีกต่อไป",
+      "pageNo": 12,
+      "image": "/edu/st03/11_p12.webp",
+      "tagTh": "หน้า 10 • กอดอุ่นเติมพลังก่อนออกจากบ้าน",
+      "tagEn": "Page 10 • Warm Morning Hug Power-Up!",
+      "linesTh": [
+        "แม่ใหญ่กางแขนโอบกอดลูกๆ ทั้งสองแน่นๆ",
+        "\"ขอบคุณที่ทำเช้านี้ให้ใจเย็นและมีความสุขจ้ะ\"",
+        "น้องๆ หอมแก้มแม่ฟอดใหญ่ เติมพลังเต็มร้อย!",
+        "แค่ทำทีละก้าว เช้าวันใหม่ก็ง่ายนิดเดียว"
       ],
-      linesEn: [
-        "Mama Mami opened her arms wide for a cozy group hug.",
-        '"Thank you for making our morning so calm and joyful, little ones."',
-        "Both kittens nuzzled Mama's cheek—heart batteries charged to 100%!",
-        "One gentle step at a time makes every morning feel easy.",
-      ],
+      "linesEn": [
+        "Mama opened her arms for a cozy group hug.",
+        "\"Thank you for such a calm, joyful morning.\"",
+        "Both kittens nuzzled Mama—hearts full of love!",
+        "One gentle step makes every morning easy."
+      ]
     },
     {
-      pageNo: 13,
-      image: "/edu/st03/12_p13.webp",
-      tagTh: "หน้า 11 • ออกเดินทางสู่เช้าวันใหม่ที่สดใส!",
-      tagEn: "Page 11 • Off We Go to a Bright New Day!",
-      linesTh: [
-        "ประตูบ้านเปิดออกรับลมเช้าเย็นสบายและแดดสีทองอ่อนๆ",
-        "น้องชาบูและน้องแซลมอนโบกมือลาแม่ใหญ่ด้วยรอยยิ้มกว้าง",
-        "วันนี้และทุกๆ เช้า เราจะใช้เวทมนตร์ 3 ก้าวไปด้วยกันนะ",
-        "อรุณสวัสดิ์นะเช้าวันใหม่... หัวใจเย็นๆ พร้อมลุยแล้ว!",
+      "pageNo": 13,
+      "image": "/edu/st03/12_p13.webp",
+      "tagTh": "หน้า 11 • ออกเดินทางสู่เช้าวันใหม่ที่สดใส!",
+      "tagEn": "Page 11 • Off We Go to a Bright New Day!",
+      "linesTh": [
+        "ประตูบ้านเปิดรับลมเช้าและแดดสีทองอ่อนๆ",
+        "น้องชาบูกับน้องแซลมอนโบกมือลาด้วยรอยยิ้ม",
+        "ทุกๆ เช้า เราจะใช้เวทมนตร์ 3 ก้าวไปด้วยกัน",
+        "อรุณสวัสดิ์นะเช้าวันใหม่... พร้อมลุยแล้ว!"
       ],
-      linesEn: [
-        "The front door opened to a cool breeze and soft golden sunshine.",
-        "Shabu and Salmon waved happily to Mama Mami with bright smiles.",
-        "Today and every morning, our 3-Step Magic keeps our hearts calm.",
-        "Good morning, bright new day—we're ready to shine!",
-      ],
-    },
+      "linesEn": [
+        "The door opened to cool breezes and sunshine.",
+        "Shabu and Salmon waved goodbye with big smiles.",
+        "Every morning, our 3-Step Magic keeps us calm.",
+        "Good morning, bright new day—ready to shine!"
+      ]
+    }
   ],
   dialogicQuestions: [
     {
