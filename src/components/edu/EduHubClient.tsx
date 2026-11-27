@@ -26,6 +26,8 @@ import { EDU_CATALOG, getEduOrderLineUrl } from "@/lib/eduCatalog";
 type AudienceMode = "home" | "class";
 type GoalFilterId =
   | "all"
+  | "fc01"
+  | "cb01"
   | "st01"
   | "sn01"
   | "bb01"
@@ -45,9 +47,23 @@ const GOAL_FILTERS: {
   {
     id: "all",
     age: "ทุกช่วงวัย 3–7 ปี",
-    goal: "ครบทั้ง 13 เล่ม Live!",
+    goal: "ครบทั้ง 15 เล่ม Live!",
     emoji: "👑",
-    desc: "แสดงสื่อการสอน & นิทานภาพ Hybrid QR ครบทั้งหมด 13 ชุด (ใบงาน Level 1 ครบ 6 เล่ม + Level 2 ป.1 + นิทานภาพแก๊ง 6 แมว Season 1 ครบ 6/6 เล่ม!)",
+    desc: "แสดงสื่อการสอน นิทานภาพ สมุดระบายสี & แฟลชการ์ด Hybrid QR ครบทั้งหมด 15 ชุด (ใบงาน 7 + นิทาน 6 + ระบายสี 40 หน้า + แฟลชการ์ด 48 การ์ด เริ่ม 49฿!)",
+  },
+  {
+    id: "fc01",
+    age: "NEW • 3–6 ปี • 59฿",
+    goal: "แฟลชการ์ด 2 ภาษา 48 ใบ",
+    emoji: "🃏",
+    desc: "NEW! ชุดแฟลชการ์ดคำศัพท์ & พลังใจ 2 ภาษาแก๊ง 6 แมว 48 การ์ดตัดเล่น + คำอ่านโฟนิกส์ + เว็บการ์ดกดฟังเสียง TH/EN & เกมควิซฟรี!",
+  },
+  {
+    id: "cb01",
+    age: "NEW • 3–6 ปี • 49฿",
+    goal: "สมุดระบายสีแก๊ง 6 แมว (40 หน้า)",
+    emoji: "🖍️",
+    desc: "NEW! สมุดระบายสีเส้นหนาขอบชัด 40 หน้า (36 ภาพแก๊ง 6 แมว + คำศัพท์ 2 ภาษา + ประโยคพลังใจ + ใบประกาศฯ) พร้อมเว็บระบายสีออนไลน์ฟรี!",
   },
   {
     id: "st01",
@@ -113,7 +129,7 @@ const HOW_IT_WORKS = [
     icon: Download,
     colorBg: "bg-amber-100 text-amber-800 border-amber-200",
     title: "โหลดไฟล์ PDF ทันที",
-    desc: "รับลิงก์ไฟล์ความละเอียดสูงทันทีหลังโอน หรือกดโหลดชุดทดลองฟรี 65 หน้า (ครบ 13 เล่ม) ไปลองปริ้นท์ดูก่อน 0 ฿",
+    desc: "รับลิงก์ไฟล์ความละเอียดสูงทันทีหลังโอน หรือกดโหลดชุดทดลองฟรี 75 หน้า (ครบ 15 เล่ม) ไปลองปริ้นท์ดูก่อน 0 ฿",
   },
   {
     step: "02",
@@ -201,7 +217,7 @@ export function EduHubClient() {
                   }`}
                 >
                   <Home className="w-4 h-4 shrink-0" />
-                  <span>สำหรับคุณพ่อคุณแม่ (Home • เริ่ม 99฿)</span>
+                  <span>สำหรับคุณพ่อคุณแม่ (Home • เริ่ม 49฿)</span>
                 </button>
 
                 <button
@@ -225,7 +241,7 @@ export function EduHubClient() {
                   className="inline-flex items-center gap-1.5 text-amber-800 hover:text-amber-950 underline underline-offset-4"
                 >
                   <Download className="w-4 h-4 text-amber-600" />
-                  <span>ทดลองโหลดฟรีครบ 13 เล่ม รวม 65 หน้า (0 ฿ ไม่ต้องสมัคร)</span>
+                  <span>ทดลองโหลดฟรีครบ 15 เล่ม รวม 75 หน้า (0 ฿ ไม่ต้องสมัคร)</span>
                 </a>
                 <a
                   href="#mega-bundle"
@@ -246,10 +262,10 @@ export function EduHubClient() {
                 />
                 <div className="bg-white/95 backdrop-blur-sm border-t border-amber-100 px-4 py-2.5 flex items-center justify-between gap-2 text-xs">
                   <span className="font-bold text-slate-800">
-                    👑 13 เล่ม Live (ใบงาน 7 เล่ม + นิทาน Season 1 ครบ 6/6!)
+                    👑 15 เล่ม Live (ใบงาน 7 + นิทาน 6 + ระบายสี + แฟลชการ์ด!)
                   </span>
                   <span className="rounded-full bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 font-bold text-emerald-800 shrink-0">
-                    ฟรี 65 หน้า!
+                    ฟรี 75 หน้า!
                   </span>
                 </div>
               </div>
@@ -354,12 +370,12 @@ export function EduHubClient() {
                 onClick={() => setSelectedGoal("all")}
                 className="text-xs sm:text-sm font-bold text-rose-700 hover:text-rose-900 underline underline-offset-4 cursor-pointer"
               >
-                ล้างตัวกรอง (แสดงครบทั้ง 7 เล่ม)
+                ล้างตัวกรอง (แสดงครบทั้ง 15 เล่ม)
               </button>
             )}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
             {GOAL_FILTERS.map((g) => {
               const active = selectedGoal === g.id;
               return (
@@ -413,10 +429,10 @@ export function EduHubClient() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B]">
-                คลังสื่อการสอน &amp; นิทานภาพครบ 13 เล่ม Live (AiAon Edu-Verse)
+                คลังสื่อการสอน นิทานภาพ ระบายสี &amp; แฟลชการ์ดครบ 15 เล่ม Live (AiAon Edu-Verse)
               </h2>
               <p className="text-sm text-slate-600 mt-1">
-                คลิกเข้าหน้าแต่ละเล่มเพื่อใช้งานเครื่องมือ Hybrid QR และดาวน์โหลดชุดทดลองฟรี (ครบ 13 เล่ม รวม 65 หน้า!)
+                คลิกเข้าหน้าแต่ละเล่มเพื่อใช้งานเครื่องมือ Hybrid QR และดาวน์โหลดชุดทดลองฟรี (ครบ 15 เล่ม รวม 75 หน้า!)
               </p>
             </div>
 
@@ -726,8 +742,8 @@ export function EduHubClient() {
           id="mega-bundle"
           className="rounded-3xl border-2 border-amber-300 bg-gradient-to-br from-[#FEF9EF] via-white to-[#FFF5F5] p-6 sm:p-8 shadow-lg shadow-amber-900/5 space-y-6 scroll-mt-24"
         >
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-            <div className="space-y-2 max-w-2xl">
+          <div className="space-y-5">
+            <div className="space-y-2 max-w-3xl">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-amber-100 px-3 py-1 text-xs font-extrabold text-amber-950">
                 <Gift className="w-3.5 h-3.5 text-amber-700" />
                 <span>LAUNCH PROMOTION • คุ้มที่สุดสำหรับบ้านที่มีลูกวัย 3–6 ปี</span>
@@ -740,19 +756,21 @@ export function EduHubClient() {
               </p>
             </div>
 
-            {/* Mini 4-book visual stack */}
-            <div className="flex items-center gap-2 shrink-0 flex-wrap">
+            {/* Clean 15-book visual showcase strip (5x3 on mobile, 15x1 on desktop — zero overflow!) */}
+            <div className="grid grid-cols-5 lg:grid-cols-[repeat(15,minmax(0,1fr))] gap-2">
               {EDU_CATALOG.map((item) => (
-                <div
+                <Link
                   key={item.sku}
-                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden border-2 border-amber-200 shadow-sm bg-white"
+                  href={`/edu/${item.slug}`}
+                  title={`${item.sku}: ${item.titleTh}`}
+                  className="aspect-square rounded-xl overflow-hidden border-2 border-amber-200 hover:border-amber-500 hover:-translate-y-0.5 shadow-xs bg-white transition-all block"
                 >
                   <img
                     src={item.coverImage}
                     alt={item.sku}
                     className="w-full h-full object-cover"
                   />
-                </div>
+                </Link>
               ))}
             </div>
           </div>

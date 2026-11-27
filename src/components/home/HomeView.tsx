@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   Gift,
@@ -16,6 +16,64 @@ import {
 } from "lucide-react";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 import { getLineOrderUrl } from "@/lib/line";
+import {
+  ScrollProgressBar,
+  CountUpMetric,
+  SpotlightTiltCard,
+  LiveShowcaseMarquee,
+  LiveTryItPlayground,
+} from "@/components/home/HomeInteractiveWidgets";
+
+const HERO_SPOTLIGHTS = [
+  {
+    id: "edu",
+    tab: "01 Edu-Verse",
+    badge: "AiAon Edu-Verse • 15 เล่ม Live!",
+    badgeStyle: "bg-amber-400 text-[#0F172A]",
+    auraA: "bg-amber-500/[0.10]",
+    auraB: "bg-rose-400/[0.08]",
+    title: "สื่อเด็กเล็กไร้จอ + นิทาน 6 เล่ม + ระบายสี & แฟลชการ์ด (ฟรี 75 หน้า!)",
+    image: "/edu/hero-banner-6cats.webp",
+    href: "/edu",
+    pillDot: "bg-amber-500",
+  },
+  {
+    id: "tech",
+    tab: "02 Tech",
+    badge: "AiAon Tech • 20+ ระบบโรงเรียน GAS",
+    badgeStyle: "bg-blue-600 text-white",
+    auraA: "bg-blue-500/[0.10]",
+    auraB: "bg-cyan-400/[0.08]",
+    title: "ระบบแจ้งซ่อม QR Telegram, สุขาภิบาล, เช็กชื่อ & KruRank AI ใช้งานจริง",
+    image: "/brand/visuals/hero_aiaon_tech.webp",
+    href: "/digital-vault",
+    pillDot: "bg-blue-600",
+  },
+  {
+    id: "audio",
+    tab: "03 Audio",
+    badge: "AiAon Audio • BGM ว.PA ปลอดลิขสิทธิ์",
+    badgeStyle: "bg-teal-600 text-white",
+    auraA: "bg-teal-500/[0.10]",
+    auraB: "bg-amber-400/[0.07]",
+    title: "เพลงช่วยจำสอบครู, ดนตรีประกอบคลิป ว.PA 60 นาที & เทมเพลต Cubase",
+    image: "/brand/visuals/hero_aiaon_audio.webp",
+    href: "/music-store",
+    pillDot: "bg-teal-600",
+  },
+  {
+    id: "studio",
+    tab: "04 Studio",
+    badge: "AiAon Studio • 30+ LINE Store On Sale",
+    badgeStyle: "bg-purple-600 text-white",
+    auraA: "bg-purple-500/[0.10]",
+    auraB: "bg-pink-400/[0.08]",
+    title: "ปั้นสติกเกอร์ LINE 3D & อิโมจิจากรูปถ่ายจริง ดูแลครบจนอนุมัติขาย",
+    image: "/brand/visuals/hero_aiaon_studio.webp",
+    href: "/line-stickers",
+    pillDot: "bg-purple-600",
+  },
+];
 
 const PILLARS = [
   {
@@ -28,6 +86,7 @@ const PILLARS = [
     desc: "รวม 20+ ระบบ Google Apps Script ใช้งานจริงในโรงเรียนใหญ่ (แจ้งซ่อม QR, สุขาภิบาล, เช็กชื่อ, ห้องเรียนสีขาว) พร้อม KruRank AI และรับพัฒนาเว็บแอป",
     image: "/brand/visuals/hero_aiaon_tech.webp",
     accentBorder: "hover:border-[#2563EB]/50",
+    glowColor: "rgba(37, 99, 235, 0.13)",
     pillBg: "bg-blue-50 text-[#1D4ED8] border-blue-200",
     ctaBg: "bg-[#1D4ED8] hover:bg-[#1E40AF] text-white",
     href: "/digital-vault",
@@ -43,19 +102,20 @@ const PILLARS = [
     number: "02",
     logo: "/brand/svg/aiaon-edu_lockup_horizontal_fullcolor-on-light.svg",
     logoAlt: "AiAon Edu-Verse by AiAon Tech",
-    audience: "สำหรับพ่อแม่ & ครูอนุบาล (วัย 3–6 ปี)",
-    title: "สื่อกิจกรรมเด็กเล็กไร้จอ + Hybrid QR",
-    desc: "6 เล่ม 192 หน้า โดยแก๊ง 6 แมว (ฝึกสมอง EF, ตารางวินัย 30 วัน, Busy Book แปรงฟัน, ดนตรีเสียงจริง, Phonics, ศิลปะ SEL) โหลดทดลองฟรี 30 หน้า",
+    audience: "สำหรับพ่อแม่ & ครูอนุบาล (วัย 3–7 ปี)",
+    title: "สื่อกิจกรรมเด็กเล็กไร้จอ + นิทาน & ระบายสี Hybrid QR",
+    desc: "ครบ 15 เล่ม Live โดยแก๊ง 6 แมว: ใบงาน Level 1–2 (ป.1) 7 เล่ม + นิทานสีน้ำ 6 เล่ม + สมุดระบายสี 40 หน้า + แฟลชการ์ด 48 ใบ โหลดทดลองฟรีรวม 75 หน้า!",
     image: "/brand/visuals/hero_aiaon_edu.webp",
     accentBorder: "hover:border-[#F59E0B]/60",
+    glowColor: "rgba(245, 158, 11, 0.15)",
     pillBg: "bg-amber-50 text-[#92400E] border-amber-200",
     ctaBg: "bg-[#92400E] hover:bg-[#78350F] text-white",
     href: "/edu",
-    ctaText: "เข้าจักรวาล AiAon Edu-Verse",
+    ctaText: "เข้าจักรวาล AiAon Edu-Verse (15 เล่ม)",
     quickLinks: [
-      { label: "ครบ 6 เล่ม (ฟรี 30 หน้า)", href: "/edu" },
-      { label: "คลัง E-Book ครูไทย", href: "/ebooks" },
-      { label: "ติวสอบครูผู้ช่วย", href: "/teacher-prep" },
+      { label: "ครบ 15 เล่ม (ฟรี 75 หน้า)", href: "/edu" },
+      { label: "สมุดระบายสี 40 หน้า (49฿)", href: "/edu/cb01" },
+      { label: "แฟลชการ์ดเสียง 48 ใบ (59฿)", href: "/edu/fc01" },
     ],
   },
   {
@@ -68,6 +128,7 @@ const PILLARS = [
     desc: "เพลงช่วยจำกฎหมายการศึกษา, ดนตรีประกอบคลิป ว.PA ปลอดลิขสิทธิ์ 100%, Backing Track วงดนตรี และเทมเพลตสตูดิโอ Cubase ระดับมืออาชีพ",
     image: "/brand/visuals/hero_aiaon_audio.webp",
     accentBorder: "hover:border-[#EA580C]/50",
+    glowColor: "rgba(15, 118, 110, 0.13)",
     pillBg: "bg-orange-50 text-[#C2410C] border-orange-200",
     ctaBg: "bg-[#0F766E] hover:bg-[#115E59] text-white",
     href: "/music-store",
@@ -88,6 +149,7 @@ const PILLARS = [
     desc: "ปั้นสติกเกอร์ 3D จากรูปถ่ายจริง ดูแลครบวงจรจนอนุมัติขึ้น LINE STORE พร้อมพอร์ตผลงานจริงกว่า 30+ ชุด On Sale และไฟล์ PNG พื้นใสแต่งปกร้าน",
     image: "/brand/visuals/hero_aiaon_studio.webp",
     accentBorder: "hover:border-[#7C3AED]/50",
+    glowColor: "rgba(124, 58, 237, 0.13)",
     pillBg: "bg-purple-50 text-[#6D28D9] border-purple-200",
     ctaBg: "bg-[#6D28D9] hover:bg-[#5B21B6] text-white",
     href: "/line-stickers",
@@ -102,15 +164,15 @@ const PILLARS = [
 
 const FEATURED_FLAGSHIPS = [
   {
-    tag: "BEST SELLER • 6 เล่มครบชุด",
+    tag: "BEST SELLER • 15 เล่ม Live!",
     tagColor: "bg-amber-100 text-amber-900",
-    title: "AiAon Edu-Verse All-6 Bundle",
-    subtitle: "สื่อกิจกรรมไร้จอ 192 หน้า + เว็บแอป QR จับเวลา & เสียงจริง",
-    price: "449 ฿",
-    oldPrice: "714 ฿",
-    image: "/edu/bb01/mockup-01-cover.webp",
+    title: "AiAon Edu-Verse (เริ่ม 49฿ • แพ็กเหมา 449฿)",
+    subtitle: "ใบงาน 7 เล่ม + นิทานภาพ 6 เล่ม + สมุดระบายสี 40 หน้า + แฟลชการ์ด 48 ใบ + เว็บ QR ฟรี!",
+    price: "เริ่ม 49 ฿",
+    oldPrice: "All-6 449 ฿",
+    image: "/edu/cb01/mockup-01-cover.webp",
     href: "/edu",
-    cta: "ดูทั้ง 6 เล่ม & โหลดฟรี 30 หน้า",
+    cta: "ดูครบ 15 เล่ม & โหลดฟรี 75 หน้า",
   },
   {
     tag: "POPULAR SERVICE • 30+ ON SALE",
@@ -138,6 +200,18 @@ const FEATURED_FLAGSHIPS = [
 
 export function HomeView() {
   const { openLineModal } = useLineModal();
+  const [heroIdx, setHeroIdx] = useState(0);
+  const [autoCycle, setAutoCycle] = useState(true);
+
+  useEffect(() => {
+    if (!autoCycle) return;
+    const t = setInterval(() => {
+      setHeroIdx((i) => (i + 1) % HERO_SPOTLIGHTS.length);
+    }, 6500);
+    return () => clearInterval(t);
+  }, [autoCycle]);
+
+  const activeHero = HERO_SPOTLIGHTS[heroIdx];
 
   const handleLineClick = (e: React.MouseEvent) => {
     const msg =
@@ -153,13 +227,20 @@ export function HomeView() {
 
   return (
     <div className="w-full bg-[#F8FAFC] text-[#1E293B] font-prompt overflow-x-hidden">
+      {/* Top Scroll Progress Line */}
+      <ScrollProgressBar />
+
       {/* =================================================================
-          BLOCK 1: CINEMATIC EDITORIAL HERO (ABOVE THE FOLD)
+          BLOCK 1: CINEMATIC MORPHING 4-PILLAR HERO (ABOVE THE FOLD)
       ================================================================= */}
-      <section className="relative pt-8 pb-16 sm:pt-12 sm:pb-24 border-b border-[#E2E8F0]">
-        {/* Subtle Warm Studio Paper Ambient */}
-        <div className="absolute top-0 right-0 w-[520px] h-[520px] bg-blue-500/[0.04] blur-3xl rounded-full pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-amber-500/[0.06] blur-3xl rounded-full pointer-events-none" />
+      <section className="relative pt-8 pb-16 sm:pt-12 sm:pb-24 border-b border-[#E2E8F0] transition-colors duration-700">
+        {/* Dynamic Ambient Aura shifts smoothly per selected pillar */}
+        <div
+          className={`absolute top-0 right-0 w-[560px] h-[560px] ${activeHero.auraA} blur-3xl rounded-full pointer-events-none transition-colors duration-700`}
+        />
+        <div
+          className={`absolute bottom-0 left-0 w-[440px] h-[440px] ${activeHero.auraB} blur-3xl rounded-full pointer-events-none transition-colors duration-700`}
+        />
 
         <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
@@ -171,7 +252,7 @@ export function HomeView() {
               className="lg:col-span-6 space-y-6"
             >
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E2E8F0] shadow-2xs text-xs font-semibold text-[#475569]">
-                <span className="w-2 h-2 rounded-full bg-[#06C755]" />
+                <span className="w-2 h-2 rounded-full bg-[#06C755] animate-pulse" />
                 <span>Creative Tech Studio • โดย ครูอ้น (Teacher · Musician · Maker)</span>
               </div>
 
@@ -186,7 +267,7 @@ export function HomeView() {
                 <strong className="text-[#0F172A] font-semibold">
                   Intelligent Technology. More Human Life.
                 </strong>{" "}
-                — ศูนย์รวมระบบอัตโนมัติโรงเรียน สื่อการสอนเด็กเล็ก Hybrid QR เพลงเพื่อการศึกษา และสตูดิโอสติกเกอร์ LINE 3D ที่ออกแบบจากหน้างานจริง
+                — ศูนย์รวมระบบอัตโนมัติโรงเรียน สื่อเด็กเล็ก 15 เล่ม Hybrid QR เพลงเพื่อการศึกษา และสตูดิโอสติกเกอร์ LINE 3D ที่ออกแบบจากหน้างานจริง
               </p>
 
               {/* Primary & Secondary CTAs */}
@@ -205,104 +286,139 @@ export function HomeView() {
                   className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-[#FEF3C7] hover:bg-amber-200/80 text-[#78350F] border border-amber-300/70 font-bold text-sm sm:text-base transition-all"
                 >
                   <Gift className="w-4 h-4" />
-                  <span>รับของแจกฟรี 0 ฿</span>
+                  <span>รับของแจกฟรี 75 หน้า (0 ฿)</span>
                 </Link>
               </div>
 
-              {/* Real Verified Metrics Strip */}
+              {/* Animated Count-Up Metrics Strip */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-[#E2E8F0]">
-                {[
-                  { value: "20+", label: "ระบบโรงเรียน GAS" },
-                  { value: "6 เล่ม", label: "สื่อเด็กเล็ก 192 หน้า" },
-                  { value: "30+", label: "LINE Store On Sale" },
-                  { value: "4,000+", label: "นร.ใช้งานจริง" },
-                ].map((stat) => (
-                  <div key={stat.label} className="min-w-0">
-                    <div className="text-xl sm:text-2xl font-extrabold text-[#0F172A] tracking-tight">
-                      {stat.value}
-                    </div>
-                    <div className="text-xs text-[#475569] mt-0.5">{stat.label}</div>
-                  </div>
-                ))}
+                <CountUpMetric target={20} suffix="+" label="ระบบโรงเรียน GAS" />
+                <CountUpMetric target={15} suffix=" เล่ม" label="Edu-Verse (ฟรี 75 หน้า)" />
+                <CountUpMetric target={30} suffix="+" label="LINE Store On Sale" />
+                <CountUpMetric target={4000} suffix="+" label="นร.ใช้งานจริง" />
               </div>
             </motion.div>
 
-            {/* Right: Magazine Visual Collage (Real Flagship Assets) */}
+            {/* Right: Interactive Morphing Universe Switcher & Collage */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.08 }}
-              className="lg:col-span-6"
+              className="lg:col-span-6 space-y-3.5"
             >
-              <div className="grid grid-cols-12 gap-3.5 sm:gap-4">
-                {/* Top Full Visual: 6 Cats Pixar Ensemble */}
-                <Link
-                  href="/edu"
-                  className="col-span-12 group relative rounded-3xl overflow-hidden bg-white border border-[#E2E8F0] shadow-sm hover:shadow-lg transition-all aspect-[16/9]"
-                >
-                  <Image
-                    src="/edu/hero-banner-6cats.webp"
-                    alt="AiAon Edu-Verse 6 Cats Pixar Ensemble"
-                    fill
-                    priority
-                    className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                    sizes="(max-width: 1024px) 100vw, 600px"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/80 via-[#0F172A]/30 to-transparent p-4 sm:p-5 flex items-end justify-between gap-3">
-                    <div>
-                      <span className="inline-block px-2.5 py-0.5 rounded-full bg-amber-400 text-[#0F172A] text-[10px] font-extrabold uppercase tracking-wider mb-1">
-                        AiAon Edu-Verse • 6/6 Live
+              {/* Morphing Pillar Tabs */}
+              <div className="inline-flex flex-wrap items-center gap-1 p-1.5 rounded-2xl bg-white border border-[#E2E8F0] shadow-2xs w-full justify-between">
+                {HERO_SPOTLIGHTS.map((item, idx) => {
+                  const isActive = idx === heroIdx;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => {
+                        setHeroIdx(idx);
+                        setAutoCycle(false);
+                      }}
+                      className={`relative flex-1 min-w-[72px] px-3 py-2 rounded-xl text-xs font-extrabold transition-colors cursor-pointer ${
+                        isActive ? "text-white" : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      {isActive && (
+                        <motion.span
+                          layoutId="hero-pillar-pill"
+                          transition={{ type: "spring", stiffness: 360, damping: 30 }}
+                          className="absolute inset-0 rounded-xl bg-[#0F172A] shadow-xs"
+                        />
+                      )}
+                      <span className="relative z-10 inline-flex items-center justify-center gap-1.5">
+                        <span className={`w-1.5 h-1.5 rounded-full ${item.pillDot}`} />
+                        <span>{item.tab}</span>
                       </span>
-                      <p className="text-white font-bold text-sm sm:text-base leading-snug">
-                        สื่อกิจกรรมเด็กเล็ก 3–6 ปี + QR จับเวลา (แจกฟรี 30 หน้า)
-                      </p>
-                    </div>
-                    <span className="shrink-0 w-9 h-9 rounded-full bg-white text-[#0F172A] flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                      <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </div>
-                </Link>
+                    </button>
+                  );
+                })}
+              </div>
 
-                {/* Bottom Left: School System Mockup */}
+              <div className="grid grid-cols-12 gap-3.5 sm:gap-4">
+                {/* Active Morphing Hero Showcase */}
+                <div className="col-span-12 relative rounded-3xl overflow-hidden bg-white border border-[#E2E8F0] shadow-md aspect-[16/9]">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeHero.id}
+                      initial={{ opacity: 0, scale: 1.03 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.98 }}
+                      transition={{ duration: 0.35 }}
+                      className="absolute inset-0"
+                    >
+                      <Link href={activeHero.href} className="group block w-full h-full relative">
+                        <Image
+                          src={activeHero.image}
+                          alt={activeHero.title}
+                          fill
+                          priority
+                          className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                          sizes="(max-width: 1024px) 100vw, 600px"
+                        />
+                        <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/85 via-[#0F172A]/35 to-transparent p-4 sm:p-5 flex items-end justify-between gap-3">
+                          <div>
+                            <span
+                              className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider mb-1 ${activeHero.badgeStyle}`}
+                            >
+                              {activeHero.badge}
+                            </span>
+                            <p className="text-white font-bold text-sm sm:text-base leading-snug">
+                              {activeHero.title}
+                            </p>
+                          </div>
+                          <span className="shrink-0 w-9 h-9 rounded-full bg-white text-[#0F172A] flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                            <ArrowRight className="w-4 h-4" />
+                          </span>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Bottom Left: New Coloring Book Spotlight */}
                 <Link
-                  href="/digital-vault"
-                  className="col-span-6 group relative rounded-3xl overflow-hidden bg-white border border-[#E2E8F0] shadow-sm hover:shadow-md transition-all aspect-[4/3]"
+                  href="/edu/cb01"
+                  className="col-span-6 group relative rounded-3xl overflow-hidden bg-[#FEF9EF] border border-amber-200 shadow-sm hover:shadow-md transition-all aspect-[4/3]"
                 >
                   <Image
-                    src="/brand/visuals/hero_aiaon_tech.webp"
-                    alt="AiAon Tech School Automation"
+                    src="/edu/cb01/mockup-01-cover.webp"
+                    alt="EDU-CB01 สมุดระบายสีแก๊ง 6 แมว 40 หน้า"
                     fill
                     className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
                     sizes="(max-width: 1024px) 50vw, 300px"
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/85 via-[#0F172A]/35 to-transparent p-3.5">
-                    <span className="text-[10px] font-bold text-cyan-300 uppercase tracking-wider block">
-                      AiAon Tech
+                    <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider block">
+                      NEW • เริ่ม 49฿
                     </span>
                     <span className="text-white text-xs sm:text-sm font-bold line-clamp-1">
-                      20+ ระบบโรงเรียน GAS
+                      สมุดระบายสี 40 หน้า + เว็บสี
                     </span>
                   </div>
                 </Link>
 
-                {/* Bottom Right: Studio / Audio Showcase */}
+                {/* Bottom Right: New Flashcards Spotlight */}
                 <Link
-                  href="/line-stickers"
-                  className="col-span-6 group relative rounded-3xl overflow-hidden bg-[#FAF5FF] border border-[#E2E8F0] shadow-sm hover:shadow-md transition-all aspect-[4/3]"
+                  href="/edu/fc01"
+                  className="col-span-6 group relative rounded-3xl overflow-hidden bg-[#F0FDFA] border border-teal-200 shadow-sm hover:shadow-md transition-all aspect-[4/3]"
                 >
                   <Image
-                    src="/brand/visuals/hero_aiaon_studio.webp"
-                    alt="AiAon Studio 3D LINE Stickers"
+                    src="/edu/fc01/mockup-01-cover.webp"
+                    alt="EDU-FC01 แฟลชการ์ดคำศัพท์ 2 ภาษา 48 ใบ"
                     fill
                     className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
                     sizes="(max-width: 1024px) 50vw, 300px"
                   />
-                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/80 via-[#0F172A]/25 to-transparent p-3.5">
-                    <span className="text-[10px] font-bold text-purple-200 uppercase tracking-wider block">
-                      AiAon Studio
+                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/85 via-[#0F172A]/30 to-transparent p-3.5">
+                    <span className="text-[10px] font-bold text-teal-300 uppercase tracking-wider block">
+                      NEW • 48 การ์ดเสียง
                     </span>
                     <span className="text-white text-xs sm:text-sm font-bold line-clamp-1">
-                      สติกเกอร์ LINE 3D &amp; อิโมจิ
+                      แฟลชการ์ด 2 ภาษา + ควิซ
                     </span>
                   </div>
                 </Link>
@@ -313,7 +429,17 @@ export function HomeView() {
       </section>
 
       {/* =================================================================
-          BLOCK 2: 4-PILLAR GRAND GATEWAYS (OFFICIAL SVG LOCKUPS)
+          NEW BLOCK 1.5: INFINITE 15-BOOK LIVE SHOWCASE MARQUEE
+      ================================================================= */}
+      <LiveShowcaseMarquee />
+
+      {/* =================================================================
+          NEW BLOCK 1.8: LIVE "TRY-IT-NOW" 3-IN-1 INTERACTIVE PLAYGROUND
+      ================================================================= */}
+      <LiveTryItPlayground />
+
+      {/* =================================================================
+          BLOCK 2: 4-PILLAR GRAND GATEWAYS (3D TILT + CURSOR SPOTLIGHT)
       ================================================================= */}
       <section id="pillars" className="py-16 sm:py-24 scroll-mt-20">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-6 space-y-10">
@@ -339,75 +465,84 @@ export function HomeView() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {PILLARS.map((p) => (
-              <article
+            {PILLARS.map((p, idx) => (
+              <motion.div
                 key={p.id}
-                className={`group rounded-3xl bg-white border border-[#E2E8F0] ${p.accentBorder} shadow-2xs hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.45, delay: idx * 0.06 }}
               >
-                {/* Top Visual Preview */}
-                <Link
-                  href={p.href}
-                  className="relative aspect-[16/9] w-full bg-[#F8FAFC] overflow-hidden border-b border-[#E2E8F0] block"
-                >
-                  <Image
-                    src={p.image}
-                    alt={p.title}
-                    fill
-                    className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, 600px"
-                  />
-                  <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs border border-[#E2E8F0] text-xs font-mono font-bold text-[#0F172A] shadow-2xs">
-                    {p.number}
-                  </span>
-                </Link>
-
-                {/* Card Body */}
-                <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between gap-5">
-                  <div className="space-y-3.5">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <img
-                        src={p.logo}
-                        alt={p.logoAlt}
-                        className="h-8 sm:h-9 w-auto"
-                      />
-                      <span
-                        className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${p.pillBg}`}
-                      >
-                        {p.audience}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] leading-snug">
-                      {p.title}
-                    </h3>
-
-                    <p className="text-sm text-[#475569] leading-relaxed">
-                      {p.desc}
-                    </p>
-
-                    {/* Quick Sub-Links */}
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {p.quickLinks.map((ql) => (
-                        <Link
-                          key={ql.href}
-                          href={ql.href}
-                          className="text-xs font-semibold px-3 py-1.5 rounded-xl bg-[#F8FAFC] hover:bg-slate-100 border border-[#E2E8F0] text-[#1E293B] transition-colors"
-                        >
-                          {ql.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-
-                  <Link
-                    href={p.href}
-                    className={`w-full py-3.5 px-5 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${p.ctaBg}`}
+                <SpotlightTiltCard glowColor={p.glowColor} className="h-full">
+                  <article
+                    className={`h-full group rounded-3xl bg-white border border-[#E2E8F0] ${p.accentBorder} shadow-2xs hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col`}
                   >
-                    <span>{p.ctaText}</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </article>
+                    {/* Top Visual Preview */}
+                    <Link
+                      href={p.href}
+                      className="relative aspect-[16/9] w-full bg-[#F8FAFC] overflow-hidden border-b border-[#E2E8F0] block"
+                    >
+                      <Image
+                        src={p.image}
+                        alt={p.title}
+                        fill
+                        className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, 600px"
+                      />
+                      <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs border border-[#E2E8F0] text-xs font-mono font-bold text-[#0F172A] shadow-2xs">
+                        {p.number}
+                      </span>
+                    </Link>
+
+                    {/* Card Body */}
+                    <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between gap-5 relative z-20">
+                      <div className="space-y-3.5">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <img
+                            src={p.logo}
+                            alt={p.logoAlt}
+                            className="h-8 sm:h-9 w-auto"
+                          />
+                          <span
+                            className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${p.pillBg}`}
+                          >
+                            {p.audience}
+                          </span>
+                        </div>
+
+                        <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] leading-snug">
+                          {p.title}
+                        </h3>
+
+                        <p className="text-sm text-[#475569] leading-relaxed">
+                          {p.desc}
+                        </p>
+
+                        {/* Quick Sub-Links */}
+                        <div className="flex flex-wrap gap-2 pt-1">
+                          {p.quickLinks.map((ql) => (
+                            <Link
+                              key={ql.href}
+                              href={ql.href}
+                              className="text-xs font-semibold px-3 py-1.5 rounded-xl bg-[#F8FAFC] hover:bg-slate-100 border border-[#E2E8F0] text-[#1E293B] transition-colors"
+                            >
+                              {ql.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+
+                      <Link
+                        href={p.href}
+                        className={`w-full py-3.5 px-5 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${p.ctaBg}`}
+                      >
+                        <span>{p.ctaText}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </article>
+                </SpotlightTiltCard>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -503,7 +638,7 @@ export function HomeView() {
               </h2>
               <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
                 ครูอ้นเตรียมชุดทดลองใช้งานจริงให้ฟรีไม่มีเงื่อนไข ทั้ง{" "}
-                <strong className="text-[#0F172A]">ใบงานเด็กเล็ก 30 หน้า (ครบ 6 เล่ม)</strong>,{" "}
+                <strong className="text-[#0F172A]">สื่อเด็กเล็ก &amp; นิทานฟรี 75 หน้า (ครบ 15 เล่ม)</strong>,{" "}
                 <strong className="text-[#0F172A]">ระบบครู Google Apps Script แจกฟรี</strong> และ{" "}
                 <strong className="text-[#0F172A]">แทร็กเพลง BGM ปลอดลิขสิทธิ์</strong>
               </p>
@@ -521,7 +656,7 @@ export function HomeView() {
                 href="/edu"
                 className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white hover:bg-amber-50 text-[#0F172A] border border-amber-300 font-bold text-sm transition-all"
               >
-                <span>โหลดใบงานเด็กฟรี 30 หน้า</span>
+                <span>โหลดสื่อเด็กฟรี 75 หน้า</span>
               </Link>
             </div>
           </div>

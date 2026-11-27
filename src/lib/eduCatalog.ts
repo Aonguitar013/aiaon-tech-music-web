@@ -380,6 +380,60 @@ export const EDU_CATALOG: EduSkuItem[] = [
     badgeTh: "👑 ปิดซีซัน 1 (6/6) • Focus Timer 5 น.",
     badgeEn: "👑 Season 1 Finale • 5-Min Focus Timer",
   },
+  {
+    sku: "EDU-CB01",
+    slug: "cb01",
+    status: "live",
+    accent: "amber",
+    characterNameTh: "แก๊ง 6 แมวครบทีม (Coloring Book)",
+    characterNameEn: "All 6 Cats Squad (Coloring Book)",
+    titleTh: "สมุดระบายสีแก๊ง 6 แมว & คาแรกเตอร์พลังใจ — 40 หน้า",
+    titleEn: "The 6 Cats Gentle Heart Coloring Book — 40 Bold Pages",
+    subtitleTh:
+      "36 ภาพเส้นหนาขอบชัดสำหรับวัย 3–6 ปี + คำศัพท์ 2 ภาษา TH/EN + ประโยคพลังใจทุกหน้า + ใบประกาศฯ + เว็บระบายสีออนไลน์ฟรี!",
+    subtitleEn:
+      "36 Bold & Easy Coloring Pages (Ages 3–6) + Bilingual Words + Gentle Heart Affirmations + Certificate + Interactive Web Studio!",
+    ageRangeTh: "อายุ 3–6 ปี • สมุดระบายสี 40 หน้า",
+    ageRangeEn: "Ages 3–6 • 40-Page Coloring Book",
+    pages: 40,
+    heroImage: "/edu/khaotom-3d.webp",
+    coverImage: "/edu/cb01/mockup-01-cover.webp",
+    freebieThUrl: "/edu/cb01/EDU-CB01_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/cb01/EDU-CB01_Freebie_5Pages_EN.pdf",
+    priceHomeThb: 49,
+    priceHomeUsd: "$2.99",
+    priceClassThb: 99,
+    priceClassUsd: "$5.99",
+    badgeTh: "NEW 40 หน้า • เว็บระบายสีฟรี!",
+    badgeEn: "NEW 40 Pages • Online Coloring Studio",
+  },
+  {
+    sku: "EDU-FC01",
+    slug: "fc01",
+    status: "live",
+    accent: "teal",
+    characterNameTh: "แก๊ง 6 แมวครบทีม (48 Flashcards)",
+    characterNameEn: "All 6 Cats Squad (48 Flashcards)",
+    titleTh: "ชุดแฟลชการ์ดคำศัพท์ & พลังใจ 2 ภาษาแก๊ง 6 แมว — 48 การ์ด",
+    titleEn: "The 6 Cats Bilingual Flashcards & Affirmation Deck — 48 Cards",
+    subtitleTh:
+      "36 การ์ดแก๊ง 6 แมว + 12 การ์ดโบนัสอารมณ์/กิจวัตร (ตัดตามเส้นประ 4 การ์ด/หน้า) + คำอ่านโฟนิกส์ + เว็บการ์ดกดฟังเสียง TH/EN & ควิซฟรี!",
+    subtitleEn:
+      "36 Character Action Cards + 12 Bonus Feelings & Habits Cards (Jumbo Cut-Out) + Bilingual Audio Flip Deck & Sound Quiz!",
+    ageRangeTh: "อายุ 3–6 ปี • 48 การ์ดตัดเล่น (16 หน้า)",
+    ageRangeEn: "Ages 3–6 • 48 Jumbo Cards (16 Pages)",
+    pages: 16,
+    heroImage: "/edu/bob-3d.webp",
+    coverImage: "/edu/fc01/mockup-01-cover.webp",
+    freebieThUrl: "/edu/fc01/EDU-FC01_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/fc01/EDU-FC01_Freebie_5Pages_EN.pdf",
+    priceHomeThb: 59,
+    priceHomeUsd: "$3.49",
+    priceClassThb: 119,
+    priceClassUsd: "$6.99",
+    badgeTh: "NEW 48 การ์ด • กดฟังเสียง TH/EN!",
+    badgeEn: "NEW 48 Cards • Audio Deck & Quiz",
+  },
 ];
 
 export type EduOrderEdition =
@@ -462,14 +516,14 @@ export function getEduOrderLineUrl(params: {
   if (edition === "CLASS") {
     const msg =
       lang === "th"
-        ? `สวัสดีครับครูอ้น สนใจสั่งซื้อสื่อการสอน iAon Edu-Verse:\n🏫 "[${item.sku}] ${item.titleTh} — CLASS EDITION (สิทธิ์ห้องเรียน 32 หน้า ครบ 4 ไฟล์ TH/EN สี+ขาวดำ)"\n💰 ราคา: ${item.priceClassThb} ฿\nรบกวนขอเลขบัญชี / PromptPay QR เพื่อรับไฟล์ PDF ทันทีครับ 🙏`
-        : `Hi Teacher Aon! I'd like to order:\n🏫 "[${item.sku}] ${item.titleEn} — CLASS EDITION (Classroom License, 32 Pages, 4 PDFs TH/EN Color+BW)"\n💰 Price: ${item.priceClassThb} THB / ${item.priceClassUsd}\nPlease send payment instructions!`;
+        ? `สวัสดีครับครูอ้น สนใจสั่งซื้อสื่อการสอน iAon Edu-Verse:\n🏫 "[${item.sku}] ${item.titleTh} — CLASS EDITION (สิทธิ์ห้องเรียน ${item.pages} หน้า ครบ 4 ไฟล์ TH/EN สี+ขาวดำ)"\n💰 ราคา: ${item.priceClassThb} ฿\nรบกวนขอเลขบัญชี / PromptPay QR เพื่อรับไฟล์ PDF ทันทีครับ 🙏`
+        : `Hi Teacher Aon! I'd like to order:\n🏫 "[${item.sku}] ${item.titleEn} — CLASS EDITION (Classroom License, ${item.pages} Pages, 4 PDFs TH/EN Color+BW)"\n💰 Price: ${item.priceClassThb} THB / ${item.priceClassUsd}\nPlease send payment instructions!`;
     return getLineOrderUrl(msg);
   }
 
   const msg =
     lang === "th"
-      ? `สวัสดีครับครูอ้น สนใจสั่งซื้อสื่อการสอน iAon Edu-Verse:\n🏠 "[${item.sku}] ${item.titleTh} — HOME EDITION (32 หน้าเต็ม ครบ 4 ไฟล์ TH/EN สี+ขาวดำ)"\n💰 ราคา: ${item.priceHomeThb} ฿\nรบกวนขอเลขบัญชี / PromptPay QR เพื่อรับไฟล์ PDF ทันทีครับ 🙏`
-      : `Hi Teacher Aon! I'd like to order:\n🏠 "[${item.sku}] ${item.titleEn} — HOME EDITION (32 Full Pages, 4 PDFs TH/EN Color+BW)"\n💰 Price: ${item.priceHomeThb} THB / ${item.priceHomeUsd}\nPlease send payment instructions!`;
+      ? `สวัสดีครับครูอ้น สนใจสั่งซื้อสื่อการสอน iAon Edu-Verse:\n🏠 "[${item.sku}] ${item.titleTh} — HOME EDITION (${item.pages} หน้าเต็ม ครบ 4 ไฟล์ TH/EN สี+ขาวดำ)"\n💰 ราคา: ${item.priceHomeThb} ฿\nรบกวนขอเลขบัญชี / PromptPay QR เพื่อรับไฟล์ PDF ทันทีครับ 🙏`
+      : `Hi Teacher Aon! I'd like to order:\n🏠 "[${item.sku}] ${item.titleEn} — HOME EDITION (${item.pages} Full Pages, 4 PDFs TH/EN Color+BW)"\n💰 Price: ${item.priceHomeThb} THB / ${item.priceHomeUsd}\nPlease send payment instructions!`;
   return getLineOrderUrl(msg);
 }
