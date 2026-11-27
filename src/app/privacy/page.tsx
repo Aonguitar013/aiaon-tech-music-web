@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Lock, ArrowLeft, ExternalLink, Database, CheckCircle2 } from "lucide-react";
+import { Lock, ArrowLeft, ExternalLink, Database, CheckCircle2, ShieldCheck, Sparkles, Baby } from "lucide-react";
 import { getLineOrderUrl } from "@/lib/line";
 import { PillarThemeWrapper } from "@/components/layout/PillarThemeWrapper";
 
 export const metadata: Metadata = {
-  title: "นโยบายความเป็นส่วนตัว (PDPA) | AiAon Tech",
+  title: "นโยบายความเป็นส่วนตัว (PDPA) | AiAon",
   description:
-    "นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคลของนักเรียน ครู และลูกค้าธุรกิจ ตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)",
+    "นโยบายความเป็นส่วนตัวและการคุ้มครองข้อมูลส่วนบุคคลครบทั้ง 4 เสาหลักของ AiAon (Tech, Edu-Verse, Audio และ Studio) ตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)",
 };
 
 export default function PrivacyPage() {
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
       <div className="w-full relative overflow-hidden min-h-screen pb-24 font-prompt text-[#1E293B]">
         <div className="max-w-4xl mx-auto px-4 pt-10 md:pt-14 relative z-10">
           {/* Navigation Breadcrumb */}
-          <div className="mb-8">
+          <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
             <Link
               href="/"
               className="inline-flex items-center gap-2 text-sm font-medium text-[#2563EB] hover:text-[#1D4ED8] transition-colors"
@@ -24,21 +24,37 @@ export default function PrivacyPage() {
               <ArrowLeft className="w-4 h-4" />
               กลับสู่หน้าหลัก
             </Link>
+            <div className="flex items-center gap-2 text-xs font-semibold">
+              <Link
+                href="/terms"
+                className="px-3 py-1.5 rounded-full bg-white border border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:border-[#BFDBFE] transition"
+              >
+                เงื่อนไขการใช้งาน
+              </Link>
+              <Link
+                href="/refund"
+                className="px-3 py-1.5 rounded-full bg-white border border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:border-[#BFDBFE] transition"
+              >
+                นโยบายการคืนเงิน
+              </Link>
+            </div>
           </div>
 
           {/* Page Header */}
           <div className="mb-10 border-b border-[#E2E8F0] pb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 mb-4">
               <Lock className="w-3.5 h-3.5" />
-              การคุ้มครองข้อมูลส่วนบุคคล (PDPA)
+              การคุ้มครองข้อมูลส่วนบุคคล (PDPA) • AiAon Ecosystem V2.0
             </div>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0F172A] mb-3">
               นโยบายความเป็นส่วนตัว (Privacy Policy)
             </h1>
             <p className="text-[#475569] text-sm md:text-base leading-relaxed">
-              ผู้ให้บริการ: <strong className="text-[#0F172A]">AiAon Tech โดย นายจิรวัฒน์ เดชเส้ง</strong> | มาตรฐานการคุ้มครองข้อมูลระดับสูงสุด
+              ผู้ให้บริการ: <strong className="text-[#0F172A]">AiAon (AiAon Tech • Edu-Verse • Audio • Studio) โดย นายจิรวัฒน์ เดชเส้ง</strong> | มาตรฐานการคุ้มครองข้อมูลระดับสูงสุด
             </p>
-            <p className="text-[#64748B] text-xs mt-2">อัปเดตล่าสุด: 16 ตุลาคม 2026</p>
+            <p className="text-[#64748B] text-xs mt-2">
+              อัปเดตล่าสุด: 27 พฤศจิกายน 2026 (ครอบคลุมระบบโรงเรียน, เว็บแอปเด็กเล็ก Edu-Verse และบริการสติกเกอร์ LINE)
+            </p>
           </div>
 
           {/* Content Body */}
@@ -52,7 +68,8 @@ export default function PrivacyPage() {
                 ภาพรวมและเจตนารมณ์
               </h2>
               <p className="text-[#475569] text-sm md:text-base">
-                เอกสารนี้จัดทำขึ้นเพื่อชี้แจงแนวปฏิบัติที่ระบบภายใต้แบรนด์ <strong className="text-[#0F172A]">AiAon Tech</strong> เกี่ยวข้องกับข้อมูลส่วนบุคคลของนักเรียน ครู ผู้ปกครอง และลูกค้าองค์กร ตามเจตนารมณ์ของ{" "}
+                เอกสารนี้จัดทำขึ้นเพื่อชี้แจงแนวปฏิบัติในการเก็บรวบรวม ใช้ และคุ้มครองข้อมูลส่วนบุคคลของนักเรียน ครู ผู้ปกครอง เด็กเล็ก และลูกค้าองค์กรในทุกบริการภายใต้แบรนด์{" "}
+                <strong className="text-[#0F172A]">AiAon</strong> ตามเจตนารมณ์ของ{" "}
                 <strong className="text-[#0F766E]">พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)</strong>
               </p>
             </section>
@@ -61,7 +78,7 @@ export default function PrivacyPage() {
             <section className="bg-emerald-50/70 p-6 md:p-8 rounded-3xl border border-emerald-200">
               <h2 className="text-xl font-bold text-emerald-900 mb-4 flex items-center gap-2.5">
                 <Database className="w-6 h-6 text-emerald-700" />
-                2. ประเด็นสำคัญที่สุด: ข้อมูลของท่านถูกจัดเก็บอยู่ที่ไหน?
+                2. ระบบ AiAon Tech: ข้อมูลของโรงเรียนและองค์กรอยู่ที่ไหน?
               </h2>
               <div className="space-y-4 text-sm text-[#1E293B]">
                 <div className="p-4 rounded-2xl bg-white border border-emerald-200">
@@ -69,7 +86,7 @@ export default function PrivacyPage() {
                     🛡️ ข้อมูลทั้งหมดอยู่ในบัญชี Google Workspace ของผู้ซื้อเอง 100%
                   </p>
                   <p className="text-[#475569] text-xs md:text-sm leading-relaxed">
-                    ระบบทั้งหมดของ AiAon Tech ทำงานบน Google Sheets, Google Drive และ Google Apps Script ในบัญชี Google
+                    ระบบงานโรงเรียนทั้งหมดของ AiAon Tech ทำงานบน Google Sheets, Google Drive และ Google Apps Script ในบัญชี Google
                     ของผู้ซื้อเอง <strong className="text-[#0F172A]">ไม่ใช่เซิร์ฟเวอร์ของ AiAon Tech</strong> ดังนั้น:
                   </p>
                 </div>
@@ -107,6 +124,31 @@ export default function PrivacyPage() {
               </div>
             </section>
 
+            {/* Section 2.1 & 2.2: Edu-Verse Kid Safety & Studio Photos */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <section className="bg-[#FFFDF7] p-6 rounded-3xl border border-[#FDE68A] shadow-xs">
+                <h2 className="text-base font-bold text-[#92400E] mb-3 flex items-center gap-2">
+                  <Baby className="w-5 h-5 text-[#D97706] shrink-0" />
+                  <span>2.1 ความปลอดภัยเด็กเล็ก (AiAon Edu-Verse)</span>
+                </h2>
+                <ul className="space-y-2 text-xs md:text-sm text-[#475569]">
+                  <li>• <strong className="text-[#0F172A]">Zero Login &amp; Zero Ads:</strong> เว็บแอป Hybrid QR ทั้ง 15 หน้า (<code className="text-[#92400E]">/edu/*</code>) ไม่บังคับล็อกอิน ไม่มีโฆษณา และไม่ติดตามพฤติกรรมเด็ก</li>
+                  <li>• <strong className="text-[#0F172A]">Local-Only Storage:</strong> ดาวสะสม คืนอ่านนิทาน และภาพระบายสีถูกเก็บเฉพาะในเครื่องผู้ใช้งาน (<code className="text-[#92400E]">localStorage</code>) ไม่มีการส่งข้อมูลเด็กขึ้นเซิร์ฟเวอร์</li>
+                </ul>
+              </section>
+
+              <section className="bg-[#FAF8FF] p-6 rounded-3xl border border-[#DDD6FE] shadow-xs">
+                <h2 className="text-base font-bold text-[#6D28D9] mb-3 flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-[#7C3AED] shrink-0" />
+                  <span>2.2 รูปถ่ายต้นแบบ (AiAon Studio สติกเกอร์ LINE)</span>
+                </h2>
+                <ul className="space-y-2 text-xs md:text-sm text-[#475569]">
+                  <li>• รูปถ่ายบุคคล/สัตว์เลี้ยงที่ลูกค้าส่งมาเพื่อปั้นคาแรกเตอร์ 3D ใช้เฉพาะการจัดทำออเดอร์ของลูกค้ารายนั้นเท่านั้น</li>
+                  <li>• <strong className="text-[#0F172A]">ไม่นำไปใช้ซ้ำหรือเผยแพร่โดยไม่ได้รับอนุญาต</strong> และลูกค้าสามารถแจ้งลบไฟล์ต้นฉบับทันทีหลังส่งมอบงานเสร็จสิ้น</li>
+                </ul>
+              </section>
+            </div>
+
             {/* Section 3 */}
             <section className="bg-white p-6 md:p-8 rounded-3xl border border-[#E2E8F0] shadow-xs">
               <h2 className="text-xl font-bold text-[#0F172A] mb-4 flex items-center gap-2.5">
@@ -126,19 +168,15 @@ export default function PrivacyPage() {
                   <tbody className="divide-y divide-[#F1F5F9]">
                     <tr>
                       <td className="py-3 font-medium text-[#0F172A]">ชื่อ-นามสกุล, เลขประจำตัว, ชั้น/ห้อง</td>
-                      <td className="py-3 text-[#0F766E] font-medium">แทบทุกระบบ (เช็คชื่อ, ปพ.5, เยี่ยมบ้าน)</td>
+                      <td className="py-3 text-[#0F766E] font-medium">ระบบงานโรงเรียน (เช็คชื่อ, ปพ.5, เยี่ยมบ้าน)</td>
                     </tr>
                     <tr>
-                      <td className="py-3 font-medium text-[#0F172A]">รูปถ่ายนักเรียน/ครู</td>
-                      <td className="py-3 text-[#0F766E] font-medium">AONE10 (ฝึกจำหน้า), AONA03 (เกียรติบัตร QR)</td>
+                      <td className="py-3 font-medium text-[#0F172A]">รูปถ่ายนักเรียน/ครู หรือภาพต้นแบบสติกเกอร์</td>
+                      <td className="py-3 text-[#0F766E] font-medium">AONE10, AONA03 (เกียรติบัตร QR), AiAon Studio</td>
                     </tr>
                     <tr>
-                      <td className="py-3 font-medium text-[#0F172A]">บันทึกวินัย / คะแนนความประพฤติ</td>
-                      <td className="py-3 text-[#0F766E] font-medium">AONE01, AONE03, AONE04, AONE05</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 font-medium text-[#0F172A]">คะแนนสอบ &amp; ตัดเกรด</td>
-                      <td className="py-3 text-[#0F766E] font-medium">AONE06, AONE07, SYS02 (ปพ.5 GPAX)</td>
+                      <td className="py-3 font-medium text-[#0F172A]">บันทึกวินัย / คะแนนความประพฤติ &amp; เกรด</td>
+                      <td className="py-3 text-[#0F766E] font-medium">AONE01–AONE07, SYS02 (ปพ.5 GPAX)</td>
                     </tr>
                     <tr>
                       <td className="py-3 font-medium text-[#0F172A]">เบอร์โทรผู้ปกครอง &amp; พิกัด GPS</td>
@@ -198,38 +236,53 @@ export default function PrivacyPage() {
             {/* Section 5 & 6 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <section className="bg-white p-6 rounded-3xl border border-[#E2E8F0] shadow-xs">
-                <h2 className="text-base font-bold text-[#0F172A] mb-2">5. ข้อมูลที่ AiAon Tech จัดเก็บจริง</h2>
+                <h2 className="text-base font-bold text-[#0F172A] mb-2">5. ข้อมูลที่ AiAon จัดเก็บจริง</h2>
                 <p className="text-xs md:text-sm text-[#475569] leading-relaxed">
-                  จัดเก็บเฉพาะข้อมูลของผู้สั่งซื้อสินค้า (ชื่อ, อีเมล, เบอร์โทร, ประวัติการสั่งซื้อ)
-                  เพื่อวัตถุประสงค์ในการออกใบเสร็จ สนับสนุนหลังการขาย และบันทึกประวัติการรับประกันเท่านั้น
-                  ไม่เกี่ยวข้องกับข้อมูลนักเรียนของโรงเรียนผู้ซื้อ
+                  จัดเก็บเฉพาะข้อมูลของผู้สั่งซื้อสินค้า (ชื่อ, อีเมล, LINE Display Name, สลิปโอนเงิน และประวัติการสั่งซื้อ)
+                  เพื่อวัตถุประสงค์ในการส่งมอบไฟล์ ออกใบเสร็จ สนับสนุนหลังการขาย และยืนยันสิทธิ์การรับประกันเท่านั้น
                 </p>
               </section>
 
               <section className="bg-white p-6 rounded-3xl border border-[#E2E8F0] shadow-xs">
                 <h2 className="text-base font-bold text-[#0F172A] mb-2">6. สิทธิของเจ้าของข้อมูล (Data Subject Rights)</h2>
                 <p className="text-xs md:text-sm text-[#475569] leading-relaxed">
-                  ลูกค้าของ AiAon Tech มีสิทธิในการขอเข้าถึง ขอสำเนา ขอแก้ไข หรือขอให้ลบข้อมูลส่วนบุคคลของผู้ซื้อที่จัดเก็บไว้ได้ตลอดเวลา
-                  โดยติดต่อผ่านช่องทางอย่างเป็นทางการ
+                  ลูกค้าของ AiAon มีสิทธิขอเข้าถึง ขอสำเนา ขอแก้ไข หรือขอให้ลบข้อมูลส่วนบุคคลและรูปถ่ายต้นแบบที่จัดเก็บไว้ได้ตลอดเวลา
+                  โดยติดต่อผ่าน LINE OA <code className="text-[#0F766E] font-semibold">@deu6776s</code>
                 </p>
               </section>
             </div>
 
-            {/* Contact Box */}
-            <section className="bg-white p-6 md:p-8 rounded-3xl border border-[#99F6E4] text-center shadow-xs">
-              <h2 className="text-lg font-bold text-[#0F172A] mb-2">มีข้อสงสัยเกี่ยวกับนโยบายคุ้มครองข้อมูลส่วนบุคคล?</h2>
-              <p className="text-xs md:text-sm text-[#475569] mb-4">
-                ติดต่อสอบถามทีมงานหรือเจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคลของ AiAon Tech ได้โดยตรง
-              </p>
-              <a
-                href={getLineOrderUrl("สวัสดีครับครูอ้น มีข้อสอบถามเกี่ยวกับนโยบายความเป็นส่วนตัวและ PDPA ครับ")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-bold text-sm transition-all shadow-xs"
-              >
-                ติดต่อฝ่ายคุ้มครองข้อมูลผ่าน LINE OA (@deu6776s)
-                <ExternalLink className="w-4 h-4" />
-              </a>
+            {/* Contact Box with Authentic Founder Portrait */}
+            <section className="bg-white p-6 md:p-8 rounded-3xl border border-[#99F6E4] shadow-xs">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
+                <div className="flex flex-col sm:flex-row items-center gap-4">
+                  <div className="relative shrink-0">
+                    <img
+                      src="/images/kru_aon_profile.png"
+                      alt="ครูอ้น จิรวัฒน์ เดชเส้ง — ผู้ก่อตั้ง AiAon"
+                      className="w-16 h-16 rounded-2xl object-cover object-top border-2 border-white ring-2 ring-[#99F6E4] shadow-sm bg-[#ECE9E2]"
+                    />
+                    <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center ring-2 ring-white">
+                      <ShieldCheck className="w-3 h-3" />
+                    </span>
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-[#0F172A]">มีข้อสงสัยเกี่ยวกับนโยบายความเป็นส่วนตัว (PDPA)?</h2>
+                    <p className="text-xs md:text-sm text-[#475569] mt-0.5">
+                      ติดต่อสอบถามหรือแจ้งใช้สิทธิเจ้าของข้อมูลกับครูอ้นโดยตรงได้ทุกวัน
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href={getLineOrderUrl("สวัสดีครับครูอ้น มีข้อสอบถามเกี่ยวกับนโยบายความเป็นส่วนตัวและ PDPA ครับ 🙏")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-bold text-sm transition-all shadow-xs"
+                >
+                  ติดต่อผ่าน LINE OA (@deu6776s)
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
             </section>
           </div>
         </div>

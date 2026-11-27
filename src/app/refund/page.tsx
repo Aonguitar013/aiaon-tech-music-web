@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { RefreshCw, CheckCircle2, XCircle, ArrowLeft, ExternalLink, Clock } from "lucide-react";
+import { RefreshCw, CheckCircle2, XCircle, ArrowLeft, ExternalLink, Clock, ShieldCheck, BookOpen, Sparkles } from "lucide-react";
 import { getLineOrderUrl } from "@/lib/line";
 import { PillarThemeWrapper } from "@/components/layout/PillarThemeWrapper";
 
 export const metadata: Metadata = {
-  title: "นโยบายการคืนเงิน (Refund Policy) | AiAon Tech",
+  title: "นโยบายการคืนเงิน (Refund Policy) | AiAon",
   description:
-    "นโยบายและขั้นตอนการขอคืนเงินสำหรับสินค้าดิจิทัล คอร์สเรียนออนไลน์ และระบบ Google Apps Script ภายใต้แบรนด์ AiAon Tech",
+    "นโยบายและขั้นตอนการขอคืนเงินสำหรับสินค้าดิจิทัลครบทั้ง 4 เสาหลักภายใต้แบรนด์ AiAon (Tech, Edu-Verse, Audio และ Studio)",
 };
 
 export default function RefundPage() {
@@ -16,7 +16,7 @@ export default function RefundPage() {
       <div className="w-full relative overflow-hidden min-h-screen pb-24 font-prompt text-[#1E293B]">
         <div className="max-w-4xl mx-auto px-4 pt-10 md:pt-14 relative z-10">
           {/* Navigation Breadcrumb */}
-          <div className="mb-8">
+          <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
             <Link
               href="/"
               className="inline-flex items-center gap-2 text-sm font-medium text-[#2563EB] hover:text-[#1D4ED8] transition-colors"
@@ -24,21 +24,37 @@ export default function RefundPage() {
               <ArrowLeft className="w-4 h-4" />
               กลับสู่หน้าหลัก
             </Link>
+            <div className="flex items-center gap-2 text-xs font-semibold">
+              <Link
+                href="/terms"
+                className="px-3 py-1.5 rounded-full bg-white border border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:border-[#BFDBFE] transition"
+              >
+                เงื่อนไขการใช้งาน
+              </Link>
+              <Link
+                href="/privacy"
+                className="px-3 py-1.5 rounded-full bg-white border border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:border-[#BFDBFE] transition"
+              >
+                นโยบายความเป็นส่วนตัว
+              </Link>
+            </div>
           </div>
 
           {/* Page Header */}
           <div className="mb-10 border-b border-[#E2E8F0] pb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#FAF5FF] text-[#6D28D9] border border-[#DDD6FE] mb-4">
               <RefreshCw className="w-3.5 h-3.5" />
-              ความโปร่งใสและเป็นธรรม
+              ความโปร่งใสและเป็นธรรม • AiAon Ecosystem V2.0
             </div>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0F172A] mb-3">
               นโยบายการคืนเงิน (Refund Policy)
             </h1>
             <p className="text-[#475569] text-sm md:text-base leading-relaxed">
-              ผู้ให้บริการ: <strong className="text-[#0F172A]">AiAon Tech โดย นายจิรวัฒน์ เดชเส้ง</strong> | มาตรฐานการดูแลลูกค้าหลังการขาย
+              ผู้ให้บริการ: <strong className="text-[#0F172A]">AiAon (AiAon Tech • Edu-Verse • Audio • Studio) โดย นายจิรวัฒน์ เดชเส้ง</strong> | มาตรฐานการดูแลลูกค้าหลังการขาย
             </p>
-            <p className="text-[#64748B] text-xs mt-2">อัปเดตล่าสุด: 16 ตุลาคม 2026</p>
+            <p className="text-[#64748B] text-xs mt-2">
+              อัปเดตล่าสุด: 27 พฤศจิกายน 2026 (ครอบคลุมสินค้าดิจิทัลและงานออกแบบสั่งทำครบทั้ง 4 เสาหลัก)
+            </p>
           </div>
 
           {/* Content Body */}
@@ -52,13 +68,38 @@ export default function RefundPage() {
                 หลักการทั่วไปของสินค้าดิจิทัล
               </h2>
               <p className="text-[#475569] text-sm md:text-base leading-relaxed">
-                สินค้าและบริการของ <strong className="text-[#0F172A]">AiAon Tech</strong> เป็น{" "}
-                <strong className="text-[#1D4ED8]">สินค้าดิจิทัล (Digital Products)</strong>{" "}
-                ได้แก่ โค้ดต้นฉบับ Google Apps Script, ไฟล์เทมเพลต, ไฟล์ E-Book PDF, คลังไฟล์เสียงเพลงลิขสิทธิ์ และสิทธิ์เข้าถึงระบบอัตโนมัติ
-                ซึ่งเมื่อระบบทำการตรวจสลิปและส่งมอบลิงก์ดาวน์โหลดหรือโอนสิทธิ์ให้แก่ผู้ซื้อแล้ว จะถือว่าสินค้าถูกส่งมอบเสร็จสิ้นสมบูรณ์ในทางเทคนิค
+                สินค้าและบริการของ <strong className="text-[#0F172A]">AiAon</strong> เป็น{" "}
+                <strong className="text-[#1D4ED8]">สินค้าดิจิทัลและงานออกแบบตามสั่ง (Digital Products &amp; Custom Services)</strong>{" "}
+                ได้แก่ โค้ด Google Apps Script, เทมเพลตโรงเรียน, สื่อการเรียนรู้เด็กเล็ก AiAon Edu-Verse (PDF ใบงาน, นิทานภาพ, สมุดระบายสี, แฟลชการ์ด), E-Book, คลังเสียง Royalty-Free Audio และสติกเกอร์ LINE 3D
+                ซึ่งเมื่อส่งมอบลิงก์ดาวน์โหลดหรือเริ่มผลิตงานตามบรีฟแล้ว จะถือว่าการส่งมอบสมบูรณ์ในทางเทคนิค
                 จึง <strong className="text-[#0F172A]">ไม่สามารถขอคืนเงินได้</strong> ยกเว้นกรณีที่เข้าเงื่อนไขพิเศษที่ระบุไว้ชัดเจนด้านล่าง
               </p>
             </section>
+
+            {/* Pillar-Specific Notes: Edu-Verse & Studio */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <section className="bg-[#FFFDF7] p-6 rounded-3xl border border-[#FDE68A] shadow-xs">
+                <h3 className="text-base font-bold text-[#92400E] mb-2.5 flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-[#D97706] shrink-0" />
+                  <span>เงื่อนไขเฉพาะ AiAon Edu-Verse (สื่อ PDF 15 เล่ม)</span>
+                </h3>
+                <ul className="space-y-1.5 text-xs md:text-sm text-[#475569]">
+                  <li>• เรามี <strong className="text-[#0F172A]">ชุดทดลองฟรี 75 หน้า (ครบ 15 เล่ม)</strong> ที่ <Link href="/edu" className="text-[#D97706] font-semibold hover:underline">/edu</Link> ให้ลองปริ้นท์และเทสเว็บแอป QR ฟรีก่อนตัดสินใจซื้อ</li>
+                  <li>• หากไฟล์ PDF/ZIP เสียหาย เปิดไม่ได้ หรือลิงก์เสีย ทีมงานจัดส่งไฟล์ใหม่/แก้ไขให้ฟรีภายใน 24 ชม. (หรือคืนเงินเต็มจำนวนหากแก้ไขไม่ได้)</li>
+                </ul>
+              </section>
+
+              <section className="bg-[#FAF8FF] p-6 rounded-3xl border border-[#DDD6FE] shadow-xs">
+                <h3 className="text-base font-bold text-[#6D28D9] mb-2.5 flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-[#7C3AED] shrink-0" />
+                  <span>เงื่อนไขเฉพาะ AiAon Studio (สติกเกอร์ LINE 3D)</span>
+                </h3>
+                <ul className="space-y-1.5 text-xs md:text-sm text-[#475569]">
+                  <li>• หลังลูกค้าตรวจสอบและยืนยันคาแรกเตอร์ต้นแบบเพื่อผลิตชุดเต็ม (16–24 รูป) หรือส่งตรวจขึ้น LINE Creators Market แล้ว ไม่สามารถยกเลิก/คืนเงินได้</li>
+                  <li>• กรณีทีมงาน LINE ตีกลับด้วยเหตุผลทางเทคนิค ทีมงานแก้ไขและส่งตรวจใหม่ให้ฟรีจนกว่าจะผ่านเกณฑ์</li>
+                </ul>
+              </section>
+            </div>
 
             {/* Refundable vs Non-refundable Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -72,7 +113,7 @@ export default function RefundPage() {
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-700 font-bold">•</span>
                     <span>
-                      ระบบไม่สามารถใช้งานได้จริงอันเกิดจากข้อผิดพลาดของโค้ดต้นฉบับ (Bug) จากฝั่งผู้ให้บริการ
+                      ระบบหรือไฟล์สินค้าไม่สามารถใช้งานได้จริงอันเกิดจากข้อผิดพลาดจากฝั่งผู้ให้บริการ (Bug / ไฟล์เสียหาย)
                       และทีมงานไม่สามารถแก้ไขให้ใช้งานได้ภายใน <strong>7 วันทำการ</strong> หลังได้รับแจ้งพร้อมหลักฐาน
                     </span>
                   </li>
@@ -100,18 +141,18 @@ export default function RefundPage() {
                 <ul className="space-y-3 text-xs md:text-sm text-rose-950/85">
                   <li className="flex items-start gap-2">
                     <span className="text-rose-700 font-bold">•</span>
-                    <span>เปลี่ยนใจหรือยกเลิกคำสั่งซื้อหลังจากได้รับไฟล์ ZIP หรือสิทธิ์เข้าถึงระบบไปแล้ว</span>
+                    <span>เปลี่ยนใจหรือยกเลิกคำสั่งซื้อหลังจากได้รับไฟล์ ZIP / PDF หรือสิทธิ์เข้าถึงระบบไปแล้ว</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-rose-700 font-bold">•</span>
                     <span>
-                      ติดตั้งหรือใช้งานไม่เป็น หรือไม่มีเวลาเรียนรู้คู่มือ (AiAon Tech มีคลิปสอนละเอียด 2-3 นาที และช่องทางช่วยเหลือทางเทคนิคให้)
+                      ติดตั้งหรือใช้งานไม่เป็น หรือไม่มีเวลาเรียนรู้คู่มือ (AiAon มีคู่มือภาษาไทยและช่องทางช่วยเหลือฟรี 14 วันผ่าน LINE OA)
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-rose-700 font-bold">•</span>
                     <span>
-                      ปัญหาที่เกิดจากการตั้งค่าหรือข้อจำกัดของบัญชี Google ของผู้ซื้อเอง (เช่น ใช้อีเมลองค์กรที่แอดมินปิดกั้นสิทธิ์ Apps Script)
+                      ปัญหาที่เกิดจากการตั้งค่าหรือข้อจำกัดของบัญชี Google / เครื่องปริ้นท์ / อุปกรณ์ของผู้ซื้อเอง
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
@@ -157,21 +198,37 @@ export default function RefundPage() {
               </div>
             </section>
 
-            {/* Contact Box */}
-            <section className="bg-white p-6 md:p-8 rounded-3xl border border-[#DDD6FE] text-center shadow-xs">
-              <h2 className="text-lg font-bold text-[#0F172A] mb-2">ต้องการสอบถามข้อมูลการคืนเงินหรือแจ้งปัญหา?</h2>
-              <p className="text-xs md:text-sm text-[#475569] mb-4">
-                ทีมงานยินดีรับฟังและช่วยเหลือแก้ไขปัญหาทางเทคนิคอย่างเต็มที่
-              </p>
-              <a
-                href={getLineOrderUrl("สวัสดีครับครูอ้น ต้องการปรึกษาปัญหาการใช้งานระบบ / การขอคืนเงินครับ")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-bold text-sm transition-all shadow-xs"
-              >
-                ติดต่อฝ่ายสนับสนุนผ่าน LINE OA (@deu6776s)
-                <ExternalLink className="w-4 h-4" />
-              </a>
+            {/* Contact Box with Authentic Founder Portrait */}
+            <section className="bg-white p-6 md:p-8 rounded-3xl border border-[#DDD6FE] shadow-xs">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
+                <div className="flex flex-col sm:flex-row items-center gap-4">
+                  <div className="relative shrink-0">
+                    <img
+                      src="/images/kru_aon_profile.png"
+                      alt="ครูอ้น จิรวัฒน์ เดชเส้ง — ผู้ก่อตั้ง AiAon"
+                      className="w-16 h-16 rounded-2xl object-cover object-top border-2 border-white ring-2 ring-[#DDD6FE] shadow-sm bg-[#ECE9E2]"
+                    />
+                    <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#6D28D9] text-white flex items-center justify-center ring-2 ring-white">
+                      <ShieldCheck className="w-3 h-3" />
+                    </span>
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-[#0F172A]">ต้องการแจ้งปัญหาไฟล์ หรือสอบถามการคืนเงิน?</h2>
+                    <p className="text-xs md:text-sm text-[#475569] mt-0.5">
+                      ครูอ้นยินดีดูแลและช่วยเหลือแก้ไขปัญหาทางเทคนิคให้เต็มที่ครับ
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href={getLineOrderUrl("สวัสดีครับครูอ้น ต้องการปรึกษาปัญหาการใช้งานสินค้า / การขอคืนเงินครับ 🙏")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-bold text-sm transition-all shadow-xs"
+                >
+                  ติดต่อฝ่ายสนับสนุน LINE OA (@deu6776s)
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
             </section>
           </div>
         </div>
