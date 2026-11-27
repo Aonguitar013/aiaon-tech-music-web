@@ -462,9 +462,9 @@ export function AboutMasterView() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Editorial Portrait Column */}
               <div className="lg:col-span-4 flex flex-col items-center">
-                <div className="relative w-56 h-64 sm:w-64 sm:h-72 rounded-3xl overflow-hidden border border-[#E2E8F0] bg-[#F8FAFC] shadow-sm">
+                <div className="relative w-56 h-64 sm:w-64 sm:h-72 rounded-3xl overflow-hidden border border-[#E2E8F0] bg-[#ECE9E2] shadow-sm">
                   <Image
-                    src="/me.png"
+                    src="/images/kru_aon_profile.png"
                     alt="ครูอ้น จิรวัฒน์ เดชเส้ง — ผู้ก่อตั้ง AiAon"
                     fill
                     className="object-cover object-top"

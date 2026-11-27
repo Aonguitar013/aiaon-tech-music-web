@@ -430,15 +430,28 @@ export function ServicesView() {
 
             {/* Total Estimated Box & CTA */}
             <div className="p-6 sm:p-8 rounded-2xl bg-[#FAF8F5] border border-[#BFDBFE] flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div>
-                <span className="text-xs font-prompt text-[#64748B] uppercase tracking-wider font-semibold">ราคาประเมินเบื้องต้น (Estimated Budget)</span>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="font-prompt text-4xl sm:text-5xl font-black text-[#0F172A]">
-                    {totalEstimate.toLocaleString()} ฿
-                  </span>
-                  <span className="font-prompt text-xs text-[#475569]">
-                    (ระยะเวลาจัดทำ: {isUrgent ? "3–5 วัน" : "7–10 วัน"})
-                  </span>
+              <div className="flex items-center gap-4">
+                <div className="relative shrink-0 hidden sm:block">
+                  <img
+                    src="/images/kru_aon_profile.png"
+                    alt="ครูอ้น จิรวัฒน์ เดชเส้ง — สถาปนิกระบบ AiAon Tech"
+                    className="w-16 h-16 rounded-2xl object-cover object-top border-2 border-white ring-2 ring-[#BFDBFE] shadow-sm bg-[#ECE9E2]"
+                  />
+                  <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#06C755] ring-2 ring-white" />
+                </div>
+                <div>
+                  <span className="text-xs font-prompt text-[#64748B] uppercase tracking-wider font-semibold">ราคาประเมินเบื้องต้น (Estimated Budget)</span>
+                  <div className="flex items-baseline gap-2 mt-1 flex-wrap">
+                    <span className="font-prompt text-4xl sm:text-5xl font-black text-[#0F172A]">
+                      {totalEstimate.toLocaleString()} ฿
+                    </span>
+                    <span className="font-prompt text-xs text-[#475569]">
+                      (ระยะเวลาจัดทำ: {isUrgent ? "3–5 วัน" : "7–10 วัน"})
+                    </span>
+                  </div>
+                  <p className="font-prompt text-xs text-[#1D4ED8] font-medium mt-1">
+                    คุยสเปกตรงกับครูอ้น ไม่ผ่านนายหน้า • ออกแบบตามบริบทโรงเรียนจริง 100%
+                  </p>
                 </div>
               </div>
 
@@ -582,20 +595,32 @@ export function ServicesView() {
         {/* --- SPEAKER & WORKSHOP BANNER --- */}
         <div className="mb-12 rounded-3xl p-8 sm:p-12 border border-[#FDE68A] bg-white shadow-sm">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="space-y-4 text-center lg:text-left max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FEF9EF] border border-[#FDE68A] text-[#92400E] text-xs font-prompt font-semibold">
-                <Presentation className="w-4 h-4 text-[#D97706]" />
-                <span>AI SPEAKER &amp; WORKSHOP</span>
-              </div>
-              <h3 className="font-prompt text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
-                ขอเชิญครูอ้นเป็น{" "}
-                <span className="text-[#D97706]">
-                  วิทยากรบรรยาย &amp; จัดอบรม AI
+            <div className="flex flex-col sm:flex-row items-center lg:items-start gap-6 text-center sm:text-left max-w-2xl">
+              <div className="relative shrink-0">
+                <img
+                  src="/images/kru_aon_profile.png"
+                  alt="ครูอ้น จิรวัฒน์ เดชเส้ง — วิทยากร Generative AI เพื่อการศึกษา"
+                  className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl object-cover object-top border-2 border-[#FDE68A] shadow-sm bg-[#ECE9E2]"
+                />
+                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full bg-[#FEF9EF] border border-[#FDE68A] text-[10px] font-bold text-[#92400E] shadow-xs">
+                  ครู ค.ศ.2 • ญ.ว.
                 </span>
-              </h3>
-              <p className="font-prompt text-sm text-[#475569] leading-relaxed">
-                หลักสูตร AI เพื่อการศึกษาลดภาระครู และ Automation ในโรงเรียน ถ่ายทอดจากประสบการณ์จริงเข้าใจง่าย Hands-on 100% มีหนังสือเชิญและเอกสารเสนอราคาถูกต้องตามระบบราชการ
-              </p>
+              </div>
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FEF9EF] border border-[#FDE68A] text-[#92400E] text-xs font-prompt font-semibold">
+                  <Presentation className="w-4 h-4 text-[#D97706]" />
+                  <span>AI SPEAKER &amp; WORKSHOP</span>
+                </div>
+                <h3 className="font-prompt text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
+                  ขอเชิญครูอ้นเป็น{" "}
+                  <span className="text-[#D97706]">
+                    วิทยากรบรรยาย &amp; จัดอบรม AI
+                  </span>
+                </h3>
+                <p className="font-prompt text-sm text-[#475569] leading-relaxed">
+                  หลักสูตร AI เพื่อการศึกษาลดภาระครู และ Automation ในโรงเรียน ถ่ายทอดจากประสบการณ์จริงเข้าใจง่าย Hands-on 100% มีหนังสือเชิญและเอกสารเสนอราคาถูกต้องตามระบบราชการ
+                </p>
+              </div>
             </div>
 
             <a

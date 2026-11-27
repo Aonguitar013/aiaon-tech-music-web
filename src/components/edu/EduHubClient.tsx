@@ -971,18 +971,38 @@ export function EduHubClient() {
             </div>
           </div>
 
-          {/* Value-First LINE OA Lead Strip */}
+          {/* Value-First LINE OA Lead Strip + Founder Trust Anchor */}
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white border border-emerald-200 flex items-center justify-center text-emerald-700 shrink-0">
-                <HeartHandshake className="w-5 h-5" />
+            <div className="flex items-center gap-3.5 sm:gap-4">
+              <div className="relative shrink-0">
+                <img
+                  src="/images/kru_aon_profile.png"
+                  alt={t("ครูอ้น จิรวัฒน์ เดชเส้ง — ผู้สร้างสื่อ AiAon Edu-Verse", "Teacher Aon — Creator of AiAon Edu-Verse")}
+                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl object-cover object-top border-2 border-white ring-2 ring-emerald-300 shadow-sm bg-[#ECE9E2]"
+                />
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center ring-2 ring-white"
+                >
+                  <ShieldCheck className="w-3 h-3" />
+                </span>
               </div>
               <div>
+                <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-emerald-800 bg-white/90 border border-emerald-200 rounded-full px-2.5 py-0.5 mb-1">
+                  <HeartHandshake className="w-3 h-3 text-emerald-600" />
+                  <span>{t("ออกแบบและดูแลโดย ครูอ้น (ครู ค.ศ.2 • พ่อบ้านแก๊ง 6 แมว)", "Created & Supported by Teacher Aon • Verified Educator")}</span>
+                </div>
                 <div className="text-sm font-extrabold text-emerald-950">
-                  ยังไม่แน่ใจว่าเหมาะกับวัยลูกไหม? แอด LINE OA ปรึกษาครูอ้น + รับใบงานฟรีรายเดือนได้เลย!
+                  {t(
+                    "ยังไม่แน่ใจว่าเหมาะกับวัยลูกไหม? แอด LINE OA ปรึกษาครูอ้น + รับใบงานฟรีรายเดือนได้เลย!",
+                    "Not sure which pack fits your child's age? Chat directly with Teacher Aon on LINE OA!"
+                  )}
                 </div>
                 <p className="text-xs text-emerald-900/80 mt-0.5">
-                  สอบถามวิธีเคลือบตีนตุ๊กแก หรือขอใบเสร็จสิทธิ์โรงเรียน (Class Edition) ได้โดยตรงครับ
+                  {t(
+                    "สอบถามวิธีเคลือบตีนตุ๊กแก หรือขอใบเสร็จสิทธิ์โรงเรียน (Class Edition) ได้โดยตรงครับ",
+                    "Ask about printing tips, lamination, or School Class Edition licenses directly."
+                  )}
                 </p>
               </div>
             </div>
@@ -990,14 +1010,14 @@ export function EduHubClient() {
               href={getEduOrderLineUrl({
                 sku: "EDU-EF01",
                 edition: "HOME",
-                lang: "th",
+                lang,
               })}
               target="_blank"
               rel="noopener noreferrer"
               className="shrink-0 inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-emerald-100 border border-emerald-300 px-4 py-2.5 text-xs sm:text-sm font-bold text-emerald-900 transition-colors"
             >
               <FaLine className="w-4 h-4 text-[#06C755]" />
-              <span>ทักแชท LINE ครูอ้น</span>
+              <span>{t("ทักแชท LINE ครูอ้น", "Chat with Teacher Aon")}</span>
             </a>
           </div>
         </section>

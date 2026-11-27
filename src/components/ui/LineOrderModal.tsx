@@ -258,12 +258,19 @@ export function LineOrderModal({
 
             {/* Modal Header */}
             <div className="p-5 sm:p-6 border-b border-[#E2E8F0] flex items-start justify-between gap-4 bg-[#F8FAFC]">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl bg-[#06C755] text-white flex items-center justify-center shrink-0 shadow-md shadow-[#06C755]/25">
-                  <FaLine className="w-7 h-7" />
+              <div className="flex items-center gap-3.5">
+                <div className="relative shrink-0">
+                  <img
+                    src="/images/kru_aon_profile.png"
+                    alt="ครูอ้น จิรวัฒน์ เดชเส้ง — LINE OA @deu6776s"
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl object-cover object-top border-2 border-white ring-2 ring-[#06C755]/40 shadow-sm bg-[#ECE9E2]"
+                  />
+                  <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#06C755] text-white flex items-center justify-center ring-2 ring-white shadow-xs">
+                    <FaLine className="w-3 h-3" />
+                  </span>
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 uppercase tracking-wider">
                       LINE Official Account
                     </span>
@@ -275,6 +282,9 @@ export function LineOrderModal({
                   >
                     {title || "สั่งซื้อและติดต่อผ่าน LINE OA ครูอ้น"}
                   </h2>
+                  <p className="text-[11px] text-[#475569] mt-0.5">
+                    ครูอ้นดูแลและส่งไฟล์ให้ด้วยตัวเอง • ตอบไว ปลอดภัย 100%
+                  </p>
                 </div>
               </div>
 
