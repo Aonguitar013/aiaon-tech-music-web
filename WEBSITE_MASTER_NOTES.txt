@@ -1,0 +1,111 @@
+================================================================================
+📝 สรุปบันทึกข้อมูลสำคัญสำหรับเว็บไซต์ aiaon.tech (MASTER CHEAT SHEET)
+จัดทำเมื่อ: 19 ตุลาคม 2026
+สร้างสำหรับ: ครูอ้น (iAon Tech) สำหรับพกติดตัว / ใส่ Notepad สำรองข้อมูล
+================================================================================
+
+[ 1. ตำแหน่งโฟลเดอร์โปรเจกต์หลักและ Git Repository ]
+--------------------------------------------------------------------------------
+• ที่อยู่โฟลเดอร์หลักในเครื่อง (Root Path):
+  C:\iAonDev2026
+
+• ลิงก์ GitHub Repository:
+  https://github.com/Aonguitar013/aiaon-tech-music-web.git
+  (Branch หลัก: main)
+
+• เว็บไซต์จริง (Production Domain):
+  https://www.aiaon.tech
+  (โฮสต์และ Deploy อัตโนมัติผ่าน Vercel เมื่อ Push ขึ้น main)
+
+• ที่อยู่โฟลเดอร์ทรัพยากร/แบรนด์ใน OneDrive:
+  c:\Users\ACER\OneDrive\WORK_SPACE\02_TECH\05_WEBSITE_ASSETS\
+
+
+[ 2. เทคโนโลยีและเครื่องมือที่ใช้พัฒนา (Tech Stack) ]
+--------------------------------------------------------------------------------
+• Framework: Next.js 16 (App Router) + React 19 + TypeScript
+• Styling: Tailwind CSS v4 + PostCSS
+• Animation & Effects: Framer Motion, Lucide React Icons
+• Payment UI: PromptPay QR Code (promptpay-qr, qrcode.react)
+• Database & Auth: Supabase (@supabase/ssr, @supabase/supabase-js)
+• AI Engine: Google Gemini API (Gemini 2.5 Flash / 3.8 Flash)
+• Webhook & Integrations: LINE Messaging API, Facebook Graph API, Instagram API, Telegram Bot, Google Apps Script (GAS)
+
+
+[ 3. แผนที่หน้าเว็บและเส้นทางหลัก (Sitemap & Key Routes) ]
+--------------------------------------------------------------------------------
+1. หน้าแรก (Home): 
+   /  -> ศูนย์รวม 8 มหาคลัง 3D Carousel & Command Center
+2. คลังสินค้าดิจิทัลและบริการ (Vaults & Services):
+   • /freebies       -> คลังของแจกฟรี + โมเดล 3D DVD Case Mockup
+   • /ebooks         -> คลัง 30 E-Book ครูไทย 2026 + โมเดล 3D Book Mockup
+   • /courses        -> คอร์สเรียนออนไลน์ (Academy)
+   • /bundles        -> แพ็กเกจเหมาหีบสมบัติ + โมเดล 3D Cyber Vault Crate
+   • /music-store    -> สตูดิโอเพลง + โมเดล 3D Vinyl Record Sleeve
+   • /services       -> บริการรับพัฒนาระบบ Bespoke + 3D Cyber Blueprint Tablet
+   • /ai-caretaker   -> บริการดูแลระบบ AI รายเดือน (SME AI Caretaker)
+   • /teacher-prep   -> คลังติวสอบครูผู้ช่วย + 3D VIP Golden Ticket
+   • /student-vault  -> คลังนักเรียน ดนตรีสากล + 3D Cyber Pass Card
+   • /saas           -> ระบบคลาวด์ซอฟต์แวร์
+   • /merch          -> สินค้า Merchandise
+3. ระบบสมาชิกและการจัดการ:
+   • /login, /auth, /dashboard -> ระบบล็อกอินและแดชบอร์ดสมาชิก
+   • /api            -> API Webhooks (LINE, FB, IG, Telegram, Gemini, Delivery)
+4. นโยบายกฎหมาย (Legal):
+   • /privacy, /terms, /refund -> นโยบายความเป็นส่วนตัว PDPA, ข้อตกลง, นโยบายคืนเงิน
+
+
+[ 4. รายการ Environment Variables สำคัญ (.env.local) ]
+--------------------------------------------------------------------------------
+(ไฟล์จริงอยู่ที่ C:\iAonDev2026\.env.local - สำรองเก็บแยกไว้ อย่าอัปโหลดขึ้นสาธารณะ)
+• NEXT_PUBLIC_SITE_URL             = https://www.aiaon.tech
+• NEXT_PUBLIC_SUPABASE_URL         = (URL โปรเจกต์ Supabase)
+• NEXT_PUBLIC_SUPABASE_ANON_KEY    = (Anon Public Key ของ Supabase)
+• NEXT_PUBLIC_ADMIN_EMAIL          = (อีเมลแอดมินสำหรับจัดการระบบ)
+• GEMINI_API_KEY                   = (API Key สำหรับระบบผู้ช่วยอัจฉริยะ)
+• LINE_CHANNEL_ACCESS_TOKEN        = (สำหรับ LINE Bot / การส่งงาน)
+• LINE_CHANNEL_SECRET              = (รหัสความปลอดภัย LINE Webhook)
+• FB_PAGE_ACCESS_TOKEN & IG        = (ระบบเชื่อมต่อเพจและอินสตาแกรม)
+• TELEGRAM_BOT_TOKEN & CHAT_ID     = (ระบบแจ้งเตือนเข้า Telegram อัตโนมัติ)
+• DELIVERY_SIGNING_SECRET          = (รหัสเข้ารหัสลิงก์ส่งมอบสินค้าดิจิทัล)
+
+
+[ 5. คำสั่งที่ใช้ประจำใน Terminal (Cheat Sheet Commands) ]
+--------------------------------------------------------------------------------
+เข้าโฟลเดอร์โปรเจกต์:
+  cd C:\iAonDev2026
+
+เปิดทดสอบบนเครื่อง Local (เข้าดูที่ http://localhost:3000):
+  npm run dev
+
+ทดสอบ Build โค้ดเสมือนจริงก่อน Deploy:
+  npm run build
+
+ขั้นตอนนำโค้ดขึ้นระบบจริง (Deploy สู่ aiaon.tech):
+  git add .
+  git commit -m "อัปเดตฟีเจอร์ใหม่"
+  git push origin main
+  (ระบบ Vercel จะดึงไปสร้างเว็บจริงให้เองอัตโนมัติภายใน 1-2 นาที)
+
+
+[ 6. โครงสร้างไฟล์ใน C:\iAonDev2026 ที่ควรรู้ ]
+--------------------------------------------------------------------------------
+• src/app/          -> ที่อยู่ของหน้าเว็บทุกหน้าและ API Endpoints
+• src/components/   -> คอมโพเนนต์ UI, การ์ด 3D Mockup, โมดอล, แถบเมนู
+• public/           -> ที่เก็บรูปภาพ ไอคอน โลโก้ และไฟล์เอกสารที่ให้ดาวน์โหลดผ่านเว็บ
+• supabase.sql      -> โค้ดฐานข้อมูลและตารางสินค้า/คำสั่งซื้อ
+• package.json      -> รายการไลบรารีและปลั๊กอินทั้งหมดของเว็บ
+
+
+[ 7. ข้อแนะนำในการ Copy สำรองข้อมูล (Backup Guide) ]
+--------------------------------------------------------------------------------
+หากต้องการก๊อปปี้โฟลเดอร์ C:\iAonDev2026 ไปเก็บไว้ที่ Flashdrive หรือ External Drive:
+1. "ไม่ต้องก๊อปปี้" โฟลเดอร์ต่อไปนี้ (เพราะมีขนาดใหญ่มากหลายร้อย MB และสร้างใหม่ได้):
+   - node_modules
+   - .next
+2. "ต้องก๊อปปี้อย่างยิ่ง":
+   - โฟลเดอร์ src, public, docs
+   - ไฟล์ .env.local (สำคัญที่สุด ห้ามทำหาย)
+   - ไฟล์ package.json, package-lock.json, tsconfig.json, next.config.ts
+   - ไฟล์ .sql ทั้งหมด
+================================================================================

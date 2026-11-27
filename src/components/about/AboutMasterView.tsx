@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ExternalLink,
   Sparkles,
@@ -13,9 +13,7 @@ import {
   Check,
   MessageCircle,
   Store,
-  Cpu,
   Radio,
-  Globe,
   Award,
   BadgeCheck,
   Calendar,
@@ -29,38 +27,45 @@ import {
   Music,
   Guitar,
   Clock,
-  Smartphone,
-  Bell,
   ArrowRight,
-  UserCheck,
   Send,
-  Sliders,
   Laptop,
+  Download,
+  Layers,
+  Quote,
 } from "lucide-react";
 import { getLineOrderUrl } from "@/lib/line";
 
 /* ============================================================
-   TYPES & DATA DEFINITIONS
+   TYPES & DATA (OFFICIAL AiAon BRAND V2.0 PROFILE)
 ============================================================ */
 
+type DirectoryTab = "channels" | "stores" | "gear";
 type GearCategory = "all" | "mobile" | "audio" | "pc";
 
-interface ChannelCardItem {
+interface PillarBrandItem {
   id: string;
-  stepOrder: number;
-  stepLabel: string;
+  number: string;
+  name: string;
+  tagline: string;
+  href: string;
+  logoSrc: string;
+  surfaceBg: string;
+  borderClass: string;
+  accentText: string;
+  badge: string;
+}
+
+interface ChannelItem {
+  id: string;
   platform: string;
   name: string;
   handle: string;
   role: string;
   schedule: string;
   url: string;
-  buttonText: string;
   badge: string;
-  colorClass: string;
-  borderClass: string;
-  bgGlow: string;
-  iconText: string;
+  icon: string;
 }
 
 interface GearItem {
@@ -68,7 +73,6 @@ interface GearItem {
   name: string;
   category: GearCategory;
   roleInWorkflow: string;
-  whyKruAonLovesIt: string;
   badge: string;
   tiktokShopUrl: string;
   shopeeUrl: string;
@@ -87,127 +91,136 @@ interface Certificate {
   verifyUrl?: string;
 }
 
-const OFFICIAL_CHANNELS: ChannelCardItem[] = [
+const FOUR_PILLARS: PillarBrandItem[] = [
+  {
+    id: "tech",
+    number: "01",
+    name: "AiAon Tech",
+    tagline: "ระบบงานโรงเรียน 0-Baht, Google Apps Script & AI Caretaker",
+    href: "/digital-vault",
+    logoSrc: "/brand/svg/aiaon-tech_lockup_horizontal_fullcolor-on-light.svg",
+    surfaceBg: "bg-[#F8FAFC]",
+    borderClass: "border-[#BFDBFE] hover:border-[#2563EB]",
+    accentText: "text-[#1D4ED8]",
+    badge: "Precision Product Studio",
+  },
+  {
+    id: "edu",
+    number: "02",
+    name: "AiAon Edu-Verse",
+    tagline: "สื่อเด็กเล็ก Hybrid QR 6 โลกการเรียนรู้ & คลัง 30 E-Book ครูไทย",
+    href: "/edu",
+    logoSrc: "/brand/svg/aiaon-edu_lockup_horizontal_fullcolor-on-light.svg",
+    surfaceBg: "bg-[#FFFDF7]",
+    borderClass: "border-[#FDE68A] hover:border-[#F59E0B]",
+    accentText: "text-[#92400E]",
+    badge: "Warm Storybook",
+  },
+  {
+    id: "audio",
+    number: "03",
+    name: "AiAon Audio",
+    tagline: "เพลงช่วยจำกฎหมายครู & BGM คลิป ว.PA ปลอดลิขสิทธิ์ 100%",
+    href: "/music-store",
+    logoSrc: "/brand/svg/aiaon-audio_lockup_horizontal_fullcolor-on-light.svg",
+    surfaceBg: "bg-[#F5FAF9]",
+    borderClass: "border-[#99F6E4] hover:border-[#0D9488]",
+    accentText: "text-[#0F766E]",
+    badge: "Boutique Vinyl Studio",
+  },
+  {
+    id: "studio",
+    number: "04",
+    name: "AiAon Studio",
+    tagline: "โรงงานปั้นสติกเกอร์ LINE 3D จากรูปจริง & คลัง 30+ On Sale",
+    href: "/line-stickers",
+    logoSrc: "/brand/svg/aiaon-studio_lockup_horizontal_fullcolor-on-light.svg",
+    surfaceBg: "bg-[#FAF8FF]",
+    borderClass: "border-[#DDD6FE] hover:border-[#7C3AED]",
+    accentText: "text-[#6D28D9]",
+    badge: "Playful 3D Toy Gallery",
+  },
+];
+
+const OFFICIAL_CHANNELS: ChannelItem[] = [
   {
     id: "fb-page",
-    stepOrder: 1,
-    stepLabel: "ขั้นที่ 1 • หน้าร้านหลัก & ไลฟ์สดแม่พิมพ์",
     platform: "Facebook Page",
     name: "ไอทีง่ายๆ สไตล์ iAon",
     handle: "@iaontech",
-    role: "ศูนย์กลางไลฟ์สดโชว์ระบบ AI ของจริง, ลงคลิป Reels สั้น และป้ายยาอุปกรณ์ไอทีที่ใช้ทำงานจริง",
-    schedule: "🔴 ไลฟ์สดทุกวันอังคาร 20:00 น. • โพสต์ทุกวัน",
+    role: "ศูนย์กลางไลฟ์สดโชว์ระบบ AI ของจริง, คลิป Reels และรีวิวอุปกรณ์ทำงาน",
+    schedule: "ไลฟ์สดทุกวันอังคาร 20:00 น.",
     url: "https://www.facebook.com/search/top?q=%E0%B9%84%E0%B8%AD%E0%B8%97%E0%B8%B5%E0%B8%87%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B9%86%20%E0%B8%AA%E0%B9%84%E0%B8%95%E0%B8%A5%E0%B9%8C%20iAon",
-    buttonText: "ไปที่เพจ ไอทีง่ายๆ สไตล์ iAon",
     badge: "MAIN HUB",
-    colorClass: "text-blue-700",
-    borderClass: "border-[#E2E8F0] hover:border-blue-400",
-    bgGlow: "from-blue-600/20 via-indigo-600/10 to-transparent",
-    iconText: "🚩",
-  },
-  {
-    id: "fb-personal",
-    stepOrder: 2,
-    stepLabel: "ขั้นที่ 2 • พื้นที่เล่าเรื่องชีวิตจริง & เพื่อนคุ้นเคย",
-    platform: "Facebook ส่วนตัว",
-    name: "Aon Jirawat",
-    handle: "ฐานเพื่อน 1,800+ คน",
-    role: "อัปเดตเรื่องเล่าเบื้องหลังการทำระบบ, ไลฟ์สไตล์ครูดนตรี ร.ร.หาดใหญ่วิทยาลัย และแชร์เคสลูกค้าจริง",
-    schedule: "📱 อัปเดตสตอรี่ & โพสต์ทุกวัน",
-    url: "https://www.facebook.com/search/top?q=Aon%20Jirawat",
-    buttonText: "ส่องเฟซบุ๊ก Aon Jirawat",
-    badge: "PERSONAL STORY",
-    colorClass: "text-sky-700",
-    borderClass: "border-[#E2E8F0] hover:border-sky-400",
-    bgGlow: "from-sky-600/20 via-cyan-600/10 to-transparent",
-    iconText: "📘",
-  },
-  {
-    id: "instagram",
-    stepOrder: 3,
-    stepLabel: "ขั้นที่ 3 • แกลเลอรีจัดโต๊ะคอม & Reels อัตโนมัติ",
-    platform: "Instagram",
-    name: "iAonTech | ไอทีง่ายๆ สไตล์ iAon",
-    handle: "@iaontech",
-    role: "รวมภาพมุมโต๊ะทำงาน Studio, คลิป Reels สั้นเข้าใจง่าย และพอร์ตโฟลิโออุปกรณ์เทคโนโลยี",
-    schedule: "📸 ซิงค์อัตโนมัติจากเพจหลักทุกวัน",
-    url: "https://www.instagram.com/iaontech",
-    buttonText: "ติดตาม IG @iaontech",
-    badge: "VISUAL & REELS",
-    colorClass: "text-pink-700",
-    borderClass: "border-[#E2E8F0] hover:border-pink-400",
-    bgGlow: "from-pink-600/20 via-purple-600/10 to-transparent",
-    iconText: "📸",
-  },
-  {
-    id: "threads",
-    stepOrder: 4,
-    stepLabel: "ขั้นที่ 4 • สรุปข่าวไว AI & ไอเดียสั้น 30 วิ",
-    platform: "Threads / X",
-    name: "Aon Jirawat | iAonTech",
-    handle: "@iaontech",
-    role: "ทริคสั้นๆ เรื่องการใช้ AI ซื้อเวลาชีวิต, อัปเดตเทรนด์เทคโนโลยีรายวัน อ่านจบไวใน 30 วินาที",
-    schedule: "🧵 โพสต์สรุปสั้นทุกวัน",
-    url: "https://www.threads.net/@iaontech",
-    buttonText: "อ่านทริคบน Threads @iaontech",
-    badge: "QUICK INSIGHTS",
-    colorClass: "text-slate-700",
-    borderClass: "border-[#E2E8F0] hover:border-slate-400",
-    bgGlow: "from-slate-500/20 via-zinc-600/10 to-transparent",
-    iconText: "🧵",
-  },
-  {
-    id: "tiktok",
-    stepOrder: 5,
-    stepLabel: "ขั้นที่ 5 • คลิปสั้น 60 วิ โชว์ความเจ๋ง & ป้ายยา",
-    platform: "TikTok",
-    name: "iAonTech",
-    handle: "@iaontech",
-    role: "คลิปสั้นโชว์ระบบ AI ซ่อมตารางตัวเองใน 2 วิ, แก้ปัญหาธุรกิจ และรีวิวแกดเจ็ตพร้อมตะกร้าสินค้า",
-    schedule: "🎬 ลงคลิปใหม่ทุก จันทร์ / พุธ / ศุกร์ 18:30 น.",
-    url: "https://www.tiktok.com/@iaontech",
-    buttonText: "ดูคลิปใน TikTok @iAonTech",
-    badge: "SHORT VIDEO",
-    colorClass: "text-cyan-700",
-    borderClass: "border-[#E2E8F0] hover:border-cyan-400",
-    bgGlow: "from-cyan-500/20 via-rose-500/10 to-transparent",
-    iconText: "🎵",
-  },
-  {
-    id: "youtube",
-    stepOrder: 6,
-    stepLabel: "ขั้นที่ 6 • คลิปยาวเจาะลึก & คลังความรู้ถาวร",
-    platform: "YouTube",
-    name: "iAonTech / ไอทีง่ายๆ สไตล์ iAon",
-    handle: "@iaontech",
-    role: "คลิปยาว 8–10 นาที เจาะลึกเบื้องหลังการทำงานของระบบ AI, รีวิวอุปกรณ์แบบเต็มระบบ และ YouTube Shorts",
-    schedule: "📺 คลิปยาวทุกวันอาทิตย์ 19:00 น.",
-    url: "https://www.youtube.com/@iaontech",
-    buttonText: "เปิดช่อง YouTube iAonTech",
-    badge: "DEEP DIVE",
-    colorClass: "text-red-700",
-    borderClass: "border-[#E2E8F0] hover:border-red-400",
-    bgGlow: "from-red-600/20 via-orange-600/10 to-transparent",
-    iconText: "📺",
+    icon: "🚩",
   },
   {
     id: "line-oa",
-    stepOrder: 7,
-    stepLabel: "ขั้นที่ 7 • จุดรับลูกค้า ปิดการขาย & ส่งมอบงาน",
     platform: "LINE Official Account",
-    name: "AiAon Tech โดยครูอ้น",
+    name: "AiAon โดยครูอ้น",
     handle: "@deu6776s",
-    role: "ช่องทางหลักในการปรึกษาติดตั้งระบบ AI Caretaker รายเดือน, ส่งสลิปโอนเงิน, รับระบบ และติดต่อเชิญเป็นวิทยากร",
-    schedule: "💬 ตอบกลับไวทุกวัน • มีระบบ AI ช่วยรับเรื่อง 24 ชม.",
+    role: "จุดรับลูกค้า ปรึกษาระบบ AI Caretaker, ส่งมอบงาน และติดต่อวิทยากร",
+    schedule: "ตอบไวทุกวัน • มี AI ช่วยรับเรื่อง 24 ชม.",
     url: getLineOrderUrl(
       "สวัสดีครับครูอ้น สนใจปรึกษางานระบบ AI / วิทยากรบรรยาย หรือสอบถามข้อมูลครับ 🙏"
     ),
-    buttonText: "แอด LINE OA @deu6776s ทันที",
     badge: "OFFICIAL CONTACT",
-    colorClass: "text-emerald-700",
-    borderClass: "border-[#E2E8F0] hover:border-emerald-400",
-    bgGlow: "from-emerald-500/25 via-teal-500/10 to-transparent",
-    iconText: "💬",
+    icon: "💬",
+  },
+  {
+    id: "tiktok",
+    platform: "TikTok",
+    name: "iAonTech",
+    handle: "@iaontech",
+    role: "คลิปสั้น 60 วิ โชว์ระบบ AI แก้ปัญหางานจริง และป้ายยาแกดเจ็ตพร้อมตะกร้า",
+    schedule: "จ. / พ. / ศ. 18:30 น.",
+    url: "https://www.tiktok.com/@iaontech",
+    badge: "SHORT VIDEO",
+    icon: "🎵",
+  },
+  {
+    id: "youtube",
+    platform: "YouTube",
+    name: "iAonTech / ไอทีง่ายๆ สไตล์ iAon",
+    handle: "@iaontech",
+    role: "คลิปยาวเจาะลึกเบื้องหลังการทำงานของระบบ AI และรีวิวอุปกรณ์แบบเต็มระบบ",
+    schedule: "ทุกวันอาทิตย์ 19:00 น.",
+    url: "https://www.youtube.com/@iaontech",
+    badge: "DEEP DIVE",
+    icon: "📺",
+  },
+  {
+    id: "instagram",
+    platform: "Instagram",
+    name: "iAonTech",
+    handle: "@iaontech",
+    role: "แกลเลอรีจัดโต๊ะทำงาน Studio และคลิป Reels สั้นเข้าใจง่าย",
+    schedule: "อัปเดตทุกวัน",
+    url: "https://www.instagram.com/iaontech",
+    badge: "VISUAL & REELS",
+    icon: "📸",
+  },
+  {
+    id: "threads",
+    platform: "Threads",
+    name: "Aon Jirawat | iAonTech",
+    handle: "@iaontech",
+    role: "สรุปทริคการใช้ AI ซื้อเวลาชีวิต อ่านจบไวใน 30 วินาที",
+    schedule: "สรุปสั้นทุกวัน",
+    url: "https://www.threads.net/@iaontech",
+    badge: "QUICK INSIGHTS",
+    icon: "🧵",
+  },
+  {
+    id: "fb-personal",
+    platform: "Facebook ส่วนตัว",
+    name: "Aon Jirawat",
+    handle: "เพื่อน 1,800+ คน",
+    role: "เล่าเรื่องเบื้องหลังการสร้างระบบ และไลฟ์สไตล์ครูดนตรี ร.ร.หาดใหญ่วิทยาลัย",
+    schedule: "สตอรี่ & โพสต์ทุกวัน",
+    url: "https://www.facebook.com/search/top?q=Aon%20Jirawat",
+    badge: "PERSONAL",
+    icon: "📘",
   },
 ];
 
@@ -216,42 +229,33 @@ const GADGET_STORES = [
     id: "tiktok-shop",
     platform: "TikTok Shop",
     storeName: "iAonTech Studio & Gadget",
-    tagline: "กดตะกร้าหน้าช่อง TikTok @iAonTech พร้อมคูปองส่งฟรี",
+    tagline: "กดตะกร้าหน้าช่อง @iAonTech พร้อมคูปองส่งฟรี",
     description:
-      "รวมไมโครโฟน กล้องเว็บแคม ขาตั้งมือถือ และอุปกรณ์จัดโต๊ะคอมที่ครูอ้นใช้โชว์ในคลิปสั้นทุกชิ้น",
+      "รวมไมโครโฟน กล้องเว็บแคม ขาตั้งมือถือ และอุปกรณ์จัดโต๊ะคอมที่ครูอ้นใช้จริงในคลิปสั้นทุกชิ้น",
     url: "https://www.tiktok.com/@iaontech",
-    buttonLabel: "เข้าสู่ TikTok Shop: iAonTech Studio & Gadget",
     badge: "ขายดีในคลิปสั้น",
-    accent: "from-cyan-600 to-rose-600",
-    border: "border-[#E2E8F0] hover:border-cyan-400",
     icon: "🎵",
   },
   {
     id: "shopee-store",
     platform: "Shopee & Shopee Video",
     storeName: "iAonTech Gadget",
-    tagline: "คัดเฉพาะร้าน Official ของแท้ 100% + โค้ดลด Shopee Video",
+    tagline: "ร้าน Official ของแท้ 100% + โค้ดลด Shopee Video",
     description:
-      "ดูคลิปรีวิวสั้นใน Shopee Video ของครูอ้นเพื่อเก็บโค้ดส่วนลด 30–50% ก่อนกดสั่งซื้ออุปกรณ์ไอทีชิ้นโปรด",
+      "เก็บโค้ดส่วนลดจากคลิปรีวิวสั้นก่อนกดสั่งซื้อไมค์ กล้อง และอุปกรณ์ไอทีชิ้นโปรด",
     url: "https://shopee.co.th/search?keyword=shure%20sm27",
-    buttonLabel: "เข้าสู่ Shopee: iAonTech Gadget",
-    badge: "โค้ดลด Shopee Video โหดมาก",
-    accent: "from-orange-600 to-amber-600",
-    border: "border-[#E2E8F0] hover:border-orange-400",
+    badge: "โค้ดลดคุ้มมาก",
     icon: "🧡",
   },
   {
     id: "lazada-store",
     platform: "Lazada",
     storeName: "iAonTech Official Select",
-    tagline: "พิกัด LazMall ของแท้ประกันศูนย์ไทย คัดโดยครูอ้น",
+    tagline: "พิกัด LazMall ของแท้ประกันศูนย์ไทย",
     description:
-      "เหมาะสำหรับสายช้อปแคมเปญใหญ่ ดับเบิลเดย์ ผ่อน 0% อุปกรณ์คอมพิวเตอร์ จอมอนิเตอร์ และสมาร์ตโฟน",
+      "เหมาะสำหรับสายช้อปแคมเปญใหญ่ ผ่อน 0% จอมอนิเตอร์ คอมพิวเตอร์ และสมาร์ตโฟน",
     url: "https://www.lazada.co.th/catalog/?q=logitech+streamcam",
-    buttonLabel: "เข้าสู่ Lazada: iAonTech Official Select",
     badge: "LazMall ประกันศูนย์",
-    accent: "from-blue-600 to-indigo-700",
-    border: "border-[#E2E8F0] hover:border-blue-400",
     icon: "💙",
   },
 ];
@@ -259,10 +263,9 @@ const GADGET_STORES = [
 const STUDIO_GEAR_ITEMS: GearItem[] = [
   {
     id: "iphone-17-pm",
-    name: "iPhone 17 Pro Max 256GB (คู่ใจครูอ้น)",
+    name: "iPhone 17 Pro Max 256GB",
     category: "mobile",
-    roleInWorkflow: "ใช้รับแจ้งเตือน Telegram ยามเฝ้าระบบ AI 24 ชม., ถ่ายคลิปมุมโต๊ะทำงาน และรีโมต AnyDesk",
-    whyKruAonLovesIt: "กล้องถ่ายคลิปสั้นคมกริบ แบตอึด คุมระบบลูกค้าได้จากทุกที่แม้ตอนสอนดนตรีที่โรงเรียน",
+    roleInWorkflow: "รับแจ้งเตือน Telegram ระบบ AI 24 ชม., ถ่ายคลิปสั้น และรีโมตงานนอกสถานที่",
     badge: "ใช้ทุกวัน 24 ชม.",
     tiktokShopUrl: "https://www.tiktok.com/@iaontech",
     shopeeUrl: "https://shopee.co.th/search?keyword=iphone%2017%20pro%20max",
@@ -270,43 +273,39 @@ const STUDIO_GEAR_ITEMS: GearItem[] = [
   },
   {
     id: "shure-sm27",
-    name: "ไมค์คอนเดนเซอร์ SHURE SM27 + Steinberg UR44",
+    name: "SHURE SM27 + Steinberg UR44",
     category: "audio",
-    roleInWorkflow: "ใช้พูดไลฟ์สดทุกคืนวันอังคาร, อัดเสียงคลิปสั้น และสั่งงาน AI ด้วยเสียงภาษาไทยแม่นยำ 100%",
-    whyKruAonLovesIt: "เสียงนุ่ม หนา คมชัดระดับห้องอัดเพลง พูดนานแค่ไหนคนฟังก็ไม่ล้าหู และสั่งงาน AI พิมพ์ตามเป๊ะ",
-    badge: "เสียงหล่อระดับสตูดิโอ",
+    roleInWorkflow: "พูดไลฟ์สดทุกคืนวันอังคาร, อัดเสียงคลิปสั้น และสั่งงาน AI ด้วยเสียงไทยคมชัด",
+    badge: "เสียงระดับสตูดิโอ",
     tiktokShopUrl: "https://www.tiktok.com/@iaontech",
     shopeeUrl: "https://shopee.co.th/search?keyword=shure%20sm27",
     lazadaUrl: "https://www.lazada.co.th/catalog/?q=shure+sm27",
   },
   {
     id: "logitech-streamcam",
-    name: "กล้องเว็บแคม Logitech StreamCam (Full HD 60fps)",
+    name: "Logitech StreamCam (1080p 60fps)",
     category: "audio",
-    roleInWorkflow: "ใช้ไลฟ์สดบนเพจ 'ไอทีง่ายๆ สไตล์ iAon' และอัดคลิปสอนระบบแบบเห็นหน้าคู่กับหน้าจอคอม",
-    whyKruAonLovesIt: "ภาพลื่น 60fps โฟกัสไวมาก เวลาหยิบมือถือหรือแกดเจ็ตขึ้นมาโชว์หน้ากล้อง ไม่เบลอเลย",
-    badge: "ภาพคมชัด 60fps",
+    roleInWorkflow: "ไลฟ์สดเพจ 'ไอทีง่ายๆ สไตล์ iAon' และอัดคลิปสอนระบบคู่หน้าจอคอม",
+    badge: "ภาพลื่น 60fps",
     tiktokShopUrl: "https://www.tiktok.com/@iaontech",
     shopeeUrl: "https://shopee.co.th/search?keyword=logitech%20streamcam",
     lazadaUrl: "https://www.lazada.co.th/catalog/?q=logitech+streamcam",
   },
   {
     id: "rtx5060-pc",
-    name: "คอมตั้งโต๊ะ i7-14700F + RTX 5060 + RAM 32GB DDR5",
+    name: "PC i7-14700F + RTX 5060 + 32GB DDR5",
     category: "pc",
-    roleInWorkflow: "ศูนย์บัญชาการหลักวันเสาร์ 10 โมงเช้า ใช้รัน Antigravity AI, ตัดคลิป และเซ็ตระบบให้ลูกค้า",
-    whyKruAonLovesIt: "เปิด 20 หน้าต่างพร้อมไลฟ์สดและรัน AI ไปด้วยไม่มีสะดุดแม้แต่วินาทีเดียว",
-    badge: "เครื่องหลักห้องบัญชาการ",
+    roleInWorkflow: "ศูนย์บัญชาการหลัก รัน AI Agents, ตัดต่อวิดีโอ และพัฒนาระบบให้ลูกค้า",
+    badge: "เครื่องหลักสตูดิโอ",
     tiktokShopUrl: "https://www.tiktok.com/@iaontech",
     shopeeUrl: "https://shopee.co.th/search?keyword=rtx%205060",
     lazadaUrl: "https://www.lazada.co.th/catalog/?q=rtx+5060",
   },
   {
     id: "acer-nitro",
-    name: "โน้ตบุ๊กสายลุย Acer Nitro NL16 (i5-13420H + RTX 3050)",
+    name: "Acer Nitro NL16 (i5-13420H + RTX 3050)",
     category: "pc",
-    roleInWorkflow: "พกไปทำงานที่โรงเรียนหาดใหญ่วิทยาลัย และใช้ขึ้นเวทีตอนไปเป็นวิทยากรอบรม AI นอกสถานที่",
-    whyKruAonLovesIt: "จอใหญ่ 16 นิ้ว การ์ดจอแยก พกไปสาธิตระบบให้ผู้บริหารหรือลูกค้าดูข้างนอกได้ลื่นไหล",
+    roleInWorkflow: "พกไปทำงานที่ ร.ร.หาดใหญ่วิทยาลัย และขึ้นเวทีวิทยากรอบรม AI นอกสถานที่",
     badge: "พกพาสายวิทยากร",
     tiktokShopUrl: "https://www.tiktok.com/@iaontech",
     shopeeUrl: "https://shopee.co.th/search?keyword=acer%20nitro%2016",
@@ -314,10 +313,9 @@ const STUDIO_GEAR_ITEMS: GearItem[] = [
   },
   {
     id: "ipad-pro",
-    name: "iPad Pro 11 นิ้ว (Cellular) + Smart Keyboard Folio",
+    name: "iPad Pro 11\" Cellular + Keyboard",
     category: "mobile",
-    roleInWorkflow: "ใช้เปิดโพยสคริปต์ตอนไลฟ์สดวันอังคาร และตรวจเช็กแดชบอร์ดลูกค้าแบบพกพาในร้านกาแฟ",
-    whyKruAonLovesIt: "บางเบา เปิดปุ๊บติดปั๊บ ใส่ซิมเน็ตในตัว หยิบขึ้นมาเช็กระบบลูกค้าได้ทันทีไม่ต้องต่อ Wi-Fi",
+    roleInWorkflow: "เปิดโพยสคริปต์ไลฟ์สด และตรวจแดชบอร์ดลูกค้าแบบพกพาได้ทุกที่",
     badge: "คล่องตัวสุดๆ",
     tiktokShopUrl: "https://www.tiktok.com/@iaontech",
     shopeeUrl: "https://shopee.co.th/search?keyword=ipad%20pro%2011",
@@ -334,18 +332,18 @@ const CERTIFICATES: Certificate[] = [
     credentialId: "WF5PYDSIAA55",
     issueDate: "Apr 13, 2026",
     category: "AI & Machine Learning",
-    categoryColor: "text-[#1D4ED8] bg-[#EFF6FF]/95 border-[#BFDBFE]",
+    categoryColor: "text-[#1D4ED8] bg-[#EFF6FF] border-[#BFDBFE]",
     verifyUrl: "https://coursera.org/verify/WF5PYDSIAA55",
   },
   {
     id: "cert-canva-ai",
     imageSrc: "/images/cert-canva-ai.png",
-    title: "Certificate of Completion: Work smarter with AI",
+    title: "Work Smarter with AI",
     issuer: "Canva Design School",
     credentialId: "e73e41",
     issueDate: "June 13, 2026",
     category: "AI & Design",
-    categoryColor: "text-[#6D28D9] bg-[#F5F3FF]/95 border-[#DDD6FE]",
+    categoryColor: "text-[#6D28D9] bg-[#F5F3FF] border-[#DDD6FE]",
   },
   {
     id: "cert-workspace-ai",
@@ -355,84 +353,30 @@ const CERTIFICATES: Certificate[] = [
     credentialId: "CERT202606130001",
     issueDate: "June 13, 2026",
     category: "AI & Innovation",
-    categoryColor: "text-[#0E7490] bg-[#ECFEFF]/95 border-[#A5F3FC]",
+    categoryColor: "text-[#0F766E] bg-[#F0FDFA] border-[#99F6E4]",
     verifyUrl: "https://www.workspace.in.th",
   },
 ];
 
-const containerVariants: Variants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
-
 /* ============================================================
-   MAIN COMPONENT: AboutMasterView
+   MAIN COMPONENT: AboutMasterView (Editorial Magazine Profile)
 ============================================================ */
 
 export function AboutMasterView() {
+  const [activeTab, setActiveTab] = useState<DirectoryTab>("channels");
   const [selectedGearCat, setSelectedGearCat] = useState<GearCategory>("all");
   const [copiedBioLink, setCopiedBioLink] = useState(false);
   const [selectedCertIndex, setSelectedCertIndex] = useState<number | null>(null);
 
-  // Automation ROI Calculator States
+  // Compact ROI Calculator States
   const [students, setStudents] = useState(35);
   const [timePerStudent, setTimePerStudent] = useState(15);
   const [reportHours, setReportHours] = useState(8);
 
-  // Notification Demo Simulator States
-  const [chatMessages, setChatMessages] = useState<Array<{ id: number; time: string; text: string }>>([
-    { id: 1, time: "07:55", text: "🔔 ระบบเช็คชื่ออัตโนมัติ AiAon Tech พร้อมใช้งาน" },
-  ]);
-  const [isScanning, setIsScanning] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
-
-  const dailyTimeSavedSeconds = students * timePerStudent;
   const termTimeSavedHours = Math.round(
-    (dailyTimeSavedSeconds * 100) / 3600 + reportHours
+    (students * timePerStudent * 100) / 3600 + reportHours
   );
   const equivalentSleepDays = (termTimeSavedHours / 8).toFixed(1);
-
-  const triggerScan = () => {
-    if (isScanning) return;
-    setIsScanning(true);
-    setShowAlert(false);
-
-    setTimeout(() => {
-      const now = new Date();
-      const timeStr = `${String(now.getHours()).padStart(2, "0")}:${String(
-        now.getMinutes()
-      ).padStart(2, "0")}`;
-      const studentNames = [
-        "เด็กชายภัทรพล",
-        "เด็กหญิงนภัสสร",
-        "เด็กชายธนากร",
-        "เด็กหญิงกัญญารัตน์",
-        "เด็กชายณัฐพงษ์",
-      ];
-      const randomName = studentNames[Math.floor(Math.random() * studentNames.length)];
-
-      const newMsg = {
-        id: Date.now(),
-        time: timeStr,
-        text: `📍 ${randomName} เช็คชื่อเข้าเรียนแล้ว (แจ้งเตือนผู้ปกครองทาง LINE เรียบร้อย)`,
-      };
-
-      setChatMessages((prev) => [...prev, newMsg]);
-      setIsScanning(false);
-      setShowAlert(true);
-
-      setTimeout(() => setShowAlert(false), 4000);
-    }, 800);
-  };
 
   const filteredGear =
     selectedGearCat === "all"
@@ -447,41 +391,33 @@ export function AboutMasterView() {
     }
   };
 
-  // Certificate Lightbox Nav
   const handlePrevCert = (e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (selectedCertIndex === null) return;
-    setSelectedCertIndex((prev) =>
-      prev !== null ? (prev - 1 + CERTIFICATES.length) % CERTIFICATES.length : null
+    setSelectedCertIndex(
+      (prev) => (prev !== null ? (prev - 1 + CERTIFICATES.length) % CERTIFICATES.length : null)
     );
   };
 
   const handleNextCert = (e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (selectedCertIndex === null) return;
-    setSelectedCertIndex((prev) =>
-      prev !== null ? (prev + 1) % CERTIFICATES.length : null
+    setSelectedCertIndex(
+      (prev) => (prev !== null ? (prev + 1) % CERTIFICATES.length : null)
     );
-  };
-
-  const handleCloseCert = () => {
-    setSelectedCertIndex(null);
   };
 
   useEffect(() => {
     if (selectedCertIndex === null) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleCloseCert();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedCertIndex(null);
       else if (e.key === "ArrowLeft") handlePrevCert();
       else if (e.key === "ArrowRight") handleNextCert();
     };
-
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
-
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
   }, [selectedCertIndex]);
@@ -489,495 +425,325 @@ export function AboutMasterView() {
   const activeCert = selectedCertIndex !== null ? CERTIFICATES[selectedCertIndex] : null;
 
   return (
-    <div className="w-full relative overflow-hidden min-h-screen pb-28 font-prompt text-[#1E293B]">
-      {/* Dynamic Ambient Background Glows */}
-      <div className="absolute top-0 left-1/4 w-[750px] h-[650px] bg-blue-600/12 blur-[190px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-[700px] h-[700px] bg-purple-600/12 blur-[190px] rounded-full pointer-events-none" />
-      <div className="absolute top-2/3 left-10 w-[650px] h-[650px] bg-cyan-600/10 blur-[190px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-20 right-1/4 w-[650px] h-[650px] bg-amber-500/10 blur-[190px] rounded-full pointer-events-none" />
-
-      {/* Grid Pattern Overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-30"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right,rgba(255,255,255,0.04) 1px,transparent 1px), linear-gradient(to bottom,rgba(255,255,255,0.04) 1px,transparent 1px)",
-          backgroundSize: "36px 36px",
-        }}
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 relative z-10 space-y-24">
-        
-        {/* ============================================================
-           NAV PILLS (Quick Scroll Menu)
-        ============================================================ */}
-        <div className="w-full flex justify-center sticky top-20 z-40">
-          <nav className="inline-flex items-center gap-1.5 p-1.5 rounded-full bg-white/95 backdrop-blur-xl border border-[#E2E8F0] shadow-md overflow-x-auto max-w-full no-scrollbar">
-            <a
-              href="#identity"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#334155] hover:text-[#0F172A] hover:bg-[#FAF8F5] transition-all whitespace-nowrap"
-            >
-              👤 ประวัติครูอ้น
-            </a>
-            <a
-              href="#channels"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#0E7490] hover:bg-cyan-50 transition-all whitespace-nowrap"
-            >
-              📲 7 ช่องทางหลัก
-            </a>
-            <a
-              href="#stores"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#B45309] hover:bg-amber-50 transition-all whitespace-nowrap"
-            >
-              🛒 3 หน้าร้านไอที
-            </a>
-            <a
-              href="#gear"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#0F766E] hover:bg-teal-50 transition-all whitespace-nowrap"
-            >
-              🎧 โต๊ะทำงาน &amp; อุปกรณ์
-            </a>
-            <a
-              href="#certificates"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#6D28D9] hover:bg-purple-50 transition-all whitespace-nowrap"
-            >
-              🏆 ใบเซอร์ AI
-            </a>
-            <a
-              href="#showcase"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#1D4ED8] hover:bg-blue-50 transition-all whitespace-nowrap"
-            >
-              ⏱️ เครื่องคำนวณเวลา
-            </a>
+    <div className="w-full min-h-screen pb-24 font-prompt text-[#1E293B] overflow-x-clip">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 space-y-16">
+        {/* ══════════════════════════════════════════════════════
+            STICKY EDITORIAL JUMP BAR
+        ══════════════════════════════════════════════════════ */}
+        <div className="flex justify-center sticky top-20 z-30">
+          <nav
+            aria-label="สารบัญหน้าเกี่ยวกับเรา"
+            className="inline-flex items-center gap-1 p-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#E2E8F0] shadow-xs overflow-x-auto max-w-full scrollbar-none"
+          >
+            {[
+              { href: "#identity", label: "เรื่องราว" },
+              { href: "#philosophy", label: "ปรัชญา" },
+              { href: "#brand-ecosystem", label: "4 เสา & Brand Kit" },
+              { href: "#certificates", label: "ใบรับรอง AI" },
+              { href: "#channels", label: "ช่องทาง & อุปกรณ์" },
+              { href: "#contact", label: "ติดต่องาน" },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="min-h-[36px] inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold text-[#475569] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition whitespace-nowrap"
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
         </div>
 
-        {/* ============================================================
-           SECTION 1: HERO & IDENTITY (KRU AON'S STORY)
-        ============================================================ */}
-        <section id="identity" className="pt-2">
-          <div className="bg-white shadow-sm relative rounded-3xl border border-[#E2E8F0] p-6 sm:p-10 lg:p-12 overflow-hidden shadow-sm">
-            {/* Ambient Corner Highlights */}
-            <div className="absolute -top-32 -left-10 w-96 h-96 bg-cyan-500/20 blur-[120px] rounded-full pointer-events-none" />
-            <div className="absolute -bottom-32 -right-10 w-96 h-96 bg-purple-500/20 blur-[120px] rounded-full pointer-events-none" />
-
-            <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 items-center relative z-10">
-              
-              {/* Profile Avatar Card with Cyber Glow */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="shrink-0 flex flex-col items-center"
-              >
-                <div className="w-52 h-52 sm:w-64 sm:h-64 rounded-3xl p-1.5 relative group">
-                  <div className="absolute inset-0 rounded-3xl bg-linear-to-tr from-cyan-400 via-purple-500 to-amber-400 opacity-60 blur-md group-hover:opacity-90 transition-opacity" />
-                  <div className="relative w-full h-full rounded-3xl bg-zinc-950 overflow-hidden border border-white/20 flex items-center justify-center">
-                    <Image
-                      src="/me.png"
-                      alt="ครูอ้น จิรวัฒน์ เดชเส้ง - AiAon Tech"
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 640px) 208px, 256px"
-                      priority
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute bottom-3 left-3 right-3 text-center">
-                      <span className="font-prompt text-xs font-bold text-white px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20">
-                        ครู ค.ศ.2 • ดนตรีสากล ญ.ว.
-                      </span>
+        {/* ══════════════════════════════════════════════════════
+            BLOCK 1: EDITORIAL MAGAZINE COVER HERO (#identity)
+        ══════════════════════════════════════════════════════ */}
+        <section id="identity" className="scroll-mt-28">
+          <div className="rounded-[28px] bg-white border border-[#E2E8F0] shadow-[0_8px_22px_rgba(15,23,42,0.04)] p-6 sm:p-10 lg:p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              {/* Editorial Portrait Column */}
+              <div className="lg:col-span-4 flex flex-col items-center">
+                <div className="relative w-56 h-64 sm:w-64 sm:h-72 rounded-3xl overflow-hidden border border-[#E2E8F0] bg-[#F8FAFC] shadow-sm">
+                  <Image
+                    src="/me.png"
+                    alt="ครูอ้น จิรวัฒน์ เดชเส้ง — ผู้ก่อตั้ง AiAon"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 640px) 224px, 256px"
+                    priority
+                  />
+                  <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-white/95 backdrop-blur-sm border border-[#E2E8F0] px-3 py-2 text-center shadow-xs">
+                    <div className="text-xs font-extrabold text-[#0F172A]">
+                      ครูอ้น • จิรวัฒน์ เดชเส้ง
+                    </div>
+                    <div className="text-[11px] font-medium text-[#475569]">
+                      ครู ค.ศ.2 ดนตรีสากล • ร.ร.หาดใหญ่วิทยาลัย
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 flex items-center gap-2">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-                  </span>
-                  <span className="font-prompt text-xs font-semibold text-[#047857]">
-                    พร้อมรับบรรยาย &amp; ดูแลระบบ AI 24 ชม.
-                  </span>
+                <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-800">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <span>พร้อมรับบรรยาย &amp; วางระบบ AI</span>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* Story & Philosophy Details */}
-              <div className="flex-1 text-center lg:text-left space-y-5">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-[#0E7490] text-xs sm:text-sm font-bold tracking-wide">
-                  <UserCheck className="w-4 h-4 text-[#0E7490]" />
-                  <span>ABOUT KRU AON • จิรวัฒน์ เดชเส้ง</span>
+              {/* Magazine Masthead Copy */}
+              <div className="lg:col-span-8 min-w-0 text-center lg:text-left space-y-5">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] text-xs font-bold tracking-wider uppercase">
+                  <span>THE STORY OF AiAON • TEACHER · MUSICIAN · MAKER</span>
                 </div>
 
-                <h1 className="font-prompt text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight leading-[1.16]">
                   เมื่อคนขี้เกียจทำงานเอกสาร{" "}
-                  <span className="block sm:inline bg-linear-to-r from-[#0369A1] via-[#0F766E] to-[#B45309] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
-                    เสกโค้ดให้คอมทำงานแทน!
-                  </span>
+                  <span className="text-[#2563EB]">เสกโค้ดให้คอมทำงานแทน</span>
                 </h1>
 
-                <p className="font-prompt text-[#475569] text-base sm:text-lg leading-relaxed">
-                  สวัสดีครับ ผม <strong>ครูอ้น (จิรวัฒน์ เดชเส้ง)</strong> ข้าราชการครู ค.ศ.2 กลุ่มสาระการเรียนรู้ศิลปะ (ดนตรีสากล) โรงเรียนหาดใหญ่วิทยาลัย จังหวัดสงขลา ด้วยหัวใจที่รักในเสียงดนตรีและหลงใหลในโลกของเทคโนโลยี ผมจึงทุ่มเทเขียนโปรแกรมและสร้างสรรค์ระบบ <strong>Smart School Automation &amp; AI Caretaker</strong> ขึ้นมา เพื่อเปลี่ยนเวลาตรวจเอกสาร งานธุรการ และการตอบแชทที่ซ้ำซาก ให้กลายเป็นเวลาสอนเด็กๆ และเวลาใช้ชีวิตของพวกเราครับ
+                <p className="text-sm sm:text-base lg:text-lg text-[#475569] leading-relaxed">
+                  ผม <strong className="text-[#0F172A]">ครูอ้น (จิรวัฒน์ เดชเส้ง)</strong>{" "}
+                  ข้าราชการครู ค.ศ.2 ดนตรีสากล โรงเรียนหาดใหญ่วิทยาลัย จังหวัดสงขลา
+                  ผู้ก่อตั้งระบบนิเวศ <strong className="text-[#0F172A]">AiAon</strong>{" "}
+                  ที่นำพลังของ Google Apps Script, AI Automation และงานออกแบบสื่อการสอนมาเปลี่ยนภาระงานซ้ำซาก
+                  ให้กลายเป็นเวลาคุณภาพสำหรับห้องเรียนและชีวิตจริง
                 </p>
 
-                {/* Badge tags */}
-                <div className="flex flex-wrap gap-2.5 justify-center lg:justify-start pt-2">
+                {/* Role Chips */}
+                <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
                   {[
-                    { icon: GraduationCap, text: "ข้าราชการครู ค.ศ.2 (ดนตรีสากล)", color: "text-[#1D4ED8]" },
-                    { icon: Rocket, text: "Google Apps Script & AI Automation", color: "text-[#0E7490]" },
-                    { icon: Music, text: "เพลงช่วยจำ & BGM ปลอดลิขสิทธิ์", color: "text-[#BE185D]" },
-                    { icon: ShieldCheck, text: "AI Caretaker แอดมินเฝ้าร้าน 24 ชม.", color: "text-[#047857]" },
-                    { icon: Guitar, text: "วิทยากรบรรยาย Generative AI", color: "text-[#B45309]" },
-                  ].map((item, idx) => (
-                    <div
+                    { icon: GraduationCap, label: "ครู ค.ศ.2 ดนตรีสากล (ญ.ว.)", tone: "text-[#1D4ED8]" },
+                    { icon: Rocket, label: "Smart School 0-Baht Architect", tone: "text-[#0F766E]" },
+                    { icon: Music, label: "Music Producer & BGM", tone: "text-[#B45309]" },
+                    { icon: Guitar, label: "วิทยากร Generative AI", tone: "text-[#6D28D9]" },
+                  ].map((tag, idx) => (
+                    <span
                       key={idx}
-                      className="flex items-center gap-2 bg-[#FAF8F5] border border-[#E2E8F0] px-3.5 py-1.5 rounded-full text-[#475569] text-xs sm:text-sm hover:bg-[#F1ECE4] transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-semibold text-[#334155]"
                     >
-                      <item.icon className={`w-4 h-4 ${item.color} shrink-0`} />
-                      <span className="font-prompt font-medium">{item.text}</span>
-                    </div>
+                      <tag.icon className={`w-3.5 h-3.5 shrink-0 ${tag.tone}`} />
+                      <span>{tag.label}</span>
+                    </span>
                   ))}
                 </div>
 
-                {/* Primary CTA Buttons */}
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-4">
+                {/* Primary Actions */}
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
                   <a
                     href={getLineOrderUrl(
                       "สวัสดีครับครูอ้น ติดต่อจากหน้าเกี่ยวกับเรา สนใจปรึกษาเรื่องระบบ AI / วิทยากรบรรยาย ครับ 🙏"
                     )}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-prompt inline-flex items-center gap-2 px-6 py-3 rounded-full bg-linear-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-zinc-950 font-extrabold text-sm shadow-[0_0_25px_rgba(16,185,129,0.35)] transition-all hover:scale-102"
+                    className="min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-extrabold text-sm transition shadow-xs"
                   >
                     <MessageCircle className="w-4 h-4" />
-                    <span>ทัก LINE OA ครูอ้น (@deu6776s)</span>
-                    <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                    <span>ทัก LINE OA (@deu6776s)</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
                   </a>
 
                   <button
+                    type="button"
                     onClick={handleCopyBioUrl}
-                    className="font-prompt inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white shadow-sm border border-[#E2E8F0] hover:border-cyan-400 text-[#475569] hover:text-[#0F172A] text-xs sm:text-sm font-semibold transition-all cursor-pointer"
+                    className="min-h-[44px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#F8FAFC] hover:bg-[#EFF6FF] border border-[#E2E8F0] hover:border-[#BFDBFE] text-[#0F172A] text-sm font-bold transition cursor-pointer"
                   >
                     {copiedBioLink ? (
                       <>
-                        <Check className="w-4 h-4 text-[#047857]" />
-                        <span className="text-[#047857]">คัดลอกลิงก์ aiaon.tech/about แล้ว!</span>
+                        <Check className="w-4 h-4 text-[#059669]" />
+                        <span className="text-[#059669]">คัดลอกลิงก์แล้ว!</span>
                       </>
                     ) : (
                       <>
-                        <Copy className="w-4 h-4 text-[#0E7490]" />
-                        <span>แชร์หน้าแนะนำตัวครูอ้น</span>
+                        <Copy className="w-4 h-4 text-[#2563EB]" />
+                        <span>แชร์หน้าแนะนำตัว</span>
                       </>
                     )}
                   </button>
                 </div>
-
               </div>
-
             </div>
           </div>
         </section>
 
-        {/* ============================================================
-           SECTION 2: 7 OFFICIAL CHANNELS MATRIX (MERGED FROM /CHANNELS)
-        ============================================================ */}
-        <section id="channels" className="pt-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <div className="font-prompt inline-flex items-center gap-2 text-[#0E7490] text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
-                <Radio className="w-4 h-4" />
-                <span>ALL OFFICIAL CHANNELS • 7 ช่องทางทางการของครูอ้น</span>
-              </div>
-              <h2 className="font-prompt text-2xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight">
-                📲 ติดตามจักรวาล <span className="text-transparent bg-clip-text bg-linear-to-r from-[#0369A1] via-[#0F766E] to-[#B45309]">iAonTech</span> ได้ครบทุกแพลตฟอร์ม
-              </h2>
-            </div>
-            <p className="font-prompt text-[#64748B] text-sm md:text-right max-w-md">
-              คลิกติดตามช่องทางต้นทางของแท้ 100% เรียงลำดับจากไลฟ์สดแม่พิมพ์ ➔ คลิปสั้น ➔ คลิปยาว ➔ และจุดรับบริการที่ LINE OA
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {OFFICIAL_CHANNELS.map((ch) => (
-              <motion.div
-                key={ch.id}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className={`group bg-white shadow-sm relative rounded-3xl bg-linear-to-br ${ch.bgGlow} border ${ch.borderClass} p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between shadow-sm`}
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className="font-prompt text-xs font-bold px-3 py-1 rounded-full bg-[#FAF8F5] text-[#475569] border border-[#E2E8F0]">
-                      {ch.stepLabel}
-                    </span>
-                    <span className={`font-prompt text-xs font-extrabold tracking-wider ${ch.colorClass}`}>
-                      {ch.badge}
-                    </span>
-                  </div>
-
-                  <div className="flex items-start gap-3.5 mb-3.5">
-                    <div className="text-3xl shrink-0 bg-[#FAF8F5] w-12 h-12 rounded-2xl flex items-center justify-center border border-[#E2E8F0] group-hover:scale-105 transition-transform">
-                      {ch.iconText}
-                    </div>
-                    <div>
-                      <div className="font-prompt text-xs text-[#64748B] font-semibold">
-                        {ch.platform}
-                      </div>
-                      <h3 className="font-prompt text-lg sm:text-xl font-extrabold text-[#0F172A] group-hover:text-[#0E7490] transition-colors">
-                        {ch.name}
-                      </h3>
-                      <div className="font-mono text-xs text-[#0E7490]">{ch.handle}</div>
-                    </div>
-                  </div>
-
-                  <p className="font-prompt text-[#475569] text-sm leading-relaxed mb-3">
-                    {ch.role}
-                  </p>
-                  <div className="font-prompt text-xs text-[#B45309] font-semibold mb-5">
-                    {ch.schedule}
-                  </div>
+        {/* ══════════════════════════════════════════════════════
+            BLOCK 2: CREATIVE LAZINESS PHILOSOPHY (#philosophy)
+        ══════════════════════════════════════════════════════ */}
+        <section id="philosophy" className="scroll-mt-28">
+          <div className="rounded-[28px] bg-white border border-[#E2E8F0] shadow-[0_8px_22px_rgba(15,23,42,0.04)] p-6 sm:p-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-5">
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#1D4ED8] mb-3">
+                  <Quote className="w-4 h-4" />
+                  <span>Creative Laziness Philosophy</span>
                 </div>
-
-                <a
-                  href={ch.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-prompt inline-flex items-center justify-between w-full px-4 py-3 rounded-xl bg-[#FAF8F5] hover:bg-cyan-50 border border-[#E2E8F0] group-hover:border-cyan-400 text-sm font-bold text-[#0F172A] transition-all"
-                >
-                  <span>{ch.buttonText}</span>
-                  <ExternalLink className="w-4 h-4 text-[#0E7490]" />
-                </a>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* ============================================================
-           SECTION 3: 3 OFFICIAL GADGET & AFFILIATE STORES
-        ============================================================ */}
-        <section id="stores" className="pt-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <div className="font-prompt inline-flex items-center gap-2 text-[#B45309] text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
-                <Store className="w-4 h-4" />
-                <span>OFFICIAL GADGET &amp; TECH STORES • 3 แพลตฟอร์มหลัก</span>
-              </div>
-              <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                🛒 หน้าร้านไอที &amp; พิกัดแกดเจ็ตที่ครูอ้นคัดมาให้แล้ว
-              </h2>
-            </div>
-            <p className="font-prompt text-[#64748B] text-sm md:text-right max-w-md">
-              สะดวกช้อปบนแพลตฟอร์มไหน กดคลิกไปที่หน้าร้านต้นทางได้ทันที ของแท้ 100% พร้อมโค้ดลดพิเศษ
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {GADGET_STORES.map((store, idx) => (
-              <motion.div
-                key={store.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.08 + idx * 0.08 }}
-                className={`bg-white shadow-sm relative rounded-3xl border ${store.border} p-6 sm:p-7 flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 shadow-sm`}
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className="text-3xl">{store.icon}</span>
-                    <span className="font-prompt px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-[#B45309] border border-amber-300">
-                      {store.badge}
-                    </span>
-                  </div>
-
-                  <div className="font-prompt text-xs font-bold uppercase tracking-wider text-[#64748B] mb-1">
-                    {store.platform}
-                  </div>
-                  <h3 className="font-prompt text-xl font-extrabold text-[#0F172A] mb-2">
-                    {store.storeName}
-                  </h3>
-                  <p className="font-prompt text-[#0E7490] text-xs sm:text-sm font-semibold mb-3">
-                    {store.tagline}
-                  </p>
-                  <p className="font-prompt text-[#475569] text-sm leading-relaxed mb-6">
-                    {store.description}
-                  </p>
-                </div>
-
-                <a
-                  href={store.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`font-prompt w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-linear-to-r ${store.accent} text-white font-bold text-sm shadow-lg hover:opacity-95 transition-all`}
-                >
-                  <span>{store.buttonLabel}</span>
-                  <ExternalLink className="w-4 h-4 shrink-0" />
-                </a>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* ============================================================
-           SECTION 4: KRU AON'S STUDIO GEAR CHECKLIST
-        ============================================================ */}
-        <section id="gear" className="pt-6">
-          <div className="bg-white shadow-sm rounded-3xl border border-[#E2E8F0] p-6 sm:p-10">
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-8">
-              <div>
-                <div className="font-prompt inline-flex items-center gap-2 text-[#0F766E] text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">
-                  <Laptop className="w-4 h-4" />
-                  <span>KRU AON&apos;S REAL WORKING GEAR</span>
-                </div>
-                <h2 className="font-prompt text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                  🎧 เปิดกรุอุปกรณ์จริงบนโต๊ะทำงานครูอ้น (ใช้จริง รีวิวจริงทุกชิ้น)
-                </h2>
-                <p className="font-prompt text-[#64748B] text-sm mt-1">
-                  อุปกรณ์ทุกชิ้นด้านล่างคืออาวุธจริงที่ครูอ้นใช้สร้างระบบ AI, ไลฟ์สด และสอนดนตรี กดเทียบราคาจากทั้ง 3 ร้านได้เลย
+                <blockquote className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] leading-snug">
+                  “ให้ระบบทำงานแทนคุณ แล้วเอาเวลาไปใช้ชีวิตนะครับ”
+                </blockquote>
+                <p className="text-sm text-[#64748B] mt-3 leading-relaxed">
+                  เพราะเทคโนโลยีที่ดีที่สุดไม่ใช่ระบบที่ซับซ้อนที่สุด แต่คือระบบที่ลดแรงเสียดทานและคืนเวลาให้มนุษย์ได้มากที่สุด
                 </p>
               </div>
 
-              {/* Category Filter Tabs */}
-              <div className="flex flex-wrap gap-2">
+              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
-                  { key: "all", label: "ทั้งหมด (6)" },
-                  { key: "mobile", label: "📱 มือถือ & ไอแพด" },
-                  { key: "audio", label: "🎙️ ไมค์ & กล้องไลฟ์สด" },
-                  { key: "pc", label: "💻 คอม & โน้ตบุ๊ก" },
-                ].map((tab) => (
-                  <button
-                    key={tab.key}
-                    onClick={() => setSelectedGearCat(tab.key as GearCategory)}
-                    className={`font-prompt px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                      selectedGearCat === tab.key
-                        ? "bg-linear-to-r from-cyan-600 to-teal-600 text-white shadow-sm"
-                        : "bg-[#FAF8F5] text-[#475569] border border-[#E2E8F0] hover:border-[#CBD5E1] hover:text-[#0F172A]"
-                    }`}
+                  {
+                    num: "01",
+                    title: "0-Baht & Lean",
+                    desc: "ออกแบบบนเครื่องมือที่โรงเรียนมีอยู่แล้ว เช่น Google Workspace ไม่ต้องเสียค่าเซิร์ฟเวอร์รายเดือน",
+                  },
+                  {
+                    num: "02",
+                    title: "Real Classroom Tested",
+                    desc: "ทุกระบบและทุก E-Book ผ่านการใช้งานจริงในโรงเรียนกับนักเรียนกว่า 279 คนก่อนเปิดแบ่งปัน",
+                  },
+                  {
+                    num: "03",
+                    title: "Zero-Friction UX",
+                    desc: "กดใช้งานง่ายบนมือถือ ไม่ต้องเก่งโค้ด มีคู่มือและไฟล์แม่แบบพร้อมเริ่มต้นใน 3 นาที",
+                  },
+                ].map((p) => (
+                  <div
+                    key={p.num}
+                    className="rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] p-5 flex flex-col gap-2"
                   >
-                    {tab.label}
-                  </button>
+                    <span className="text-xs font-black text-[#2563EB] tracking-wider">
+                      {p.num}
+                    </span>
+                    <h3 className="text-sm font-extrabold text-[#0F172A]">{p.title}</h3>
+                    <p className="text-xs text-[#475569] leading-relaxed">{p.desc}</p>
+                  </div>
                 ))}
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {filteredGear.map((gear) => (
-                <div
-                  key={gear.id}
-                  className="rounded-2xl bg-[#FAF8F5] border border-[#E2E8F0] p-5 sm:p-6 flex flex-col justify-between hover:border-cyan-400 transition-all"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="font-prompt px-2.5 py-1 rounded-full bg-teal-50 border border-teal-300 text-[#0F766E] text-xs font-bold">
-                        {gear.badge}
-                      </span>
-                      <Sparkles className="w-4 h-4 text-[#B45309]" />
-                    </div>
-
-                    <h3 className="font-prompt text-base sm:text-lg font-extrabold text-[#0F172A] mb-2">
-                      {gear.name}
-                    </h3>
-                    <p className="font-prompt text-xs text-[#0E7490] mb-2 leading-relaxed">
-                      <strong>หน้าที่ในระบบครูอ้น:</strong> {gear.roleInWorkflow}
-                    </p>
-                    <p className="font-prompt text-xs text-[#64748B] leading-relaxed mb-5">
-                      &ldquo;{gear.whyKruAonLovesIt}&rdquo;
-                    </p>
-                  </div>
-
-                  <div className="space-y-2.5 pt-3.5 border-t border-[#E2E8F0]">
-                    <div className="font-prompt text-[11px] font-semibold text-[#64748B]">
-                      คลิกเช็กราคาของแท้ในหน้าร้านครูอ้น:
-                    </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      <a
-                        href={gear.tiktokShopUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-[#FAF8F5] hover:bg-cyan-50 border border-cyan-300 text-[11px] font-bold text-[#0E7490] transition-all"
-                      >
-                        <span>🎵 TikTok</span>
-                      </a>
-                      <a
-                        href={gear.shopeeUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-[#FAF8F5] hover:bg-orange-50 border border-orange-300 text-[11px] font-bold text-[#C2410C] transition-all"
-                      >
-                        <span>🧡 Shopee</span>
-                      </a>
-                      <a
-                        href={gear.lazadaUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-prompt flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-[#FAF8F5] hover:bg-blue-50 border border-blue-300 text-[11px] font-bold text-[#1D4ED8] transition-all"
-                      >
-                        <span>💙 Lazada</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </section>
 
-        {/* ============================================================
-           SECTION 5: VERIFIED CERTIFICATIONS & ACHIEVEMENTS
-        ============================================================ */}
-        <section id="certificates" className="pt-6">
-          <div className="text-center mb-12 px-4">
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-amber-300 bg-amber-50 text-[#B45309] text-xs sm:text-sm font-prompt font-medium mb-4">
-              <Award className="w-4 h-4" />
-              ความสำเร็จและใบประกาศนียบัตร
-            </span>
-
-            <h2 className="font-prompt text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#0F172A]">
-              Certificates &amp;{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-[#B45309] via-[#7C3AED] to-[#BE185D]">
-                AI Credentials
-              </span>
-            </h2>
-
-            <p className="text-[#64748B] max-w-xl mx-auto text-sm sm:text-base font-prompt font-light leading-relaxed">
-              ใบรับรองความเชี่ยวชาญด้าน AI และนวัตกรรมดิจิทัลที่ผ่านการเรียนรู้และทดสอบจริง
+        {/* ══════════════════════════════════════════════════════
+            BLOCK 3: OFFICIAL 4-PILLAR ECOSYSTEM & BRAND KIT V2.0
+        ══════════════════════════════════════════════════════ */}
+        <section id="brand-ecosystem" className="scroll-mt-28 space-y-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
+            <div>
+              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1D4ED8] mb-1.5">
+                <Layers className="w-4 h-4" />
+                <span>AiAon Brand Ecosystem V2.0</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
+                4 เสาหลักของจักรวาล AiAon
+              </h2>
+            </div>
+            <p className="text-sm text-[#475569] max-w-md md:text-right">
+              ระบบอัตลักษณ์แบบ 4-Room Territory Tinting ที่รวมเทคโนโลยี สื่อการสอน ดนตรี และงานสร้างสรรค์ 3D ไว้ภายใต้บ้านหลังเดียว
             </p>
           </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {CERTIFICATES.map((cert, index) => (
-              <motion.div
-                key={cert.id}
-                variants={cardVariants}
-                onClick={() => setSelectedCertIndex(index)}
-                className="group relative rounded-3xl border border-[#E2E8F0] bg-white backdrop-blur-sm overflow-hidden cursor-pointer
-                           transition-all duration-300 ease-out hover:border-purple-500/40 hover:shadow-[0_8px_40px_rgba(168,85,247,0.2)] hover:-translate-y-1 flex flex-col justify-between"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {FOUR_PILLARS.map((pillar) => (
+              <Link
+                key={pillar.id}
+                href={pillar.href}
+                className={`group rounded-3xl ${pillar.surfaceBg} border ${pillar.borderClass} p-5 flex flex-col justify-between transition-all duration-300 shadow-[0_8px_22px_rgba(15,23,42,0.04)] hover:shadow-md hover:-translate-y-1 min-w-0`}
               >
-                <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#FAF8F5]">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className={`text-xs font-black ${pillar.accentText}`}>
+                      {pillar.number}
+                    </span>
+                    <span className="text-[11px] font-semibold text-[#64748B] truncate">
+                      {pillar.badge}
+                    </span>
+                  </div>
+
+                  {/* Official Outlined SVG Lockup */}
+                  <div className="h-14 w-full rounded-2xl bg-white border border-[#E2E8F0] px-3.5 py-2.5 flex items-center justify-center mb-4">
+                    <img
+                      src={pillar.logoSrc}
+                      alt={`โลโก้ทางการ ${pillar.name}`}
+                      className="max-h-9 w-auto object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <p className="text-xs text-[#475569] leading-relaxed mb-4">
+                    {pillar.tagline}
+                  </p>
+                </div>
+
+                <div
+                  className={`inline-flex items-center gap-1.5 text-xs font-extrabold ${pillar.accentText}`}
+                >
+                  <span>สำรวจ {pillar.name}</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Official Brand Kit V2.0 Press & Download Bar */}
+          <div className="rounded-3xl bg-white border border-[#BFDBFE] p-6 sm:p-7 shadow-[0_8px_22px_rgba(15,23,42,0.04)] flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+            <div className="space-y-1.5 min-w-0">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] text-[11px] font-bold">
+                <Sparkles className="w-3 h-3" />
+                <span>OFFICIAL PRESS &amp; MEDIA KIT V2.0</span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-extrabold text-[#0F172A]">
+                ดาวน์โหลด AiAon Brand Kit V2.0 (.ZIP)
+              </h3>
+              <p className="text-xs sm:text-sm text-[#475569]">
+                รวมไฟล์โลโก้ Outlined SVG (32 ไฟล์), Transparent PNG ความละเอียด 2400px และ App Icons ครบทั้ง 4 เสา สำหรับสื่อประชาสัมพันธ์และหน่วยงานที่เชิญบรรยาย
+              </p>
+            </div>
+
+            <a
+              href="/brand/AiAon_Brand_Kit_v2.0.zip"
+              download="AiAon_Brand_Kit_v2.0.zip"
+              className="min-h-[46px] px-6 py-3 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] text-white text-sm font-bold inline-flex items-center justify-center gap-2 transition shadow-xs shrink-0 w-full md:w-auto"
+            >
+              <Download className="w-4 h-4" />
+              <span>ดาวน์โหลด Brand Kit V2.0</span>
+            </a>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════
+            BLOCK 4: VERIFIED AI CREDENTIALS (#certificates)
+        ══════════════════════════════════════════════════════ */}
+        <section id="certificates" className="scroll-mt-28 space-y-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
+            <div>
+              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B45309] mb-1.5">
+                <Award className="w-4 h-4" />
+                <span>Verified AI Credentials</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
+                ใบประกาศนียบัตร &amp; ความเชี่ยวชาญด้าน AI
+              </h2>
+            </div>
+            <p className="text-sm text-[#475569]">
+              คลิกที่ใบประกาศนียบัตรเพื่อขยายดูรายละเอียดเต็มจอ
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {CERTIFICATES.map((cert, index) => (
+              <div
+                key={cert.id}
+                onClick={() => setSelectedCertIndex(index)}
+                className="group rounded-3xl border border-[#E2E8F0] bg-white overflow-hidden cursor-pointer transition-all duration-300 shadow-[0_8px_22px_rgba(15,23,42,0.04)] hover:border-[#2563EB]/50 hover:shadow-md hover:-translate-y-1 flex flex-col justify-between"
+              >
+                <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#F8FAFC]">
                   <Image
                     src={cert.imageSrc}
                     alt={cert.title}
                     fill
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <div className="p-3 rounded-full bg-black/70 backdrop-blur-sm border border-white/20 shadow-lg">
-                      <ZoomIn className="w-5 h-5 text-white" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-[#0F172A]/35">
+                    <div className="p-2.5 rounded-full bg-white text-[#0F172A] shadow-md">
+                      <ZoomIn className="w-5 h-5" />
                     </div>
                   </div>
-
                   <div className="absolute top-3 left-3">
                     <span
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-prompt font-semibold backdrop-blur-md border shadow-xs ${cert.categoryColor}`}
+                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold border ${cert.categoryColor}`}
                     >
                       <BadgeCheck className="w-3 h-3" />
                       {cert.category}
@@ -985,78 +751,259 @@ export function AboutMasterView() {
                   </div>
                 </div>
 
-                <div className="p-5 space-y-3 relative z-10 flex-1 flex flex-col justify-between">
+                <div className="p-5 flex-1 flex flex-col justify-between gap-3">
                   <div>
-                    <h3 className="font-prompt text-base font-semibold text-[#0F172A] leading-snug group-hover:text-[#6D28D9] transition-colors line-clamp-2">
+                    <h3 className="text-base font-extrabold text-[#0F172A] group-hover:text-[#1D4ED8] transition-colors line-clamp-2">
                       {cert.title}
                     </h3>
-                    <p className="text-xs sm:text-sm font-prompt text-[#64748B] font-medium mt-1">
+                    <p className="text-xs text-[#475569] font-medium mt-1">
                       {cert.issuer}
                     </p>
                   </div>
 
-                  <div className="border-t border-[#E2E8F0] pt-3 space-y-1.5 text-xs font-prompt text-[#64748B]">
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-[#B45309] shrink-0" />
-                      <span>ออกเมื่อ: {cert.issueDate}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Hash className="w-3.5 h-3.5 text-[#6D28D9] shrink-0" />
-                      <span>ID: </span>
-                      <span className="text-[#6D28D9] font-mono font-semibold">{cert.credentialId}</span>
-                    </div>
-                    {cert.verifyUrl && (
-                      <a
-                        href={cert.verifyUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1 text-[11px] font-prompt text-[#0E7490] hover:text-[#155E75] pt-1"
-                      >
-                        <ExternalLink className="w-3 h-3" />
-                        <span>ตรวจสอบใบรับรองออนไลน์</span>
-                      </a>
-                    )}
+                  <div className="border-t border-[#F1F5F9] pt-3 flex items-center justify-between text-xs text-[#64748B]">
+                    <span className="inline-flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5 text-[#B45309]" />
+                      {cert.issueDate}
+                    </span>
+                    <span className="font-mono font-semibold text-[#1D4ED8] truncate max-w-[130px]">
+                      #{cert.credentialId}
+                    </span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </section>
 
-        {/* ============================================================
-           SECTION 6: SMART SCHOOL AUTOMATION & ROI SIMULATOR
-        ============================================================ */}
-        <section id="showcase" className="pt-6">
-          <div className="text-center mb-12 px-4">
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white shadow-sm border-blue-200 bg-blue-50 text-[#1D4ED8] text-xs sm:text-sm font-prompt font-medium mb-4">
-              <Cpu className="w-4 h-4" /> SMART SCHOOL AUTOMATION
-            </span>
-            <h2 className="font-prompt text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#0F172A]">
-              นวัตกรรมลดภาระงานครู <span className="text-transparent bg-clip-text bg-linear-to-r from-[#1D4ED8] via-[#0E7490] to-[#0F766E]">เห็นภาพจริงใน 1 นาที</span>
-            </h2>
-            <p className="text-[#64748B] max-w-2xl mx-auto text-sm sm:text-base font-prompt font-light leading-relaxed">
-              ทดลองเลื่อนสไลเดอร์คำนวณชั่วโมงที่ระบบช่วยซื้อเวลาชีวิตกลับคืน และกดสแกนการ์ดเพื่อดูการแจ้งเตือนจำลองด้านล่างได้เลย
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-            
-            {/* Left: ROI Time Calculator */}
-            <div className="bg-white shadow-sm rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 flex flex-col justify-between bg-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-blue-50 blur-[80px] rounded-full pointer-events-none" />
-
+        {/* ══════════════════════════════════════════════════════
+            BLOCK 5: TABBED EDITORIAL DIRECTORY (#channels)
+            (7 Official Channels | 3 Gadget Stores | Studio Gear)
+        ══════════════════════════════════════════════════════ */}
+        <section id="channels" className="scroll-mt-28">
+          <div className="rounded-[28px] bg-white border border-[#E2E8F0] shadow-[0_8px_22px_rgba(15,23,42,0.04)] p-6 sm:p-8 lg:p-10">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-7">
               <div>
-                <h3 className="font-prompt text-xl sm:text-2xl font-bold text-[#0F172A] mb-6 flex items-center gap-2.5">
-                  <Clock className="w-5 h-5 text-[#1D4ED8]" />
-                  <span>เครื่องคำนวณเวลาที่ประหยัดได้</span>
-                </h3>
+                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1D4ED8] mb-1.5">
+                  <Radio className="w-4 h-4" />
+                  <span>Official Directory &amp; Studio Setup</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
+                  ช่องทางทางการ หน้าร้านไอที และอุปกรณ์จริงบนโต๊ะครูอ้น
+                </h2>
+              </div>
 
-                <div className="space-y-6">
+              {/* 3 Clean Directory Tabs */}
+              <div className="inline-flex flex-wrap gap-2 bg-[#F8FAFC] p-1.5 rounded-2xl border border-[#E2E8F0]">
+                {[
+                  { id: "channels" as DirectoryTab, icon: Radio, label: "7 ช่องทางหลัก" },
+                  { id: "stores" as DirectoryTab, icon: Store, label: "3 หน้าร้านไอที" },
+                  { id: "gear" as DirectoryTab, icon: Laptop, label: "อุปกรณ์จริง (6)" },
+                ].map((tab) => {
+                  const Icon = tab.icon;
+                  const active = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`min-h-[40px] px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 transition cursor-pointer ${
+                        active
+                          ? "bg-[#0F172A] text-white shadow-xs"
+                          : "text-[#475569] hover:text-[#0F172A] hover:bg-white"
+                      }`}
+                    >
+                      <Icon className="w-3.5 h-3.5" />
+                      <span>{tab.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* TAB 1: 7 OFFICIAL CHANNELS */}
+            {activeTab === "channels" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {OFFICIAL_CHANNELS.map((ch) => (
+                  <a
+                    key={ch.id}
+                    href={ch.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group rounded-2xl bg-[#F8FAFC] hover:bg-[#EFF6FF]/60 border border-[#E2E8F0] hover:border-[#BFDBFE] p-5 flex flex-col justify-between transition"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className="text-2xl">{ch.icon}</span>
+                        <span className="text-[10px] font-extrabold tracking-wider px-2.5 py-0.5 rounded-full bg-white border border-[#E2E8F0] text-[#475569]">
+                          {ch.badge}
+                        </span>
+                      </div>
+                      <div className="text-[11px] font-bold text-[#64748B]">
+                        {ch.platform}
+                      </div>
+                      <h3 className="text-base font-extrabold text-[#0F172A] group-hover:text-[#1D4ED8] transition">
+                        {ch.name}
+                      </h3>
+                      <div className="text-xs font-mono text-[#2563EB] mb-2">
+                        {ch.handle}
+                      </div>
+                      <p className="text-xs text-[#475569] leading-relaxed mb-3">
+                        {ch.role}
+                      </p>
+                    </div>
+
+                    <div className="pt-3 border-t border-[#E2E8F0] flex items-center justify-between text-xs font-bold text-[#0F172A]">
+                      <span className="text-[11px] text-[#B45309] truncate pr-2">
+                        {ch.schedule}
+                      </span>
+                      <ExternalLink className="w-3.5 h-3.5 text-[#2563EB] shrink-0" />
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )}
+
+            {/* TAB 2: 3 OFFICIAL GADGET STORES */}
+            {activeTab === "stores" && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {GADGET_STORES.map((store) => (
+                  <div
+                    key={store.id}
+                    className="rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] p-6 flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-2xl">{store.icon}</span>
+                        <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FEF9EF] text-[#92400E] border border-[#FDE68A]">
+                          {store.badge}
+                        </span>
+                      </div>
+                      <div className="text-xs font-bold text-[#64748B] uppercase">
+                        {store.platform}
+                      </div>
+                      <h3 className="text-lg font-extrabold text-[#0F172A] mt-0.5 mb-1.5">
+                        {store.storeName}
+                      </h3>
+                      <p className="text-xs font-semibold text-[#1D4ED8] mb-2">
+                        {store.tagline}
+                      </p>
+                      <p className="text-xs text-[#475569] leading-relaxed mb-5">
+                        {store.description}
+                      </p>
+                    </div>
+                    <a
+                      href={store.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="min-h-[44px] w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] text-white text-xs font-bold transition"
+                    >
+                      <span>ไปที่หน้าร้าน {store.platform}</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* TAB 3: STUDIO GEAR CHECKLIST */}
+            {activeTab === "gear" && (
+              <div className="space-y-5">
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { key: "all" as GearCategory, label: "ทั้งหมด (6)" },
+                    { key: "mobile" as GearCategory, label: "📱 มือถือ & ไอแพด" },
+                    { key: "audio" as GearCategory, label: "🎙️ ไมค์ & กล้อง" },
+                    { key: "pc" as GearCategory, label: "💻 คอม & โน้ตบุ๊ก" },
+                  ].map((cat) => (
+                    <button
+                      key={cat.key}
+                      type="button"
+                      onClick={() => setSelectedGearCat(cat.key)}
+                      className={`min-h-[38px] px-3.5 py-1.5 rounded-full text-xs font-bold border transition cursor-pointer ${
+                        selectedGearCat === cat.key
+                          ? "bg-[#1D4ED8] text-white border-[#1D4ED8]"
+                          : "bg-[#F8FAFC] text-[#475569] border-[#E2E8F0] hover:text-[#0F172A]"
+                      }`}
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {filteredGear.map((gear) => (
+                    <div
+                      key={gear.id}
+                      className="rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] p-5 flex flex-col justify-between gap-4"
+                    >
+                      <div>
+                        <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] text-[11px] font-bold mb-2.5">
+                          {gear.badge}
+                        </span>
+                        <h3 className="text-sm sm:text-base font-extrabold text-[#0F172A] mb-1.5">
+                          {gear.name}
+                        </h3>
+                        <p className="text-xs text-[#475569] leading-relaxed">
+                          {gear.roleInWorkflow}
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-1.5 pt-3 border-t border-[#E2E8F0]">
+                        <a
+                          href={gear.tiktokShopUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="min-h-[36px] flex items-center justify-center rounded-lg bg-white hover:bg-cyan-50 border border-[#E2E8F0] text-[11px] font-bold text-[#0F172A] transition"
+                        >
+                          🎵 TikTok
+                        </a>
+                        <a
+                          href={gear.shopeeUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="min-h-[36px] flex items-center justify-center rounded-lg bg-white hover:bg-orange-50 border border-[#E2E8F0] text-[11px] font-bold text-[#C2410C] transition"
+                        >
+                          🧡 Shopee
+                        </a>
+                        <a
+                          href={gear.lazadaUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="min-h-[36px] flex items-center justify-center rounded-lg bg-white hover:bg-blue-50 border border-[#E2E8F0] text-[11px] font-bold text-[#1D4ED8] transition"
+                        >
+                          💙 Lazada
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════
+            BLOCK 6: ROI CALCULATOR + SPEAKER & CONSULTING (#contact)
+        ══════════════════════════════════════════════════════ */}
+        <section id="contact" className="scroll-mt-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            {/* Left: Compact Time-Saved Calculator */}
+            <div className="lg:col-span-6 rounded-[28px] bg-white border border-[#E2E8F0] shadow-[0_8px_22px_rgba(15,23,42,0.04)] p-6 sm:p-8 flex flex-col justify-between">
+              <div>
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#1D4ED8] mb-2">
+                  <Clock className="w-4 h-4" />
+                  <span>Smart School ROI Calculator</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] mb-5">
+                  ลองคำนวณเวลาที่ระบบช่วยซื้อคืนให้คุณครู
+                </h2>
+
+                <div className="space-y-4">
                   <div>
-                    <div className="flex justify-between items-center mb-2 font-prompt text-sm">
-                      <span className="text-[#475569]">จำนวนนักเรียนในห้องเรียน</span>
-                      <span className="font-bold text-[#0E7490]">{students} คน</span>
+                    <div className="flex justify-between text-xs sm:text-sm mb-1.5">
+                      <span className="text-[#475569]">จำนวนนักเรียนต่อห้อง</span>
+                      <span className="font-bold text-[#1D4ED8]">{students} คน</span>
                     </div>
                     <input
                       type="range"
@@ -1064,14 +1011,14 @@ export function AboutMasterView() {
                       max="100"
                       value={students}
                       onChange={(e) => setStudents(Number(e.target.value))}
-                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#2563EB]"
                     />
                   </div>
 
                   <div>
-                    <div className="flex justify-between items-center mb-2 font-prompt text-sm">
-                      <span className="text-[#475569]">เวลาที่ใช้เช็คชื่อและแจ้งเตือนแบบเดิม (ต่อคน)</span>
-                      <span className="font-bold text-[#0E7490]">{timePerStudent} วินาที</span>
+                    <div className="flex justify-between text-xs sm:text-sm mb-1.5">
+                      <span className="text-[#475569]">เวลาเช็คชื่อ &amp; แจ้งเตือนเดิม (ต่อคน)</span>
+                      <span className="font-bold text-[#1D4ED8]">{timePerStudent} วินาที</span>
                     </div>
                     <input
                       type="range"
@@ -1079,14 +1026,14 @@ export function AboutMasterView() {
                       max="45"
                       value={timePerStudent}
                       onChange={(e) => setTimePerStudent(Number(e.target.value))}
-                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#2563EB]"
                     />
                   </div>
 
                   <div>
-                    <div className="flex justify-between items-center mb-2 font-prompt text-sm">
-                      <span className="text-[#475569]">เวลาทำรายงานฝ่ายวิชาการต่อเทอม</span>
-                      <span className="font-bold text-[#0E7490]">{reportHours} ชั่วโมง</span>
+                    <div className="flex justify-between text-xs sm:text-sm mb-1.5">
+                      <span className="text-[#475569]">เวลาทำรายงานสรุปต่อเทอม</span>
+                      <span className="font-bold text-[#1D4ED8]">{reportHours} ชั่วโมง</span>
                     </div>
                     <input
                       type="range"
@@ -1094,298 +1041,174 @@ export function AboutMasterView() {
                       max="30"
                       value={reportHours}
                       onChange={(e) => setReportHours(Number(e.target.value))}
-                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#2563EB]"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Result display */}
-              <div className="mt-8 pt-6 border-t border-[#E2E8F0] bg-blue-50 rounded-2xl p-5 border border-blue-200">
-                <div className="grid grid-cols-2 gap-4 text-center">
-                  <div className="border-r border-[#E2E8F0] pr-2">
-                    <span className="text-[11px] uppercase font-prompt tracking-wider text-[#64748B] block mb-1">
-                      ประหยัดได้ต่อภาคเรียน
-                    </span>
-                    <span className="text-3xl sm:text-4xl font-extrabold font-prompt text-transparent bg-clip-text bg-linear-to-r from-[#1D4ED8] to-[#0E7490]">
-                      {termTimeSavedHours} ชม.
-                    </span>
+              <div className="mt-6 rounded-2xl bg-[#EFF6FF] border border-[#BFDBFE] p-4 grid grid-cols-2 gap-4 text-center">
+                <div className="border-r border-[#BFDBFE] pr-2">
+                  <div className="text-[11px] font-semibold text-[#475569]">
+                    ประหยัดได้ต่อภาคเรียน
                   </div>
-                  <div className="pl-2">
-                    <span className="text-[11px] uppercase font-prompt tracking-wider text-[#64748B] block mb-1">
-                      คืนเวลานอนพักผ่อน
-                    </span>
-                    <span className="text-3xl sm:text-4xl font-extrabold font-prompt text-transparent bg-clip-text bg-linear-to-r from-[#0F766E] to-[#047857]">
-                      ~ {equivalentSleepDays} วัน
-                    </span>
+                  <div className="text-2xl sm:text-3xl font-black text-[#1D4ED8]">
+                    {termTimeSavedHours} ชม.
                   </div>
                 </div>
-                <p className="text-xs text-[#64748B] font-prompt text-center mt-4 leading-relaxed">
-                  * คำนวณจากการเปิดเรียน 100 วันต่อหนึ่งภาคเรียน ยิ่งมีหลายห้องเรียน หรือสอนหลายระดับชั้น เวลาที่ประหยัดได้จะเพิ่มขึ้นเป็นทวีคูณ!
-                </p>
+                <div>
+                  <div className="text-[11px] font-semibold text-[#475569]">
+                    คืนเวลานอนพักผ่อน
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-black text-[#0F766E]">
+                    ~{equivalentSleepDays} วัน
+                  </div>
+                </div>
               </div>
-
             </div>
 
-            {/* Right: Interactive Phone Preview */}
-            <div className="bg-white shadow-sm rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 flex flex-col justify-between items-center bg-white relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-48 h-48 bg-cyan-500/10 blur-[80px] rounded-full pointer-events-none" />
-
-              <div className="w-full text-center lg:text-left mb-6">
-                <h3 className="font-prompt text-xl sm:text-2xl font-bold text-[#0F172A] mb-1.5 flex items-center justify-center lg:justify-start gap-2.5">
-                  <Smartphone className="w-5 h-5 text-[#0E7490]" />
-                  <span>เครื่องจำลองแจ้งเตือน LINE</span>
-                </h3>
-                <p className="text-xs sm:text-sm font-prompt text-[#64748B]">
-                  จำลองการส่งข้อมูลเช็คชื่อเข้า LINE ของผู้ปกครองแบบ Real-time
-                </p>
-              </div>
-
-              {/* Mobile Phone Mockup */}
-              <div className="relative w-full max-w-[270px] aspect-[9/18] bg-zinc-950 rounded-[38px] border-4 border-zinc-800 p-2 shadow-2xl overflow-hidden flex flex-col justify-between">
-                
-                {/* Dynamic Notification Banner */}
-                <AnimatePresence>
-                  {showAlert && (
-                    <motion.div
-                      initial={{ y: -60, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -60, opacity: 0 }}
-                      className="absolute top-6 left-2 right-2 bg-zinc-900/95 backdrop-blur-md rounded-2xl p-2.5 border border-white/10 shadow-lg z-50 flex gap-2.5 items-start"
-                    >
-                      <div className="w-7 h-7 rounded-lg bg-[#06C755] flex items-center justify-center shrink-0">
-                        <Bell className="w-4 h-4 text-white" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex justify-between items-center mb-0.5">
-                          <span className="text-[11px] font-bold font-prompt text-white">AiAon Tech OA</span>
-                          <span className="text-[11px] text-white/40">ตอนนี้</span>
-                        </div>
-                        <p className="text-[11px] font-prompt text-white/80 leading-normal line-clamp-2">
-                          สแกนบัตรสำเร็จ! ส่งแจ้งผลแจ้งเตือนเข้าสมาร์ตโฟนผู้ปกครองเรียบร้อยแล้ว
-                        </p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Status Bar */}
-                <div className="h-5 flex justify-between items-center px-4 text-[11px] text-white/70 font-sans z-10">
-                  <span>08:02</span>
-                  <div className="w-16 h-3 bg-zinc-800 rounded-full absolute left-1/2 -translate-x-1/2 top-1" />
-                  <div className="flex gap-1">
-                    <span>📶</span>
-                    <span>🔋</span>
-                  </div>
-                </div>
-
-                {/* Chat Stream */}
-                <div className="flex-1 bg-zinc-900/90 rounded-[28px] mt-1 mb-2 p-3 overflow-y-auto flex flex-col gap-2 relative">
-                  <div className="text-center my-1">
-                    <span className="text-[11px] bg-black/40 text-white/40 px-2.5 py-0.5 rounded-full font-prompt">
-                      วันนี้
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col gap-2 relative z-10">
-                    {chatMessages.map((msg) => (
-                      <motion.div
-                        key={msg.id}
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{ duration: 0.3 }}
-                        className="bg-zinc-800 border border-white/5 rounded-2xl p-2.5 max-w-[90%] self-start"
-                      >
-                        <p className="text-[11px] font-prompt text-white/90 leading-relaxed">
-                          {msg.text}
-                        </p>
-                        <span className="text-[10px] text-white/35 block text-right mt-1 font-prompt">
-                          {msg.time}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Action Button */}
-                <button
-                  onClick={triggerScan}
-                  disabled={isScanning}
-                  className={`w-full py-2.5 rounded-xl font-prompt font-semibold text-[11px] flex items-center justify-center gap-1.5 transition-all z-10 cursor-pointer ${
-                    isScanning
-                      ? "bg-zinc-800 text-white/50 cursor-wait"
-                      : "bg-cyan-500 hover:bg-cyan-400 text-black shadow-[0_0_12px_rgba(6,182,212,0.3)]"
-                  }`}
-                >
-                  {isScanning ? (
-                    <>
-                      <span className="w-2.5 h-2.5 border border-white/30 border-t-white animate-spin rounded-full inline-block" />
-                      กำลังสแกนบัตร...
-                    </>
-                  ) : (
-                    <>
-                      <span>สแกนการ์ดนักเรียน (จำลอง)</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </>
-                  )}
-                </button>
-              </div>
-
-              <div className="mt-4 text-center">
-                <span className="text-xs text-[#64748B] font-prompt">
-                  * ลองคลิกปุ่มสีฟ้าจำลองด้านบนเพื่อทดสอบการยิงแจ้งเตือน LINE
+            {/* Right: Speaker & Consulting Booking Card */}
+            <div className="lg:col-span-6 rounded-[28px] bg-white border border-[#E2E8F0] shadow-[0_8px_22px_rgba(15,23,42,0.04)] p-6 sm:p-8 flex flex-col justify-between">
+              <div className="space-y-4">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#1D4ED8] text-xs font-bold">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>SPEAKER &amp; CONSULTING</span>
                 </span>
+
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] leading-snug">
+                  เชิญเป็นวิทยากร Workshop AI หรือวางระบบให้องค์กรของคุณ
+                </h2>
+
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  รับเชิญเป็นวิทยากรบรรยายเชิงปฏิบัติการ (Hands-on Workshop) ด้าน Generative AI เพื่อการศึกษา,
+                  การสร้างระบบ Google Apps Script 0-Baht สำหรับสถานศึกษา และการวางระบบ Automation ให้ธุรกิจ SME
+                </p>
+
+                <ul className="space-y-2 text-xs sm:text-sm text-[#334155]">
+                  {[
+                    "Workshop ปฏิบัติจริง ได้ระบบกลับไปใช้ในโรงเรียนทันที",
+                    "ให้คำปรึกษาออกแบบระบบ Custom Enterprise เฉพาะองค์กร",
+                    "ออกหนังสือเชิญวิทยากรและเอกสารเบิกจ่ายได้ตามระเบียบราชการ",
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
 
-          </div>
-        </section>
-
-        {/* ============================================================
-           SECTION 7: SPEAKER & CONSULTATION BOOKING BANNER
-        ============================================================ */}
-        <section className="pt-4">
-          <div className="rounded-3xl p-8 sm:p-12 relative overflow-hidden bg-white border border-cyan-300 shadow-sm text-center">
-            <div className="max-w-3xl mx-auto space-y-5">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-300 text-[#0E7490] text-xs font-bold tracking-wide">
-                <Sparkles className="w-4 h-4 text-[#0E7490]" />
-                <span>SPEAKER &amp; CONSULTING • เชิญเป็นวิทยากร &amp; ปรึกษางานระบบ</span>
-              </span>
-
-              <h2 className="font-prompt text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
-                พร้อมยกระดับองค์กรและการศึกษาด้วยพลัง AI แล้วหรือยัง?
-              </h2>
-
-              <p className="font-prompt text-[#475569] text-sm sm:text-base leading-relaxed">
-                ครูอ้นยินดีรับเชิญเป็นวิทยากรบรรยาย อบรมเชิงปฏิบัติการ (Workshop) การประยุกต์ใช้ AI ในโรงเรียน, การสร้างระบบ Automation ด้วย Google Apps Script หรือการวางสถาปัตยกรรมระบบสำหรับธุรกิจ SME
-              </p>
-
-              <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+              <div className="pt-6 flex flex-wrap gap-3">
                 <a
                   href={getLineOrderUrl(
                     "สวัสดีครับครูอ้น สนใจติดต่อเชิญเป็นวิทยากรบรรยาย / ปรึกษาระบบสำหรับองค์กรครับ 🙏"
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-prompt inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-linear-to-r from-cyan-400 to-teal-400 hover:from-cyan-300 hover:to-teal-300 text-zinc-950 font-extrabold text-sm sm:text-base shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all hover:scale-102"
+                  className="min-h-[46px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-extrabold text-sm transition shadow-xs"
                 >
                   <Send className="w-4 h-4" />
-                  <span>ส่งข้อความนัดหมายผ่าน LINE OA ทันที</span>
+                  <span>นัดหมายผ่าน LINE OA</span>
                 </a>
+                <Link
+                  href="/services"
+                  className="min-h-[46px] inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-[#F8FAFC] hover:bg-[#EFF6FF] border border-[#E2E8F0] text-[#0F172A] font-bold text-sm transition"
+                >
+                  <span>ดูบริการองค์กร</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           </div>
         </section>
-
       </div>
 
-      {/* ============================================================
-         CERTIFICATE LIGHTBOX MODAL
-      ============================================================ */}
-      {typeof document !== "undefined" && createPortal(
-      <AnimatePresence>
-        {activeCert && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={handleCloseCert}
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md select-none"
-          >
-            <button
-              onClick={handleCloseCert}
-              className="absolute top-4 right-4 z-50 p-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:bg-white/15 transition-all cursor-pointer"
-              aria-label="Close modal"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            {CERTIFICATES.length > 1 && (
-              <>
+      {/* ══════════════════════════════════════════════════════
+          CERTIFICATE LIGHTBOX MODAL
+      ══════════════════════════════════════════════════════ */}
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {activeCert && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedCertIndex(null)}
+                className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 md:p-8 bg-[#0F172A]/90 backdrop-blur-md select-none"
+              >
                 <button
-                  onClick={handlePrevCert}
-                  className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:bg-white/15 transition-all cursor-pointer hidden sm:block"
-                  aria-label="Previous certificate"
+                  type="button"
+                  onClick={() => setSelectedCertIndex(null)}
+                  className="absolute top-4 right-4 z-50 p-3 rounded-full border border-white/15 bg-white/10 text-white hover:bg-white/20 transition cursor-pointer"
+                  aria-label="ปิดหน้าต่าง"
                 >
-                  <ChevronLeft className="w-6 h-6" />
+                  <X className="w-5 h-5" />
                 </button>
-                <button
-                  onClick={handleNextCert}
-                  className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:bg-white/15 transition-all cursor-pointer hidden sm:block"
-                  aria-label="Next certificate"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-              </>
-            )}
 
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ type: "spring", damping: 28, stiffness: 220 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-5xl flex flex-col items-center gap-6"
-            >
-              <div className="relative w-full aspect-[16/10] max-h-[65vh] rounded-2xl overflow-hidden border border-white/15 bg-black/50 flex items-center justify-center">
-                <Image
-                  src={activeCert.imageSrc}
-                  alt={activeCert.title}
-                  fill
-                  className="object-contain p-2"
-                  sizes="(max-width: 1280px) 100vw, 1280px"
-                  priority
-                />
-              </div>
-
-              <div className="w-full max-w-3xl text-center px-4 space-y-3">
-                <span
-                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-prompt font-semibold border shadow-xs ${activeCert.categoryColor}`}
-                >
-                  <BadgeCheck className="w-3.5 h-3.5" />
-                  {activeCert.category}
-                </span>
-
-                <h3 className="font-prompt text-lg md:text-2xl font-bold text-white tracking-tight leading-snug">
-                  {activeCert.title}
-                </h3>
-
-                <p className="text-sm md:text-base font-prompt text-white/70">
-                  {activeCert.issuer}
-                </p>
-
-                <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pt-2 border-t border-white/10 text-xs md:text-sm font-prompt text-white/50">
-                  <div className="flex items-center gap-1.5">
-                    <Calendar className="w-4 h-4 text-amber-400/80 shrink-0" />
-                    <span>Issue Date:</span>
-                    <span className="text-white/80 font-medium">{activeCert.issueDate}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Hash className="w-4 h-4 text-purple-400/80 shrink-0" />
-                    <span>Credential ID:</span>
-                    <span className="text-purple-300 font-mono font-semibold">
-                      {activeCert.credentialId}
-                    </span>
-                  </div>
-                  {activeCert.verifyUrl && (
-                    <a
-                      href={activeCert.verifyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                {CERTIFICATES.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={handlePrevCert}
+                      className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full border border-white/15 bg-white/10 text-white hover:bg-white/20 transition cursor-pointer hidden sm:block"
+                      aria-label="ใบรับรองก่อนหน้า"
                     >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                      Verify Certificate
-                    </a>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNextCert}
+                      className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full border border-white/15 bg-white/10 text-white hover:bg-white/20 transition cursor-pointer hidden sm:block"
+                      aria-label="ใบรับรองถัดไป"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </>
+                )}
+
+                <motion.div
+                  initial={{ scale: 0.96, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.96, opacity: 0 }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative w-full max-w-4xl flex flex-col items-center gap-5"
+                >
+                  <div className="relative w-full aspect-[16/10] max-h-[65vh] rounded-2xl overflow-hidden border border-white/15 bg-white/5">
+                    <Image
+                      src={activeCert.imageSrc}
+                      alt={activeCert.title}
+                      fill
+                      className="object-contain p-2"
+                      sizes="(max-width: 1280px) 100vw, 1024px"
+                      priority
+                    />
+                  </div>
+
+                  <div className="text-center space-y-2 text-white px-4">
+                    <h3 className="text-lg sm:text-xl font-bold">{activeCert.title}</h3>
+                    <p className="text-sm text-white/75">
+                      {activeCert.issuer} • ออกเมื่อ {activeCert.issueDate} • ID:{" "}
+                      <span className="font-mono">{activeCert.credentialId}</span>
+                    </p>
+                    {activeCert.verifyUrl && (
+                      <a
+                        href={activeCert.verifyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-sky-300 hover:text-sky-200 underline underline-offset-4"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>ตรวจสอบใบรับรองออนไลน์</span>
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>,
-      document.body
-      )}
     </div>
   );
 }

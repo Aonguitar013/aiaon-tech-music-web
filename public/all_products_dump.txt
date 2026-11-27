@@ -1,0 +1,59 @@
+AIC01 | [AIC01] ระบบ AI Caretaker 24/7 Self-Healing Watchdog & แอดมินร้านค้าอัจฉริยะ | 
+AIC02 | [AIC02] ระบบดูดและคัดกรองคอมเมนต์สร้างสรรค์ Omnichannel Comment Harvester | 
+AONA01 | [AONA01] - ระบบทำเนียบและแผนภูมิบุคลากร (AiAon Tech) | 
+AONA02 | [AONA02] - ระบบสารสนเทศยานพาหนะโรงเรียน (AiAon Tech) | 
+AONA03 | [AONA03] - ระบบออกเกียรติบัตร & ตรวจสอบ QR (AiAon Tech) | 
+AONA04 | [AONA04] - ระบบสมุดโทรศัพท์ & ทรัพย์สินครู (AiAon Tech) | 
+AONA05 | [AONA05] - ระบบยืม-คืนอุปกรณ์ & ห้องปฏิบัติการ (AiAon Tech) | 
+AONA06 | [AONA06] - ระบบบันทึกและติดตามการลาครู (AiAon Tech) | 
+AONA07 | [AONA07] - ระบบจัดการเอกสารประเมินและ SAR อัตโนมัติ (AiAon Tech) | 
+AONA08 | [AONA08] - ระบบรวมผลงานครู & แฟ้มสะสมงานดิจิทัล E-Portfolio (Teacher-Portfolio-Vault) | 
+AONE01 | [AONE01] - ระบบเช็คชื่อ & แจ้งเตือน LINE V2 (AiAon Tech) | 
+AONE02 | [AONE02] - ระบบส่งงานและรายงานการสอน (AiAon Tech) | 
+AONE03 | [AONE03] - ระบบตรวจวินัย & เครื่องแบบนักเรียน (AiAon Tech) | 
+AONE04 | [AONE04] - ระบบเช็คชื่อและสถิติเข้าเรียน V1 (AiAon Tech) | 
+AONE05 | [AONE05] - ระบบบันทึกพฤติกรรม & ตัดคะแนน (AiAon Tech) | 
+AONE06 | [AONE06] - ระบบวิเคราะห์คะแนนสอบ & ตัดเกรด ม.4 (AiAon Tech) | 
+AONE07 | [AONE07] - ระบบวิเคราะห์คะแนนสอบ & ตัดเกรด ม.3 (AiAon Tech) | 
+AONE08 | [AONE08] - ระบบใบขออนุญาตผู้ปกครองดิจิทัล (AiAon Tech) | 
+AONE09 | [AONE09] - ระบบรายงานห้องเรียนสีขาว & คะแนนเก็บ (AiAon Tech) | 
+AONE10 | [AONE10] - ระบบฝึกจำหน้านักเรียน 3D Flashcard (AiAon Tech) | 
+AONE11 | [AONE11] - ระบบคิวสอบปฏิบัติดนตรี & บันทึกเสียง (AiAon Tech) | 
+AONE12 | [AONE12] - ระบบเช็คชื่อเผชิญเหตุฉุกเฉิน & Active Shooter (AiAon Tech) | 
+AONM01 | [AONM01] - ระบบทะเบียน & ทำเนียบลูกเสือ (AiAon Tech) | 
+AONM02 | [AONM02] - ระบบตรวจระเบียบแถวลูกเสือ (AiAon Tech) | 
+AONM03 | [AONM03] - ระบบจองห้องซ้อมดนตรี & ยืมเครื่องดนตรี (AiAon Tech) | 
+PREP01 | [PREP01] ระบบบอทติวสอบครูผู้ช่วย Telegram & คลังข้อสอบ AiAon Prep | 
+STU01 | [STU01] - เว็บ Portfolio TCAS 3D สำหรับนักเรียน (AiAon Tech) | 
+STU02 | [STU02] - ระบบเช็คการบ้าน & งานค้างประจำห้อง (AiAon Tech) | 
+STU03 | [STU03] - คัมภีร์ AI Prompts ลับสำหรับนักเรียน (AiAon Tech) | 
+SYS01 | [SYS01] - ระบบบันทึกการเยี่ยมบ้านดิจิทัล & GPS (HomeVisit-SmartDoc) | 
+SYS02 | [SYS02] - ระบบคำนวณคะแนน ปพ.5 & GPAX อัตโนมัติ (Smart-Gradebook-Paph5) | 
+SYS03 | [SYS03] - ระบบสร้างแผนการสอน Active Learning & วิจัยชั้นเรียน AI (AI-LessonPlan-CAR) | 
+SYS04 | [SYS04] - ระบบจัดการเอกสาร & E-Portfolio ว.PA ดิจิทัล (PA-Digital-Portfolio) | 
+SYS05 | [SYS05] - ระบบคลังข้อสอบ & Test Blueprint อัจฉริยะ (ExamBank-Blueprint-Gen) | 
+SYS06 | [SYS06] - ระบบสารบรรณอิเล็กทรอนิกส์ & รับส่งหนังสือราชการ (Smart-E-Saraban) | 
+SYS07 | [SYS07] - ระบบเช็คชื่อเข้าแถว & โฮมรูมแจ้งเตือน LINE (Smart-Homeroom-Attendance) | 
+SYS08 | [SYS08] - ระบบบริหารอาหารกลางวัน & สารอาหารนักเรียน (School-Lunch-Nutrition) | 
+SYS09 | [SYS09] - ระบบคัดกรอง SDQ & ดูแลช่วยเหลือนักเรียน (SDQ-Student-Care) | 
+SYS10 | [SYS10] - ระบบบันทึกเวรประจำวัน & ตรวจตราความปลอดภัย (School-Guard-Duty-Log) | 
+SYS11 | [SYS11] - ระบบบันทึก PLC & ชุมชนแห่งการเรียนรู้ทางวิชาชีพ (PLC-Professional-Learning-Community) | 
+SYS12 | [SYS12] - ระบบลงทะเบียนกิจกรรมชุมนุม & กิจกรรมพัฒนาผู้เรียน (Club-Activity-Registration) | 
+SYS13 | [SYS13] - ระบบส่งและตรวจแผนการจัดการเรียนรู้ออนไลน์ (LessonPlan-Review-Workflow) | 
+SYS14 | [SYS14] - ระบบจัดการทุนการศึกษา & ปัจจัยพื้นฐานนักเรียนยากจน (CCT-Scholarship-Management) | 
+SYS15 | [SYS15] - ระบบนิเทศการสอน & Coaching ภายในสถานศึกษา (Internal-Supervision-Evaluation) | 
+SYS16 | [SYS16] - ระบบบริหารจัดการห้องพยาบาล & จ่ายยาโรงเรียน (School-Infirmary-Health-Tracker) | 
+SYS17 | [SYS17] - ระบบขออนุมัติไปราชการ & เบิกจ่ายค่าเดินทาง (Official-Travel-Permit-Expenses) | 
+SYS18 | [SYS18] - ระบบส่งเสริมคุณธรรม จริยธรรม & ธนาคารความดี (Student-Virtue-Bank) | 
+SYS19 | [SYS19] - ระบบจองห้องปฏิบัติการ สื่อ ICT & อุปกรณ์โสตทัศนูปกรณ์ (Smart-AV-Lab-Booking) | 
+SYS20 | [SYS20] - ระบบวิเคราะห์และสังเคราะห์รายงานประจำปี SAR โรงเรียน (School-SAR-Annual-Report) | 
+SYS21 | [SYS21] - ระบบคัดกรองการอ่านออกเขียนได้ & วินิจฉัยภาษาไทย (Thai-Literacy-Diagnostic-Tracker) | 
+SYS22 | [SYS22] - ระบบสถิติจราจร & บัตรอนุญาตเข้า-ออกโรงเรียนดิจิทัล (School-Gate-Pass-Traffic) | 
+SYS23 | [SYS23] - ระบบทะเบียนพัสดุครุภัณฑ์ & ตรวจนับสต็อกประจำปี (Smart-School-Asset-Inventory) | 
+SYS24 | [SYS24] - ระบบส่งผลงานเข้าประกวด & รางวัลเชิดชูเกียรติครูและนักเรียน (Teacher-Student-Award-Vault) | 
+SYS25 | [SYS25] - ระบบเลือกตั้งสภานักเรียนออนไลน์ & ถ่ายทอดสดนับคะแนน (Student-Council-E-Voting) | 
+SYS26 | [SYS26] - ระบบบริหารงบประมาณโครงการตามแผนปฏิบัติการประจำปี (School-Project-Budget-Tracker) | 
+SYS27 | [SYS27] - ระบบจัดตารางเวรทำความสะอาด & ตรวจความสะอาดเขตพื้นที่ (Classroom-Cleaning-Duty-Inspector) | 
+SYS28 | [SYS28] - ระบบส่งเสริมการอ่าน & สถิติยืม-คืนห้องสมุดอัจฉริยะ (Smart-Library-Reading-Pass) | 
+SYS29 | [SYS29] - ระบบเทียบโอนหน่วยกิต & งานทะเบียนวัดผลนักเรียน (Credit-Transfer-Registration) | 
+SYS30 | [SYS30] - ระบบวิเคราะห์ข้อมูลสารสนเทศโรงเรียน Big Data สพฐ. (School-Executive-BigData-Dashboard) | 

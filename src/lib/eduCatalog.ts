@@ -6,7 +6,7 @@ export interface EduSkuItem {
   sku: string;
   slug: string;
   status: "live" | "coming_soon";
-  accent: "amber" | "rose" | "pink" | "fuchsia" | "teal" | "indigo";
+  accent: "amber" | "rose" | "pink" | "fuchsia" | "teal" | "indigo" | "sky";
   characterNameTh: string;
   characterNameEn: string;
   titleTh: string;
@@ -190,6 +190,114 @@ export const EDU_CATALOG: EduSkuItem[] = [
     priceClassUsd: "$9.99",
     badgeTh: "พร้อมใช้งาน • ผสมสี & หายใจ 4-4-4",
     badgeEn: "Live Now • Color Mixer & SEL",
+  },
+  {
+    sku: "EDU-SN01",
+    slug: "sn01",
+    status: "live",
+    accent: "sky",
+    characterNameTh: "น้องแซลมอน × น้องบ๊อบ × แม่ใหญ่",
+    characterNameEn: "Salmon, Bob & Mama Mami",
+    titleTh: "ติวเข้มสอบเข้า ป.1 กับแก๊ง 6 แมว — Level 2",
+    titleEn: "Grade 1 Entrance & Readiness Exam Prep — Level 2",
+    subtitleTh:
+      "ครบ 4 วิชาสอบเข้า ป.1 (คณิต, เชาวน์-บล็อก 3D, ภาษา, รอบตัว) + Mock Exam 20 ข้อ & OMR + เสียงอ่านโจทย์ QR (32 หน้าเต็ม)",
+    subtitleEn:
+      "4 Core Readiness Domains (Math, 3D Spatial IQ, Reading, Science) + Timed 20-Item Mock Exam + Audio Exam Simulator (32 Pages)",
+    ageRangeTh: "อายุ 5–7 ปี • Level 2 (อ.3 – เตรียม ป.1)",
+    ageRangeEn: "Ages 5–7 • Level 2 (Pre-1st Grade)",
+    pages: 32,
+    heroImage: "/edu/salmon-3d.webp",
+    coverImage: "/edu/sn01/mockup-01-cover.webp",
+    freebieThUrl: "/edu/sn01/EDU-SN01_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/sn01/EDU-SN01_Freebie_5Pages_EN.pdf",
+    priceHomeThb: 129,
+    priceHomeUsd: "$5.99",
+    priceClassThb: 249,
+    priceClassUsd: "$8.99",
+    badgeTh: "NEW Level 2 • Audio Exam 20 ข้อ",
+    badgeEn: "NEW Level 2 • 20-Q Audio Exam",
+  },
+  {
+    sku: "EDU-ST01",
+    slug: "st01",
+    status: "live",
+    accent: "indigo",
+    characterNameTh: "น้องดำ × แม่ใหญ่ (Book 1)",
+    characterNameEn: "Midnight & Mama Mami (Book 1)",
+    titleTh: "นิทานก่อนนอน: คืนที่ก้อนเมฆสีเทาหายไป",
+    titleEn: "Bedtime Storybook: The Night the Gray Cloud Melted Away",
+    subtitleTh:
+      "นิทานภาพสีน้ำ 16 หน้า (ชุดนิทานพลังใจแก๊ง 6 แมว เล่มที่ 1) สอนลูกคุมอารมณ์ก่อนนอนด้วยหายใจ 4-4-4 + เว็บเสียงเล่านิทาน TH/EN!",
+    subtitleEn:
+      "16-Page Full-Color Watercolor Bedtime SEL Storybook (The 6 Cats Gentle Heart Series, Book 1) + Free Audio Read-Aloud App!",
+    ageRangeTh: "อายุ 3–6 ปี • นิทานก่อนนอน SEL",
+    ageRangeEn: "Ages 3–6 • Bedtime SEL Storybook",
+    pages: 16,
+    heroImage: "/edu/midnight-3d.webp",
+    coverImage: "/edu/st01/mockup-01-cover.webp",
+    freebieThUrl: "/edu/st01/EDU-ST01_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/st01/EDU-ST01_Freebie_5Pages_EN.pdf",
+    priceHomeThb: 79,
+    priceHomeUsd: "$3.99",
+    priceClassThb: 159,
+    priceClassUsd: "$6.99",
+    badgeTh: "NEW นิทานภาพ • Audio Story",
+    badgeEn: "NEW Storybook • Audio Read-Aloud",
+  },
+  {
+    sku: "EDU-ST02",
+    slug: "st02",
+    status: "live",
+    accent: "pink",
+    characterNameTh: "น้องชาบู × แม่ใหญ่ (Book 2)",
+    characterNameEn: "Shabu & Mama Mami (Book 2)",
+    titleTh: "นิทานก่อนนอน: ภารกิจปราบแมงกินฟันของน้องชาบู",
+    titleEn: "Bedtime Storybook: Shabu's Sparkle-Tooth Mission",
+    subtitleTh:
+      "นิทานภาพสีน้ำ 16 หน้า (ชุดนิทานพลังใจแก๊ง 6 แมว เล่มที่ 2) เปลี่ยนการบังคับแปรงฟันเป็นเกมกัปตัน 3 ด่าน 2 นาที + เสียงเล่านิทาน TH/EN!",
+    subtitleEn:
+      "16-Page Full-Color Watercolor Brushing Storybook (The 6 Cats Gentle Heart Series, Book 2) + Free 2-Min Brush Timer & Audio App!",
+    ageRangeTh: "อายุ 3–6 ปี • นิทานวินัยแปรงฟัน",
+    ageRangeEn: "Ages 3–6 • Happy Brushing Storybook",
+    pages: 16,
+    heroImage: "/edu/shabu-3d.webp",
+    coverImage: "/edu/st02/mockup-01-cover.webp",
+    freebieThUrl: "/edu/st02/EDU-ST02_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/st02/EDU-ST02_Freebie_5Pages_EN.pdf",
+    priceHomeThb: 79,
+    priceHomeUsd: "$3.99",
+    priceClassThb: 159,
+    priceClassUsd: "$6.99",
+    badgeTh: "NEW เล่ม 2 • นาฬิกาแปรงฟัน 2 นาที",
+    badgeEn: "NEW Book 2 • 2-Min Brush Timer",
+  },
+  {
+    sku: "EDU-ST03",
+    slug: "st03",
+    status: "live",
+    accent: "rose",
+    characterNameTh: "แม่ใหญ่ × ชาบู × แซลมอน (Book 3)",
+    characterNameEn: "Mama Mami, Shabu & Salmon (Book 3)",
+    titleTh: "นิทานสร้างวินัยเช้า: เช้าวันใหม่ใจเย็นของแม่ใหญ่",
+    titleEn: "Routine Storybook: Mama Mami's Calm Morning Magic",
+    subtitleTh:
+      "นิทานภาพสีน้ำ 16 หน้า (ชุดนิทานพลังใจแก๊ง 6 แมว เล่มที่ 3) เปลี่ยนเช้าสุดวุ่นและเสียงบ่นเป็นเกมกิจวัตร 3 ก้าว + ขวดโหลดาวทอง & นาฬิกา 4 โหมด!",
+    subtitleEn:
+      "16-Page Full-Color Watercolor Morning Routine Storybook (The 6 Cats Gentle Heart Series, Book 3) + Free Audio Story & 4-Mode Routine Timer!",
+    ageRangeTh: "อายุ 3–6 ปี • นิทานกิจวัตรเช้า & เก็บของเล่น",
+    ageRangeEn: "Ages 3–6 • Calm Morning & Tidy-Up Storybook",
+    pages: 16,
+    heroImage: "/edu/mami-3d.webp",
+    coverImage: "/edu/st03/mockup-01-cover.webp",
+    freebieThUrl: "/edu/st03/EDU-ST03_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/st03/EDU-ST03_Freebie_5Pages_EN.pdf",
+    priceHomeThb: 79,
+    priceHomeUsd: "$3.99",
+    priceClassThb: 159,
+    priceClassUsd: "$6.99",
+    badgeTh: "NEW เล่ม 3 • นาฬิกากิจวัตร 4 โหมด",
+    badgeEn: "NEW Book 3 • 4-Mode Routine Timer",
   },
 ];
 

@@ -24,7 +24,16 @@ import { FaLine } from "react-icons/fa6";
 import { EDU_CATALOG, getEduOrderLineUrl } from "@/lib/eduCatalog";
 
 type AudienceMode = "home" | "class";
-type GoalFilterId = "all" | "bb01" | "rt01" | "ef01" | "mu01" | "vl01" | "ac01";
+type GoalFilterId =
+  | "all"
+  | "st01"
+  | "sn01"
+  | "bb01"
+  | "rt01"
+  | "ef01"
+  | "mu01"
+  | "vl01"
+  | "ac01";
 
 const GOAL_FILTERS: {
   id: GoalFilterId;
@@ -35,10 +44,24 @@ const GOAL_FILTERS: {
 }[] = [
   {
     id: "all",
-    age: "ทุกช่วงวัย 3–6 ปี",
-    goal: "ครบทั้ง 6/6 เล่ม Live!",
+    age: "ทุกช่วงวัย 3–7 ปี",
+    goal: "ครบทั้ง 8 เล่ม Live!",
     emoji: "👑",
-    desc: "แสดงสื่อการสอน Hybrid QR ครบสมบูรณ์ทั้ง 6 ชุดในจักรวาลแก๊ง 6 แมว (192 หน้า)",
+    desc: "แสดงสื่อการสอน & นิทานภาพ Hybrid QR ครบทั้งหมด 8 ชุด (Level 1 ครบ 6 เล่ม + Level 2 ป.1 + นิทานก่อนนอน SEL)",
+  },
+  {
+    id: "st01",
+    age: "นิทาน • 3–6 ปี",
+    goal: "นิทานก่อนนอน SEL / เสียงอ่าน TH-EN",
+    emoji: "📖",
+    desc: "NEW นิทานภาพสีน้ำ 16 หน้า 'คืนที่ก้อนเมฆสีเทาหายไป' (น้องดำ × แม่ใหญ่) + เว็บเสียงเล่านิทาน & หายใจ 4-4-4!",
+  },
+  {
+    id: "sn01",
+    age: "LV2 • 5–7 ปี",
+    goal: "ติวสอบเข้า ป.1 / Mock Exam 20 ข้อ",
+    emoji: "🎓",
+    desc: "NEW Level 2! ครบ 4 วิชาสอบเข้า ป.1 (คณิต, บล็อก 3D, ภาษา, วิทย์) + Mock Exam 20 ข้อ & เว็บอ่านโจทย์ให้ฟัง!",
   },
   {
     id: "ac01",
@@ -145,7 +168,7 @@ export function EduHubClient() {
                 />
                 <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-amber-50 px-3 py-1 text-xs font-bold text-amber-900">
                   <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                  <span>สื่อเด็กเล็ก 3–6 ปี มาตรฐานครูตัวจริง</span>
+                  <span>สื่อเด็กเล็ก 3–7 ปี (LV1 &amp; LV2 เตรียม ป.1) มาตรฐานครูตัวจริง</span>
                 </div>
               </div>
 
@@ -200,7 +223,7 @@ export function EduHubClient() {
                   className="inline-flex items-center gap-1.5 text-amber-800 hover:text-amber-950 underline underline-offset-4"
                 >
                   <Download className="w-4 h-4 text-amber-600" />
-                  <span>ทดลองโหลดฟรีครบ 6 เล่ม รวม 30 หน้า (0 ฿ ไม่ต้องสมัคร)</span>
+                  <span>ทดลองโหลดฟรีครบ 8 เล่ม รวม 40 หน้า (0 ฿ ไม่ต้องสมัคร)</span>
                 </a>
                 <a
                   href="#mega-bundle"
@@ -221,10 +244,10 @@ export function EduHubClient() {
                 />
                 <div className="bg-white/95 backdrop-blur-sm border-t border-amber-100 px-4 py-2.5 flex items-center justify-between gap-2 text-xs">
                   <span className="font-bold text-slate-800">
-                    👑 แก๊ง 6 แมว • 6/6 เล่ม Live ครบสมบูรณ์ (192 หน้า)
+                    👑 8 เล่ม Live (LV1 6 เล่ม + LV2 ป.1 + นิทานภาพ SEL)
                   </span>
                   <span className="rounded-full bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 font-bold text-emerald-800 shrink-0">
-                    ฟรี 30 หน้า!
+                    ฟรี 40 หน้า!
                   </span>
                 </div>
               </div>
@@ -329,12 +352,12 @@ export function EduHubClient() {
                 onClick={() => setSelectedGoal("all")}
                 className="text-xs sm:text-sm font-bold text-rose-700 hover:text-rose-900 underline underline-offset-4 cursor-pointer"
               >
-                ล้างตัวกรอง (แสดงครบทั้ง 4 เล่ม)
+                ล้างตัวกรอง (แสดงครบทั้ง 7 เล่ม)
               </button>
             )}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
             {GOAL_FILTERS.map((g) => {
               const active = selectedGoal === g.id;
               return (
@@ -388,10 +411,10 @@ export function EduHubClient() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E293B]">
-                คลังสื่อการสอนครบจักรวาล 6/6 เล่ม Live (iAon Edu-Verse)
+                คลังสื่อการสอน &amp; นิทานภาพครบ 8 เล่ม Live (iAon Edu-Verse)
               </h2>
               <p className="text-sm text-slate-600 mt-1">
-                คลิกเข้าหน้าแต่ละเล่มเพื่อใช้งานเครื่องมือ Hybrid QR และดาวน์โหลดชุดทดลองฟรี (ครบ 6 เล่ม รวม 30 หน้า!)
+                คลิกเข้าหน้าแต่ละเล่มเพื่อใช้งานเครื่องมือ Hybrid QR และดาวน์โหลดชุดทดลองฟรี (ครบ 8 เล่ม รวม 40 หน้า!)
               </p>
             </div>
 
@@ -439,7 +462,9 @@ export function EduHubClient() {
                         ? "border-teal-200 bg-white hover:border-teal-400"
                         : item.accent === "indigo"
                           ? "border-indigo-200 bg-white hover:border-indigo-400"
-                          : "border-purple-200 bg-white hover:border-purple-400";
+                          : item.accent === "sky"
+                            ? "border-sky-300 bg-white hover:border-sky-500"
+                            : "border-purple-200 bg-white hover:border-purple-400";
 
               const topTint =
                 item.accent === "amber"
@@ -452,7 +477,9 @@ export function EduHubClient() {
                         ? "bg-[#F0FDFA] border-teal-100"
                         : item.accent === "indigo"
                           ? "bg-[#EEF2FF] border-indigo-100"
-                          : "bg-purple-50/70 border-purple-100";
+                          : item.accent === "sky"
+                            ? "bg-[#F0F9FF] border-sky-200"
+                            : "bg-purple-50/70 border-purple-100";
 
               const ringAccent =
                 item.accent === "amber"
@@ -465,7 +492,9 @@ export function EduHubClient() {
                         ? "ring-teal-500"
                         : item.accent === "indigo"
                           ? "ring-indigo-500"
-                          : "ring-purple-400";
+                          : item.accent === "sky"
+                            ? "ring-sky-500"
+                            : "ring-purple-400";
 
               const ctaBg =
                 item.accent === "rose"
@@ -476,9 +505,11 @@ export function EduHubClient() {
                       ? "bg-teal-600 hover:bg-teal-700 text-white"
                       : item.accent === "indigo"
                         ? "bg-indigo-600 hover:bg-indigo-700 text-white"
-                        : item.accent === "fuchsia"
-                          ? "bg-purple-600 hover:bg-purple-700 text-white"
-                          : "bg-amber-400 hover:bg-amber-500 text-slate-950";
+                        : item.accent === "sky"
+                          ? "bg-sky-700 hover:bg-sky-800 text-white"
+                          : item.accent === "fuchsia"
+                            ? "bg-purple-600 hover:bg-purple-700 text-white"
+                            : "bg-amber-400 hover:bg-amber-500 text-slate-950";
 
               const activePrice =
                 audience === "home" ? item.priceHomeThb : item.priceClassThb;

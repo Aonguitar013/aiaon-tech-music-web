@@ -3,30 +3,34 @@ import { AboutMasterView } from "@/components/about/AboutMasterView";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "เกี่ยวกับเรา & รวมช่องทางทางการ | AiAon Tech x Music (ครูอ้น)",
+  title: "เกี่ยวกับเรา & Brand Kit V2.0 | AiAon (ครูอ้น จิรวัฒน์ เดชเส้ง)",
   description:
-    "ประวัติ นวัตกรรม Smart School Automation, AI Caretaker และศูนย์รวมทุกช่องทางโซเชียลมีเดีย พร้อมหน้าร้านอุปกรณ์ไอทีของแท้ 3 แพลตฟอร์ม โดย ครูอ้น (จิรวัฒน์ เดชเส้ง) โรงเรียนหาดใหญ่วิทยาลัย",
+    "เรื่องราวและปรัชญา Creative Laziness ของครูอ้น จิรวัฒน์ เดชเส้ง ผู้ก่อตั้ง AiAon ครบทั้ง 4 เสาหลัก (Tech, Edu-Verse, Audio, Studio) พร้อมดาวน์โหลด Brand Kit V2.0, ใบรับรอง AI และช่องทางทางการทั้งหมด",
   keywords: [
     "เกี่ยวกับเรา",
     "ครูอ้น",
     "จิรวัฒน์ เดชเส้ง",
     "โรงเรียนหาดใหญ่วิทยาลัย",
-    "ไอทีง่ายๆ สไตล์ iAon",
-    "iAonTech",
-    "AI Caretaker",
+    "AiAon",
+    "AiAon Tech",
+    "AiAon Edu-Verse",
+    "AiAon Audio",
+    "AiAon Studio",
+    "Brand Kit V2.0",
     "Smart School Automation",
-    "TikTok Shop iAonTech",
-    "Shopee iAonTech",
-    "Lazada iAonTech",
   ],
   openGraph: {
-    title: "เกี่ยวกับเรา & รวมช่องทางทางการ | AiAon Tech x Music (ครูอ้น)",
+    title: "The Story of AiAon | ครูอ้น จิรวัฒน์ เดชเส้ง",
     description:
-      "เมื่อคนขี้เกียจทำงานเอกสาร เสกโค้ดให้คอมทำงานแทน! รวมประวัติ ช่องทางทางการ 7 ช่องทาง และหน้าร้านอุปกรณ์ไอทีครูอ้นในหน้าเดียว",
+      "เมื่อคนขี้เกียจทำงานเอกสาร เสกโค้ดให้คอมทำงานแทน — Teacher · Musician · Maker ผู้ก่อตั้งระบบนิเวศ AiAon 4 เสาหลัก",
     type: "website",
   },
 };
 
 export default function AboutPage() {
-  return <PillarThemeWrapper pillar="tech"><AboutMasterView /></PillarThemeWrapper>;
+  return (
+    <PillarThemeWrapper pillar="about">
+      <AboutMasterView />
+    </PillarThemeWrapper>
+  );
 }
