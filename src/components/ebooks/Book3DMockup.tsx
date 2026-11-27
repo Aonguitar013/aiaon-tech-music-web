@@ -308,99 +308,95 @@ export function Book3DMockup({
           }}
         />
 
-        {/* ── 1. BACK-LEFT: 3D HARDCOVER BOOK WITH TOP PAGE EDGES + THICK LEFT SPINE ── */}
+        {/* ── 1. BACK-LEFT: 3D HARDCOVER BOOK WITH SEAMLESS TOP PAGE EDGES + THICK LEFT SPINE ── */}
         <div
           className="relative transition-all duration-500 ease-out transform-gpu"
           style={{
+            width: `${dims.spineW + dims.bookW}px`,
+            height: `${dims.topPageH + dims.bookH}px`,
             marginRight: `${Math.round(dims.tabletW * 0.48)}px`,
             transform: isHovered
-              ? "translateY(-4px) translateX(-3px) rotateY(4deg)"
-              : "translateY(0px) rotateY(8deg)",
-            transformStyle: "preserve-3d",
+              ? "translateY(-4px) translateX(-3px)"
+              : "translateY(0px)",
             filter: "drop-shadow(-10px 12px 14px rgba(15,23,42,0.18))",
           }}
         >
-          {/* 3D Angled Top Pages Edge (Visible crisp white paper block above cover) */}
+          {/* Seamless 3D Top Pages Parallelogram (Connects Spine Top-Left to Cover Top-Right with 0 Overhang) */}
           <div
             aria-hidden="true"
-            className="relative z-10 overflow-hidden"
+            className="absolute top-0 left-0 z-10 overflow-hidden"
             style={{
-              width: `${dims.bookW + 2}px`,
-              height: `${dims.topPageH}px`,
-              marginLeft: `${dims.spineW - 2}px`,
-              marginBottom: "-2px",
-              transform: "skewX(-52deg)",
-              transformOrigin: "bottom left",
-              background:
-                "repeating-linear-gradient(0deg, #FFFFFF 0px, #F1F5F9 2px, #E2E8F0 3px, #FFFFFF 4px)",
-              borderTop: `2.5px solid ${theme.spine}`,
-              borderRight: `2px solid ${theme.spine}`,
-              borderLeft: `2px solid ${theme.spine}`,
+              width: `${dims.spineW + dims.bookW}px`,
+              height: `${dims.topPageH + 1}px`,
+              clipPath: `polygon(0% 0%, calc(100% - ${dims.spineW}px) 0%, 100% 100%, ${dims.spineW}px 100%)`,
+              background: `linear-gradient(180deg, ${theme.spine} 0px, ${theme.spine} 2px, #F8FAFC 2.5px, #E2E8F0 5px, #FFFFFF 7.5px, #E2E8F0 10px, #CBD5E1 100%)`,
               boxShadow: "inset 0 -2px 4px rgba(15,23,42,0.12)",
             }}
           />
 
-          {/* Spine + Front Cover Row */}
-          <div className="relative flex items-stretch">
-            {/* Thick Visible Left Spine */}
+          {/* Thick Visible Left Spine (Top-Left at y=0, Top-Right at y=topPageH) */}
+          <div
+            className="absolute left-0 z-20 flex flex-col justify-between items-center py-2.5 text-white/95 overflow-hidden"
+            style={{
+              top: `${dims.topPageH}px`,
+              width: `${dims.spineW}px`,
+              height: `${dims.bookH}px`,
+              background: `linear-gradient(90deg, ${theme.spine} 0%, #0F172A 100%)`,
+              boxShadow:
+                "inset -2px 0 6px rgba(0,0,0,0.38), inset 1.5px 0 2px rgba(255,255,255,0.22)",
+              transform: `skewY(${Math.round((Math.atan(dims.topPageH / dims.spineW) * 180) / Math.PI)}deg)`,
+              transformOrigin: "right top",
+              borderTopLeftRadius: "2px",
+              borderBottomLeftRadius: "3px",
+            }}
+          >
+            <span className="text-[5.5px] font-bold tracking-wider text-amber-300">
+              AiAon
+            </span>
             <div
-              className="relative flex flex-col justify-between items-center py-2.5 text-white/95 rounded-l-[3px] shrink-0 overflow-hidden z-20"
+              className="text-[6.5px] sm:text-[7.5px] font-bold tracking-wider text-white/90 whitespace-nowrap overflow-hidden text-ellipsis max-w-[115px]"
               style={{
-                width: `${dims.spineW}px`,
-                height: `${dims.bookH}px`,
-                background: `linear-gradient(90deg, ${theme.spine} 0%, #0F172A 100%)`,
-                boxShadow:
-                  "inset -2px 0 6px rgba(0,0,0,0.38), inset 1.5px 0 2px rgba(255,255,255,0.22)",
-                transform: "skewY(6deg)",
-                transformOrigin: "right bottom",
+                writingMode: "vertical-rl",
+                transform: "rotate(180deg)",
               }}
             >
-              <span className="text-[5.5px] font-bold tracking-wider text-amber-300">
-                AiAon
-              </span>
-              <div
-                className="text-[6.5px] sm:text-[7.5px] font-bold tracking-wider text-white/90 whitespace-nowrap overflow-hidden text-ellipsis max-w-[115px]"
-                style={{
-                  writingMode: "vertical-rl",
-                  transform: "rotate(180deg)",
-                }}
-              >
-                {code} • {title}
-              </div>
-              <span className="text-[5.5px] font-mono text-white/65">#{rank}</span>
+              {code} • {title}
             </div>
+            <span className="text-[5.5px] font-mono text-white/65">#{rank}</span>
+          </div>
 
-            {/* Front Hardcover Face */}
-            <div
-              className="relative rounded-r-[3px] overflow-hidden bg-white border border-slate-300/75 z-20"
-              style={{
-                width: `${dims.bookW}px`,
-                height: `${dims.bookH}px`,
-                boxShadow:
-                  "inset 2px 0 5px rgba(255,255,255,0.45), 6px 10px 18px rgba(15, 23, 42, 0.16)",
-              }}
-            >
-              {coverImage ? (
-                <img
-                  src={coverImage}
-                  alt={`ปกหนังสือ ${title}`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              ) : (
-                renderEditorialCover()
-              )}
-
-              {/* Spine Crease Lighting */}
-              <div
-                aria-hidden="true"
-                className="absolute left-0 top-0 bottom-0 w-3 pointer-events-none"
-                style={{
-                  background:
-                    "linear-gradient(90deg, rgba(15,23,42,0.25) 0%, rgba(255,255,255,0.24) 45%, transparent 100%)",
-                }}
+          {/* Front Hardcover Face (Sits flush at left=spineW, top=topPageH) */}
+          <div
+            className="absolute z-20 rounded-r-[3px] overflow-hidden bg-white border border-slate-300/75"
+            style={{
+              left: `${dims.spineW}px`,
+              top: `${dims.topPageH}px`,
+              width: `${dims.bookW}px`,
+              height: `${dims.bookH}px`,
+              boxShadow:
+                "inset 2px 0 5px rgba(255,255,255,0.45), 6px 10px 18px rgba(15, 23, 42, 0.16)",
+            }}
+          >
+            {coverImage ? (
+              <img
+                src={coverImage}
+                alt={`ปกหนังสือ ${title}`}
+                className="w-full h-full object-cover"
+                loading="lazy"
               />
-            </div>
+            ) : (
+              renderEditorialCover()
+            )}
+
+            {/* Spine Crease Lighting */}
+            <div
+              aria-hidden="true"
+              className="absolute left-0 top-0 bottom-0 w-3 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(15,23,42,0.25) 0%, rgba(255,255,255,0.24) 45%, transparent 100%)",
+              }}
+            />
           </div>
         </div>
 
