@@ -139,15 +139,194 @@ export function SpotlightTiltCard({
 }
 
 // =========================================================================
-// 4. INFINITE SMOOTH SHOWCASE MARQUEE (15 LIVE EDU-VERSE COVERS)
+// 4. INFINITE SMOOTH SHOWCASE MARQUEE (ALL 4 PILLARS FLAGSHIP PRODUCTS)
 // =========================================================================
+interface FlagshipMarqueeItem {
+  id: string;
+  code: string;
+  pillarTh: string;
+  pillarEn: string;
+  pillarClass: string;
+  titleTh: string;
+  titleEn: string;
+  priceThb: string;
+  priceUsd: string;
+  href: string;
+  image: string;
+  imageBg?: string;
+}
+
 export function LiveShowcaseMarquee() {
   const { lang, t } = useSiteLang();
-  const items = [...EDU_CATALOG, ...EDU_CATALOG];
+
+  const eduBySlug = (slug: string) =>
+    EDU_CATALOG.find((item) => item.slug === slug);
+
+  const FLAGSHIP_ITEMS: FlagshipMarqueeItem[] = [
+    {
+      id: "aona09",
+      code: "AONA09",
+      pillarTh: "AiAon Tech",
+      pillarEn: "AiAon Tech",
+      pillarClass: "bg-blue-600 text-white",
+      titleTh: "ระบบแจ้งซ่อม & Telegram 2 ทาง",
+      titleEn: "Smart Repair & 2-Way Telegram",
+      priceThb: "490฿",
+      priceUsd: "$14.99",
+      href: "/digital-vault",
+      image: "/images/mockups/aona09_repair_telegram_mockup.jpg",
+    },
+    {
+      id: "eb-pa-01",
+      code: "EB-PA-01",
+      pillarTh: "E-Book ครูไทย",
+      pillarEn: "Thai E-Book",
+      pillarClass: "bg-amber-600 text-white",
+      titleTh: "คัมภีร์ ว.PA ผ่านฉลุย 100%",
+      titleEn: "PA Mastery Playbook 100%",
+      priceThb: "290฿",
+      priceUsd: "$8.99",
+      href: "/ebooks",
+      image: "/images/ebooks/eb01_pa_mastery.jpg",
+    },
+    {
+      id: "edu-ef01",
+      code: "EDU-EF01",
+      pillarTh: "Edu-Verse",
+      pillarEn: "Edu-Verse",
+      pillarClass: "bg-rose-600 text-white",
+      titleTh: "นักสืบแซลมอน EF สมองไว",
+      titleEn: "Detective Salmon Brain & EF",
+      priceThb: "99฿",
+      priceUsd: "$4.99",
+      href: "/edu/ef01",
+      image: eduBySlug("ef01")?.coverImage || "/images/ebooks/eb01_pa_mastery.jpg",
+    },
+    {
+      id: "stk-3d",
+      code: "STK-3D",
+      pillarTh: "AiAon Studio",
+      pillarEn: "AiAon Studio",
+      pillarClass: "bg-violet-600 text-white",
+      titleTh: "ปั้นสติกเกอร์ LINE 3D จากรูปจริง",
+      titleEn: "Custom 3D LINE Stickers",
+      priceThb: "390฿",
+      priceUsd: "$11.99",
+      href: "/line-stickers",
+      image: "/images/stickers/set2/main.png",
+      imageBg: "bg-[#FAF8FF]",
+    },
+    {
+      id: "aona10",
+      code: "AONA10",
+      pillarTh: "AiAon Tech",
+      pillarEn: "AiAon Tech",
+      pillarClass: "bg-blue-600 text-white",
+      titleTh: "ระบบตรวจสุขาภิบาล 3 เวลา",
+      titleEn: "3-Time Hygiene QR Matrix",
+      priceThb: "490฿",
+      priceUsd: "$14.99",
+      href: "/digital-vault",
+      image: "/images/mockups/aona10_hygiene_matrix_mockup.jpg",
+    },
+    {
+      id: "eb-ai-02",
+      code: "EB-AI-02",
+      pillarTh: "E-Book ครูไทย",
+      pillarEn: "Thai E-Book",
+      pillarClass: "bg-amber-600 text-white",
+      titleTh: "100 คำสั่ง AI ลับเสกงานครู",
+      titleEn: "100 Secret AI Prompts for Teachers",
+      priceThb: "290฿",
+      priceUsd: "$8.99",
+      href: "/ebooks",
+      image: "/images/ebooks/eb02_ai_prompts.jpg",
+    },
+    {
+      id: "audio-01",
+      code: "AUDIO",
+      pillarTh: "AiAon Audio",
+      pillarEn: "AiAon Audio",
+      pillarClass: "bg-teal-600 text-white",
+      titleTh: "เพลงช่วยจำ & BGM ปลอดลิขสิทธิ์",
+      titleEn: "Royalty-Free BGM & Study Songs",
+      priceThb: "199฿",
+      priceUsd: "$5.99",
+      href: "/music-store",
+      image: "/images/mockups/indie_folk_guitar_cover.png",
+    },
+    {
+      id: "edu-st01",
+      code: "BOXSET-6",
+      pillarTh: "Edu-Verse",
+      pillarEn: "Edu-Verse",
+      pillarClass: "bg-rose-600 text-white",
+      titleTh: "นิทานแก๊ง 6 แมว Season 1 (6 เล่ม)",
+      titleEn: "6 Cats Watercolor Storybooks",
+      priceThb: "349฿",
+      priceUsd: "$11.99",
+      href: "/edu/st01",
+      image: eduBySlug("st01")?.coverImage || "/images/ebooks/eb03_car_research.jpg",
+    },
+    {
+      id: "eb-car-03",
+      code: "EB-CAR-03",
+      pillarTh: "E-Book ครูไทย",
+      pillarEn: "Thai E-Book",
+      pillarClass: "bg-amber-600 text-white",
+      titleTh: "สูตรลับวิจัยในชั้นเรียน 5 บท",
+      titleEn: "Classroom Research (CAR) Guide",
+      priceThb: "250฿",
+      priceUsd: "$7.99",
+      href: "/ebooks",
+      image: "/images/ebooks/eb03_car_research.jpg",
+    },
+    {
+      id: "edu-cb01",
+      code: "EDU-CB01",
+      pillarTh: "Edu-Verse",
+      pillarEn: "Edu-Verse",
+      pillarClass: "bg-rose-600 text-white",
+      titleTh: "สมุดระบายสีแก๊ง 6 แมว (40 หน้า)",
+      titleEn: "6 Cats Bold Coloring Book (40p)",
+      priceThb: "49฿",
+      priceUsd: "$2.99",
+      href: "/edu/cb01",
+      image: eduBySlug("cb01")?.coverImage || "/images/ebooks/eb04_google_sheets.jpg",
+    },
+    {
+      id: "aone01",
+      code: "AONE01",
+      pillarTh: "AiAon Tech",
+      pillarEn: "AiAon Tech",
+      pillarClass: "bg-blue-600 text-white",
+      titleTh: "ระบบเช็กชื่อ & พฤติกรรมนักเรียน",
+      titleEn: "Student Attendance & Behavior OS",
+      priceThb: "490฿",
+      priceUsd: "$14.99",
+      href: "/digital-vault",
+      image: "/images/mockups/admin_dashboard_pro.png",
+    },
+    {
+      id: "edu-fc01",
+      code: "EDU-FC01",
+      pillarTh: "Edu-Verse",
+      pillarEn: "Edu-Verse",
+      pillarClass: "bg-rose-600 text-white",
+      titleTh: "แฟลชการ์ด 2 ภาษา 48 การ์ด + เสียง",
+      titleEn: "48 Bilingual Audio Flashcards",
+      priceThb: "59฿",
+      priceUsd: "$3.49",
+      href: "/edu/fc01",
+      image: eduBySlug("fc01")?.coverImage || "/images/ebooks/eb05_active_learning.jpg",
+    },
+  ];
+
+  const items = [...FLAGSHIP_ITEMS, ...FLAGSHIP_ITEMS];
 
   return (
     <section
-      aria-label={t("คลังสื่อจริง 15 เล่ม Live", "15 Live Edu-Verse Products")}
+      aria-label={t("สินค้าเด่นครบทั้ง 4 เสาหลัก AiAon", "Featured Flagship Products Across All 4 AiAon Pillars")}
       className="py-6 sm:py-8 bg-white border-b border-[#E2E8F0] overflow-hidden"
     >
       <style>{`
@@ -158,7 +337,7 @@ export function LiveShowcaseMarquee() {
         .aiaon-marquee-track {
           display: flex;
           width: max-content;
-          animation: aiaon-marquee 42s linear infinite;
+          animation: aiaon-marquee 40s linear infinite;
         }
         .aiaon-marquee-track:hover {
           animation-play-state: paused;
@@ -167,21 +346,31 @@ export function LiveShowcaseMarquee() {
 
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 mb-4 flex flex-wrap items-center justify-between gap-2">
         <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-slate-600">
-          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-[#2563EB] animate-pulse" />
           <span>
             {t(
-              "LIVE PRODUCT SHELF • คลังผลงานจริง 15 เล่ม พร้อมโหลดฟรี 75 หน้า (ชี้เพื่อหยุด • คลิกเข้าชม)",
-              "LIVE PRODUCT SHELF • 15 Real Teacher-Crafted Kits + 75 Free Sample Pages (Hover to Pause • Click to Explore)"
+              "FLAGSHIP SHOWCASE • สินค้าเด่นครบทั้ง 4 เสาหลัก (ระบบ AI • E-Book • Edu-Verse • Audio • สติกเกอร์ 3D)",
+              "FLAGSHIP SHOWCASE • Featured Hits Across All 4 Pillars (Tech • E-Books • Edu-Verse • Audio • Studio)"
             )}
           </span>
         </div>
-        <Link
-          href="/edu"
-          className="text-xs font-bold text-[#1D4ED8] hover:underline inline-flex items-center gap-1"
-        >
-          <span>{t("ดูครบทั้ง 15 เล่ม", "Explore All 15 Kits")}</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
+        <div className="flex items-center gap-3 text-xs font-bold">
+          <Link
+            href="/digital-vault"
+            className="text-[#1D4ED8] hover:underline inline-flex items-center gap-1"
+          >
+            <span>{t("ดูระบบทั้งหมด", "All Systems")}</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+          <span className="text-slate-300">•</span>
+          <Link
+            href="/edu"
+            className="text-[#B45309] hover:underline inline-flex items-center gap-1"
+          >
+            <span>{t("คลังสื่อ 15 เล่ม", "15 Edu Kits")}</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
       </div>
 
       <div className="relative">
@@ -191,26 +380,31 @@ export function LiveShowcaseMarquee() {
         <div className="aiaon-marquee-track gap-3.5 px-2">
           {items.map((item, idx) => (
             <Link
-              key={`${item.sku}-${idx}`}
-              href={`/edu/${item.slug}`}
-              className="group w-36 sm:w-44 shrink-0 rounded-2xl border border-[#E2E8F0] hover:border-amber-400 bg-[#FFFDF7] p-2 shadow-2xs hover:shadow-md transition-all hover:-translate-y-1"
+              key={`${item.id}-${idx}`}
+              href={item.href}
+              className="group w-40 sm:w-48 shrink-0 rounded-2xl border border-[#E2E8F0] hover:border-[#2563EB]/60 bg-[#FFFDF7] p-2 shadow-2xs hover:shadow-md transition-all hover:-translate-y-1"
             >
-              <div className="aspect-square rounded-xl overflow-hidden bg-white border border-slate-100">
+              <div className={`relative aspect-square rounded-xl overflow-hidden border border-slate-100 ${item.imageBg || "bg-white"}`}>
                 <img
-                  src={item.coverImage}
+                  src={item.image}
                   alt={lang === "en" ? item.titleEn : item.titleTh}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
+                <span
+                  className={`absolute top-2 left-2 px-2 py-0.5 rounded-md text-[9.5px] font-bold shadow-xs ${item.pillarClass}`}
+                >
+                  {lang === "en" ? item.pillarEn : item.pillarTh}
+                </span>
               </div>
               <div className="mt-2 px-1">
                 <div className="flex items-center justify-between text-[10px] font-mono font-bold text-slate-500">
-                  <span>{item.sku}</span>
-                  <span className="text-amber-700">
-                    {lang === "en" ? item.priceHomeUsd : `${item.priceHomeThb}฿`}
+                  <span>{item.code}</span>
+                  <span className="text-[#0F172A] font-extrabold">
+                    {lang === "en" ? item.priceUsd : item.priceThb}
                   </span>
                 </div>
                 <div className="text-xs font-bold text-[#0F172A] truncate mt-0.5">
-                  {lang === "en" ? item.characterNameEn : item.characterNameTh}
+                  {lang === "en" ? item.titleEn : item.titleTh}
                 </div>
               </div>
             </Link>
