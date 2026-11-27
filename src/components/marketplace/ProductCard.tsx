@@ -3,15 +3,11 @@
 import React from "react";
 import Link from "next/link";
 import {
-  Tag, Gift, ShieldCheck, Zap, ArrowRight, Eye,
-  QrCode, Award, Truck, FileText, CheckSquare, Users, BookOpen, Clock,
-  Music, Compass, Smartphone, Cpu, GraduationCap, Bot, 
-  Activity, Star, Layers, ShoppingCart
+  Gift, ShieldCheck, ArrowRight, Eye, ShoppingCart, Sparkles, Check
 } from "lucide-react";
 import { useBrandTheme } from "@/components/providers/BrandThemeProvider";
 import { useLineModal, isMobileDevice } from "@/components/ui/LineOrderModal";
 import { cn } from "@/lib/utils";
-import { DvdCaseMockup } from "@/components/marketplace/DvdCaseMockup";
 
 export interface Product {
   id: string;
@@ -40,21 +36,18 @@ export function ProductCard({ product }: ProductCardProps) {
   const { openLineModal } = useLineModal();
 
   let rawDesc = product.description;
-  let parsedType = "";
   const matchFormat = rawDesc.match(/\(Format:\s*(.+?)\)/i);
   const matchType = rawDesc.match(/\(Type:\s*(.+?)\)/i);
   if (matchFormat) {
-    parsedType = matchFormat[1];
     rawDesc = rawDesc.replace(matchFormat[0], "").trim();
   } else if (matchType) {
-    parsedType = matchType[1];
     rawDesc = rawDesc.replace(matchType[0], "").trim();
   }
 
   const isMusicBrand = brandTheme === "music";
-  const hoverBorder = isMusicBrand 
-    ? "hover:border-amber-400 hover:shadow-md" 
-    : "hover:border-[#2563EB]/50 hover:shadow-md";
+  const hoverBorder = isMusicBrand
+    ? "hover:border-amber-400 hover:shadow-[0_14px_34px_rgba(217,119,6,0.10)]"
+    : "hover:border-[#2563EB]/60 hover:shadow-[0_14px_34px_rgba(37,99,235,0.10)]";
   const hoverText = isMusicBrand ? "group-hover:text-amber-700" : "group-hover:text-[#1D4ED8]";
 
   const priceStr = (product.price || "").trim().toLowerCase();
@@ -69,8 +62,9 @@ export function ProductCard({ product }: ProductCardProps) {
   const numericPrice = parseInt(priceStr.replace(/[^0-9]/g, ""), 10) || 0;
   const originalAnchorPrice = numericPrice > 0 ? Math.round(numericPrice * 1.6 + 100) : 590;
 
-  // Generate dynamic bespoke theme
+  // Dynamic bespoke theme & setup tier
   const coverTheme = getSystemCoverTheme(product.title, product.category);
+  const ThemeIcon = coverTheme.icon;
   const setupTier = product.setupTier || getProductSetupTier(product.id, product.title);
   const tierInfo = getSetupTierInfo(setupTier);
 
@@ -152,159 +146,230 @@ export function ProductCard({ product }: ProductCardProps) {
     }
   };
 
-  return (
-    <div className={cn(
-      "flex flex-col h-full rounded-3xl border border-[#E2E8F0] transition-all duration-300 relative overflow-hidden bg-white shadow-sm hover:-translate-y-1 group",
-      hoverBorder
-    )}>
-      
-      {/* ── BESPOKE 3D HOLOGRAPHIC COVER ART / 3D DVD MOCKUP (Clickable to detail) ── */}
-      <Link href={detailHref} className="block relative w-full border-b border-[#E2E8F0] overflow-hidden bg-[#FAF8F5] flex flex-col justify-center cursor-pointer">
-        <DvdCaseMockup
-          code={coverTheme.code}
-          title={product.title}
-          categoryName={coverTheme.categoryName}
-          tagline={coverTheme.tagline}
-          glowColor={coverTheme.glowColor}
-        />
-        {product.image_url && (
-          <span className="absolute top-3 right-3 z-20 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/95 border border-[#BFDBFE] text-[#1D4ED8] text-[11px] font-prompt font-bold backdrop-blur-md shadow-xs">
-            <Eye className="w-3.5 h-3.5" />
-            <span>มีภาพหน้าจอจริง</span>
-          </span>
-        )}
-      </Link>
+  const featurePills = (coverTheme.pills || []).slice(0, 3);
 
-      {/* ── CARD BODY ─────────────────────────────────────────── */}
-      <div className="p-5 sm:p-6 flex flex-col flex-1 z-10">
-        
-        {/* Setup Tier Badge */}
-        <div className="mb-2.5">
-          <span className={cn(
-            "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-prompt font-extrabold border transition-all",
-            tierInfo.badgeStyle
-          )}>
+  return (
+    <div
+      className={cn(
+        "flex flex-col h-full rounded-[24px] border border-[#E2E8F0] transition-all duration-300 relative overflow-hidden bg-white shadow-[0_4px_16px_rgba(15,23,42,0.04)] hover:-translate-y-1 group",
+        hoverBorder
+      )}
+    >
+      {/* ── VERCEL × FRAMER PRECISION SAAS BROWSER PREVIEW ── */}
+      <Link
+        href={detailHref}
+        className="block relative w-full pt-4 px-4 pb-0 border-b border-[#E2E8F0] overflow-hidden cursor-pointer select-none"
+        style={{
+          backgroundColor: "#F8FAFC",
+          backgroundImage: "radial-gradient(#CBD5E1 1px, transparent 1px)",
+          backgroundSize: "14px 14px",
+        }}
+      >
+        {/* Subtle ambient accent glow */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-10 -right-10 w-36 h-36 rounded-full blur-2xl opacity-35 transition-opacity duration-500 group-hover:opacity-60"
+          style={{ background: coverTheme.glowColor }}
+        />
+
+        {/* Top Floating Badges Row */}
+        <div className="relative z-20 flex items-center justify-between gap-2 mb-3">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#0F172A] text-white font-mono text-[11px] font-bold tracking-wide shadow-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" />
+            <span>{coverTheme.code}</span>
+          </span>
+
+          <span
+            className={cn(
+              "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-prompt font-extrabold border shadow-2xs backdrop-blur-sm",
+              tierInfo.badgeStyle
+            )}
+          >
             <span>{tierInfo.badgeText}</span>
           </span>
         </div>
 
-        <Link href={detailHref} className="block group/title cursor-pointer mb-2">
-          <h3 className={cn(
-            "text-base sm:text-lg font-bold font-prompt text-[#0F172A] line-clamp-2 leading-snug transition-colors",
-            hoverText
-          )}>
+        {/* Sleek macOS Browser Window Frame */}
+        <div className="relative z-10 rounded-t-xl border border-b-0 border-[#CBD5E1]/90 bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)] overflow-hidden transition-transform duration-500 group-hover:translate-y-[-2px]">
+          {/* Browser Chrome Header */}
+          <div className="h-6 px-2.5 bg-[#F1F5F9] border-b border-[#E2E8F0] flex items-center justify-between gap-2">
+            <div className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-[#F87171]" />
+              <span className="w-2 h-2 rounded-full bg-[#FBBF24]" />
+              <span className="w-2 h-2 rounded-full bg-[#34D399]" />
+            </div>
+            <div className="px-2 py-0.5 rounded bg-white border border-[#E2E8F0] font-mono text-[9px] text-[#64748B] truncate max-w-[165px]">
+              aiaon.tech/app/{coverTheme.code.toLowerCase()}
+            </div>
+            <span className="inline-flex items-center gap-1 text-[9px] font-mono font-bold text-emerald-700">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              LIVE
+            </span>
+          </div>
+
+          {/* Viewport: Real Screenshot OR Clean SaaS UI Fallback */}
+          <div className="relative aspect-[16/10] w-full bg-[#F8FAFC] overflow-hidden">
+            {product.image_url ? (
+              <img
+                src={product.image_url}
+                alt={`ตัวอย่างหน้าจอจริง ${product.title}`}
+                loading="lazy"
+                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+            ) : (
+              <div className="w-full h-full p-4 flex flex-col justify-between bg-gradient-to-br from-[#F8FAFC] via-white to-[#EFF6FF]">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] border border-[#BFDBFE] flex items-center justify-center text-[#1D4ED8] shadow-2xs">
+                    <ThemeIcon className="w-5 h-5" />
+                  </div>
+                  <span className="font-mono text-[10px] font-bold text-[#2563EB] bg-[#EFF6FF] border border-[#BFDBFE] px-2 py-0.5 rounded-md">
+                    0฿ GAS APP
+                  </span>
+                </div>
+                <div className="space-y-1.5">
+                  <div className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#64748B]">
+                    {coverTheme.tagline}
+                  </div>
+                  <div className="grid grid-cols-3 gap-1.5">
+                    <div className="h-2 rounded-full bg-[#BFDBFE]" />
+                    <div className="h-2 rounded-full bg-[#99F6E4]" />
+                    <div className="h-2 rounded-full bg-[#FDE68A]" />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Interactive Hover Quick-Preview Pill */}
+            <div className="pointer-events-none absolute inset-0 bg-[#0F172A]/0 group-hover:bg-[#0F172A]/15 transition-colors duration-300 flex items-end justify-center pb-2.5">
+              <span className="opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#BFDBFE] text-[#0F172A] text-[11px] font-prompt font-bold shadow-md">
+                <Eye className="w-3.5 h-3.5 text-[#2563EB]" />
+                <span>ดูภาพหน้าจอจริง &amp; สเปก 7 ข้อ</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </Link>
+
+      {/* ── PRECISION CARD BODY ── */}
+      <div className="p-5 flex flex-col flex-1 z-10">
+        {/* Category & Zero-Monthly Micro Row */}
+        <div className="flex items-center justify-between gap-2 mb-2">
+          <span className="inline-flex items-center gap-1 text-[11px] font-prompt font-bold text-[#2563EB] truncate">
+            <Sparkles className="w-3 h-3 shrink-0" />
+            <span className="truncate">{coverTheme.categoryName}</span>
+          </span>
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-[10px] font-prompt font-bold text-emerald-700 shrink-0">
+            <ShieldCheck className="w-3 h-3 text-emerald-600" />
+            <span>0฿/เดือน</span>
+          </span>
+        </div>
+
+        {/* Title */}
+        <Link href={detailHref} className="block group/title cursor-pointer mb-1.5">
+          <h3
+            className={cn(
+              "text-base font-extrabold font-prompt text-[#0F172A] line-clamp-2 leading-snug transition-colors",
+              hoverText
+            )}
+          >
             {product.title}
           </h3>
         </Link>
 
-        {parsedType && (
-          <div className="flex items-center gap-1.5 mb-2.5 text-xs font-prompt text-[#0E7490] font-medium">
-            <Tag className="w-3.5 h-3.5 shrink-0" />
-            <span className="truncate">{parsedType}</span>
-          </div>
-        )}
-
-        <Link href={detailHref} className="block flex-1 cursor-pointer mb-5">
-          <p className="text-xs font-prompt text-[#475569] line-clamp-3 leading-relaxed hover:text-[#0F172A] transition-colors">
+        {/* Concise 2-Line Description */}
+        <Link href={detailHref} className="block cursor-pointer mb-3.5">
+          <p className="text-xs font-prompt text-[#475569] line-clamp-2 leading-relaxed">
             {rawDesc}
           </p>
         </Link>
 
-        {product.image_url && (
-          <Link
-            href={detailHref}
-            className="mb-4 w-full py-2 px-3 rounded-xl bg-[#EFF6FF] hover:bg-[#DBEAFE] border border-[#BFDBFE] hover:border-[#93C5FD] text-[#1D4ED8] font-prompt text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
-          >
-            <Eye className="w-3.5 h-3.5 shrink-0" />
-            <span>ดูรายละเอียด &amp; ภาพหน้าจอจริง</span>
-          </Link>
+        {/* Tech Stack / Feature Spec Pills (Vercel Templates Style) */}
+        {featurePills.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {featurePills.map((pill) => (
+              <span
+                key={pill}
+                className="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[10.5px] font-prompt font-semibold text-[#334155]"
+              >
+                <Check className="w-3 h-3 text-[#2563EB] shrink-0" />
+                <span>{pill}</span>
+              </span>
+            ))}
+          </div>
         )}
 
-        {/* --- CLEAN SINGLE-LINE PRICE & CTA FOOTER --- */}
-        <div className="mt-auto pt-4 border-t border-[#F1F5F9] space-y-3">
-          
-          {/* Price Row — Never wraps */}
+        {/* ── CLEAN PRECISION PRICE & DUAL-CTA FOOTER ── */}
+        <div className="mt-auto pt-3.5 border-t border-[#F1F5F9] space-y-2.5">
+          {/* Price + VIP Inline Row */}
           <div className="flex items-end justify-between gap-2">
             <div>
-              <div className="text-[11px] font-prompt text-[#64748B] font-medium whitespace-nowrap mb-0.5">
-                {isFree ? "🎁 ของขวัญพิเศษ" : "⚡ จ่ายครั้งเดียวตลอดชีพ"}
+              <div className="text-[10px] font-prompt text-[#64748B] font-medium">
+                {isFree ? "🎁 ดาวน์โหลดฟรีตลอดชีพ" : "⚡ ซื้อครั้งเดียว ใช้ตลอดชีพ"}
               </div>
-              <div className="flex items-baseline gap-2 whitespace-nowrap">
-                <span className={cn(
-                  "font-prompt text-2xl font-black tracking-tight whitespace-nowrap",
-                  isFree 
-                    ? "text-[#059669]" 
-                    : "text-[#0F172A]"
-                )}>
+              <div className="flex items-baseline gap-1.5 whitespace-nowrap">
+                <span
+                  className={cn(
+                    "font-prompt text-2xl font-black tracking-tight",
+                    isFree ? "text-[#059669]" : "text-[#0F172A]"
+                  )}
+                >
                   {cleanPrice}
                 </span>
-
                 {!isFree && numericPrice > 0 && (
-                  <span className="font-prompt text-xs text-[#94A3B8] line-through whitespace-nowrap">
+                  <span className="font-prompt text-xs text-[#94A3B8] line-through">
                     {originalAnchorPrice} ฿
                   </span>
                 )}
               </div>
             </div>
 
-            <div className="flex flex-col items-end gap-1 shrink-0">
-              <span className="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[11px] font-prompt text-emerald-700 flex items-center gap-1 font-semibold whitespace-nowrap">
-                <ShieldCheck className="w-3 h-3 text-emerald-600 shrink-0" />
-                <span>ไม่มีรายเดือน</span>
-              </span>
-            </div>
+            {!isFree && (
+              <a
+                href={vipLineOrderUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleVipClick}
+                data-line-title={`ระบบ ${displayTitle} (VIP Setup)`}
+                data-line-price={`${cleanPrice} + ${vipPrice}`}
+                data-line-code={coverTheme.code}
+                title="คลิกเพื่อสั่งซื้อพร้อมบริการให้ครูอ้นติดตั้งให้พร้อมใช้ (VIP Setup)"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#FEF9EF] hover:bg-[#FEF3C7] border border-[#FDE68A] text-[10.5px] font-prompt font-bold text-[#92400E] whitespace-nowrap transition cursor-pointer"
+              >
+                <span>🛠️ ให้ครูติดตั้ง {vipPrice}</span>
+              </a>
+            )}
           </div>
 
-          {/* VIP Setup Micro-badge (Direct LINE link with VIP preset message) */}
-          {!isFree && (
+          {/* Dual Action Row: Preview + Order LINE */}
+          <div className="grid grid-cols-12 gap-2">
+            <Link
+              href={detailHref}
+              className="col-span-5 h-10 px-2.5 rounded-xl bg-[#F8FAFC] hover:bg-[#EFF6FF] border border-[#E2E8F0] hover:border-[#BFDBFE] text-[#0F172A] hover:text-[#1D4ED8] font-prompt text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer whitespace-nowrap"
+            >
+              <Eye className="w-3.5 h-3.5 shrink-0" />
+              <span>ดูหน้าจอจริง</span>
+            </Link>
+
             <a
-              href={vipLineOrderUrl}
+              href={lineOrderUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleVipClick}
-              data-line-title={`ระบบ ${displayTitle} (VIP Setup)`}
-              data-line-price={`${cleanPrice} + ${vipPrice}`}
+              onClick={handleOrderClick}
+              data-line-title={displayTitle}
+              data-line-price={cleanPrice}
               data-line-code={coverTheme.code}
-              title="คลิกเพื่อสั่งซื้อพร้อมบริการให้ครูอ้นติดตั้งให้พร้อมใช้ (VIP Setup)"
-              className="block text-[11px] font-prompt font-semibold text-[#92400E] hover:text-[#78350F] bg-[#FEF9EF] hover:bg-[#FEF3C7] border border-[#FDE68A] hover:border-amber-400 rounded-lg py-1.5 px-2.5 text-center whitespace-nowrap truncate transition-all cursor-pointer"
+              title="คลิกเพื่อสั่งซื้อผ่าน LINE OA ทันที"
+              className="col-span-7 h-10 px-3 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-prompt text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-xs transition-all active:scale-[0.98] cursor-pointer whitespace-nowrap"
             >
-              🛠️ ออปชันครูอ้นติดตั้งให้พร้อมใช้ ({vipPrice})
-            </a>
-          )}
-
-          {/* ── ✨ SLEEK SINGLE-LINE LUXURY CTA BUTTON (Direct LINE link) ── */}
-          <a
-            href={lineOrderUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={handleOrderClick}
-            data-line-title={displayTitle}
-            data-line-price={cleanPrice}
-            data-line-code={coverTheme.code}
-            title="คลิกเพื่อสั่งซื้อผ่าน LINE OA ทันที"
-            className={cn(
-              "w-full h-11 px-4 rounded-xl font-prompt text-sm font-extrabold flex items-center justify-between whitespace-nowrap transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.98] cursor-pointer relative overflow-hidden shadow-xs",
-              isFree 
-                ? "bg-[#06C755] hover:bg-[#05b34c] text-[#052E16]" 
-                : "bg-[#06C755] hover:bg-[#05b34c] text-[#052E16]"
-            )}
-          >
-            <div className="flex items-center gap-2 relative z-10 whitespace-nowrap">
               {isFree ? (
-                <Gift className="w-4 h-4 text-[#052E16] shrink-0" />
+                <Gift className="w-3.5 h-3.5 shrink-0" />
               ) : (
-                <ShoppingCart className="w-4 h-4 text-[#052E16] shrink-0" />
+                <ShoppingCart className="w-3.5 h-3.5 shrink-0" />
               )}
-              <span className="tracking-tight">
-                {isFree ? "รับระบบและโค้ดฟรี (LINE)" : "สั่งซื้อรับระบบทันที (LINE)"}
-              </span>
-            </div>
-
-            <div className="w-6 h-6 rounded-lg bg-[#052E16]/12 group-hover:bg-[#052E16]/20 flex items-center justify-center relative z-10 shrink-0 transition-all">
-              <ArrowRight className="w-3.5 h-3.5 text-[#052E16] transition-transform group-hover:translate-x-0.5" />
-            </div>
-          </a>
-
+              <span>{isFree ? "รับฟรี (LINE)" : "สั่งซื้อทันที"}</span>
+              <ArrowRight className="w-3.5 h-3.5 shrink-0 transition-transform group-hover:translate-x-0.5" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
