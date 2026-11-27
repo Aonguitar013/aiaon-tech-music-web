@@ -443,125 +443,80 @@ function FreebieCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative"
+      transition={{ duration: 0.3 }}
+      className="group relative flex flex-col h-full rounded-2xl bg-white border border-[#E2E8F0] hover:border-[#2563EB]/50 p-4 sm:p-5 shadow-2xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
     >
-      {/* Outer glow on hover */}
-      <div
-        className="absolute -inset-0.5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md pointer-events-none"
-        style={{ background: `radial-gradient(ellipse at center, ${freebie.glow_color}, transparent 70%)` }}
-      />
-
-      <div className="relative bg-white shadow-sm border-[#E2E8F0] group-hover:border-[#CBD5E1] p-6 sm:p-7 rounded-3xl flex flex-col gap-5 h-full transition-all duration-300 ">
-
-        {/* Header row with badges */}
-        <div className="flex items-start justify-between gap-3">
-          {/* Icon Badge */}
-          <div 
-            className={`w-12 h-12 rounded-xl flex items-center justify-center bg-linear-to-br ${freebie.color_from} ${freebie.color_to} shadow-lg group-hover:scale-105 transition-transform duration-300 shrink-0`}
-          >
-            <Icon className="w-5 h-5 text-white" />
-          </div>
-
-          {/* Badges */}
-          <div className="flex flex-wrap gap-1.5 justify-end">
-            <span className={`text-[11px] font-prompt font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${t.border} ${t.text} ${t.bg}`}>
-              {freebie.file_type}
-            </span>
-            <span className="text-[11px] font-prompt font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-[#E2E8F0] text-[#64748B] bg-[#F8FAFC]">
-              {freebie.file_size}
-            </span>
-            <span className="text-[11px] font-prompt font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 shadow-[0_0_12px_rgba(16,185,129,0.25)]">
-              🎁 ฟรี 100%
-            </span>
-          </div>
-        </div>
-
-        {/* 3D Bespoke Character Mockup Stage - Click opens details */}
-        <div 
+      {/* Compact Header: Icon + Type/Size + Free Pill */}
+      <div className="flex items-start justify-between gap-2.5 mb-3">
+        <div
           onClick={() => onViewDetails(freebie)}
-          className="cursor-pointer transition-transform duration-300 group-hover:scale-[1.02]"
-          title="คลิกเพื่อดูรายละเอียดและข้อมูลเชิงลึกทั้งหมด"
+          className={`w-10 h-10 rounded-xl flex items-center justify-center bg-linear-to-br ${freebie.color_from} ${freebie.color_to} shadow-sm shrink-0 cursor-pointer group-hover:scale-105 transition-transform`}
         >
-          {renderFreebie3DMockup(freebie)}
+          <Icon className="w-5 h-5 text-white" />
         </div>
 
-        {/* Content - Click opens details */}
-        <div className="flex-1 space-y-2">
-          <h3 
-            onClick={() => onViewDetails(freebie)}
-            className={`font-prompt text-lg sm:text-xl font-bold text-[#0F172A] ${t.groupHover} transition-colors duration-300 leading-snug cursor-pointer flex items-center justify-between gap-2`}
-          >
-            <span>{freebie.title}</span>
-            <span className="shrink-0 text-[#64748B] group-hover:text-cyan-700 transition-colors text-xs font-normal font-prompt flex items-center gap-1">
-              <Eye className="w-3.5 h-3.5" />
-              <span>ดูข้อมูล</span>
-            </span>
-          </h3>
-          <p className="font-prompt text-xs sm:text-sm text-[#475569] leading-relaxed">
-            {freebie.description}
-          </p>
-        </div>
-
-        {/* Tag & Category Metadata */}
-        <div className="flex items-center justify-between pt-2 border-t border-[#E2E8F0] text-xs font-prompt">
-          <span className={`${t.text} font-semibold flex items-center gap-1.5`}>
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{freebie.tag}</span>
+        <div className="flex flex-wrap items-center justify-end gap-1">
+          <span className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-md border ${t.border} ${t.text} ${t.bg}`}>
+            {freebie.file_type}
           </span>
-          <span className="text-[#64748B] font-mono text-[11px]">
-            FREE RESOURCE
+          <span className="text-[10px] font-mono text-[#64748B] bg-[#F8FAFC] border border-[#E2E8F0] px-2 py-0.5 rounded-md">
+            {freebie.file_size}
+          </span>
+          <span className="text-[10px] font-prompt font-extrabold px-2 py-0.5 rounded-md bg-emerald-50 border border-emerald-300 text-emerald-700">
+            ฟรี 0฿
           </span>
         </div>
+      </div>
 
-        {/* Prominent Price Tag: 0 บาท */}
-        <div className="flex items-center justify-between pt-3 pb-1 px-4 py-3 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] shadow-inner">
-          <div>
-            <div className="text-[11px] font-prompt text-[#64748B] line-through">
-              ราคาปกติ ฿{freebieDetail.originalPrice.toLocaleString()}
-            </div>
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-2xl sm:text-3xl font-black font-prompt text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-teal-600">
-                0 บาท
-              </span>
-              <span className="text-xs font-bold font-prompt text-emerald-700">
-                (แจกฟรี)
-              </span>
-            </div>
-          </div>
-          <div className="text-right">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-700 font-prompt text-xs font-extrabold shadow-[0_0_14px_rgba(16,185,129,0.3)]">
-              <Tag className="w-3.5 h-3.5 text-emerald-700" />
-              <span>ราคา 0 บาท</span>
-            </span>
-          </div>
+      {/* Title & Concise 2-Line Description */}
+      <div className="flex-1 mb-3.5">
+        <div className={`text-[10.5px] font-prompt font-bold ${t.text} mb-1 flex items-center gap-1`}>
+          <Sparkles className="w-3 h-3 shrink-0" />
+          <span className="truncate">{freebie.tag}</span>
+        </div>
+        <h3
+          onClick={() => onViewDetails(freebie)}
+          className={`font-prompt text-sm sm:text-[15px] font-extrabold text-[#0F172A] ${t.groupHover} transition-colors leading-snug line-clamp-2 cursor-pointer mb-1.5`}
+        >
+          {freebie.title}
+        </h3>
+        <p className="font-prompt text-xs text-[#475569] leading-relaxed line-clamp-2">
+          {freebie.description}
+        </p>
+      </div>
+
+      {/* Compact Price + Dual Action Footer */}
+      <div className="mt-auto pt-3 border-t border-[#F1F5F9] space-y-2.5">
+        <div className="flex items-center justify-between text-xs">
+          <span className="text-[11px] font-prompt text-[#94A3B8] line-through">
+            มูลค่า ฿{freebieDetail.originalPrice.toLocaleString()}
+          </span>
+          <span className="font-prompt text-sm font-black text-emerald-700">
+            แจกฟรี 0 บาท
+          </span>
         </div>
 
-        {/* Action buttons: ดูรายละเอียด & ปลดล็อก/ดาวน์โหลดฟรี */}
-        <div className="mt-auto pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-12 gap-2">
           <button
             type="button"
             onClick={() => onViewDetails(freebie)}
-            className="py-3 px-3.5 rounded-2xl bg-[#F8FAFC] hover:bg-[#F1ECE4] border border-[#E2E8F0] hover:border-[#CBD5E1] text-[#0F172A] font-bold font-prompt text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer hover:scale-[1.02] active:scale-95 shadow-md"
+            className="col-span-5 h-9 px-2 rounded-xl bg-[#F8FAFC] hover:bg-[#EFF6FF] border border-[#E2E8F0] hover:border-[#BFDBFE] text-[#0F172A] hover:text-[#1D4ED8] font-bold font-prompt text-xs flex items-center justify-center gap-1 transition cursor-pointer"
           >
-            <Eye className="w-4 h-4 text-cyan-700" />
-            <span>ดูรายละเอียด</span>
+            <Eye className="w-3.5 h-3.5 shrink-0" />
+            <span>รายละเอียด</span>
           </button>
-          
+
           <button
             type="button"
             onClick={() => onUnlockPrompt(freebie)}
-            className={`py-3 px-3.5 rounded-2xl border flex items-center justify-center gap-1.5 text-xs sm:text-sm font-bold font-prompt tracking-wide transition-all duration-300 cursor-pointer shadow-lg active:scale-95
-              ${t.border} ${t.text} ${t.bg}
-              hover:brightness-95`}
-            style={{ boxShadow: `0 6px 16px -8px ${freebie.glow_color}` }}
+            className="col-span-7 h-9 px-2.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-extrabold font-prompt text-xs flex items-center justify-center gap-1.5 shadow-2xs transition active:scale-[0.98] cursor-pointer"
           >
-            <Download className="w-4 h-4" />
-            <span>ดาวน์โหลดฟรี (0 ฿)</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <Download className="w-3.5 h-3.5 shrink-0" />
+            <span>โหลดฟรี (0฿)</span>
+            <ArrowRight className="w-3 h-3 shrink-0" />
           </button>
         </div>
       </div>
@@ -669,119 +624,72 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
         )}
       </AnimatePresence>
 
-      <div className="w-full relative overflow-hidden min-h-screen bg-[#FAF8FF] pb-24">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 pt-8 sm:pt-12">
+      <div className="w-full relative overflow-hidden min-h-screen bg-[#FAF8F5] pb-16">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 pt-6 sm:pt-8">
 
-          {/* ── 0-BAHT GIFT BOUTIQUE HERO ────────────────────────── */}
-          <section className="mb-12 rounded-3xl bg-white border border-[#FDE68A] p-6 sm:p-10 lg:p-12 shadow-sm relative overflow-hidden">
-            <div className="absolute -top-24 -right-24 w-80 h-80 bg-amber-400/10 blur-3xl rounded-full pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-emerald-400/10 blur-3xl rounded-full pointer-events-none" />
-
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* ── SLIM 0-BAHT GIFT BOUTIQUE HERO ────────────────────────── */}
+          <section className="mb-6 rounded-3xl bg-white border border-[#FDE68A] p-5 sm:p-7 shadow-2xs relative overflow-hidden">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
               {/* Left Copy */}
-              <div className="lg:col-span-7 space-y-5 text-left">
-                <div className="flex flex-wrap items-center gap-3">
-                  <img
-                    src="/brand/svg/aiaon-tech_lockup_horizontal_fullcolor-on-light.svg"
-                    alt="AiAon Tech"
-                    className="h-8 sm:h-9 w-auto"
-                  />
+              <div className="lg:col-span-7 space-y-3 text-left">
+                <div className="flex flex-wrap items-center gap-2.5">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FEF3C7] border border-[#FDE68A] text-[#92400E] text-xs font-prompt font-bold">
                     <Gift className="w-3.5 h-3.5 text-[#D97706]" />
-                    <span>0-BAHT GIFT BOUTIQUE • แจกฟรี 100%</span>
+                    <span>0-BAHT GIFT HUB • แจกฟรี 100%</span>
+                  </span>
+                  <span className="text-xs font-mono font-bold text-[#64748B]">
+                    {initialFreebies.length}+ ไฟล์ระบบ &amp; เพลง • ฟรี 75 หน้า Edu-Verse
                   </span>
                 </div>
 
-                <motion.h1
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45 }}
-                  className="font-prompt text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0F172A] leading-[1.15]"
-                >
+                <h1 className="font-prompt text-2xl sm:text-4xl font-extrabold tracking-tight text-[#0F172A] leading-tight">
                   คลังของแจกฟรี{" "}
                   <span className="text-transparent bg-clip-text bg-linear-to-r from-[#D97706] via-[#EA580C] to-[#E11D48]">
                     หยิบไปใช้ได้จริง 0 ฿
                   </span>
-                </motion.h1>
+                </h1>
 
-                <p className="text-sm sm:text-base text-[#475569] font-prompt leading-relaxed max-w-2xl">
-                  ลองของจริงก่อนตัดสินใจซื้อ! ครูอ้นแจกฟรีทั้ง{" "}
-                  <strong className="text-[#0F172A]">ซอร์สโค้ดระบบครู Google Apps Script</strong>,{" "}
-                  <strong className="text-[#0F172A]">ชุดคำสั่ง AI</strong>,{" "}
-                  <strong className="text-[#0F172A]">เพลง BGM ปลอดลิขสิทธิ์</strong> และ{" "}
-                  <strong className="text-[#0F172A]">ใบงานเด็กเล็กฟรี 30 หน้า</strong> ไม่มีข้อผูกมัด
+                <p className="text-xs sm:text-sm text-[#475569] font-prompt leading-relaxed max-w-2xl">
+                  ลองของจริงก่อนตัดสินใจซื้อ! แจกฟรีครบทั้งซอร์สโค้ด Google Apps Script, ชุดคำสั่ง AI, เพลง BGM ปลอดลิขสิทธิ์ และสื่อเด็กเล็ก <strong className="text-[#0F172A]">AiAon Edu-Verse ฟรี 75 หน้า (ครบ 15 เล่ม)</strong>
                 </p>
-
-                {/* Verified Stats */}
-                <div className="grid grid-cols-3 gap-3 pt-2 max-w-md">
-                  {[
-                    { value: `${initialFreebies.length}+`, label: "ไฟล์ระบบ & เพลงฟรี" },
-                    { value: "30 หน้า", label: "ใบงานเด็กเล็กฟรี" },
-                    { value: "0 ฿", label: "ไม่มีค่าใช้จ่าย" },
-                  ].map((s) => (
-                    <div key={s.label} className="rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] px-3.5 py-2.5">
-                      <div className="font-prompt text-lg sm:text-xl font-extrabold text-[#0F172A]">{s.value}</div>
-                      <div className="font-prompt text-[11px] text-[#64748B]">{s.label}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
 
-              {/* Right: Visual Gift Trio */}
-              <div className="lg:col-span-5 grid grid-cols-2 gap-3">
+              {/* Right: Compact Edu-Verse 75-Page Free Mega Pack Card */}
+              <div className="lg:col-span-5">
                 <Link
                   href="/edu"
-                  className="col-span-2 group relative rounded-2xl overflow-hidden border border-amber-200 bg-[#FEF9EF] aspect-[16/9] block shadow-2xs hover:shadow-md transition-all"
+                  className="group flex items-center gap-3.5 rounded-2xl border border-amber-200 bg-[#FEF9EF] hover:border-amber-400 p-3 shadow-2xs hover:shadow-md transition-all"
                 >
-                  <img
-                    src="/edu/hero-banner-6cats.webp"
-                    alt="แจกฟรีใบงานเด็กเล็ก 30 หน้า"
-                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/85 via-[#0F172A]/35 to-transparent p-3.5 flex items-end justify-between gap-2">
-                    <div>
-                      <span className="inline-block px-2 py-0.5 rounded-full bg-amber-400 text-[#0F172A] text-[10px] font-extrabold mb-1">
-                        🎁 ฟรี 30 หน้า (ครบ 6 เล่ม)
-                      </span>
-                      <div className="text-white font-bold text-xs sm:text-sm">
-                        ใบงานเด็กเล็ก AiAon Edu-Verse
-                      </div>
+                  <div className="w-24 sm:w-28 aspect-[4/3] rounded-xl overflow-hidden border border-amber-200/80 shrink-0 bg-white">
+                    <img
+                      src="/edu/hero-banner-6cats.webp"
+                      alt="แจกฟรีสื่อเด็กเล็ก 75 หน้า ครบ 15 เล่ม"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <span className="inline-block px-2 py-0.5 rounded-full bg-amber-400 text-[#0F172A] text-[10px] font-extrabold mb-1">
+                      🎁 ฟรี 75 หน้า (15 เล่ม!)
+                    </span>
+                    <div className="text-xs sm:text-sm font-extrabold text-[#0F172A] leading-snug">
+                      สื่อเด็กเล็ก AiAon Edu-Verse
                     </div>
-                    <ArrowRight className="w-4 h-4 text-white shrink-0 group-hover:translate-x-1 transition-transform" />
+                    <div className="text-[11px] text-[#64748B] mt-0.5 inline-flex items-center gap-1 group-hover:text-[#B45309] font-semibold">
+                      <span>กดไปโหลดฟรีทันที (0฿)</span>
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
                   </div>
                 </Link>
-
-                <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] bg-[#F8FAFC] aspect-[4/3]">
-                  <img
-                    src="/images/mockups/aona09_repair_telegram_mockup.jpg"
-                    alt="ระบบครู GAS แจกฟรี"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/85 to-transparent p-2.5">
-                    <span className="text-white text-[11px] font-bold block">ระบบครู &amp; โค้ดฟรี</span>
-                  </div>
-                </div>
-
-                <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] bg-[#F8FAFC] aspect-[4/3]">
-                  <img
-                    src="/images/mockups/indie_folk_guitar_cover.png"
-                    alt="เพลง BGM แจกฟรี"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-[#0F172A]/85 to-transparent p-2.5">
-                    <span className="text-white text-[11px] font-bold block">BGM &amp; แทร็กฟรี</span>
-                  </div>
-                </div>
               </div>
             </div>
           </section>
 
           {/* ── Clean Filter Toolbar ─────────────────────────────── */}
-          <div className="rounded-2xl bg-white border border-[#E2E8F0] p-3.5 sm:p-4 shadow-2xs mb-8 flex flex-wrap items-center justify-between gap-3">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#64748B] mr-1">
+          <div className="rounded-2xl bg-white border border-[#E2E8F0] p-3 shadow-2xs mb-5 flex flex-wrap items-center justify-between gap-2.5">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="inline-flex items-center gap-1 text-xs font-bold text-[#64748B] mr-1">
                 <Filter className="w-3.5 h-3.5" />
-                <span>หมวดของฟรี:</span>
+                <span>หมวด:</span>
               </span>
               {TABS.map((tab) => {
                 const TabIcon = tab.icon;
@@ -790,7 +698,7 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
                   <button
                     key={tab.value}
                     onClick={() => setActiveTab(tab.value)}
-                    className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-prompt font-bold transition-all cursor-pointer border ${
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-prompt font-bold transition-all cursor-pointer border ${
                       isActive
                         ? "bg-[#0F172A] text-white border-[#0F172A]"
                         : "bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:text-[#0F172A] hover:bg-slate-100"
@@ -807,15 +715,15 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
             </span>
           </div>
 
-          {/* ── Cards Grid ────────────────────────────────────── */}
+          {/* ── Compact 3-Column Cards Grid ──────────────────────── */}
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
             >
               {filtered.map((freebie) => (
                 <FreebieCard
@@ -829,40 +737,37 @@ export function FreebiesView({ initialFreebies }: FreebiesViewProps) {
           </AnimatePresence>
 
           {/* ── Permanent Bottom Impulse Upgrade Section ───── */}
-          <div className="mt-16 sm:mt-24"><FreebieUpsellSection className="" /></div>
+          <div className="mt-10 sm:mt-14"><FreebieUpsellSection className="" /></div>
 
-          {/* ── CTA for LINE Community ─────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.2 }}
-            className="mt-20 bg-white shadow-sm border-[#E2E8F0] p-8 md:p-12 text-center relative overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-linear-to-br from-[#06C755]/5 to-emerald-500/5 pointer-events-none" />
-            <div className="relative z-10 space-y-5 max-w-lg mx-auto">
-              <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-[#06C755] to-emerald-600 flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(6,199,85,0.4)]">
-                <RiLineLine className="w-8 h-8 text-white" />
+          {/* ── Compact LINE Community Strip with Founder Portrait ─── */}
+          <div className="mt-10 rounded-3xl bg-white shadow-2xs border border-[#E2E8F0] p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3.5 text-left">
+              <img
+                src="/images/kru_aon_profile.png"
+                alt="ครูอ้น จิรวัฒน์ เดชเส้ง — LINE OA @deu6776s"
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl object-cover object-top border-2 border-white ring-2 ring-[#06C755]/40 shrink-0 bg-[#ECE9E2]"
+              />
+              <div>
+                <h3 className="font-prompt text-base sm:text-lg font-extrabold text-[#0F172A]">
+                  แอด LINE OA @deu6776s รับโค้ดฟรีอัปเดตทุกสัปดาห์
+                </h3>
+                <p className="text-[#64748B] font-prompt text-xs">
+                  รับแจ้งเตือนสคริปต์ใหม่ ใบงานฟรีรายเดือน และรหัสปลดล็อกไฟล์ทั้งหมด
+                </p>
               </div>
-              <h3 className="font-prompt text-2xl font-bold text-[#0F172A]">
-                แอด LINE OA @deu6776s รับอัปเดตโค้ดฟรีทุกสัปดาห์
-              </h3>
-              <p className="text-[#64748B] font-prompt text-sm leading-relaxed">
-                รับการแจ้งเตือนสคริปต์ใหม่ บทเรียนการสอนฟรี และรหัสส่วนลดพิเศษเฉพาะใน LINE
-              </p>
-              <a
-                href={getLineOrderUrl(
-                  "สวัสดีครับครูอ้น ขอสมัครรับอัปเดตโค้ดฟรีประจำสัปดาห์ และขอรหัสปลดล็อกคลังของแจกฟรี (Freebies) ครับ 🎁🙏"
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#06C755] hover:bg-[#05b34c] text-white font-prompt font-bold text-sm transition-all duration-300 hover:scale-105 shadow-[0_0_24px_rgba(6,199,85,0.35)]"
-              >
-                <RiLineLine className="w-5 h-5 fill-white" />
-                เพิ่มเพื่อน LINE OA @deu6776s
-              </a>
             </div>
-          </motion.div>
+            <a
+              href={getLineOrderUrl(
+                "สวัสดีครับครูอ้น ขอสมัครรับอัปเดตโค้ดฟรีประจำสัปดาห์ และขอรหัสปลดล็อกคลังของแจกฟรี (Freebies) ครับ 🎁🙏"
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-[#052E16] font-prompt font-extrabold text-xs sm:text-sm transition shadow-xs"
+            >
+              <RiLineLine className="w-4 h-4 shrink-0" />
+              <span>เพิ่มเพื่อน LINE OA @deu6776s</span>
+            </a>
+          </div>
 
         </div>
       </div>
