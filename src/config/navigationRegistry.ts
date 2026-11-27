@@ -111,9 +111,9 @@ export const NAVIGATION_PILLARS: NavPillarGroup[] = [
       {
         id: "edu-verse",
         label: "AiAon Edu-Verse",
-        description: "สื่อเด็กเล็ก Hybrid QR 6 โลกการเรียนรู้ (แจกฟรี 30 หน้า!)",
+        description: "สื่อเด็กเล็ก Hybrid QR ครบ 15 เล่ม Live (แจกฟรี 75 หน้า!)",
         href: "/edu",
-        badge: "ใหม่! 99฿",
+        badge: "เริ่ม 49฿",
         badgeTone: "rose",
         icon: "paw-print",
       },

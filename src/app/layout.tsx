@@ -7,6 +7,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { MouseGlowGrid } from "@/components/layout/MouseGlowGrid";
 import { FaYoutube, FaTiktok, FaFacebook, FaLine } from "react-icons/fa6";
 import { BrandThemeProvider } from "@/components/providers/BrandThemeProvider";
+import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { FloatingLINEButton } from "@/components/ui/FloatingLINEButton";
 import { CommandMenuProvider } from "@/components/command-menu/CommandMenuProvider";
@@ -107,6 +108,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <BrandThemeProvider>
+          <LanguageProvider>
           <LineModalProvider>
           <CommandMenuProvider>
           <MarketingPixels />
@@ -270,6 +272,7 @@ export default function RootLayout({
 
           </CommandMenuProvider>
           </LineModalProvider>
+          </LanguageProvider>
         </BrandThemeProvider>
       </body>
     </html>

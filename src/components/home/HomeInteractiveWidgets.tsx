@@ -15,6 +15,7 @@ import {
   Palette,
 } from "lucide-react";
 import { EDU_CATALOG } from "@/lib/eduCatalog";
+import { useSiteLang } from "@/components/providers/LanguageProvider";
 
 // =========================================================================
 // 1. TOP SCROLL PROGRESS BAR
@@ -141,11 +142,12 @@ export function SpotlightTiltCard({
 // 4. INFINITE SMOOTH SHOWCASE MARQUEE (15 LIVE EDU-VERSE COVERS)
 // =========================================================================
 export function LiveShowcaseMarquee() {
+  const { lang, t } = useSiteLang();
   const items = [...EDU_CATALOG, ...EDU_CATALOG];
 
   return (
     <section
-      aria-label="คลังสื่อจริง 15 เล่ม Live"
+      aria-label={t("คลังสื่อจริง 15 เล่ม Live", "15 Live Edu-Verse Products")}
       className="py-6 sm:py-8 bg-white border-b border-[#E2E8F0] overflow-hidden"
     >
       <style>{`
@@ -166,13 +168,18 @@ export function LiveShowcaseMarquee() {
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 mb-4 flex flex-wrap items-center justify-between gap-2">
         <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-slate-600">
           <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          <span>LIVE PRODUCT SHELF • คลังผลงานจริง 15 เล่ม พร้อมโหลดฟรี 75 หน้า (ชี้เพื่อหยุด • คลิกเข้าชม)</span>
+          <span>
+            {t(
+              "LIVE PRODUCT SHELF • คลังผลงานจริง 15 เล่ม พร้อมโหลดฟรี 75 หน้า (ชี้เพื่อหยุด • คลิกเข้าชม)",
+              "LIVE PRODUCT SHELF • 15 Real Teacher-Crafted Kits + 75 Free Sample Pages (Hover to Pause • Click to Explore)"
+            )}
+          </span>
         </div>
         <Link
           href="/edu"
           className="text-xs font-bold text-[#1D4ED8] hover:underline inline-flex items-center gap-1"
         >
-          <span>ดูครบทั้ง 15 เล่ม</span>
+          <span>{t("ดูครบทั้ง 15 เล่ม", "Explore All 15 Kits")}</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>
@@ -191,17 +198,19 @@ export function LiveShowcaseMarquee() {
               <div className="aspect-square rounded-xl overflow-hidden bg-white border border-slate-100">
                 <img
                   src={item.coverImage}
-                  alt={item.titleTh}
+                  alt={lang === "en" ? item.titleEn : item.titleTh}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="mt-2 px-1">
                 <div className="flex items-center justify-between text-[10px] font-mono font-bold text-slate-500">
                   <span>{item.sku}</span>
-                  <span className="text-amber-700">{item.priceHomeThb}฿</span>
+                  <span className="text-amber-700">
+                    {lang === "en" ? item.priceHomeUsd : `${item.priceHomeThb}฿`}
+                  </span>
                 </div>
                 <div className="text-xs font-bold text-[#0F172A] truncate mt-0.5">
-                  {item.characterNameTh}
+                  {lang === "en" ? item.characterNameEn : item.characterNameTh}
                 </div>
               </div>
             </Link>
@@ -225,6 +234,7 @@ const MINI_CATS = [
 ];
 
 export function LiveTryItPlayground() {
+  const { t } = useSiteLang();
   // Widget A: Web Audio Live Groove Synthesizer
   const [playing, setPlaying] = useState(false);
   const [beatStep, setBeatStep] = useState(0);
@@ -328,183 +338,202 @@ export function LiveTryItPlayground() {
           <div className="space-y-1.5">
             <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-widest text-[#0D9488]">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>INTERACTIVE PLAYGROUND • ลองเล่นของจริงใน 3 วินาที</span>
+              <span>{t("INTERACTIVE PLAYGROUND • ลองเล่นของจริงใน 3 วินาที", "INTERACTIVE PLAYGROUND • TRY IT LIVE IN 3 SECONDS")}</span>
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-              สัมผัสประสบการณ์จริงก่อนคลิกเข้าแต่ละโลก
+              {t("สัมผัสประสบการณ์จริงก่อนคลิกเข้าแต่ละโลก", "Experience Real Interactive Tools Right Here")}
             </h2>
           </div>
           <p className="text-xs sm:text-sm text-[#475569] max-w-md">
-            ทุกปุ่มด้านล่างทำงานจริงบนเบราว์เซอร์ทันที 100% — สะท้อน DNA งานโค้ด ดนตรี และสื่อเด็กเล็กของ AiAon
+            {t(
+              "ทุกปุ่มด้านล่างทำงานจริงบนเบราว์เซอร์ทันที 100% — สะท้อน DNA งานโค้ด ดนตรี และสื่อเด็กเล็กของ AiAon",
+              "Every widget below runs live in your browser with zero ads — showcasing AiAon's blend of Code, Music, and Early Learning."
+            )}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
           {/* MINI APP 1: AIAON AUDIO LIVE GROOVE */}
-          <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 shadow-2xs flex flex-col justify-between gap-5">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200 px-3 py-1 text-[11px] font-extrabold text-teal-800">
-                  <Music className="w-3.5 h-3.5" />
-                  <span>AiAon Audio • Live Synth</span>
-                </span>
-                <span className="text-[11px] font-mono font-bold text-slate-400">95 BPM</span>
-              </div>
-              <h3 className="text-lg font-extrabold text-[#0F172A]">
-                กดฟังจังหวะ &amp; คลื่นเสียงสด
-              </h3>
-              <p className="text-xs text-[#475569] leading-relaxed">
-                สังเคราะห์เสียงแบบเรียลไทม์ด้วย Web Audio API — ตัวอย่างความสนุกของสื่อดนตรีเด็ก &amp; BGM ปลอดลิขสิทธิ์
-              </p>
+          <div className="rounded-3xl bg-linear-to-br from-[#F0FDFA]/90 via-white to-white border-2 border-teal-200 hover:border-teal-400 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div className="h-1.5 w-full bg-linear-to-r from-[#0D9488] to-[#38BDF8]" />
+            <div className="p-6 flex-1 flex flex-col justify-between gap-5">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-100 border border-teal-200 px-3 py-1 text-[11px] font-extrabold text-teal-900">
+                    <Music className="w-3.5 h-3.5" />
+                    <span>AiAon Audio • Live Synth</span>
+                  </span>
+                  <span className="text-[11px] font-mono font-bold text-teal-700">95 BPM</span>
+                </div>
+                <h3 className="text-lg font-extrabold text-[#0F172A]">
+                  {t("กดฟังจังหวะ & คลื่นเสียงสด", "Play Live Groove & Waveform")}
+                </h3>
+                <p className="text-xs text-[#475569] leading-relaxed">
+                  {t(
+                    "สังเคราะห์เสียงแบบเรียลไทม์ด้วย Web Audio API — ตัวอย่างความสนุกของสื่อดนตรีเด็ก & BGM ปลอดลิขสิทธิ์",
+                    "Real-time Web Audio synthesizer — a taste of our kid-friendly music kits & royalty-free BGM."
+                  )}
+                </p>
 
-              {/* Animated Waveform Bars */}
-              <div className="h-16 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 px-4 flex items-center justify-center gap-1.5">
-                {Array.from({ length: 12 }).map((_, i) => {
-                  const h = playing
-                    ? 18 + ((i * 19 + beatStep * 23) % 38)
-                    : 10 + (i % 3) * 6;
-                  return (
-                    <span
-                      key={i}
-                      style={{ height: `${h}px` }}
-                      className={`w-2 rounded-full transition-all duration-150 ${
-                        playing ? "bg-linear-to-t from-teal-600 to-cyan-400" : "bg-slate-300"
-                      }`}
-                    />
-                  );
-                })}
+                {/* Animated Waveform Bars */}
+                <div className="h-16 rounded-2xl bg-teal-50/70 border border-teal-200/80 px-4 flex items-center justify-center gap-1.5">
+                  {Array.from({ length: 12 }).map((_, i) => {
+                    const h = playing
+                      ? 18 + ((i * 19 + beatStep * 23) % 38)
+                      : 10 + (i % 3) * 6;
+                    return (
+                      <span
+                        key={i}
+                        style={{ height: `${h}px` }}
+                        className={`w-2 rounded-full transition-all duration-150 ${
+                          playing ? "bg-linear-to-t from-teal-600 to-cyan-400" : "bg-teal-300/70"
+                        }`}
+                      />
+                    );
+                  })}
+                </div>
               </div>
-            </div>
 
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={toggleGroove}
-                className={`flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold cursor-pointer transition-colors ${
-                  playing
-                    ? "bg-rose-600 hover:bg-rose-700 text-white"
-                    : "bg-[#0F766E] hover:bg-[#115E59] text-white"
-                }`}
-              >
-                {playing ? <Square className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                <span>{playing ? "หยุดจังหวะ" : "กดฟังจังหวะสด"}</span>
-              </button>
-              <Link
-                href="/music-store"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 hover:bg-slate-50 px-3 py-2.5 text-xs font-bold text-slate-700"
-              >
-                ร้านเพลง →
-              </Link>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={toggleGroove}
+                  className={`flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold cursor-pointer transition-colors ${
+                    playing
+                      ? "bg-rose-600 hover:bg-rose-700 text-white"
+                      : "bg-[#0F766E] hover:bg-[#115E59] text-white"
+                  }`}
+                >
+                  {playing ? <Square className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                  <span>{playing ? t("หยุดจังหวะ", "Stop Beat") : t("กดฟังจังหวะสด", "Play Live Beat")}</span>
+                </button>
+                <Link
+                  href="/music-store"
+                  className="inline-flex items-center justify-center rounded-xl border border-teal-200 bg-teal-50 hover:bg-teal-100 px-3 py-2.5 text-xs font-bold text-teal-900"
+                >
+                  {t("ร้านเพลง →", "Audio →")}
+                </Link>
+              </div>
             </div>
           </div>
 
           {/* MINI APP 2: AIAON EDU-VERSE 6-CAT VOICE PICKER */}
-          <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 shadow-2xs flex flex-col justify-between gap-5">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-[11px] font-extrabold text-amber-900">
-                  <Palette className="w-3.5 h-3.5" />
-                  <span>AiAon Edu-Verse • 15 Live</span>
-                </span>
-                <Volume2 className="w-4 h-4 text-amber-600" />
-              </div>
-              <h3 className="text-lg font-extrabold text-[#0F172A]">
-                จิ้มแก๊ง 6 แมวฟังเสียง 2 ภาษา
-              </h3>
+          <div className="rounded-3xl bg-linear-to-br from-[#FEF9EF] via-white to-white border-2 border-amber-200 hover:border-amber-400 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div className="h-1.5 w-full bg-linear-to-r from-[#F59E0B] to-[#FB7185]" />
+            <div className="p-6 flex-1 flex flex-col justify-between gap-5">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 border border-amber-300 px-3 py-1 text-[11px] font-extrabold text-amber-950">
+                    <Palette className="w-3.5 h-3.5" />
+                    <span>AiAon Edu-Verse • 15 Live</span>
+                  </span>
+                  <Volume2 className="w-4 h-4 text-amber-600" />
+                </div>
+                <h3 className="text-lg font-extrabold text-[#0F172A]">
+                  {t("จิ้มแก๊ง 6 แมวฟังเสียง 2 ภาษา", "Tap 6 Cats for Bilingual Voice")}
+                </h3>
 
-              <div className="grid grid-cols-3 gap-1.5">
-                {MINI_CATS.map((c, idx) => (
-                  <button
-                    key={c.id}
-                    type="button"
-                    onClick={() => handlePickCat(idx)}
-                    className={`rounded-xl border px-2 py-1.5 text-xs font-bold cursor-pointer transition-all ${
-                      idx === catIdx
-                        ? "border-amber-500 bg-amber-100 text-slate-950 shadow-2xs"
-                        : "border-slate-200 bg-[#FFFDF7] text-slate-700 hover:border-amber-300"
-                    }`}
-                  >
-                    {c.emoji} {c.name}
-                  </button>
-                ))}
+                <div className="grid grid-cols-3 gap-1.5">
+                  {MINI_CATS.map((c, idx) => (
+                    <button
+                      key={c.id}
+                      type="button"
+                      onClick={() => handlePickCat(idx)}
+                      className={`rounded-xl border px-2 py-1.5 text-xs font-bold cursor-pointer transition-all ${
+                        idx === catIdx
+                          ? "border-amber-500 bg-amber-200/80 text-slate-950 shadow-2xs"
+                          : "border-amber-200/80 bg-white text-slate-700 hover:border-amber-400"
+                      }`}
+                    >
+                      {c.emoji} {c.name}
+                    </button>
+                  ))}
+                </div>
+
+                <div className={`rounded-2xl border p-3 text-center space-y-0.5 ${activeCat.badge}`}>
+                  <div className="text-sm font-extrabold">{activeCat.word}</div>
+                  <div className="text-[11px] font-semibold opacity-90">“{activeCat.aff}”</div>
+                </div>
               </div>
 
-              <div className={`rounded-2xl border p-3 text-center space-y-0.5 ${activeCat.badge}`}>
-                <div className="text-sm font-extrabold">{activeCat.word}</div>
-                <div className="text-[11px] font-semibold opacity-90">“{activeCat.aff}”</div>
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/edu/cb01"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl bg-amber-400 hover:bg-amber-500 px-3.5 py-2.5 text-xs font-extrabold text-slate-950 transition-colors"
+                >
+                  <span>{t("ลองระบายสีฟรี", "Color Online Free")}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                <Link
+                  href="/edu/fc01"
+                  className="inline-flex items-center justify-center rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 px-3 py-2.5 text-xs font-bold text-amber-950"
+                >
+                  {t("การ์ดเสียง →", "Cards →")}
+                </Link>
               </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Link
-                href="/edu/cb01"
-                className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl bg-amber-400 hover:bg-amber-500 px-3.5 py-2.5 text-xs font-extrabold text-slate-950 transition-colors"
-              >
-                <span>ลองระบายสีฟรี</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-              <Link
-                href="/edu/fc01"
-                className="inline-flex items-center justify-center rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 px-3 py-2.5 text-xs font-bold text-amber-950"
-              >
-                การ์ดเสียง →
-              </Link>
             </div>
           </div>
 
           {/* MINI APP 3: CREATIVE LAZINESS TIME-SAVED ROI CALCULATOR */}
-          <div className="rounded-3xl bg-white border border-[#E2E8F0] p-6 shadow-2xs flex flex-col justify-between gap-5">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] font-extrabold text-blue-800">
-                  <Sliders className="w-3.5 h-3.5" />
-                  <span>AiAon Tech • Time ROI</span>
-                </span>
-                <Clock className="w-4 h-4 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-extrabold text-[#0F172A]">
-                คำนวณเวลาที่ระบบคืนให้ชีวิตคุณ
-              </h3>
-
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs font-bold text-slate-700">
-                  <span>งานเอกสารซ้ำๆ ต่อสัปดาห์</span>
-                  <span className="text-[#1D4ED8] font-mono">{hoursPerWeek} ชม./สัปดาห์</span>
+          <div className="rounded-3xl bg-linear-to-br from-[#EFF6FF]/90 via-white to-white border-2 border-blue-200 hover:border-blue-400 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div className="h-1.5 w-full bg-linear-to-r from-[#2563EB] to-[#6366F1]" />
+            <div className="p-6 flex-1 flex flex-col justify-between gap-5">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-100 border border-blue-200 px-3 py-1 text-[11px] font-extrabold text-blue-900">
+                    <Sliders className="w-3.5 h-3.5" />
+                    <span>AiAon Tech • Time ROI</span>
+                  </span>
+                  <Clock className="w-4 h-4 text-blue-600" />
                 </div>
-                <input
-                  type="range"
-                  min={2}
-                  max={20}
-                  step={1}
-                  value={hoursPerWeek}
-                  onChange={(e) => setHoursPerWeek(Number(e.target.value))}
-                  aria-label="ชั่วโมงงานเอกสารต่อสัปดาห์"
-                  className="w-full accent-[#2563EB] cursor-pointer"
-                />
-              </div>
+                <h3 className="text-lg font-extrabold text-[#0F172A]">
+                  {t("คำนวณเวลาที่ระบบคืนให้ชีวิตคุณ", "Calculate Hours Saved Per Year")}
+                </h3>
 
-              <div className="rounded-2xl bg-blue-50/80 border border-blue-200 p-3.5 flex items-center justify-between gap-2">
-                <div>
-                  <div className="text-[11px] font-bold text-blue-900">ระบบอัตโนมัติช่วยคืนเวลาให้</div>
-                  <div className="text-2xl font-black text-[#1D4ED8] tabular-nums">
-                    +{savedHoursPerYear} ชม./ปี
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+                    <span>{t("งานเอกสารซ้ำๆ ต่อสัปดาห์", "Repetitive tasks / week")}</span>
+                    <span className="text-[#1D4ED8] font-mono">
+                      {hoursPerWeek} {t("ชม./สัปดาห์", "hrs/wk")}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min={2}
+                    max={20}
+                    step={1}
+                    value={hoursPerWeek}
+                    onChange={(e) => setHoursPerWeek(Number(e.target.value))}
+                    aria-label={t("ชั่วโมงงานเอกสารต่อสัปดาห์", "Weekly repetitive hours")}
+                    className="w-full accent-[#2563EB] cursor-pointer"
+                  />
+                </div>
+
+                <div className="rounded-2xl bg-blue-100/70 border border-blue-200 p-3.5 flex items-center justify-between gap-2">
+                  <div>
+                    <div className="text-[11px] font-bold text-blue-900">
+                      {t("ระบบอัตโนมัติช่วยคืนเวลาให้", "Automation returns")}
+                    </div>
+                    <div className="text-2xl font-black text-[#1D4ED8] tabular-nums">
+                      +{savedHoursPerYear} {t("ชม./ปี", "hrs/yr")}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className="inline-block rounded-xl bg-white border border-blue-200 px-2.5 py-1 text-xs font-extrabold text-slate-900">
+                      ≈ {savedWorkDays} {t("วันทำงานเต็ม!", "work days!")}
+                    </span>
                   </div>
                 </div>
-                <div className="text-right">
-                  <span className="inline-block rounded-xl bg-white border border-blue-200 px-2.5 py-1 text-xs font-extrabold text-slate-900">
-                    ≈ {savedWorkDays} วันทำงานเต็ม!
-                  </span>
-                </div>
               </div>
-            </div>
 
-            <Link
-              href="/digital-vault"
-              className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] px-4 py-2.5 text-xs sm:text-sm font-bold text-white transition-colors"
-            >
-              <span>ดูคลัง 20+ ระบบอัตโนมัติ</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+              <Link
+                href="/digital-vault"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] px-4 py-2.5 text-xs sm:text-sm font-bold text-white transition-colors"
+              >
+                <span>{t("ดูคลัง 20+ ระบบอัตโนมัติ", "Explore 20+ Automation Apps")}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

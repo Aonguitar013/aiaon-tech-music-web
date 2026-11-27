@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { FaLine } from "react-icons/fa6";
 import { EDU_CATALOG, getEduOrderLineUrl } from "@/lib/eduCatalog";
+import { useSiteLang } from "@/components/providers/LanguageProvider";
 
 type AudienceMode = "home" | "class";
 type GoalFilterId =
@@ -148,6 +149,7 @@ const HOW_IT_WORKS = [
 ];
 
 export function EduHubClient() {
+  const { lang, t } = useSiteLang();
   const [audience, setAudience] = useState<AudienceMode>("home");
   const [selectedGoal, setSelectedGoal] = useState<GoalFilterId>("all");
 
@@ -191,18 +193,18 @@ export function EduHubClient() {
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold text-[#1E293B] leading-[1.2] tracking-tight">
-                เลิกบ่นซ้ำทุกเช้า!{" "}
-                <span className="text-rose-600">สื่อกิจกรรมไร้จอ + QR จับเวลา</span>{" "}
-                ที่ลูกหยิบเล่นเองได้ทุกวัน
+                {t("เลิกบ่นซ้ำทุกเช้า!", "Stop Nagging Every Morning!")}{" "}
+                <span className="text-rose-600">
+                  {t("สื่อกิจกรรมไร้จอ + QR จับเวลา", "Screen-Free Kits + Hybrid QR Apps")}
+                </span>{" "}
+                {t("ที่ลูกหยิบเล่นเองได้ทุกวัน", "Kids Actually Love Using Daily")}
               </h1>
 
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
-                เปลี่ยนเวลาหน้าจอมือถือให้เป็นการเรียนรู้บนกระดาษที่ลูกสนุกจริง — ครบทั้ง
-                <strong className="text-slate-900"> ฝึกสมอง EF, ตารางสร้างวินัย 30 วัน, Busy Book 45 การ์ดตีนตุ๊กแก</strong>{" "}
-                และดนตรีเด็กเล็ก โดยแก๊ง 6 แมว &amp; ครูอ้น{" "}
-                <span className="font-semibold text-slate-800">
-                  ได้ครบ TH/EN + สีและขาวดำประหยัดหมึกทุกชุด
-                </span>
+                {t(
+                  "เปลี่ยนเวลาหน้าจอมือถือให้เป็นการเรียนรู้บนกระดาษที่ลูกสนุกจริง — ครบทั้ง ฝึกสมอง EF, ตารางสร้างวินัย 30 วัน, Busy Book, นิทานภาพ 6 เล่ม, สมุดระบายสี 40 หน้า & แฟลชการ์ด 48 ใบ โดยแก๊ง 6 แมว & ครูอ้น ได้ครบ TH/EN + สีและขาวดำประหยัดหมึกทุกชุด",
+                  "Turn screen time into joyful hands-on learning — 15 teacher-crafted kits (Workbooks, 6 Watercolor Storybooks, 40-Page Coloring Book & 48 Bilingual Flashcards) starring The 6 Cats Squad. Every kit includes TH/EN + Color & Ink-Saving B&W PDFs!"
+                )}
               </p>
 
               {/* Dual-Path Audience Buttons (Home vs Class) */}
@@ -217,7 +219,9 @@ export function EduHubClient() {
                   }`}
                 >
                   <Home className="w-4 h-4 shrink-0" />
-                  <span>สำหรับคุณพ่อคุณแม่ (Home • เริ่ม 49฿)</span>
+                  <span>
+                    {t("สำหรับคุณพ่อคุณแม่ (Home • เริ่ม 49฿)", "For Parents (Home • From $2.99)")}
+                  </span>
                 </button>
 
                 <button
@@ -230,7 +234,9 @@ export function EduHubClient() {
                   }`}
                 >
                   <School className="w-4 h-4 shrink-0" />
-                  <span>สำหรับคุณครูอนุบาล (Class • ปริ้นท์ไม่อั้น)</span>
+                  <span>
+                    {t("สำหรับคุณครูอนุบาล (Class • ปริ้นท์ไม่อั้น)", "For Teachers (Class • Unlimited Prints)")}
+                  </span>
                 </button>
               </div>
 
@@ -529,10 +535,20 @@ export function EduHubClient() {
                             ? "bg-purple-600 hover:bg-purple-700 text-white"
                             : "bg-amber-400 hover:bg-amber-500 text-slate-950";
 
-              const activePrice =
-                audience === "home" ? item.priceHomeThb : item.priceClassThb;
-              const altPrice =
-                audience === "home" ? item.priceClassThb : item.priceHomeThb;
+              const activePriceDisplay =
+                lang === "en"
+                  ? audience === "home"
+                    ? item.priceHomeUsd
+                    : item.priceClassUsd
+                  : `${audience === "home" ? item.priceHomeThb : item.priceClassThb} ฿`;
+              const altPriceDisplay =
+                lang === "en"
+                  ? audience === "home"
+                    ? `Class License ${item.priceClassUsd}`
+                    : `Home License ${item.priceHomeUsd}`
+                  : audience === "home"
+                    ? `สิทธิ์ครู Class ${item.priceClassThb} ฿`
+                    : `สิทธิ์บ้าน Home ${item.priceHomeThb} ฿`;
 
               return (
                 <article
@@ -554,7 +570,7 @@ export function EduHubClient() {
                             : "bg-purple-100 text-purple-900 border-purple-300"
                         }`}
                       >
-                        {item.badgeTh}
+                        {lang === "en" ? item.badgeEn : item.badgeTh}
                       </span>
                     </div>
 
@@ -564,7 +580,7 @@ export function EduHubClient() {
                         <div className="sm:col-span-5 rounded-2xl overflow-hidden border border-slate-200 bg-[#FEF9EF] aspect-square shadow-xs">
                           <img
                             src={item.coverImage}
-                            alt={item.titleTh}
+                            alt={lang === "en" ? item.titleEn : item.titleTh}
                             className="w-full h-full object-cover"
                           />
                         </div>
@@ -582,20 +598,20 @@ export function EduHubClient() {
                             </div>
                             <div className="min-w-0">
                               <div className="text-xs font-bold text-slate-500">
-                                {item.characterNameTh}
+                                {lang === "en" ? item.characterNameEn : item.characterNameTh}
                               </div>
                               <div className="text-xs font-bold text-amber-800">
-                                {item.ageRangeTh}
+                                {lang === "en" ? item.ageRangeEn : item.ageRangeTh}
                               </div>
                             </div>
                           </div>
 
                           <h3 className="text-base sm:text-lg font-extrabold text-[#1E293B] leading-snug">
-                            {item.titleTh}
+                            {lang === "en" ? item.titleEn : item.titleTh}
                           </h3>
 
                           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                            {item.subtitleTh}
+                            {lang === "en" ? item.subtitleEn : item.subtitleTh}
                           </p>
                         </div>
                       </div>
@@ -616,26 +632,26 @@ export function EduHubClient() {
                               : "text-sky-700"
                           }`}
                         >
-                          {activePrice} ฿
+                          {activePriceDisplay}
                         </strong>
                         <span className="text-xs text-slate-500">
-                          ({item.pages} หน้า • 4 PDF)
+                          ({item.pages} {t("หน้า", "Pages")} • 4 PDF)
                         </span>
                       </div>
                       <span className="text-xs text-slate-500">
-                        {audience === "home"
-                          ? `สิทธิ์ครู Class ${altPrice} ฿`
-                          : `สิทธิ์บ้าน Home ${altPrice} ฿`}
+                        {altPriceDisplay}
                       </span>
                     </div>
 
                     {isLive ? (
                       <div className="flex flex-col sm:flex-row gap-2">
                         <Link
-                          href={`/edu/${item.slug}`}
+                          href={`/edu/${item.slug}${lang === "en" ? "?lang=en" : ""}`}
                           className={`flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold shadow-sm transition-colors ${ctaBg}`}
                         >
-                          <span>เปิดหน้า Hybrid QR &amp; โหลดฟรี 5 หน้า</span>
+                          <span>
+                            {t("เปิดหน้า Hybrid QR & โหลดฟรี 5 หน้า", "Open Hybrid QR App & 5 Free Pages")}
+                          </span>
                           <ArrowRight className="w-4 h-4 shrink-0" />
                         </Link>
                         {audience === "class" && (
@@ -643,14 +659,14 @@ export function EduHubClient() {
                             href={getEduOrderLineUrl({
                               sku: item.sku,
                               edition: "CLASS",
-                              lang: "th",
+                              lang,
                             })}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-sky-300 bg-sky-50 hover:bg-sky-100 px-3.5 py-2.5 text-xs sm:text-sm font-bold text-sky-900 transition-colors"
                           >
                             <FaLine className="w-4 h-4 text-[#06C755]" />
-                            <span>สั่ง Class</span>
+                            <span>{t("สั่ง Class", "Order Class")}</span>
                           </a>
                         )}
                       </div>

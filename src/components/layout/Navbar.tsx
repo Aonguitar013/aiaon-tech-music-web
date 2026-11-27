@@ -29,7 +29,9 @@ import {
   Zap,
   ScrollText,
   ArrowUpRight,
+  Globe,
 } from "lucide-react";
+import { useSiteLang } from "@/components/providers/LanguageProvider";
 import { useCommandMenu } from "@/components/command-menu/CommandMenuProvider";
 import {
   Sheet,
@@ -107,6 +109,7 @@ interface NavbarProps {
 
 export function Navbar({ user: initialUser = null }: NavbarProps) {
   const pathname = usePathname();
+  const { lang, setLang, t } = useSiteLang();
   const [user, setUser] = useState<SupabaseUser | null>(initialUser);
   const { open: openCommandMenu } = useCommandMenu();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -280,15 +283,47 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
 
         {/* Right Action Controls (Desktop) */}
         <div className="hidden lg:flex items-center gap-2 shrink-0">
+          {/* Global Language Switcher (TH | EN) */}
+          <div
+            role="group"
+            aria-label="Language switcher"
+            className="inline-flex items-center rounded-xl bg-white border border-[#E2E8F0] p-0.5 text-xs font-bold shadow-2xs"
+          >
+            <button
+              type="button"
+              onClick={() => setLang("th")}
+              className={cn(
+                "px-2.5 py-1.5 rounded-lg transition-colors cursor-pointer",
+                lang === "th"
+                  ? "bg-[#0F172A] text-white"
+                  : "text-[#475569] hover:text-[#0F172A]"
+              )}
+            >
+              TH
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang("en")}
+              className={cn(
+                "px-2.5 py-1.5 rounded-lg transition-colors cursor-pointer",
+                lang === "en"
+                  ? "bg-[#0F172A] text-white"
+                  : "text-[#475569] hover:text-[#0F172A]"
+              )}
+            >
+              EN
+            </button>
+          </div>
+
           {/* Quick Search (⌘K) */}
           <button
             type="button"
             onClick={openCommandMenu}
-            aria-label="ค้นหาด่วน (Ctrl+K)"
+            aria-label={t("ค้นหาด่วน (Ctrl+K)", "Quick Search (Ctrl+K)")}
             className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white hover:bg-[#FFFFFF] border border-[#E2E8F0] hover:border-[#2563EB]/40 text-[#475569] hover:text-[#0F172A] text-xs font-prompt transition-all cursor-pointer shadow-2xs"
           >
             <Search className="w-3.5 h-3.5 text-[#2563EB]" />
-            <span className="hidden xl:inline">ค้นหา...</span>
+            <span className="hidden xl:inline">{t("ค้นหา...", "Search...")}</span>
             <kbd className="inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono text-[#64748B] bg-[#F8FAFC] border border-[#E2E8F0] rounded-md">
               ⌘K
             </kbd>
@@ -300,7 +335,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#FEF3C7] hover:bg-[#FDE68A] text-[#78350F] border border-[#FDE68A] text-sm font-prompt font-semibold transition-all whitespace-nowrap shadow-2xs"
           >
             <Gift className="w-4 h-4 shrink-0" />
-            <span>Freebies</span>
+            <span>{t("แจกฟรี", "Freebies")}</span>
           </Link>
 
           {/* Auth-Aware Console CTA */}
@@ -311,13 +346,13 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
                 className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] text-white text-sm font-prompt font-semibold transition-all whitespace-nowrap"
               >
                 <LayoutDashboard className="w-4 h-4 shrink-0" />
-                <span>แผงควบคุม</span>
+                <span>{t("แผงควบคุม", "Console")}</span>
               </Link>
               <button
                 type="button"
                 onClick={handleLogout}
-                aria-label="ออกจากระบบ"
-                title="ออกจากระบบ"
+                aria-label={t("ออกจากระบบ", "Sign Out")}
+                title={t("ออกจากระบบ", "Sign Out")}
                 className="inline-flex items-center justify-center p-2 rounded-xl border border-[#E2E8F0] bg-white text-[#475569] hover:text-[#BE123C] hover:border-[#FECDD3] hover:bg-[#FFF1F2] transition-colors cursor-pointer"
               >
                 <LogOut className="w-4 h-4" />
@@ -329,7 +364,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0F172A] hover:bg-[#1E293B] text-white text-sm font-prompt font-semibold transition-all whitespace-nowrap shadow-xs"
             >
               <LogIn className="w-4 h-4 shrink-0" />
-              <span>เข้าสู่ระบบ</span>
+              <span>{t("เข้าสู่ระบบ", "Sign In")}</span>
             </Link>
           )}
         </div>
@@ -338,8 +373,18 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
         <div className="flex lg:hidden items-center gap-1.5">
           <button
             type="button"
+            onClick={() => setLang(lang === "th" ? "en" : "th")}
+            aria-label="Switch Language"
+            className="inline-flex items-center gap-1 px-2.5 py-2 rounded-xl bg-white border border-[#E2E8F0] text-[#0F172A] text-xs font-extrabold cursor-pointer"
+          >
+            <Globe className="w-3.5 h-3.5 text-[#2563EB]" />
+            <span>{lang.toUpperCase()}</span>
+          </button>
+
+          <button
+            type="button"
             onClick={openCommandMenu}
-            aria-label="ค้นหาด่วน (Ctrl+K)"
+            aria-label={t("ค้นหาด่วน (Ctrl+K)", "Quick Search")}
             className="p-2.5 rounded-xl bg-white border border-[#E2E8F0] text-[#0F172A] hover:bg-[#FFFFFF] transition-colors cursor-pointer"
           >
             <Search className="h-4 w-4 text-[#2563EB]" />
@@ -350,7 +395,7 @@ export function Navbar({ user: initialUser = null }: NavbarProps) {
             className="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-[#FEF3C7] text-[#78350F] border border-[#FDE68A] text-xs font-prompt font-semibold whitespace-nowrap"
           >
             <Gift className="w-3.5 h-3.5" />
-            <span>ฟรี</span>
+            <span>{t("ฟรี", "Free")}</span>
           </Link>
 
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
