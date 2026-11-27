@@ -45,16 +45,16 @@ const GOAL_FILTERS: {
   {
     id: "all",
     age: "ทุกช่วงวัย 3–7 ปี",
-    goal: "ครบทั้ง 8 เล่ม Live!",
+    goal: "ครบทั้ง 13 เล่ม Live!",
     emoji: "👑",
-    desc: "แสดงสื่อการสอน & นิทานภาพ Hybrid QR ครบทั้งหมด 8 ชุด (Level 1 ครบ 6 เล่ม + Level 2 ป.1 + นิทานก่อนนอน SEL)",
+    desc: "แสดงสื่อการสอน & นิทานภาพ Hybrid QR ครบทั้งหมด 13 ชุด (ใบงาน Level 1 ครบ 6 เล่ม + Level 2 ป.1 + นิทานภาพแก๊ง 6 แมว Season 1 ครบ 6/6 เล่ม!)",
   },
   {
     id: "st01",
     age: "นิทาน • 3–6 ปี",
-    goal: "นิทานก่อนนอน SEL / เสียงอ่าน TH-EN",
+    goal: "นิทานภาพแก๊ง 6 แมว ครบ 6/6 เล่ม!",
     emoji: "📖",
-    desc: "NEW นิทานภาพสีน้ำ 16 หน้า 'คืนที่ก้อนเมฆสีเทาหายไป' (น้องดำ × แม่ใหญ่) + เว็บเสียงเล่านิทาน & หายใจ 4-4-4!",
+    desc: "🏆 Season 1 ครบ 6/6 เล่ม! นิทานภาพสีน้ำ 16 หน้า (ST01–ST06) ครบทั้ง 6 คาแรกเตอร์ + เว็บเสียงเล่านิทาน TH/EN & เกมประกอบฟรีทุกเล่ม!",
   },
   {
     id: "sn01",
@@ -138,7 +138,9 @@ export function EduHubClient() {
   const filteredCatalog =
     selectedGoal === "all"
       ? EDU_CATALOG
-      : EDU_CATALOG.filter((item) => item.slug === selectedGoal);
+      : selectedGoal === "st01"
+        ? EDU_CATALOG.filter((item) => item.slug.startsWith("st"))
+        : EDU_CATALOG.filter((item) => item.slug === selectedGoal);
 
   const activeGoalMeta =
     GOAL_FILTERS.find((g) => g.id === selectedGoal) ?? GOAL_FILTERS[0];
@@ -223,14 +225,14 @@ export function EduHubClient() {
                   className="inline-flex items-center gap-1.5 text-amber-800 hover:text-amber-950 underline underline-offset-4"
                 >
                   <Download className="w-4 h-4 text-amber-600" />
-                  <span>ทดลองโหลดฟรีครบ 8 เล่ม รวม 40 หน้า (0 ฿ ไม่ต้องสมัคร)</span>
+                  <span>ทดลองโหลดฟรีครบ 13 เล่ม รวม 65 หน้า (0 ฿ ไม่ต้องสมัคร)</span>
                 </a>
                 <a
                   href="#mega-bundle"
                   className="inline-flex items-center gap-1.5 text-emerald-700 hover:text-emerald-900 underline underline-offset-4"
                 >
                   <Gift className="w-4 h-4 text-emerald-600" />
-                  <span>โปรเหมาสุดคุ้ม 249฿ / 449฿ (ครบ 6 เล่ม)</span>
+                  <span>โปรเหมาสุดคุ้ม 249฿ / Boxset นิทาน 349฿ / 449฿</span>
                 </a>
               </div>
             </div>
@@ -244,10 +246,10 @@ export function EduHubClient() {
                 />
                 <div className="bg-white/95 backdrop-blur-sm border-t border-amber-100 px-4 py-2.5 flex items-center justify-between gap-2 text-xs">
                   <span className="font-bold text-slate-800">
-                    👑 8 เล่ม Live (LV1 6 เล่ม + LV2 ป.1 + นิทานภาพ SEL)
+                    👑 13 เล่ม Live (ใบงาน 7 เล่ม + นิทาน Season 1 ครบ 6/6!)
                   </span>
                   <span className="rounded-full bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 font-bold text-emerald-800 shrink-0">
-                    ฟรี 40 หน้า!
+                    ฟรี 65 หน้า!
                   </span>
                 </div>
               </div>
@@ -755,7 +757,66 @@ export function EduHubClient() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            {/* Option 0: Season 1 Complete 6-Book Storybook Boxset (349 THB — Save 125 THB!) */}
+            <div className="rounded-2xl border-2 border-indigo-400 bg-white p-5 sm:p-6 flex flex-col justify-between gap-5 shadow-md">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-indigo-600 px-3 py-1 text-xs font-extrabold text-white">
+                    <span>🏆 Season 1 Boxset ครบ 6/6 เล่ม!</span>
+                  </span>
+                  <span className="text-xs font-mono font-bold text-indigo-900 bg-indigo-50 border border-indigo-200 rounded-full px-2.5 py-0.5">
+                    96 หน้า • 12 PDF
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-extrabold text-[#1E293B]">
+                    Boxset นิทานภาพแก๊ง 6 แมว ครบ 6 เล่ม (ST01–ST06)
+                  </h3>
+                  <div className="mt-2 flex items-baseline gap-2.5 flex-wrap">
+                    <span className="text-4xl font-extrabold text-indigo-700">
+                      349 ฿
+                    </span>
+                    <span className="text-sm text-slate-400 line-through">
+                      474 ฿
+                    </span>
+                    <span className="text-xs font-semibold text-slate-600">
+                      (ประหยัด 125 ฿ • เฉลี่ยเล่มละ 58 ฿!)
+                    </span>
+                  </div>
+                </div>
+
+                <ul className="space-y-2 text-sm text-slate-700">
+                  {[
+                    "ครบทั้ง 6 เล่ม: น้องดำ (SEL) + น้องชาบู (แปรงฟัน) + แม่ใหญ่ (กิจวัตรเช้า)",
+                    "ครบเล่ม 4–6: น้องข้าวต้ม (70 BPM) + น้องบ๊อบ (กล้าไป รร.) + น้องแซลมอน (สมาธิ EF)",
+                    "ครบ 12 ไฟล์ PDF สีเต็มรูปแบบ (TH + EN ทั้ง 6 เล่ม) ปริ้นท์หรือเปิด iPad ได้เลย",
+                    "ฟรี! เว็บเสียงเล่านิทาน TH/EN + เกมประกอบทั้ง 6 หน้า (/edu/st01–st06) ไร้โฆษณา",
+                  ].map((line) => (
+                    <li key={line} className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <a
+                href={getEduOrderLineUrl({
+                  sku: "EDU-ST06",
+                  edition: "STORYBOOK_S1_BOXSET",
+                  lang: "th",
+                })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-indigo-600 hover:bg-indigo-700 px-5 py-3.5 text-base font-bold text-white shadow-md shadow-indigo-500/20 transition-colors"
+              >
+                <FaLine className="w-5 h-5 shrink-0" />
+                <span>สั่งซื้อ Boxset นิทาน 6 เล่ม (349 ฿) ทาง LINE</span>
+              </a>
+            </div>
+
             {/* Option 1: 3-Book Live Trio Pack (249 THB — 100% Live Today!) */}
             <div className="rounded-2xl border-2 border-emerald-400 bg-white p-5 sm:p-6 flex flex-col justify-between gap-5 shadow-md">
               <div className="space-y-4">

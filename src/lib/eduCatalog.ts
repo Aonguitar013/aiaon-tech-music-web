@@ -299,6 +299,87 @@ export const EDU_CATALOG: EduSkuItem[] = [
     badgeTh: "NEW เล่ม 3 • นาฬิกากิจวัตร 4 โหมด",
     badgeEn: "NEW Book 3 • 4-Mode Routine Timer",
   },
+  {
+    sku: "EDU-ST04",
+    slug: "st04",
+    status: "live",
+    accent: "fuchsia",
+    characterNameTh: "น้องข้าวต้ม × แม่ใหญ่ (Book 4)",
+    characterNameEn: "Khao Tom & Mama Mami (Book 4)",
+    titleTh: "นิทานดนตรีคุมพลังล้น: จังหวะหัวใจของน้องข้าวต้ม",
+    titleEn: "Rhythm Storybook: Khao Tom's Steady Heartbeat Drum",
+    subtitleTh:
+      "นิทานภาพสีน้ำ 16 หน้า (ชุดนิทานพลังใจแก๊ง 6 แมว เล่มที่ 4) ชวนลูกคุมพลังงานล้นด้วยกลองจังหวะหัวใจ 3 สปีด (70 BPM) + เสียงเล่านิทาน TH/EN!",
+    subtitleEn:
+      "16-Page Full-Color Watercolor Rhythm Storybook (The 6 Cats Gentle Heart Series, Book 4) + Free 3-Speed 70 BPM Drum & Audio App!",
+    ageRangeTh: "อายุ 3–6 ปี • นิทานคุมพลังงาน & ดนตรี",
+    ageRangeEn: "Ages 3–6 • Self-Control & Rhythm Storybook",
+    pages: 16,
+    heroImage: "/edu/khaotom-3d.webp",
+    coverImage: "/edu/st04/mockup-01-cover.webp",
+    freebieThUrl: "/edu/st04/EDU-ST04_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/st04/EDU-ST04_Freebie_5Pages_EN.pdf",
+    priceHomeThb: 79,
+    priceHomeUsd: "$3.99",
+    priceClassThb: 159,
+    priceClassUsd: "$6.99",
+    badgeTh: "NEW เล่ม 4 • กลองจังหวะ 70 BPM",
+    badgeEn: "NEW Book 4 • 70 BPM Heartbeat Drum",
+  },
+  {
+    sku: "EDU-ST05",
+    slug: "st05",
+    status: "live",
+    accent: "teal",
+    characterNameTh: "น้องบ๊อบ × แม่ใหญ่ (Book 5)",
+    characterNameEn: "Explorer Bob & Mama Mami (Book 5)",
+    titleTh: "นิทานความกล้าไปโรงเรียน: วันแรกที่โรงเรียนของน้องบ๊อบ",
+    titleEn: "Brave School Storybook: Explorer Bob's Brave First Day",
+    subtitleTh:
+      "นิทานภาพสีน้ำ 16 หน้า (ชุดนิทานพลังใจแก๊ง 6 แมว เล่มที่ 5) ลดร้องไห้หน้าประตู รร. ด้วยตราหัวใจอุ่น & แผนที่ความกล้า 3 ก้าว + กระดานคำทักทาย TH/EN!",
+    subtitleEn:
+      "16-Page Full-Color Watercolor First-Day School Storybook (The 6 Cats Gentle Heart Series, Book 5) + Free Hello Board & Audio App!",
+    ageRangeTh: "อายุ 3–6 ปี • นิทานความกล้าไป รร. & เพื่อนใหม่",
+    ageRangeEn: "Ages 3–6 • Brave School Days & Friendship Storybook",
+    pages: 16,
+    heroImage: "/edu/bob-3d.webp",
+    coverImage: "/edu/st05/mockup-01-cover.webp",
+    freebieThUrl: "/edu/st05/EDU-ST05_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/st05/EDU-ST05_Freebie_5Pages_EN.pdf",
+    priceHomeThb: 79,
+    priceHomeUsd: "$3.99",
+    priceClassThb: 159,
+    priceClassUsd: "$6.99",
+    badgeTh: "NEW เล่ม 5 • แผนที่ความกล้า 3 ก้าว",
+    badgeEn: "NEW Book 5 • 3-Step Brave Map",
+  },
+  {
+    sku: "EDU-ST06",
+    slug: "st06",
+    status: "live",
+    accent: "amber",
+    characterNameTh: "น้องแซลมอน × แม่ใหญ่ (Book 6 • Finale)",
+    characterNameEn: "Detective Salmon & Mama Mami (Book 6 • Finale)",
+    titleTh: "นิทานฝึกสมาธิ EF: นักสืบแซลมอนกับปริศนาที่หายไป",
+    titleEn: "EF Focus Storybook: Detective Salmon's Patient Clue Hunt",
+    subtitleTh:
+      "นิทานภาพสีน้ำ 16 หน้า เล่มปิดซีซัน 1 (6/6) ฝึกสมาธิ การรอคอย & ไม่ยอมแพ้ด้วยสูตรนักสืบ 3 ขั้น + นาฬิกา Focus Timer 5 นาที & เสียงเล่านิทาน TH/EN!",
+    subtitleEn:
+      "16-Page Season 1 Finale Watercolor EF Storybook (Book 6/6) Building Focus, Patience & Persistence + Free 5-Min Focus Timer & Audio App!",
+    ageRangeTh: "อายุ 3–6 ปี • นิทานสมาธิ EF & การรอคอย",
+    ageRangeEn: "Ages 3–6 • EF Focus & Patience Storybook",
+    pages: 16,
+    heroImage: "/edu/salmon-3d.webp",
+    coverImage: "/edu/st06/mockup-01-cover.webp",
+    freebieThUrl: "/edu/st06/EDU-ST06_Freebie_5Pages_TH.pdf",
+    freebieEnUrl: "/edu/st06/EDU-ST06_Freebie_5Pages_EN.pdf",
+    priceHomeThb: 79,
+    priceHomeUsd: "$3.99",
+    priceClassThb: 159,
+    priceClassUsd: "$6.99",
+    badgeTh: "👑 ปิดซีซัน 1 (6/6) • Focus Timer 5 น.",
+    badgeEn: "👑 Season 1 Finale • 5-Min Focus Timer",
+  },
 ];
 
 export type EduOrderEdition =
@@ -309,6 +390,7 @@ export type EduOrderEdition =
   | "ALL4_BUNDLE"
   | "ALL5_BUNDLE"
   | "ALL6_BUNDLE"
+  | "STORYBOOK_S1_BOXSET"
   | "MEGA_BUNDLE"
   | "BUNDLE";
 
@@ -320,6 +402,14 @@ export function getEduOrderLineUrl(params: {
   const { sku, edition, lang } = params;
   const item =
     EDU_CATALOG.find((entry) => entry.sku === sku) ?? EDU_CATALOG[0];
+
+  if (edition === "STORYBOOK_S1_BOXSET") {
+    const msg =
+      lang === "th"
+        ? `สวัสดีครับครูอ้น สนใจสั่งซื้อ 🏆 Season 1 Boxset นิทานภาพแก๊ง 6 แมว ครบทั้ง 6/6 เล่ม (Home Edition):\n📖 1) EDU-ST01 น้องดำ — คืนที่ก้อนเมฆสีเทาหายไป (คุมอารมณ์ก่อนนอน)\n📖 2) EDU-ST02 น้องชาบู — ภารกิจปราบแมงกินฟัน (แปรงฟัน 2 นาที)\n📖 3) EDU-ST03 แม่ใหญ่ — เช้าวันใหม่ใจเย็นของแม่ใหญ่ (กิจวัตรเช้า)\n📖 4) EDU-ST04 น้องข้าวต้ม — จังหวะหัวใจของน้องข้าวต้ม (ดนตรี 70 BPM)\n📖 5) EDU-ST05 น้องบ๊อบ — วันแรกที่โรงเรียนของน้องบ๊อบ (ความกล้าไป รร.)\n📖 6) EDU-ST06 น้องแซลมอน — นักสืบแซลมอนกับปริศนาที่หายไป (สมาธิ EF)\n💰 ราคา Boxset ครบ 6 เล่ม: 349 ฿ (จากปกติ 474 ฿ • ประหยัด 125 ฿ • 96 หน้า 12 ไฟล์ PDF สีเต็ม TH/EN + 6 เว็บเสียงเล่านิทานฟรี!)\nรบกวนขอเลขพร้อมเพย์เพื่อรับไฟล์ PDF ทันทีครับ 🙏`
+        : `Hi Teacher Aon! I'd like to order the 🏆 Complete Season 1 Storybook Boxset (Books 1–6 • Home Edition • 96 Pages / 12 Full-Color Bilingual PDFs):\n📖 ST01 + ST02 + ST03 + ST04 + ST05 + ST06 + 6 Free Ad-Free Audio Storybook Apps!\n💰 Boxset Price: 349 THB ($14.99)\nPlease share payment & download instructions!`;
+    return getLineOrderUrl(msg);
+  }
 
   if (edition === "ALL6_BUNDLE") {
     const msg =

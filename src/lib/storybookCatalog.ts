@@ -162,7 +162,7 @@ export const SERIES_SEASON_1_BOOKS: SeriesBookSummary[] = [
     bookNo: 4,
     sku: "EDU-ST04",
     slug: "st04",
-    status: "next",
+    status: "live",
     emoji: "🥁",
     characterTh: "น้องข้าวต้ม",
     characterEn: "Khao Tom",
@@ -185,7 +185,7 @@ export const SERIES_SEASON_1_BOOKS: SeriesBookSummary[] = [
     bookNo: 5,
     sku: "EDU-ST05",
     slug: "st05",
-    status: "planned",
+    status: "live",
     emoji: "🎒",
     characterTh: "น้องบ๊อบ",
     characterEn: "Explorer Bob",
@@ -208,7 +208,7 @@ export const SERIES_SEASON_1_BOOKS: SeriesBookSummary[] = [
     bookNo: 6,
     sku: "EDU-ST06",
     slug: "st06",
-    status: "planned",
+    status: "live",
     emoji: "🔍",
     characterTh: "น้องแซลมอน",
     characterEn: "Detective Salmon",
@@ -1154,4 +1154,880 @@ export const ST03_CONFIG: StorybookConfig = {
       aEn: "You get both the 16-page watercolor storybook EDU-ST03 and the 32-page 30-Day Routine & Star Reward Kit EDU-RT01 (daily boards, 24 Velcro cards & 20-Star Jar) at a bundle discount!",
     },
   ],
+};
+
+export const ST04_CONFIG: StorybookConfig = {
+  "sku": "EDU-ST04",
+  "slug": "st04",
+  "bookNo": 4,
+  "theme": "purple",
+  "badgeTh": "NEW เล่ม 4 • กลองจังหวะหัวใจ 70 BPM",
+  "badgeEn": "NEW Book 4 • 70 BPM Heartbeat Drum",
+  "heroPrefixTh": "นิทานดนตรีคุมพลังล้น:",
+  "heroPrefixEn": "Rhythm Storybook:",
+  "titleTh": "จังหวะหัวใจของน้องข้าวต้ม",
+  "titleEn": "Khao Tom's Steady Heartbeat Drum",
+  "heroDescTh": "นิทานภาพสีน้ำ 16 หน้า (น้องข้าวต้ม × แม่ใหญ่) ชวนลูกคุมพลังงานล้นและฝึกสมาธิด้วยเกมกลองจังหวะหัวใจ 3 สปีด พร้อมเสียงเล่านิทาน TH/EN ฟรี!",
+  "heroDescEn": "16-page watercolor storybook (Khao Tom & Mama Mami) helping energetic kids calm down with a 3-speed Heartbeat Drum & free bilingual audio!",
+  "coverImage": "/edu/st04/01_cover.webp",
+  "coverAlt": "EDU-ST04 Khao Tom's Steady Heartbeat Drum",
+  "freebieTitleTh": "ชุดทดลองอ่านฟรี 5 หน้า (EDU-ST04)",
+  "freebieTitleEn": "Free 5-Page Sample (EDU-ST04)",
+  "freebieThUrl": "/edu/st04/EDU-ST04_Freebie_5Pages_TH.pdf",
+  "freebieEnUrl": "/edu/st04/EDU-ST04_Freebie_5Pages_EN.pdf",
+  "priceHomeThb": 79,
+  "priceHomeRegularThb": 129,
+  "priceHomeUsd": "$3.99",
+  "priceClassThb": 159,
+  "priceClassRegularThb": 249,
+  "priceClassUsd": "$6.99",
+  "homeBulletsTh": [
+    "นิทานภาพสีน้ำ 16 หน้าเต็ม (TH + EN ครบ 2 ภาษา)",
+    "ปริ้นท์อ่านหรือเปิดบน iPad ให้ลูกในครอบครัวได้ไม่จำกัด",
+    "คู่มือพ่อแม่ 3 ขั้น + 3 คำถามชวนคุย P14 + กิจกรรมวาดภาพ P15",
+    "เว็บเสียงเล่านิทาน /edu/st04 ไร้โฆษณา 100% ใช้ได้ตลอดชีพ"
+  ],
+  "classBulletsTh": [
+    "ลิขสิทธิ์คุณครู 1 ท่าน ใช้เปิดเล่าหน้าห้องเรียนได้ทั้งห้อง",
+    "ขึ้นจอทีวี/โปรเจกเตอร์พร้อมเปิดเสียงเล่านิทาน TH/EN ได้ทันที",
+    "ปริ้นท์หน้ากิจกรรม P15 แจกนักเรียน 30–40 คนได้ไม่จำกัด",
+    "ครบทั้งภาษาไทยและภาษาอังกฤษ เหมาะสำหรับห้องเรียนปกติและ EP"
+  ],
+  "pages": [
+    {
+      "pageNo": 3,
+      "image": "/edu/st04/02_p03.webp",
+      "tagTh": "หน้า 1 • น้องข้าวต้มพลังจรวด!",
+      "tagEn": "Page 1 • Rocket-Energy Khao Tom!",
+      "linesTh": [
+        "น้องข้าวต้มเป็นลูกแมวขาวที่พลังล้นที่สุด!",
+        "ตั้งแต่เช้า น้องกระโดดดึ๋งๆ วิ่งปรู๊ดรอบห้อง",
+        "\"ซูมมม! ปุ๊งๆ! ตะลุยอวกาศเลย!\"",
+        "หูฟังฟ้า-เหลืองสั่นดุ๊กดิ๊กเร็วเหมือนพายุ!"
+      ],
+      "linesEn": [
+        "Khao Tom was the bounciest kitten in the house!",
+        "All morning, he zoomed around the living room.",
+        "\"Zooooom! Boing-boing! Blast off to space!\"",
+        "His blue headphones wiggled to a whirlwind beat!"
+      ]
+    },
+    {
+      "pageNo": 4,
+      "image": "/edu/st04/03_p04.webp",
+      "tagTh": "หน้า 2 • อ๊ะ! เร็วเกินไปจนชนโครม!",
+      "tagEn": "Page 2 • Oops! Too Fast—Crash!",
+      "linesTh": [
+        "แต่พอน้องข้าวต้มวิ่งเร็วจนเบรกไม่อยู่...",
+        "โครม! บล็อกไม้ล้มกระจาย ดินสอสีกลิ้งเต็มพื้น!",
+        "ขาน้องยังกระตุกยุกยิก หยุดนิ่งไม่ได้เลย",
+        "\"ฮือ... หนูไม่ได้ตั้งใจ ทำไมตัวหยุดไม่ได้ล่ะ!\""
+      ],
+      "linesEn": [
+        "Wait—Khao Tom zoomed too fast to stop...",
+        "Crash! The block tower tumbled down the rug!",
+        "His wiggly paws kept bouncing on their own.",
+        "\"Aww... why won't my body slow down?\""
+      ]
+    },
+    {
+      "pageNo": 5,
+      "image": "/edu/st04/04_p05.webp",
+      "tagTh": "หน้า 3 • แม่ใหญ่กับกลองไม้ใบจิ๋ว",
+      "tagEn": "Page 3 • Mama Mami's Little Wooden Drum",
+      "linesTh": [
+        "แม่ใหญ่ไม่ได้ดุ และไม่สั่งให้นั่งนิ่งๆ เลย",
+        "แม่ใหญ่ยิ้มอุ่นๆ หยิบ \"กลองไม้สีม่วงทอง\" มาให้",
+        "\"พลังล้นไม่ผิดนะลูก แปลว่าหนูมีดนตรีเต็มตัว!\"",
+        "\"มาฝึกเป็นวาทยกรคุมจังหวะหัวใจกันไหมจ๊ะ?\""
+      ],
+      "linesEn": [
+        "Mama Mami didn't scold or say 'Sit still!'",
+        "She smiled and set a purple wooden drum down.",
+        "\"Big energy means you're full of music!\"",
+        "\"Let's conduct your Heartbeat Drum together!\""
+      ]
+    },
+    {
+      "pageNo": 6,
+      "image": "/edu/st04/05_p06.webp",
+      "tagTh": "หน้า 4 • ฟังเสียงกลองในอกของหนูสิ",
+      "tagEn": "Page 4 • Listen to the Drum Inside!",
+      "linesTh": [
+        "แม่ใหญ่จับอุ้งมือนุ่มๆ วางเบาๆ ที่หน้าอกน้อง",
+        "ตึกตัก-ตึกตัก! หัวใจน้องเต้นรัวเหมือนกลองรบ!",
+        "\"ได้ยินไหมลูก? หัวใจหนูตีกลองเร็วเหมือนจรวด\"",
+        "\"มาเล่นเกม 'กลอง 3 สปีด' ไปพร้อมแม่นะ!\""
+      ],
+      "linesEn": [
+        "Mama placed Khao Tom's soft paw on his chest.",
+        "Thump-thump-thump! His heart beat super fast!",
+        "\"Hear that? Your heart played a rocket beat!\"",
+        "\"Let's play our 3-Speed Drum Game together!\""
+      ]
+    },
+    {
+      "pageNo": 7,
+      "image": "/edu/st04/06_p07.webp",
+      "tagTh": "หน้า 5 • สปีดที่ 1 จังหวะจรวดเร็วปรื๋อ!",
+      "tagEn": "Page 5 • Speed 1: Super Fast Rocket Beat!",
+      "linesTh": [
+        "สปีดที่ 1: ปล่อยพลังให้สุดกับจังหวะเร็วปรื๋อ!",
+        "\"ตึ๊งตังตึ๊งตัง! ปรบมือรัวๆ ส่ายหางดุ๊กดิ๊ก!\"",
+        "น้องข้าวต้มหัวเราะเอิ๊กอ๊าก ตีกลองสุดสนุก",
+        "พลังที่อัดแน่นค่อยๆ ปลดปล่อยเป็นเสียงเพลง!"
+      ],
+      "linesEn": [
+        "Speed 1: Let out energy with a fast beat!",
+        "\"Bum-ba-da-bum! Tap fast and wiggle your tail!\"",
+        "Khao Tom giggled, drumming with bright notes.",
+        "All the big wiggles turned into happy music!"
+      ]
+    },
+    {
+      "pageNo": 8,
+      "image": "/edu/st04/07_p08.webp",
+      "tagTh": "หน้า 6 • สปีดที่ 2 จังหวะเดินสวนสนาม",
+      "tagEn": "Page 6 • Speed 2: Steady Marching Beat!",
+      "linesTh": [
+        "สปีดที่ 2: แตะเบรกเป็นจังหวะเดินสวนสนาม!",
+        "\"หนึ่ง... สอง... สาม... สี่... ตึง... ตัง...\"",
+        "น้องข้าวต้มย่ำเท้าตามจังหวะกลองอย่างพร้อมเพรียง",
+        "ลมหายใจเริ่มสม่ำเสมอ ไม่วิ่งชนอีกแล้ว!"
+      ],
+      "linesEn": [
+        "Speed 2: Slow down into a steady march!",
+        "\"One... two... three... four... boom... tap...\"",
+        "Khao Tom marched smoothly right beside Mama.",
+        "His breath grew even—no more bumping blocks!"
+      ]
+    },
+    {
+      "pageNo": 9,
+      "image": "/edu/st04/08_p09.webp",
+      "tagTh": "หน้า 7 • สปีดที่ 3 จังหวะหัวใจอุ่นๆ 70 BPM",
+      "tagEn": "Page 7 • Speed 3: Calm Heartbeat 70 BPM",
+      "linesTh": [
+        "สปีดที่ 3: ลดเสียงเบาๆ เป็นจังหวะหัวใจสงบ!",
+        "\"ตึก... ตัก... ตึก... ตัก... ช้าๆ นุ่มๆ\"",
+        "น้องข้าวต้มหลับตาพริ้ม เคาะกลองเบาๆ ตามใจ",
+        "โน้ตดนตรีสีม่วงทองลอยละล่องอุ่นทั่วห้อง!"
+      ],
+      "linesEn": [
+        "Speed 3: Soften down to a calm heartbeat!",
+        "\"Lub... dub... lub... dub... slow and gentle.\"",
+        "Khao Tom closed his eyes and tapped softly.",
+        "Warm purple and gold notes floated like stars!"
+      ]
+    },
+    {
+      "pageNo": 10,
+      "image": "/edu/st04/09_p10.webp",
+      "tagTh": "หน้า 8 • วาทยกรตัวน้อยคุมเบรกได้แล้ว!",
+      "tagEn": "Page 8 • Little Conductor in Control!",
+      "linesTh": [
+        "ว้าว! น้องข้าวต้มลืมตาขึ้นด้วยรอยยิ้มภูมิใจ",
+        "หัวใจเต้นนุ่มนวล มือและเท้าสงบนิ่งพร้อมฟัง!",
+        "\"แม่ดูสิ! หนูเบรกพลังจรวดได้ด้วยดนตรี!\"",
+        "น้องต่อหอคอยบล็อกไม้สูงใหม่ได้โดยไม่ล้ม!"
+      ],
+      "linesEn": [
+        "Whoa! Khao Tom smiled with bright pride.",
+        "His heart felt calm; his paws felt steady!",
+        "\"Look, Mama! I slowed my rocket down myself!\"",
+        "Carefully, he rebuilt the tall block tower!"
+      ]
+    },
+    {
+      "pageNo": 11,
+      "image": "/edu/st04/10_p11.webp",
+      "tagTh": "หน้า 9 • เล่นดนตรีด้วยกันเพราะกว่าเยอะเลย!",
+      "tagEn": "Page 9 • Music Sounds Sweeter Together!",
+      "linesTh": [
+        "พอฟังจังหวะเป็น น้องก็เล่นเข้าจังหวะกับแม่",
+        "ตึง... ตัง... กริ๊ง... เสียงดนตรีผสานไพเราะ",
+        "พลังล้นกลายเป็นพลังสร้างสรรค์สุดวิเศษ!",
+        "\"หนูชอบเป็นวาทยกรคุมหัวใจที่สุดเลยครับ!\""
+      ],
+      "linesEn": [
+        "Now Khao Tom played in sweet harmony with Mama!",
+        "Boom... tap... ting! Drum and chime blended.",
+        "His big energy turned into creative rhythm!",
+        "\"Being my own Heart Conductor is the best!\""
+      ]
+    },
+    {
+      "pageNo": 12,
+      "image": "/edu/st04/11_p12.webp",
+      "tagTh": "หน้า 10 • กอดอุ่นและเหรียญดาววาทยกร",
+      "tagEn": "Page 10 • Warm Hug & Conductor's Star",
+      "linesTh": [
+        "แม่ใหญ่กอดน้องแน่นๆ หัวใจเต้นเป็นจังหวะเดียว",
+        "\"เก่งมากลูก รู้จักเร่งและผ่อนคือพลังวิเศษจ้ะ\"",
+        "น้องข้าวต้มกอดแม่ตอบ เต็มไปด้วยความมั่นใจ",
+        "ไม่ว่าจะตื่นเต้นแค่ไหน เรามีกลองในใจเสมอ!"
+      ],
+      "linesEn": [
+        "Mama hugged Khao Tom—two hearts in one beat.",
+        "\"Speeding up and slowing down is a superpower!\"",
+        "Khao Tom hugged back, calm and confident.",
+        "His steady drum is always right inside!"
+      ]
+    },
+    {
+      "pageNo": 13,
+      "image": "/edu/st04/12_p13.webp",
+      "tagTh": "หน้า 11 • หลับฝันดีในจังหวะกล่อมหัวใจ",
+      "tagEn": "Page 11 • Sweet Dreams in a Gentle Beat",
+      "linesTh": [
+        "คืนนี้น้องวางหูฟังไว้ข้างหมอนอย่างเรียบร้อย",
+        "วางอุ้งมือบนอก ฟังหัวใจ ตึก... ตัก... ช้าๆ",
+        "จังหวะละมุนกล่อมน้องหลับใต้แสงดาวสีม่วงทอง",
+        "ฝันดีนะน้องข้าวต้ม... วาทยกรตัวน้อยของแม่"
+      ],
+      "linesEn": [
+        "Tonight, Khao Tom placed his headphones away.",
+        "Paw on chest, he heard: lub... dub... slow.",
+        "A gentle beat carried him to starry dreams.",
+        "Goodnight, Khao Tom... sweet dreams to you."
+      ]
+    }
+  ],
+  "dialogicQuestions": [
+    {
+      "emoji": "🚀",
+      "th": "1. วันนี้หัวใจของหนูเต้นเป็นจังหวะไหนบ่อยที่สุดครับ — สปีด 1 จรวดเร็วปรื๋อ, สปีด 2 สวนสนาม, หรือสปีด 3 หัวใจอุ่นๆ?",
+      "en": "1. Which beat did your heart play most today—Speed 1 Rocket, Speed 2 Marching, or Speed 3 Calm Heartbeat?"
+    },
+    {
+      "emoji": "🥁",
+      "th": "2. เวลาเราตื่นเต้นหรือพลังล้นเหมือนน้องข้าวต้ม เราลองเคาะตัก 'ตึก... ตัก...' ช้าลงตามจังหวะไหนดี?",
+      "en": "2. When big bouncy energy bubbles up like Khao Tom's, how can we use our lap drum to slow down?"
+    },
+    {
+      "emoji": "💜",
+      "th": "3. คืนนี้เรามาเปิดแอปจังหวะหัวใจ 70 BPM เคาะกลอง 3 สปีดแข่งกับน้องข้าวต้มก่อนนอนกันไหม?",
+      "en": "3. Shall we open the 70 BPM Heartbeat Drum tonight and practice slowing down together just like Khao Tom?"
+    }
+  ],
+  "galleryImages": [
+    {
+      "src": "/edu/st04/mockup-01-cover.webp",
+      "labelTh": "ปกหน้า & จุดเด่นนิทาน 16 หน้า (เล่มที่ 4)",
+      "labelEn": "Front Cover & 16-Page Highlights (Book 4)"
+    },
+    {
+      "src": "/edu/st04/mockup-02-spreads.webp",
+      "labelTh": "ส่องภาพประกอบสีน้ำจริงข้างใน (12 ภาพเต็มเล่ม)",
+      "labelEn": "Inside Watercolor Illustrations (12 Full Plates)"
+    },
+    {
+      "src": "/edu/st04/mockup-03-audio-qr.webp",
+      "labelTh": "นิทานกระดาษคู่ Hybrid QR + กลองจังหวะหัวใจ 70 BPM",
+      "labelEn": "Hybrid QR Audio Storybook & 70 BPM Heartbeat Drum"
+    },
+    {
+      "src": "/edu/st04/mockup-04-editions.webp",
+      "labelTh": "เทียบสิทธิ์ Home (79฿) vs Class (159฿) + แพ็กคู่ MU01 149฿",
+      "labelEn": "Home ($3.99) vs Class ($6.99) + MU01 Pair Bundle"
+    }
+  ],
+  "faqs": [
+    {
+      "qTh": "นิทาน EDU-ST04 ช่วยลูกที่พลังล้น อยู่ไม่นิ่ง ได้ยังไง?",
+      "qEn": "How does EDU-ST04 help energetic kids who struggle to sit still?",
+      "aTh": "แทนที่จะดุให้ 'อยู่นิ่งๆ!' นิทานเล่มนี้ใช้หลักดนตรีบำบัด: ยอมรับพลังล้นก่อน (สปีด 1 จรวด 120 BPM) แล้วค่อยๆ ชวนลดสปีดลงมาที่เดินสวนสนาม (95 BPM) และหัวใจอุ่น (70 BPM) บนหน้า /edu/st04 ครับ",
+      "aEn": "Instead of saying 'sit still!', this story matches high energy first (120 BPM), then guides kids gently down to a steady march (95 BPM) and calm heartbeat (70 BPM) on /edu/st04."
+    },
+    {
+      "qTh": "แพ็กคู่ 149฿ (EDU-ST04 + EDU-MU01) ได้อะไรบ้าง?",
+      "qEn": "What is included in the 149 THB Pair Pack (EDU-ST04 + EDU-MU01)?",
+      "aTh": "ได้ครบทั้งนิทานภาพสีน้ำ EDU-ST04 (16 หน้า TH+EN) และใบงานดนตรี & จังหวะน้องข้าวต้ม EDU-MU01 (32 หน้า + ห้องซ้อมดนตรี 6 แทร็กเสียงจริง 70/95 BPM + ควิซทายเสียงเครื่องดนตรี) ประหยัดจากปกติ 208฿ ครับ!",
+      "aEn": "You get both the 16-page storybook EDU-ST04 and the 32-page Music & Rhythm Workbook EDU-MU01 with 6 real audio tracks at a bundle discount!"
+    }
+  ]
+};
+
+export const ST05_CONFIG: StorybookConfig = {
+  "sku": "EDU-ST05",
+  "slug": "st05",
+  "bookNo": 5,
+  "theme": "teal",
+  "badgeTh": "NEW เล่ม 5 • แผนที่ความกล้า 3 ก้าว",
+  "badgeEn": "NEW Book 5 • 3-Step Brave School Map",
+  "heroPrefixTh": "นิทานความกล้าไปโรงเรียน:",
+  "heroPrefixEn": "Brave School Storybook:",
+  "titleTh": "วันแรกที่โรงเรียนของน้องบ๊อบ",
+  "titleEn": "Explorer Bob's Brave First Day",
+  "heroDescTh": "นิทานภาพสีน้ำ 16 หน้า (น้องบ๊อบ × แม่ใหญ่) ลดอาการร้องไห้หน้าประตูโรงเรียนและสร้างความกล้าทักทายเพื่อนใหม่ด้วย 'ตราหัวใจอุ่น' & แผนที่ความกล้า 3 ก้าว!",
+  "heroDescEn": "16-page watercolor storybook (Explorer Bob & Mama Mami) easing first-day school jitters with a Pocket Heart ritual & 3-Step Brave Map!",
+  "coverImage": "/edu/st05/01_cover.webp",
+  "coverAlt": "EDU-ST05 Explorer Bob's Brave First Day",
+  "freebieTitleTh": "ชุดทดลองอ่านฟรี 5 หน้า (EDU-ST05)",
+  "freebieTitleEn": "Free 5-Page Sample (EDU-ST05)",
+  "freebieThUrl": "/edu/st05/EDU-ST05_Freebie_5Pages_TH.pdf",
+  "freebieEnUrl": "/edu/st05/EDU-ST05_Freebie_5Pages_EN.pdf",
+  "priceHomeThb": 79,
+  "priceHomeRegularThb": 129,
+  "priceHomeUsd": "$3.99",
+  "priceClassThb": 159,
+  "priceClassRegularThb": 249,
+  "priceClassUsd": "$6.99",
+  "homeBulletsTh": [
+    "นิทานภาพสีน้ำ 16 หน้าเต็ม (TH + EN ครบ 2 ภาษา)",
+    "ปริ้นท์อ่านหรือเปิดบน iPad ให้ลูกในครอบครัวได้ไม่จำกัด",
+    "คู่มือพ่อแม่ 3 ขั้น + 3 คำถามชวนคุย P14 + กิจกรรมวาดภาพ P15",
+    "เว็บเสียงเล่านิทาน /edu/st05 ไร้โฆษณา 100% ใช้ได้ตลอดชีพ"
+  ],
+  "classBulletsTh": [
+    "ลิขสิทธิ์คุณครู 1 ท่าน ใช้เปิดเล่าหน้าห้องเรียนได้ทั้งห้อง",
+    "ขึ้นจอทีวี/โปรเจกเตอร์พร้อมเปิดเสียงเล่านิทาน TH/EN ได้ทันที",
+    "ปริ้นท์หน้ากิจกรรม P15 แจกนักเรียน 30–40 คนได้ไม่จำกัด",
+    "ครบทั้งภาษาไทยและภาษาอังกฤษ เหมาะสำหรับห้องเรียนปกติและ EP"
+  ],
+  "pages": [
+    {
+      "pageNo": 3,
+      "image": "/edu/st05/02_p03.webp",
+      "tagTh": "หน้า 1 • เช้าวันแรกกับเป้นักผจญภัย!",
+      "tagEn": "Page 1 • First Day with My Explorer Bag!",
+      "linesTh": [
+        "เช้าวันนี้เป็นวันพิเศษของน้องบ๊อบ!",
+        "น้องสะพายเป้สีเขียวมิ้นต์และผ้าพันคอคู่ใจ",
+        "หางพวงฟูสีส้มแกว่งไปมาอย่างตื่นเต้น",
+        "\"เย้! วันนี้บ๊อบจะได้ไปโรงเรียนวันแรกแล้ว!\""
+      ],
+      "linesEn": [
+        "Today was a super special day for Bob!",
+        "He wore his mint bandana and little backpack.",
+        "His big fluffy orange tail swished excitedly.",
+        "\"Yay! Today is my very first day of school!\""
+      ]
+    },
+    {
+      "pageNo": 4,
+      "image": "/edu/st05/03_p04.webp",
+      "tagTh": "หน้า 2 • เอ๊ะ! ทำไมหน้าประตูมันใหญ่จัง!",
+      "tagEn": "Page 2 • Whoa! The School Gate Looks Big!",
+      "linesTh": [
+        "แต่พอเดินมาถึงหน้าประตูโรงเรียนสีสดใส...",
+        "น้องบ๊อบกลับหยุดกึก แล้วรีบหลบหลังแม่ใหญ่!",
+        "ห้องเรียนกว้างๆ กับเพื่อนใหม่เต็มไปหมดเลย",
+        "\"แม่ใหญ่จ๋า... ท้องบ๊อบเหมือนมีผีเสื้อบินอยู่!\""
+      ],
+      "linesEn": [
+        "Yet when they reached the bright school gate...",
+        "Bob froze and hid right behind Mama Mami!",
+        "The big classroom was full of brand-new faces.",
+        "\"Mama... my tummy feels full of butterflies!\""
+      ]
+    },
+    {
+      "pageNo": 5,
+      "image": "/edu/st05/04_p05.webp",
+      "tagTh": "หน้า 3 • ก้าวที่ 1 ตราหัวใจอุ่นของแม่ใหญ่",
+      "tagEn": "Page 3 • Step 1: Mama's Warm Pocket Heart",
+      "linesTh": [
+        "แม่ใหญ่ย่อตัวกอดน้องบ๊อบไว้แน่นๆ อย่างใจเย็น",
+        "\"ความกลัวแค่นิดเดียว แปลว่ากำลังจะกล้าจ้ะ\"",
+        "แม่ใหญ่ติด 'ตราหัวใจสีทอง' ไว้ที่สายกระเป๋า",
+        "\"คิดถึงแม่เมื่อไหร่ แตะหัวใจดวงนี้เบาๆ นะลูก\""
+      ],
+      "linesEn": [
+        "Mama Mami knelt and gave Bob a cozy hug.",
+        "\"Feeling shy just means you're ready to grow.\"",
+        "She pinned a glowing golden heart on his strap.",
+        "\"Whenever you miss me, tap this warm heart!\""
+      ]
+    },
+    {
+      "pageNo": 6,
+      "image": "/edu/st05/05_p06.webp",
+      "tagTh": "หน้า 4 • แผนที่ความกล้า 3 ก้าว!",
+      "tagEn": "Page 4 • The 3-Step Brave Explorer Map!",
+      "linesTh": [
+        "แม่ใหญ่กาง 'แผนที่ความกล้า' ใบจิ๋วให้น้องดู",
+        "\"นักผจญภัยตัวจริงใช้แผนที่แค่ 3 ก้าวเองนะ:\"",
+        "\"1. แตะหัวใจอุ่น  2. ยิ้มทักทาย  3. ชวนเล่น!\"",
+        "น้องบ๊อบพยักหน้าหงึกๆ ตาเป็นประกายความกล้า!"
+      ],
+      "linesEn": [
+        "Mama unrolled a tiny pastel Explorer Map.",
+        "\"Brave explorers only need three easy steps:\"",
+        "\"1. Tap your heart  2. Say hi  3. Share & play!\"",
+        "Bob nodded brightly—his brave eyes sparkled!"
+      ]
+    },
+    {
+      "pageNo": 7,
+      "image": "/edu/st05/06_p07.webp",
+      "tagTh": "หน้า 5 • ก้าวเท้าเข้าห้องเรียนอย่างกล้าหาญ!",
+      "tagEn": "Page 5 • One Brave Step Inside!",
+      "linesTh": [
+        "น้องบ๊อบแตะตราหัวใจอุ่นที่สายกระเป๋าเบาๆ",
+        "สูดหายใจลึก 1 ที แล้วโบกมือลาแม่ใหญ่",
+        "\"บ๊อบจะไปผจญภัยแล้วนะ ตอนเย็นเจอกันครับ!\"",
+        "แม่ใหญ่ยิ้มปลื้มใจ โบกมือส่งนักผจญภัยตัวน้อย"
+      ],
+      "linesEn": [
+        "Bob gently tapped the warm heart on his strap.",
+        "He took one deep breath and waved to Mama.",
+        "\"I'm ready to explore! See you this afternoon!\"",
+        "Mama beamed proudly and waved him inside."
+      ]
+    },
+    {
+      "pageNo": 8,
+      "image": "/edu/st05/07_p08.webp",
+      "tagTh": "หน้า 6 • ก้าวที่ 2 ยิ้มกว้างแล้วทักทาย!",
+      "tagEn": "Page 6 • Step 2: Smile & Say Hello!",
+      "linesTh": [
+        "ในมุมหนังสือ น้องบ๊อบเห็นเพื่อนใหม่นั่งเงียบๆ",
+        "น้องบ๊อบจำก้าวที่ 2 ได้ จึงเดินเข้าไปยิ้มกว้าง",
+        "\"สวัสดี! เราชื่อบ๊อบนะ... Hi! I'm Bob!\"",
+        "เพื่อนใหม่เงยหน้ายิ้มแฉ่ง โบกมือทักทายกลับ!"
+      ],
+      "linesEn": [
+        "In the reading nook, a shy kitten sat alone.",
+        "Remembering Step 2, Bob walked over smiling.",
+        "\"Hello! I'm Bob! Nice to meet you!\"",
+        "The new friend looked up and beamed right back!"
+      ]
+    },
+    {
+      "pageNo": 9,
+      "image": "/edu/st05/08_p09.webp",
+      "tagTh": "หน้า 7 • ก้าวที่ 3 แบ่งสีไม้ชวนเล่นด้วยกัน!",
+      "tagEn": "Page 7 • Step 3: Share & Play Together!",
+      "linesTh": [
+        "ก้าวที่ 3: น้องบ๊อบหยิบสีไม้จากเป้แบ่งเพื่อน",
+        "\"เรามาวาดแผนที่ผจญภัยด้วยกันไหม?\"",
+        "เพื่อนใหม่ดีใจมาก หยิบบล็อกไม้มาต่อด้วยกัน",
+        "ผีเสื้อในท้องหายวับ กลายเป็นเสียงหัวเราะแทน!"
+      ],
+      "linesEn": [
+        "Step 3: Bob shared his crayons from his bag.",
+        "\"Want to draw an adventure map together?\"",
+        "His new friend cheered and shared wooden blocks.",
+        "The tummy butterflies turned into happy giggles!"
+      ]
+    },
+    {
+      "pageNo": 10,
+      "image": "/edu/st05/09_p10.webp",
+      "tagTh": "หน้า 8 • สนุกกับเกมเสียงและนิทาน!",
+      "tagEn": "Page 8 • Fun Storytime & Phonics Games!",
+      "linesTh": [
+        "ในห้องเรียนมีทั้งร้องเพลง นิทาน และเกมคำศัพท์",
+        "น้องบ๊อบยกมือตอบเสียงดังฟังชัดอย่างมั่นใจ",
+        "\"A - B - C! แอปเปิ้ลกับหมีน้อยครับ!\"",
+        "หางพวงฟูของน้องแกว่งดุ๊กดิ๊กอย่างมีความสุข!"
+      ],
+      "linesEn": [
+        "Class was full of songs, stories, and games!",
+        "Bob raised his paw high with a brave voice.",
+        "He loved matching bright picture cards together.",
+        "His fluffy orange tail swished with pure joy!"
+      ]
+    },
+    {
+      "pageNo": 11,
+      "image": "/edu/st05/10_p11.webp",
+      "tagTh": "หน้า 9 • แป๊บเดียวก็ถึงเวลาแม่มารับแล้ว!",
+      "tagEn": "Page 9 • Pickup Time Already!",
+      "linesTh": [
+        "กริ๊งงง! เสียงระฆังเลิกเรียนดังขึ้นอย่างไว",
+        "แม่ใหญ่มายืนรอรับที่หน้าประตูตรงเวลาเป๊ะ!",
+        "น้องบ๊อบวิ่งปรู๊ดออกไปโชว์ภาพวาดให้แม่ดู",
+        "\"แม่ใหญ่! โรงเรียนสนุกมาก บ๊อบมีเพื่อนใหม่ด้วย!\""
+      ],
+      "linesEn": [
+        "Ding! Before he knew it, school was done!",
+        "Mama Mami waited right by the sunny gate.",
+        "Bob zoomed over proudly holding his drawing.",
+        "\"Mama! School was amazing—I made a new friend!\""
+      ]
+    },
+    {
+      "pageNo": 12,
+      "image": "/edu/st05/11_p12.webp",
+      "tagTh": "หน้า 10 • กอดอุ่นและเหรียญนักผจญภัยกล้าหาญ",
+      "tagEn": "Page 10 • Warm Hug & Brave Explorer Badge",
+      "linesTh": [
+        "แม่ใหญ่โอบกอดน้องบ๊อบแน่นๆ ด้วยความภูมิใจ",
+        "\"เห็นไหมลูก แม่กลับมาหาบ๊อบเสมอเลยนะ\"",
+        "แม่ใหญ่แปะ 'ดาวทองนักผจญภัย' ลงบนแผนที่",
+        "\"วันนี้บ๊อบกล้าหาญที่สุดในโลกเลยจ้ะ!\""
+      ],
+      "linesEn": [
+        "Mama Mami wrapped Bob in a huge proud hug.",
+        "\"See, sweetheart? I always come back for you.\"",
+        "She placed a golden Explorer Star on his map.",
+        "\"You were the bravest little explorer today!\""
+      ]
+    },
+    {
+      "pageNo": 13,
+      "image": "/edu/st05/12_p13.webp",
+      "tagTh": "หน้า 11 • พรุ่งนี้ไปผจญภัยกันอีกนะ!",
+      "tagEn": "Page 11 • Ready for Tomorrow's Adventure!",
+      "linesTh": [
+        "คืนนี้น้องบ๊อบจัดเป้สีเขียวมิ้นต์เตรียมไว้พร้อม",
+        "ยิ้มอุ่นๆ ใต้ผ้าห่มลายแผนที่ดาวดวงน้อย",
+        "โรงเรียนไม่ใช่ที่ที่น่ากลัวอีกต่อไปแล้ว",
+        "ฝันดีนะน้องบ๊อบ... พรุ่งนี้ไปสนุกกันใหม่นะ!"
+      ],
+      "linesEn": [
+        "Tonight, Bob packed his mint bag for tomorrow.",
+        "He smiled warmly under his starry quilt.",
+        "School wasn't scary at all—it was full of fun!",
+        "Goodnight, brave Bob... see you tomorrow!"
+      ]
+    }
+  ],
+  "dialogicQuestions": [
+    {
+      "emoji": "🦋",
+      "th": "1. ตอนไปโรงเรียนหรือไปที่ใหม่ๆ หนูเคยรู้สึกเหมือนมี 'ผีเสื้อบินในท้อง' แบบน้องบ๊อบไหมครับ?",
+      "en": "1. Have you ever felt 'tummy butterflies' when visiting a new place or school like Explorer Bob?"
+    },
+    {
+      "emoji": "💛",
+      "th": "2. ในแผนที่ความกล้า 3 ก้าว (แตะหัวใจ-ยิ้มทักทาย-ชวนเล่น) พรุ่งนี้หนูอยากลองใช้ก้าวไหนกับเพื่อนใหม่?",
+      "en": "2. Of the 3 Brave Steps (Tap Heart, Say Hi, Share & Play), which one do you want to try tomorrow?"
+    },
+    {
+      "emoji": "👋",
+      "th": "3. เรามาซ้อมคำทักทายเพื่อนใหม่แบบน้องบ๊อบ 'สวัสดี! เราชื่อ...' / 'Hi! I'm...' ด้วยกัน 1 รอบดีไหม?",
+      "en": "3. Shall we practice saying 'Hi! I'm ___! Want to play?' together just like Explorer Bob?"
+    }
+  ],
+  "galleryImages": [
+    {
+      "src": "/edu/st05/mockup-01-cover.webp",
+      "labelTh": "ปกหน้า & จุดเด่นนิทาน 16 หน้า (เล่มที่ 5)",
+      "labelEn": "Front Cover & 16-Page Highlights (Book 5)"
+    },
+    {
+      "src": "/edu/st05/mockup-02-spreads.webp",
+      "labelTh": "ส่องภาพประกอบสีน้ำจริงข้างใน (12 ภาพเต็มเล่ม)",
+      "labelEn": "Inside Watercolor Illustrations (12 Full Plates)"
+    },
+    {
+      "src": "/edu/st05/mockup-03-audio-qr.webp",
+      "labelTh": "นิทานกระดาษคู่ Hybrid QR + กระดานคำทักทาย & Phonics",
+      "labelEn": "Hybrid QR Audio Storybook & Friendly Hello Board"
+    },
+    {
+      "src": "/edu/st05/mockup-04-editions.webp",
+      "labelTh": "เทียบสิทธิ์ Home (79฿) vs Class (159฿) + แพ็กคู่ VL01 149฿",
+      "labelEn": "Home ($3.99) vs Class ($6.99) + VL01 Pair Bundle"
+    }
+  ],
+  "faqs": [
+    {
+      "qTh": "นิทาน EDU-ST05 ช่วยลดอาการร้องไห้ไม่อยากไปโรงเรียนได้จริงไหม?",
+      "qEn": "How does EDU-ST05 help with school drop-off tears?",
+      "aTh": "นิทานเล่มนี้ช่วยสร้าง 'พิธีกรรมเชื่อมต่อใจแม่-ลูก' ด้วยตราหัวใจอุ่นที่สายกระเป๋าเป้ และซ้อมคำพูดทักทายเพื่อนใหม่สั้นๆ 1 ประโยคบนหน้า /edu/st05 ทำให้ลูกอุ่นใจว่าแม่รอรับเสมอและกล้าก้าวเข้าห้องเรียนครับ",
+      "aEn": "It creates a comforting 'Pocket Heart' separation ritual and lets kids rehearse friendly hello phrases on /edu/st05 before morning drop-off."
+    },
+    {
+      "qTh": "แพ็กคู่ 149฿ (EDU-ST05 + EDU-VL01) ได้อะไรบ้าง?",
+      "qEn": "What is included in the 149 THB Pair Pack (EDU-ST05 + EDU-VL01)?",
+      "aTh": "ได้ครบทั้งนิทานภาพสีน้ำ EDU-ST05 (16 หน้า TH+EN) และชุดฝึกภาษา & Phonics A–Z น้องบ๊อบ EDU-VL01 (32 หน้า + 36 คำศัพท์ 2 ภาษา + 27 แฟลชการ์ด + กระดานเสียง A–Z) ประหยัดจากปกติ 178฿ ครับ!",
+      "aEn": "You get both the 16-page storybook EDU-ST05 and the 32-page Visual Phonics & Vocabulary Kit EDU-VL01 (A-Z soundboard + 27 flashcards)!"
+    }
+  ]
+};
+
+export const ST06_CONFIG: StorybookConfig = {
+  "sku": "EDU-ST06",
+  "slug": "st06",
+  "bookNo": 6,
+  "theme": "amber",
+  "badgeTh": "👑 เล่มปิดซีซัน 1 (6/6) • Focus Timer 5 น.",
+  "badgeEn": "👑 Season 1 Finale (6/6) • 5-Min Focus Timer",
+  "heroPrefixTh": "นิทานฝึกสมาธิ EF:",
+  "heroPrefixEn": "EF Focus Storybook:",
+  "titleTh": "นักสืบแซลมอนกับปริศนาที่หายไป",
+  "titleEn": "Detective Salmon's Patient Clue Hunt",
+  "heroDescTh": "นิทานภาพสีน้ำ 16 หน้า เล่มปิดซีซัน 1 (น้องแซลมอน × แม่ใหญ่) ฝึกสมาธิ การรอคอย และไม่ยอมแพ้ง่ายๆ ด้วย 'สูตรนักสืบใจเย็น 3 ขั้น' + นาฬิกา Focus Timer 5 นาทีฟรี!",
+  "heroDescEn": "16-page Season 1 Finale watercolor storybook (Detective Salmon & Mama Mami) building EF focus, patience & persistence with a 5-Min Focus Timer!",
+  "coverImage": "/edu/st06/01_cover.webp",
+  "coverAlt": "EDU-ST06 Detective Salmon's Patient Clue Hunt",
+  "freebieTitleTh": "ชุดทดลองอ่านฟรี 5 หน้า (EDU-ST06)",
+  "freebieTitleEn": "Free 5-Page Sample (EDU-ST06)",
+  "freebieThUrl": "/edu/st06/EDU-ST06_Freebie_5Pages_TH.pdf",
+  "freebieEnUrl": "/edu/st06/EDU-ST06_Freebie_5Pages_EN.pdf",
+  "priceHomeThb": 79,
+  "priceHomeRegularThb": 129,
+  "priceHomeUsd": "$3.99",
+  "priceClassThb": 159,
+  "priceClassRegularThb": 249,
+  "priceClassUsd": "$6.99",
+  "homeBulletsTh": [
+    "นิทานภาพสีน้ำ 16 หน้าเต็ม (TH + EN ครบ 2 ภาษา)",
+    "ปริ้นท์อ่านหรือเปิดบน iPad ให้ลูกในครอบครัวได้ไม่จำกัด",
+    "คู่มือพ่อแม่ 3 ขั้น + 3 คำถามชวนคุย P14 + กิจกรรมวาดภาพ P15",
+    "เว็บเสียงเล่านิทาน /edu/st06 ไร้โฆษณา 100% ใช้ได้ตลอดชีพ"
+  ],
+  "classBulletsTh": [
+    "ลิขสิทธิ์คุณครู 1 ท่าน ใช้เปิดเล่าหน้าห้องเรียนได้ทั้งห้อง",
+    "ขึ้นจอทีวี/โปรเจกเตอร์พร้อมเปิดเสียงเล่านิทาน TH/EN ได้ทันที",
+    "ปริ้นท์หน้ากิจกรรม P15 แจกนักเรียน 30–40 คนได้ไม่จำกัด",
+    "ครบทั้งภาษาไทยและภาษาอังกฤษ เหมาะสำหรับห้องเรียนปกติและ EP"
+  ],
+  "pages": [
+    {
+      "pageNo": 3,
+      "image": "/edu/st06/02_p03.webp",
+      "tagTh": "หน้า 1 • ปริศนาจิ๊กซอว์ชิ้นสุดท้าย!",
+      "tagEn": "Page 1 • The Missing Last Puzzle Piece!",
+      "linesTh": [
+        "บ่ายวันนี้น้องแซลมอนกำลังต่อจิ๊กซอว์รูปดาว",
+        "ต่อมาตั้งนานจนเกือบจะเสร็จสมบูรณ์แล้ว!",
+        "แต่เอ๊ะ... ช่องตรงกลางยังว่างอยู่หนึ่งช่อง",
+        "\"อ้าว! ชิ้นจิ๊กซอว์ดาวสีทองหายไปไหนนะ?\""
+      ],
+      "linesEn": [
+        "This afternoon, Salmon built a star puzzle.",
+        "She worked so hard and nearly finished it!",
+        "Wait... one tiny spot in the middle was empty.",
+        "\"Oh no! Where did the golden star piece go?\""
+      ]
+    },
+    {
+      "pageNo": 4,
+      "image": "/edu/st06/03_p04.webp",
+      "tagTh": "หน้า 2 • ยิ่งรีบร้อน ยิ่งหาไม่เจอ!",
+      "tagEn": "Page 2 • Rushing Makes It Harder to See!",
+      "linesTh": [
+        "น้องแซลมอนรีบรื้อกล่องของเล่นอย่างไว!",
+        "หันซ้ายหันขวา คุ้ยหมอน คุ้ยกองตุ๊กตา",
+        "ของเล่นกระจายเต็มพื้นแต่ก็ยังไม่เจออยู่ดี",
+        "\"ฮือ... ยากจังเลย แซลมอนไม่หาแล้วได้ไหม?\""
+      ],
+      "linesEn": [
+        "Salmon rushed and dumped out her toy box!",
+        "She spun left and right, tossing pillows high.",
+        "Toys scattered everywhere, yet no piece showed.",
+        "\"Ugh... it's too hard! I want to give up!\""
+      ]
+    },
+    {
+      "pageNo": 5,
+      "image": "/edu/st06/04_p05.webp",
+      "tagTh": "หน้า 3 • แว่นขยายและสูตรนักสืบ 3 ขั้น",
+      "tagEn": "Page 3 • Mama's 3-Step Detective Plan",
+      "linesTh": [
+        "แม่ใหญ่เดินมานั่งข้างๆ โอบกอดลูกเบาๆ",
+        "แล้วยื่นแว่นขยายด้ามไม้ให้นักสืบตัวน้อย",
+        "\"นักสืบเก่งๆ ไม่รีบจ้ะ ใช้แค่ 3 ขั้นง่ายๆ:\"",
+        "\"1. หยุดหายใจ 2. ส่องทีละมุม 3. ไม่ยอมแพ้!\""
+      ],
+      "linesEn": [
+        "Mama Mami sat beside her with a gentle hug.",
+        "She handed Salmon a wooden magnifying glass.",
+        "\"Great detectives go slow with three steps:\"",
+        "\"1. Breathe  2. Look closely  3. Never give up!\""
+      ]
+    },
+    {
+      "pageNo": 6,
+      "image": "/edu/st06/05_p06.webp",
+      "tagTh": "หน้า 4 • ขั้นที่ 1 หยุดพักและหายใจลึกๆ",
+      "tagEn": "Page 4 • Step 1: Pause and Take a Breath",
+      "linesTh": [
+        "น้องแซลมอนวางอุ้งมือน้อยๆ ลงบนพุงกลม",
+        "หลับตาสูดหายใจเข้าช้าๆ... นับ 1 - 2 - 3",
+        "แล้วค่อยๆ ผ่อนลมหายใจออกเบาๆ อย่างใจเย็น",
+        "หัวใจเต้นช้าลง สมองนักสืบกลับมาสว่างใส!"
+      ],
+      "linesEn": [
+        "Salmon placed both soft paws on her tummy.",
+        "She closed her eyes and breathed in... 1, 2, 3.",
+        "Then she puffed the air out nice and slowly.",
+        "Her heart felt calm—her detective mind shone!"
+      ]
+    },
+    {
+      "pageNo": 7,
+      "image": "/edu/st06/06_p07.webp",
+      "tagTh": "หน้า 5 • ขั้นที่ 2 ส่องทีละมุม — ใต้โต๊ะไม้",
+      "tagEn": "Page 5 • Step 2: Check Corner One — The Table",
+      "linesTh": [
+        "น้องแซลมอนยกแว่นขยายขึ้นส่องมุมที่ 1",
+        "ค่อยๆ ก้มมองใต้โต๊ะไม้ทีละนิดอย่างตั้งใจ",
+        "เจอสีเทียนแท่งสีเหลืองกับลูกแก้วสีใส",
+        "\"ยังไม่ใช่ชิ้นดาว... ไม่เป็นไร ส่องต่อนะ!\""
+      ],
+      "linesEn": [
+        "Salmon raised her glass to check Corner One.",
+        "She peeked under the wooden table with focus.",
+        "She found a yellow crayon and a clear marble.",
+        "\"Not the star piece yet—let's keep looking!\""
+      ]
+    },
+    {
+      "pageNo": 8,
+      "image": "/edu/st06/07_p08.webp",
+      "tagTh": "หน้า 6 • เบาะแสที่ 1 ข้างชั้นหนังสือนิทาน",
+      "tagEn": "Page 6 • Clue One by the Cozy Bookshelf",
+      "linesTh": [
+        "มุมที่ 2 น้องเดินไปส่องข้างชั้นหนังสือนิทาน",
+        "เอ๊ะ! มีมุมสีทองแหลมๆ โผล่ออกมานิดหนึ่ง!",
+        "พอดึงดูเบาๆ กลับเป็นสติกเกอร์ดาวแผ่นจิ๋ว",
+        "แซลมอนยิ้มสู้ \"ใกล้เจอแล้วล่ะ ต้องใจเย็น!\""
+      ],
+      "linesEn": [
+        "Corner Two: she checked the storybook shelf.",
+        "Ooh! A tiny golden point peeked out quietly!",
+        "She pulled gently—just a shiny star sticker.",
+        "Salmon smiled bravely: \"Stay patient, keep going!\""
+      ]
+    },
+    {
+      "pageNo": 9,
+      "image": "/edu/st06/08_p09.webp",
+      "tagTh": "หน้า 7 • เบาะแสที่ 2 รอยเส้นริบบิ้นนำทาง!",
+      "tagEn": "Page 7 • Clue Two: A Guiding Ribbon Trail!",
+      "linesTh": [
+        "เพราะไม่ใจร้อน น้องจึงสังเกตเห็นเบาะแสใหม่!",
+        "มีปลายริบบิ้นสีฟ้าพาดยาวไปที่มุมโซฟานุ่ม",
+        "น้องแซลมอนค่อยๆ เดินตามเส้นริบบิ้นไปทีละก้าว",
+        "\"เหมือนเกมตามหาเส้นทางเลย สนุกจัง!\""
+      ],
+      "linesEn": [
+        "Because she slowed down, she spotted a clue!",
+        "A soft blue ribbon trailed to the cozy sofa.",
+        "Salmon followed the ribbon one step at a time.",
+        "\"Just like a path puzzle—this is so much fun!\""
+      ]
+    },
+    {
+      "pageNo": 10,
+      "image": "/edu/st06/09_p10.webp",
+      "tagTh": "หน้า 8 • ขั้นที่ 3 รอคอยและค่อยๆ ยกหมอนทีละใบ",
+      "tagEn": "Page 8 • Step 3: Lift Each Cushion Gently",
+      "linesTh": [
+        "ถึงมุมหมอนนุ่มที่ปลายทางของริบบิ้นสีฟ้าแล้ว",
+        "น้องแซลมอนไม่โยนหมอนทิ้งเหมือนตอนแรก",
+        "แต่ค่อยๆ ยกหมอนทีละใบวางเรียงอย่างเบามือ",
+        "เอ๊ะ... ใต้หมอนใบที่สามมีแสงสีทองวิบวับ!"
+      ],
+      "linesEn": [
+        "The blue ribbon ended at a stack of pillows.",
+        "This time, Salmon did not toss them around.",
+        "She lifted each soft pillow slowly and neatly.",
+        "Wait... something golden sparkled underneath!"
+      ]
+    },
+    {
+      "pageNo": 11,
+      "image": "/edu/st06/10_p11.webp",
+      "tagTh": "หน้า 9 • เย้! เจอชิ้นจิ๊กซอว์ดาวสีทองแล้ว!",
+      "tagEn": "Page 9 • Hooray! The Golden Star Piece!",
+      "linesTh": [
+        "\"เจอแล้ว!! ชิ้นดาวสีทองอยู่ตรงนี้นี่เอง!\"",
+        "น้องแซลมอนชูชิ้นดาวขึ้นสูงด้วยความดีใจ",
+        "ตาสีเขียวหลังแว่นสีม่วงเป็นประกายวิบวับ",
+        "การใจเย็นและไม่ยอมแพ้พาหนูมาเจอจนได้!"
+      ],
+      "linesEn": [
+        "\"Found it!! The golden star piece was here!\"",
+        "Salmon held the glowing star piece up high.",
+        "Her green eyes sparkled behind purple glasses.",
+        "Patience and focus solved the whole mystery!"
+      ]
+    },
+    {
+      "pageNo": 12,
+      "image": "/edu/st06/11_p12.webp",
+      "tagTh": "หน้า 10 • วางชิ้นสุดท้าย... สำเร็จ 100%!",
+      "tagEn": "Page 10 • The Final Piece Fits Just Right!",
+      "linesTh": [
+        "คลิก! น้องแซลมอนวางชิ้นดาวลงตรงกลางพอดี",
+        "ภาพจิ๊กซอว์บ้านแก๊ง 6 แมวสมบูรณ์สวยงาม!",
+        "แม่ใหญ่ปรบมือชื่นชมแล้วกอดลูกสาวแน่นๆ",
+        "\"แม่ภูมิใจมากที่แซลมอนใจเย็นและไม่ยอมแพ้จ้ะ\""
+      ],
+      "linesEn": [
+        "Click! Salmon placed the star right in place.",
+        "The 6 Cats puzzle picture was 100% complete!",
+        "Mama Mami clapped and hugged her tightly.",
+        "\"I'm so proud you stayed calm and never quit!\""
+      ]
+    },
+    {
+      "pageNo": 13,
+      "image": "/edu/st06/12_p13.webp",
+      "tagTh": "หน้า 11 • นักสืบใจเย็นทำได้ทุกปริศนา!",
+      "tagEn": "Page 11 • Calm Detectives Solve Anything!",
+      "linesTh": [
+        "ก่อนนอน น้องเก็บแว่นขยายเข้ากล่องเรียบร้อย",
+        "วางภาพจิ๊กซอว์ดาวไว้ข้างหมอนอย่างภูมิใจ",
+        "ต่อให้เจอปริศนายากแค่ไหน แค่ใจเย็นทีละขั้น",
+        "ฝันดีนะแซลมอน... พรุ่งนี้ลุยปริศนาใหม่กัน!"
+      ],
+      "linesEn": [
+        "At bedtime, Salmon put her glass away neatly.",
+        "She smiled at her finished star puzzle nearby.",
+        "Even tricky puzzles feel easy step by step.",
+        "Goodnight, Detective Salmon—sweet dreams!"
+      ]
+    }
+  ],
+  "dialogicQuestions": [
+    {
+      "emoji": "🧩",
+      "th": "1. ตอนที่หนูหาของไม่เจอหรือทำอะไรยากๆ หนูเคยรู้สึกอยากยอมแพ้แบบน้องแซลมอนตอนแรกไหมครับ?",
+      "en": "1. Have you ever felt frustrated and wanted to give up on a tricky puzzle like Detective Salmon?"
+    },
+    {
+      "emoji": "🔍",
+      "th": "2. สูตรนักสืบ 3 ขั้นของน้องแซลมอน (หยุดหายใจ-ส่องทีละมุม-ไม่ยอมแพ้) ขั้นไหนที่หนูชอบที่สุด?",
+      "en": "2. Which of Detective Salmon's 3 steps (Breathe, Look Closely, Never Give Up) is your favorite?"
+    },
+    {
+      "emoji": "⭐",
+      "th": "3. พรุ่งนี้ถ้าเจอเกมหรือการบ้านที่ท้าทาย เรามาลองใช้แว่นขยายนักสืบค่อยๆ ทำทีละขั้นด้วยกันไหม?",
+      "en": "3. Next time something feels tricky, shall we put on our detective glasses and go step by step?"
+    }
+  ],
+  "galleryImages": [
+    {
+      "src": "/edu/st06/mockup-01-cover.webp",
+      "labelTh": "ปกหน้า & จุดเด่นนิทาน 16 หน้า (เล่มที่ 6)",
+      "labelEn": "Front Cover & 16-Page Highlights (Book 6)"
+    },
+    {
+      "src": "/edu/st06/mockup-02-spreads.webp",
+      "labelTh": "ส่องภาพประกอบสีน้ำจริงข้างใน (12 ภาพเต็มเล่ม)",
+      "labelEn": "Inside Watercolor Illustrations (12 Full Plates)"
+    },
+    {
+      "src": "/edu/st06/mockup-03-audio-qr.webp",
+      "labelTh": "นิทานกระดาษคู่ Hybrid QR + นาฬิกา Focus Timer 5 นาที",
+      "labelEn": "Hybrid QR Audio Storybook & 5-Min Focus Timer"
+    },
+    {
+      "src": "/edu/st06/mockup-04-editions.webp",
+      "labelTh": "เทียบสิทธิ์ Home (79฿) vs Class (159฿) + แพ็กคู่ EF01 149฿",
+      "labelEn": "Home ($3.99) vs Class ($6.99) + EF01 Pair Bundle"
+    }
+  ],
+  "faqs": [
+    {
+      "qTh": "นิทาน EDU-ST06 ช่วยฝึกสมาธิและแก้ปัญหาลูกใจร้อนยอมแพ้ง่ายได้ยังไง?",
+      "qEn": "How does EDU-ST06 build patience and persistence?",
+      "aTh": "สอนเด็กวัย 3–6 ปีด้วย 'สูตรนักสืบใจเย็น 3 ขั้น' ที่ทำตามได้ทันที: 1. หยุด-หายใจ 1-2-3 ➔ 2. ส่องหาทีละมุม ➔ 3. รอคอยและไม่ยอมแพ้ พร้อมนาฬิกา Focus Timer 5 นาทีบนหน้า /edu/st06 ครับ",
+      "aEn": "It teaches kids a concrete 3-Step Detective Plan (Pause & Breathe, Check Corner by Corner, Stay Patient) paired with our 5-Min Focus Timer on /edu/st06."
+    },
+    {
+      "qTh": "แพ็กคู่ 149฿ (EDU-ST06 + EDU-EF01) หรือ Boxset 6 เล่ม 349฿ คุ้มกว่ากัน?",
+      "qEn": "Should I get the 149 THB Pair Pack or the 6-Book Season 1 Boxset?",
+      "aTh": "ถ้าอยากเน้นฝึกสมอง EF ครบจบกับน้องแซลมอน แนะนำแพ็กคู่ ST06+EF01 เพียง 149฿ (48 หน้า) แต่ถ้าอยากเก็บนิทานแก๊ง 6 แมวครบทุกเล่มทั้ง 6 ทักษะ (ST01–ST06 = 96 หน้า 12 PDFs) แนะนำ Boxset Season 1 เพียง 349฿ ประหยัด 125฿ ครับ!",
+      "aEn": "The ST06+EF01 Pair Pack (149 THB) is ideal for focused EF practice, while the Complete Season 1 Boxset (349 THB) unlocks all 6 bilingual storybooks (96 pages) at 26% off!"
+    }
+  ]
 };
