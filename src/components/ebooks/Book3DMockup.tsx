@@ -12,15 +12,16 @@ interface Book3DMockupProps {
   rank?: number;
   earlyBirdPrice?: number;
   coverImage?: string | null;
+  previewSnippet?: string;
   size?: "sm" | "md" | "lg";
   isInteractive?: boolean;
   className?: string;
 }
 
 /**
- * Editorial Hardcover 3D Book Mockup (Brand V2.0 — Warm Bookstore Edition)
- * - If `coverImage` is present: renders the real high-res cover artwork on a realistic 3D hardcover.
- * - Otherwise: renders a Stripe Press / Kinokuniya-inspired Editorial Publisher Hardcover.
+ * Editorial Hardcover 3D Book + Matte-Black E-Reader Inside-Page Mockup (Transparent BG)
+ * - Back-Left: 3D Hardcover Book with visible left spine + 3D top page edges
+ * - Front-Right: Leaning matte-black E-Reader showing a real clean inside reading page
  */
 export function Book3DMockup({
   code = "EB-PA-01",
@@ -29,6 +30,7 @@ export function Book3DMockup({
   themeColor = "amber",
   rank = 1,
   coverImage = null,
+  previewSnippet,
   size = "md",
   isInteractive = true,
   className = "",
@@ -165,46 +167,53 @@ export function Book3DMockup({
 
   const dims = {
     sm: {
-      containerH: "h-[184px]",
-      bookW: 108,
-      bookH: 152,
-      spineW: 14,
-      tabletW: 78,
-      tabletH: 112,
+      containerH: "h-[190px]",
+      bookW: 102,
+      bookH: 146,
+      spineW: 16,
+      topPageH: 10,
+      tabletW: 82,
+      tabletH: 118,
       tabletChin: "pb-3.5 pt-1.5 px-1.5",
       fontSizeTitle: "text-[9px]",
-      tabletTitle: "text-[7px]",
+      pageHeading: "text-[7.5px]",
+      pageBody: "text-[6.2px]",
     },
     md: {
-      containerH: "h-[234px]",
-      bookW: 138,
-      bookH: 194,
-      spineW: 17,
-      tabletW: 98,
-      tabletH: 142,
+      containerH: "h-[242px]",
+      bookW: 130,
+      bookH: 186,
+      spineW: 20,
+      topPageH: 13,
+      tabletW: 104,
+      tabletH: 148,
       tabletChin: "pb-4 pt-2 px-2",
       fontSizeTitle: "text-[11px]",
-      tabletTitle: "text-[8px]",
+      pageHeading: "text-[9px]",
+      pageBody: "text-[7.5px]",
     },
     lg: {
-      containerH: "h-[320px] sm:h-[350px]",
-      bookW: 192,
-      bookH: 270,
-      spineW: 22,
-      tabletW: 136,
-      tabletH: 196,
+      containerH: "h-[330px] sm:h-[360px]",
+      bookW: 182,
+      bookH: 258,
+      spineW: 26,
+      topPageH: 17,
+      tabletW: 144,
+      tabletH: 204,
       tabletChin: "pb-6 pt-2.5 px-2.5",
       fontSizeTitle: "text-sm",
-      tabletTitle: "text-[10px]",
+      pageHeading: "text-[11.5px]",
+      pageBody: "text-[9.5px]",
     },
   }[size];
 
-  const renderEditorialCover = (isMini: boolean) => (
+  const insideText =
+    previewSnippet ||
+    `สรุปเทคนิคและขั้นตอนปฏิบัติจริง พร้อมเทมเพลตสำเร็จรูปและตัวอย่างนำไปใช้ในงานครูได้ทันที (${category})`;
+
+  const renderEditorialCover = () => (
     <div
-      className={cn(
-        "relative w-full h-full overflow-hidden flex flex-col justify-between",
-        isMini ? "p-2" : "p-3"
-      )}
+      className="relative w-full h-full overflow-hidden flex flex-col justify-between p-3"
       style={{ background: theme.coverBg }}
     >
       <div
@@ -215,39 +224,34 @@ export function Book3DMockup({
         <div className="flex items-center justify-between gap-1 mb-0.5">
           <span
             className={cn(
-              "px-1.5 py-0.5 rounded font-bold tracking-wider",
-              isMini ? "text-[6px]" : "text-[7.5px]",
+              "px-1.5 py-0.5 rounded font-bold tracking-wider text-[7.5px]",
               theme.badgeBg
             )}
           >
             {code}
           </span>
-          {!isMini && (
-            <span className="text-[7px] font-bold text-[#64748B]">AiAon</span>
-          )}
+          <span className="text-[7px] font-bold text-[#64748B]">AiAon</span>
         </div>
-        {!isMini && (
-          <div
-            className={cn(
-              "text-[7.5px] font-semibold uppercase tracking-wider truncate",
-              theme.subText
-            )}
-          >
-            {category}
-          </div>
-        )}
+        <div
+          className={cn(
+            "text-[7.5px] font-semibold uppercase tracking-wider truncate",
+            theme.subText
+          )}
+        >
+          {category}
+        </div>
       </div>
 
       <div className="relative z-10 my-auto py-0.5">
         <div
-          className={cn("rounded-full mb-1", isMini ? "w-4 h-0.5" : "w-6 h-0.5")}
+          className="w-6 h-0.5 rounded-full mb-1"
           style={{ background: theme.accent }}
         />
         <h4
           className={cn(
             "font-extrabold leading-tight line-clamp-4",
             theme.titleText,
-            isMini ? dims.tabletTitle : dims.fontSizeTitle
+            dims.fontSizeTitle
           )}
         >
           {title}
@@ -257,20 +261,18 @@ export function Book3DMockup({
       <div className="relative z-10 pt-1 border-t border-slate-900/10 flex items-center justify-between">
         <div className="flex items-center gap-1 text-[6.5px] text-[#475569] font-semibold">
           <BookOpen className="w-2 h-2 shrink-0" style={{ color: theme.accent }} />
-          <span className="truncate">{isMini ? "E-Book" : "PDF + Web"}</span>
+          <span className="truncate">PDF + Web</span>
         </div>
-        {!isMini && (
-          <div
-            className="w-3.5 h-3.5 rounded-full flex items-center justify-center shrink-0 text-white"
-            style={{ background: theme.accent }}
-          >
-            {rank <= 10 ? (
-              <Award className="w-2 h-2" />
-            ) : (
-              <ShieldCheck className="w-2 h-2" />
-            )}
-          </div>
-        )}
+        <div
+          className="w-3.5 h-3.5 rounded-full flex items-center justify-center shrink-0 text-white"
+          style={{ background: theme.accent }}
+        >
+          {rank <= 10 ? (
+            <Award className="w-2 h-2" />
+          ) : (
+            <ShieldCheck className="w-2 h-2" />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -278,7 +280,7 @@ export function Book3DMockup({
   return (
     <div
       className={cn(
-        "relative w-full flex items-end justify-center overflow-visible select-none pb-4 pt-3",
+        "relative w-full bg-transparent flex items-end justify-center overflow-visible select-none pb-4 pt-5",
         dims.containerH,
         className
       )}
@@ -287,130 +289,206 @@ export function Book3DMockup({
       onMouseLeave={() => isInteractive && setIsHovered(false)}
       onClick={() => isInteractive && setIsHovered(!isHovered)}
     >
-      {/* Composite Stage: Standing 3D Book + Leaning Matte-Black E-Reader */}
+      {/* Transparent-BG Composite Stage: 3D Hardcover Book + Leaning Matte-Black E-Reader */}
       <div
-        className="relative flex items-end justify-center cursor-pointer"
+        className="relative flex items-end justify-center cursor-pointer bg-transparent"
         style={{
-          width: `${dims.bookW + dims.spineW + Math.round(dims.tabletW * 0.42)}px`,
-          height: `${dims.bookH}px`,
+          width: `${dims.bookW + dims.spineW + Math.round(dims.tabletW * 0.56)}px`,
+          height: `${dims.bookH + dims.topPageH}px`,
         }}
       >
-        {/* Realistic Left-Cast Studio Ground Shadow (Book + E-Reader) */}
+        {/* Soft Left-Cast Transparent Studio Shadow (matches reference lighting) */}
         <div
           aria-hidden="true"
-          className="absolute -bottom-2.5 left-0 right-1 h-5 rounded-full blur-md pointer-events-none transition-all duration-500"
+          className="absolute -bottom-2 -left-3 right-2 h-5 rounded-full blur-md pointer-events-none transition-all duration-500"
           style={{
             background:
-              "linear-gradient(90deg, rgba(15,23,42,0.02) 0%, rgba(15,23,42,0.34) 22%, rgba(15,23,42,0.28) 78%, rgba(15,23,42,0.05) 100%)",
-            transform: isHovered ? "scaleX(1.05) translateY(2px)" : "scaleX(1)",
+              "linear-gradient(90deg, rgba(15,23,42,0.02) 0%, rgba(15,23,42,0.28) 28%, rgba(15,23,42,0.22) 82%, rgba(15,23,42,0.04) 100%)",
+            transform: isHovered ? "scaleX(1.04) translateY(2px)" : "scaleX(1)",
           }}
         />
 
-        {/* ── 1. BACK-LEFT: STANDING 3D PRINT BOOK WITH CRISP VISIBLE SPINE ── */}
+        {/* ── 1. BACK-LEFT: 3D HARDCOVER BOOK WITH TOP PAGE EDGES + THICK LEFT SPINE ── */}
         <div
-          className="relative flex items-stretch transition-all duration-500 ease-out transform-gpu"
+          className="relative transition-all duration-500 ease-out transform-gpu"
           style={{
-            marginRight: `${Math.round(dims.tabletW * 0.36)}px`,
+            marginRight: `${Math.round(dims.tabletW * 0.48)}px`,
             transform: isHovered
               ? "translateY(-4px) translateX(-3px) rotateY(4deg)"
-              : "translateY(0px) rotateY(7deg)",
+              : "translateY(0px) rotateY(8deg)",
             transformStyle: "preserve-3d",
-            filter: "drop-shadow(-8px 10px 14px rgba(15,23,42,0.18))",
+            filter: "drop-shadow(-10px 12px 14px rgba(15,23,42,0.18))",
           }}
         >
-          {/* Crisp Visible Left Spine */}
+          {/* 3D Angled Top Pages Edge (Visible crisp white paper block above cover) */}
           <div
-            className="relative flex flex-col justify-between items-center py-2.5 text-white/95 rounded-l-[2px] shrink-0 overflow-hidden"
+            aria-hidden="true"
+            className="relative z-10 overflow-hidden"
             style={{
-              width: `${dims.spineW}px`,
-              height: `${dims.bookH}px`,
-              background: `linear-gradient(90deg, ${theme.spine} 0%, #0F172A 100%)`,
-              boxShadow: "inset -2px 0 5px rgba(0,0,0,0.32), inset 1px 0 1px rgba(255,255,255,0.18)",
-              transform: "skewY(-3deg)",
-              transformOrigin: "right center",
+              width: `${dims.bookW + 2}px`,
+              height: `${dims.topPageH}px`,
+              marginLeft: `${dims.spineW - 2}px`,
+              marginBottom: "-2px",
+              transform: "skewX(-52deg)",
+              transformOrigin: "bottom left",
+              background:
+                "repeating-linear-gradient(0deg, #FFFFFF 0px, #F1F5F9 2px, #E2E8F0 3px, #FFFFFF 4px)",
+              borderTop: `2.5px solid ${theme.spine}`,
+              borderRight: `2px solid ${theme.spine}`,
+              borderLeft: `2px solid ${theme.spine}`,
+              boxShadow: "inset 0 -2px 4px rgba(15,23,42,0.12)",
             }}
-          >
-            <span className="text-[5.5px] font-bold tracking-wider text-amber-300">AiAon</span>
+          />
+
+          {/* Spine + Front Cover Row */}
+          <div className="relative flex items-stretch">
+            {/* Thick Visible Left Spine */}
             <div
-              className="text-[6.5px] sm:text-[7px] font-semibold tracking-wider text-white/85 whitespace-nowrap overflow-hidden text-ellipsis max-w-[110px]"
+              className="relative flex flex-col justify-between items-center py-2.5 text-white/95 rounded-l-[3px] shrink-0 overflow-hidden z-20"
               style={{
-                writingMode: "vertical-rl",
-                transform: "rotate(180deg)",
+                width: `${dims.spineW}px`,
+                height: `${dims.bookH}px`,
+                background: `linear-gradient(90deg, ${theme.spine} 0%, #0F172A 100%)`,
+                boxShadow:
+                  "inset -2px 0 6px rgba(0,0,0,0.38), inset 1.5px 0 2px rgba(255,255,255,0.22)",
+                transform: "skewY(6deg)",
+                transformOrigin: "right bottom",
               }}
             >
-              {code} • {title}
+              <span className="text-[5.5px] font-bold tracking-wider text-amber-300">
+                AiAon
+              </span>
+              <div
+                className="text-[6.5px] sm:text-[7.5px] font-bold tracking-wider text-white/90 whitespace-nowrap overflow-hidden text-ellipsis max-w-[115px]"
+                style={{
+                  writingMode: "vertical-rl",
+                  transform: "rotate(180deg)",
+                }}
+              >
+                {code} • {title}
+              </div>
+              <span className="text-[5.5px] font-mono text-white/65">#{rank}</span>
             </div>
-            <span className="text-[5.5px] font-mono text-white/60">#{rank}</span>
-          </div>
 
-          {/* Crisp Front Cover Face */}
-          <div
-            className="relative rounded-r-[3px] overflow-hidden bg-white border border-slate-300/70"
-            style={{
-              width: `${dims.bookW}px`,
-              height: `${dims.bookH}px`,
-              boxShadow:
-                "inset 2px 0 5px rgba(255,255,255,0.45), 6px 10px 18px rgba(15, 23, 42, 0.16)",
-            }}
-          >
-            {coverImage ? (
-              <img
-                src={coverImage}
-                alt={`ปกหนังสือ ${title}`}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            ) : (
-              renderEditorialCover(false)
-            )}
-
-            {/* Spine Hinge Lighting */}
+            {/* Front Hardcover Face */}
             <div
-              aria-hidden="true"
-              className="absolute left-0 top-0 bottom-0 w-3 pointer-events-none"
+              className="relative rounded-r-[3px] overflow-hidden bg-white border border-slate-300/75 z-20"
               style={{
-                background:
-                  "linear-gradient(90deg, rgba(15,23,42,0.22) 0%, rgba(255,255,255,0.22) 45%, transparent 100%)",
+                width: `${dims.bookW}px`,
+                height: `${dims.bookH}px`,
+                boxShadow:
+                  "inset 2px 0 5px rgba(255,255,255,0.45), 6px 10px 18px rgba(15, 23, 42, 0.16)",
               }}
-            />
+            >
+              {coverImage ? (
+                <img
+                  src={coverImage}
+                  alt={`ปกหนังสือ ${title}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                renderEditorialCover()
+              )}
+
+              {/* Spine Crease Lighting */}
+              <div
+                aria-hidden="true"
+                className="absolute left-0 top-0 bottom-0 w-3 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(90deg, rgba(15,23,42,0.25) 0%, rgba(255,255,255,0.24) 45%, transparent 100%)",
+                }}
+              />
+            </div>
           </div>
         </div>
 
-        {/* ── 2. FRONT-RIGHT: SLEEK MATTE-BLACK E-READER / KINDLE LEANING IN FRONT ── */}
+        {/* ── 2. FRONT-RIGHT: MATTE-BLACK E-READER SHOWING CLEAN INSIDE PAGE PREVIEW ── */}
         <div
           className="absolute bottom-0 right-0 z-30 transition-all duration-500 ease-out transform-gpu"
           style={{
             width: `${dims.tabletW}px`,
             height: `${dims.tabletH}px`,
             transform: isHovered
-              ? "translateX(5px) translateY(-6px) rotateY(-4deg) rotateZ(-0.5deg) scale(1.04)"
-              : "translateX(0px) translateY(0px) rotateY(-10deg) rotateZ(-1.8deg)",
+              ? "translateX(6px) translateY(-6px) rotateY(-4deg) rotateZ(-0.4deg) scale(1.04)"
+              : "translateX(0px) translateY(0px) rotateY(-8deg) rotateZ(-1.6deg)",
             transformStyle: "preserve-3d",
           }}
         >
-          {/* Matte-Black E-Reader Chassis with Left Thickness Bevel & Cast Shadow */}
+          {/* Matte-Black Kindle/E-Reader Body */}
           <div
             className={cn(
-              "relative w-full h-full rounded-[11px] bg-gradient-to-br from-[#27272A] via-[#18181B] to-[#09090B] border-l-[3px] border-t border-r border-b border-l-[#3F3F46] border-t-[#3F3F46]/60 border-r-[#09090B] border-b-[#09090B] flex flex-col",
+              "relative w-full h-full rounded-[12px] bg-gradient-to-br from-[#27272A] via-[#18181B] to-[#09090B] border-l-[3px] border-t border-r border-b border-l-[#3F3F46] border-t-[#3F3F46]/60 border-r-[#09090B] border-b-[#09090B] flex flex-col",
               dims.tabletChin
             )}
             style={{
               boxShadow:
-                "-10px 10px 20px rgba(15, 23, 42, 0.36), 0 4px 10px rgba(15, 23, 42, 0.22), inset 0 1px 1px rgba(255,255,255,0.14)",
+                "-12px 12px 22px rgba(15, 23, 42, 0.34), 0 4px 10px rgba(15, 23, 42, 0.22), inset 0 1px 1px rgba(255,255,255,0.16)",
             }}
           >
-            {/* Recessed E-Ink / Tablet Display */}
-            <div className="relative w-full h-full rounded-[4px] overflow-hidden bg-white ring-1 ring-black/80">
-              {coverImage ? (
-                <img
-                  src={coverImage}
-                  alt={`ตัวอย่างอ่านบน E-Reader ${title}`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+            {/* Clean Crisp White Inside-Book Reading Screen */}
+            <div className="relative w-full h-full rounded-[4px] overflow-hidden bg-white ring-1 ring-black/80 flex flex-col justify-between p-2 sm:p-2.5 text-left">
+              {/* Top Chapter Bar + Bookmark Ribbon */}
+              <div className="flex items-center justify-between gap-1 border-b border-slate-200/90 pb-1">
+                <div className="flex items-center gap-1 min-w-0">
+                  <span
+                    className="w-0.5 h-2.5 rounded-full shrink-0"
+                    style={{ background: theme.accent }}
+                  />
+                  <span className="font-mono text-[6px] sm:text-[7px] font-bold uppercase tracking-wider text-[#475569] truncate">
+                    {code}
+                  </span>
+                </div>
+                <span
+                  aria-hidden="true"
+                  className="w-2 h-2.5 shrink-0"
+                  style={{
+                    background: theme.accent,
+                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%)",
+                  }}
                 />
-              ) : (
-                renderEditorialCover(true)
-              )}
+              </div>
+
+              {/* Bold Thai Reading Title + Highlight Callout Box */}
+              <div className="my-auto py-1 space-y-1.5">
+                <div
+                  className={cn(
+                    "font-extrabold text-[#0F172A] leading-tight line-clamp-2",
+                    dims.pageHeading
+                  )}
+                >
+                  {title}
+                </div>
+
+                <div
+                  className="rounded-md p-1.5 border-l-2"
+                  style={{
+                    backgroundColor: theme.paperTint,
+                    borderLeftColor: theme.accent,
+                  }}
+                >
+                  <p
+                    className={cn(
+                      "text-[#1E293B] font-medium leading-snug line-clamp-3",
+                      dims.pageBody
+                    )}
+                  >
+                    {insideText}
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom Reader Page Number Line */}
+              <div className="flex items-center justify-between gap-1 pt-1 border-t border-slate-200/80">
+                <span
+                  className="h-[1.5px] flex-1 rounded-full opacity-45"
+                  style={{ background: theme.accent }}
+                />
+                <span className="font-mono text-[6.5px] font-bold text-[#334155]">
+                  08
+                </span>
+              </div>
 
               {/* Subtle Anti-Glare Diagonal Glass Reflection */}
               <div
@@ -418,12 +496,12 @@ export function Book3DMockup({
                 className="pointer-events-none absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(125deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 36%, transparent 52%)",
+                    "linear-gradient(125deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 36%, transparent 50%)",
                 }}
               />
             </div>
 
-            {/* Subtle Bottom Chin Brand Indicator */}
+            {/* Bottom Chin Indicator */}
             <div
               aria-hidden="true"
               className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-5 h-[2px] rounded-full bg-white/15"

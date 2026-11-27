@@ -740,6 +740,7 @@ export function EbooksCatalogView() {
                                     themeColor={book.themeColor}
                                     rank={book.rank}
                                     coverImage={book.coverImage}
+                                    previewSnippet={book.highlights?.[0] || book.synopsis}
                                     size="md"
                                     isInteractive={true}
                                   />
@@ -868,10 +869,10 @@ export function EbooksCatalogView() {
                           </span>
                         </div>
 
-                        {/* Editorial Book Display Stage */}
+                        {/* Editorial Book Display Stage (Transparent BG) */}
                         <div
                           onClick={() => openBookDetail(book.code)}
-                          className="relative w-full mb-4 cursor-pointer py-3 rounded-2xl bg-[#FEF9EF]/80 border border-[#FDE68A]/70 flex justify-center overflow-hidden"
+                          className="relative w-full mb-4 cursor-pointer py-2 bg-transparent flex justify-center overflow-visible"
                           title="คลิกเพื่อเจาะลึก 7 องค์ประกอบของ E-Book เล่มนี้"
                         >
                           <Book3DMockup
@@ -881,6 +882,7 @@ export function EbooksCatalogView() {
                             themeColor={book.themeColor}
                             rank={book.rank}
                             coverImage={book.coverImage}
+                            previewSnippet={book.highlights?.[0] || book.synopsis}
                             size="md"
                             isInteractive={true}
                           />
